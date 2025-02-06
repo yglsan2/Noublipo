@@ -1,0 +1,296 @@
+{
+  "@@locale": "pl",
+  "appTitle": "Noubliepo!",
+  "appTitlePlus": "Noubliepo!+",
+  "searchHint": "Szukaj na liście",
+  "totalLabel": "Razem",
+  "addItem": "Dodaj pozycję",
+  "emptyList": "Pusta lista",
+  "tapToAdd": "Dotknij tutaj lub +, aby dodać pozycję",
+  "settings": "Ustawienia",
+  "share": "Udostępnij",
+  "more": "Więcej",
+  "catalogAndInspiration": "Katalog i inspiracje",
+  "planningRecurrentSeasonal": "Planowanie (cykliczne i sezonowe)",
+  "scanBarcode": "Skanuj kod kreskowy",
+  "quickAddListArticles": "Szybkie dodawanie (lista + pozycje)",
+  "selectItems": "Wybierz pozycje",
+  "removeChecked": "Usuń zaznaczone",
+  "newList": "Nowa lista",
+  "duplicateList": "Duplikuj listę",
+  "saveAsTemplate": "Zapisz jako szablon",
+  "newFromTemplate": "Nowa lista z szablonu",
+  "stats": "Statystyki",
+  "listDuplicated": "Lista zduplikowana",
+  "quickAdd": "Szybkie dodawanie",
+  "noMatchForSearch": "Żadna pozycja nie pasuje do \"{query}\"",
+  "@noMatchForSearch": {
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
+  },
+  "clear": "Wyczyść",
+  "noResults": "Brak wyników",
+  "clearSearchToSeeAll": "Wyczyść wyszukiwanie, aby zobaczyć wszystkie pozycje",
+  "touchToCheck": "Dotknij, aby zaznaczyć",
+  "toBuy": "Do kupienia",
+  "totalEuro": "Razem: {value} €",
+  "@totalEuro": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "itemRemoved": "Pozycja usunięta",
+  "cancel": "Anuluj",
+  "delete": "Usuń",
+  "modify": "Edytuj",
+  "deleteArticleConfirm": "Usunąć tę pozycję?",
+  "shareList": "Udostępnij listę",
+  "exportAsText": "Eksportuj jako tekst",
+  "about": "O aplikacji",
+  "backupRestore": "Kopia zapasowa i przywracanie",
+  "backupExportImport": "Eksportuj lub importuj listy i ustawienia",
+  "backupScreenTitle": "Kopia zapasowa i przywracanie",
+  "backupExportTitle": "Eksportuj kopię",
+  "backupImportTitle": "Importuj kopię",
+  "backupExportSubtitle": "Generuje plik JSON do udostępnienia lub zapisania",
+  "backupImportSubtitle": "Zastąp bieżące dane wybranym plikiem",
+  "backupIntro": "Eksportuj wszystkie listy, ustawienia i planowanie do pliku lub przywróć z kopii zapasowej.",
+  "backupExportSuccess": "Kopia wyeksportowana. Udostępnij lub zapisz plik.",
+  "backupImportConfirm": "Bieżące listy i ustawienia zostaną zastąpione zawartością pliku. Kontynuować?",
+  "backupImportSuccess": "Kopia przywrócona.",
+  "scanPlaceBarcode": "Umieść kod kreskowy w ramce",
+  "scanProductAdded": "{name} dodane do listy",
+  "@scanProductAdded": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "scanClose": "Zamknij",
+  "sharedListCount": "Udostępniona • {count}",
+  "@sharedListCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sharedList": "Udostępniona",
+  "listDeleted": "Lista usunięta",
+  "tooltipClear": "Wyczyść",
+  "tooltipSyncDone": "Zsynchronizowano",
+  "tooltipSyncUpload": "Synchronizuj na wszystkich urządzeniach",
+  "tooltipMoveTo": "Przenieś do",
+  "itemsMoved": "Pozycje przeniesione",
+  "colorChipTapToSet": "{name} – dotknij, aby ustawić",
+  "@colorChipTapToSet": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "deleteGroup": "Usuń grupę",
+  "deleteListConfirm": "Usunąć tę listę?",
+  "aboutSubtitle": "User guide, author, GPL v3 licence, GDPR",
+  "articleStyle": "Item style",
+  "backToPersonalList": "Back to your personal list",
+  "backupFileNotAccessible": "File not accessible (e.g. Web).",
+  "backupImportError": "Import error: {error}",
+  "@backupImportError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "capitalizeNames": "Capitalize item names",
+  "capitalizeSubtitle": "First letter uppercase",
+  "categoriesHint": "Form: optional name when adding. Legend: squares at top, tap a square to set (e.g. Carrefour).",
+  "categoriesLabel": "Categories (store, type…)",
+  "categoryNameHint": "Store or category name",
+  "checkedItemsRemoved": "Checked items removed",
+  "chooseGroup": "Choose a group",
+  "chooseTemplate": "Choose a template",
+  "colorNameHint": "E.g. Carrefour, Fruit, Urgent. Items in this color will show this name.",
+  "copyCode": "Copy code",
+  "copyCodeLabel": "Copy code: {code}",
+  "@copyCodeLabel": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "copyLink": "Copy link",
+  "copyList": "Copy list",
+  "copyListSubtitle": "Copy to clipboard (read-only)",
+  "create": "Create",
+  "createButton": "Create",
+  "createNewSharedList": "Create a new shared list",
+  "createShareLink": "Create share link",
+  "darkMode": "Dark mode",
+  "darkModeSubtitle": "Dark theme, easy on the eyes",
+  "disconnect": "Disconnect",
+  "errorPrefix": "Error",
+  "everyoneSeesSameList": "Everyone sees the same list and changes in real time.",
+  "everyoneSeesSameListWithCount": "{count} participant(s) • Everyone sees the same list live.",
+  "@everyoneSeesSameListWithCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "formLabel": "Form",
+  "futurePurchases": "Future purchases",
+  "groupDeleted": "Group deleted",
+  "groupLabel": "Group",
+  "groupNameHint": "E.g. Shopping, DIY",
+  "groupsLabel": "Groups",
+  "import": "Import",
+  "itemWillBeRemovedFromList": "\"{name}\" will be removed from the list.",
+  "@itemWillBeRemovedFromList": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "itemsDeleted": "Items deleted",
+  "join": "Join",
+  "joinList": "Join a list",
+  "joinListHint": "Paste the link, 8-character code or ID to join the shared list.",
+  "leaveSharedList": "Leave shared list",
+  "leftListSnackbar": "Disconnected. List kept locally.",
+  "legendLabel": "Legend",
+  "linkCodeHint": "Link, code (e.g. ABC12XYZ) or ID",
+  "linkCopied": "Link copied",
+  "linkCreated": "Link created",
+  "listCopiedToClipboard": "List copied to clipboard",
+  "listCreatedFromTemplate": "List \"{name}\" created",
+  "@listCreatedFromTemplate": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "listEmptySnackbar": "Empty list",
+  "listGroupsTitle": "List groups",
+  "listJoined": "List joined",
+  "listLabel": "List",
+  "listNameHint": "List name",
+  "modelNameHint": "Template name",
+  "modelSaved": "Template saved",
+  "nameForThisColor": "Name for this color",
+  "nameHint": "Name",
+  "newButton": "New",
+  "newGroupTitle": "New group",
+  "newListTitle": "New list",
+  "newSharedList": "New shared list",
+  "newSharedListConfirm": "You will leave the current list and create a new shared list from your personal list.",
+  "noGroup": "No group",
+  "noGroupsHint": "No groups. Create one to organize your lists (e.g. Shopping, DIY).",
+  "noTemplates": "No templates. Save a list as template (⋮ menu).",
+  "participantsCount": "{count} participant(s)",
+  "@participantsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "remindersPerItem": "Reminders per item",
+  "remindersSubtitle": "Optional: alarm and note per item (hidden if disabled)",
+  "renameGroupTitle": "Rename group",
+  "renameListTitle": "Rename list",
+  "renameTitle": "Rename",
+  "save": "Save",
+  "saveAsTemplateTitle": "Save as template",
+  "saveButton": "Save",
+  "scanAvailablePlus": "Available in Noublipo+",
+  "scanTitle": "Scan",
+  "selectedCount": "{n} selected",
+  "@selectedCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "sendLinkToOthers": "Send the link or code so others can view and edit the list in real time.",
+  "sendListByMessage": "Send list by message or email",
+  "shareJoinMessage": "Join my real-time shopping list: {link}",
+  "@shareJoinMessage": {
+    "placeholders": {
+      "link": {
+        "type": "String"
+      }
+    }
+  },
+  "shareLink": "Share link",
+  "shareRealtime": "Share in real time",
+  "shareRealtimeWithOthers": "With others (same list, live)",
+  "shareSubject": "List {appName}",
+  "@shareSubject": {
+    "placeholders": {
+      "appName": {
+        "type": "String"
+      }
+    }
+  },
+  "shortCode": "Short code",
+  "showPrices": "Show prices and total",
+  "showPricesSubtitle": "Price per item and estimated total",
+  "signInGoogleSameAccount": "Sign in with the same Google account on each device to share the list in real time.",
+  "signInGoogleToEnable": "Sign in with Google to enable",
+  "signInWithGoogle": "Sign in with Google",
+  "sortColor": "Color",
+  "sortListLabel": "List sort (Noublipo+)",
+  "sortName": "Name",
+  "sortOrder": "Order",
+  "styleBar": "Bar",
+  "styleFilled": "Filled rectangle",
+  "syncEnabled": "Sync enabled",
+  "templateItemCount": "{count} item(s)",
+  "@templateItemCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "voiceUnavailable": "Voice input not available",
+  "voiceError": "Voice input unavailable",
+  "colorLabel": "Color",
+  "addToListItem": "Add to list",
+  "quickAddHint": "Enter at least one item (e.g. Apple or List Store : Apple)",
+  "linkCopiedBrowser": "Link copied: paste it in your browser.",
+  "signInToJoinList": "Sign in with Google to join the list.",
+  "cannotJoinList": "Cannot join: {error}",
+  "@cannotJoinList": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "autocompleteLabel": "Auto-completion",
+  "autocompleteSubtitle": "Suggest items from the lexicon as you type (e.g. pu… → purée, pull)",
+  "addForLater": "For later",
+  "addForLaterSnackbar": "« {name} » added to list (pending)",
+  "@addForLaterSnackbar": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
+}

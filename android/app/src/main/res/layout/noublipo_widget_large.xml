@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="@android:color/white">
+    <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical">
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@mipmap/ic_launcher"
+            android:contentDescription="@null" />
+        <TextView
+            android:id="@+id/widget_list_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:text="Ma liste"
+            android:maxLines="1"
+            android:ellipsize="end" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/widget_item_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:textSize="12sp"
+        android:textColor="#666666"
+        android:text="0 article à acheter" />
+    <TextView android:id="@+id/widget_item_0" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:textSize="13sp" android:maxLines="1" android:ellipsize="end" android:visibility="gone" />
+    <TextView android:id="@+id/widget_item_1" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:textSize="13sp" android:maxLines="1" android:ellipsize="end" android:visibility="gone" />
+    <TextView android:id="@+id/widget_item_2" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:textSize="13sp" android:maxLines="1" android:ellipsize="end" android:visibility="gone" />
+    <TextView android:id="@+id/widget_item_3" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:textSize="13sp" android:maxLines="1" android:ellipsize="end" android:visibility="gone" />
+    <TextView android:id="@+id/widget_item_4" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:textSize="13sp" android:maxLines="1" android:ellipsize="end" android:visibility="gone" />
+</LinearLayout>

@@ -18,7 +18,7 @@ class AppTheme {
           foregroundColor: Colors.black87,
         ),
         scaffoldBackgroundColor: const Color(0xFFF5F5F5),
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           elevation: 0,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           color: Colors.white,
@@ -36,18 +36,35 @@ class AppTheme {
         ),
       );
 
+  /// Mode nuit reposant : fonds doux, contraste réduit, texte lisible.
   static ThemeData get dark => ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF4CAF50),
           brightness: Brightness.dark,
+          surface: const Color(0xFF1A1A1A),
         ),
         scaffoldBackgroundColor: const Color(0xFF121212),
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           elevation: 0,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          color: const Color(0xFF1E1E1E),
+          color: const Color(0xFF252525),
+        ),
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+          backgroundColor: Color(0xFF1A1A1A),
+          foregroundColor: Color(0xFFE0E0E0),
+        ),
+        textTheme: const TextTheme().apply(
+          bodyColor: Color(0xFFE0E0E0),
+          displayColor: Color(0xFFE0E0E0),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: const Color(0xFF2D2D2D),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         ),
       );
 }

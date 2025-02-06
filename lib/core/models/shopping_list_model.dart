@@ -6,12 +6,18 @@ class ShoppingListModel {
   String name;
   final List<ShoppingItem> items;
   int order;
+  /// Date prévue pour faire ces courses (timestamp ms), null = non planifiée.
+  int? plannedDate;
+  /// ID du groupe (Noublipo+), null = sans groupe.
+  String? groupId;
 
   ShoppingListModel({
     required this.id,
     this.name = 'Ma liste',
     List<ShoppingItem>? items,
     this.order = 0,
+    this.plannedDate,
+    this.groupId,
   }) : items = items ?? [];
 
   ShoppingListModel copyWith({
@@ -19,12 +25,16 @@ class ShoppingListModel {
     String? name,
     List<ShoppingItem>? items,
     int? order,
+    int? plannedDate,
+    String? groupId,
   }) {
     return ShoppingListModel(
       id: id ?? this.id,
       name: name ?? this.name,
       items: items ?? List.from(this.items),
       order: order ?? this.order,
+      plannedDate: plannedDate ?? this.plannedDate,
+      groupId: groupId ?? this.groupId,
     );
   }
 
@@ -34,6 +44,8 @@ class ShoppingListModel {
       'name': name,
       'items': items.map((e) => e.toJson()).toList(),
       'order': order,
+      'plannedDate': plannedDate,
+      'groupId': groupId,
     };
   }
 
@@ -47,6 +59,12 @@ class ShoppingListModel {
               .toList() ??
           [],
       order: json['order'] as int? ?? 0,
+      plannedDate: (json['plannedDate'] as num?)?.toInt(),
+      groupId: json['groupId'] as String?,
     );
   }
 }
+
+/// ID réservé pour la liste "Achats futurs" (à acheter plus tard).
+const String kAchatsFutursListId = 'achats_futurs';
+const String kAchatsFutursListName = 'Achats futurs';

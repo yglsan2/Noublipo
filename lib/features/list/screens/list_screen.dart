@@ -360,7 +360,7 @@ class ListScreen extends StatelessWidget {
 
   void _showStorePickerThenAdd(BuildContext context, ListProvider provider) {
     final categoryNames = context.read<CategoryNamesProvider>();
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
     final sections = _groupItemsByStore(provider.items);
     final storeEntries = <MapEntry<int, String>>[];
     if (sections.isNotEmpty) {
@@ -439,7 +439,7 @@ class ListScreen extends StatelessWidget {
   }
 
   void _showStoreActionsSheet(BuildContext context, int colorIndex, CategoryNamesProvider categoryNames) {
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
     final color = AppColors.categoryColors[colorIndex % AppColors.categoryColors.length];
     showModalBottomSheet<void>(
       context: context,
@@ -510,7 +510,7 @@ class ListScreen extends StatelessWidget {
 
   void _showManageStoresSheet(BuildContext context, ListProvider provider) {
     final categoryNames = context.read<CategoryNamesProvider>();
-    final l10n = AppLocalizations.of(context)!;
+    final l10n = AppLocalizations.of(context);
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
@@ -555,7 +555,7 @@ class ListScreen extends StatelessWidget {
                             border: Border.all(color: AppColors.darken(color, 0.2)),
                           ),
                         ),
-                        title: Text(hasName ? name! : l10n.storeNameOrUnset),
+                        title: Text(hasName ? name : l10n.storeNameOrUnset),
                         subtitle: hasName ? Text(l10n.renameStore) : Text(l10n.tapToSetStoreName),
                         trailing: hasName
                             ? IconButton(
@@ -1180,7 +1180,7 @@ class ListScreen extends StatelessWidget {
                       Text(AppLocalizations.of(ctx).articleStyle, style: Theme.of(ctx).textTheme.titleSmall),
                       const SizedBox(height: 8),
                       DropdownButtonFormField<String>(
-                        value: settings.tileStyle,
+                        initialValue: settings.tileStyle,
                         decoration: const InputDecoration(
                           isDense: true,
                           contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -1953,9 +1953,6 @@ class _FilledBalancedList extends StatelessWidget {
         builder: (context, constraints) {
           final width = constraints.maxWidth;
           final rows = _packIntoBalancedRows(items, width);
-          final totalContentHeight = rows.isEmpty
-              ? 0.0
-              : rows.length * rowHeight + (rows.length - 1) * runSpacing;
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

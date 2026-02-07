@@ -9,7 +9,6 @@ import '../../../app_config.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/utils/voice_text_cleaner.dart';
 import '../../../core/constants/design_constants.dart';
-import '../../../core/constants/touch_constants.dart';
 import '../../../core/layout/screen_layout.dart';
 import '../../../core/utils/app_logger.dart';
 import '../../../core/providers/category_names_provider.dart';
@@ -155,13 +154,11 @@ class _AddItemSheetState extends State<AddItemSheet> {
     final reminderNote = settings.remindersEnabled ? _reminderNoteController.text.trim() : null;
     final note = isNoublipoPlus ? (_noteController.text.trim().isEmpty ? null : _noteController.text.trim()) : null;
     final priceStr = isNoublipoPlus ? _priceController.text.trim().replaceFirst(RegExp(r','), '.') : '';
-    final price = isNoublipoPlus && priceStr.isNotEmpty
-        ? (double.tryParse(priceStr) != null && double.tryParse(priceStr)! > 0 ? double.tryParse(priceStr) : null)
-        : null;
+    final priceParsed = priceStr.isNotEmpty ? double.tryParse(priceStr) : null;
+    final price = isNoublipoPlus && priceParsed != null && priceParsed > 0 ? priceParsed : null;
     final quantityStr = isNoublipoPlus ? _quantityController.text.trim().replaceFirst(RegExp(r','), '.') : '';
-    final quantity = isNoublipoPlus && quantityStr.isNotEmpty
-        ? (double.tryParse(quantityStr) != null && double.tryParse(quantityStr)! > 0 ? double.tryParse(quantityStr) : null)
-        : null;
+    final quantityParsed = quantityStr.isNotEmpty ? double.tryParse(quantityStr) : null;
+    final quantity = isNoublipoPlus && quantityParsed != null && quantityParsed > 0 ? quantityParsed : null;
     final unit = isNoublipoPlus ? (_unitController.text.trim().isEmpty ? null : _unitController.text.trim()) : null;
     widget.onSubmit(
       finalName,

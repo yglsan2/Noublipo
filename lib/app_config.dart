@@ -6,4 +6,4 @@
 const String _flavor = String.fromEnvironment('APP_FLAVOR', defaultValue: 'noublipo');
 bool get isNoublipoPlus => _flavor == 'noublipo_plus';
 String get appName => isNoublipoPlus ? 'Noubliepo!+' : 'Noubliepo!';
-String get appVersion => '1.0.0';
+String get appVersion => '1.0.2';

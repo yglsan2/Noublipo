@@ -4,8 +4,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'app_config.dart';
 import 'core/providers/category_names_provider.dart';
+import 'core/providers/consumption_profile_provider.dart';
+import 'core/providers/gamification_provider.dart';
+import 'core/providers/premium_provider.dart';
+import 'core/services/ad_service.dart';
+import 'core/services/upgrade_prompt_helper.dart';
 import 'l10n/app_localizations.dart';
 import 'core/providers/list_provider.dart';
+import 'core/providers/birthdays_provider.dart';
 import 'core/providers/planning_provider.dart';
 import 'core/providers/settings_provider.dart';
 import 'core/services/reminder_service.dart';
@@ -37,11 +43,19 @@ void main() async {
   final storage = StorageService(prefs);
   final reminderService = ReminderService();
   final planningProvider = PlanningProvider(storage, reminderService);
+  final birthdaysProvider = BirthdaysProvider(storage, reminderService);
+  if (!isNoublipoPlus) {
+    AdService.initialize();
+  }
   runApp(
     MultiProvider(
       providers: [
         Provider<StorageService>.value(value: storage),
+        ChangeNotifierProvider<PremiumProvider>(
+          create: (_) => PremiumProvider(storage),
+        ),
         ChangeNotifierProvider<PlanningProvider>.value(value: planningProvider),
+        ChangeNotifierProvider<BirthdaysProvider>.value(value: birthdaysProvider),
         ChangeNotifierProvider<ListProvider>(
           create: (_) => ListProvider(
             storage,
@@ -55,6 +69,12 @@ void main() async {
         ),
         ChangeNotifierProvider<SettingsProvider>(
           create: (_) => SettingsProvider(storage),
+        ),
+        ChangeNotifierProvider<GamificationProvider>(
+          create: (_) => GamificationProvider(storage),
+        ),
+        ChangeNotifierProvider<ConsumptionProfileProvider>(
+          create: (_) => ConsumptionProfileProvider(storage),
         ),
       ],
       child: const NoublipoApp(),
@@ -94,6 +114,13 @@ class _NoublipoAppState extends State<NoublipoApp> {
           locale: settings.localeOverride,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
+          localeResolutionCallback: (locale, supported) {
+            if (settings.localeOverride != null) return settings.localeOverride;
+            for (final s in supported) {
+              if (s.languageCode == locale?.languageCode) return s;
+            }
+            return supported.isNotEmpty ? supported.first : locale;
+          },
           home: const SplashScreen(),
         );
       },

@@ -116,4 +116,56 @@ class ReminderService {
       AppLogger.warning('cancelRecurringReminder', e, stack);
     }
   }
+
+  static int _idFromBirthday(String birthdayId, int daysBefore) =>
+      ('birthday_${birthdayId}_$daysBefore').hashCode.abs() % 0x7FFFFFFF;
+
+  /// Planifie un rappel à [when] (ex. J-1 ou J-2). [celebrationLabel] ex. "Anniversaire", "Mariage".
+  Future<void> scheduleBirthdayReminder(
+    String birthdayId,
+    String name,
+    DateTime when, {
+    required int daysBefore,
+    String celebrationLabel = 'Anniversaire',
+  }) async {
+    if (!_initialized || when.isBefore(DateTime.now())) return;
+    try {
+      final id = _idFromBirthday(birthdayId, daysBefore);
+      await _plugin.cancel(id);
+      final details = NotificationDetails(
+        android: AndroidNotificationDetails(
+          'noublipo_birthdays',
+          'Anniversaires',
+          channelDescription: 'Rappels (J-1, J-2)',
+          importance: Importance.defaultImportance,
+        ),
+      );
+      final whenTz = tz.TZDateTime.from(when, tz.local);
+      final body = daysBefore == 1
+          ? 'Demain : $celebrationLabel de $name'
+          : 'Dans $daysBefore jours : $celebrationLabel de $name';
+      await _plugin.zonedSchedule(
+        id,
+        '$celebrationLabel de $name',
+        body,
+        whenTz,
+        details,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+      );
+    } catch (e, stack) {
+      AppLogger.warning('scheduleBirthdayReminder', e, stack);
+    }
+  }
+
+  /// Annule tous les rappels pour cet anniversaire.
+  Future<void> cancelBirthdayReminders(String birthdayId) async {
+    try {
+      for (final d in [1, 2]) {
+        await _plugin.cancel(_idFromBirthday(birthdayId, d));
+      }
+    } catch (e, stack) {
+      AppLogger.warning('cancelBirthdayReminders', e, stack);
+    }
+  }
 }

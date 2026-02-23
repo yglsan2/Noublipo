@@ -9,10 +9,10 @@ class AppLocalizationsEt extends AppLocalizations {
   AppLocalizationsEt([String locale = 'et']) : super(locale);
 
   @override
-  String get appTitle => 'Noubliepo!';
+  String get appTitle => 'NopList';
 
   @override
-  String get appTitlePlus => 'Noubliepo!+';
+  String get appTitlePlus => 'NopList+';
 
   @override
   String get searchHint => 'Search in list';
@@ -65,16 +65,20 @@ class AppLocalizationsEt extends AppLocalizations {
   String get settings => 'Settings';
 
   @override
-  String get languageLabel => 'Langue';
+  String get languageLabel => 'Keel';
 
   @override
-  String get languageSystem => 'Système';
+  String get languageSystem => 'Süsteem';
+
+  @override
+  String get languageSelectorHint =>
+      'Vaikimisi kasutatakse telefoni keelt. Muutmiseks puudutage lippu.';
 
   @override
   String get share => 'Share';
 
   @override
-  String get more => 'More';
+  String get more => 'Rohkem';
 
   @override
   String get catalogAndInspiration => 'Catalog & inspiration';
@@ -441,7 +445,7 @@ class AppLocalizationsEt extends AppLocalizations {
   String get categoryLabel => 'Catégorie';
 
   @override
-  String get sortListLabel => 'List sort (Noublipo+)';
+  String get sortListLabel => 'List sort (NopList+)';
 
   @override
   String get sortOrder => 'Order';
@@ -451,6 +455,36 @@ class AppLocalizationsEt extends AppLocalizations {
 
   @override
   String get sortColor => 'Color';
+
+  @override
+  String get sortAisle => 'Rayon';
+
+  @override
+  String get aisleOrderTitle => 'Ordre des rayons';
+
+  @override
+  String get aisleOrderSubtitle =>
+      'Numéro de rayon par catégorie (pour tri au magasin)';
+
+  @override
+  String get favoriteStoresTitle => 'Magasin(s) favori(s)';
+
+  @override
+  String get favoriteStoresSubtitle => 'Ces rayons apparaissent en premier';
+
+  @override
+  String get partnerSuggestionTitle => 'Suggestion';
+
+  @override
+  String partnerSuggestionMessage(String item, String suggestion) {
+    return 'Un partenaire a ajouté « $item ». Ajouter aussi « $suggestion » ?';
+  }
+
+  @override
+  String get partnerSuggestionAdd => 'Oui, ajouter';
+
+  @override
+  String get partnerSuggestionNo => 'Non';
 
   @override
   String get showPrices => 'Show prices and total';
@@ -588,7 +622,7 @@ class AppLocalizationsEt extends AppLocalizations {
   String get scanTitle => 'Scan';
 
   @override
-  String get scanAvailablePlus => 'Available in Noublipo+';
+  String get scanAvailablePlus => 'Available in NopList+';
 
   @override
   String get everyoneSeesSameList =>
@@ -638,6 +672,543 @@ class AppLocalizationsEt extends AppLocalizations {
 
   @override
   String addForLaterSnackbar(String name) {
-    return '« $name » added to list (pending)';
+    return '« $name » lisatud nimekirja (ootab)';
   }
+
+  @override
+  String get engagementDetectedTitle => 'Engagement implicite détecté';
+
+  @override
+  String engagementDetectedMessage(String title) {
+    return 'Créer un rappel pour « $title » dans la liste Engagements ?';
+  }
+
+  @override
+  String get createReminderButton => 'Créer un rappel';
+
+  @override
+  String engagementReminderCreated(String title) {
+    return 'Rappel créé : « $title »';
+  }
+
+  @override
+  String get birthdaysTitle => 'Anniversaires';
+
+  @override
+  String get birthdaysSubtitle =>
+      'Rappels 1 à 2 jours avant pour ne pas oublier';
+
+  @override
+  String get addBirthday => 'Ajouter un anniversaire';
+
+  @override
+  String get birthdayNameHint => 'Prénom ou nom (ex. Léontine, Gertrude)';
+
+  @override
+  String get birthdayDay => 'Jour';
+
+  @override
+  String get birthdayMonth => 'Mois';
+
+  @override
+  String get reminder1DayBefore => 'Rappel 1 jour avant';
+
+  @override
+  String get reminder2DaysBefore => 'Rappel 2 jours avant';
+
+  @override
+  String get birthdayDeleted => 'Anniversaire supprimé';
+
+  @override
+  String get emptyBirthdays =>
+      'Aucun anniversaire. Ajoutez-en pour recevoir une alerte 1 à 2 jours avant.';
+
+  @override
+  String get editBirthday => 'Modifier l\'anniversaire';
+
+  @override
+  String deleteBirthdayConfirm(String name) {
+    return 'Supprimer l\'anniversaire de $name ?';
+  }
+
+  @override
+  String get celebrationTypeBirthday => 'Anniversaire (naissance)';
+
+  @override
+  String get celebrationTypeWedding => 'Mariage';
+
+  @override
+  String get celebrationTypeMeeting => 'Rencontre';
+
+  @override
+  String get celebrationTypeOther => 'Autre fête';
+
+  @override
+  String get birthdayYearOptional => 'Année (optionnel, pour l\'âge)';
+
+  @override
+  String get celebrationTypeLabel => 'Type';
+
+  @override
+  String ageYears(int count) {
+    return '$count ans';
+  }
+
+  @override
+  String get alreadyBoughtValidate => 'Déjà acheté ? Valider';
+
+  @override
+  String get addToRecurring => 'Ajouter aux achats récurrents';
+
+  @override
+  String recurringAddedSnackbar(String name) {
+    return '« $name » en achat récurrent (rappel dans 7 j)';
+  }
+
+  @override
+  String get recurringTooltip => 'Achat récurrent';
+
+  @override
+  String get courseTerminee => 'Ostud lõpetatud';
+
+  @override
+  String get courseTermineeConfirm =>
+      'Eemaldada kõik märgistused? Võite alustada uue nimekirjaga.';
+
+  @override
+  String get uncheckAll => 'Eemalda kõik';
+
+  @override
+  String get moveToFutureList => 'Liigu tulevastesse ostudesse';
+
+  @override
+  String deleteOrMoveToFuture(String name) {
+    return 'Kustutada « $name » või liigutada tulevastesse ostudesse?';
+  }
+
+  @override
+  String get listFontScale => 'Nimekirja teksti suurus';
+
+  @override
+  String get listFontScaleSubtitle => 'Kohandage parema loetavuse jaoks';
+
+  @override
+  String get shoppingMode => 'Osturežiim';
+
+  @override
+  String get shoppingModeSubtitle => 'Lihtsustatud vaade suurte nuppudega poes';
+
+  @override
+  String get onboardingWelcome => 'Tere tulemast NopListsse!';
+
+  @override
+  String get onboardingWelcomeSubtitle =>
+      'Alustage tühja nimekirjaga või valige allpool mall.';
+
+  @override
+  String get startEmpty => 'Alusta tühja nimekirjaga';
+
+  @override
+  String progressCount(int checked, int total) {
+    return '$checked / $total';
+  }
+
+  @override
+  String get sendLinkBy => 'Saada link sõnumiga või e-kirjaga kutsumiseks';
+
+  @override
+  String get syncConflictHint => 'Võimalik konflikt: muudatused on ühendatud.';
+
+  @override
+  String get smartCartTitle => 'Ostude abiline';
+
+  @override
+  String get smartCartSubtitle => 'Soovitused harjumuste ja konteksti põhjal';
+
+  @override
+  String get smartCartDueTitle => 'Harjumused';
+
+  @override
+  String smartCartDueMessage(String name, int days, int recurrence) {
+    return 'Sa pole ostnud « $name » juba $days päeva (tavaliselt iga $recurrence p.). Vaja?';
+  }
+
+  @override
+  String get smartCartAddToList => 'Jah, lisa';
+
+  @override
+  String get smartCartNotThisTime => 'Mitte seekord';
+
+  @override
+  String get smartCartContextTitle => 'Kontekst';
+
+  @override
+  String get smartCartContextCold =>
+      'On külm. Kas sul on piisavalt teed, suppi?';
+
+  @override
+  String get smartCartContextCheck => 'Kontrolli ja lisa';
+
+  @override
+  String get smartCartNoSuggestions => 'Soovitusi pole.';
+
+  @override
+  String get panicCheckoutTitle => 'Kontrolli enne kassat';
+
+  @override
+  String get panicCheckoutSubtitle => 'Kas sa kõike meenusid?';
+
+  @override
+  String panicCheckoutUncheckedCount(int count) {
+    return '$count märkimata toodet';
+  }
+
+  @override
+  String get panicCheckoutAddMissing => 'Lisa puuduvad nimekirja';
+
+  @override
+  String get panicCheckoutAllGood => 'Kõik korras, lähen maksma';
+
+  @override
+  String get panicCheckoutEmpty =>
+      'Pole midagi kontrollida. Võid kassasse minna.';
+
+  @override
+  String get streakTitle => 'Streak « O oubli »';
+
+  @override
+  String get streakSubtitle => 'Sorties sans rien oublier d\'affilée';
+
+  @override
+  String get streakCurrent => 'Série actuelle';
+
+  @override
+  String get streakBest => 'Record';
+
+  @override
+  String streakCount(int count) {
+    return '$count sortie(s)';
+  }
+
+  @override
+  String get badgeMemoryMaster => 'Memory Master';
+
+  @override
+  String get badgeMemoryMasterDesc => '5 sorties sans oubli d\'affilée';
+
+  @override
+  String get badgeStreak10 => 'Champion';
+
+  @override
+  String get badgeStreak10Desc => '10 sorties sans oubli d\'affilée';
+
+  @override
+  String get badgeHundredTrips => 'Routard';
+
+  @override
+  String get badgeHundredTripsDesc => '100 courses terminées';
+
+  @override
+  String get statsMostBought => 'Produits les plus achetés';
+
+  @override
+  String get statsSpendingByCategory => 'Dépenses par catégorie';
+
+  @override
+  String get statsMostForgotten => 'Produits les plus souvent oubliés';
+
+  @override
+  String get statsTotalTrips => 'Courses terminées';
+
+  @override
+  String get statsZeroOubliRate => 'Taux zéro oubli';
+
+  @override
+  String get statsZeroOubliSubtitle =>
+      'Courses sans rien déplacer vers Achats futurs';
+
+  @override
+  String get statsNoDataYet =>
+      'Pas encore de données. Termine des courses pour voir tes stats.';
+
+  @override
+  String statsCountTimes(int count) {
+    return '$count fois';
+  }
+
+  @override
+  String get profileConsumptionTitle => 'Profil de conso';
+
+  @override
+  String get profileConsumptionSubtitle =>
+      'Régimes, allergies, produits à éviter. Optionnel et sans jugement.';
+
+  @override
+  String get profileCoachMode => 'Mode conseil bienveillant';
+
+  @override
+  String get profileCoachModeSubtitle =>
+      'Rappels doux et suggestions de substituts quand tu ajoutes un article (tu peux désactiver à tout moment)';
+
+  @override
+  String get profileObjectives => 'Objectifs à atteindre';
+
+  @override
+  String get profileObjectivesSubtitle =>
+      'Choisis les objectifs qui te correspondent (sans jugement)';
+
+  @override
+  String get profileObjectiveWeightLoss => 'Perte de poids';
+
+  @override
+  String get profileObjectiveReduceBudget => 'Réduire le budget';
+
+  @override
+  String get profileObjectiveEatBalanced => 'Manger plus équilibré';
+
+  @override
+  String get profileObjectiveReduceSugar => 'Réduire le sucre';
+
+  @override
+  String get profileObjectiveReduceCholesterol =>
+      'Réduire le mauvais cholestérol';
+
+  @override
+  String get profileObjectiveMoreProteins => 'Augmenter les protéines';
+
+  @override
+  String get profileObjectiveLessMeat => 'Moins de viande / protéines animales';
+
+  @override
+  String get profileObjectiveEatHealthier => 'Manger plus sain';
+
+  @override
+  String get profileObjectiveReduceUltraProcessed =>
+      'Réduire les ultra-transformés';
+
+  @override
+  String get profileObjectiveReducePalmOil => 'Réduire l\'huile de palme';
+
+  @override
+  String get profileObjectiveReduceFatty => 'Réduire les produits gras';
+
+  @override
+  String get profileObjectiveReduceSalt => 'Réduire le sel';
+
+  @override
+  String get profileObjectiveMoreFiber => 'Plus de fibres';
+
+  @override
+  String get profileObjectiveMoreVegetables => 'Plus de légumes';
+
+  @override
+  String get profileDiet => 'Régime / préférences';
+
+  @override
+  String get profileVegan => 'Végan';
+
+  @override
+  String get profileVegetarian => 'Végétarien';
+
+  @override
+  String get profileGlutenFree => 'Sans gluten';
+
+  @override
+  String get profileLactoseFree => 'Sans lactose';
+
+  @override
+  String get profileBioOnly => 'Bio uniquement';
+
+  @override
+  String get profileLocalOnly => 'Local uniquement';
+
+  @override
+  String get profileFairTrade => 'Équitable';
+
+  @override
+  String get profileNoAddedSugar => 'Sans sucre ajouté';
+
+  @override
+  String get profileAllergies => 'Allergies et intolérances';
+
+  @override
+  String get profileAllergiesHint => 'Un par ligne (ex. arachides, lactose)';
+
+  @override
+  String get profileProductsToAvoid => 'Produits à éviter';
+
+  @override
+  String get profileProductsToAvoidHint => 'Alcool, porc, fast-food…';
+
+  @override
+  String get profileBrandsToAvoid => 'Marques à éviter';
+
+  @override
+  String get profileTemptations => 'Objectifs bien-être';
+
+  @override
+  String get profileTemptationsSubtitle =>
+      'On t\'accompagne avec bienveillance : rappels doux et idées de substituts, sans jugement.';
+
+  @override
+  String get profileTemptationProduct => 'Produit (ex. chocolat, soda)';
+
+  @override
+  String get profileTemptationSubstitute => 'Substitut suggéré (optionnel)';
+
+  @override
+  String get profileAddTemptation => 'Ajouter un objectif';
+
+  @override
+  String profileReduceWarning(String product) {
+    return 'Objectif en cours : réduire « $product ». On ajoute quand même cette fois ?';
+  }
+
+  @override
+  String profileReduceWarningWithProgress(String product, int percent) {
+    return 'Objectif en cours : réduire « $product ». Ta progression : $percent %. On ajoute quand même cette fois ?';
+  }
+
+  @override
+  String profileSubstituteSuggestion(String product, String substitute) {
+    return 'Pour ton objectif « $product », on te propose « $substitute » comme alternative. Tu préfères quoi ?';
+  }
+
+  @override
+  String get profileAddAnyway => 'Oui, ajouter quand même';
+
+  @override
+  String profileReplaceWith(String name) {
+    return 'Remplacer par « $name »';
+  }
+
+  @override
+  String get profileCancel => 'Annuler';
+
+  @override
+  String get statsPleasurePercent => 'Où tu en es (plaisir)';
+
+  @override
+  String get statsPleasureSubtitle =>
+      'Progression vers tes objectifs : part des achats type snacks / sucreries.';
+
+  @override
+  String get statsBalanceScore => 'Progression équilibre';
+
+  @override
+  String get statsBalanceSubtitle =>
+      'Ta progression vers un équilibre qui te convient (sans jugement).';
+
+  @override
+  String get statsMonthlyEvolution => 'Kuine areng';
+
+  @override
+  String get statsMonthlySubtitle => 'See kuu võrreldes eelmise kuuga';
+
+  @override
+  String get smartCartYouMightForget => 'Sa unustad peaaegu';
+
+  @override
+  String get smartCartYouMightForgetSubtitle =>
+      'Sinu harjumuste, ajaloo ja hooaja põhjal';
+
+  @override
+  String get smartCartAddAllSuggested => 'Lisa kõik';
+
+  @override
+  String get probableListTitle => 'Tõenäoline nädalaleht';
+
+  @override
+  String get probableListSubtitle =>
+      'Siin on sinu tõenäoline nädalaleht ajaloo, korduvate ja hooaja põhjal. Kinnitada?';
+
+  @override
+  String get probableListConfirm => 'Kinnita ja lisa minu nimekirja';
+
+  @override
+  String get probableListCancel => 'Tühista';
+
+  @override
+  String get shoppingSocialTitle => 'Sotsiaalne ostmine';
+
+  @override
+  String get shoppingSocialSubtitle =>
+      'Anonüümitud trendid: mida teised ostavad (koondandmed, sinu nimekirja ei jagata)';
+
+  @override
+  String get shoppingSocialPopularNearby => 'Populaarne sinu lähedal';
+
+  @override
+  String shoppingSocialTrendThisWeek(int percent, String product) {
+    return 'Sinu piirkonnas ostab $percent % kasutajatest sel nädalal « $product ».';
+  }
+
+  @override
+  String get shoppingSocialTrendsTitle => 'Toitumistrendid (anonüümsed)';
+
+  @override
+  String get probableListEmptyHint =>
+      'Lisa korduvaid ostukaid ja lõpeta ostud, et rakendus õpiks sinu harjumusi ja pakub tõenäolist nimekirja.';
+
+  @override
+  String get probableListSelectAll => 'Vali kõik';
+
+  @override
+  String get probableListDeselectAll => 'Tühista valik';
+
+  @override
+  String probableListSelectedCount(int count) {
+    return '$count üksus(t) valitud';
+  }
+
+  @override
+  String probableListAddedCount(int count) {
+    return '$count üksus(t) lisatud nimekirja';
+  }
+
+  @override
+  String get smartCartSeeMore => 'Näita rohkem';
+
+  @override
+  String smartCartSuggestionsCount(int count) {
+    return '$count soovitust';
+  }
+
+  @override
+  String smartCartAddedCount(int count) {
+    return '$count üksus(t) lisatud';
+  }
+
+  @override
+  String shoppingSocialAddProduct(String product) {
+    return 'Lisa « $product » minu nimekirja';
+  }
+
+  @override
+  String get shoppingSocialDemoDataNote =>
+      'Demodata. Päris trendid tulevad tulevases uuenduses. Isikuandmeid ei jagata (GDPR).';
+
+  @override
+  String get shoppingSocialPopularRecipes => 'Populaarsed retseptid';
+
+  @override
+  String get shoppingSocialViewIngredients => 'Vaata koostisosi';
+
+  @override
+  String get shoppingSocialAddIngredientsToList =>
+      'Lisa koostisosad minu nimekirja';
+
+  @override
+  String get proBadge => 'Pro';
+
+  @override
+  String get probableListFirstRunHint =>
+      'Kinnita või muuda ettepanekul olevat nimekirja vastavalt oma harjumustele.';
+
+  @override
+  String get shoppingSocialFirstRunHint =>
+      'Anonüümitud trendid: isikuandmeid ei jagata.';
+
+  @override
+  String get errorGeneric => 'Tekkis viga.';
 }

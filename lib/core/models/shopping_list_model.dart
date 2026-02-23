@@ -68,3 +68,7 @@ class ShoppingListModel {
 /// ID réservé pour la liste "Achats futurs" (à acheter plus tard).
 const String kAchatsFutursListId = 'achats_futurs';
 const String kAchatsFutursListName = 'Achats futurs';
+
+/// ID réservé pour la liste "Engagements" (rappel d'engagements implicites, Noublipo+).
+const String kEngagementsListId = 'engagements';
+const String kEngagementsListName = 'Engagements';

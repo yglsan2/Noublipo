@@ -8,10 +8,14 @@ import 'package:speech_to_text/speech_to_text.dart';
 import '../../../app_config.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/utils/voice_text_cleaner.dart';
+import '../../../core/utils/implicit_commitment_detector.dart';
 import '../../../core/constants/design_constants.dart';
 import '../../../core/layout/screen_layout.dart';
 import '../../../core/utils/app_logger.dart';
+import '../../../core/models/recurring_item.dart';
 import '../../../core/providers/category_names_provider.dart';
+import '../../../core/providers/list_provider.dart';
+import '../../../core/providers/planning_provider.dart';
 import '../../../core/providers/settings_provider.dart';
 import '../../../core/data/product_lexicon.dart';
 import '../../../l10n/app_localizations.dart';
@@ -34,6 +38,7 @@ class AddItemSheet extends StatefulWidget {
     this.initialUnit,
     required this.onSubmit,
     this.onAddForLater,
+    this.onAddAsAlreadyBought,
   });
 
   final String initialName;
@@ -61,6 +66,8 @@ class AddItemSheet extends StatefulWidget {
   }) onSubmit;
   /// Appelé quand l'utilisateur choisit « Pour plus tard » sur une suggestion : ajoute l'article à la liste (non coché).
   final void Function(String name)? onAddForLater;
+  /// Appelé quand l'utilisateur valide « Déjà acheté » : ajoute l'article coché et lié au récurrent.
+  final void Function(String name, int colorIndex, String recurringItemId)? onAddAsAlreadyBought;
 
   @override
   State<AddItemSheet> createState() => _AddItemSheetState();
@@ -214,6 +221,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                   }
                 });
               }
+              _maybeOfferEngagementReminder(cleaned);
             } else if (!result.finalResult) {
               _controller.text = raw;
             }
@@ -246,6 +254,53 @@ class _AddItemSheetState extends State<AddItemSheet> {
         _soundLevel = 0;
       });
     }
+  }
+
+  void _maybeOfferEngagementReminder(String cleaned) {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (!mounted) return;
+      final commitment = ImplicitCommitmentDetector.detect(cleaned);
+      if (commitment == null) return;
+      final l10n = AppLocalizations.of(context);
+      final create = await showDialog<bool>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: Text(l10n.engagementDetectedTitle),
+          content: Text(l10n.engagementDetectedMessage(commitment.title)),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(ctx).pop(false),
+              child: Text(l10n.cancel),
+            ),
+            FilledButton(
+              onPressed: () => Navigator.of(ctx).pop(true),
+              child: Text(l10n.createReminderButton),
+            ),
+          ],
+        ),
+      );
+      if (create != true || !mounted) return;
+      try {
+        await context.read<ListProvider>().addEngagementItem(
+          commitment.title,
+          reminderAt: commitment.reminderAtMs,
+          reminderNote: commitment.reminderNote,
+        );
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(l10n.engagementReminderCreated(commitment.title)),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('${l10n.errorPrefix}: $e')),
+          );
+        }
+      }
+    });
   }
 
   Future<void> _pickImage() async {
@@ -351,6 +406,32 @@ class _AddItemSheetState extends State<AddItemSheet> {
                   onSubmitted: (_) => _submit(),
                   onChanged: (_) => setState(() {}),
                 ),
+                if (!widget.isEdit && isNoublipoPlus && widget.onAddAsAlreadyBought != null)
+                  Consumer<PlanningProvider>(
+                    builder: (context, planning, _) {
+                      final q = _controller.text.trim();
+                      if (q.isEmpty) return const SizedBox.shrink();
+                      final qLower = q.toLowerCase();
+                      RecurringItem? match;
+                      try {
+                        match = planning.recurringItems.firstWhere(
+                          (r) => r.name.trim().toLowerCase() == qLower,
+                        );
+                      } catch (_) {}
+                      if (match == null) return const SizedBox.shrink();
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 8),
+                        child: ActionChip(
+                          avatar: Icon(Icons.repeat, size: 18, color: Theme.of(context).colorScheme.primary),
+                          label: Text(AppLocalizations.of(context).alreadyBoughtValidate),
+                          onPressed: () {
+                            widget.onAddAsAlreadyBought!(q, _colorIndex, match!.id);
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      );
+                    },
+                  ),
                 if (isNoublipoPlus && _isListening)
                   Padding(
                     padding: const EdgeInsets.only(top: 6),

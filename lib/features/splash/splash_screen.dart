@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../app_config.dart';
+import '../../core/providers/premium_provider.dart';
 import '../list/screens/list_screen.dart';
 import '../../core/utils/deep_link_handler.dart';
 
@@ -46,8 +48,8 @@ class _SplashScreenState extends State<SplashScreen> {
                 ClipRect(
                   child: Image.asset(
                     'assets/logo/noubliepo.png',
-                    width: 200,
-                    height: 80,
+                    width: 280,
+                    height: 112,
                     fit: BoxFit.contain,
                     errorBuilder: (context, error, stackTrace) => Icon(
                       Icons.shopping_cart,
@@ -56,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     ),
                   ),
                 ),
-                if (isNoublipoPlus)
+                if (context.watch<PremiumProvider>().isPremiumActive)
                   Padding(
                     padding: const EdgeInsets.only(top: 4),
                     child: Text(
@@ -67,11 +69,11 @@ class _SplashScreenState extends State<SplashScreen> {
                           ),
                     ),
                   ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 28),
                 Text(
-                  appName,
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.w600,
+                  context.watch<PremiumProvider>().isPremiumActive ? 'NopList+' : 'NopList',
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
                         color: isDark ? const Color(0xFFE0E0E0) : Colors.black87,
                       ),
                 ),

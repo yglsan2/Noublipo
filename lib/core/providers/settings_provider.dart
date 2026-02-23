@@ -11,9 +11,26 @@ class SettingsProvider extends ChangeNotifier {
     _remindersEnabled = _storage.remindersEnabled;
     _categoryStyle = _storage.categoryStyle;
     _sortMode = _storage.sortMode;
+    _aisleOrder = Map<int, int>.from(_storage.aisleOrder);
+    _favoriteStoreIndices = List<int>.from(_storage.favoriteStoreIndices);
     _showPrices = _storage.showPrices;
     _autocomplete = _storage.autocomplete;
     _localeLanguageCode = _storage.localeLanguageCode;
+    _listFontScale = _storage.listFontScale;
+    _shoppingMode = _storage.shoppingMode;
+    _onboardingSeen = _storage.onboardingSeen;
+    _coachNutritionEnabled = _storage.coachNutritionEnabled;
+  }
+
+  Future<void> setCoachNutritionEnabled(bool value) async {
+    try {
+      await _storage.setCoachNutritionEnabled(value);
+      _coachNutritionEnabled = value;
+      notifyListeners();
+    } catch (e, stack) {
+      AppLogger.error('SettingsProvider.setCoachNutritionEnabled', e, stack);
+      rethrow;
+    }
   }
 
   final StorageService _storage;
@@ -23,9 +40,15 @@ class SettingsProvider extends ChangeNotifier {
   bool _remindersEnabled = false;
   String _categoryStyle = 'form';
   String _sortMode = 'order';
+  Map<int, int> _aisleOrder = {};
+  List<int> _favoriteStoreIndices = [];
   bool _showPrices = false;
   bool _autocomplete = true;
   String? _localeLanguageCode;
+  double _listFontScale = 1.0;
+  bool _shoppingMode = false;
+  bool _onboardingSeen = false;
+  bool _coachNutritionEnabled = true;
 
   bool get capitalizeNames => _capitalizeNames;
   /// Code langue choisi (null = langue du système). Utilisé par MaterialApp.locale.
@@ -39,8 +62,14 @@ class SettingsProvider extends ChangeNotifier {
   bool get remindersEnabled => _remindersEnabled;
   String get categoryStyle => _categoryStyle;
   String get sortMode => _sortMode;
+  Map<int, int> get aisleOrder => Map.unmodifiable(_aisleOrder);
+  List<int> get favoriteStoreIndices => List.unmodifiable(_favoriteStoreIndices);
   bool get showPrices => _showPrices;
   bool get autocomplete => _autocomplete;
+  double get listFontScale => _listFontScale;
+  bool get shoppingMode => _shoppingMode;
+  bool get onboardingSeen => _onboardingSeen;
+  bool get coachNutritionEnabled => _coachNutritionEnabled;
   ThemeMode get themeMode => _darkMode ? ThemeMode.dark : ThemeMode.light;
 
   Future<void> setCapitalizeNames(bool value) async {
@@ -109,6 +138,28 @@ class SettingsProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> setAisleOrder(Map<int, int> order) async {
+    try {
+      await _storage.setAisleOrder(order);
+      _aisleOrder = Map<int, int>.from(_storage.aisleOrder);
+      notifyListeners();
+    } catch (e, stack) {
+      AppLogger.error('SettingsProvider.setAisleOrder', e, stack);
+      rethrow;
+    }
+  }
+
+  Future<void> setFavoriteStoreIndices(List<int> indices) async {
+    try {
+      await _storage.setFavoriteStoreIndices(indices);
+      _favoriteStoreIndices = List<int>.from(_storage.favoriteStoreIndices);
+      notifyListeners();
+    } catch (e, stack) {
+      AppLogger.error('SettingsProvider.setFavoriteStoreIndices', e, stack);
+      rethrow;
+    }
+  }
+
   Future<void> setShowPrices(bool value) async {
     try {
       await _storage.setShowPrices(value);
@@ -144,6 +195,41 @@ class SettingsProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> setListFontScale(double value) async {
+    final v = value.clamp(0.8, 1.5);
+    if (v == _listFontScale) return;
+    try {
+      await _storage.setListFontScale(v);
+      _listFontScale = _storage.listFontScale;
+      notifyListeners();
+    } catch (e, stack) {
+      AppLogger.error('SettingsProvider.setListFontScale', e, stack);
+      rethrow;
+    }
+  }
+
+  Future<void> setShoppingMode(bool value) async {
+    try {
+      await _storage.setShoppingMode(value);
+      _shoppingMode = _storage.shoppingMode;
+      notifyListeners();
+    } catch (e, stack) {
+      AppLogger.error('SettingsProvider.setShoppingMode', e, stack);
+      rethrow;
+    }
+  }
+
+  Future<void> setOnboardingSeen(bool value) async {
+    try {
+      await _storage.setOnboardingSeen(value);
+      _onboardingSeen = _storage.onboardingSeen;
+      notifyListeners();
+    } catch (e, stack) {
+      AppLogger.error('SettingsProvider.setOnboardingSeen', e, stack);
+      rethrow;
+    }
+  }
+
   /// Recharge les préférences depuis le stockage (après import backup).
   void reloadFromStorage() {
     _capitalizeNames = _storage.capitalizeNames;
@@ -152,9 +238,15 @@ class SettingsProvider extends ChangeNotifier {
     _remindersEnabled = _storage.remindersEnabled;
     _categoryStyle = _storage.categoryStyle;
     _sortMode = _storage.sortMode;
+    _aisleOrder = Map<int, int>.from(_storage.aisleOrder);
+    _favoriteStoreIndices = List<int>.from(_storage.favoriteStoreIndices);
     _showPrices = _storage.showPrices;
     _autocomplete = _storage.autocomplete;
     _localeLanguageCode = _storage.localeLanguageCode;
+    _listFontScale = _storage.listFontScale;
+    _shoppingMode = _storage.shoppingMode;
+    _onboardingSeen = _storage.onboardingSeen;
+    _coachNutritionEnabled = _storage.coachNutritionEnabled;
     notifyListeners();
   }
 

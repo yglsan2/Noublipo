@@ -57,7 +57,8 @@ class PlanningProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addRecurringItem(String name,
+  /// Retourne l'item créé pour lier à un article de liste (recurringItemId).
+  Future<RecurringItem> addRecurringItem(String name,
       {int colorIndex = 0, int recurrenceDays = 7}) async {
     final item = RecurringItem(
       id: _uuid.v4(),
@@ -73,6 +74,7 @@ class PlanningProvider extends ChangeNotifier {
       await rem.scheduleRecurringReminder(item.id, item.name, when);
     }
     notifyListeners();
+    return item;
   }
 
   Future<void> updateRecurringItem(String id,

@@ -172,3 +172,17 @@ L’app peut s’ouvrir via un lien de partage. Schémas supportés : `https://n
 ## Fonctionnalités (Noublipo+)
 
 En plus : listes multiples, saisie vocale, notes par article, images, tri, budget et total estimé, widget, mode sombre, actions rapides.
+
+### Rappel d’engagements implicites (Noublipo+)
+
+Lors d’une **saisie vocale**, l’app détecte les engagements implicites, idées rapides et personnes à recontacter, puis propose de créer un **rappel** dans la liste **Engagements**. Exemples :
+
+- « On devrait aller voir ce film ce week-end » → proposition de rappel avec date (week-end).
+- « Il faudrait rappeler Marie la semaine prochaine » → rappel « Recontacter Marie ».
+- « Penser à réserver le restaurant demain » → note avec rappel à la date indiquée.
+
+Une liste dédiée **Engagements** est créée automatiquement ; les rappels sont planifiés (notifications). Expressions temporelles reconnues : *demain*, *ce week-end*, *la semaine prochaine*, *lundi prochain*, *ce soir*, etc. Le détecteur est optimisé (une seule passe, titres nettoyés des expressions de date).
+
+### Calendrier des anniversaires (Noublipo+)
+
+Menu **Plus** → **Anniversaires** : tenez à jour une liste de personnes (Léontine, Gertrude…) avec leur date d’anniversaire (jour + mois). Des **rappels** permettent de ne pas oublier : alerte **1 jour avant** et/ou **2 jours avant**, avec notification type « Demain : anniversaire de X » ou « Dans 2 jours : anniversaire de X ». Les anniversaires sont inclus dans la sauvegarde / restauration.

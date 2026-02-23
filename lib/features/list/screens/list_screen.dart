@@ -3,6 +3,7 @@ import 'package:flutter/services.dart' show HapticFeedback, Clipboard, Clipboard
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import '../../../app_config.dart';
+import '../../../core/constants/locale_config.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/design_constants.dart';
 import '../../../core/constants/touch_constants.dart';
@@ -11,6 +12,7 @@ import '../../../core/models/shopping_item.dart';
 import '../../../core/models/list_group.dart';
 import '../../../core/models/shopping_list_model.dart';
 import '../../../core/providers/category_names_provider.dart';
+import '../../../core/providers/gamification_provider.dart';
 import '../../../core/providers/list_provider.dart';
 import '../../../core/providers/settings_provider.dart';
 import '../widgets/add_item_sheet.dart';
@@ -24,8 +26,19 @@ import 'backup_screen.dart';
 import 'stats_screen.dart';
 import '../../catalog/catalog_screen.dart';
 import '../../scan/scan_screen.dart';
+import '../../birthdays/birthdays_screen.dart';
 import '../../planning/planning_screen.dart';
+import '../../smart_cart/panic_checkout_sheet.dart';
+import '../../smart_cart/probable_list_sheet.dart';
+import '../../smart_cart/shopping_social_sheet.dart';
+import '../../smart_cart/smart_cart_sheet.dart';
+import '../../paywall/paywall_screen.dart';
+import '../../profile/consumption_profile_sheet.dart';
+import '../../../core/providers/consumption_profile_provider.dart';
 import '../../../core/providers/planning_provider.dart';
+import '../../../core/providers/premium_provider.dart';
+import '../../../core/services/storage_service.dart';
+import '../../../core/services/upgrade_prompt_helper.dart';
 import '../../../core/utils/app_logger.dart';
 import '../../../l10n/app_localizations.dart';
 
@@ -33,13 +46,18 @@ import '../../../l10n/app_localizations.dart';
 class ListScreen extends StatelessWidget {
   const ListScreen({super.key});
 
+  static bool _onboardingShownThisSession = false;
+
   @override
   Widget build(BuildContext context) {
+    final isPremiumActive = context.watch<PremiumProvider>().isPremiumActive;
     final layout = ScreenLayout.of(context);
     final mq = MediaQuery.of(context);
     final isPhone = layout.isPhone;
     final appBarHeight = isPhone ? 72.0 : 112.0;
-    return Scaffold(
+    return Stack(
+      children: [
+        Scaffold(
       appBar: AppBar(
         toolbarHeight: appBarHeight,
         titleSpacing: isPhone ? 8 : 16,
@@ -70,12 +88,28 @@ class ListScreen extends StatelessWidget {
         builder: (context, constraints) {
           return Consumer3<ListProvider, CategoryNamesProvider, SettingsProvider>(
             builder: (context, provider, categoryNames, settings, _) {
+              final isPremiumActiveInner = context.watch<PremiumProvider>().isPremiumActive;
               final layout = ScreenLayout.of(context);
               if (provider.loading) {
                 return const Center(child: CircularProgressIndicator());
               }
-              final items = provider.getFilteredSortedItems(settings.sortMode);
-              final listSwitcher = provider.isSharedList || !isNoublipoPlus || provider.allLists.length < 2
+              if (!settings.onboardingSeen && !_onboardingShownThisSession) {
+                _onboardingShownThisSession = true;
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  _showOnboardingIfNeeded(context);
+                });
+              }
+              if (provider.pendingPartnerSuggestions.isNotEmpty) {
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  _showPartnerSuggestionDialog(context, provider);
+                });
+              }
+              final items = provider.getFilteredSortedItems(
+                settings.sortMode,
+                aisleOrder: settings.sortMode == 'aisle' ? settings.aisleOrder : null,
+                favoriteStoreIndices: settings.sortMode == 'aisle' ? settings.favoriteStoreIndices : null,
+              );
+              final listSwitcher = provider.isSharedList || !isPremiumActive || provider.allLists.length < 2
                   ? null
                   : _ListSwitcher(
                       provider: provider,
@@ -93,7 +127,7 @@ class ListScreen extends StatelessWidget {
                 layout.contentPaddingHorizontal,
                 layout.contentPaddingVertical + mq.padding.bottom,
               );
-              if (provider.selectionMode && isNoublipoPlus) {
+              if (provider.selectionMode && isPremiumActive) {
                 return Column(
                   children: [
                     ...[listSwitcher, colorLegend].whereType<Widget>(),
@@ -126,7 +160,7 @@ class ListScreen extends StatelessWidget {
                       onClearSearch: () => provider.setSearchQuery(''),
                       onTapAdd: () => _addItem(context),
                       onQuickAdd: () => _showQuickAdd(context),
-                      showQuickAddChip: isNoublipoPlus,
+                      showQuickAddChip: isPremiumActive,
                       contentPaddingHorizontal: layout.contentPaddingHorizontal,
                     ),
                     ),
@@ -155,7 +189,7 @@ class ListScreen extends StatelessWidget {
                               tileStyle: tileStyle,
                               onEditStoreName: (colorIndex) =>
                                   _showStoreActionsSheet(context, colorIndex, categoryNames),
-                              buildItem: (item) => _buildDismissibleItem(
+                              buildItem: (item, {bool wrapSized = false}) => _buildDismissibleItem(
                                 context,
                                 provider,
                                 categoryNames,
@@ -163,6 +197,7 @@ class ListScreen extends StatelessWidget {
                                 layout,
                                 isGrid: false,
                                 compact: true,
+                                wrapSized: wrapSized,
                               ),
                             ),
                           );
@@ -178,6 +213,9 @@ class ListScreen extends StatelessWidget {
       floatingActionButton: _BigAddButton(
         onPressed: () => _addItem(context),
       ),
+        ),
+        const _UpgradePromptTrigger(),
+    ],
     );
   }
 
@@ -194,6 +232,11 @@ class ListScreen extends StatelessWidget {
           MaterialPageRoute<void>(builder: (context) => const PlanningScreen()),
         );
         break;
+      case 'birthdays':
+        Navigator.of(context).push(
+          MaterialPageRoute<void>(builder: (context) => const BirthdaysScreen()),
+        );
+        break;
       case 'scan':
         Navigator.of(context).push(
           MaterialPageRoute<void>(builder: (context) => const ScanScreen()),
@@ -201,6 +244,37 @@ class ListScreen extends StatelessWidget {
         break;
       case 'quick_add':
         _showQuickAdd(context);
+        break;
+      case 'smart_cart':
+        showModalBottomSheet<void>(
+          context: context,
+          isScrollControlled: true,
+          builder: (ctx) => const SmartCartSheet(),
+        );
+        break;
+      case 'probable_list':
+        showModalBottomSheet<void>(
+          context: context,
+          isScrollControlled: true,
+          builder: (ctx) => const ProbableListSheet(),
+        );
+        break;
+      case 'shopping_social':
+        showModalBottomSheet<void>(
+          context: context,
+          isScrollControlled: true,
+          builder: (ctx) => const ShoppingSocialSheet(),
+        );
+        break;
+      case 'panic_checkout':
+        showModalBottomSheet<void>(
+          context: context,
+          isScrollControlled: true,
+          builder: (ctx) => const PanicCheckoutSheet(),
+        );
+        break;
+      case 'finish_shopping':
+        _confirmFinishShopping(context);
         break;
       case 'remove_checked':
         _removeChecked(context);
@@ -241,18 +315,26 @@ class ListScreen extends StatelessWidget {
     ScreenLayout layout, {
     required bool isGrid,
     bool compact = false,
+    bool wrapSized = false,
   }) {
     final settings = context.read<SettingsProvider>();
+    final fontSize = layout.listItemFontSize * settings.listFontScale;
     final tile = RepaintBoundary(
       child: ItemTile(
       item: item,
       categoryLabel: categoryNames.getCategoryName(item.colorIndex),
       tileStyle: settings.tileStyle,
       minHeight: layout.listItemMinHeight,
-      fontSize: layout.listItemFontSize,
-      showPlusExtras: isNoublipoPlus,
+      fontSize: fontSize,
+      showPlusExtras: context.watch<PremiumProvider>().isPremiumActive,
       compact: compact,
-      onTap: () => provider.toggleChecked(item.id),
+      wrapSized: wrapSized,
+      onTap: () async {
+        await provider.toggleChecked(item.id);
+        if (context.mounted && provider.totalCount > 0 && provider.checkedCount == provider.totalCount) {
+          HapticFeedback.mediumImpact();
+        }
+      },
       onLongPress: () => _showItemActions(context, provider, item),
     ),
     );
@@ -339,7 +421,7 @@ class ListScreen extends StatelessWidget {
 
   static List<String> _getSuggestionNames(BuildContext context, ListProvider provider) {
     var names = provider.currentItemNames.toList();
-    if (!isNoublipoPlus) return names;
+    if (!context.watch<PremiumProvider>().isPremiumActive) return names;
     try {
       final planning = context.read<PlanningProvider>();
       names = {
@@ -604,25 +686,124 @@ class ListScreen extends StatelessWidget {
         initialColorIndex: initialColorIndex,
         suggestionNames: _getSuggestionNames(context, provider),
         onSubmit: (name, colorIndex, {reminderAt, reminderNote, updateReminder = false, note, imagePath, price, quantity, unit}) {
-          context.read<ListProvider>().addItem(
-                name,
-                colorIndex: colorIndex,
-                reminderAt: reminderAt,
-                reminderNote: reminderNote,
-                note: note,
-                imagePath: imagePath,
-                price: price,
-                quantity: quantity,
-                unit: unit,
-              );
+          _addItemWithProfileCheck(
+            context,
+            name: name,
+            colorIndex: colorIndex,
+            reminderAt: reminderAt,
+            reminderNote: reminderNote,
+            updateReminder: updateReminder,
+            note: note,
+            imagePath: imagePath,
+            price: price,
+            quantity: quantity,
+            unit: unit,
+          );
         },
-        onAddForLater: isNoublipoPlus
+        onAddForLater: context.watch<PremiumProvider>().isPremiumActive
             ? (name) {
-                context.read<ListProvider>().addItem(name);
+                _addItemWithProfileCheck(context, name: name);
+              }
+            : null,
+        onAddAsAlreadyBought: context.watch<PremiumProvider>().isPremiumActive
+            ? (name, colorIndex, recurringItemId) {
+                context.read<ListProvider>().addItem(
+                      name,
+                      colorIndex: colorIndex,
+                      checked: true,
+                      recurringItemId: recurringItemId,
+                    );
               }
             : null,
       ),
     );
+  }
+
+  Future<void> _addItemWithProfileCheck(
+    BuildContext context, {
+    required String name,
+    int colorIndex = 0,
+    int? reminderAt,
+    String? reminderNote,
+    bool updateReminder = false,
+    String? note,
+    String? imagePath,
+    double? price,
+    double? quantity,
+    String? unit,
+  }) async {
+    final listProvider = context.read<ListProvider>();
+    if (!context.watch<PremiumProvider>().isPremiumActive) {
+      listProvider.addItem(name, colorIndex: colorIndex, reminderAt: reminderAt, reminderNote: reminderNote, note: note, imagePath: imagePath, price: price, quantity: quantity, unit: unit);
+      return;
+    }
+    final settings = context.read<SettingsProvider>();
+    if (!settings.coachNutritionEnabled) {
+      listProvider.addItem(name, colorIndex: colorIndex, reminderAt: reminderAt, reminderNote: reminderNote, note: note, imagePath: imagePath, price: price, quantity: quantity, unit: unit);
+      return;
+    }
+    final profileProvider = context.read<ConsumptionProfileProvider>();
+    final result = profileProvider.checkProduct(name);
+    if (result.shouldWarnReduce) {
+      final l10n = AppLocalizations.of(context);
+      if (result.substitute != null && result.substitute!.isNotEmpty) {
+        final choice = await showDialog<String>(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: Text(l10n.profileConsumptionTitle),
+            content: Text(l10n.profileSubstituteSuggestion(name, result.substitute!)),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, 'cancel'),
+                child: Text(l10n.profileCancel),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, 'add'),
+                child: Text(l10n.profileAddAnyway),
+              ),
+              FilledButton(
+                onPressed: () => Navigator.pop(ctx, 'replace'),
+                child: Text(l10n.profileReplaceWith(result.substitute!)),
+              ),
+            ],
+          ),
+        );
+        if (!context.mounted) return;
+        if (choice == 'replace') {
+          listProvider.addItem(result.substitute!, colorIndex: colorIndex, reminderAt: reminderAt, reminderNote: reminderNote, note: note, imagePath: imagePath, price: price, quantity: quantity, unit: unit);
+        } else if (choice == 'add') {
+          listProvider.addItem(name, colorIndex: colorIndex, reminderAt: reminderAt, reminderNote: reminderNote, note: note, imagePath: imagePath, price: price, quantity: quantity, unit: unit);
+        }
+      } else {
+        final gamification = context.read<GamificationProvider>();
+        final percent = gamification.balanceScore.round();
+        final content = percent > 0
+            ? l10n.profileReduceWarningWithProgress(name, percent)
+            : l10n.profileReduceWarning(name);
+        final addAnyway = await showDialog<bool>(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: Text(l10n.profileConsumptionTitle),
+            content: Text(content),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, false),
+                child: Text(l10n.profileCancel),
+              ),
+              FilledButton(
+                onPressed: () => Navigator.pop(ctx, true),
+                child: Text(l10n.profileAddAnyway),
+              ),
+            ],
+          ),
+        );
+        if (context.mounted && addAnyway == true) {
+          listProvider.addItem(name, colorIndex: colorIndex, reminderAt: reminderAt, reminderNote: reminderNote, note: note, imagePath: imagePath, price: price, quantity: quantity, unit: unit);
+        }
+      }
+    } else {
+      listProvider.addItem(name, colorIndex: colorIndex, reminderAt: reminderAt, reminderNote: reminderNote, note: note, imagePath: imagePath, price: price, quantity: quantity, unit: unit);
+    }
   }
 
   void _showItemActions(
@@ -630,6 +811,7 @@ class ListScreen extends StatelessWidget {
     ListProvider provider,
     ShoppingItem item,
   ) {
+    final l10n = AppLocalizations.of(context);
     showModalBottomSheet<void>(
       context: context,
       builder: (ctx) => SafeArea(
@@ -638,7 +820,7 @@ class ListScreen extends StatelessWidget {
           children: [
             ListTile(
               leading: const Icon(Icons.edit_outlined),
-              title: Text(AppLocalizations.of(context).modify),
+              title: Text(l10n.modify),
               minLeadingWidth: TouchConstants.minTouchTarget,
               onTap: () {
                 HapticFeedback.selectionClick();
@@ -646,10 +828,46 @@ class ListScreen extends StatelessWidget {
                 _editItem(context, provider, item);
               },
             ),
+            if (context.watch<PremiumProvider>().isPremiumActive && item.recurringItemId == null)
+              ListTile(
+                leading: Icon(Icons.repeat, color: Theme.of(context).colorScheme.primary),
+                title: Text(AppLocalizations.of(context).addToRecurring),
+                minLeadingWidth: TouchConstants.minTouchTarget,
+                onTap: () async {
+                  HapticFeedback.selectionClick();
+                  Navigator.pop(ctx);
+                  try {
+                    final planning = context.read<PlanningProvider>();
+                    final recurring = await planning.addRecurringItem(
+                      item.name,
+                      colorIndex: item.colorIndex,
+                      recurrenceDays: 7,
+                    );
+                    await provider.updateItem(
+                      item.id,
+                      recurringItemId: recurring.id,
+                    );
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(AppLocalizations.of(context).recurringAddedSnackbar(item.name)),
+                          behavior: SnackBarBehavior.floating,
+                        ),
+                      );
+                    }
+                  } catch (e) {
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('${l10n.errorPrefix}: $e')),
+                      );
+                    }
+                  }
+                },
+              ),
             ListTile(
               leading: Icon(Icons.delete_outline, color: Theme.of(context).colorScheme.error),
               title: Text(
-                AppLocalizations.of(context).delete,
+                l10n.delete,
                 style: TextStyle(color: Theme.of(context).colorScheme.error),
               ),
               minLeadingWidth: TouchConstants.minTouchTarget,
@@ -705,31 +923,57 @@ class ListScreen extends StatelessWidget {
     ListProvider provider,
     ShoppingItem item,
   ) {
-    showDialog<bool>(
+    final l10n = AppLocalizations.of(context);
+    final offerMoveToFuture = context.watch<PremiumProvider>().isPremiumActive && !provider.isSharedList && !item.checked && !provider.isCurrentListAchatsFuturs;
+    showDialog<String?>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text(AppLocalizations.of(context).deleteArticleConfirm),
-        content: Text(AppLocalizations.of(context).itemWillBeRemovedFromList(item.name)),
+        title: Text(offerMoveToFuture ? l10n.deleteOrMoveToFuture(item.name) : l10n.deleteArticleConfirm),
+        content: Text(l10n.itemWillBeRemovedFromList(item.name)),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(ctx, false),
-            child: Text(AppLocalizations.of(context).cancel),
+            onPressed: () => Navigator.pop(ctx, null),
+            child: Text(l10n.cancel),
           ),
+          if (offerMoveToFuture)
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, 'move'),
+              child: Text(l10n.moveToFutureList),
+            ),
           FilledButton(
-            onPressed: () => Navigator.pop(ctx, true),
+            onPressed: () => Navigator.pop(ctx, 'delete'),
             style: FilledButton.styleFrom(
               backgroundColor: Theme.of(context).colorScheme.error,
             ),
-            child: Text(AppLocalizations.of(context).delete),
+            child: Text(l10n.delete),
           ),
         ],
       ),
-    ).then((ok) {
-      if (ok == true) {
+    ).then((action) async {
+      if (action == null) return;
+      if (!context.mounted) return;
+      final gamification = context.read<GamificationProvider>();
+      if (action == 'move') {
+        try {
+          await gamification.recordForgotten([item.name]);
+          await provider.moveItemToFutureList(item.id);
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(l10n.moveToFutureList)),
+            );
+          }
+        } catch (e) {
+          if (context.mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text('${l10n.errorPrefix}: $e')),
+            );
+          }
+        }
+      } else {
         provider.removeItem(item.id);
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(AppLocalizations.of(context).itemRemoved)),
+            SnackBar(content: Text(l10n.itemRemoved)),
           );
         }
       }
@@ -1127,6 +1371,216 @@ class ListScreen extends StatelessWidget {
     );
   }
 
+  static void _showOnboardingIfNeeded(BuildContext context) {
+    if (!context.mounted) return;
+    final settings = context.read<SettingsProvider>();
+    if (settings.onboardingSeen) return;
+    final l10n = AppLocalizations.of(context);
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (ctx) => AlertDialog(
+        title: Text(l10n.onboardingWelcome),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(l10n.onboardingWelcomeSubtitle),
+            const SizedBox(height: 20),
+            FilledButton.icon(
+              onPressed: () async {
+                Navigator.pop(ctx);
+                if (!context.mounted) return;
+                await context.read<SettingsProvider>().setOnboardingSeen(true);
+              },
+              icon: const Icon(Icons.add_circle_outline),
+              label: Text(l10n.startEmpty),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _confirmFinishShopping(BuildContext context) {
+    final provider = context.read<ListProvider>();
+    final l10n = AppLocalizations.of(context);
+    if (provider.totalCount == 0) return;
+    final uncheckedCount = provider.totalCount - provider.checkedCount;
+    final canMoveToFuture = context.watch<PremiumProvider>().isPremiumActive && !provider.isSharedList && !provider.isCurrentListAchatsFuturs && uncheckedCount > 0;
+    showDialog<bool?>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(l10n.courseTerminee),
+        content: Text(
+          canMoveToFuture
+              ? '${l10n.courseTermineeConfirm}\n\n${l10n.moveToFutureList} ($uncheckedCount) ?'
+              : l10n.courseTermineeConfirm,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, null),
+            child: Text(l10n.cancel),
+          ),
+          if (canMoveToFuture)
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: Text(l10n.uncheckAll),
+            ),
+          FilledButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text(canMoveToFuture ? l10n.moveToFutureList : l10n.uncheckAll),
+          ),
+        ],
+      ),
+    ).then((moveToFuture) async {
+      if (moveToFuture == null) return;
+      if (!context.mounted) return;
+      final p = context.read<ListProvider>();
+      final gamification = context.read<GamificationProvider>();
+      final storage = context.read<StorageService>();
+      final premium = context.read<PremiumProvider>();
+      final checkedItems = p.list.items.where((e) => e.checked).toList();
+      final allChecked = p.checkedCount == p.totalCount && p.totalCount > 0;
+      final badgesCountBefore = gamification.badges.length;
+      try {
+        await gamification.recordTripComplete(checkedItems, allChecked);
+        await storage.incrementTripsCompletedCount();
+        if (moveToFuture) {
+          final uncheckedNames = p.list.items.where((e) => !e.checked).map((e) => e.name).toList();
+          await gamification.recordForgotten(uncheckedNames);
+          await p.moveUncheckedToFutureList();
+        }
+        await p.finishShopping();
+        if (context.mounted) {
+          final badgesCountAfter = context.read<GamificationProvider>().badges.length;
+          if (badgesCountAfter > badgesCountBefore && badgesCountBefore == 0 && !premium.isPremiumActive) {
+            await premium.grantTrial24h();
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(l10n.trialGrantedTitle),
+                behavior: SnackBarBehavior.floating,
+                duration: const Duration(seconds: 5),
+              ),
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(l10n.courseTerminee)),
+            );
+          }
+        }
+      } catch (e) {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('${l10n.errorPrefix}: $e')),
+          );
+        }
+      }
+    });
+  }
+
+  void _showPartnerSuggestionDialog(BuildContext context, ListProvider provider) {
+    final pending = provider.pendingPartnerSuggestions;
+    if (pending.isEmpty) return;
+    final first = pending.first;
+    final l10n = AppLocalizations.of(context);
+    showDialog<void>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(l10n.partnerSuggestionTitle),
+        content: Text(l10n.partnerSuggestionMessage(first.addedName, first.suggestion)),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              provider.clearPendingPartnerSuggestions();
+            },
+            child: Text(l10n.partnerSuggestionNo),
+          ),
+          FilledButton(
+            onPressed: () {
+              provider.addItem(first.suggestion);
+              Navigator.pop(ctx);
+              provider.clearPendingPartnerSuggestions();
+            },
+            child: Text(l10n.partnerSuggestionAdd),
+          ),
+        ],
+      ),
+    ).then((_) => provider.clearPendingPartnerSuggestions());
+  }
+
+  void _showAisleOrderSheet(BuildContext context, SettingsProvider settings, CategoryNamesProvider categoryNames) {
+    final order = Map<int, int>.from(settings.aisleOrder);
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      builder: (ctx) => DraggableScrollableSheet(
+        initialChildSize: 0.6,
+        minChildSize: 0.3,
+        maxChildSize: 0.95,
+        expand: false,
+        builder: (ctx, scrollController) => StatefulBuilder(
+          builder: (ctx, setState) {
+            return SafeArea(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Text(
+                      AppLocalizations.of(ctx).aisleOrderTitle,
+                      style: Theme.of(ctx).textTheme.titleLarge,
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      controller: scrollController,
+                      itemCount: AppColors.categoryColors.length,
+                      itemBuilder: (context, i) {
+                        final name = categoryNames.getCategoryName(i) ?? AppColors.categoryColorNames[i];
+                        final value = order[i] ?? (i + 1);
+                        return ListTile(
+                          leading: CircleAvatar(
+                            backgroundColor: AppColors.colorFromIndex(i),
+                            radius: 18,
+                          ),
+                          title: Text(name),
+                          trailing: SizedBox(
+                            width: 64,
+                            child: TextFormField(
+                              initialValue: value.toString(),
+                              keyboardType: TextInputType.number,
+                              onChanged: (v) {
+                                final n = int.tryParse(v);
+                                if (n != null && n >= 0) order[i] = n;
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: FilledButton(
+                      onPressed: () async {
+                        await settings.setAisleOrder(order);
+                        if (ctx.mounted) Navigator.pop(ctx);
+                      },
+                      child: Text(AppLocalizations.of(ctx).save),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+        const _UpgradePromptTrigger(),
+    ],
+    );
+  }
+
   void _showSettingsSheet(BuildContext context) {
     showModalBottomSheet<void>(
       context: context,
@@ -1141,20 +1595,20 @@ class ListScreen extends StatelessWidget {
               const SizedBox(height: 16),
               Consumer<SettingsProvider>(
                 builder: (context, settings, _) {
-                  const localeOptions = [
-                    (null, '🌐', ''),
-                    ('fr', '🇫🇷', 'FR'),
-                    ('en', '🇬🇧', 'EN'),
-                    ('es', '🇪🇸', 'ES'),
-                    ('de', '🇩🇪', 'DE'),
-                    ('it', '🇮🇹', 'IT'),
-                    ('pt', '🇵🇹', 'PT'),
-                  ];
+                  final localeOptions = localeOptionsForPicker;
                   final current = settings.localeLanguageCode;
+                  final l10n = AppLocalizations.of(ctx);
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(AppLocalizations.of(ctx).languageLabel, style: Theme.of(ctx).textTheme.titleSmall),
+                      Text(l10n.languageLabel, style: Theme.of(ctx).textTheme.titleSmall),
+                      const SizedBox(height: 4),
+                      Text(
+                        l10n.languageSelectorHint,
+                        style: Theme.of(ctx).textTheme.bodySmall?.copyWith(color: Colors.grey),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                       const SizedBox(height: 8),
                       Wrap(
                         spacing: 8,
@@ -1162,12 +1616,21 @@ class ListScreen extends StatelessWidget {
                         children: localeOptions.map((opt) {
                           final code = opt.$1;
                           final flag = opt.$2;
-                          final label = opt.$3.isEmpty ? AppLocalizations.of(ctx).languageSystem : opt.$3;
+                          final name = opt.$3;
+                          final label = name.isEmpty ? l10n.languageSystem : name;
                           final selected = (code == null && (current == null || current.isEmpty)) ||
                               (code != null && current == code);
                           return FilterChip(
                             avatar: Text(flag, style: const TextStyle(fontSize: 18)),
-                            label: Text(label),
+                            label: ConstrainedBox(
+                              constraints: const BoxConstraints(maxWidth: 140),
+                              child: Text(
+                                label,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                softWrap: false,
+                              ),
+                            ),
                             selected: selected,
                             onSelected: (_) {
                               HapticFeedback.selectionClick();
@@ -1215,6 +1678,38 @@ class ListScreen extends StatelessWidget {
                         value: settings.remindersEnabled,
                         onChanged: (v) => settings.setRemindersEnabled(v),
                       ),
+                      const SizedBox(height: 8),
+                      Text(AppLocalizations.of(ctx).listFontScale, style: Theme.of(ctx).textTheme.titleSmall),
+                      const SizedBox(height: 4),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Row(
+                          children: [
+                            Text('0.8', style: Theme.of(ctx).textTheme.bodySmall),
+                            Expanded(
+                              child: Slider(
+                                value: settings.listFontScale,
+                                min: 0.8,
+                                max: 1.5,
+                                divisions: 7,
+                                label: '${(settings.listFontScale * 100).round()}%',
+                                onChanged: (v) => settings.setListFontScale(v),
+                              ),
+                            ),
+                            Text('1.5', style: Theme.of(ctx).textTheme.bodySmall),
+                          ],
+                        ),
+                      ),
+                      Text(
+                        AppLocalizations.of(ctx).listFontScaleSubtitle,
+                        style: Theme.of(ctx).textTheme.bodySmall?.copyWith(color: Colors.grey),
+                      ),
+                      SwitchListTile(
+                        title: Text(AppLocalizations.of(ctx).shoppingMode),
+                        subtitle: Text(AppLocalizations.of(ctx).shoppingModeSubtitle),
+                        value: settings.shoppingMode,
+                        onChanged: (v) => settings.setShoppingMode(v),
+                      ),
                       const SizedBox(height: 16),
                       Text(AppLocalizations.of(ctx).categoriesLabel, style: Theme.of(ctx).textTheme.titleSmall),
                       const SizedBox(height: 8),
@@ -1240,7 +1735,7 @@ class ListScreen extends StatelessWidget {
                         style: Theme.of(ctx).textTheme.bodySmall?.copyWith(color: Colors.grey),
                         maxLines: 3,
                       ),
-                      if (isNoublipoPlus) ...[
+                      if (ctx.watch<PremiumProvider>().isPremiumActive) ...[
                         const SizedBox(height: 24),
                         Text(AppLocalizations.of(ctx).sortListLabel, style: Theme.of(ctx).textTheme.titleSmall),
                         const SizedBox(height: 8),
@@ -1249,10 +1744,49 @@ class ListScreen extends StatelessWidget {
                             ButtonSegment(value: 'order', label: Text(AppLocalizations.of(ctx).sortOrder), icon: const Icon(Icons.format_list_numbered, size: 18)),
                             ButtonSegment(value: 'name', label: Text(AppLocalizations.of(ctx).sortName), icon: const Icon(Icons.sort_by_alpha, size: 18)),
                             ButtonSegment(value: 'color', label: Text(AppLocalizations.of(ctx).sortColor), icon: const Icon(Icons.palette_outlined, size: 18)),
+                            ButtonSegment(value: 'aisle', label: Text(AppLocalizations.of(ctx).sortAisle), icon: const Icon(Icons.storefront_outlined, size: 18)),
                           ],
                           selected: {settings.sortMode},
                           onSelectionChanged: (Set<String> v) => settings.setSortMode(v.first),
                         ),
+                        if (settings.sortMode == 'aisle') ...[
+                          const SizedBox(height: 12),
+                          ListTile(
+                            title: Text(AppLocalizations.of(ctx).aisleOrderTitle),
+                            subtitle: Text(AppLocalizations.of(ctx).aisleOrderSubtitle),
+                            leading: const Icon(Icons.tune),
+                            onTap: () => _showAisleOrderSheet(ctx, settings, context.read<CategoryNamesProvider>()),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(AppLocalizations.of(ctx).favoriteStoresTitle, style: Theme.of(ctx).textTheme.titleSmall),
+                          const SizedBox(height: 4),
+                          Text(AppLocalizations.of(ctx).favoriteStoresSubtitle, style: Theme.of(ctx).textTheme.bodySmall?.copyWith(color: Colors.grey)),
+                          const SizedBox(height: 8),
+                          Wrap(
+                            spacing: 6,
+                            runSpacing: 6,
+                            children: List.generate(AppColors.categoryColors.length, (i) {
+                              final selected = settings.favoriteStoreIndices.contains(i);
+                              return Padding(
+                                padding: const EdgeInsets.only(right: 4),
+                                child: FilterChip(
+                                  label: Text(context.read<CategoryNamesProvider>().getCategoryName(i) ?? AppColors.categoryColorNames[i]),
+                                  selected: selected,
+                                  onSelected: (_) {
+                                    final next = List<int>.from(settings.favoriteStoreIndices);
+                                    if (selected) {
+                                      next.remove(i);
+                                    } else {
+                                      next.add(i);
+                                    }
+                                    next.sort();
+                                    settings.setFavoriteStoreIndices(next);
+                                  },
+                                ),
+                              );
+                            }),
+                          ),
+                        ],
                         const SizedBox(height: 16),
                         SwitchListTile(
                           title: Text(AppLocalizations.of(ctx).showPrices),
@@ -1266,6 +1800,22 @@ class ListScreen extends StatelessWidget {
                           subtitle: Text(AppLocalizations.of(ctx).autocompleteSubtitle),
                           value: settings.autocomplete,
                           onChanged: (v) => settings.setAutocomplete(v),
+                        ),
+                      ],
+                      if (ctx.watch<PremiumProvider>().isPremiumActive) ...[
+                        const SizedBox(height: 16),
+                        ListTile(
+                          leading: const Icon(Icons.eco_outlined),
+                          title: Text(AppLocalizations.of(ctx).profileConsumptionTitle),
+                          subtitle: Text(AppLocalizations.of(ctx).profileConsumptionSubtitle),
+                          onTap: () {
+                            Navigator.pop(ctx);
+                            showModalBottomSheet<void>(
+                              context: context,
+                              isScrollControlled: true,
+                              builder: (c) => const ConsumptionProfileSheet(),
+                            );
+                          },
                         ),
                       ],
                       const SizedBox(height: 24),
@@ -1282,6 +1832,20 @@ class ListScreen extends StatelessWidget {
                           );
                         },
                       ),
+                      if (!ctx.watch<PremiumProvider>().isPremiumActive)
+                        ListTile(
+                          leading: Icon(Icons.workspace_premium, color: Theme.of(ctx).colorScheme.primary),
+                          title: Text(AppLocalizations.of(ctx).upgradePromptCta),
+                          subtitle: Text(AppLocalizations.of(ctx).paywallSubtitle),
+                          onTap: () {
+                            Navigator.pop(ctx);
+                            Navigator.of(context).push(
+                              MaterialPageRoute<void>(
+                                builder: (context) => const PaywallScreen(),
+                              ),
+                            );
+                          },
+                        ),
                       ListTile(
                         leading: const Icon(Icons.info_outlined),
                         title: Text(AppLocalizations.of(context).about),
@@ -1427,7 +1991,7 @@ class ListScreen extends StatelessWidget {
                 _showRenameListDialog(context, provider, list);
               },
             ),
-            if (isNoublipoPlus && provider.listGroups.isNotEmpty)
+            if (context.watch<PremiumProvider>().isPremiumActive && provider.listGroups.isNotEmpty)
               ListTile(
                 leading: const Icon(Icons.folder_outlined),
                 title: Text(AppLocalizations.of(context).groupLabel),
@@ -1693,7 +2257,7 @@ class _FilledListByStore extends StatelessWidget {
   final EdgeInsets padding;
   final String tileStyle;
   final void Function(int colorIndex) onEditStoreName;
-  final Widget Function(ShoppingItem item) buildItem;
+  final Widget Function(ShoppingItem item, {bool wrapSized}) buildItem;
 
   @override
   Widget build(BuildContext context) {
@@ -1742,6 +2306,7 @@ class _FilledListByStore extends StatelessWidget {
                           layout: layout,
                           padding: EdgeInsets.only(left: 0, right: 0, top: 0, bottom: 0),
                           buildItem: buildItem,
+                          useWrapLayout: true,
                         ),
                       ],
                     ],
@@ -1872,12 +2437,14 @@ class _FilledBalancedList extends StatelessWidget {
     required this.layout,
     required this.padding,
     required this.buildItem,
+    this.useWrapLayout = false,
   });
 
   final List<ShoppingItem> items;
   final ScreenLayout layout;
   final EdgeInsets padding;
-  final Widget Function(ShoppingItem item) buildItem;
+  final Widget Function(ShoppingItem item, {bool wrapSized}) buildItem;
+  final bool useWrapLayout;
 
   static const double _horizontalSpacing = 8.0;
   /// Largeur min par cellule pour éviter overflow dans ItemTile (texte + checkbox 48px).
@@ -1942,6 +2509,23 @@ class _FilledBalancedList extends StatelessWidget {
     final bottomExtra = layout.fabSize + 8.0;
     final resolvedBottom = padding.bottom + bottomExtra;
 
+    if (useWrapLayout) {
+      return SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(
+          padding.left,
+          padding.top,
+          padding.right,
+          resolvedBottom,
+        ),
+        child: Wrap(
+          spacing: _horizontalSpacing,
+          runSpacing: runSpacing,
+          alignment: WrapAlignment.start,
+          children: items.map((item) => buildItem(item, wrapSized: true)).toList(),
+        ),
+      );
+    }
+
     return SingleChildScrollView(
       padding: EdgeInsets.fromLTRB(
         padding.left,
@@ -1969,8 +2553,6 @@ class _FilledBalancedList extends StatelessWidget {
                         for (var i = 0; i < rows[r].length; i++) ...[
                           if (i > 0) SizedBox(width: _horizontalSpacing),
                           Expanded(
-                            // Flex proportionnel à la largeur estimée, pour rester cohérent
-                            // avec le packing et éviter les cellules trop étroites.
                             flex: _estimatedWidth(rows[r][i]).round().clamp(80, 400),
                             child: buildItem(rows[r][i]),
                           ),
@@ -2280,7 +2862,7 @@ class _ListToolbar extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (isNoublipoPlus)
+        if (context.watch<PremiumProvider>().isPremiumActive)
           Padding(
             padding: EdgeInsets.symmetric(horizontal: layout.contentPaddingHorizontal, vertical: 6),
             child: Row(
@@ -2296,7 +2878,7 @@ class _ListToolbar extends StatelessWidget {
               ],
             ),
           ),
-        if (isNoublipoPlus)
+        if (context.watch<PremiumProvider>().isPremiumActive)
           Padding(
             padding: EdgeInsets.symmetric(horizontal: layout.contentPaddingHorizontal, vertical: 4),
             child: TextField(
@@ -2336,7 +2918,7 @@ class _ListToolbar extends StatelessWidget {
                           fontSize: 12,
                         ),
                   ),
-                  if (isNoublipoPlus) ...[
+                  if (context.watch<PremiumProvider>().isPremiumActive) ...[
                     const SizedBox(width: 8),
                     FilterChip(
                       label: Text(AppLocalizations.of(context).toBuy),
@@ -2349,7 +2931,7 @@ class _ListToolbar extends StatelessWidget {
                   ],
                 ],
               ),
-              if (isNoublipoPlus && settings.showPrices && provider.totalPriceUnchecked > 0)
+              if (context.watch<PremiumProvider>().isPremiumActive && settings.showPrices && provider.totalPriceUnchecked > 0)
                 Text(
                   AppLocalizations.of(context).totalEuro(provider.totalPriceUnchecked.toStringAsFixed(2)),
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
@@ -2477,7 +3059,7 @@ class _ListSwitcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final grouped = provider.getListsGrouped();
-    final hasGroups = isNoublipoPlus && provider.listGroups.isNotEmpty;
+    final hasGroups = context.watch<PremiumProvider>().isPremiumActive && provider.listGroups.isNotEmpty;
     return Material(
       elevation: 0,
       color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
@@ -2558,7 +3140,7 @@ class _ListSwitcher extends StatelessWidget {
                   },
                 ),
               ),
-              if (isNoublipoPlus && !provider.isSharedList)
+              if (context.watch<PremiumProvider>().isPremiumActive && !provider.isSharedList)
                 Padding(
                   padding: const EdgeInsets.only(left: 4),
                   child: ActionChip(
@@ -2751,4 +3333,28 @@ class _BigAddButton extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Déclenche une seule fois le dialogue d'upgrade après 4 s (moment calme).
+class _UpgradePromptTrigger extends StatefulWidget {
+  const _UpgradePromptTrigger();
+
+  @override
+  State<_UpgradePromptTrigger> createState() => _UpgradePromptTriggerState();
+}
+
+class _UpgradePromptTriggerState extends State<_UpgradePromptTrigger> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(seconds: 4), () {
+        if (!mounted) return;
+        UpgradePromptHelper.showUpgradeDialogIfAppropriate(context);
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) => const SizedBox.shrink();
 }

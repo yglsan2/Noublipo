@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:uuid/uuid.dart';
 import '../constants/app_colors.dart';
+import '../data/product_pairings.dart';
 import '../../app_config.dart';
 import '../models/list_group.dart';
 import '../models/list_template.dart';
@@ -47,6 +50,9 @@ class ListProvider extends ChangeNotifier {
   /// Mode sélection pour actions groupées (Noublipo+).
   bool _selectionMode = false;
   final Set<String> _selectedItemIds = {};
+  final List<({String addedName, String suggestion})> _pendingPartnerSuggestions = [];
+  Timer? _syncDebounceTimer;
+  static const Duration _syncDebounceDelay = Duration(milliseconds: 450);
 
   ShoppingListModel get list => _list;
   List<ShoppingItem> get items => List.unmodifiable(_list.items);
@@ -74,11 +80,18 @@ class ListProvider extends ChangeNotifier {
   String get currentListId => _currentListId;
 
   /// Articles triés : à acheter en premier, puis « dans le panier » (cochés).
-  /// [sortMode] : 'order' (défaut), 'name', 'color' (Noublipo+).
+  /// [sortMode] : 'order' (défaut), 'name', 'color', 'aisle' (Noublipo+).
+  /// Pour 'aisle', [aisleOrder] et [favoriteStoreIndices] sont utilisés (liste selon rayon / magasin favori).
   List<ShoppingItem> get sortedItems => getSortedItems('order');
 
-  List<ShoppingItem> getSortedItems(String sortMode) {
+  List<ShoppingItem> getSortedItems(
+    String sortMode, {
+    Map<int, int>? aisleOrder,
+    List<int>? favoriteStoreIndices,
+  }) {
     final lst = List<ShoppingItem>.from(_list.items);
+    final aisle = aisleOrder ?? {};
+    final favorites = (favoriteStoreIndices ?? []).toSet();
     lst.sort((a, b) {
       if (a.checked != b.checked) return a.checked ? 1 : -1;
       switch (sortMode) {
@@ -87,6 +100,14 @@ class ListProvider extends ChangeNotifier {
         case 'color':
           final c = a.colorIndex.compareTo(b.colorIndex);
           return c != 0 ? c : a.order.compareTo(b.order);
+        case 'aisle':
+          final aFav = favorites.contains(a.colorIndex) ? 0 : 1;
+          final bFav = favorites.contains(b.colorIndex) ? 0 : 1;
+          if (aFav != bFav) return aFav.compareTo(bFav);
+          final aAisle = aisle[a.colorIndex] ?? a.colorIndex;
+          final bAisle = aisle[b.colorIndex] ?? b.colorIndex;
+          final aisleC = aAisle.compareTo(bAisle);
+          return aisleC != 0 ? aisleC : a.order.compareTo(b.order);
         default:
           return a.order.compareTo(b.order);
       }
@@ -116,8 +137,12 @@ class ListProvider extends ChangeNotifier {
   }
 
   /// Articles triés + filtrés par recherche et option « À acheter » (Noublipo+).
-  List<ShoppingItem> getFilteredSortedItems(String sortMode) {
-    final list = getSortedItems(sortMode);
+  List<ShoppingItem> getFilteredSortedItems(
+    String sortMode, {
+    Map<int, int>? aisleOrder,
+    List<int>? favoriteStoreIndices,
+  }) {
+    final list = getSortedItems(sortMode, aisleOrder: aisleOrder, favoriteStoreIndices: favoriteStoreIndices);
     final onlyUnchecked = isNoublipoPlus && _showUncheckedOnly;
     final q = _searchQuery.trim();
     if (!onlyUnchecked && q.isEmpty) return list;
@@ -131,9 +156,19 @@ class ListProvider extends ChangeNotifier {
 
   /// Réordonne un article (oldIndex/newIndex dans la liste affichée, après filtres). Noublipo+.
   /// [sortMode] pour cohérence avec l'affichage.
-  Future<void> reorderItem(int oldIndex, int newIndex, String sortMode) async {
+  Future<void> reorderItem(
+    int oldIndex,
+    int newIndex,
+    String sortMode, {
+    Map<int, int>? aisleOrder,
+    List<int>? favoriteStoreIndices,
+  }) async {
     if (!isNoublipoPlus) return;
-    final displayed = getFilteredSortedItems(sortMode);
+    final displayed = getFilteredSortedItems(
+      sortMode,
+      aisleOrder: aisleOrder,
+      favoriteStoreIndices: favoriteStoreIndices,
+    );
     if (oldIndex < 0 || newIndex < 0 || oldIndex >= displayed.length || newIndex >= displayed.length) return;
     if (oldIndex == newIndex) return;
     final reordered = List<ShoppingItem>.from(displayed);
@@ -323,7 +358,32 @@ class ListProvider extends ChangeNotifier {
   /// Déplace les articles sélectionnés vers Achats futurs.
   Future<void> moveSelectedItemsToFutureList() async {
     if (!isNoublipoPlus || _selectedItemIds.isEmpty) return;
+    _ensureAchatsFutursList();
     await moveSelectedItemsToList(kAchatsFutursListId);
+  }
+
+  /// Déplace les articles non cochés de la liste actuelle vers Achats futurs (Pro). À appeler avant ou après finishShopping() selon le flux.
+  Future<void> moveUncheckedToFutureList() async {
+    if (!isNoublipoPlus || isSharedList) return;
+    final unchecked = _list.items.where((e) => !e.checked).toList();
+    if (unchecked.isEmpty) return;
+    _ensureAchatsFutursList();
+    try {
+      var futureList = _lists.firstWhere((l) => l.id == kAchatsFutursListId);
+      final orderStart = futureList.items.isEmpty ? 0 : futureList.items.map((e) => e.order).reduce((a, b) => a > b ? a : b) + 1;
+      for (var i = 0; i < unchecked.length; i++) {
+        futureList = futureList.copyWith(
+          items: [...futureList.items, unchecked[i].copyWith(id: _uuid.v4(), order: orderStart + i, checked: false)],
+        );
+      }
+      _list = _list.copyWith(items: _list.items.where((e) => e.checked).toList());
+      final idx = _lists.indexWhere((l) => l.id == kAchatsFutursListId);
+      _lists = List.from(_lists)..[idx] = futureList;
+      await _save();
+    } catch (e, stack) {
+      AppLogger.error('moveUncheckedToFutureList', e, stack);
+      rethrow;
+    }
   }
 
   /// True si la liste affichée est "Achats futurs".
@@ -336,6 +396,13 @@ class ListProvider extends ChangeNotifier {
     _lists = [..._lists, ShoppingListModel(id: kAchatsFutursListId, name: kAchatsFutursListName, order: order)];
   }
 
+  void _ensureEngagementsList() {
+    if (!isNoublipoPlus) return;
+    if (_lists.any((l) => l.id == kEngagementsListId)) return;
+    final order = _lists.isEmpty ? 0 : _lists.map((e) => e.order).reduce((a, b) => a > b ? a : b) + 1;
+    _lists = [..._lists, ShoppingListModel(id: kEngagementsListId, name: kEngagementsListName, order: order)];
+  }
+
   bool get syncAvailable => _sync != null;
   bool get isSyncing => _sync?.isSignedIn ?? false;
   String? get syncUserEmail => _sync?.currentUser?.email;
@@ -344,9 +411,30 @@ class ListProvider extends ChangeNotifier {
   int get sharedListMemberCount => _sync?.sharedListMemberCount ?? 0;
   String? get sharedListShortCode => _sync?.sharedListShortCode;
 
+  /// Suggestions « ajouter aussi X ? » à afficher (ex. partenaire a ajouté « pâtes » → « sauce tomate »).
+  List<({String addedName, String suggestion})> get pendingPartnerSuggestions =>
+      List.unmodifiable(_pendingPartnerSuggestions);
+
+  void clearPendingPartnerSuggestions() {
+    if (_pendingPartnerSuggestions.isEmpty) return;
+    _pendingPartnerSuggestions.clear();
+    notifyListeners();
+  }
+
   void _onSyncUpdate() {
     final remote = _sync?.remoteList;
     if (remote != null) {
+      if (isSharedList && remote.items.length > _list.items.length) {
+        final ourIds = _list.items.map((e) => e.id).toSet();
+        for (final item in remote.items) {
+          if (!ourIds.contains(item.id)) {
+            final suggestion = ProductPairings.getSuggestion(item.name);
+            if (suggestion != null) {
+              _pendingPartnerSuggestions.add((addedName: item.name, suggestion: suggestion));
+            }
+          }
+        }
+      }
       _list = remote;
       _storage.saveMainList(_list).catchError((e, stack) {
         AppLogger.error('_onSyncUpdate saveMainList', e, stack);
@@ -369,6 +457,7 @@ class ListProvider extends ChangeNotifier {
         await _storage.saveAllLists(_lists);
       }
       _ensureAchatsFutursList();
+      _ensureEngagementsList();
       await _storage.saveAllLists(_lists);
       var id = _storage.currentListId;
       if (id == null || !_lists.any((l) => l.id == id)) {
@@ -401,8 +490,8 @@ class ListProvider extends ChangeNotifier {
   Future<void> _save() async {
     try {
       if (isSharedList) {
-        await _sync!.saveList(_list);
         await _storage.saveMainList(_list);
+        _scheduleSyncSave();
       } else {
         final idx = _lists.indexWhere((l) => l.id == _list.id);
         if (idx >= 0) {
@@ -419,6 +508,16 @@ class ListProvider extends ChangeNotifier {
       AppLogger.error('ListProvider._save', e, stack);
       rethrow;
     }
+  }
+
+  void _scheduleSyncSave() {
+    _syncDebounceTimer?.cancel();
+    _syncDebounceTimer = Timer(_syncDebounceDelay, () {
+      _syncDebounceTimer = null;
+        if (isSharedList && _sync != null) {
+        _sync.saveList(_list);
+      }
+    });
   }
 
   /// Bascule vers une liste (ignoré si liste partagée active).
@@ -603,7 +702,50 @@ class ListProvider extends ChangeNotifier {
     return targetListName;
   }
 
+  /// Ajoute un engagement implicite à la liste Engagements (Noublipo+) et planifie le rappel.
+  Future<void> addEngagementItem(
+    String title, {
+    int? reminderAt,
+    String? reminderNote,
+  }) async {
+    if (!isNoublipoPlus || isSharedList) return;
+    _ensureEngagementsList();
+    await _storage.saveAllLists(_lists);
+    final engagementsList = _lists.firstWhere((l) => l.id == kEngagementsListId);
+    final order = engagementsList.items.isEmpty
+        ? 0
+        : engagementsList.items.map((e) => e.order).reduce((a, b) => a > b ? a : b) + 1;
+    final id = _uuid.v4();
+    final now = DateTime.now().millisecondsSinceEpoch;
+    final reminderAtMs = (reminderAt != null && reminderAt > now) ? reminderAt : now + 7 * 24 * 60 * 60 * 1000;
+    final newItem = ShoppingItem(
+      id: id,
+      name: title.trim(),
+      colorIndex: 0,
+      order: order,
+      reminderAt: reminderAtMs,
+      reminderNote: reminderNote?.trim().isEmpty == true ? null : reminderNote?.trim(),
+    );
+    final updatedList = engagementsList.copyWith(
+      items: [...engagementsList.items, newItem],
+    );
+    final idx = _lists.indexWhere((l) => l.id == kEngagementsListId);
+    _lists = List.from(_lists)..[idx] = updatedList;
+    if (_list.id == kEngagementsListId) _list = updatedList;
+    await _save();
+    if (_reminder != null) {
+      await _reminder.scheduleReminder(
+        id,
+        title.trim(),
+        reminderNote?.trim(),
+        DateTime.fromMillisecondsSinceEpoch(reminderAtMs),
+      );
+    }
+    notifyListeners();
+  }
+
   /// Ajoute un article (nom déjà capitalisé si option activée).
+  /// [checked] : ajouter directement comme « déjà acheté » (ex. récurrent).
   Future<void> addItem(
     String name, {
     int colorIndex = 0,
@@ -615,6 +757,7 @@ class ListProvider extends ChangeNotifier {
     double? quantity,
     String? unit,
     String? recurringItemId,
+    bool checked = false,
   }) async {
     try {
       final order = _list.items.isEmpty
@@ -629,6 +772,7 @@ class ListProvider extends ChangeNotifier {
             name: name.trim(),
             colorIndex: colorIndex % AppColors.categoryColors.length,
             order: order,
+            checked: checked,
             reminderAt: reminderAt,
             reminderNote: reminderNote?.trim().isEmpty == true ? null : reminderNote?.trim(),
             note: note?.trim().isEmpty == true ? null : note?.trim(),
@@ -685,6 +829,7 @@ class ListProvider extends ChangeNotifier {
     double? price,
     double? quantity,
     String? unit,
+    String? recurringItemId,
   }) async {
     final idx = _list.items.indexWhere((e) => e.id == itemId);
     if (idx < 0) return;
@@ -707,6 +852,7 @@ class ListProvider extends ChangeNotifier {
         price: price != null ? (price > 0 ? price : null) : item.price,
         quantity: (quantity != null && quantity > 0) ? quantity : null,
         unit: (unit != null && unit.trim().isNotEmpty) ? unit.trim() : null,
+        recurringItemId: recurringItemId ?? item.recurringItemId,
       );
       final newItems = List<ShoppingItem>.from(_list.items)..[idx] = updated;
       _list = _list.copyWith(items: newItems);
@@ -774,6 +920,22 @@ class ListProvider extends ChangeNotifier {
     }
   }
 
+  /// « Course terminée » : décocher tous les articles de la liste actuelle.
+  Future<void> finishShopping() async {
+    try {
+      final unchecked = _list.items.map((e) => e.checked ? e.copyWith(checked: false) : e).toList();
+      _list = _list.copyWith(items: unchecked);
+      await _save();
+    } catch (e, stack) {
+      AppLogger.error('finishShopping', e, stack);
+      rethrow;
+    }
+  }
+
+  /// Nombre d'articles cochés / total (pour compteur AppBar).
+  int get checkedCount => _list.items.where((e) => e.checked).length;
+  int get totalCount => _list.items.length;
+
   /// Définit la date prévue pour une liste (null = retirer la date).
   Future<void> setListPlannedDate(String listId, int? plannedDate) async {
     if (isSharedList) return;
@@ -792,9 +954,9 @@ class ListProvider extends ChangeNotifier {
     }
   }
 
-  /// Déplace un article vers la liste "Achats futurs" (sans annuler le rappel).
+  /// Déplace un article vers la liste "Achats futurs" (sans annuler le rappel). Pro uniquement.
   Future<void> moveItemToFutureList(String itemId) async {
-    if (isSharedList) return;
+    if (!isNoublipoPlus || isSharedList) return;
     final item = _list.items.cast<ShoppingItem?>().firstWhere(
           (e) => e?.id == itemId,
           orElse: () => null,
@@ -906,6 +1068,7 @@ class ListProvider extends ChangeNotifier {
   }
 
   void disposeProvider() {
+    _syncDebounceTimer?.cancel();
     _sync?.removeListener(_onSyncUpdate);
   }
 }

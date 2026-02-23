@@ -177,13 +177,13 @@ abstract class AppLocalizations {
   /// No description provided for @appTitle.
   ///
   /// In fr, this message translates to:
-  /// **'Noubliepo!'**
+  /// **'NopList'**
   String get appTitle;
 
   /// No description provided for @appTitlePlus.
   ///
   /// In fr, this message translates to:
-  /// **'Noubliepo!+'**
+  /// **'NopList+'**
   String get appTitlePlus;
 
   /// No description provided for @searchHint.
@@ -293,6 +293,12 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Système'**
   String get languageSystem;
+
+  /// No description provided for @languageSelectorHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'La langue du téléphone est utilisée par défaut. Cliquez sur un drapeau pour changer.'**
+  String get languageSelectorHint;
 
   /// No description provided for @share.
   ///
@@ -987,7 +993,7 @@ abstract class AppLocalizations {
   /// No description provided for @sortListLabel.
   ///
   /// In fr, this message translates to:
-  /// **'Tri de la liste (Noublipo+)'**
+  /// **'Tri de la liste (NopList+)'**
   String get sortListLabel;
 
   /// No description provided for @sortOrder.
@@ -1007,6 +1013,60 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Couleur'**
   String get sortColor;
+
+  /// No description provided for @sortAisle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rayon'**
+  String get sortAisle;
+
+  /// No description provided for @aisleOrderTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ordre des rayons'**
+  String get aisleOrderTitle;
+
+  /// No description provided for @aisleOrderSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Numéro de rayon par catégorie (pour tri au magasin)'**
+  String get aisleOrderSubtitle;
+
+  /// No description provided for @favoriteStoresTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Magasin(s) favori(s)'**
+  String get favoriteStoresTitle;
+
+  /// No description provided for @favoriteStoresSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ces rayons apparaissent en premier'**
+  String get favoriteStoresSubtitle;
+
+  /// No description provided for @partnerSuggestionTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Suggestion'**
+  String get partnerSuggestionTitle;
+
+  /// No description provided for @partnerSuggestionMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Un partenaire a ajouté « {item} ». Ajouter aussi « {suggestion} » ?'**
+  String partnerSuggestionMessage(String item, String suggestion);
+
+  /// No description provided for @partnerSuggestionAdd.
+  ///
+  /// In fr, this message translates to:
+  /// **'Oui, ajouter'**
+  String get partnerSuggestionAdd;
+
+  /// No description provided for @partnerSuggestionNo.
+  ///
+  /// In fr, this message translates to:
+  /// **'Non'**
+  String get partnerSuggestionNo;
 
   /// No description provided for @showPrices.
   ///
@@ -1251,7 +1311,7 @@ abstract class AppLocalizations {
   /// No description provided for @scanAvailablePlus.
   ///
   /// In fr, this message translates to:
-  /// **'Disponible en Noublipo+'**
+  /// **'Disponible en NopList+'**
   String get scanAvailablePlus;
 
   /// No description provided for @everyoneSeesSameList.
@@ -1337,6 +1397,948 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'« {name} » ajouté à la liste (en attente)'**
   String addForLaterSnackbar(String name);
+
+  /// No description provided for @engagementDetectedTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Engagement implicite détecté'**
+  String get engagementDetectedTitle;
+
+  /// No description provided for @engagementDetectedMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créer un rappel pour « {title} » dans la liste Engagements ?'**
+  String engagementDetectedMessage(String title);
+
+  /// No description provided for @createReminderButton.
+  ///
+  /// In fr, this message translates to:
+  /// **'Créer un rappel'**
+  String get createReminderButton;
+
+  /// No description provided for @engagementReminderCreated.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rappel créé : « {title} »'**
+  String engagementReminderCreated(String title);
+
+  /// No description provided for @birthdaysTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Anniversaires'**
+  String get birthdaysTitle;
+
+  /// No description provided for @birthdaysSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rappels 1 à 2 jours avant pour ne pas oublier'**
+  String get birthdaysSubtitle;
+
+  /// No description provided for @addBirthday.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter un anniversaire'**
+  String get addBirthday;
+
+  /// No description provided for @birthdayNameHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prénom ou nom (ex. Léontine, Gertrude)'**
+  String get birthdayNameHint;
+
+  /// No description provided for @birthdayDay.
+  ///
+  /// In fr, this message translates to:
+  /// **'Jour'**
+  String get birthdayDay;
+
+  /// No description provided for @birthdayMonth.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mois'**
+  String get birthdayMonth;
+
+  /// No description provided for @reminder1DayBefore.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rappel 1 jour avant'**
+  String get reminder1DayBefore;
+
+  /// No description provided for @reminder2DaysBefore.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rappel 2 jours avant'**
+  String get reminder2DaysBefore;
+
+  /// No description provided for @birthdayDeleted.
+  ///
+  /// In fr, this message translates to:
+  /// **'Anniversaire supprimé'**
+  String get birthdayDeleted;
+
+  /// No description provided for @emptyBirthdays.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun anniversaire. Ajoutez-en pour recevoir une alerte 1 à 2 jours avant.'**
+  String get emptyBirthdays;
+
+  /// No description provided for @editBirthday.
+  ///
+  /// In fr, this message translates to:
+  /// **'Modifier l\'anniversaire'**
+  String get editBirthday;
+
+  /// No description provided for @deleteBirthdayConfirm.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer l\'anniversaire de {name} ?'**
+  String deleteBirthdayConfirm(String name);
+
+  /// No description provided for @celebrationTypeBirthday.
+  ///
+  /// In fr, this message translates to:
+  /// **'Anniversaire (naissance)'**
+  String get celebrationTypeBirthday;
+
+  /// No description provided for @celebrationTypeWedding.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mariage'**
+  String get celebrationTypeWedding;
+
+  /// No description provided for @celebrationTypeMeeting.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rencontre'**
+  String get celebrationTypeMeeting;
+
+  /// No description provided for @celebrationTypeOther.
+  ///
+  /// In fr, this message translates to:
+  /// **'Autre fête'**
+  String get celebrationTypeOther;
+
+  /// No description provided for @birthdayYearOptional.
+  ///
+  /// In fr, this message translates to:
+  /// **'Année (optionnel, pour l\'âge)'**
+  String get birthdayYearOptional;
+
+  /// No description provided for @celebrationTypeLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Type'**
+  String get celebrationTypeLabel;
+
+  /// No description provided for @ageYears.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count} ans'**
+  String ageYears(int count);
+
+  /// No description provided for @alreadyBoughtValidate.
+  ///
+  /// In fr, this message translates to:
+  /// **'Déjà acheté ? Valider'**
+  String get alreadyBoughtValidate;
+
+  /// No description provided for @addToRecurring.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter aux achats récurrents'**
+  String get addToRecurring;
+
+  /// No description provided for @recurringAddedSnackbar.
+  ///
+  /// In fr, this message translates to:
+  /// **'« {name} » en achat récurrent (rappel dans 7 j)'**
+  String recurringAddedSnackbar(String name);
+
+  /// No description provided for @recurringTooltip.
+  ///
+  /// In fr, this message translates to:
+  /// **'Achat récurrent'**
+  String get recurringTooltip;
+
+  /// No description provided for @courseTerminee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Course terminée'**
+  String get courseTerminee;
+
+  /// No description provided for @courseTermineeConfirm.
+  ///
+  /// In fr, this message translates to:
+  /// **'Décocher tous les articles ? Tu peux recommencer une nouvelle course.'**
+  String get courseTermineeConfirm;
+
+  /// No description provided for @uncheckAll.
+  ///
+  /// In fr, this message translates to:
+  /// **'Décocher tout'**
+  String get uncheckAll;
+
+  /// No description provided for @moveToFutureList.
+  ///
+  /// In fr, this message translates to:
+  /// **'Déplacer vers Achats futurs'**
+  String get moveToFutureList;
+
+  /// No description provided for @deleteOrMoveToFuture.
+  ///
+  /// In fr, this message translates to:
+  /// **'Supprimer « {name} » ou le déplacer vers Achats futurs ?'**
+  String deleteOrMoveToFuture(String name);
+
+  /// No description provided for @listFontScale.
+  ///
+  /// In fr, this message translates to:
+  /// **'Taille du texte de la liste'**
+  String get listFontScale;
+
+  /// No description provided for @listFontScaleSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajuster pour une meilleure lisibilité'**
+  String get listFontScaleSubtitle;
+
+  /// No description provided for @shoppingMode.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mode course en cours'**
+  String get shoppingMode;
+
+  /// No description provided for @shoppingModeSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vue simplifiée avec gros boutons au magasin'**
+  String get shoppingModeSubtitle;
+
+  /// No description provided for @onboardingWelcome.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bienvenue dans NopList !'**
+  String get onboardingWelcome;
+
+  /// No description provided for @onboardingWelcomeSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tu peux démarrer avec une liste vide ou choisir un modèle ci‑dessous.'**
+  String get onboardingWelcomeSubtitle;
+
+  /// No description provided for @startEmpty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Commencer avec une liste vide'**
+  String get startEmpty;
+
+  /// No description provided for @progressCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{checked} / {total}'**
+  String progressCount(int checked, int total);
+
+  /// No description provided for @sendLinkBy.
+  ///
+  /// In fr, this message translates to:
+  /// **'Envoyer le lien par message ou email pour inviter'**
+  String get sendLinkBy;
+
+  /// No description provided for @syncConflictHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Conflit possible : les modifications ont été fusionnées.'**
+  String get syncConflictHint;
+
+  /// No description provided for @smartCartTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aide course'**
+  String get smartCartTitle;
+
+  /// No description provided for @smartCartSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Suggestions selon tes habitudes et le contexte'**
+  String get smartCartSubtitle;
+
+  /// No description provided for @smartCartDueTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Habitudes'**
+  String get smartCartDueTitle;
+
+  /// No description provided for @smartCartDueMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tu n\'as pas acheté « {name} » depuis {days} jour(s) (d\'habitude tous les {recurrence} j). Tu en as besoin ?'**
+  String smartCartDueMessage(String name, int days, int recurrence);
+
+  /// No description provided for @smartCartAddToList.
+  ///
+  /// In fr, this message translates to:
+  /// **'Oui, ajouter'**
+  String get smartCartAddToList;
+
+  /// No description provided for @smartCartNotThisTime.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pas cette fois'**
+  String get smartCartNotThisTime;
+
+  /// No description provided for @smartCartContextTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Contexte'**
+  String get smartCartContextTitle;
+
+  /// No description provided for @smartCartContextCold.
+  ///
+  /// In fr, this message translates to:
+  /// **'Il fait froid. As-tu assez de thé, soupe ?'**
+  String get smartCartContextCold;
+
+  /// No description provided for @smartCartContextCheck.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vérifier et ajouter'**
+  String get smartCartContextCheck;
+
+  /// No description provided for @smartCartNoSuggestions.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucune suggestion pour le moment.'**
+  String get smartCartNoSuggestions;
+
+  /// No description provided for @panicCheckoutTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vérifier avant la caisse'**
+  String get panicCheckoutTitle;
+
+  /// No description provided for @panicCheckoutSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'As-tu bien pensé à tout ?'**
+  String get panicCheckoutSubtitle;
+
+  /// No description provided for @panicCheckoutUncheckedCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count} article(s) non coché(s)'**
+  String panicCheckoutUncheckedCount(int count);
+
+  /// No description provided for @panicCheckoutAddMissing.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter les oubliés à la liste'**
+  String get panicCheckoutAddMissing;
+
+  /// No description provided for @panicCheckoutAllGood.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tout est bon, je passe en caisse'**
+  String get panicCheckoutAllGood;
+
+  /// No description provided for @panicCheckoutEmpty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun article à vérifier. Tu peux passer en caisse.'**
+  String get panicCheckoutEmpty;
+
+  /// No description provided for @streakTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Streak « O oubli »'**
+  String get streakTitle;
+
+  /// No description provided for @streakSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sorties sans rien oublier d\'affilée'**
+  String get streakSubtitle;
+
+  /// No description provided for @streakCurrent.
+  ///
+  /// In fr, this message translates to:
+  /// **'Série actuelle'**
+  String get streakCurrent;
+
+  /// No description provided for @streakBest.
+  ///
+  /// In fr, this message translates to:
+  /// **'Record'**
+  String get streakBest;
+
+  /// No description provided for @streakCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count} sortie(s)'**
+  String streakCount(int count);
+
+  /// No description provided for @badgeMemoryMaster.
+  ///
+  /// In fr, this message translates to:
+  /// **'Memory Master'**
+  String get badgeMemoryMaster;
+
+  /// No description provided for @badgeMemoryMasterDesc.
+  ///
+  /// In fr, this message translates to:
+  /// **'5 sorties sans oubli d\'affilée'**
+  String get badgeMemoryMasterDesc;
+
+  /// No description provided for @badgeStreak10.
+  ///
+  /// In fr, this message translates to:
+  /// **'Champion'**
+  String get badgeStreak10;
+
+  /// No description provided for @badgeStreak10Desc.
+  ///
+  /// In fr, this message translates to:
+  /// **'10 sorties sans oubli d\'affilée'**
+  String get badgeStreak10Desc;
+
+  /// No description provided for @badgeHundredTrips.
+  ///
+  /// In fr, this message translates to:
+  /// **'Routard'**
+  String get badgeHundredTrips;
+
+  /// No description provided for @badgeHundredTripsDesc.
+  ///
+  /// In fr, this message translates to:
+  /// **'100 courses terminées'**
+  String get badgeHundredTripsDesc;
+
+  /// No description provided for @statsMostBought.
+  ///
+  /// In fr, this message translates to:
+  /// **'Produits les plus achetés'**
+  String get statsMostBought;
+
+  /// No description provided for @statsSpendingByCategory.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dépenses par catégorie'**
+  String get statsSpendingByCategory;
+
+  /// No description provided for @statsMostForgotten.
+  ///
+  /// In fr, this message translates to:
+  /// **'Produits les plus souvent oubliés'**
+  String get statsMostForgotten;
+
+  /// No description provided for @statsTotalTrips.
+  ///
+  /// In fr, this message translates to:
+  /// **'Courses terminées'**
+  String get statsTotalTrips;
+
+  /// No description provided for @statsZeroOubliRate.
+  ///
+  /// In fr, this message translates to:
+  /// **'Taux zéro oubli'**
+  String get statsZeroOubliRate;
+
+  /// No description provided for @statsZeroOubliSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Courses sans rien déplacer vers Achats futurs'**
+  String get statsZeroOubliSubtitle;
+
+  /// No description provided for @statsNoDataYet.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pas encore de données. Termine des courses pour voir tes stats.'**
+  String get statsNoDataYet;
+
+  /// No description provided for @statsCountTimes.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count} fois'**
+  String statsCountTimes(int count);
+
+  /// No description provided for @profileConsumptionTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Profil de conso'**
+  String get profileConsumptionTitle;
+
+  /// No description provided for @profileConsumptionSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Régimes, allergies, produits à éviter. Optionnel et sans jugement.'**
+  String get profileConsumptionSubtitle;
+
+  /// No description provided for @profileCoachMode.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mode conseil bienveillant'**
+  String get profileCoachMode;
+
+  /// No description provided for @profileCoachModeSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rappels doux et suggestions de substituts quand tu ajoutes un article (tu peux désactiver à tout moment)'**
+  String get profileCoachModeSubtitle;
+
+  /// No description provided for @profileObjectives.
+  ///
+  /// In fr, this message translates to:
+  /// **'Objectifs à atteindre'**
+  String get profileObjectives;
+
+  /// No description provided for @profileObjectivesSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Choisis les objectifs qui te correspondent (sans jugement)'**
+  String get profileObjectivesSubtitle;
+
+  /// No description provided for @profileObjectiveWeightLoss.
+  ///
+  /// In fr, this message translates to:
+  /// **'Perte de poids'**
+  String get profileObjectiveWeightLoss;
+
+  /// No description provided for @profileObjectiveReduceBudget.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réduire le budget'**
+  String get profileObjectiveReduceBudget;
+
+  /// No description provided for @profileObjectiveEatBalanced.
+  ///
+  /// In fr, this message translates to:
+  /// **'Manger plus équilibré'**
+  String get profileObjectiveEatBalanced;
+
+  /// No description provided for @profileObjectiveReduceSugar.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réduire le sucre'**
+  String get profileObjectiveReduceSugar;
+
+  /// No description provided for @profileObjectiveReduceCholesterol.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réduire le mauvais cholestérol'**
+  String get profileObjectiveReduceCholesterol;
+
+  /// No description provided for @profileObjectiveMoreProteins.
+  ///
+  /// In fr, this message translates to:
+  /// **'Augmenter les protéines'**
+  String get profileObjectiveMoreProteins;
+
+  /// No description provided for @profileObjectiveLessMeat.
+  ///
+  /// In fr, this message translates to:
+  /// **'Moins de viande / protéines animales'**
+  String get profileObjectiveLessMeat;
+
+  /// No description provided for @profileObjectiveEatHealthier.
+  ///
+  /// In fr, this message translates to:
+  /// **'Manger plus sain'**
+  String get profileObjectiveEatHealthier;
+
+  /// No description provided for @profileObjectiveReduceUltraProcessed.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réduire les ultra-transformés'**
+  String get profileObjectiveReduceUltraProcessed;
+
+  /// No description provided for @profileObjectiveReducePalmOil.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réduire l\'huile de palme'**
+  String get profileObjectiveReducePalmOil;
+
+  /// No description provided for @profileObjectiveReduceFatty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réduire les produits gras'**
+  String get profileObjectiveReduceFatty;
+
+  /// No description provided for @profileObjectiveReduceSalt.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réduire le sel'**
+  String get profileObjectiveReduceSalt;
+
+  /// No description provided for @profileObjectiveMoreFiber.
+  ///
+  /// In fr, this message translates to:
+  /// **'Plus de fibres'**
+  String get profileObjectiveMoreFiber;
+
+  /// No description provided for @profileObjectiveMoreVegetables.
+  ///
+  /// In fr, this message translates to:
+  /// **'Plus de légumes'**
+  String get profileObjectiveMoreVegetables;
+
+  /// No description provided for @profileDiet.
+  ///
+  /// In fr, this message translates to:
+  /// **'Régime / préférences'**
+  String get profileDiet;
+
+  /// No description provided for @profileVegan.
+  ///
+  /// In fr, this message translates to:
+  /// **'Végan'**
+  String get profileVegan;
+
+  /// No description provided for @profileVegetarian.
+  ///
+  /// In fr, this message translates to:
+  /// **'Végétarien'**
+  String get profileVegetarian;
+
+  /// No description provided for @profileGlutenFree.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sans gluten'**
+  String get profileGlutenFree;
+
+  /// No description provided for @profileLactoseFree.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sans lactose'**
+  String get profileLactoseFree;
+
+  /// No description provided for @profileBioOnly.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bio uniquement'**
+  String get profileBioOnly;
+
+  /// No description provided for @profileLocalOnly.
+  ///
+  /// In fr, this message translates to:
+  /// **'Local uniquement'**
+  String get profileLocalOnly;
+
+  /// No description provided for @profileFairTrade.
+  ///
+  /// In fr, this message translates to:
+  /// **'Équitable'**
+  String get profileFairTrade;
+
+  /// No description provided for @profileNoAddedSugar.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sans sucre ajouté'**
+  String get profileNoAddedSugar;
+
+  /// No description provided for @profileAllergies.
+  ///
+  /// In fr, this message translates to:
+  /// **'Allergies et intolérances'**
+  String get profileAllergies;
+
+  /// No description provided for @profileAllergiesHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Un par ligne (ex. arachides, lactose)'**
+  String get profileAllergiesHint;
+
+  /// No description provided for @profileProductsToAvoid.
+  ///
+  /// In fr, this message translates to:
+  /// **'Produits à éviter'**
+  String get profileProductsToAvoid;
+
+  /// No description provided for @profileProductsToAvoidHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Alcool, porc, fast-food…'**
+  String get profileProductsToAvoidHint;
+
+  /// No description provided for @profileBrandsToAvoid.
+  ///
+  /// In fr, this message translates to:
+  /// **'Marques à éviter'**
+  String get profileBrandsToAvoid;
+
+  /// No description provided for @profileTemptations.
+  ///
+  /// In fr, this message translates to:
+  /// **'Objectifs bien-être'**
+  String get profileTemptations;
+
+  /// No description provided for @profileTemptationsSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'On t\'accompagne avec bienveillance : rappels doux et idées de substituts, sans jugement.'**
+  String get profileTemptationsSubtitle;
+
+  /// No description provided for @profileTemptationProduct.
+  ///
+  /// In fr, this message translates to:
+  /// **'Produit (ex. chocolat, soda)'**
+  String get profileTemptationProduct;
+
+  /// No description provided for @profileTemptationSubstitute.
+  ///
+  /// In fr, this message translates to:
+  /// **'Substitut suggéré (optionnel)'**
+  String get profileTemptationSubstitute;
+
+  /// No description provided for @profileAddTemptation.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter un objectif'**
+  String get profileAddTemptation;
+
+  /// No description provided for @profileReduceWarning.
+  ///
+  /// In fr, this message translates to:
+  /// **'Objectif en cours : réduire « {product} ». On ajoute quand même cette fois ?'**
+  String profileReduceWarning(String product);
+
+  /// No description provided for @profileReduceWarningWithProgress.
+  ///
+  /// In fr, this message translates to:
+  /// **'Objectif en cours : réduire « {product} ». Ta progression : {percent} %. On ajoute quand même cette fois ?'**
+  String profileReduceWarningWithProgress(String product, int percent);
+
+  /// No description provided for @profileSubstituteSuggestion.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pour ton objectif « {product} », on te propose « {substitute} » comme alternative. Tu préfères quoi ?'**
+  String profileSubstituteSuggestion(String product, String substitute);
+
+  /// No description provided for @profileAddAnyway.
+  ///
+  /// In fr, this message translates to:
+  /// **'Oui, ajouter quand même'**
+  String get profileAddAnyway;
+
+  /// No description provided for @profileReplaceWith.
+  ///
+  /// In fr, this message translates to:
+  /// **'Remplacer par « {name} »'**
+  String profileReplaceWith(String name);
+
+  /// No description provided for @profileCancel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annuler'**
+  String get profileCancel;
+
+  /// No description provided for @statsPleasurePercent.
+  ///
+  /// In fr, this message translates to:
+  /// **'Où tu en es (plaisir)'**
+  String get statsPleasurePercent;
+
+  /// No description provided for @statsPleasureSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Progression vers tes objectifs : part des achats type snacks / sucreries.'**
+  String get statsPleasureSubtitle;
+
+  /// No description provided for @statsBalanceScore.
+  ///
+  /// In fr, this message translates to:
+  /// **'Progression équilibre'**
+  String get statsBalanceScore;
+
+  /// No description provided for @statsBalanceSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ta progression vers un équilibre qui te convient (sans jugement).'**
+  String get statsBalanceSubtitle;
+
+  /// No description provided for @statsMonthlyEvolution.
+  ///
+  /// In fr, this message translates to:
+  /// **'Évolution mensuelle'**
+  String get statsMonthlyEvolution;
+
+  /// No description provided for @statsMonthlySubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ce mois vs mois précédent'**
+  String get statsMonthlySubtitle;
+
+  /// No description provided for @smartCartYouMightForget.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tu allais oublier'**
+  String get smartCartYouMightForget;
+
+  /// No description provided for @smartCartYouMightForgetSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'D\'après tes habitudes, l\'historique et la saison'**
+  String get smartCartYouMightForgetSubtitle;
+
+  /// No description provided for @smartCartAddAllSuggested.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tout ajouter'**
+  String get smartCartAddAllSuggested;
+
+  /// No description provided for @probableListTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Liste probable de la semaine'**
+  String get probableListTitle;
+
+  /// No description provided for @probableListSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Voici ta liste probable pour la semaine, d\'après ton historique, les récurrents et la saison. Veux-tu la confirmer ?'**
+  String get probableListSubtitle;
+
+  /// No description provided for @probableListConfirm.
+  ///
+  /// In fr, this message translates to:
+  /// **'Confirmer et ajouter à ma liste'**
+  String get probableListConfirm;
+
+  /// No description provided for @probableListCancel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annuler'**
+  String get probableListCancel;
+
+  /// No description provided for @shoppingSocialTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Shopping social'**
+  String get shoppingSocialTitle;
+
+  /// No description provided for @shoppingSocialSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tendances anonymisées : ce que les autres achètent (données agrégées, sans partage de ta liste)'**
+  String get shoppingSocialSubtitle;
+
+  /// No description provided for @shoppingSocialPopularNearby.
+  ///
+  /// In fr, this message translates to:
+  /// **'Populaire près de chez toi'**
+  String get shoppingSocialPopularNearby;
+
+  /// No description provided for @shoppingSocialTrendThisWeek.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dans ta zone, {percent} % des utilisateurs achètent « {product} » cette semaine.'**
+  String shoppingSocialTrendThisWeek(int percent, String product);
+
+  /// No description provided for @shoppingSocialTrendsTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tendances alimentaires (anonymisées)'**
+  String get shoppingSocialTrendsTitle;
+
+  /// No description provided for @probableListEmptyHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajoute des achats récurrents et termine des courses pour que l\'app apprenne tes habitudes et te propose une liste probable.'**
+  String get probableListEmptyHint;
+
+  /// No description provided for @probableListSelectAll.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tout sélectionner'**
+  String get probableListSelectAll;
+
+  /// No description provided for @probableListDeselectAll.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tout désélectionner'**
+  String get probableListDeselectAll;
+
+  /// No description provided for @probableListSelectedCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count} article(s) sélectionné(s)'**
+  String probableListSelectedCount(int count);
+
+  /// No description provided for @probableListAddedCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count} article(s) ajouté(s) à ta liste'**
+  String probableListAddedCount(int count);
+
+  /// No description provided for @smartCartSeeMore.
+  ///
+  /// In fr, this message translates to:
+  /// **'Voir plus'**
+  String get smartCartSeeMore;
+
+  /// No description provided for @smartCartSuggestionsCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count} suggestion(s)'**
+  String smartCartSuggestionsCount(int count);
+
+  /// No description provided for @smartCartAddedCount.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count} article(s) ajouté(s)'**
+  String smartCartAddedCount(int count);
+
+  /// No description provided for @shoppingSocialAddProduct.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter « {product} » à ma liste'**
+  String shoppingSocialAddProduct(String product);
+
+  /// No description provided for @shoppingSocialDemoDataNote.
+  ///
+  /// In fr, this message translates to:
+  /// **'Données de démonstration. Les tendances réelles arriveront avec une future mise à jour. Aucune donnée personnelle n\'est partagée (RGPD).'**
+  String get shoppingSocialDemoDataNote;
+
+  /// No description provided for @shoppingSocialPopularRecipes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Recettes populaires'**
+  String get shoppingSocialPopularRecipes;
+
+  /// No description provided for @shoppingSocialViewIngredients.
+  ///
+  /// In fr, this message translates to:
+  /// **'Voir les ingrédients'**
+  String get shoppingSocialViewIngredients;
+
+  /// No description provided for @shoppingSocialAddIngredientsToList.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter les ingrédients à ma liste'**
+  String get shoppingSocialAddIngredientsToList;
+
+  /// No description provided for @proBadge.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pro'**
+  String get proBadge;
+
+  /// No description provided for @probableListFirstRunHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Valide ou modifie la liste proposée selon tes habitudes.'**
+  String get probableListFirstRunHint;
+
+  /// No description provided for @shoppingSocialFirstRunHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Découvre les tendances anonymisées : aucune donnée personnelle n\'est partagée.'**
+  String get shoppingSocialFirstRunHint;
+
+  /// No description provided for @errorGeneric.
+  ///
+  /// In fr, this message translates to:
+  /// **'Une erreur s\'est produite.'**
+  String get errorGeneric;
 }
 
 class _AppLocalizationsDelegate

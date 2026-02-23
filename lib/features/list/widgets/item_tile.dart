@@ -5,6 +5,7 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/design_constants.dart';
 import '../../../core/constants/touch_constants.dart';
 import '../../../core/models/shopping_item.dart';
+import '../../../l10n/app_localizations.dart';
 import 'liquid_tile_background.dart';
 
 /// Une ligne d'article : bande couleur + nom + coche.
@@ -21,6 +22,7 @@ class ItemTile extends StatelessWidget {
     this.fontSize,
     this.showPlusExtras = false,
     this.compact = false,
+    this.wrapSized = false,
   });
 
   final ShoppingItem item;
@@ -33,6 +35,8 @@ class ItemTile extends StatelessWidget {
   final bool showPlusExtras;
   /// En true, la tuile prend uniquement la place du texte (pour layout Wrap style SSSSL).
   final bool compact;
+  /// En true, la tuile se dimensionne à la largeur du contenu (pour Wrap, tous les articles comme les cochés).
+  final bool wrapSized;
 
   static double _tileBorderRadius(String style) {
     switch (style) {
@@ -56,9 +60,12 @@ class ItemTile extends StatelessWidget {
     final fs = fontSize ?? 18.0;
     final isFilled = tileStyle != 'bar';
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final tileColor = isFilled
+    var tileColor = isFilled
         ? (isDark ? color.withValues(alpha: DesignConstants.itemTileColorAlphaDark) : color.withValues(alpha: DesignConstants.itemTileColorAlphaLight))
         : (Theme.of(context).cardTheme.color ?? (isDark ? const Color(0xFF252525) : Colors.white));
+    if (item.checked) {
+      tileColor = tileColor.withValues(alpha: 0.55);
+    }
     final textColor = isFilled
         ? (isDark ? Colors.white : Colors.black87)
         : (item.checked ? Colors.grey : (isDark ? const Color(0xFFE0E0E0) : null));
@@ -86,30 +93,56 @@ class ItemTile extends StatelessWidget {
             ? LayoutBuilder(
                 builder: (context, c) {
                   final availableWidth = c.maxWidth;
-                  final checkSize = (availableWidth - 16).clamp(24.0, TouchConstants.minTouchTarget);
+                  final checkSize = wrapSized ? 28.0 : (availableWidth - 16).clamp(24.0, TouchConstants.minTouchTarget);
                   return Row(
-                    mainAxisSize: MainAxisSize.max,
+                    mainAxisSize: wrapSized ? MainAxisSize.min : MainAxisSize.max,
                     children: [
-                      Expanded(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              item.name,
-                              style: TextStyle(
-                                fontSize: (fs * 0.95).clamp(15.0, 17.0),
-                                decoration: item.checked ? TextDecoration.lineThrough : null,
-                                color: textColor,
-                                fontWeight: isFilled ? FontWeight.w500 : null,
+                      if (wrapSized)
+                        Flexible(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              if (item.recurringItemId != null) ...[
+                                Icon(Icons.repeat, size: 14, color: secondaryColor),
+                                const SizedBox(width: 4),
+                              ],
+                              Flexible(
+                                child: Text(
+                                  item.name,
+                                  style: TextStyle(
+                                    fontSize: (fs * 0.95).clamp(15.0, 17.0),
+                                    decoration: item.checked ? TextDecoration.lineThrough : null,
+                                    color: textColor,
+                                    fontWeight: isFilled ? FontWeight.w500 : null,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
+                            ],
+                          ),
+                        )
+                      else
+                        Expanded(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                item.name,
+                                style: TextStyle(
+                                  fontSize: (fs * 0.95).clamp(15.0, 17.0),
+                                  decoration: item.checked ? TextDecoration.lineThrough : null,
+                                  color: textColor,
+                                  fontWeight: isFilled ? FontWeight.w500 : null,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
                       SizedBox(
                         width: checkSize,
                         height: checkSize,
@@ -126,7 +159,7 @@ class ItemTile extends StatelessWidget {
                 },
               )
             : Row(
-          mainAxisSize: MainAxisSize.max,
+          mainAxisSize: wrapSized ? MainAxisSize.min : MainAxisSize.max,
           children: [
             if (!isFilled)
               Container(
@@ -146,26 +179,51 @@ class ItemTile extends StatelessWidget {
               ),
             if (!isFilled) const SizedBox(width: 14),
             if (compact)
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      item.name,
-                      style: TextStyle(
-                        fontSize: (fs * 0.95).clamp(15.0, 17.0),
-                        decoration: item.checked ? TextDecoration.lineThrough : null,
-                        color: textColor,
-                        fontWeight: isFilled ? FontWeight.w500 : null,
+              wrapSized
+                  ? Flexible(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (item.recurringItemId != null) ...[
+                            Icon(Icons.repeat, size: 14, color: secondaryColor),
+                            const SizedBox(width: 4),
+                          ],
+                          Flexible(
+                            child: Text(
+                              item.name,
+                              style: TextStyle(
+                                fontSize: (fs * 0.95).clamp(15.0, 17.0),
+                                decoration: item.checked ? TextDecoration.lineThrough : null,
+                                color: textColor,
+                                fontWeight: isFilled ? FontWeight.w500 : null,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-              )
+                    )
+                  : Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            item.name,
+                            style: TextStyle(
+                              fontSize: (fs * 0.95).clamp(15.0, 17.0),
+                              decoration: item.checked ? TextDecoration.lineThrough : null,
+                              color: textColor,
+                              fontWeight: isFilled ? FontWeight.w500 : null,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                    )
             else
             Expanded(
                   child: LayoutBuilder(
@@ -197,6 +255,13 @@ class ItemTile extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
+                              if (item.recurringItemId != null) ...[
+                                const SizedBox(width: 4),
+                                Tooltip(
+                                  message: AppLocalizations.of(context).recurringTooltip,
+                                  child: Icon(Icons.repeat, size: 16, color: secondaryColor),
+                                ),
+                              ],
                               if (hasReminder) ...[
                                 const SizedBox(width: 6),
                                 Tooltip(

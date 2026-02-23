@@ -1,5 +1,8 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../models/birthday_entry.dart';
+import '../models/consumption_profile.dart';
+import '../models/gamification_data.dart';
 import '../models/list_group.dart';
 import '../models/list_template.dart';
 import '../models/recurring_item.dart';
@@ -19,7 +22,9 @@ class StorageService {
   static const String _keyDarkMode = 'noublipo_dark_mode';
   static const String _keyRemindersEnabled = 'noublipo_reminders_enabled';
   static const String _keyCategoryStyle = 'noublipo_category_style'; // 'form' | 'legend' (magasins/enseignes)
-  static const String _keySortMode = 'noublipo_sort_mode'; // 'order' | 'name' | 'color' (Noublipo+)
+  static const String _keySortMode = 'noublipo_sort_mode'; // 'order' | 'name' | 'color' | 'aisle' (Noublipo+)
+  static const String _keyAisleOrder = 'noublipo_aisle_order'; // Map colorIndex -> aisle number (Pro)
+  static const String _keyFavoriteStoreIndices = 'noublipo_favorite_store_indices'; // List<int> (Pro)
   static const String _keyShowPrices = 'noublipo_show_prices'; // (Noublipo+)
   static const String _keyAutocomplete = 'noublipo_autocomplete'; // (Noublipo+) complétion auto lexique
   static const String _keyLastQuickAddListName = 'noublipo_last_quick_add_list';
@@ -28,6 +33,20 @@ class StorageService {
   static const String _keyListTemplates = 'noublipo_list_templates';
   static const String _keyListGroups = 'noublipo_list_groups';
   static const String _keyLocale = 'noublipo_locale';
+  static const String _keyBirthdays = 'noublipo_birthdays';
+  static const String _keyOnboardingSeen = 'noublipo_onboarding_seen';
+  static const String _keyListFontScale = 'noublipo_list_font_scale';
+  static const String _keyShoppingMode = 'noublipo_shopping_mode';
+  static const String _keyArchivedLists = 'noublipo_archived_lists';
+  static const String _keyGamification = 'noublipo_gamification';
+  static const String _keyConsumptionProfile = 'noublipo_consumption_profile';
+  static const String _keyCoachNutritionEnabled = 'noublipo_coach_nutrition_enabled';
+  static const String _keyPremiumPurchased = 'noublipo_premium_purchased';
+  static const String _keyPremiumTrialEndMs = 'noublipo_premium_trial_end_ms';
+  static const String _keyUpgradePromptLastShownMs = 'noublipo_upgrade_prompt_last_shown_ms';
+  static const String _keyFirstOpenMs = 'noublipo_first_open_ms';
+  static const String _keyTripsCompletedCount = 'noublipo_trips_completed_count';
+  static const String _keyLastInterstitialShownMs = 'noublipo_last_interstitial_ms';
 
   final SharedPreferences _prefs;
 
@@ -134,14 +153,62 @@ class StorageService {
     }
   }
 
-  /// Tri de la liste (Noublipo+) : 'order' | 'name' | 'color'.
+  /// Tri de la liste (Noublipo+) : 'order' | 'name' | 'color' | 'aisle'.
   String get sortMode => _prefs.getString(_keySortMode) ?? 'order';
 
   Future<void> setSortMode(String value) async {
     try {
-      await _prefs.setString(_keySortMode, value == 'name' || value == 'color' ? value : 'order');
+      final v = (value == 'name' || value == 'color' || value == 'aisle') ? value : 'order';
+      await _prefs.setString(_keySortMode, v);
     } catch (e, stack) {
       AppLogger.error('setSortMode', e, stack);
+      rethrow;
+    }
+  }
+
+  /// Ordre des rayons (colorIndex -> numéro de rayon). Pro.
+  Map<int, int> get aisleOrder {
+    final json = _prefs.getString(_keyAisleOrder);
+    if (json == null) return {};
+    try {
+      final map = jsonDecode(json) as Map<String, dynamic>;
+      return map.map((k, v) => MapEntry(int.tryParse(k) ?? 0, (v as num).toInt()));
+    } catch (e, stack) {
+      AppLogger.warning('aisleOrder: JSON invalide', e, stack);
+      return {};
+    }
+  }
+
+  Future<void> setAisleOrder(Map<int, int> order) async {
+    try {
+      await _prefs.setString(
+        _keyAisleOrder,
+        jsonEncode(order.map((k, v) => MapEntry(k.toString(), v))),
+      );
+    } catch (e, stack) {
+      AppLogger.error('setAisleOrder', e, stack);
+      rethrow;
+    }
+  }
+
+  /// Magasin(s) favori(s) : liste des colorIndex. Pro.
+  List<int> get favoriteStoreIndices {
+    final json = _prefs.getString(_keyFavoriteStoreIndices);
+    if (json == null) return [];
+    try {
+      final list = jsonDecode(json) as List<dynamic>;
+      return list.map((e) => (e as num).toInt()).toList();
+    } catch (e, stack) {
+      AppLogger.warning('favoriteStoreIndices: JSON invalide', e, stack);
+      return [];
+    }
+  }
+
+  Future<void> setFavoriteStoreIndices(List<int> indices) async {
+    try {
+      await _prefs.setString(_keyFavoriteStoreIndices, jsonEncode(indices));
+    } catch (e, stack) {
+      AppLogger.error('setFavoriteStoreIndices', e, stack);
       rethrow;
     }
   }
@@ -182,6 +249,60 @@ class StorageService {
       }
     } catch (e, stack) {
       AppLogger.error('setLastQuickAddListName', e, stack);
+      rethrow;
+    }
+  }
+
+  bool get onboardingSeen => _prefs.getBool(_keyOnboardingSeen) ?? false;
+  Future<void> setOnboardingSeen(bool value) async {
+    try {
+      await _prefs.setBool(_keyOnboardingSeen, value);
+    } catch (e, stack) {
+      AppLogger.error('setOnboardingSeen', e, stack);
+      rethrow;
+    }
+  }
+
+  /// Facteur de taille de police pour la liste (0.8 à 1.5). 1.0 = défaut.
+  double get listFontScale => (_prefs.getDouble(_keyListFontScale) ?? 1.0).clamp(0.8, 1.5);
+  Future<void> setListFontScale(double value) async {
+    try {
+      await _prefs.setDouble(_keyListFontScale, value.clamp(0.8, 1.5));
+    } catch (e, stack) {
+      AppLogger.error('setListFontScale', e, stack);
+      rethrow;
+    }
+  }
+
+  /// Mode « course en cours » : vue simplifiée (gros boutons).
+  bool get shoppingMode => _prefs.getBool(_keyShoppingMode) ?? false;
+  Future<void> setShoppingMode(bool value) async {
+    try {
+      await _prefs.setBool(_keyShoppingMode, value);
+    } catch (e, stack) {
+      AppLogger.error('setShoppingMode', e, stack);
+      rethrow;
+    }
+  }
+
+  /// Listes archivées (Noublipo+) : liste de ShoppingListModel.toJson.
+  Future<List<Map<String, dynamic>>> loadArchivedLists() async {
+    final json = _prefs.getString(_keyArchivedLists);
+    if (json == null) return [];
+    try {
+      final list = jsonDecode(json) as List<dynamic>;
+      return list.map((e) => e as Map<String, dynamic>).toList();
+    } catch (e, stack) {
+      AppLogger.warning('loadArchivedLists', e, stack);
+      return [];
+    }
+  }
+
+  Future<void> saveArchivedLists(List<Map<String, dynamic>> archives) async {
+    try {
+      await _prefs.setString(_keyArchivedLists, jsonEncode(archives));
+    } catch (e, stack) {
+      AppLogger.error('saveArchivedLists', e, stack);
       rethrow;
     }
   }
@@ -390,6 +511,163 @@ class StorageService {
     }
   }
 
+  /// Anniversaires (Noublipo+).
+  Future<List<BirthdayEntry>> loadBirthdays() async {
+    final json = _prefs.getString(_keyBirthdays);
+    if (json == null) return [];
+    try {
+      final list = jsonDecode(json) as List<dynamic>;
+      return list
+          .map((e) => BirthdayEntry.fromJson(e as Map<String, dynamic>))
+          .toList();
+    } catch (e, stack) {
+      AppLogger.warning('loadBirthdays: JSON invalide', e, stack);
+      return [];
+    }
+  }
+
+  Future<void> saveBirthdays(List<BirthdayEntry> birthdays) async {
+    try {
+      await _prefs.setString(
+        _keyBirthdays,
+        jsonEncode(birthdays.map((e) => e.toJson()).toList()),
+      );
+    } catch (e, stack) {
+      AppLogger.error('saveBirthdays', e, stack);
+      rethrow;
+    }
+  }
+
+  /// Gamification (streak, badges, historique courses, oublis). Noublipo+.
+  Future<GamificationData> loadGamificationData() async {
+    final json = _prefs.getString(_keyGamification);
+    if (json == null) return GamificationData();
+    try {
+      return GamificationData.fromJson(
+        jsonDecode(json) as Map<String, dynamic>,
+      );
+    } catch (e, stack) {
+      AppLogger.warning('loadGamificationData: JSON invalide', e, stack);
+      return GamificationData();
+    }
+  }
+
+  Future<void> saveGamificationData(GamificationData data) async {
+    try {
+      await _prefs.setString(_keyGamification, jsonEncode(data.toJson()));
+    } catch (e, stack) {
+      AppLogger.error('saveGamificationData', e, stack);
+      rethrow;
+    }
+  }
+
+  /// Profil de consommation (Pro).
+  Future<ConsumptionProfile> loadConsumptionProfile() async {
+    final json = _prefs.getString(_keyConsumptionProfile);
+    if (json == null) return ConsumptionProfile();
+    try {
+      return ConsumptionProfile.fromJson(jsonDecode(json) as Map<String, dynamic>);
+    } catch (e, stack) {
+      AppLogger.warning('loadConsumptionProfile: JSON invalide', e, stack);
+      return ConsumptionProfile();
+    }
+  }
+
+  Future<void> saveConsumptionProfile(ConsumptionProfile profile) async {
+    try {
+      await _prefs.setString(_keyConsumptionProfile, jsonEncode(profile.toJson()));
+    } catch (e, stack) {
+      AppLogger.error('saveConsumptionProfile', e, stack);
+      rethrow;
+    }
+  }
+
+  /// Mode conseil bienveillant (rappels / substituts) activé. Pro. Par défaut true.
+  bool get coachNutritionEnabled => _prefs.getBool(_keyCoachNutritionEnabled) ?? true;
+
+  Future<void> setCoachNutritionEnabled(bool value) async {
+    try {
+      await _prefs.setBool(_keyCoachNutritionEnabled, value);
+    } catch (e, stack) {
+      AppLogger.error('setCoachNutritionEnabled', e, stack);
+      rethrow;
+    }
+  }
+
+  /// Premium : achat in-app ou version Plus (flavor). NopList+.
+  bool get premiumPurchased => _prefs.getBool(_keyPremiumPurchased) ?? false;
+  Future<void> setPremiumPurchased(bool value) async {
+    try {
+      await _prefs.setBool(_keyPremiumPurchased, value);
+    } catch (e, stack) {
+      AppLogger.error('setPremiumPurchased', e, stack);
+      rethrow;
+    }
+  }
+
+  /// Fin de l'essai premium (timestamp ms). Null si pas d'essai actif.
+  int? get premiumTrialEndMs {
+    final v = _prefs.getInt(_keyPremiumTrialEndMs);
+    if (v == null) return null;
+    if (v <= DateTime.now().millisecondsSinceEpoch) return null;
+    return v;
+  }
+  Future<void> setPremiumTrialEndMs(int? value) async {
+    try {
+      if (value == null) {
+        await _prefs.remove(_keyPremiumTrialEndMs);
+      } else {
+        await _prefs.setInt(_keyPremiumTrialEndMs, value);
+      }
+    } catch (e, stack) {
+      AppLogger.error('setPremiumTrialEndMs', e, stack);
+      rethrow;
+    }
+  }
+
+  /// Dernière fois qu'on a montré le prompt d'upgrade (pour ne pas harceler).
+  int? get upgradePromptLastShownMs => _prefs.getInt(_keyUpgradePromptLastShownMs);
+  Future<void> setUpgradePromptLastShownMs(int value) async {
+    try {
+      await _prefs.setInt(_keyUpgradePromptLastShownMs, value);
+    } catch (e, stack) {
+      AppLogger.error('setUpgradePromptLastShownMs', e, stack);
+      rethrow;
+    }
+  }
+
+  /// Premier lancement (pour proposer upgrade après habitude).
+  int? get firstOpenMs => _prefs.getInt(_keyFirstOpenMs);
+  Future<void> setFirstOpenMs(int value) async {
+    try {
+      if (_prefs.getInt(_keyFirstOpenMs) == null) {
+        await _prefs.setInt(_keyFirstOpenMs, value);
+      }
+    } catch (e, stack) {
+      AppLogger.error('setFirstOpenMs', e, stack);
+    }
+  }
+
+  /// Nombre de courses terminées (pour proposer upgrade après engagement).
+  int get tripsCompletedCount => _prefs.getInt(_keyTripsCompletedCount) ?? 0;
+  Future<void> incrementTripsCompletedCount() async {
+    try {
+      final n = (_prefs.getInt(_keyTripsCompletedCount) ?? 0) + 1;
+      await _prefs.setInt(_keyTripsCompletedCount, n);
+    } catch (e, stack) {
+      AppLogger.error('incrementTripsCompletedCount', e, stack);
+    }
+  }
+
+  int? get lastInterstitialShownMs => _prefs.getInt(_keyLastInterstitialShownMs);
+  Future<void> setLastInterstitialShownMs(int value) async {
+    try {
+      await _prefs.setInt(_keyLastInterstitialShownMs, value);
+    } catch (e, stack) {
+      AppLogger.error('setLastInterstitialShownMs', e, stack);
+    }
+  }
+
   /// Version du format de sauvegarde pour compatibilité future.
   static const int backupVersion = 1;
 
@@ -405,6 +683,7 @@ class StorageService {
         seasonal.where((e) => !defaultSeasonalIds.contains(e.id)).toList();
     final templates = await loadListTemplates();
     final groups = await loadListGroups();
+    final birthdays = await loadBirthdays();
 
     return {
       'version': backupVersion,
@@ -426,6 +705,7 @@ class StorageService {
       'seasonalTemplates': customSeasonal.map((e) => e.toJson()).toList(),
       'listTemplates': templates.map((e) => e.toJson()).toList(),
       'listGroups': groups.map((e) => e.toJson()).toList(),
+      'birthdays': birthdays.map((e) => e.toJson()).toList(),
     };
   }
 
@@ -503,6 +783,14 @@ class StorageService {
           .map((e) => ListGroup.fromJson(e as Map<String, dynamic>))
           .toList();
       await saveListGroups(groups);
+    }
+
+    final birthdaysList = data['birthdays'] as List<dynamic>?;
+    if (birthdaysList != null) {
+      final birthdays = birthdaysList
+          .map((e) => BirthdayEntry.fromJson(e as Map<String, dynamic>))
+          .toList();
+      await saveBirthdays(birthdays);
     }
   }
 }

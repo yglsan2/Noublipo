@@ -1219,4 +1219,53 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get errorGeneric => 'Er is een fout opgetreden.';
+
+  @override
+  String get paywallTitle => 'Passe à NopList+';
+
+  @override
+  String get paywallSubtitle => 'Débloque tout le potentiel de ta liste';
+
+  @override
+  String get paywallBenefitNoAds => 'Zéro pub, expérience fluide';
+
+  @override
+  String get paywallBenefitSmartCart => 'Aide course & liste probable';
+
+  @override
+  String get paywallBenefitSync => 'Sync sur tous tes appareils';
+
+  @override
+  String get paywallBenefitStats => 'Stats, badges et gamification';
+
+  @override
+  String paywallCta(String price) {
+    return 'Débloquer pour $price';
+  }
+
+  @override
+  String get paywallTrialCta => 'Essayer 24h gratuit';
+
+  @override
+  String get paywallRestore => 'Restaurer l\'achat';
+
+  @override
+  String get upgradePromptTitle => 'Tu gères bien tes listes !';
+
+  @override
+  String get upgradePromptMessage =>
+      'Passe à NopList+ pour garder tes habitudes et débloquer l\'Aide course, la liste probable et la sync.';
+
+  @override
+  String get upgradePromptCta => 'Découvrir NopList+';
+
+  @override
+  String get upgradePromptLater => 'Plus tard';
+
+  @override
+  String get trialGrantedTitle => '24h de NopList+ offertes !';
+
+  @override
+  String get trialGrantedMessage =>
+      'Tu as débloqué un essai gratuit. Profites-en pour tester l\'Aide course et la liste probable.';
 }

@@ -88,7 +88,6 @@ class ListScreen extends StatelessWidget {
         builder: (context, constraints) {
           return Consumer3<ListProvider, CategoryNamesProvider, SettingsProvider>(
             builder: (context, provider, categoryNames, settings, _) {
-              final isPremiumActiveInner = context.watch<PremiumProvider>().isPremiumActive;
               final layout = ScreenLayout.of(context);
               if (provider.loading) {
                 return const Center(child: CircularProgressIndicator());
@@ -1456,17 +1455,21 @@ class ListScreen extends StatelessWidget {
           final badgesCountAfter = context.read<GamificationProvider>().badges.length;
           if (badgesCountAfter > badgesCountBefore && badgesCountBefore == 0 && !premium.isPremiumActive) {
             await premium.grantTrial24h();
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(l10n.trialGrantedTitle),
-                behavior: SnackBarBehavior.floating,
-                duration: const Duration(seconds: 5),
-              ),
-            );
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(l10n.trialGrantedTitle),
+                  behavior: SnackBarBehavior.floating,
+                  duration: const Duration(seconds: 5),
+                ),
+              );
+            }
           } else {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(l10n.courseTerminee)),
-            );
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(l10n.courseTerminee)),
+              );
+            }
           }
         }
       } catch (e) {
@@ -1576,8 +1579,6 @@ class ListScreen extends StatelessWidget {
           },
         ),
       ),
-        const _UpgradePromptTrigger(),
-    ],
     );
   }
 

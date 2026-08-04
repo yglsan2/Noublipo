@@ -1208,4 +1208,53 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errorGeneric => 'An error occurred.';
+
+  @override
+  String get paywallTitle => 'Upgrade to NopList+';
+
+  @override
+  String get paywallSubtitle => 'Unlock your list\'s full potential';
+
+  @override
+  String get paywallBenefitNoAds => 'No ads, smooth experience';
+
+  @override
+  String get paywallBenefitSmartCart => 'Smart cart & probable list';
+
+  @override
+  String get paywallBenefitSync => 'Sync across all your devices';
+
+  @override
+  String get paywallBenefitStats => 'Stats, badges & gamification';
+
+  @override
+  String paywallCta(String price) {
+    return 'Unlock for $price';
+  }
+
+  @override
+  String get paywallTrialCta => 'Try 24h free';
+
+  @override
+  String get paywallRestore => 'Restore purchase';
+
+  @override
+  String get upgradePromptTitle => 'You\'re doing great!';
+
+  @override
+  String get upgradePromptMessage =>
+      'Upgrade to NopList+ to keep your habits and unlock Smart cart, probable list and sync.';
+
+  @override
+  String get upgradePromptCta => 'Discover NopList+';
+
+  @override
+  String get upgradePromptLater => 'Later';
+
+  @override
+  String get trialGrantedTitle => '24h of NopList+ free!';
+
+  @override
+  String get trialGrantedMessage =>
+      'You\'ve unlocked a free trial. Try Smart cart and probable list.';
 }

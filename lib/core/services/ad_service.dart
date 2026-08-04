@@ -1,9 +1,8 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../config/monetization_config.dart';
-import '../providers/premium_provider.dart';
 import 'storage_service.dart';
 import '../utils/app_logger.dart';
 

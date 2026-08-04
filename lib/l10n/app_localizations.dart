@@ -177,13 +177,13 @@ abstract class AppLocalizations {
   /// No description provided for @appTitle.
   ///
   /// In fr, this message translates to:
-  /// **'NopList'**
+  /// **'Noubliepo!'**
   String get appTitle;
 
   /// No description provided for @appTitlePlus.
   ///
   /// In fr, this message translates to:
-  /// **'NopList+'**
+  /// **'Noubliepo!+'**
   String get appTitlePlus;
 
   /// No description provided for @searchHint.
@@ -2339,6 +2339,96 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Une erreur s\'est produite.'**
   String get errorGeneric;
+
+  /// No description provided for @paywallTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Passe à NopList+'**
+  String get paywallTitle;
+
+  /// No description provided for @paywallSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Débloque tout le potentiel de ta liste'**
+  String get paywallSubtitle;
+
+  /// No description provided for @paywallBenefitNoAds.
+  ///
+  /// In fr, this message translates to:
+  /// **'Zéro pub, expérience fluide'**
+  String get paywallBenefitNoAds;
+
+  /// No description provided for @paywallBenefitSmartCart.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aide course & liste probable'**
+  String get paywallBenefitSmartCart;
+
+  /// No description provided for @paywallBenefitSync.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sync sur tous tes appareils'**
+  String get paywallBenefitSync;
+
+  /// No description provided for @paywallBenefitStats.
+  ///
+  /// In fr, this message translates to:
+  /// **'Stats, badges et gamification'**
+  String get paywallBenefitStats;
+
+  /// No description provided for @paywallCta.
+  ///
+  /// In fr, this message translates to:
+  /// **'Débloquer pour {price}'**
+  String paywallCta(String price);
+
+  /// No description provided for @paywallTrialCta.
+  ///
+  /// In fr, this message translates to:
+  /// **'Essayer 24h gratuit'**
+  String get paywallTrialCta;
+
+  /// No description provided for @paywallRestore.
+  ///
+  /// In fr, this message translates to:
+  /// **'Restaurer l\'achat'**
+  String get paywallRestore;
+
+  /// No description provided for @upgradePromptTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tu gères bien tes listes !'**
+  String get upgradePromptTitle;
+
+  /// No description provided for @upgradePromptMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Passe à NopList+ pour garder tes habitudes et débloquer l\'Aide course, la liste probable et la sync.'**
+  String get upgradePromptMessage;
+
+  /// No description provided for @upgradePromptCta.
+  ///
+  /// In fr, this message translates to:
+  /// **'Découvrir NopList+'**
+  String get upgradePromptCta;
+
+  /// No description provided for @upgradePromptLater.
+  ///
+  /// In fr, this message translates to:
+  /// **'Plus tard'**
+  String get upgradePromptLater;
+
+  /// No description provided for @trialGrantedTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'24h de NopList+ offertes !'**
+  String get trialGrantedTitle;
+
+  /// No description provided for @trialGrantedMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tu as débloqué un essai gratuit. Profites-en pour tester l\'Aide course et la liste probable.'**
+  String get trialGrantedMessage;
 }
 
 class _AppLocalizationsDelegate

@@ -8,7 +8,8 @@ import 'core/providers/consumption_profile_provider.dart';
 import 'core/providers/gamification_provider.dart';
 import 'core/providers/premium_provider.dart';
 import 'core/services/ad_service.dart';
-import 'core/services/upgrade_prompt_helper.dart';
+import 'core/services/consent_service.dart';
+import 'core/services/iap_service.dart';
 import 'l10n/app_localizations.dart';
 import 'core/providers/list_provider.dart';
 import 'core/providers/birthdays_provider.dart';
@@ -23,7 +24,7 @@ import 'features/splash/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  AppLogger.info('Démarrage Noubliepo!');
+  AppLogger.info('Démarrage NopList');
   SyncService? syncService;
   try {
     await Firebase.initializeApp();
@@ -44,16 +45,20 @@ void main() async {
   final reminderService = ReminderService();
   final planningProvider = PlanningProvider(storage, reminderService);
   final birthdaysProvider = BirthdaysProvider(storage, reminderService);
+  final premium = PremiumProvider(storage);
+  final iap = IapService(premium);
+  // Ne pas bloquer le démarrage sur le store.
+  iap.initialize();
   if (!isNoublipoPlus) {
+    await ConsentService.requestConsentIfNeeded();
     AdService.initialize();
   }
   runApp(
     MultiProvider(
       providers: [
         Provider<StorageService>.value(value: storage),
-        ChangeNotifierProvider<PremiumProvider>(
-          create: (_) => PremiumProvider(storage),
-        ),
+        ChangeNotifierProvider<PremiumProvider>.value(value: premium),
+        Provider<IapService>.value(value: iap),
         ChangeNotifierProvider<PlanningProvider>.value(value: planningProvider),
         ChangeNotifierProvider<BirthdaysProvider>.value(value: birthdaysProvider),
         ChangeNotifierProvider<ListProvider>(

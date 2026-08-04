@@ -177,13 +177,13 @@ abstract class AppLocalizations {
   /// No description provided for @appTitle.
   ///
   /// In fr, this message translates to:
-  /// **'Noubliepo!'**
+  /// **'NopList'**
   String get appTitle;
 
   /// No description provided for @appTitlePlus.
   ///
   /// In fr, this message translates to:
-  /// **'Noubliepo!+'**
+  /// **'NopList+'**
   String get appTitlePlus;
 
   /// No description provided for @searchHint.

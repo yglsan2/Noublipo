@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../app_config.dart';
+import '../../../core/config/monetization_config.dart';
 import '../../../l10n/app_localizations.dart';
 
 /// Écran À propos : créateur, licence GPL v3, RGPD, accessibilité.
@@ -39,8 +40,10 @@ class AboutScreen extends StatelessWidget {
             title: 'Créateur',
             icon: Icons.person_outline,
             child: const Text(
-              'Noublipo a été créée par DesertYGL.\n'
-              'Application de liste de courses simple, fluide et sans publicité.',
+              'NopList a été créée par DesertYGL.\n'
+              'Application de liste de courses simple et fluide. '
+              'La version gratuite peut afficher des publicités discrètes ; '
+              'NopList+ (achat unique) retire les pubs et débloque les fonctions avancées.',
               style: TextStyle(height: 1.4),
             ),
           ),
@@ -52,11 +55,35 @@ class AboutScreen extends StatelessWidget {
               '• Cocher / décocher : touchez un article (dans le panier = coché).\n'
               '• Modifier ou supprimer : appui long sur un article, puis « Modifier » ou « Supprimer ».\n'
               '• Suppression rapide : glissez un article vers la gauche pour le supprimer ; un message permet d’annuler.\n'
-              '• Couleurs et catégories : en mode Magasins (Paramètres), les carrés en haut permettent d\'ajouter ou définir des magasins (enseigne, marché, supermarché…) ; touchez un carré pour lui donner un nom (ex. Carrefour, Fruits). En mode Formulaire, le nom de catégorie peut être saisi à l’ajout.\n'
-              '• Partager : icône partage dans la barre → « Exporter en texte » pour envoyer la liste, ou « Partager en temps réel » (après connexion Google) pour que d’autres voient et modifient la même liste en direct.\n'
-              '• Plusieurs listes : menu ⋮ → « Nouvelle liste » ; les pastilles en haut permettent de changer de liste ; appui long sur une pastille pour renommer ou supprimer la liste.\n'
-              '• Paramètres (icône engrenage) : style des articles, mode nuit, capitalisation, rappels, style des catégories (formulaire / magasins).',
+              '• Couleurs et catégories : en mode Magasins (Paramètres), les carrés en haut permettent d\'ajouter ou définir des magasins ; touchez un carré pour lui donner un nom.\n'
+              '• Partager : icône partage → « Exporter en texte » ou « Partager en temps réel » (connexion Google).\n'
+              '• Plusieurs listes et fonctions avancées : disponibles avec NopList+.\n'
+              '• Paramètres (icône engrenage) : style des articles, mode nuit, capitalisation, rappels, catégories.',
               style: TextStyle(height: 1.5),
+            ),
+          ),
+          _Section(
+            title: 'Confidentialité',
+            icon: Icons.privacy_tip_outlined,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Responsable du traitement : l’éditeur de l’application (DesertYGL).\n\n'
+                  '• Données collectées : listes d’articles et paramètres en local ; en cas de synchronisation (Google) : identifiant de compte et données Firebase ; '
+                  'en version gratuite : identifiants publicitaires via Google AdMob (sous réserve de votre consentement en UE).\n'
+                  '• Finalités : listes de courses, sync multi‑appareils, monétisation publicitaire (gratuit) / achat in-app (Premium).\n'
+                  '• Vos droits RGPD : accès, rectification, effacement, portabilité, opposition. Réclamation possible auprès de la CNIL.\n'
+                  '• Pour supprimer un compte sync : déconnexion Google dans l’app, puis demande d’effacement Firebase auprès de l’éditeur.',
+                  style: TextStyle(height: 1.5),
+                ),
+                const SizedBox(height: 12),
+                OutlinedButton.icon(
+                  onPressed: () => _openPrivacy(context),
+                  icon: const Icon(Icons.open_in_new, size: 18),
+                  label: const Text('Politique de confidentialité complète'),
+                ),
+              ],
             ),
           ),
           _Section(
@@ -66,7 +93,7 @@ class AboutScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'Cette application est distribuée sous licence GNU GPL v3 (General Public License version 3). '
+                  'Cette application est distribuée sous licence GNU GPL v3. '
                   'Vous avez la liberté d’utiliser, modifier et redistribuer ce logiciel, sous les conditions de la GPL v3.',
                   style: TextStyle(height: 1.4),
                 ),
@@ -76,56 +103,15 @@ class AboutScreen extends StatelessWidget {
                   icon: const Icon(Icons.open_in_new, size: 18),
                   label: const Text('Voir la licence GPL v3 complète'),
                 ),
-                const SizedBox(height: 12),
-                ExpansionTile(
-                  title: Text(
-                    'Résumé des droits (GPL v3)',
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: Text(
-                        '• Liberté d’exécuter le programme pour tout usage.\n'
-                        '• Liberté d’étudier le fonctionnement et de l’adapter.\n'
-                        '• Liberté de redistribuer des copies.\n'
-                        '• Liberté d’améliorer le programme et de publier vos améliorations.\n\n'
-                        'Les œuvres dérivées doivent être diffusées sous la même licence GPL v3.',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              height: 1.5,
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
               ],
-            ),
-          ),
-          _Section(
-            title: 'Données personnelles (RGPD)',
-            icon: Icons.privacy_tip_outlined,
-            child: const Text(
-              'Responsable du traitement : l’éditeur de l’application (voir Crédits).\n\n'
-              '• Données collectées : listes d’articles, paramètres, et en cas de synchronisation (connexion Google) : identifiant de compte et données hébergées sur Firebase (Google) pour la sync et le partage en temps réel.\n'
-              '• Finalités : fourniture du service (listes de courses), synchronisation multi‑appareils et partage en temps réel si activé.\n'
-              '• Base légale : exécution du contrat (utilisation de l’app) ; votre consentement pour la synchronisation (connexion Google).\n'
-              '• Durée de conservation : données locales tant que l’app est installée ; données Firebase tant que le compte est connecté. Vous pouvez supprimer les données en vous déconnectant et en désinstallant l’app.\n'
-              '• Vos droits : accès, rectification, effacement, portabilité, limitation du traitement, opposition (art. 15 à 22 RGPD). Pour les exercer ou pour toute question : contactez l’éditeur (voir Crédits). Vous pouvez introduire une réclamation auprès de la CNIL.\n'
-              '• Aucune revente de données ; pas de suivi publicitaire ni analytics tiers intégrés par défaut.',
-              style: TextStyle(height: 1.5),
             ),
           ),
           _Section(
             title: 'Accessibilité (RGAA)',
             icon: Icons.accessibility_new_outlined,
             child: const Text(
-              'Noublipo vise une conformité aux critères d’accessibilité (RGAA, niveau AA dans la mesure du possible) :\n'
-              '• Contraste des textes et fonds, tailles de touche minimales (bouton + large, zones tactiles ≥ 44 pt).\n'
-              '• Mode nuit et respect du thème système (clair/sombre).\n'
-              '• Libellés et rôles pour les technologies d’assistance (TalkBack, VoiceOver) : boutons, champs, listes.\n'
-              '• Information non portée par la seule couleur : texte et icônes associés aux couleurs de catégorie.\n'
-              '• Navigation au clavier / focus prévue sur les écrans supportés.\n\n'
-              'Si vous constatez un défaut d’accessibilité, merci de nous le signaler pour amélioration.',
+              'NopList vise une conformité aux critères d’accessibilité (RGAA, niveau AA dans la mesure du possible) : '
+              'contraste, tailles de touche, mode nuit, libellés TalkBack, information non portée par la seule couleur.',
               style: TextStyle(height: 1.5),
             ),
           ),
@@ -134,14 +120,30 @@ class AboutScreen extends StatelessWidget {
             icon: Icons.info_outline,
             child: const Text(
               '© DesertYGL. Tous droits réservés selon les termes de la GPL v3.\n\n'
-              'Cette application est fournie « telle quelle », sans garantie d’aucune sorte. '
-              'L’auteur ne pourra être tenu responsable des dommages résultant de son utilisation.',
-              style: TextStyle(height: 1.5),
+              'Cette application est fournie « telle quelle », sans garantie d’aucune sorte.',
+              style: TextStyle(height: 1.4),
             ),
           ),
         ],
       ),
     );
+  }
+
+  static Future<void> _openPrivacy(BuildContext context) async {
+    final uri = Uri.parse(privacyPolicyUrl);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      await Clipboard.setData(ClipboardData(text: uri.toString()));
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(AppLocalizations.of(context).linkCopiedBrowser),
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
+      }
+    }
   }
 
   static Future<void> _copyLicenseUrl(BuildContext context) async {

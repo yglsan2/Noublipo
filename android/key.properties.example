@@ -1,0 +1,4 @@
+storePassword=CHANGE_ME
+keyPassword=CHANGE_ME
+keyAlias=noplist
+storeFile=../keystore/noplist-upload.jks

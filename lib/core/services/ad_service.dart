@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import '../config/monetization_config.dart';
+import 'consent_service.dart';
 import 'storage_service.dart';
 import '../utils/app_logger.dart';
 
@@ -35,7 +36,7 @@ class AdService {
     required bool isPremiumActive,
     int? backgroundDurationMs,
   }) async {
-    if (isPremiumActive || !shouldShowAds) return;
+    if (isPremiumActive || !shouldShowAds || !ConsentService.canRequestAds) return;
     if (moment == AdMoment.appResume &&
         (backgroundDurationMs == null ||
             backgroundDurationMs < minBackgroundDurationForAd.inMilliseconds)) {
@@ -97,7 +98,9 @@ class AdService {
   /// Crée un widget bannière discrète (petite hauteur). À placer en bas de l'écran liste.
   /// Ne pas afficher si premium actif.
   Widget? bannerWidgetIfAppropriate(bool isPremiumActive) {
-    if (isPremiumActive || !shouldShowAds) return null;
+    if (isPremiumActive || !shouldShowAds || !ConsentService.canRequestAds) {
+      return null;
+    }
     return _BannerPlaceholder();
   }
 

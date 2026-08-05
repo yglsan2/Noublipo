@@ -20,7 +20,7 @@ Future<void> updateHomeWidgetFromList(ShoppingListModel list) async {
         i < uncheckedItems.length ? uncheckedItems[i].name : '',
       );
     }
-    await HomeWidget.updateWidget(androidName: 'NoublipoWidgetProvider');
+    await HomeWidget.updateWidget(androidName: 'ToteoWidgetProvider');
   } catch (_) {
     // Widget non disponible (iOS sans config, desktop, Linux, etc.) — on ignore silencieusement.
   }

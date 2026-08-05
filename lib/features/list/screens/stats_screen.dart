@@ -9,7 +9,7 @@ import '../../../core/providers/planning_provider.dart';
 import '../../../core/providers/settings_provider.dart';
 import '../../../l10n/app_localizations.dart';
 
-/// Écran Statistiques (Noublipo+) : vue d’ensemble des listes et des achats.
+/// Écran Statistiques (Toteo+) : vue d’ensemble des listes et des achats.
 class StatsScreen extends StatelessWidget {
   const StatsScreen({super.key});
 
@@ -24,7 +24,7 @@ class StatsScreen extends StatelessWidget {
           tooltip: AppLocalizations.of(context).clear,
         ),
       ),
-      body: isNoublipoPlus
+      body: isToteoPlus
           ? Consumer5<ListProvider, PlanningProvider, SettingsProvider,
               GamificationProvider, CategoryNamesProvider>(
               builder: (context, listProvider, planning, settings,

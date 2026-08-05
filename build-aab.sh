@@ -11,16 +11,16 @@ cd "$(dirname "$0")"
 export GRADLE_USER_HOME="${GRADLE_USER_HOME:-$PWD/android/.gradle}"
 mkdir -p "$GRADLE_USER_HOME"
 
-FLAVOR="noublipo"
-DART_FLAVOR="noublipo"
+FLAVOR="toteo"
+DART_FLAVOR="toteo"
 EXTRA_DART=()
 ADMOB_APP_ID=""
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
     plus)
-      FLAVOR="noublipo_plus"
-      DART_FLAVOR="noublipo_plus"
+      FLAVOR="toteo_plus"
+      DART_FLAVOR="toteo_plus"
       shift
       ;;
     --admob-app-id=*)

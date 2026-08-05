@@ -1,7 +1,8 @@
 {
   "@@locale": "ro",
-  "appTitle": "NopList",
-  "appTitlePlus": "NopList+",
+  "appTitle": "Tote 'O Recall",
+  "appTitlePlus": "Tote 'O Recall+",
+  "appTagline": "Lista care nu uită nimic!",
   "searchHint": "Search in list",
   "totalLabel": "Total",
   "addItem": "Add item",
@@ -218,7 +219,7 @@
   "save": "Save",
   "saveAsTemplateTitle": "Save as template",
   "saveButton": "Save",
-  "scanAvailablePlus": "Available in NopList+",
+  "scanAvailablePlus": "Available in Tote 'O Recall+",
   "scanTitle": "Scan",
   "selectedCount": "{n} selected",
   "@selectedCount": {
@@ -256,7 +257,7 @@
   "signInGoogleToEnable": "Sign in with Google to enable",
   "signInWithGoogle": "Sign in with Google",
   "sortColor": "Color",
-  "sortListLabel": "List sort (NopList+)",
+  "sortListLabel": "List sort (Tote 'O Recall+)",
   "sortName": "Name",
   "sortOrder": "Order",
   "styleBar": "Bar",
@@ -301,16 +302,31 @@
   "uncheckAll": "Debifați tot",
   "moveToFutureList": "Mutați la cumpărături viitoare",
   "deleteOrMoveToFuture": "Ștergeți « {name} » sau mutați la cumpărături viitoare?",
-  "@deleteOrMoveToFuture": { "placeholders": { "name": { "type": "String" } } },
+  "@deleteOrMoveToFuture": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "listFontScale": "Mărimea textului listei",
   "listFontScaleSubtitle": "Ajustați pentru lizibilitate mai bună",
   "shoppingMode": "Mod cumpărături",
   "shoppingModeSubtitle": "Vizualizare simplificată cu butoane mari în magazin",
-  "onboardingWelcome": "Bine ați venit la NopList",
+  "onboardingWelcome": "Bine ați venit la Tote 'O Recall",
   "onboardingWelcomeSubtitle": "Începeți cu o listă goală sau alegeți un șablon mai jos.",
   "startEmpty": "Începeți cu listă goală",
   "progressCount": "{checked} / {total}",
-  "@progressCount": { "placeholders": { "checked": { "type": "int" }, "total": { "type": "int" } } },
+  "@progressCount": {
+    "placeholders": {
+      "checked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "sendLinkBy": "Trimiteți linkul prin mesaj sau email pentru a invita",
   "syncConflictHint": "Posibil conflict: modificările au fost îmbinate.",
   "statsMonthlyEvolution": "Evoluție lunară",
@@ -326,22 +342,61 @@
   "shoppingSocialSubtitle": "Trenduri anonimizate: ce cumpără alții (date agregate, lista ta nu e partajată)",
   "shoppingSocialPopularNearby": "Popular în apropiere",
   "shoppingSocialTrendThisWeek": "În zona ta, {percent} % din utilizatori cumpără « {product} » săptămâna aceasta.",
-  "@shoppingSocialTrendThisWeek": { "placeholders": { "percent": { "type": "int" }, "product": { "type": "String" } } },
+  "@shoppingSocialTrendThisWeek": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialTrendsTitle": "Trenduri alimentare (anonimizate)",
   "probableListEmptyHint": "Adaugă cumpărături recurente și finalizează cursele ca aplicația să-ți învețe obiceiurile și să propună o listă probabilă.",
   "probableListSelectAll": "Selectează tot",
   "probableListDeselectAll": "Deselectează tot",
   "probableListSelectedCount": "{count} articol(e) selectat(e)",
-  "@probableListSelectedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "probableListAddedCount": "{count} articol(e) adăugat(e) în lista ta",
-  "@probableListAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartSeeMore": "Vezi mai mult",
   "smartCartSuggestionsCount": "{count} sugestie(i)",
-  "@smartCartSuggestionsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartSuggestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddedCount": "{count} articol(e) adăugat(e)",
-  "@smartCartAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingSocialAddProduct": "Adaugă « {product} » în lista mea",
-  "@shoppingSocialAddProduct": { "placeholders": { "product": { "type": "String" } } },
+  "@shoppingSocialAddProduct": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialDemoDataNote": "Date demonstrative. Tendințele reale într-o actualizare viitoare. Nu se partajează date personale (GDPR).",
   "shoppingSocialPopularRecipes": "Rețete populare",
   "shoppingSocialViewIngredients": "Vezi ingredientele",

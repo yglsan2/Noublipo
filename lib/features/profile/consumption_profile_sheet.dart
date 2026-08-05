@@ -41,7 +41,7 @@ class ConsumptionProfileSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!isNoublipoPlus) return const SizedBox.shrink();
+    if (!isToteoPlus) return const SizedBox.shrink();
     final l10n = AppLocalizations.of(context);
     return DraggableScrollableSheet(
       initialChildSize: 0.7,

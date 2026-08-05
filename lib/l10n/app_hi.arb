@@ -1,7 +1,8 @@
 {
   "@@locale": "hi",
-  "appTitle": "NopList",
-  "appTitlePlus": "NopList+",
+  "appTitle": "Tote 'O Recall",
+  "appTitlePlus": "Tote 'O Recall+",
+  "appTagline": "वो सूची जो कभी नहीं भूलती!",
   "searchHint": "Search in list",
   "totalLabel": "Total",
   "addItem": "Add item",
@@ -218,7 +219,7 @@
   "save": "Save",
   "saveAsTemplateTitle": "Save as template",
   "saveButton": "Save",
-  "scanAvailablePlus": "Available in NopList+",
+  "scanAvailablePlus": "Available in Tote 'O Recall+",
   "scanTitle": "Scan",
   "selectedCount": "{n} selected",
   "@selectedCount": {
@@ -256,7 +257,7 @@
   "signInGoogleToEnable": "Sign in with Google to enable",
   "signInWithGoogle": "Sign in with Google",
   "sortColor": "Color",
-  "sortListLabel": "List sort (NopList+)",
+  "sortListLabel": "List sort (Tote 'O Recall+)",
   "sortName": "Name",
   "sortOrder": "Order",
   "styleBar": "Bar",
@@ -301,16 +302,31 @@
   "uncheckAll": "सभी अनचेक करें",
   "moveToFutureList": "बाद में खरीदने में ले जाएं",
   "deleteOrMoveToFuture": "« {name} » हटाएं या बाद में खरीदने में ले जाएं?",
-  "@deleteOrMoveToFuture": { "placeholders": { "name": { "type": "String" } } },
+  "@deleteOrMoveToFuture": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "listFontScale": "सूची का टेक्स्ट आकार",
   "listFontScaleSubtitle": "पढ़ने में आसानी के लिए समायोजित करें",
   "shoppingMode": "खरीदारी मोड",
   "shoppingModeSubtitle": "दुकान में बड़े बटन के साथ सरल दृश्य",
-  "onboardingWelcome": "NopList में आपका स्वागत है!",
+  "onboardingWelcome": "Tote 'O Recall में आपका स्वागत है!",
   "onboardingWelcomeSubtitle": "खाली सूची से शुरू करें या नीचे टेम्पलेट चुनें।",
   "startEmpty": "खाली सूची से शुरू करें",
   "progressCount": "{checked} / {total}",
-  "@progressCount": { "placeholders": { "checked": { "type": "int" }, "total": { "type": "int" } } },
+  "@progressCount": {
+    "placeholders": {
+      "checked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "sendLinkBy": "आमंत्रित करने के लिए संदेश या ईमेल से लिंक भेजें",
   "syncConflictHint": "संभावित संघर्ष: बदलाव मर्ज कर दिए गए।",
   "statsMonthlyEvolution": "मासिक बदलाव",
@@ -326,22 +342,61 @@
   "shoppingSocialSubtitle": "गुमनाम ट्रेंड: दूसरे क्या खरीदते हैं (एकत्र डेटा, तुम्हारी सूची साझा नहीं)",
   "shoppingSocialPopularNearby": "तुम्हारे पास लोकप्रिय",
   "shoppingSocialTrendThisWeek": "तुम्हारे इलाके में {percent}% उपयोगकर्ता इस सप्ताह « {product} » खरीदते हैं।",
-  "@shoppingSocialTrendThisWeek": { "placeholders": { "percent": { "type": "int" }, "product": { "type": "String" } } },
+  "@shoppingSocialTrendThisWeek": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialTrendsTitle": "खाद्य ट्रेंड (गुमनाम)",
   "probableListEmptyHint": "नियमित खरीदारी जोड़ें और शॉपिंग पूरी करें ताकि ऐप आपकी आदतें सीखे और संभावित सूची सुझाए।",
   "probableListSelectAll": "सभी चुनें",
   "probableListDeselectAll": "सभी अचयनित करें",
   "probableListSelectedCount": "{count} आइटम चुने गए",
-  "@probableListSelectedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "probableListAddedCount": "{count} आइटम आपकी सूची में जोड़े गए",
-  "@probableListAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartSeeMore": "और देखें",
   "smartCartSuggestionsCount": "{count} सुझाव",
-  "@smartCartSuggestionsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartSuggestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddedCount": "{count} आइटम जोड़े गए",
-  "@smartCartAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingSocialAddProduct": "« {product} » मेरी सूची में जोड़ें",
-  "@shoppingSocialAddProduct": { "placeholders": { "product": { "type": "String" } } },
+  "@shoppingSocialAddProduct": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialDemoDataNote": "डेमो डेटा। असली ट्रेंड भविष्य के अपडेट में। कोई व्यक्तिगत डेटा साझा नहीं (GDPR)।",
   "shoppingSocialPopularRecipes": "लोकप्रिय रेसिपी",
   "shoppingSocialViewIngredients": "सामग्री देखें",

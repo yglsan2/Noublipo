@@ -9,10 +9,13 @@ class AppLocalizationsHu extends AppLocalizations {
   AppLocalizationsHu([String locale = 'hu']) : super(locale);
 
   @override
-  String get appTitle => 'NopList';
+  String get appTitle => 'Tote \'O Recall';
 
   @override
-  String get appTitlePlus => 'NopList+';
+  String get appTitlePlus => 'Tote \'O Recall+';
+
+  @override
+  String get appTagline => 'A lista, ami semmit sem felejt!';
 
   @override
   String get searchHint => 'Search in list';
@@ -445,7 +448,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get categoryLabel => 'Catégorie';
 
   @override
-  String get sortListLabel => 'List sort (NopList+)';
+  String get sortListLabel => 'List sort (Tote \'O Recall+)';
 
   @override
   String get sortOrder => 'Order';
@@ -622,7 +625,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get scanTitle => 'Scan';
 
   @override
-  String get scanAvailablePlus => 'Available in NopList+';
+  String get scanAvailablePlus => 'Available in Tote \'O Recall+';
 
   @override
   String get everyoneSeesSameList =>
@@ -801,7 +804,7 @@ class AppLocalizationsHu extends AppLocalizations {
       'Egyszerűsített nézet nagy gombokkal a boltban';
 
   @override
-  String get onboardingWelcome => 'Üdvözöljük a NopList-ban!';
+  String get onboardingWelcome => 'Üdvözöljük a Tote \'O Recall-ban!';
 
   @override
   String get onboardingWelcomeSubtitle =>
@@ -1218,7 +1221,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get errorGeneric => 'Hiba történt.';
 
   @override
-  String get paywallTitle => 'Passe à NopList+';
+  String get paywallTitle => 'Passe à Tote \'O Recall+';
 
   @override
   String get paywallSubtitle => 'Débloque tout le potentiel de ta liste';
@@ -1251,18 +1254,252 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get upgradePromptMessage =>
-      'Passe à NopList+ pour garder tes habitudes et débloquer l\'Aide course, la liste probable et la sync.';
+      'Passe à Tote \'O Recall+ pour garder tes habitudes et débloquer l\'Aide course, la liste probable et la sync.';
 
   @override
-  String get upgradePromptCta => 'Découvrir NopList+';
+  String get upgradePromptCta => 'Découvrir Tote \'O Recall+';
 
   @override
   String get upgradePromptLater => 'Plus tard';
 
   @override
-  String get trialGrantedTitle => '24h de NopList+ offertes !';
+  String get trialGrantedTitle => '24h de Tote \'O Recall+ offertes !';
 
   @override
   String get trialGrantedMessage =>
       'Tu as débloqué un essai gratuit. Profites-en pour tester l\'Aide course et la liste probable.';
+
+  @override
+  String get undo => 'Annuler';
+
+  @override
+  String get retry => 'Réessayer';
+
+  @override
+  String itemAdded(String name) {
+    return '« $name » ajouté';
+  }
+
+  @override
+  String get syncFailed => 'Synchronisation impossible. Vérifie ta connexion.';
+
+  @override
+  String get syncCancelled => 'Connexion annulée.';
+
+  @override
+  String get syncStatusOk => 'Synchronisé';
+
+  @override
+  String get syncStatusSyncing => 'Synchronisation…';
+
+  @override
+  String get syncStatusOffline => 'Hors ligne';
+
+  @override
+  String get syncStatusError => 'Erreur de sync';
+
+  @override
+  String scanProductNotFound(String name) {
+    return 'Produit inconnu — ajouté comme « $name »';
+  }
+
+  @override
+  String get scanFailed => 'Scan impossible. Réessaie.';
+
+  @override
+  String get scanCameraDenied =>
+      'Autorise la caméra pour scanner un code-barres.';
+
+  @override
+  String get purchaseSuccess => 'Tote \'O Recall+ activé. Merci !';
+
+  @override
+  String get purchaseCancelled => 'Achat annulé.';
+
+  @override
+  String get purchasePending => 'Achat en cours de validation…';
+
+  @override
+  String get purchaseRestoreSuccess => 'Achat restauré.';
+
+  @override
+  String get purchaseRestoreNone => 'Aucun achat à restaurer.';
+
+  @override
+  String get onboardingStepAddTitle => 'Ajoute des articles';
+
+  @override
+  String get onboardingStepAddBody =>
+      'Tape sur + pour ajouter ce dont tu as besoin. Simple et rapide.';
+
+  @override
+  String get onboardingStepCheckTitle => 'Coche en magasin';
+
+  @override
+  String get onboardingStepCheckBody =>
+      'Coche les articles au fur et à mesure. Glisse pour supprimer.';
+
+  @override
+  String get onboardingStepShareTitle => 'Partage ta liste';
+
+  @override
+  String get onboardingStepShareBody =>
+      'Invite un proche pour faire les courses à deux en temps réel.';
+
+  @override
+  String get onboardingStartEmpty => 'Commencer avec une liste vide';
+
+  @override
+  String get onboardingPickTemplate => 'Choisir un modèle';
+
+  @override
+  String get onboardingNext => 'Suivant';
+
+  @override
+  String get onboardingSkip => 'Passer';
+
+  @override
+  String get hintSync =>
+      'Connecte-toi pour synchroniser ta liste sur tous tes appareils.';
+
+  @override
+  String get hintScan =>
+      'Scanne un code-barres pour ajouter un produit rapidement.';
+
+  @override
+  String get hintSmartCart =>
+      'L\'Aide course te suggère ce qu\'il te manque selon tes habitudes.';
+
+  @override
+  String get hintGotIt => 'Compris';
+
+  @override
+  String get premiumFeatureLocked => 'Disponible avec Tote \'O Recall+';
+
+  @override
+  String get planningEmptyCta => 'Ajouter un rappel';
+
+  @override
+  String get birthdaysEmptyCta => 'Ajouter un anniversaire';
+
+  @override
+  String get settingsSaveFailed => 'Impossible d\'enregistrer ce réglage.';
+
+  @override
+  String mealPresetTitle(String label) {
+    return 'Liste « $label » ?';
+  }
+
+  @override
+  String mealPresetBody(int count) {
+    return 'Ajouter les $count articles typiques en un tap ?';
+  }
+
+  @override
+  String get mealPresetPremiumOnly =>
+      'Les listes repas express sont disponibles avec Tote \'O Recall+.';
+
+  @override
+  String get mealPresetAddAll => 'Tout ajouter';
+
+  @override
+  String get mealPresetAddSingle => 'Juste ce nom';
+
+  @override
+  String mealPresetAdded(int count, String label) {
+    return '$count articles ajoutés ($label)';
+  }
+
+  @override
+  String get budgetCeiling => 'Plafond budget (€)';
+
+  @override
+  String get budgetCeilingSubtitle =>
+      'Alerte si le total à acheter dépasse ce montant';
+
+  @override
+  String get budgetCeilingHint => 'Ex. 50';
+
+  @override
+  String budgetOverBanner(String total, String ceiling) {
+    return 'Budget dépassé : $total € / $ceiling €';
+  }
+
+  @override
+  String get recentItems => 'Récents';
+
+  @override
+  String recallDueCard(int count) {
+    return '$count article(s) à racheter ?';
+  }
+
+  @override
+  String get recallDueCardCta => 'Voir l\'Aide course';
+
+  @override
+  String get weeklyReminder => 'Rappel jour de courses';
+
+  @override
+  String get weeklyReminderSubtitle =>
+      'Notification hebdomadaire pour ne pas oublier ta liste';
+
+  @override
+  String get weeklyReminderDay => 'Jour';
+
+  @override
+  String get weeklyReminderTime => 'Heure';
+
+  @override
+  String get weeklyReminderMessage => 'N\'oublie pas ta liste Tote \'O Recall';
+
+  @override
+  String get weekdayMon => 'Lundi';
+
+  @override
+  String get weekdayTue => 'Mardi';
+
+  @override
+  String get weekdayWed => 'Mercredi';
+
+  @override
+  String get weekdayThu => 'Jeudi';
+
+  @override
+  String get weekdayFri => 'Vendredi';
+
+  @override
+  String get weekdaySat => 'Samedi';
+
+  @override
+  String get weekdaySun => 'Dimanche';
+
+  @override
+  String get dragToReorder => 'Glisse un article pour le déplacer';
+
+  @override
+  String get dragHandleTooltip => 'Déplacer';
+
+  @override
+  String get longPressToDelete => 'Appui long pour supprimer';
+
+  @override
+  String get orgModeLabel => 'Organisation';
+
+  @override
+  String get orgModeBubbles => 'Bulles';
+
+  @override
+  String get orgModeNumbered => 'Liste';
+
+  @override
+  String get orgModeManual => 'Perso';
+
+  @override
+  String get orgModeBubblesHint => 'Les bulles s’organisent toutes seules';
+
+  @override
+  String get orgModeNumberedHint => 'Liste numérotée';
+
+  @override
+  String get orgModeManualHint => 'Glisse pour ranger à ta façon';
 }

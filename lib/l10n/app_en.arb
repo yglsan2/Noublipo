@@ -1,7 +1,8 @@
 {
   "@@locale": "en",
-  "appTitle": "NopList",
-  "appTitlePlus": "NopList+",
+  "appTitle": "Tote 'O Recall",
+  "appTitlePlus": "Tote 'O Recall+",
+  "appTagline": "The list that never forgets!",
   "searchHint": "Search in list",
   "totalLabel": "Total",
   "addItem": "Add item",
@@ -136,10 +137,22 @@
   "listJoined": "List joined",
   "checkedItemsRemoved": "Checked items removed",
   "itemWillBeRemovedFromList": "\"{name}\" will be removed from the list.",
-  "@itemWillBeRemovedFromList": { "placeholders": { "name": { "type": "String" } } },
+  "@itemWillBeRemovedFromList": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "copyCode": "Copy code",
   "copyCodeLabel": "Copy code: {code}",
-  "@copyCodeLabel": { "placeholders": { "code": { "type": "String" } } },
+  "@copyCodeLabel": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
   "backToPersonalList": "Back to your personal list",
   "leaveSharedList": "Leave shared list",
   "leftListSnackbar": "Disconnected. List kept locally.",
@@ -148,7 +161,13 @@
   "syncEnabled": "Sync enabled",
   "signInWithGoogle": "Sign in with Google",
   "selectedCount": "{n} selected",
-  "@selectedCount": { "placeholders": { "n": { "type": "int" } } },
+  "@selectedCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "itemsDeleted": "Items deleted",
   "futurePurchases": "Future purchases",
   "listLabel": "List",
@@ -174,7 +193,7 @@
   "categoryDefinedByStoresBar": "Set by the stores bar at top",
   "tapSquareToSetStoreHint": "Tap a square at top to set the store or category.",
   "categoryLabel": "Category",
-  "sortListLabel": "List sort (NopList+)",
+  "sortListLabel": "List sort (Tote 'O Recall+)",
   "sortOrder": "Order",
   "sortName": "Name",
   "sortColor": "Color",
@@ -185,7 +204,16 @@
   "favoriteStoresSubtitle": "These aisles appear first",
   "partnerSuggestionTitle": "Suggestion",
   "partnerSuggestionMessage": "A partner added « {item} ». Add « {suggestion} » too?",
-  "@partnerSuggestionMessage": { "placeholders": { "item": { "type": "String" }, "suggestion": { "type": "String" } } },
+  "@partnerSuggestionMessage": {
+    "placeholders": {
+      "item": {
+        "type": "String"
+      },
+      "suggestion": {
+        "type": "String"
+      }
+    }
+  },
   "partnerSuggestionAdd": "Yes, add",
   "partnerSuggestionNo": "No",
   "showPrices": "Show prices and total",
@@ -198,9 +226,21 @@
   "noTemplates": "No templates. Save a list as template (⋮ menu).",
   "chooseTemplate": "Choose a template",
   "templateItemCount": "{count} item(s)",
-  "@templateItemCount": { "placeholders": { "count": { "type": "int" } } },
+  "@templateItemCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "listCreatedFromTemplate": "List \"{name}\" created",
-  "@listCreatedFromTemplate": { "placeholders": { "name": { "type": "String" } } },
+  "@listCreatedFromTemplate": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "newListTitle": "New list",
   "listNameHint": "List name",
   "createButton": "Create",
@@ -222,22 +262,52 @@
   "colorNameHint": "E.g. Carrefour, Fruit, Urgent. Items in this color will show this name.",
   "categoryNameHint": "Store or category name",
   "shareJoinMessage": "Join my real-time shopping list: {link}",
-  "@shareJoinMessage": { "placeholders": { "link": { "type": "String" } } },
+  "@shareJoinMessage": {
+    "placeholders": {
+      "link": {
+        "type": "String"
+      }
+    }
+  },
   "shareSubject": "List {appName}",
-  "@shareSubject": { "placeholders": { "appName": { "type": "String" } } },
+  "@shareSubject": {
+    "placeholders": {
+      "appName": {
+        "type": "String"
+      }
+    }
+  },
   "joinListHint": "Paste the link, 8-character code or ID to join the shared list.",
   "linkCodeHint": "Link, code (e.g. ABC12XYZ) or ID",
   "participantsCount": "{count} participant(s)",
-  "@participantsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@participantsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "import": "Import",
   "backupFileNotAccessible": "File not accessible (e.g. Web).",
   "backupImportError": "Import error: {error}",
-  "@backupImportError": { "placeholders": { "error": { "type": "String" } } },
+  "@backupImportError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "scanTitle": "Scan",
-  "scanAvailablePlus": "Available in NopList+",
+  "scanAvailablePlus": "Available in Tote 'O Recall+",
   "everyoneSeesSameList": "Everyone sees the same list and changes in real time.",
   "everyoneSeesSameListWithCount": "{count} participant(s) • Everyone sees the same list live.",
-  "@everyoneSeesSameListWithCount": { "placeholders": { "count": { "type": "int" } } },
+  "@everyoneSeesSameListWithCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "voiceUnavailable": "Voice input not available",
   "voiceError": "Voice input unavailable",
   "colorLabel": "Color",
@@ -246,18 +316,42 @@
   "linkCopiedBrowser": "Link copied: paste it in your browser.",
   "signInToJoinList": "Sign in with Google to join the list.",
   "cannotJoinList": "Cannot join: {error}",
-  "@cannotJoinList": { "placeholders": { "error": { "type": "String" } } },
+  "@cannotJoinList": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "autocompleteLabel": "Auto-completion",
   "autocompleteSubtitle": "Suggest items from the lexicon as you type (e.g. pu… → purée, pull)",
   "addForLater": "For later",
   "addForLaterSnackbar": "« {name} » added to list (pending)",
-  "@addForLaterSnackbar": { "placeholders": { "name": { "type": "String" } } },
+  "@addForLaterSnackbar": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "engagementDetectedTitle": "Implicit commitment detected",
   "engagementDetectedMessage": "Create a reminder for « {title} » in the Engagements list?",
-  "@engagementDetectedMessage": { "placeholders": { "title": { "type": "String" } } },
+  "@engagementDetectedMessage": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "createReminderButton": "Create reminder",
   "engagementReminderCreated": "Reminder created: « {title} »",
-  "@engagementReminderCreated": { "placeholders": { "title": { "type": "String" } } },
+  "@engagementReminderCreated": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "birthdaysTitle": "Birthdays",
   "birthdaysSubtitle": "Reminders 1–2 days before so you don't forget",
   "addBirthday": "Add birthday",
@@ -270,7 +364,13 @@
   "emptyBirthdays": "No birthdays. Add some to get an alert 1–2 days before.",
   "editBirthday": "Edit birthday",
   "deleteBirthdayConfirm": "Delete {name}'s birthday?",
-  "@deleteBirthdayConfirm": { "placeholders": { "name": { "type": "String" } } },
+  "@deleteBirthdayConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "celebrationTypeBirthday": "Birthday",
   "celebrationTypeWedding": "Wedding",
   "celebrationTypeMeeting": "Meeting anniversary",
@@ -278,34 +378,73 @@
   "birthdayYearOptional": "Year (optional, for age)",
   "celebrationTypeLabel": "Type",
   "ageYears": "{count} years",
-  "@ageYears": { "placeholders": { "count": { "type": "int" } } },
+  "@ageYears": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "alreadyBoughtValidate": "Already bought? Validate",
   "addToRecurring": "Add to recurring purchases",
   "recurringAddedSnackbar": "« {name} » set as recurring (reminder in 7 days)",
-  "@recurringAddedSnackbar": { "placeholders": { "name": { "type": "String" } } },
+  "@recurringAddedSnackbar": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "recurringTooltip": "Recurring purchase",
   "courseTerminee": "Shopping done",
   "courseTermineeConfirm": "Uncheck all items? You can start a fresh list.",
   "uncheckAll": "Uncheck all",
   "moveToFutureList": "Move to future purchases",
   "deleteOrMoveToFuture": "Delete « {name} » or move to future purchases?",
-  "@deleteOrMoveToFuture": { "placeholders": { "name": { "type": "String" } } },
+  "@deleteOrMoveToFuture": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "listFontScale": "List text size",
   "listFontScaleSubtitle": "Adjust for better readability",
   "shoppingMode": "Shopping mode",
   "shoppingModeSubtitle": "Simplified view with large buttons in store",
-  "onboardingWelcome": "Welcome to NopList",
+  "onboardingWelcome": "Welcome to Tote 'O Recall",
   "onboardingWelcomeSubtitle": "Start with an empty list or pick a template below.",
   "startEmpty": "Start with empty list",
   "progressCount": "{checked} / {total}",
-  "@progressCount": { "placeholders": { "checked": { "type": "int" }, "total": { "type": "int" } } },
+  "@progressCount": {
+    "placeholders": {
+      "checked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "sendLinkBy": "Send the link by message or email to invite",
   "syncConflictHint": "Possible conflict: changes have been merged.",
   "smartCartTitle": "Shopping assistant",
   "smartCartSubtitle": "Suggestions based on your habits and context",
   "smartCartDueTitle": "Habits",
   "smartCartDueMessage": "You haven't bought « {name} » for {days} day(s) (usually every {recurrence} days). Need it?",
-  "@smartCartDueMessage": { "placeholders": { "name": { "type": "String" }, "days": { "type": "int" }, "recurrence": { "type": "int" } } },
+  "@smartCartDueMessage": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      },
+      "recurrence": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddToList": "Yes, add",
   "smartCartNotThisTime": "Not this time",
   "smartCartContextTitle": "Context",
@@ -315,7 +454,13 @@
   "panicCheckoutTitle": "Check before checkout",
   "panicCheckoutSubtitle": "Did you remember everything?",
   "panicCheckoutUncheckedCount": "{count} unchecked item(s)",
-  "@panicCheckoutUncheckedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@panicCheckoutUncheckedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "panicCheckoutAddMissing": "Add missing items to list",
   "panicCheckoutAllGood": "All good, I'm going to pay",
   "panicCheckoutEmpty": "Nothing to check. You can go to checkout.",
@@ -324,7 +469,13 @@
   "streakCurrent": "Current streak",
   "streakBest": "Best",
   "streakCount": "{count} trip(s)",
-  "@streakCount": { "placeholders": { "count": { "type": "int" } } },
+  "@streakCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "badgeMemoryMaster": "Memory Master",
   "badgeMemoryMasterDesc": "5 trips in a row without forgetting",
   "badgeStreak10": "Champion",
@@ -339,7 +490,13 @@
   "statsZeroOubliSubtitle": "Trips with nothing moved to future list",
   "statsNoDataYet": "No data yet. Complete trips to see your stats.",
   "statsCountTimes": "{count} times",
-  "@statsCountTimes": { "placeholders": { "count": { "type": "int" } } },
+  "@statsCountTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "profileConsumptionTitle": "Consumption profile",
   "profileConsumptionSubtitle": "Diet, allergies, products to avoid. Optional and judgment-free.",
   "profileCoachMode": "Gentle coach mode",
@@ -380,14 +537,44 @@
   "profileTemptationSubstitute": "Suggested substitute (optional)",
   "profileAddTemptation": "Add a goal",
   "profileReduceWarning": "Goal in progress: reduce « {product} ». Add anyway this time?",
-  "@profileReduceWarning": { "placeholders": { "product": { "type": "String" } } },
+  "@profileReduceWarning": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "profileReduceWarningWithProgress": "Goal in progress: reduce « {product} ». Your progress: {percent} %. Add anyway this time?",
-  "@profileReduceWarningWithProgress": { "placeholders": { "product": { "type": "String" }, "percent": { "type": "int" } } },
+  "@profileReduceWarningWithProgress": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
   "profileSubstituteSuggestion": "For your « {product} » goal, we suggest « {substitute} » as an alternative. What do you prefer?",
-  "@profileSubstituteSuggestion": { "placeholders": { "product": { "type": "String" }, "substitute": { "type": "String" } } },
+  "@profileSubstituteSuggestion": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      },
+      "substitute": {
+        "type": "String"
+      }
+    }
+  },
   "profileAddAnyway": "Yes, add anyway",
   "profileReplaceWith": "Replace with « {name} »",
-  "@profileReplaceWith": { "placeholders": { "name": { "type": "String" } } },
+  "@profileReplaceWith": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "profileCancel": "Cancel",
   "statsPleasurePercent": "Where you're at (pleasure)",
   "statsPleasureSubtitle": "Progress toward your goals: share of snack / sweet-type purchases.",
@@ -406,22 +593,61 @@
   "shoppingSocialSubtitle": "Anonymized trends: what others buy (aggregated data, your list is not shared)",
   "shoppingSocialPopularNearby": "Popular near you",
   "shoppingSocialTrendThisWeek": "In your area, {percent}% of users buy « {product} » this week.",
-  "@shoppingSocialTrendThisWeek": { "placeholders": { "percent": { "type": "int" }, "product": { "type": "String" } } },
+  "@shoppingSocialTrendThisWeek": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialTrendsTitle": "Food trends (anonymized)",
   "probableListEmptyHint": "Add recurring items and complete shopping trips so the app learns your habits and can suggest a probable list.",
   "probableListSelectAll": "Select all",
   "probableListDeselectAll": "Deselect all",
   "probableListSelectedCount": "{count} item(s) selected",
-  "@probableListSelectedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "probableListAddedCount": "{count} item(s) added to your list",
-  "@probableListAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartSeeMore": "See more",
   "smartCartSuggestionsCount": "{count} suggestion(s)",
-  "@smartCartSuggestionsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartSuggestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddedCount": "{count} item(s) added",
-  "@smartCartAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingSocialAddProduct": "Add « {product} » to my list",
-  "@shoppingSocialAddProduct": { "placeholders": { "product": { "type": "String" } } },
+  "@shoppingSocialAddProduct": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialDemoDataNote": "Demo data. Real trends will come in a future update. No personal data is shared (GDPR).",
   "shoppingSocialPopularRecipes": "Popular recipes",
   "shoppingSocialViewIngredients": "View ingredients",
@@ -430,20 +656,127 @@
   "probableListFirstRunHint": "Confirm or adjust the suggested list based on your habits.",
   "shoppingSocialFirstRunHint": "Discover anonymized trends: no personal data is shared.",
   "errorGeneric": "An error occurred.",
-  "paywallTitle": "Upgrade to NopList+",
+  "paywallTitle": "Upgrade to Tote 'O Recall+",
   "paywallSubtitle": "Unlock your list's full potential",
   "paywallBenefitNoAds": "No ads, smooth experience",
   "paywallBenefitSmartCart": "Smart cart & probable list",
   "paywallBenefitSync": "Sync across all your devices",
   "paywallBenefitStats": "Stats, badges & gamification",
   "paywallCta": "Unlock for {price}",
-  "@paywallCta": { "placeholders": { "price": { "type": "String" } } },
+  "@paywallCta": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
   "paywallTrialCta": "Try 24h free",
   "paywallRestore": "Restore purchase",
   "upgradePromptTitle": "You're doing great!",
-  "upgradePromptMessage": "Upgrade to NopList+ to keep your habits and unlock Smart cart, probable list and sync.",
-  "upgradePromptCta": "Discover NopList+",
+  "upgradePromptMessage": "Upgrade to Tote 'O Recall+ to keep your habits and unlock Smart cart, probable list and sync.",
+  "upgradePromptCta": "Discover Tote 'O Recall+",
   "upgradePromptLater": "Later",
-  "trialGrantedTitle": "24h of NopList+ free!",
-  "trialGrantedMessage": "You've unlocked a free trial. Try Smart cart and probable list."
+  "trialGrantedTitle": "24h of Tote 'O Recall+ free!",
+  "trialGrantedMessage": "You've unlocked a free trial. Try Smart cart and probable list.",
+  "undo": "Undo",
+  "retry": "Retry",
+  "itemAdded": "« {name} » added",
+  "@itemAdded": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "syncFailed": "Sync failed. Check your connection.",
+  "syncCancelled": "Sign-in cancelled.",
+  "syncStatusOk": "Synced",
+  "syncStatusSyncing": "Syncing…",
+  "syncStatusOffline": "Offline",
+  "syncStatusError": "Sync error",
+  "scanProductNotFound": "Unknown product — added as « {name} »",
+  "@scanProductNotFound": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "scanFailed": "Scan failed. Try again.",
+  "scanCameraDenied": "Allow camera access to scan barcodes.",
+  "purchaseSuccess": "Tote 'O Recall+ is on. Thanks!",
+  "purchaseCancelled": "Purchase cancelled.",
+  "purchasePending": "Purchase pending…",
+  "purchaseRestoreSuccess": "Purchase restored.",
+  "purchaseRestoreNone": "Nothing to restore.",
+  "onboardingStepAddTitle": "Add items",
+  "onboardingStepAddBody": "Tap + to add what you need. Quick and simple.",
+  "onboardingStepCheckTitle": "Check off in store",
+  "onboardingStepCheckBody": "Tick items as you go. Swipe to delete.",
+  "onboardingStepShareTitle": "Share your list",
+  "onboardingStepShareBody": "Invite someone and shop together in real time.",
+  "onboardingStartEmpty": "Start with an empty list",
+  "onboardingPickTemplate": "Pick a template",
+  "onboardingNext": "Next",
+  "onboardingSkip": "Skip",
+  "hintSync": "Sign in to sync your list across devices.",
+  "hintScan": "Scan a barcode to add a product quickly.",
+  "hintSmartCart": "Smart cart suggests what you might be missing.",
+  "hintGotIt": "Got it",
+  "premiumFeatureLocked": "Available with Tote 'O Recall+",
+  "planningEmptyCta": "Add a reminder",
+  "birthdaysEmptyCta": "Add a birthday",
+  "settingsSaveFailed": "Couldn't save this setting.",
+  "mealPresetTitle": "« {label} » list?",
+  "@mealPresetTitle": {
+    "placeholders": { "label": { "type": "String" } }
+  },
+  "mealPresetBody": "Add the {count} typical items in one tap?",
+  "@mealPresetBody": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "mealPresetPremiumOnly": "Express meal lists are available with Tote 'O Recall+.",
+  "mealPresetAddAll": "Add all",
+  "mealPresetAddSingle": "Just this name",
+  "mealPresetAdded": "{count} items added ({label})",
+  "@mealPresetAdded": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "label": { "type": "String" }
+    }
+  },
+  "budgetCeiling": "Budget ceiling (€)",
+  "budgetCeilingSubtitle": "Warn when the to-buy total exceeds this amount",
+  "budgetCeilingHint": "e.g. 50",
+  "budgetOverBanner": "Over budget: {total} € / {ceiling} €",
+  "@budgetOverBanner": {
+    "placeholders": {
+      "total": { "type": "String" },
+      "ceiling": { "type": "String" }
+    }
+  },
+  "recentItems": "Recent",
+  "recallDueCard": "{count} item(s) to restock?",
+  "@recallDueCard": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "recallDueCardCta": "Open Smart cart",
+  "weeklyReminder": "Shopping day reminder",
+  "weeklyReminderSubtitle": "Weekly notification so you don't forget your list",
+  "weeklyReminderDay": "Day",
+  "weeklyReminderTime": "Time",
+  "weeklyReminderMessage": "Don't forget your Tote 'O Recall list",
+  "weekdayMon": "Monday",
+  "weekdayTue": "Tuesday",
+  "weekdayWed": "Wednesday",
+  "weekdayThu": "Thursday",
+  "weekdayFri": "Friday",
+  "weekdaySat": "Saturday",
+  "weekdaySun": "Sunday",
+  "dragToReorder": "Drag an item to move it",
+  "dragHandleTooltip": "Move",
+  "longPressToDelete": "Long-press to delete",
+  "orgModeLabel": "Layout",
+  "orgModeBubbles": "Bubbles",
+  "orgModeNumbered": "List",
+  "orgModeManual": "Custom",
+  "orgModeBubblesHint": "Bubbles pack themselves",
+  "orgModeNumberedHint": "Numbered list",
+  "orgModeManualHint": "Drag to arrange your way"
 }

@@ -49,8 +49,8 @@ class ReminderService {
       final id = _idFromItemId(itemId);
       final details = NotificationDetails(
         android: AndroidNotificationDetails(
-          'noublipo_reminders',
-          'Rappels Noubliepo!',
+          'toteo_reminders',
+          'Rappels Tote \'O Recall',
           channelDescription: 'Rappels par article',
           importance: Importance.defaultImportance,
         ),
@@ -79,7 +79,7 @@ class ReminderService {
     }
   }
 
-  /// Planifie un rappel pour un achat récurrent (Noublipo+) : notifie à [when].
+  /// Planifie un rappel pour un achat récurrent (Toteo+) : notifie à [when].
   Future<void> scheduleRecurringReminder(String recurringItemId, String name, DateTime when) async {
     if (!_initialized || when.isBefore(DateTime.now())) return;
     try {
@@ -87,7 +87,7 @@ class ReminderService {
       final id = _idFromRecurringId(recurringItemId);
       final details = NotificationDetails(
         android: AndroidNotificationDetails(
-          'noublipo_recurring',
+          'toteo_recurring',
           'Achats récurrents',
           channelDescription: 'Rappel pour achats à intervalle régulier',
           importance: Importance.defaultImportance,
@@ -134,7 +134,7 @@ class ReminderService {
       await _plugin.cancel(id);
       final details = NotificationDetails(
         android: AndroidNotificationDetails(
-          'noublipo_birthdays',
+          'toteo_birthdays',
           'Anniversaires',
           channelDescription: 'Rappels (J-1, J-2)',
           importance: Importance.defaultImportance,
@@ -166,6 +166,56 @@ class ReminderService {
       }
     } catch (e, stack) {
       AppLogger.warning('cancelBirthdayReminders', e, stack);
+    }
+  }
+
+  static const int _weeklyReminderId = 77001;
+
+  /// Planifie un rappel hebdomadaire (jour ISO 1=lun…7=dim + heure). Remplace le précédent.
+  Future<void> scheduleWeeklyShoppingReminder({
+    required int weekday,
+    required int hour,
+    required int minute,
+    required String title,
+    required String body,
+  }) async {
+    if (!_initialized) return;
+    try {
+      await _plugin.cancel(_weeklyReminderId);
+      final details = NotificationDetails(
+        android: AndroidNotificationDetails(
+          'toteo_weekly',
+          'Rappel courses',
+          channelDescription: 'Rappel hebdomadaire pour la liste',
+          importance: Importance.defaultImportance,
+        ),
+      );
+      final now = tz.TZDateTime.now(tz.local);
+      var next = tz.TZDateTime(tz.local, now.year, now.month, now.day, hour, minute);
+      // Dart DateTime.weekday: 1=Mon … 7=Sun (same as ISO)
+      while (next.weekday != weekday.clamp(1, 7) || !next.isAfter(now)) {
+        next = next.add(const Duration(days: 1));
+      }
+      await _plugin.zonedSchedule(
+        _weeklyReminderId,
+        title,
+        body,
+        next,
+        details,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+        matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
+      );
+    } catch (e, stack) {
+      AppLogger.warning('scheduleWeeklyShoppingReminder', e, stack);
+    }
+  }
+
+  Future<void> cancelWeeklyShoppingReminder() async {
+    try {
+      await _plugin.cancel(_weeklyReminderId);
+    } catch (e, stack) {
+      AppLogger.warning('cancelWeeklyShoppingReminder', e, stack);
     }
   }
 }

@@ -13,7 +13,7 @@ class PanicCheckoutSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!isNoublipoPlus) return const SizedBox.shrink();
+    if (!isToteoPlus) return const SizedBox.shrink();
     final listProvider = context.watch<ListProvider>();
     final unchecked = listProvider.items.where((e) => !e.checked).toList();
     final l10n = AppLocalizations.of(context);

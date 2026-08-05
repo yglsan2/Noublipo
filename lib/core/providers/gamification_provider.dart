@@ -6,7 +6,7 @@ import '../utils/app_logger.dart';
 import '../../app_config.dart';
 import 'premium_provider.dart';
 
-/// Streak « O oubli », badges et stats perso (Noublipo+).
+/// Streak « O oubli », badges et stats perso (Toteo+).
 class GamificationProvider extends ChangeNotifier {
   GamificationProvider(this._storage) {
     _load();

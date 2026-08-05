@@ -1,7 +1,8 @@
 {
   "@@locale": "fi",
-  "appTitle": "NopList",
-  "appTitlePlus": "NopList+",
+  "appTitle": "Tote 'O Recall",
+  "appTitlePlus": "Tote 'O Recall+",
+  "appTagline": "Lista, joka ei unohda mitään!",
   "searchHint": "Search in list",
   "totalLabel": "Total",
   "addItem": "Add item",
@@ -218,7 +219,7 @@
   "save": "Save",
   "saveAsTemplateTitle": "Save as template",
   "saveButton": "Save",
-  "scanAvailablePlus": "Available in NopList+",
+  "scanAvailablePlus": "Available in Tote 'O Recall+",
   "scanTitle": "Scan",
   "selectedCount": "{n} selected",
   "@selectedCount": {
@@ -256,7 +257,7 @@
   "signInGoogleToEnable": "Sign in with Google to enable",
   "signInWithGoogle": "Sign in with Google",
   "sortColor": "Color",
-  "sortListLabel": "List sort (NopList+)",
+  "sortListLabel": "List sort (Tote 'O Recall+)",
   "sortName": "Name",
   "sortOrder": "Order",
   "styleBar": "Bar",
@@ -301,16 +302,31 @@
   "uncheckAll": "Poista kaikki valinnat",
   "moveToFutureList": "Siirrä myöhemmät ostokset",
   "deleteOrMoveToFuture": "Poista « {name} » vai siirrä myöhemmät ostokset?",
-  "@deleteOrMoveToFuture": { "placeholders": { "name": { "type": "String" } } },
+  "@deleteOrMoveToFuture": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "listFontScale": "Listan tekstin koko",
   "listFontScaleSubtitle": "Säädä paremman luettavuuden vuoksi",
   "shoppingMode": "Ostostila",
   "shoppingModeSubtitle": "Yksinkertaistettu näkymä isoilla painikkeilla kaupassa",
-  "onboardingWelcome": "Tervetuloa NopListon!",
+  "onboardingWelcome": "Tervetuloa Tote 'O Recallon!",
   "onboardingWelcomeSubtitle": "Aloita tyhjällä listalla tai valitse malline alla.",
   "startEmpty": "Aloita tyhjällä listalla",
   "progressCount": "{checked} / {total}",
-  "@progressCount": { "placeholders": { "checked": { "type": "int" }, "total": { "type": "int" } } },
+  "@progressCount": {
+    "placeholders": {
+      "checked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "sendLinkBy": "Lähetä linkki viestillä tai sähköpostilla kutsua varten",
   "syncConflictHint": "Mahdollinen konflikti: muutokset on yhdistetty.",
   "statsMonthlyEvolution": "Kuukausikehitys",
@@ -326,22 +342,61 @@
   "shoppingSocialSubtitle": "Anonymisoidut trendit: mitä muut ostavat (yhteenvetodata, listaa ei jaeta)",
   "shoppingSocialPopularNearby": "Suosittu lähelläsi",
   "shoppingSocialTrendThisWeek": "Alueellasi {percent} % käyttäjistä ostaa « {product} » tällä viikolla.",
-  "@shoppingSocialTrendThisWeek": { "placeholders": { "percent": { "type": "int" }, "product": { "type": "String" } } },
+  "@shoppingSocialTrendThisWeek": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialTrendsTitle": "Ruokatrendit (anonymisoitu)",
   "probableListEmptyHint": "Lisää toistuvia ostoksia ja suorita ostokset loppuun, jotta sovellus oppii tavat ja ehdottaa todennäköistä listaa.",
   "probableListSelectAll": "Valitse kaikki",
   "probableListDeselectAll": "Poista valinta",
   "probableListSelectedCount": "{count} kohde(a) valittu",
-  "@probableListSelectedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "probableListAddedCount": "{count} kohde(a) lisätty listallesi",
-  "@probableListAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartSeeMore": "Näytä lisää",
   "smartCartSuggestionsCount": "{count} ehdotus(ta)",
-  "@smartCartSuggestionsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartSuggestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddedCount": "{count} kohde(a) lisätty",
-  "@smartCartAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingSocialAddProduct": "Lisää « {product} » listalleni",
-  "@shoppingSocialAddProduct": { "placeholders": { "product": { "type": "String" } } },
+  "@shoppingSocialAddProduct": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialDemoDataNote": "Esittelydata. Oikeat trendit tulevat myöhemmässä päivityksessä. Henkilötietoja ei jaeta (GDPR).",
   "shoppingSocialPopularRecipes": "Suositut reseptit",
   "shoppingSocialViewIngredients": "Näytä ainekset",

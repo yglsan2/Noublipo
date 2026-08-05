@@ -14,7 +14,7 @@ class ListTemplateItem {
       );
 }
 
-/// Modèle de liste enregistré par l'utilisateur (Noublipo+).
+/// Modèle de liste enregistré par l'utilisateur (Toteo+).
 class ListTemplate {
   final String id;
   String name;

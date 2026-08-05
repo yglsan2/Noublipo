@@ -1,7 +1,8 @@
 {
   "@@locale": "nb",
-  "appTitle": "NopList",
-  "appTitlePlus": "NopList+",
+  "appTitle": "Tote 'O Recall",
+  "appTitlePlus": "Tote 'O Recall+",
+  "appTagline": "Listen som aldri glemmer!",
   "searchHint": "Search in list",
   "totalLabel": "Total",
   "addItem": "Add item",
@@ -218,7 +219,7 @@
   "save": "Save",
   "saveAsTemplateTitle": "Save as template",
   "saveButton": "Save",
-  "scanAvailablePlus": "Available in NopList+",
+  "scanAvailablePlus": "Available in Tote 'O Recall+",
   "scanTitle": "Scan",
   "selectedCount": "{n} selected",
   "@selectedCount": {
@@ -256,7 +257,7 @@
   "signInGoogleToEnable": "Sign in with Google to enable",
   "signInWithGoogle": "Sign in with Google",
   "sortColor": "Color",
-  "sortListLabel": "List sort (NopList+)",
+  "sortListLabel": "List sort (Tote 'O Recall+)",
   "sortName": "Name",
   "sortOrder": "Order",
   "styleBar": "Bar",
@@ -301,16 +302,31 @@
   "uncheckAll": "Fjern alle",
   "moveToFutureList": "Flytt til senere kjøp",
   "deleteOrMoveToFuture": "Slette « {name} » eller flytte til senere kjøp?",
-  "@deleteOrMoveToFuture": { "placeholders": { "name": { "type": "String" } } },
+  "@deleteOrMoveToFuture": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "listFontScale": "Listens skriftstørrelse",
   "listFontScaleSubtitle": "Juster for bedre lesbarhet",
   "shoppingMode": "Handelsmodus",
   "shoppingModeSubtitle": "Forenklet visning med store knapper i butikken",
-  "onboardingWelcome": "Velkommen til NopList",
+  "onboardingWelcome": "Velkommen til Tote 'O Recall",
   "onboardingWelcomeSubtitle": "Start med en tom liste eller velg en mal nedenfor.",
   "startEmpty": "Start med tom liste",
   "progressCount": "{checked} / {total}",
-  "@progressCount": { "placeholders": { "checked": { "type": "int" }, "total": { "type": "int" } } },
+  "@progressCount": {
+    "placeholders": {
+      "checked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "sendLinkBy": "Send lenken via melding eller e-post for å invitere",
   "syncConflictHint": "Mulig konflikt: endringer er slått sammen.",
   "statsMonthlyEvolution": "Månedlig utvikling",
@@ -326,22 +342,61 @@
   "shoppingSocialSubtitle": "Anonymiserte trender: hva andre kjøper (aggregerte data, listen din deles ikke)",
   "shoppingSocialPopularNearby": "Populært nær deg",
   "shoppingSocialTrendThisWeek": "I ditt område kjøper {percent} % av brukerne « {product} » denne uken.",
-  "@shoppingSocialTrendThisWeek": { "placeholders": { "percent": { "type": "int" }, "product": { "type": "String" } } },
+  "@shoppingSocialTrendThisWeek": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialTrendsTitle": "Mattrender (anonymisert)",
   "probableListEmptyHint": "Legg til gjentakende kjøp og fullfør handleturer slik at appen lærer vanene dine og foreslår en sannsynlig liste.",
   "probableListSelectAll": "Velg alle",
   "probableListDeselectAll": "Fjern valg",
   "probableListSelectedCount": "{count} vare(r) valgt",
-  "@probableListSelectedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "probableListAddedCount": "{count} vare(r) lagt til i listen din",
-  "@probableListAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartSeeMore": "Se mer",
   "smartCartSuggestionsCount": "{count} forslag",
-  "@smartCartSuggestionsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartSuggestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddedCount": "{count} vare(r) lagt til",
-  "@smartCartAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingSocialAddProduct": "Legg til « {product} » i listen min",
-  "@shoppingSocialAddProduct": { "placeholders": { "product": { "type": "String" } } },
+  "@shoppingSocialAddProduct": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialDemoDataNote": "Demodata. Reelle trender i en fremtidig oppdatering. Ingen personopplysninger deles (GDPR).",
   "shoppingSocialPopularRecipes": "Populære oppskrifter",
   "shoppingSocialViewIngredients": "Se ingredienser",

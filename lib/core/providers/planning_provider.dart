@@ -50,7 +50,7 @@ class PlanningProvider extends ChangeNotifier {
       ..[idx] = item.copyWith(lastCheckedAt: now);
     await _storage.saveRecurringItems(_recurringItems);
     final rem = _reminder;
-    if (isNoublipoPlus && rem != null) {
+    if (isToteoPlus && rem != null) {
       final nextWhen = DateTime.now().add(Duration(days: item.recurrenceDays));
       await rem.scheduleRecurringReminder(item.id, item.name, nextWhen);
     }
@@ -69,7 +69,7 @@ class PlanningProvider extends ChangeNotifier {
     _recurringItems = [..._recurringItems, item];
     await _storage.saveRecurringItems(_recurringItems);
     final rem = _reminder;
-    if (isNoublipoPlus && rem != null) {
+    if (isToteoPlus && rem != null) {
       final when = DateTime.now().add(Duration(days: item.recurrenceDays));
       await rem.scheduleRecurringReminder(item.id, item.name, when);
     }
@@ -94,7 +94,7 @@ class PlanningProvider extends ChangeNotifier {
 
   Future<void> removeRecurringItem(String id) async {
     final rem = _reminder;
-    if (isNoublipoPlus && rem != null) {
+    if (isToteoPlus && rem != null) {
       await rem.cancelRecurringReminder(id);
     }
     _recurringItems = _recurringItems.where((e) => e.id != id).toList();
@@ -126,10 +126,10 @@ class PlanningProvider extends ChangeNotifier {
   /// Recharge (ex. après retour sur l'écran).
   Future<void> refresh() async => _load();
 
-  /// Planifie les rappels pour les récurrents dus (Noublipo+). À appeler au démarrage de l'app.
+  /// Planifie les rappels pour les récurrents dus (Toteo+). À appeler au démarrage de l'app.
   Future<void> scheduleDueRecurringReminders() async {
     final rem = _reminder;
-    if (!isNoublipoPlus || rem == null) return;
+    if (!isToteoPlus || rem == null) return;
     for (final item in _recurringItems) {
       if (!item.isDue) continue;
       final when = DateTime.now().add(const Duration(minutes: 5));

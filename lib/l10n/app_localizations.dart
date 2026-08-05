@@ -177,14 +177,20 @@ abstract class AppLocalizations {
   /// No description provided for @appTitle.
   ///
   /// In fr, this message translates to:
-  /// **'NopList'**
+  /// **'Tote \'O Recall'**
   String get appTitle;
 
   /// No description provided for @appTitlePlus.
   ///
   /// In fr, this message translates to:
-  /// **'NopList+'**
+  /// **'Tote \'O Recall+'**
   String get appTitlePlus;
+
+  /// No description provided for @appTagline.
+  ///
+  /// In fr, this message translates to:
+  /// **'La liste qui n\'oublie rien !'**
+  String get appTagline;
 
   /// No description provided for @searchHint.
   ///
@@ -993,7 +999,7 @@ abstract class AppLocalizations {
   /// No description provided for @sortListLabel.
   ///
   /// In fr, this message translates to:
-  /// **'Tri de la liste (NopList+)'**
+  /// **'Tri de la liste (Tote \'O Recall+)'**
   String get sortListLabel;
 
   /// No description provided for @sortOrder.
@@ -1311,7 +1317,7 @@ abstract class AppLocalizations {
   /// No description provided for @scanAvailablePlus.
   ///
   /// In fr, this message translates to:
-  /// **'Disponible en NopList+'**
+  /// **'Disponible en Tote \'O Recall+'**
   String get scanAvailablePlus;
 
   /// No description provided for @everyoneSeesSameList.
@@ -1617,7 +1623,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingWelcome.
   ///
   /// In fr, this message translates to:
-  /// **'Bienvenue dans NopList !'**
+  /// **'Bienvenue dans Tote \'O Recall !'**
   String get onboardingWelcome;
 
   /// No description provided for @onboardingWelcomeSubtitle.
@@ -2343,7 +2349,7 @@ abstract class AppLocalizations {
   /// No description provided for @paywallTitle.
   ///
   /// In fr, this message translates to:
-  /// **'Passe à NopList+'**
+  /// **'Passe à Tote \'O Recall+'**
   String get paywallTitle;
 
   /// No description provided for @paywallSubtitle.
@@ -2403,13 +2409,13 @@ abstract class AppLocalizations {
   /// No description provided for @upgradePromptMessage.
   ///
   /// In fr, this message translates to:
-  /// **'Passe à NopList+ pour garder tes habitudes et débloquer l\'Aide course, la liste probable et la sync.'**
+  /// **'Passe à Tote \'O Recall+ pour garder tes habitudes et débloquer l\'Aide course, la liste probable et la sync.'**
   String get upgradePromptMessage;
 
   /// No description provided for @upgradePromptCta.
   ///
   /// In fr, this message translates to:
-  /// **'Découvrir NopList+'**
+  /// **'Découvrir Tote \'O Recall+'**
   String get upgradePromptCta;
 
   /// No description provided for @upgradePromptLater.
@@ -2421,7 +2427,7 @@ abstract class AppLocalizations {
   /// No description provided for @trialGrantedTitle.
   ///
   /// In fr, this message translates to:
-  /// **'24h de NopList+ offertes !'**
+  /// **'24h de Tote \'O Recall+ offertes !'**
   String get trialGrantedTitle;
 
   /// No description provided for @trialGrantedMessage.
@@ -2429,6 +2435,426 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Tu as débloqué un essai gratuit. Profites-en pour tester l\'Aide course et la liste probable.'**
   String get trialGrantedMessage;
+
+  /// No description provided for @undo.
+  ///
+  /// In fr, this message translates to:
+  /// **'Annuler'**
+  String get undo;
+
+  /// No description provided for @retry.
+  ///
+  /// In fr, this message translates to:
+  /// **'Réessayer'**
+  String get retry;
+
+  /// No description provided for @itemAdded.
+  ///
+  /// In fr, this message translates to:
+  /// **'« {name} » ajouté'**
+  String itemAdded(String name);
+
+  /// No description provided for @syncFailed.
+  ///
+  /// In fr, this message translates to:
+  /// **'Synchronisation impossible. Vérifie ta connexion.'**
+  String get syncFailed;
+
+  /// No description provided for @syncCancelled.
+  ///
+  /// In fr, this message translates to:
+  /// **'Connexion annulée.'**
+  String get syncCancelled;
+
+  /// No description provided for @syncStatusOk.
+  ///
+  /// In fr, this message translates to:
+  /// **'Synchronisé'**
+  String get syncStatusOk;
+
+  /// No description provided for @syncStatusSyncing.
+  ///
+  /// In fr, this message translates to:
+  /// **'Synchronisation…'**
+  String get syncStatusSyncing;
+
+  /// No description provided for @syncStatusOffline.
+  ///
+  /// In fr, this message translates to:
+  /// **'Hors ligne'**
+  String get syncStatusOffline;
+
+  /// No description provided for @syncStatusError.
+  ///
+  /// In fr, this message translates to:
+  /// **'Erreur de sync'**
+  String get syncStatusError;
+
+  /// No description provided for @scanProductNotFound.
+  ///
+  /// In fr, this message translates to:
+  /// **'Produit inconnu — ajouté comme « {name} »'**
+  String scanProductNotFound(String name);
+
+  /// No description provided for @scanFailed.
+  ///
+  /// In fr, this message translates to:
+  /// **'Scan impossible. Réessaie.'**
+  String get scanFailed;
+
+  /// No description provided for @scanCameraDenied.
+  ///
+  /// In fr, this message translates to:
+  /// **'Autorise la caméra pour scanner un code-barres.'**
+  String get scanCameraDenied;
+
+  /// No description provided for @purchaseSuccess.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tote \'O Recall+ activé. Merci !'**
+  String get purchaseSuccess;
+
+  /// No description provided for @purchaseCancelled.
+  ///
+  /// In fr, this message translates to:
+  /// **'Achat annulé.'**
+  String get purchaseCancelled;
+
+  /// No description provided for @purchasePending.
+  ///
+  /// In fr, this message translates to:
+  /// **'Achat en cours de validation…'**
+  String get purchasePending;
+
+  /// No description provided for @purchaseRestoreSuccess.
+  ///
+  /// In fr, this message translates to:
+  /// **'Achat restauré.'**
+  String get purchaseRestoreSuccess;
+
+  /// No description provided for @purchaseRestoreNone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun achat à restaurer.'**
+  String get purchaseRestoreNone;
+
+  /// No description provided for @onboardingStepAddTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajoute des articles'**
+  String get onboardingStepAddTitle;
+
+  /// No description provided for @onboardingStepAddBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tape sur + pour ajouter ce dont tu as besoin. Simple et rapide.'**
+  String get onboardingStepAddBody;
+
+  /// No description provided for @onboardingStepCheckTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coche en magasin'**
+  String get onboardingStepCheckTitle;
+
+  /// No description provided for @onboardingStepCheckBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Coche les articles au fur et à mesure. Glisse pour supprimer.'**
+  String get onboardingStepCheckBody;
+
+  /// No description provided for @onboardingStepShareTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Partage ta liste'**
+  String get onboardingStepShareTitle;
+
+  /// No description provided for @onboardingStepShareBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Invite un proche pour faire les courses à deux en temps réel.'**
+  String get onboardingStepShareBody;
+
+  /// No description provided for @onboardingStartEmpty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Commencer avec une liste vide'**
+  String get onboardingStartEmpty;
+
+  /// No description provided for @onboardingPickTemplate.
+  ///
+  /// In fr, this message translates to:
+  /// **'Choisir un modèle'**
+  String get onboardingPickTemplate;
+
+  /// No description provided for @onboardingNext.
+  ///
+  /// In fr, this message translates to:
+  /// **'Suivant'**
+  String get onboardingNext;
+
+  /// No description provided for @onboardingSkip.
+  ///
+  /// In fr, this message translates to:
+  /// **'Passer'**
+  String get onboardingSkip;
+
+  /// No description provided for @hintSync.
+  ///
+  /// In fr, this message translates to:
+  /// **'Connecte-toi pour synchroniser ta liste sur tous tes appareils.'**
+  String get hintSync;
+
+  /// No description provided for @hintScan.
+  ///
+  /// In fr, this message translates to:
+  /// **'Scanne un code-barres pour ajouter un produit rapidement.'**
+  String get hintScan;
+
+  /// No description provided for @hintSmartCart.
+  ///
+  /// In fr, this message translates to:
+  /// **'L\'Aide course te suggère ce qu\'il te manque selon tes habitudes.'**
+  String get hintSmartCart;
+
+  /// No description provided for @hintGotIt.
+  ///
+  /// In fr, this message translates to:
+  /// **'Compris'**
+  String get hintGotIt;
+
+  /// No description provided for @premiumFeatureLocked.
+  ///
+  /// In fr, this message translates to:
+  /// **'Disponible avec Tote \'O Recall+'**
+  String get premiumFeatureLocked;
+
+  /// No description provided for @planningEmptyCta.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter un rappel'**
+  String get planningEmptyCta;
+
+  /// No description provided for @birthdaysEmptyCta.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter un anniversaire'**
+  String get birthdaysEmptyCta;
+
+  /// No description provided for @settingsSaveFailed.
+  ///
+  /// In fr, this message translates to:
+  /// **'Impossible d\'enregistrer ce réglage.'**
+  String get settingsSaveFailed;
+
+  /// No description provided for @mealPresetTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Liste « {label} » ?'**
+  String mealPresetTitle(String label);
+
+  /// No description provided for @mealPresetBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter les {count} articles typiques en un tap ?'**
+  String mealPresetBody(int count);
+
+  /// No description provided for @mealPresetPremiumOnly.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les listes repas express sont disponibles avec Tote \'O Recall+.'**
+  String get mealPresetPremiumOnly;
+
+  /// No description provided for @mealPresetAddAll.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tout ajouter'**
+  String get mealPresetAddAll;
+
+  /// No description provided for @mealPresetAddSingle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Juste ce nom'**
+  String get mealPresetAddSingle;
+
+  /// No description provided for @mealPresetAdded.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count} articles ajoutés ({label})'**
+  String mealPresetAdded(int count, String label);
+
+  /// No description provided for @budgetCeiling.
+  ///
+  /// In fr, this message translates to:
+  /// **'Plafond budget (€)'**
+  String get budgetCeiling;
+
+  /// No description provided for @budgetCeilingSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Alerte si le total à acheter dépasse ce montant'**
+  String get budgetCeilingSubtitle;
+
+  /// No description provided for @budgetCeilingHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ex. 50'**
+  String get budgetCeilingHint;
+
+  /// No description provided for @budgetOverBanner.
+  ///
+  /// In fr, this message translates to:
+  /// **'Budget dépassé : {total} € / {ceiling} €'**
+  String budgetOverBanner(String total, String ceiling);
+
+  /// No description provided for @recentItems.
+  ///
+  /// In fr, this message translates to:
+  /// **'Récents'**
+  String get recentItems;
+
+  /// No description provided for @recallDueCard.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count} article(s) à racheter ?'**
+  String recallDueCard(int count);
+
+  /// No description provided for @recallDueCardCta.
+  ///
+  /// In fr, this message translates to:
+  /// **'Voir l\'Aide course'**
+  String get recallDueCardCta;
+
+  /// No description provided for @weeklyReminder.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rappel jour de courses'**
+  String get weeklyReminder;
+
+  /// No description provided for @weeklyReminderSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Notification hebdomadaire pour ne pas oublier ta liste'**
+  String get weeklyReminderSubtitle;
+
+  /// No description provided for @weeklyReminderDay.
+  ///
+  /// In fr, this message translates to:
+  /// **'Jour'**
+  String get weeklyReminderDay;
+
+  /// No description provided for @weeklyReminderTime.
+  ///
+  /// In fr, this message translates to:
+  /// **'Heure'**
+  String get weeklyReminderTime;
+
+  /// No description provided for @weeklyReminderMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'N\'oublie pas ta liste Tote \'O Recall'**
+  String get weeklyReminderMessage;
+
+  /// No description provided for @weekdayMon.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lundi'**
+  String get weekdayMon;
+
+  /// No description provided for @weekdayTue.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mardi'**
+  String get weekdayTue;
+
+  /// No description provided for @weekdayWed.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mercredi'**
+  String get weekdayWed;
+
+  /// No description provided for @weekdayThu.
+  ///
+  /// In fr, this message translates to:
+  /// **'Jeudi'**
+  String get weekdayThu;
+
+  /// No description provided for @weekdayFri.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vendredi'**
+  String get weekdayFri;
+
+  /// No description provided for @weekdaySat.
+  ///
+  /// In fr, this message translates to:
+  /// **'Samedi'**
+  String get weekdaySat;
+
+  /// No description provided for @weekdaySun.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dimanche'**
+  String get weekdaySun;
+
+  /// No description provided for @dragToReorder.
+  ///
+  /// In fr, this message translates to:
+  /// **'Glisse un article pour le déplacer'**
+  String get dragToReorder;
+
+  /// No description provided for @dragHandleTooltip.
+  ///
+  /// In fr, this message translates to:
+  /// **'Déplacer'**
+  String get dragHandleTooltip;
+
+  /// No description provided for @longPressToDelete.
+  ///
+  /// In fr, this message translates to:
+  /// **'Appui long pour supprimer'**
+  String get longPressToDelete;
+
+  /// No description provided for @orgModeLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Organisation'**
+  String get orgModeLabel;
+
+  /// No description provided for @orgModeBubbles.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bulles'**
+  String get orgModeBubbles;
+
+  /// No description provided for @orgModeNumbered.
+  ///
+  /// In fr, this message translates to:
+  /// **'Liste'**
+  String get orgModeNumbered;
+
+  /// No description provided for @orgModeManual.
+  ///
+  /// In fr, this message translates to:
+  /// **'Perso'**
+  String get orgModeManual;
+
+  /// No description provided for @orgModeBubblesHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Les bulles s’organisent toutes seules'**
+  String get orgModeBubblesHint;
+
+  /// No description provided for @orgModeNumberedHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Liste numérotée'**
+  String get orgModeNumberedHint;
+
+  /// No description provided for @orgModeManualHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Glisse pour ranger à ta façon'**
+  String get orgModeManualHint;
 }
 
 class _AppLocalizationsDelegate

@@ -2,13 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:noublipo/main.dart';
-import 'package:noublipo/core/providers/category_names_provider.dart';
-import 'package:noublipo/core/providers/list_provider.dart';
-import 'package:noublipo/core/providers/planning_provider.dart';
-import 'package:noublipo/core/providers/settings_provider.dart';
-import 'package:noublipo/core/services/reminder_service.dart';
-import 'package:noublipo/core/services/storage_service.dart';
+import 'package:toteo/main.dart';
+import 'package:toteo/core/providers/category_names_provider.dart';
+import 'package:toteo/core/providers/list_provider.dart';
+import 'package:toteo/core/providers/planning_provider.dart';
+import 'package:toteo/core/providers/settings_provider.dart';
+import 'package:toteo/core/services/reminder_service.dart';
+import 'package:toteo/core/services/storage_service.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -39,7 +39,7 @@ void main() {
             create: (_) => SettingsProvider(storage),
           ),
         ],
-        child: const NoublipoApp(),
+        child: const ToteoApp(),
       ),
     );
     await tester.pumpAndSettle();
@@ -73,7 +73,7 @@ void main() {
             create: (_) => SettingsProvider(storage),
           ),
         ],
-        child: const NoublipoApp(),
+        child: const ToteoApp(),
       ),
     );
     await tester.pump();

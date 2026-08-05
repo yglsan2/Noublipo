@@ -1,4 +1,4 @@
-package com.noublipo.noublipo
+package com.toteo.toteo
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -14,7 +14,7 @@ import es.antonborri.home_widget.HomeWidgetProvider
  * - Grand (hauteur ≥ 120 dp) : en plus les 5 premiers articles non cochés.
  * Un tap ouvre l'app (quick add).
  */
-class NoublipoWidgetProvider : HomeWidgetProvider() {
+class ToteoWidgetProvider : HomeWidgetProvider() {
 
     override fun onUpdate(
         context: Context,
@@ -25,7 +25,7 @@ class NoublipoWidgetProvider : HomeWidgetProvider() {
         val listName = widgetData.getString(KEY_LIST_NAME, "Ma liste") ?: "Ma liste"
         val unchecked = widgetData.getInt(KEY_UNCHECKED_COUNT, 0)
         val countText = if (unchecked == 1) "1 article à acheter" else "$unchecked articles à acheter"
-        val quickAddIntent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse("noublipo://quick_add")).apply {
+        val quickAddIntent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse("toteo://quick_add")).apply {
             setClass(context, MainActivity::class.java)
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         }
@@ -36,7 +36,7 @@ class NoublipoWidgetProvider : HomeWidgetProvider() {
             val minHeightDp = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT)
             val useLargeLayout = minHeightDp >= 120
 
-            val layoutId = if (useLargeLayout) R.layout.noublipo_widget_large else R.layout.noublipo_widget
+            val layoutId = if (useLargeLayout) R.layout.toteo_widget_large else R.layout.toteo_widget
             val views = RemoteViews(context.packageName, layoutId).apply {
                 setTextViewText(R.id.widget_list_name, listName)
                 setTextViewText(R.id.widget_item_count, countText)

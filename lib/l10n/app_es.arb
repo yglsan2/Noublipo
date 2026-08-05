@@ -1,7 +1,8 @@
 {
   "@@locale": "es",
-  "appTitle": "NopList",
-  "appTitlePlus": "NopList+",
+  "appTitle": "Tote 'O Recall",
+  "appTitlePlus": "Tote 'O Recall+",
+  "appTagline": "¡La lista que no olvida nada!",
   "searchHint": "Buscar en la lista",
   "totalLabel": "Total",
   "addItem": "Añadir artículo",
@@ -218,7 +219,7 @@
   "save": "Save",
   "saveAsTemplateTitle": "Save as template",
   "saveButton": "Save",
-  "scanAvailablePlus": "Available in NopList+",
+  "scanAvailablePlus": "Disponible en Tote 'O Recall+",
   "scanTitle": "Scan",
   "selectedCount": "{n} selected",
   "@selectedCount": {
@@ -256,7 +257,7 @@
   "signInGoogleToEnable": "Sign in with Google to enable",
   "signInWithGoogle": "Sign in with Google",
   "sortColor": "Color",
-  "sortListLabel": "List sort (NopList+)",
+  "sortListLabel": "Orden de la lista (Tote 'O Recall+)",
   "sortName": "Name",
   "sortOrder": "Order",
   "styleBar": "Bar",
@@ -301,16 +302,31 @@
   "uncheckAll": "Desmarcar todo",
   "moveToFutureList": "Mover a compras futuras",
   "deleteOrMoveToFuture": "¿Eliminar « {name} » o moverlo a compras futuras?",
-  "@deleteOrMoveToFuture": { "placeholders": { "name": { "type": "String" } } },
+  "@deleteOrMoveToFuture": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "listFontScale": "Tamaño del texto de la lista",
   "listFontScaleSubtitle": "Ajustar para una mejor lectura",
   "shoppingMode": "Modo compra",
   "shoppingModeSubtitle": "Vista simplificada con botones grandes en la tienda",
-  "onboardingWelcome": "Bienvenido a NopList",
+  "onboardingWelcome": "¡Bienvenido a Tote 'O Recall!",
   "onboardingWelcomeSubtitle": "Empieza con una lista vacía o elige una plantilla abajo.",
   "startEmpty": "Empezar con lista vacía",
   "progressCount": "{checked} / {total}",
-  "@progressCount": { "placeholders": { "checked": { "type": "int" }, "total": { "type": "int" } } },
+  "@progressCount": {
+    "placeholders": {
+      "checked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "sendLinkBy": "Envía el enlace por mensaje o correo para invitar",
   "syncConflictHint": "Posible conflicto: los cambios se han fusionado.",
   "statsMonthlyEvolution": "Evolución mensual",
@@ -326,22 +342,61 @@
   "shoppingSocialSubtitle": "Tendencias anónimas: qué compran otros (datos agregados, tu lista no se comparte)",
   "shoppingSocialPopularNearby": "Popular cerca de ti",
   "shoppingSocialTrendThisWeek": "En tu zona, el {percent} % de los usuarios compran « {product} » esta semana.",
-  "@shoppingSocialTrendThisWeek": { "placeholders": { "percent": { "type": "int" }, "product": { "type": "String" } } },
+  "@shoppingSocialTrendThisWeek": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialTrendsTitle": "Tendencias alimentarias (anónimas)",
   "probableListEmptyHint": "Añade compras recurrentes y termina cursos para que la app aprenda tus hábitos y te proponga una lista probable.",
   "probableListSelectAll": "Seleccionar todo",
   "probableListDeselectAll": "Deseleccionar todo",
   "probableListSelectedCount": "{count} artículo(s) seleccionado(s)",
-  "@probableListSelectedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "probableListAddedCount": "{count} artículo(s) añadido(s) a tu lista",
-  "@probableListAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartSeeMore": "Ver más",
   "smartCartSuggestionsCount": "{count} sugerencia(s)",
-  "@smartCartSuggestionsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartSuggestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddedCount": "{count} artículo(s) añadido(s)",
-  "@smartCartAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingSocialAddProduct": "Añadir « {product} » a mi lista",
-  "@shoppingSocialAddProduct": { "placeholders": { "product": { "type": "String" } } },
+  "@shoppingSocialAddProduct": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialDemoDataNote": "Datos de demostración. Las tendencias reales llegarán en una futura actualización. No se comparten datos personales (RGPD).",
   "shoppingSocialPopularRecipes": "Recetas populares",
   "shoppingSocialViewIngredients": "Ver ingredientes",
@@ -349,5 +404,9 @@
   "proBadge": "Pro",
   "probableListFirstRunHint": "Confirma o modifica la lista propuesta según tus hábitos.",
   "shoppingSocialFirstRunHint": "Descubre tendencias anónimas: no se comparten datos personales.",
-  "errorGeneric": "Se ha producido un error."
+  "errorGeneric": "Se ha producido un error.",
+  "paywallTitle": "Pasa a Tote 'O Recall+",
+  "upgradePromptMessage": "Pasa a Tote 'O Recall+ para guardar tus hábitos y desbloquear el carrito inteligente, la lista probable y la sync.",
+  "upgradePromptCta": "Descubrir Tote 'O Recall+",
+  "trialGrantedTitle": "¡24 h de Tote 'O Recall+ de regalo!"
 }

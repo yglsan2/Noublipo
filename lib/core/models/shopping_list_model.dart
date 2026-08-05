@@ -1,6 +1,6 @@
 import 'shopping_item.dart';
 
-/// Une liste de courses (une seule pour Noublipo, plusieurs pour Noublipo+).
+/// Une liste de courses (une seule pour Toteo, plusieurs pour Toteo+).
 class ShoppingListModel {
   final String id;
   String name;
@@ -8,7 +8,7 @@ class ShoppingListModel {
   int order;
   /// Date prévue pour faire ces courses (timestamp ms), null = non planifiée.
   int? plannedDate;
-  /// ID du groupe (Noublipo+), null = sans groupe.
+  /// ID du groupe (Toteo+), null = sans groupe.
   String? groupId;
 
   ShoppingListModel({
@@ -69,6 +69,6 @@ class ShoppingListModel {
 const String kAchatsFutursListId = 'achats_futurs';
 const String kAchatsFutursListName = 'Achats futurs';
 
-/// ID réservé pour la liste "Engagements" (rappel d'engagements implicites, Noublipo+).
+/// ID réservé pour la liste "Engagements" (rappel d'engagements implicites, Toteo+).
 const String kEngagementsListId = 'engagements';
 const String kEngagementsListName = 'Engagements';

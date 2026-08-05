@@ -1,11 +1,11 @@
-# Publication Play Store — NopList
+# Publication Play Store — Tote 'O Recall
 
-Checklist et textes pour publier `com.noublipo.noublipo` (flavor `noublipo`, freemium).
+Checklist et textes pour publier `com.toteo.toteo` (flavor `toteo`, freemium).
 
 ## Prérequis comptes (à faire une fois)
 
 1. **Google Play Console** — compte développeur (frais unique).
-2. **Firebase** — créer un projet réel, remplacer `android/app/google-services.json` (ne plus utiliser `noublipo-placeholder`).
+2. **Firebase** — créer un projet réel, remplacer `android/app/google-services.json` (ne plus utiliser `toteo-placeholder`).
 3. **AdMob** — créer une app + unités Banner / Interstitielle ; remplacer les IDs de test.
 4. **Play Console → Monétiser** — produit in-app **non consommable** :
    - ID produit : `noplist_plus_lifetime` (ou override `--dart-define=IAP_PRODUCT_ID=...`)
@@ -35,23 +35,23 @@ Avec IDs AdMob prod :
   --dart-define=ADMOB_INTERSTITIAL_ANDROID=ca-app-pub-XXXX/WWWW
 ```
 
-Sortie : `build/app/outputs/bundle/noublipoRelease/app-noublipo-release.aab`
+Sortie : `build/app/outputs/bundle/toteoRelease/app-toteo-release.aab`
 
 ## Fiche store (FR)
 
-**Titre :** NopList — Liste de courses  
+**Titre :** Tote 'O Recall — Liste de courses  
 **Courte :** La liste de courses simple. Premium sans pubs + aide course.  
 **Longue :**
 
 ```
-NopList, c’est une liste de courses ultra simple : ajoutez, cochez, organisez par magasin.
+Tote 'O Recall, c’est une liste de courses ultra simple : ajoutez, cochez, organisez par magasin.
 
 Gratuit
 • Ajout rapide, couleurs, partage texte
 • Mode nuit, widget Android
 • Publicités discrètes (moments calmes)
 
-NopList+ (achat unique)
+Tote 'O Recall+ (achat unique)
 • Sans publicité
 • Aide course & liste probable
 • Plusieurs listes, sync Google, scan, planification, budget

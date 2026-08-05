@@ -1,4 +1,4 @@
-/// Groupe de listes (ex. Courses, Brico) pour organiser les listes. Noublipo+.
+/// Groupe de listes (ex. Courses, Brico) pour organiser les listes. Toteo+.
 class ListGroup {
   final String id;
   String name;

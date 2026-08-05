@@ -2,12 +2,12 @@ import 'dart:developer' as developer;
 
 import 'package:flutter/foundation.dart';
 
-/// Logger central pour NopList : logs structurés + sortie console en debug.
+/// Logger central pour Tote 'O Recall : logs structurés + sortie console en debug.
 /// Utiliser [developer.log] (visible dans DevTools) + [debugPrint] en mode debug.
 class AppLogger {
   AppLogger._();
 
-  static const String _tag = 'NopList';
+  static const String _tag = 'ToteORecall';
 
   static void fine(String message, [Object? error, StackTrace? stack]) {
     _log('FINE', message, error, stack);

@@ -18,10 +18,14 @@ import '../../../core/providers/list_provider.dart';
 import '../../../core/providers/planning_provider.dart';
 import '../../../core/providers/settings_provider.dart';
 import '../../../core/data/product_lexicon.dart';
+import '../../../core/data/meal_presets.dart';
+import '../../../core/providers/premium_provider.dart';
+import '../../../core/ui/meal_preset_dialog.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../paywall/paywall_screen.dart';
 
 /// Bottom sheet pour ajouter un article : champ texte + choix de couleur + suggestions.
-/// Noublipo+ : note, image, prix, saisie vocale, complétion auto (lexique + « Pour plus tard »).
+/// Toteo+ : note, image, prix, saisie vocale, complétion auto (lexique + « Pour plus tard »).
 class AddItemSheet extends StatefulWidget {
   const AddItemSheet({
     super.key,
@@ -39,6 +43,7 @@ class AddItemSheet extends StatefulWidget {
     required this.onSubmit,
     this.onAddForLater,
     this.onAddAsAlreadyBought,
+    this.onExpandPreset,
   });
 
   final String initialName;
@@ -68,6 +73,8 @@ class AddItemSheet extends StatefulWidget {
   final void Function(String name)? onAddForLater;
   /// Appelé quand l'utilisateur valide « Déjà acheté » : ajoute l'article coché et lié au récurrent.
   final void Function(String name, int colorIndex, String recurringItemId)? onAddAsAlreadyBought;
+  /// Expansion d'un preset repas (Tote+).
+  final Future<void> Function(MealPreset preset)? onExpandPreset;
 
   @override
   State<AddItemSheet> createState() => _AddItemSheetState();
@@ -157,16 +164,44 @@ class _AddItemSheetState extends State<AddItemSheet> {
     if (!mounted) return;
     final settings = context.read<SettingsProvider>();
     final finalName = settings.applyCapitalization(name);
+
+    if (!widget.isEdit) {
+      final preset = MealPresets.match(finalName);
+      if (preset != null && widget.onExpandPreset != null) {
+        final isPremium = context.read<PremiumProvider>().isPremiumActive;
+        final action = await showMealPresetDialog(
+          context,
+          preset: preset,
+          isPremium: isPremium,
+        );
+        if (!mounted) return;
+        if (action == 'all') {
+          Navigator.of(context).pop();
+          await widget.onExpandPreset!(preset);
+          return;
+        }
+        if (action == 'paywall') {
+          Navigator.of(context).pop();
+          if (!mounted) return;
+          await Navigator.of(context).push(
+            MaterialPageRoute<void>(builder: (_) => const PaywallScreen()),
+          );
+          return;
+        }
+        if (action != 'single') return;
+      }
+    }
+
     final reminderAt = settings.remindersEnabled ? _getReminderAtMs() : null;
     final reminderNote = settings.remindersEnabled ? _reminderNoteController.text.trim() : null;
-    final note = isNoublipoPlus ? (_noteController.text.trim().isEmpty ? null : _noteController.text.trim()) : null;
-    final priceStr = isNoublipoPlus ? _priceController.text.trim().replaceFirst(RegExp(r','), '.') : '';
+    final note = isToteoPlus ? (_noteController.text.trim().isEmpty ? null : _noteController.text.trim()) : null;
+    final priceStr = isToteoPlus ? _priceController.text.trim().replaceFirst(RegExp(r','), '.') : '';
     final priceParsed = priceStr.isNotEmpty ? double.tryParse(priceStr) : null;
-    final price = isNoublipoPlus && priceParsed != null && priceParsed > 0 ? priceParsed : null;
-    final quantityStr = isNoublipoPlus ? _quantityController.text.trim().replaceFirst(RegExp(r','), '.') : '';
+    final price = isToteoPlus && priceParsed != null && priceParsed > 0 ? priceParsed : null;
+    final quantityStr = isToteoPlus ? _quantityController.text.trim().replaceFirst(RegExp(r','), '.') : '';
     final quantityParsed = quantityStr.isNotEmpty ? double.tryParse(quantityStr) : null;
-    final quantity = isNoublipoPlus && quantityParsed != null && quantityParsed > 0 ? quantityParsed : null;
-    final unit = isNoublipoPlus ? (_unitController.text.trim().isEmpty ? null : _unitController.text.trim()) : null;
+    final quantity = isToteoPlus && quantityParsed != null && quantityParsed > 0 ? quantityParsed : null;
+    final unit = isToteoPlus ? (_unitController.text.trim().isEmpty ? null : _unitController.text.trim()) : null;
     widget.onSubmit(
       finalName,
       _colorIndex,
@@ -174,7 +209,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
       reminderNote: reminderNote?.isEmpty == true ? null : reminderNote,
       updateReminder: widget.isEdit && settings.remindersEnabled,
       note: note,
-      imagePath: isNoublipoPlus ? _imagePath : null,
+      imagePath: isToteoPlus ? _imagePath : null,
       price: price,
       quantity: quantity,
       unit: unit,
@@ -183,7 +218,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
   }
 
   Future<void> _startVoiceInput() async {
-    if (!isNoublipoPlus || _isListening) return;
+    if (!isToteoPlus || _isListening) return;
     try {
       final speech = SpeechToText();
       final available = await speech.initialize();
@@ -304,14 +339,14 @@ class _AddItemSheetState extends State<AddItemSheet> {
   }
 
   Future<void> _pickImage() async {
-    if (!isNoublipoPlus) return;
+    if (!isToteoPlus) return;
     try {
       final picker = ImagePicker();
       final xFile = await picker.pickImage(source: ImageSource.gallery);
       if (xFile == null || !mounted) return;
       final dir = await getApplicationDocumentsDirectory();
       final name = 'item_${DateTime.now().millisecondsSinceEpoch}.jpg';
-      final dest = File('${dir.path}/noublipo_images/$name');
+      final dest = File('${dir.path}/toteo_images/$name');
       await dest.parent.create(recursive: true);
       await File(xFile.path).copy(dest.path);
       if (mounted) setState(() => _imagePath = dest.path);
@@ -334,7 +369,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
         .toSet()
         .toList();
     fromHistory.sort((a, b) => a.toLowerCase().indexOf(qLower).compareTo(b.toLowerCase().indexOf(qLower)));
-    if (isNoublipoPlus && context.read<SettingsProvider>().autocomplete) {
+    if (isToteoPlus && context.read<SettingsProvider>().autocomplete) {
       final fromLexicon = ProductLexicon.suggestionsForPrefix(q, limit: 10);
       final combined = <String>{...fromHistory.take(3), ...fromLexicon};
       return combined.take(10).toList();
@@ -384,7 +419,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                   decoration: InputDecoration(
                     hintText: _isListening ? 'Parlez maintenant...' : 'Nom de l\'article',
                     prefixIcon: const Icon(Icons.shopping_basket_outlined),
-                    suffixIcon: isNoublipoPlus
+                    suffixIcon: isToteoPlus
                         ? IconButton(
                             icon: Icon(
                               _isListening ? Icons.mic : Icons.mic_none_outlined,
@@ -406,7 +441,44 @@ class _AddItemSheetState extends State<AddItemSheet> {
                   onSubmitted: (_) => _submit(),
                   onChanged: (_) => setState(() {}),
                 ),
-                if (!widget.isEdit && isNoublipoPlus && widget.onAddAsAlreadyBought != null)
+                if (!widget.isEdit)
+                  Consumer<ListProvider>(
+                    builder: (context, listProvider, _) {
+                      final recents = listProvider.recentItemNames();
+                      if (recents.isEmpty) return const SizedBox.shrink();
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              AppLocalizations.of(context).recentItems,
+                              style: Theme.of(context).textTheme.labelMedium,
+                            ),
+                            const SizedBox(height: 6),
+                            Wrap(
+                              spacing: 6,
+                              runSpacing: 4,
+                              children: [
+                                for (final name in recents)
+                                  ActionChip(
+                                    label: Text(name),
+                                    visualDensity: VisualDensity.compact,
+                                    onPressed: () {
+                                      HapticFeedback.selectionClick();
+                                      _controller.text = name;
+                                      setState(() {});
+                                      _submit();
+                                    },
+                                  ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                if (!widget.isEdit && isToteoPlus && widget.onAddAsAlreadyBought != null)
                   Consumer<PlanningProvider>(
                     builder: (context, planning, _) {
                       final q = _controller.text.trim();
@@ -432,7 +504,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                       );
                     },
                   ),
-                if (isNoublipoPlus && _isListening)
+                if (isToteoPlus && _isListening)
                   Padding(
                     padding: const EdgeInsets.only(top: 6),
                     child: Row(
@@ -528,7 +600,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                         color: fromHistory ? Colors.grey.shade600 : Theme.of(context).colorScheme.primary,
                       ),
                       title: Text(s, style: Theme.of(context).textTheme.bodyMedium),
-                      trailing: isNoublipoPlus && widget.onAddForLater != null
+                      trailing: isToteoPlus && widget.onAddForLater != null
                           ? TextButton.icon(
                               icon: const Icon(Icons.schedule, size: 18),
                               label: Text(AppLocalizations.of(context).addForLater),
@@ -576,7 +648,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          if (isNoublipoPlus)
+                          if (isToteoPlus)
                             Padding(
                               padding: const EdgeInsets.only(bottom: 12),
                               child: TextField(
@@ -695,7 +767,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                               );
                             },
                           ),
-                          if (isNoublipoPlus) ...[
+                          if (isToteoPlus) ...[
                             Text(
                               'Note, quantité, photo',
                               style: Theme.of(context).textTheme.bodySmall?.copyWith(

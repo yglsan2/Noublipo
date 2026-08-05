@@ -1,4 +1,4 @@
-# Pages GitHub — NopList
+# Pages GitHub — Tote 'O Recall
 
 Ce dossier peut être publié via GitHub Pages (Settings → Pages → Deploy from branch `/docs`).
 

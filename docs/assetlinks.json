@@ -3,7 +3,7 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.noublipo.noublipo",
+      "package_name": "com.toteo.toteo",
       "sha256_cert_fingerprints": [
         "93:84:58:D5:93:12:28:A2:C6:37:50:91:E2:23:08:93:0A:94:9D:CF:6D:D7:BC:A1:69:8D:AD:E2:08:39:4D:65"
       ]

@@ -1,7 +1,8 @@
 {
   "@@locale": "el",
-  "appTitle": "NopList",
-  "appTitlePlus": "NopList+",
+  "appTitle": "Tote 'O Recall",
+  "appTitlePlus": "Tote 'O Recall+",
+  "appTagline": "Η λίστα που δεν ξεχνά τίποτα!",
   "searchHint": "Search in list",
   "totalLabel": "Total",
   "addItem": "Add item",
@@ -218,7 +219,7 @@
   "save": "Save",
   "saveAsTemplateTitle": "Save as template",
   "saveButton": "Save",
-  "scanAvailablePlus": "Available in NopList+",
+  "scanAvailablePlus": "Available in Tote 'O Recall+",
   "scanTitle": "Scan",
   "selectedCount": "{n} selected",
   "@selectedCount": {
@@ -256,7 +257,7 @@
   "signInGoogleToEnable": "Sign in with Google to enable",
   "signInWithGoogle": "Sign in with Google",
   "sortColor": "Color",
-  "sortListLabel": "List sort (NopList+)",
+  "sortListLabel": "List sort (Tote 'O Recall+)",
   "sortName": "Name",
   "sortOrder": "Order",
   "styleBar": "Bar",
@@ -301,16 +302,31 @@
   "uncheckAll": "Αποεπιλογή όλων",
   "moveToFutureList": "Μεταφορά σε μελλοντικές αγορές",
   "deleteOrMoveToFuture": "Διαγραφή « {name} » ή μεταφορά σε μελλοντικές αγορές;",
-  "@deleteOrMoveToFuture": { "placeholders": { "name": { "type": "String" } } },
+  "@deleteOrMoveToFuture": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "listFontScale": "Μέγεθος κειμένου λίστας",
   "listFontScaleSubtitle": "Προσαρμογή για καλύτερη αναγνωσιμότητα",
   "shoppingMode": "Λειτουργία αγορών",
   "shoppingModeSubtitle": "Απλοποιημένη όψη με μεγάλα κουμπιά στο κατάστημα",
-  "onboardingWelcome": "Καλώς ήρθατε στο NopList",
+  "onboardingWelcome": "Καλώς ήρθατε στο Tote 'O Recall",
   "onboardingWelcomeSubtitle": "Ξεκινήστε με κενή λίστα ή επιλέξτε πρότυπο παρακάτω.",
   "startEmpty": "Έναρξη με κενή λίστα",
   "progressCount": "{checked} / {total}",
-  "@progressCount": { "placeholders": { "checked": { "type": "int" }, "total": { "type": "int" } } },
+  "@progressCount": {
+    "placeholders": {
+      "checked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "sendLinkBy": "Στείλτε τον σύνδεσμο με μήνυμα ή email για πρόσκληση",
   "syncConflictHint": "Πιθανή σύγκρουση: οι αλλαγές συγχωνεύτηκαν.",
   "statsMonthlyEvolution": "Μηνιαία εξέλιξη",
@@ -326,22 +342,61 @@
   "shoppingSocialSubtitle": "Ανωνυμοποιημένες τάσεις: τι αγοράζουν οι άλλοι (συσσωρευμένα δεδομένα, η λίστα σου δεν κοινοποιείται)",
   "shoppingSocialPopularNearby": "Δημοφιλές κοντά σου",
   "shoppingSocialTrendThisWeek": "Στην περιοχή σου, το {percent} % των χρηστών αγοράζει « {product} » αυτή την εβδομάδα.",
-  "@shoppingSocialTrendThisWeek": { "placeholders": { "percent": { "type": "int" }, "product": { "type": "String" } } },
+  "@shoppingSocialTrendThisWeek": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialTrendsTitle": "Τάσεις διατροφής (ανωνυμοποιημένες)",
   "probableListEmptyHint": "Πρόσθεσε επαναλαμβανόμενες αγορές και ολοκλήρωσε ψώνια ώστε η εφαρμογή να μάθει τις συνήθειές σου και να προτείνει πιθανή λίστα.",
   "probableListSelectAll": "Επιλογή όλων",
   "probableListDeselectAll": "Αποεπιλογή όλων",
   "probableListSelectedCount": "{count} αντικείμενο(α) επιλεγμένο(α)",
-  "@probableListSelectedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "probableListAddedCount": "{count} αντικείμενο(α) προστέθηκε στη λίστα σου",
-  "@probableListAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartSeeMore": "Δείτε περισσότερα",
   "smartCartSuggestionsCount": "{count} πρόταση(εις)",
-  "@smartCartSuggestionsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartSuggestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddedCount": "{count} αντικείμενο(α) προστέθηκε",
-  "@smartCartAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingSocialAddProduct": "Προσθήκη « {product} » στη λίστα μου",
-  "@shoppingSocialAddProduct": { "placeholders": { "product": { "type": "String" } } },
+  "@shoppingSocialAddProduct": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialDemoDataNote": "Δεδομένα επίδειξης. Οι πραγματικές τάσεις σε μελλοντική ενημέρωση. Δεν κοινοποιούνται προσωπικά δεδομένα (GDPR).",
   "shoppingSocialPopularRecipes": "Δημοφιλή συνταγές",
   "shoppingSocialViewIngredients": "Προβολή συστατικών",

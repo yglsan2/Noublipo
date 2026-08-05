@@ -1,4 +1,4 @@
-/// Profil de consommation (Noublipo+ Pro) : régimes, objectifs, allergies, produits/marques à éviter, tentations.
+/// Profil de consommation (Toteo+ Pro) : régimes, objectifs, allergies, produits/marques à éviter, tentations.
 class ConsumptionProfile {
   ConsumptionProfile({
     this.dietTags = const [],

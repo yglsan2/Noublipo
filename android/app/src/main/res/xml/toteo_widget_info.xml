@@ -4,4 +4,4 @@
     android:minHeight="80dp"
     android:resizeMode="horizontal|vertical"
     android:updatePeriodMillis="3600000"
-    android:initialLayout="@layout/noublipo_widget" />
+    android:initialLayout="@layout/toteo_widget" />

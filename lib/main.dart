@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'dart:async' show unawaited;
+import 'dart:io' show Platform;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -24,7 +27,7 @@ import 'features/splash/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  AppLogger.info('Démarrage NopList');
+  AppLogger.info("Démarrage Tote 'O Recall");
   SyncService? syncService;
   try {
     await Firebase.initializeApp();
@@ -48,17 +51,21 @@ void main() async {
   final premium = PremiumProvider(storage);
   final iap = IapService(premium);
   // Ne pas bloquer le démarrage sur le store.
-  iap.initialize();
-  if (!isNoublipoPlus) {
+  unawaited(iap.initialize());
+  // Pubs / consentement : mobile uniquement (pas de plugin AdMob sur Linux).
+  if (!isToteoPlus &&
+      !kIsWeb &&
+      (Platform.isAndroid || Platform.isIOS)) {
     await ConsentService.requestConsentIfNeeded();
-    AdService.initialize();
+    unawaited(AdService.initialize());
   }
   runApp(
     MultiProvider(
       providers: [
         Provider<StorageService>.value(value: storage),
+        Provider<ReminderService>.value(value: reminderService),
         ChangeNotifierProvider<PremiumProvider>.value(value: premium),
-        Provider<IapService>.value(value: iap),
+        ChangeNotifierProvider<IapService>.value(value: iap),
         ChangeNotifierProvider<PlanningProvider>.value(value: planningProvider),
         ChangeNotifierProvider<BirthdaysProvider>.value(value: birthdaysProvider),
         ChangeNotifierProvider<ListProvider>(
@@ -82,19 +89,19 @@ void main() async {
           create: (_) => ConsumptionProfileProvider(storage),
         ),
       ],
-      child: const NoublipoApp(),
+      child: const ToteoApp(),
     ),
   );
 }
 
-class NoublipoApp extends StatefulWidget {
-  const NoublipoApp({super.key});
+class ToteoApp extends StatefulWidget {
+  const ToteoApp({super.key});
 
   @override
-  State<NoublipoApp> createState() => _NoublipoAppState();
+  State<ToteoApp> createState() => _ToteoAppState();
 }
 
-class _NoublipoAppState extends State<NoublipoApp> {
+class _ToteoAppState extends State<ToteoApp> {
   @override
   void initState() {
     super.initState();

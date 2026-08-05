@@ -11,9 +11,15 @@ class SettingsProvider extends ChangeNotifier {
     _remindersEnabled = _storage.remindersEnabled;
     _categoryStyle = _storage.categoryStyle;
     _sortMode = _storage.sortMode;
+    _listOrgMode = _storage.listOrgMode;
     _aisleOrder = Map<int, int>.from(_storage.aisleOrder);
     _favoriteStoreIndices = List<int>.from(_storage.favoriteStoreIndices);
     _showPrices = _storage.showPrices;
+    _budgetCeiling = _storage.budgetCeiling;
+    _weeklyReminderEnabled = _storage.weeklyReminderEnabled;
+    _weeklyReminderWeekday = _storage.weeklyReminderWeekday;
+    _weeklyReminderHour = _storage.weeklyReminderHour;
+    _weeklyReminderMinute = _storage.weeklyReminderMinute;
     _autocomplete = _storage.autocomplete;
     _localeLanguageCode = _storage.localeLanguageCode;
     _listFontScale = _storage.listFontScale;
@@ -40,9 +46,15 @@ class SettingsProvider extends ChangeNotifier {
   bool _remindersEnabled = false;
   String _categoryStyle = 'form';
   String _sortMode = 'order';
+  String _listOrgMode = 'bubbles';
   Map<int, int> _aisleOrder = {};
   List<int> _favoriteStoreIndices = [];
   bool _showPrices = false;
+  double? _budgetCeiling;
+  bool _weeklyReminderEnabled = false;
+  int _weeklyReminderWeekday = 6;
+  int _weeklyReminderHour = 10;
+  int _weeklyReminderMinute = 0;
   bool _autocomplete = true;
   String? _localeLanguageCode;
   double _listFontScale = 1.0;
@@ -62,9 +74,16 @@ class SettingsProvider extends ChangeNotifier {
   bool get remindersEnabled => _remindersEnabled;
   String get categoryStyle => _categoryStyle;
   String get sortMode => _sortMode;
+  /// 'bubbles' | 'numbered' | 'manual'
+  String get listOrgMode => _listOrgMode;
   Map<int, int> get aisleOrder => Map.unmodifiable(_aisleOrder);
   List<int> get favoriteStoreIndices => List.unmodifiable(_favoriteStoreIndices);
   bool get showPrices => _showPrices;
+  double? get budgetCeiling => _budgetCeiling;
+  bool get weeklyReminderEnabled => _weeklyReminderEnabled;
+  int get weeklyReminderWeekday => _weeklyReminderWeekday;
+  int get weeklyReminderHour => _weeklyReminderHour;
+  int get weeklyReminderMinute => _weeklyReminderMinute;
   bool get autocomplete => _autocomplete;
   double get listFontScale => _listFontScale;
   bool get shoppingMode => _shoppingMode;
@@ -138,6 +157,17 @@ class SettingsProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> setListOrgMode(String value) async {
+    try {
+      await _storage.setListOrgMode(value);
+      _listOrgMode = _storage.listOrgMode;
+      notifyListeners();
+    } catch (e, stack) {
+      AppLogger.error('SettingsProvider.setListOrgMode', e, stack);
+      rethrow;
+    }
+  }
+
   Future<void> setAisleOrder(Map<int, int> order) async {
     try {
       await _storage.setAisleOrder(order);
@@ -167,6 +197,51 @@ class SettingsProvider extends ChangeNotifier {
       notifyListeners();
     } catch (e, stack) {
       AppLogger.error('SettingsProvider.setShowPrices', e, stack);
+      rethrow;
+    }
+  }
+
+  Future<void> setBudgetCeiling(double? value) async {
+    try {
+      await _storage.setBudgetCeiling(value);
+      _budgetCeiling = _storage.budgetCeiling;
+      notifyListeners();
+    } catch (e, stack) {
+      AppLogger.error('SettingsProvider.setBudgetCeiling', e, stack);
+      rethrow;
+    }
+  }
+
+  Future<void> setWeeklyReminderEnabled(bool value) async {
+    try {
+      await _storage.setWeeklyReminderEnabled(value);
+      _weeklyReminderEnabled = value;
+      notifyListeners();
+    } catch (e, stack) {
+      AppLogger.error('SettingsProvider.setWeeklyReminderEnabled', e, stack);
+      rethrow;
+    }
+  }
+
+  Future<void> setWeeklyReminderWeekday(int value) async {
+    try {
+      await _storage.setWeeklyReminderWeekday(value);
+      _weeklyReminderWeekday = _storage.weeklyReminderWeekday;
+      notifyListeners();
+    } catch (e, stack) {
+      AppLogger.error('SettingsProvider.setWeeklyReminderWeekday', e, stack);
+      rethrow;
+    }
+  }
+
+  Future<void> setWeeklyReminderTime(int hour, int minute) async {
+    try {
+      await _storage.setWeeklyReminderTime(hour, minute);
+      _weeklyReminderHour = _storage.weeklyReminderHour;
+      _weeklyReminderMinute = _storage.weeklyReminderMinute;
+      notifyListeners();
+    } catch (e, stack) {
+      AppLogger.error('SettingsProvider.setWeeklyReminderTime', e, stack);
       rethrow;
     }
   }
@@ -238,9 +313,15 @@ class SettingsProvider extends ChangeNotifier {
     _remindersEnabled = _storage.remindersEnabled;
     _categoryStyle = _storage.categoryStyle;
     _sortMode = _storage.sortMode;
+    _listOrgMode = _storage.listOrgMode;
     _aisleOrder = Map<int, int>.from(_storage.aisleOrder);
     _favoriteStoreIndices = List<int>.from(_storage.favoriteStoreIndices);
     _showPrices = _storage.showPrices;
+    _budgetCeiling = _storage.budgetCeiling;
+    _weeklyReminderEnabled = _storage.weeklyReminderEnabled;
+    _weeklyReminderWeekday = _storage.weeklyReminderWeekday;
+    _weeklyReminderHour = _storage.weeklyReminderHour;
+    _weeklyReminderMinute = _storage.weeklyReminderMinute;
     _autocomplete = _storage.autocomplete;
     _localeLanguageCode = _storage.localeLanguageCode;
     _listFontScale = _storage.listFontScale;

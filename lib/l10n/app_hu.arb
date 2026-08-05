@@ -1,7 +1,8 @@
 {
   "@@locale": "hu",
-  "appTitle": "NopList",
-  "appTitlePlus": "NopList+",
+  "appTitle": "Tote 'O Recall",
+  "appTitlePlus": "Tote 'O Recall+",
+  "appTagline": "A lista, ami semmit sem felejt!",
   "searchHint": "Search in list",
   "totalLabel": "Total",
   "addItem": "Add item",
@@ -218,7 +219,7 @@
   "save": "Save",
   "saveAsTemplateTitle": "Save as template",
   "saveButton": "Save",
-  "scanAvailablePlus": "Available in NopList+",
+  "scanAvailablePlus": "Available in Tote 'O Recall+",
   "scanTitle": "Scan",
   "selectedCount": "{n} selected",
   "@selectedCount": {
@@ -256,7 +257,7 @@
   "signInGoogleToEnable": "Sign in with Google to enable",
   "signInWithGoogle": "Sign in with Google",
   "sortColor": "Color",
-  "sortListLabel": "List sort (NopList+)",
+  "sortListLabel": "List sort (Tote 'O Recall+)",
   "sortName": "Name",
   "sortOrder": "Order",
   "styleBar": "Bar",
@@ -301,16 +302,31 @@
   "uncheckAll": "Összes feloldása",
   "moveToFutureList": "Áthelyezés későbbi vásárlásokba",
   "deleteOrMoveToFuture": "« {name} » törlése vagy áthelyezése későbbi vásárlásokba?",
-  "@deleteOrMoveToFuture": { "placeholders": { "name": { "type": "String" } } },
+  "@deleteOrMoveToFuture": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "listFontScale": "Lista betűméret",
   "listFontScaleSubtitle": "Állítsa be a jobb olvashatóság érdekében",
   "shoppingMode": "Vásárlási mód",
   "shoppingModeSubtitle": "Egyszerűsített nézet nagy gombokkal a boltban",
-  "onboardingWelcome": "Üdvözöljük a NopList-ban!",
+  "onboardingWelcome": "Üdvözöljük a Tote 'O Recall-ban!",
   "onboardingWelcomeSubtitle": "Kezdje üres listával, vagy válasszon sablont alább.",
   "startEmpty": "Üres listával kezdés",
   "progressCount": "{checked} / {total}",
-  "@progressCount": { "placeholders": { "checked": { "type": "int" }, "total": { "type": "int" } } },
+  "@progressCount": {
+    "placeholders": {
+      "checked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "sendLinkBy": "Küldje el a linket üzenetben vagy e-mailben a meghíváshoz",
   "syncConflictHint": "Lehetséges ütközés: a változások összeolvadtak.",
   "statsMonthlyEvolution": "Havi alakulás",
@@ -326,22 +342,61 @@
   "shoppingSocialSubtitle": "Anonimizált trendek: mit vásárolnak mások (összesített adat, a listád nincs megosztva)",
   "shoppingSocialPopularNearby": "Népszerű a közeledben",
   "shoppingSocialTrendThisWeek": "A környékeden a felhasználók {percent} %-a vásárol « {product} » ezen a héten.",
-  "@shoppingSocialTrendThisWeek": { "placeholders": { "percent": { "type": "int" }, "product": { "type": "String" } } },
+  "@shoppingSocialTrendThisWeek": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialTrendsTitle": "Élelmiszer-trendek (anonimizált)",
   "probableListEmptyHint": "Adj hozzá ismétlődő vásárlásokat és fejezd be a bevásárlást, hogy az app megtanulja a szokásaidat és javasoljon egy valószínű listát.",
   "probableListSelectAll": "Összes kijelölése",
   "probableListDeselectAll": "Kijelölés megszüntetése",
   "probableListSelectedCount": "{count} elem kijelölve",
-  "@probableListSelectedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "probableListAddedCount": "{count} elem hozzáadva a listádhoz",
-  "@probableListAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartSeeMore": "Több megjelenítése",
   "smartCartSuggestionsCount": "{count} javaslat",
-  "@smartCartSuggestionsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartSuggestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddedCount": "{count} elem hozzáadva",
-  "@smartCartAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingSocialAddProduct": "« {product} » hozzáadása a listámhoz",
-  "@shoppingSocialAddProduct": { "placeholders": { "product": { "type": "String" } } },
+  "@shoppingSocialAddProduct": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialDemoDataNote": "Bemutató adatok. A valódi trendek egy későbbi frissítésben érkeznek. Személyes adat nem osztódik meg (GDPR).",
   "shoppingSocialPopularRecipes": "Népszerű receptek",
   "shoppingSocialViewIngredients": "Hozzávalók megjelenítése",

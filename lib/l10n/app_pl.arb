@@ -1,7 +1,8 @@
 {
   "@@locale": "pl",
-  "appTitle": "NopList",
-  "appTitlePlus": "NopList+",
+  "appTitle": "Tote 'O Recall",
+  "appTitlePlus": "Tote 'O Recall+",
+  "appTagline": "Lista, która niczego nie zapomina!",
   "searchHint": "Szukaj na liście",
   "totalLabel": "Razem",
   "addItem": "Dodaj pozycję",
@@ -218,7 +219,7 @@
   "save": "Save",
   "saveAsTemplateTitle": "Save as template",
   "saveButton": "Save",
-  "scanAvailablePlus": "Available in NopList+",
+  "scanAvailablePlus": "Available in Tote 'O Recall+",
   "scanTitle": "Scan",
   "selectedCount": "{n} selected",
   "@selectedCount": {
@@ -256,7 +257,7 @@
   "signInGoogleToEnable": "Sign in with Google to enable",
   "signInWithGoogle": "Sign in with Google",
   "sortColor": "Color",
-  "sortListLabel": "List sort (NopList+)",
+  "sortListLabel": "List sort (Tote 'O Recall+)",
   "sortName": "Name",
   "sortOrder": "Order",
   "styleBar": "Bar",
@@ -301,16 +302,31 @@
   "uncheckAll": "Odznacz wszystko",
   "moveToFutureList": "Przenieś na później",
   "deleteOrMoveToFuture": "Usunąć « {name} » czy przenieść na później?",
-  "@deleteOrMoveToFuture": { "placeholders": { "name": { "type": "String" } } },
+  "@deleteOrMoveToFuture": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "listFontScale": "Rozmiar czcionki listy",
   "listFontScaleSubtitle": "Dostosuj czytelność",
   "shoppingMode": "Tryb zakupów",
   "shoppingModeSubtitle": "Uproszczony widok z dużymi przyciskami w sklepie",
-  "onboardingWelcome": "Witaj w NopList",
+  "onboardingWelcome": "Witaj w Tote 'O Recall",
   "onboardingWelcomeSubtitle": "Zacznij od pustej listy lub wybierz szablon poniżej.",
   "startEmpty": "Zacznij od pustej listy",
   "progressCount": "{checked} / {total}",
-  "@progressCount": { "placeholders": { "checked": { "type": "int" }, "total": { "type": "int" } } },
+  "@progressCount": {
+    "placeholders": {
+      "checked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "sendLinkBy": "Wyślij link wiadomością lub e-mailem, aby zaprosić",
   "syncConflictHint": "Możliwy konflikt: zmiany zostały połączone.",
   "statsMonthlyEvolution": "Ewolucja miesięczna",
@@ -326,22 +342,61 @@
   "shoppingSocialSubtitle": "Zanonimizowane trendy: co kupują inni (dane zagregowane, twoja lista nie jest udostępniana)",
   "shoppingSocialPopularNearby": "Popularne w twojej okolicy",
   "shoppingSocialTrendThisWeek": "W twojej okolicy {percent} % użytkowników kupuje « {product} » w tym tygodniu.",
-  "@shoppingSocialTrendThisWeek": { "placeholders": { "percent": { "type": "int" }, "product": { "type": "String" } } },
+  "@shoppingSocialTrendThisWeek": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialTrendsTitle": "Trendy żywieniowe (zanonimizowane)",
   "probableListEmptyHint": "Dodawaj zakupy cykliczne i kończ wyprawy, aby aplikacja uczyła się twoich nawyków i proponowała listę prawdopodobną.",
   "probableListSelectAll": "Zaznacz wszystko",
   "probableListDeselectAll": "Odznacz wszystko",
   "probableListSelectedCount": "{count} artykuł(ów) zaznaczonych",
-  "@probableListSelectedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "probableListAddedCount": "{count} artykuł(ów) dodanych do listy",
-  "@probableListAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartSeeMore": "Pokaż więcej",
   "smartCartSuggestionsCount": "{count} sugestia(sugestie)",
-  "@smartCartSuggestionsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartSuggestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddedCount": "{count} artykuł(ów) dodanych",
-  "@smartCartAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingSocialAddProduct": "Dodaj « {product} » do mojej listy",
-  "@shoppingSocialAddProduct": { "placeholders": { "product": { "type": "String" } } },
+  "@shoppingSocialAddProduct": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialDemoDataNote": "Dane demonstracyjne. Prawdziwe trendy w przyszłej aktualizacji. Brak udostępniania danych osobowych (RODO).",
   "shoppingSocialPopularRecipes": "Popularne przepisy",
   "shoppingSocialViewIngredients": "Pokaż składniki",

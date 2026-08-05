@@ -13,40 +13,48 @@ import '../utils/app_logger.dart';
 /// Persistance locale des listes (SharedPreferences).
 /// Pour la sync multi-appareils, brancher ici Firebase ou Google Drive.
 class StorageService {
-  static const String _keyList = 'noublipo_main_list';
-  static const String _keyLists = 'noublipo_lists';
-  static const String _keyCurrentListId = 'noublipo_current_list_id';
-  static const String _keyCategoryNames = 'noublipo_category_names';
-  static const String _keyCapitalizeNames = 'noublipo_capitalize_names';
-  static const String _keyTileStyle = 'noublipo_tile_style'; // bar | filled | super_round | round | goutte | sticker | bulle | zebra
-  static const String _keyDarkMode = 'noublipo_dark_mode';
-  static const String _keyRemindersEnabled = 'noublipo_reminders_enabled';
-  static const String _keyCategoryStyle = 'noublipo_category_style'; // 'form' | 'legend' (magasins/enseignes)
-  static const String _keySortMode = 'noublipo_sort_mode'; // 'order' | 'name' | 'color' | 'aisle' (Noublipo+)
-  static const String _keyAisleOrder = 'noublipo_aisle_order'; // Map colorIndex -> aisle number (Pro)
-  static const String _keyFavoriteStoreIndices = 'noublipo_favorite_store_indices'; // List<int> (Pro)
-  static const String _keyShowPrices = 'noublipo_show_prices'; // (Noublipo+)
-  static const String _keyAutocomplete = 'noublipo_autocomplete'; // (Noublipo+) complétion auto lexique
-  static const String _keyLastQuickAddListName = 'noublipo_last_quick_add_list';
-  static const String _keyRecurringItems = 'noublipo_recurring_items';
-  static const String _keySeasonalTemplates = 'noublipo_seasonal_templates';
-  static const String _keyListTemplates = 'noublipo_list_templates';
-  static const String _keyListGroups = 'noublipo_list_groups';
-  static const String _keyLocale = 'noublipo_locale';
-  static const String _keyBirthdays = 'noublipo_birthdays';
-  static const String _keyOnboardingSeen = 'noublipo_onboarding_seen';
-  static const String _keyListFontScale = 'noublipo_list_font_scale';
-  static const String _keyShoppingMode = 'noublipo_shopping_mode';
-  static const String _keyArchivedLists = 'noublipo_archived_lists';
-  static const String _keyGamification = 'noublipo_gamification';
-  static const String _keyConsumptionProfile = 'noublipo_consumption_profile';
-  static const String _keyCoachNutritionEnabled = 'noublipo_coach_nutrition_enabled';
-  static const String _keyPremiumPurchased = 'noublipo_premium_purchased';
-  static const String _keyPremiumTrialEndMs = 'noublipo_premium_trial_end_ms';
-  static const String _keyUpgradePromptLastShownMs = 'noublipo_upgrade_prompt_last_shown_ms';
-  static const String _keyFirstOpenMs = 'noublipo_first_open_ms';
-  static const String _keyTripsCompletedCount = 'noublipo_trips_completed_count';
-  static const String _keyLastInterstitialShownMs = 'noublipo_last_interstitial_ms';
+  static const String _keyList = 'toteo_main_list';
+  static const String _keyLists = 'toteo_lists';
+  static const String _keyCurrentListId = 'toteo_current_list_id';
+  static const String _keyCategoryNames = 'toteo_category_names';
+  static const String _keyCapitalizeNames = 'toteo_capitalize_names';
+  static const String _keyTileStyle = 'toteo_tile_style'; // bar | filled | super_round | round | goutte | sticker | bulle | zebra
+  static const String _keyDarkMode = 'toteo_dark_mode';
+  static const String _keyRemindersEnabled = 'toteo_reminders_enabled';
+  static const String _keyCategoryStyle = 'toteo_category_style'; // 'form' | 'legend' (magasins/enseignes)
+  static const String _keySortMode = 'toteo_sort_mode'; // 'order' | 'name' | 'color' | 'aisle' (Toteo+)
+  /// Organisation visuelle : 'bubbles' (auto) | 'numbered' | 'manual' (drag perso).
+  static const String _keyListOrgMode = 'toteo_list_org_mode';
+  static const String _keyAisleOrder = 'toteo_aisle_order'; // Map colorIndex -> aisle number (Pro)
+  static const String _keyFavoriteStoreIndices = 'toteo_favorite_store_indices'; // List<int> (Pro)
+  static const String _keyShowPrices = 'toteo_show_prices'; // (Toteo+)
+  static const String _keyBudgetCeiling = 'toteo_budget_ceiling';
+  static const String _keyWeeklyReminderEnabled = 'toteo_weekly_reminder_enabled';
+  static const String _keyWeeklyReminderWeekday = 'toteo_weekly_reminder_weekday'; // 1=Mon .. 7=Sun
+  static const String _keyWeeklyReminderHour = 'toteo_weekly_reminder_hour';
+  static const String _keyWeeklyReminderMinute = 'toteo_weekly_reminder_minute';
+  static const String _keyAutocomplete = 'toteo_autocomplete'; // (Toteo+) complétion auto lexique
+  static const String _keyLastQuickAddListName = 'toteo_last_quick_add_list';
+  static const String _keyRecurringItems = 'toteo_recurring_items';
+  static const String _keySeasonalTemplates = 'toteo_seasonal_templates';
+  static const String _keyListTemplates = 'toteo_list_templates';
+  static const String _keyListGroups = 'toteo_list_groups';
+  static const String _keyLocale = 'toteo_locale';
+  static const String _keyBirthdays = 'toteo_birthdays';
+  static const String _keyOnboardingSeen = 'toteo_onboarding_seen';
+  static const String _keyHintPrefix = 'toteo_hint_';
+  static const String _keyListFontScale = 'toteo_list_font_scale';
+  static const String _keyShoppingMode = 'toteo_shopping_mode';
+  static const String _keyArchivedLists = 'toteo_archived_lists';
+  static const String _keyGamification = 'toteo_gamification';
+  static const String _keyConsumptionProfile = 'toteo_consumption_profile';
+  static const String _keyCoachNutritionEnabled = 'toteo_coach_nutrition_enabled';
+  static const String _keyPremiumPurchased = 'toteo_premium_purchased';
+  static const String _keyPremiumTrialEndMs = 'toteo_premium_trial_end_ms';
+  static const String _keyUpgradePromptLastShownMs = 'toteo_upgrade_prompt_last_shown_ms';
+  static const String _keyFirstOpenMs = 'toteo_first_open_ms';
+  static const String _keyTripsCompletedCount = 'toteo_trips_completed_count';
+  static const String _keyLastInterstitialShownMs = 'toteo_last_interstitial_ms';
 
   final SharedPreferences _prefs;
 
@@ -153,7 +161,7 @@ class StorageService {
     }
   }
 
-  /// Tri de la liste (Noublipo+) : 'order' | 'name' | 'color' | 'aisle'.
+  /// Tri de la liste (Toteo+) : 'order' | 'name' | 'color' | 'aisle'.
   String get sortMode => _prefs.getString(_keySortMode) ?? 'order';
 
   Future<void> setSortMode(String value) async {
@@ -162,6 +170,23 @@ class StorageService {
       await _prefs.setString(_keySortMode, v);
     } catch (e, stack) {
       AppLogger.error('setSortMode', e, stack);
+      rethrow;
+    }
+  }
+
+  /// Organisation de la liste : bulles auto, liste numérotée, ou ordre perso (drag).
+  String get listOrgMode {
+    final v = _prefs.getString(_keyListOrgMode);
+    if (v == 'numbered' || v == 'manual') return v!;
+    return 'bubbles';
+  }
+
+  Future<void> setListOrgMode(String value) async {
+    try {
+      final v = (value == 'numbered' || value == 'manual') ? value : 'bubbles';
+      await _prefs.setString(_keyListOrgMode, v);
+    } catch (e, stack) {
+      AppLogger.error('setListOrgMode', e, stack);
       rethrow;
     }
   }
@@ -213,7 +238,7 @@ class StorageService {
     }
   }
 
-  /// Afficher les prix et le total (Noublipo+).
+  /// Afficher les prix et le total (Toteo+).
   bool get showPrices => _prefs.getBool(_keyShowPrices) ?? false;
 
   Future<void> setShowPrices(bool value) async {
@@ -225,7 +250,59 @@ class StorageService {
     }
   }
 
-  /// Complétion automatique (suggestions depuis le lexique). Noublipo+. Par défaut true.
+  /// Plafond budget (€), null = désactivé.
+  double? get budgetCeiling {
+    if (!_prefs.containsKey(_keyBudgetCeiling)) return null;
+    return _prefs.getDouble(_keyBudgetCeiling);
+  }
+
+  Future<void> setBudgetCeiling(double? value) async {
+    try {
+      if (value == null || value <= 0) {
+        await _prefs.remove(_keyBudgetCeiling);
+      } else {
+        await _prefs.setDouble(_keyBudgetCeiling, value);
+      }
+    } catch (e, stack) {
+      AppLogger.error('setBudgetCeiling', e, stack);
+      rethrow;
+    }
+  }
+
+  bool get weeklyReminderEnabled => _prefs.getBool(_keyWeeklyReminderEnabled) ?? false;
+  Future<void> setWeeklyReminderEnabled(bool value) async {
+    try {
+      await _prefs.setBool(_keyWeeklyReminderEnabled, value);
+    } catch (e, stack) {
+      AppLogger.error('setWeeklyReminderEnabled', e, stack);
+      rethrow;
+    }
+  }
+
+  /// 1 = lundi … 7 = dimanche (ISO).
+  int get weeklyReminderWeekday => (_prefs.getInt(_keyWeeklyReminderWeekday) ?? 6).clamp(1, 7);
+  Future<void> setWeeklyReminderWeekday(int value) async {
+    try {
+      await _prefs.setInt(_keyWeeklyReminderWeekday, value.clamp(1, 7));
+    } catch (e, stack) {
+      AppLogger.error('setWeeklyReminderWeekday', e, stack);
+      rethrow;
+    }
+  }
+
+  int get weeklyReminderHour => (_prefs.getInt(_keyWeeklyReminderHour) ?? 10).clamp(0, 23);
+  int get weeklyReminderMinute => (_prefs.getInt(_keyWeeklyReminderMinute) ?? 0).clamp(0, 59);
+  Future<void> setWeeklyReminderTime(int hour, int minute) async {
+    try {
+      await _prefs.setInt(_keyWeeklyReminderHour, hour.clamp(0, 23));
+      await _prefs.setInt(_keyWeeklyReminderMinute, minute.clamp(0, 59));
+    } catch (e, stack) {
+      AppLogger.error('setWeeklyReminderTime', e, stack);
+      rethrow;
+    }
+  }
+
+  /// Complétion automatique (suggestions depuis le lexique). Toteo+. Par défaut true.
   bool get autocomplete => _prefs.getBool(_keyAutocomplete) ?? true;
 
   Future<void> setAutocomplete(bool value) async {
@@ -237,7 +314,7 @@ class StorageService {
     }
   }
 
-  /// Dernière liste utilisée pour l'ajout rapide (suggestion). Noublipo+.
+  /// Dernière liste utilisée pour l'ajout rapide (suggestion). Toteo+.
   String? get lastQuickAddListName => _prefs.getString(_keyLastQuickAddListName);
 
   Future<void> setLastQuickAddListName(String? name) async {
@@ -263,6 +340,15 @@ class StorageService {
     }
   }
 
+  bool hintSeen(String id) => _prefs.getBool('$_keyHintPrefix$id') ?? false;
+  Future<void> setHintSeen(String id) async {
+    try {
+      await _prefs.setBool('$_keyHintPrefix$id', true);
+    } catch (e, stack) {
+      AppLogger.error('setHintSeen', e, stack);
+    }
+  }
+
   /// Facteur de taille de police pour la liste (0.8 à 1.5). 1.0 = défaut.
   double get listFontScale => (_prefs.getDouble(_keyListFontScale) ?? 1.0).clamp(0.8, 1.5);
   Future<void> setListFontScale(double value) async {
@@ -285,7 +371,7 @@ class StorageService {
     }
   }
 
-  /// Listes archivées (Noublipo+) : liste de ShoppingListModel.toJson.
+  /// Listes archivées (Toteo+) : liste de ShoppingListModel.toJson.
   Future<List<Map<String, dynamic>>> loadArchivedLists() async {
     final json = _prefs.getString(_keyArchivedLists);
     if (json == null) return [];
@@ -457,7 +543,7 @@ class StorageService {
     }
   }
 
-  /// Modèles de liste utilisateur (Noublipo+).
+  /// Modèles de liste utilisateur (Toteo+).
   Future<List<ListTemplate>> loadListTemplates() async {
     final json = _prefs.getString(_keyListTemplates);
     if (json == null) return [];
@@ -484,7 +570,7 @@ class StorageService {
     }
   }
 
-  /// Groupes de listes (Noublipo+).
+  /// Groupes de listes (Toteo+).
   Future<List<ListGroup>> loadListGroups() async {
     final json = _prefs.getString(_keyListGroups);
     if (json == null) return [];
@@ -511,7 +597,7 @@ class StorageService {
     }
   }
 
-  /// Anniversaires (Noublipo+).
+  /// Anniversaires (Toteo+).
   Future<List<BirthdayEntry>> loadBirthdays() async {
     final json = _prefs.getString(_keyBirthdays);
     if (json == null) return [];
@@ -538,7 +624,7 @@ class StorageService {
     }
   }
 
-  /// Gamification (streak, badges, historique courses, oublis). Noublipo+.
+  /// Gamification (streak, badges, historique courses, oublis). Toteo+.
   Future<GamificationData> loadGamificationData() async {
     final json = _prefs.getString(_keyGamification);
     if (json == null) return GamificationData();
@@ -594,7 +680,7 @@ class StorageService {
     }
   }
 
-  /// Premium : achat in-app ou version Plus (flavor). NopList+.
+  /// Premium : achat in-app ou version Plus (flavor). Tote 'O Recall+.
   bool get premiumPurchased => _prefs.getBool(_keyPremiumPurchased) ?? false;
   Future<void> setPremiumPurchased(bool value) async {
     try {
@@ -697,6 +783,7 @@ class StorageService {
       'remindersEnabled': remindersEnabled,
       'categoryStyle': categoryStyle,
       'sortMode': sortMode,
+      'listOrgMode': listOrgMode,
       'showPrices': showPrices,
       'autocomplete': autocomplete,
       'locale': localeLanguageCode,
@@ -744,6 +831,7 @@ class StorageService {
     if (data['remindersEnabled'] is bool) await setRemindersEnabled(data['remindersEnabled'] as bool);
     if (data['categoryStyle'] is String) await setCategoryStyle(data['categoryStyle'] as String);
     if (data['sortMode'] is String) await setSortMode(data['sortMode'] as String);
+    if (data['listOrgMode'] is String) await setListOrgMode(data['listOrgMode'] as String);
     if (data['showPrices'] is bool) await setShowPrices(data['showPrices'] as bool);
     if (data['autocomplete'] is bool) await setAutocomplete(data['autocomplete'] as bool);
     final locale = data['locale'] as String?;

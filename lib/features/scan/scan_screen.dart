@@ -6,9 +6,11 @@ import '../../../app_config.dart';
 import '../../../core/providers/list_provider.dart';
 import '../../../core/providers/settings_provider.dart';
 import '../../../core/services/open_food_facts_service.dart';
+import '../../../core/services/storage_service.dart';
+import '../../../core/ui/app_feedback.dart';
 import '../../../l10n/app_localizations.dart';
 
-/// Écran de scan de code-barres (Noublipo+) : ajoute le produit scanné à la liste actuelle.
+/// Écran de scan de code-barres (Toteo+) : ajoute le produit scanné à la liste actuelle.
 class ScanScreen extends StatefulWidget {
   const ScanScreen({super.key});
 
@@ -23,6 +25,23 @@ class _ScanScreenState extends State<ScanScreen> {
     torchEnabled: false,
   );
   bool _hasScanned = false;
+  bool _lookingUp = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _maybeShowHint());
+  }
+
+  Future<void> _maybeShowHint() async {
+    if (!mounted) return;
+    final storage = context.read<StorageService>();
+    if (storage.hintSeen('scan')) return;
+    await storage.setHintSeen('scan');
+    if (!mounted) return;
+    final l10n = AppLocalizations.of(context);
+    AppFeedback.info(context, l10n.hintScan);
+  }
 
   @override
   void dispose() {
@@ -31,7 +50,7 @@ class _ScanScreenState extends State<ScanScreen> {
   }
 
   Future<void> _onDetect(BarcodeCapture capture) async {
-    if (!isNoublipoPlus || !mounted || _hasScanned) return;
+    if (!isToteoPlus || !mounted || _hasScanned) return;
     final barcodes = capture.barcodes;
     if (barcodes.isEmpty) return;
     final barcode = barcodes.first;
@@ -39,34 +58,41 @@ class _ScanScreenState extends State<ScanScreen> {
     final code = raw.trim().isEmpty ? null : raw.trim();
     if (code == null || code.isEmpty) return;
     _hasScanned = true;
+    setState(() => _lookingUp = true);
     HapticFeedback.mediumImpact();
 
     final listProvider = context.read<ListProvider>();
     final settings = context.read<SettingsProvider>();
+    final l10n = AppLocalizations.of(context);
 
-    // Essayer Open Food Facts pour obtenir le nom du produit
-    String displayName;
-    final result = await OpenFoodFactsService.lookupByBarcode(code);
-    if (result.productName != null && result.productName!.isNotEmpty) {
-      displayName = settings.applyCapitalization(result.productName!);
-    } else {
-      displayName = settings.applyCapitalization('Article ($code)');
+    try {
+      final result = await OpenFoodFactsService.lookupByBarcode(code);
+      final found = result.productName != null && result.productName!.isNotEmpty;
+      final displayName = settings.applyCapitalization(
+        found ? result.productName! : 'Article ($code)',
+      );
+
+      await listProvider.addItem(displayName);
+      if (!mounted) return;
+      Navigator.of(context).pop();
+      if (found) {
+        AppFeedback.success(context, l10n.scanProductAdded(displayName));
+      } else {
+        AppFeedback.info(context, l10n.scanProductNotFound(displayName));
+      }
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        _hasScanned = false;
+        _lookingUp = false;
+      });
+      AppFeedback.error(context, l10n.scanFailed, retryLabel: l10n.retry);
     }
-
-    await listProvider.addItem(displayName);
-    if (!mounted) return;
-    Navigator.of(context).pop();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(AppLocalizations.of(context).scanProductAdded(displayName)),
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
   }
 
   @override
   Widget build(BuildContext context) {
-    if (!isNoublipoPlus) {
+    if (!isToteoPlus) {
       return Scaffold(
         appBar: AppBar(title: Text(AppLocalizations.of(context).scanTitle)),
         body: Center(child: Text(AppLocalizations.of(context).scanAvailablePlus)),
@@ -105,6 +131,17 @@ class _ScanScreenState extends State<ScanScreen> {
           MobileScanner(
             controller: _controller,
             onDetect: _onDetect,
+            errorBuilder: (context, error) {
+              return Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: Text(
+                    AppLocalizations.of(context).scanCameraDenied,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              );
+            },
           ),
           const Center(
             child: SizedBox(
@@ -120,6 +157,11 @@ class _ScanScreenState extends State<ScanScreen> {
               ),
             ),
           ),
+          if (_lookingUp)
+            const ColoredBox(
+              color: Color(0x66000000),
+              child: Center(child: CircularProgressIndicator()),
+            ),
           Positioned(
             bottom: 32,
             left: 24,

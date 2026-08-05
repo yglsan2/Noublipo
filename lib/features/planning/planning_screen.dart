@@ -6,6 +6,7 @@ import '../../../core/models/recurring_item.dart';
 import '../../../core/models/seasonal_template.dart';
 import '../../../core/providers/list_provider.dart';
 import '../../../core/providers/planning_provider.dart';
+import '../../../l10n/app_localizations.dart';
 
 /// Écran Planification : achats récurrents et listes saisonnières.
 class PlanningScreen extends StatefulWidget {
@@ -129,12 +130,22 @@ class _RecurringTab extends StatelessWidget {
               Center(
                 child: Padding(
                   padding: const EdgeInsets.all(24),
-                  child: Text(
-                    'Aucun achat récurrent.\nEx. : Lait tous les 7 jours.',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: Theme.of(context).colorScheme.onSurfaceVariant,
-                        ),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Aucun achat récurrent.\nEx. : Lait tous les 7 jours.',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                              color: Theme.of(context).colorScheme.onSurfaceVariant,
+                            ),
+                      ),
+                      const SizedBox(height: 16),
+                      FilledButton.icon(
+                        onPressed: () => _showAddRecurringSheet(context, planning),
+                        icon: const Icon(Icons.add),
+                        label: Text(AppLocalizations.of(context).planningEmptyCta),
+                      ),
+                    ],
                   ),
                 ),
               )

@@ -1,7 +1,8 @@
 {
   "@@locale": "lt",
-  "appTitle": "NopList",
-  "appTitlePlus": "NopList+",
+  "appTitle": "Tote 'O Recall",
+  "appTitlePlus": "Tote 'O Recall+",
+  "appTagline": "Sąrašas, kuris nieko nepamiršta!",
   "searchHint": "Search in list",
   "totalLabel": "Total",
   "addItem": "Add item",
@@ -218,7 +219,7 @@
   "save": "Save",
   "saveAsTemplateTitle": "Save as template",
   "saveButton": "Save",
-  "scanAvailablePlus": "Available in NopList+",
+  "scanAvailablePlus": "Available in Tote 'O Recall+",
   "scanTitle": "Scan",
   "selectedCount": "{n} selected",
   "@selectedCount": {
@@ -256,7 +257,7 @@
   "signInGoogleToEnable": "Sign in with Google to enable",
   "signInWithGoogle": "Sign in with Google",
   "sortColor": "Color",
-  "sortListLabel": "List sort (NopList+)",
+  "sortListLabel": "List sort (Tote 'O Recall+)",
   "sortName": "Name",
   "sortOrder": "Order",
   "styleBar": "Bar",
@@ -301,16 +302,31 @@
   "uncheckAll": "Pažymėti viską",
   "moveToFutureList": "Perkelti į vėlesnius pirkimus",
   "deleteOrMoveToFuture": "Ištrinti « {name} » arba perkelti į vėlesnius pirkimus?",
-  "@deleteOrMoveToFuture": { "placeholders": { "name": { "type": "String" } } },
+  "@deleteOrMoveToFuture": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "listFontScale": "Sąrašo teksto dydis",
   "listFontScaleSubtitle": "Pritaikykite geresniam skaitomumui",
   "shoppingMode": "Pirkimo režimas",
   "shoppingModeSubtitle": "Supaprastinta vaizdas su dideliais mygtukais parduotuvėje",
-  "onboardingWelcome": "Sveiki atvykę į NopList",
+  "onboardingWelcome": "Sveiki atvykę į Tote 'O Recall",
   "onboardingWelcomeSubtitle": "Pradėkite tuščiu sąrašu arba pasirinkite šabloną žemiau.",
   "startEmpty": "Pradėti tuščiu sąrašu",
   "progressCount": "{checked} / {total}",
-  "@progressCount": { "placeholders": { "checked": { "type": "int" }, "total": { "type": "int" } } },
+  "@progressCount": {
+    "placeholders": {
+      "checked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "sendLinkBy": "Atsiųskite nuorodą žinute arba el. paštu kvietimui",
   "syncConflictHint": "Galimas konfliktas: pakeitimai sujungti.",
   "smartCartTitle": "Pirkimų asistentas",
@@ -342,22 +358,61 @@
   "shoppingSocialSubtitle": "Anonimizuotos tendencijos: ką perka kiti (sujungti duomenys, tavo sąrašas nesidalinamas)",
   "shoppingSocialPopularNearby": "Populiaru netoliese",
   "shoppingSocialTrendThisWeek": "Tavo rajone {percent} % vartotojų perka « {product} » šią savaitę.",
-  "@shoppingSocialTrendThisWeek": { "placeholders": { "percent": { "type": "int" }, "product": { "type": "String" } } },
+  "@shoppingSocialTrendThisWeek": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialTrendsTitle": "Maisto tendencijos (anonimizuotos)",
   "probableListEmptyHint": "Pridėk pasikartojančių pirkinių ir užbaik apsipirkimus, kad programa išmoktų tavo įpročius ir pasiūlytų tikėtiną sąrašą.",
   "probableListSelectAll": "Pasirinkti viską",
   "probableListDeselectAll": "Atžymėti viską",
   "probableListSelectedCount": "{count} pasirinkta(-ų)",
-  "@probableListSelectedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "probableListAddedCount": "{count} pridėta į tavo sąrašą",
-  "@probableListAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartSeeMore": "Rodyti daugiau",
   "smartCartSuggestionsCount": "{count} pasiūlymas(-ų)",
-  "@smartCartSuggestionsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartSuggestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddedCount": "{count} pridėta",
-  "@smartCartAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingSocialAddProduct": "Pridėti « {product} » į mano sąrašą",
-  "@shoppingSocialAddProduct": { "placeholders": { "product": { "type": "String" } } },
+  "@shoppingSocialAddProduct": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialDemoDataNote": "Demonstraciniai duomenys. Tikros tendencijos būsimame atnaujinime. Asmens duomenys nesidalinami (GDPR).",
   "shoppingSocialPopularRecipes": "Populiarūs receptai",
   "shoppingSocialViewIngredients": "Peržiūrėti ingredientus",

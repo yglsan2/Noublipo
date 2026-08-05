@@ -1,7 +1,8 @@
 {
   "@@locale": "vi",
-  "appTitle": "NopList",
-  "appTitlePlus": "NopList+",
+  "appTitle": "Tote 'O Recall",
+  "appTitlePlus": "Tote 'O Recall+",
+  "appTagline": "Danh sách không bao giờ quên!",
   "searchHint": "Search in list",
   "totalLabel": "Total",
   "addItem": "Add item",
@@ -218,7 +219,7 @@
   "save": "Save",
   "saveAsTemplateTitle": "Save as template",
   "saveButton": "Save",
-  "scanAvailablePlus": "Available in NopList+",
+  "scanAvailablePlus": "Available in Tote 'O Recall+",
   "scanTitle": "Scan",
   "selectedCount": "{n} selected",
   "@selectedCount": {
@@ -256,7 +257,7 @@
   "signInGoogleToEnable": "Sign in with Google to enable",
   "signInWithGoogle": "Sign in with Google",
   "sortColor": "Color",
-  "sortListLabel": "List sort (NopList+)",
+  "sortListLabel": "List sort (Tote 'O Recall+)",
   "sortName": "Name",
   "sortOrder": "Order",
   "styleBar": "Bar",
@@ -301,16 +302,31 @@
   "uncheckAll": "Bỏ chọn tất cả",
   "moveToFutureList": "Chuyển vào mua sau",
   "deleteOrMoveToFuture": "Xóa « {name} » hay chuyển vào mua sau?",
-  "@deleteOrMoveToFuture": { "placeholders": { "name": { "type": "String" } } },
+  "@deleteOrMoveToFuture": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "listFontScale": "Cỡ chữ danh sách",
   "listFontScaleSubtitle": "Chỉnh cho dễ đọc",
   "shoppingMode": "Chế độ mua sắm",
   "shoppingModeSubtitle": "Giao diện đơn giản với nút to trong cửa hàng",
-  "onboardingWelcome": "Chào mừng đến NopList",
+  "onboardingWelcome": "Chào mừng đến Tote 'O Recall",
   "onboardingWelcomeSubtitle": "Bắt đầu với danh sách trống hoặc chọn mẫu bên dưới.",
   "startEmpty": "Bắt đầu với danh sách trống",
   "progressCount": "{checked} / {total}",
-  "@progressCount": { "placeholders": { "checked": { "type": "int" }, "total": { "type": "int" } } },
+  "@progressCount": {
+    "placeholders": {
+      "checked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "sendLinkBy": "Gửi liên kết qua tin nhắn hoặc email để mời",
   "syncConflictHint": "Có thể xung đột: thay đổi đã được gộp.",
   "statsMonthlyEvolution": "Tiến triển theo tháng",
@@ -326,22 +342,61 @@
   "shoppingSocialSubtitle": "Xu hướng ẩn danh: người khác mua gì (dữ liệu tổng hợp, danh sách của bạn không được chia sẻ)",
   "shoppingSocialPopularNearby": "Phổ biến gần bạn",
   "shoppingSocialTrendThisWeek": "Trong khu vực của bạn, {percent} % người dùng mua « {product} » tuần này.",
-  "@shoppingSocialTrendThisWeek": { "placeholders": { "percent": { "type": "int" }, "product": { "type": "String" } } },
+  "@shoppingSocialTrendThisWeek": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialTrendsTitle": "Xu hướng thực phẩm (ẩn danh)",
   "probableListEmptyHint": "Thêm mua sắm lặp lại và hoàn tất các chuyến đi để app học thói quen của bạn và gợi ý danh sách có thể.",
   "probableListSelectAll": "Chọn tất cả",
   "probableListDeselectAll": "Bỏ chọn tất cả",
   "probableListSelectedCount": "{count} mục đã chọn",
-  "@probableListSelectedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "probableListAddedCount": "{count} mục đã thêm vào danh sách của bạn",
-  "@probableListAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartSeeMore": "Xem thêm",
   "smartCartSuggestionsCount": "{count} gợi ý",
-  "@smartCartSuggestionsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartSuggestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddedCount": "{count} mục đã thêm",
-  "@smartCartAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingSocialAddProduct": "Thêm « {product} » vào danh sách của tôi",
-  "@shoppingSocialAddProduct": { "placeholders": { "product": { "type": "String" } } },
+  "@shoppingSocialAddProduct": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialDemoDataNote": "Dữ liệu demo. Xu hướng thực tế trong bản cập nhật tương lai. Không chia sẻ dữ liệu cá nhân (GDPR).",
   "shoppingSocialPopularRecipes": "Công thức phổ biến",
   "shoppingSocialViewIngredients": "Xem nguyên liệu",

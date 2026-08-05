@@ -1,4 +1,4 @@
-name: noublipo
+name: toteo
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -38,7 +38,7 @@ dependencies:
   hive_flutter: ^1.1.0
   shared_preferences: ^2.2.3
   uuid: ^4.5.1
-  # Noublipo+ uniquement (optionnel)
+  # Toteo+ uniquement (optionnel)
   speech_to_text: ^7.0.0
   image_picker: ^1.1.2
   path_provider: ^2.1.4
@@ -60,6 +60,7 @@ dependencies:
   # Monétisation : pubs discrètes (version gratuite) + IAP
   google_mobile_ads: ^5.2.0
   in_app_purchase: ^3.2.0
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:

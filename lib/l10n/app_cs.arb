@@ -1,7 +1,8 @@
 {
   "@@locale": "cs",
-  "appTitle": "NopList",
-  "appTitlePlus": "NopList+",
+  "appTitle": "Tote 'O Recall",
+  "appTitlePlus": "Tote 'O Recall+",
+  "appTagline": "Seznam, který nic nezapomene!",
   "searchHint": "Search in list",
   "totalLabel": "Total",
   "addItem": "Add item",
@@ -218,7 +219,7 @@
   "save": "Save",
   "saveAsTemplateTitle": "Save as template",
   "saveButton": "Save",
-  "scanAvailablePlus": "Available in NopList+",
+  "scanAvailablePlus": "Available in Tote 'O Recall+",
   "scanTitle": "Scan",
   "selectedCount": "{n} selected",
   "@selectedCount": {
@@ -256,7 +257,7 @@
   "signInGoogleToEnable": "Sign in with Google to enable",
   "signInWithGoogle": "Sign in with Google",
   "sortColor": "Color",
-  "sortListLabel": "List sort (NopList+)",
+  "sortListLabel": "List sort (Tote 'O Recall+)",
   "sortName": "Name",
   "sortOrder": "Order",
   "styleBar": "Bar",
@@ -301,16 +302,31 @@
   "uncheckAll": "Zrušit vše",
   "moveToFutureList": "Přesunout do pozdějších nákupů",
   "deleteOrMoveToFuture": "Smazat « {name} » nebo přesunout do pozdějších nákupů?",
-  "@deleteOrMoveToFuture": { "placeholders": { "name": { "type": "String" } } },
+  "@deleteOrMoveToFuture": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "listFontScale": "Velikost písma seznamu",
   "listFontScaleSubtitle": "Upravte pro lepší čitelnost",
   "shoppingMode": "Režim nákupu",
   "shoppingModeSubtitle": "Zjednodušené zobrazení s velkými tlačítky v obchodě",
-  "onboardingWelcome": "Vítejte v NopList",
+  "onboardingWelcome": "Vítejte v Tote 'O Recall",
   "onboardingWelcomeSubtitle": "Začněte s prázdným seznamem nebo vyberte šablonu níže.",
   "startEmpty": "Začít s prázdným seznamem",
   "progressCount": "{checked} / {total}",
-  "@progressCount": { "placeholders": { "checked": { "type": "int" }, "total": { "type": "int" } } },
+  "@progressCount": {
+    "placeholders": {
+      "checked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "sendLinkBy": "Pošlete odkaz zprávou nebo e-mailem pro pozvání",
   "syncConflictHint": "Možný konflikt: změny byly sloučeny.",
   "statsMonthlyEvolution": "Měsíční vývoj",
@@ -326,22 +342,61 @@
   "shoppingSocialSubtitle": "Anonymizované trendy: co kupují ostatní (agregovaná data, tvůj seznam není sdílen)",
   "shoppingSocialPopularNearby": "Populární ve tvém okolí",
   "shoppingSocialTrendThisWeek": "Ve tvé oblasti {percent} % uživatelů kupuje tento týden « {product} ».",
-  "@shoppingSocialTrendThisWeek": { "placeholders": { "percent": { "type": "int" }, "product": { "type": "String" } } },
+  "@shoppingSocialTrendThisWeek": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialTrendsTitle": "Potravinové trendy (anonymizované)",
   "probableListEmptyHint": "Přidej opakující se nákupy a dokonči nákupy, aby se aplikace naučila tvé zvyky a navrhla pravděpodobný seznam.",
   "probableListSelectAll": "Vybrat vše",
   "probableListDeselectAll": "Zrušit výběr",
   "probableListSelectedCount": "{count} položek vybráno",
-  "@probableListSelectedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "probableListAddedCount": "{count} položek přidáno do seznamu",
-  "@probableListAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartSeeMore": "Zobrazit více",
   "smartCartSuggestionsCount": "{count} návrh(ů)",
-  "@smartCartSuggestionsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartSuggestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddedCount": "{count} položek přidáno",
-  "@smartCartAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingSocialAddProduct": "Přidat « {product} » do mého seznamu",
-  "@shoppingSocialAddProduct": { "placeholders": { "product": { "type": "String" } } },
+  "@shoppingSocialAddProduct": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialDemoDataNote": "Ukázková data. Skutečné trendy v budoucí aktualizaci. Žádná osobní data nesdílena (GDPR).",
   "shoppingSocialPopularRecipes": "Oblíbené recepty",
   "shoppingSocialViewIngredients": "Zobrazit ingredience",

@@ -4,17 +4,22 @@ import 'package:provider/provider.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import '../../../app_config.dart';
 import '../../../core/constants/touch_constants.dart';
+import '../../../core/data/meal_presets.dart';
 import '../../../core/layout/screen_layout.dart';
 import '../../../core/providers/list_provider.dart';
+import '../../../core/providers/premium_provider.dart';
 import '../../../core/providers/settings_provider.dart';
+import '../../../core/ui/app_feedback.dart';
+import '../../../core/ui/meal_preset_dialog.dart';
 import '../../../core/utils/app_logger.dart';
 import '../../../core/utils/quick_add_parser.dart';
 import '../../../core/utils/voice_text_cleaner.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../paywall/paywall_screen.dart';
 
 /// Bottom sheet d'ajout rapide : une phrase → liste (optionnelle) + articles.
 /// Ex: "Pomme" → liste actuelle ; "Liste Auchan ajouter Pomme, lait" → liste Auchan.
-/// Noublipo+ uniquement.
+/// Toteo+ uniquement.
 class QuickAddSheet extends StatefulWidget {
   const QuickAddSheet({super.key});
 
@@ -37,15 +42,55 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
     final text = _controller.text.trim();
     if (text.isEmpty) return;
     HapticFeedback.mediumImpact();
+
+    // Phrase repas → liste (Tote+)
+    final preset = MealPresets.match(text);
+    if (preset != null) {
+      final isPremium = context.read<PremiumProvider>().isPremiumActive;
+      final action = await showMealPresetDialog(
+        context,
+        preset: preset,
+        isPremium: isPremium,
+      );
+      if (!mounted) return;
+      if (action == 'all') {
+        final provider = context.read<ListProvider>();
+        final settings = context.read<SettingsProvider>();
+        try {
+          for (final item in preset.items) {
+            await provider.addItem(
+              settings.applyCapitalization(item.name),
+              colorIndex: item.colorIndex ?? preset.defaultColorIndex,
+            );
+          }
+          if (!mounted) return;
+          Navigator.of(context).pop();
+          AppFeedback.success(
+            context,
+            AppLocalizations.of(context).mealPresetAdded(preset.items.length, preset.label),
+          );
+        } catch (_) {
+          if (mounted) {
+            AppFeedback.error(context, AppLocalizations.of(context).errorGeneric);
+          }
+        }
+        return;
+      }
+      if (action == 'paywall') {
+        Navigator.of(context).pop();
+        if (!mounted) return;
+        await Navigator.of(context).push(
+          MaterialPageRoute<void>(builder: (_) => const PaywallScreen()),
+        );
+        return;
+      }
+      if (action != 'single') return;
+    }
+
     final result = QuickAddParser.parse(text);
     if (result.items.isEmpty) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(AppLocalizations.of(context).quickAddHint),
-            behavior: SnackBarBehavior.floating,
-          ),
-        );
+        AppFeedback.info(context, AppLocalizations.of(context).quickAddHint);
       }
       return;
     }
@@ -66,18 +111,10 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
       final msg = count == 1
           ? '${capitalized.single} ajouté à « $listName »'
           : '$count articles ajoutés à « $listName »';
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(msg),
-          behavior: SnackBarBehavior.floating,
-          duration: const Duration(seconds: 2),
-        ),
-      );
-    } catch (e) {
+      AppFeedback.success(context, msg);
+    } catch (_) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Erreur : $e'), behavior: SnackBarBehavior.floating),
-        );
+        AppFeedback.error(context, AppLocalizations.of(context).errorGeneric);
       }
     }
   }
@@ -100,7 +137,7 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
   }
 
   Future<void> _startVoiceInput() async {
-    if (!isNoublipoPlus || _isListening) return;
+    if (!isToteoPlus || _isListening) return;
     try {
       final speech = SpeechToText();
       final available = await speech.initialize();
@@ -192,7 +229,7 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.grey.shade700),
                 maxLines: 3,
               ),
-              if (isNoublipoPlus) ...[
+              if (isToteoPlus) ...[
                 Consumer<ListProvider>(
                   builder: (context, provider, _) {
                     final last = provider.lastQuickAddListName;

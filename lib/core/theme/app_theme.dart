@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 
-/// Thème clair, épuré et lisible (style Super Simple Shopping List).
+import '../constants/app_brand_colors.dart';
+
+/// Thème clair/sombre aligné sur la marque teal.
 class AppTheme {
   AppTheme._();
 
   static ThemeData get light => ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF4CAF50),
+          seedColor: AppBrandColors.seed,
           brightness: Brightness.light,
-          primary: const Color(0xFF4CAF50),
+          primary: AppBrandColors.seed,
         ),
         appBarTheme: const AppBarTheme(
           centerTitle: true,
           elevation: 0,
           backgroundColor: Colors.white,
-          foregroundColor: Colors.black87,
+          foregroundColor: AppBrandColors.navy,
         ),
-        scaffoldBackgroundColor: const Color(0xFFF5F5F5),
+        scaffoldBackgroundColor: const Color(0xFFF3F7F6),
         cardTheme: CardThemeData(
           elevation: 0,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -25,7 +27,7 @@ class AppTheme {
         ),
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           elevation: 4,
-          backgroundColor: Color(0xFF4CAF50),
+          backgroundColor: AppBrandColors.seed,
           foregroundColor: Colors.white,
         ),
         inputDecorationTheme: InputDecorationTheme(
@@ -36,14 +38,15 @@ class AppTheme {
         ),
       );
 
-  /// Mode nuit reposant : fonds doux, contraste réduit, texte lisible.
+  /// Mode nuit reposant : fonds doux, accents teal.
   static ThemeData get dark => ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF4CAF50),
+          seedColor: AppBrandColors.seed,
           brightness: Brightness.dark,
           surface: const Color(0xFF1A1A1A),
+          primary: AppBrandColors.tealBright,
         ),
         scaffoldBackgroundColor: const Color(0xFF121212),
         cardTheme: CardThemeData(
@@ -55,6 +58,11 @@ class AppTheme {
           elevation: 0,
           backgroundColor: Color(0xFF1A1A1A),
           foregroundColor: Color(0xFFE0E0E0),
+        ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          elevation: 4,
+          backgroundColor: AppBrandColors.tealBright,
+          foregroundColor: AppBrandColors.navyDeep,
         ),
         textTheme: const TextTheme().apply(
           bodyColor: Color(0xFFE0E0E0),

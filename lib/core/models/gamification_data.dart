@@ -1,4 +1,4 @@
-/// Données persistées pour streak, badges et stats (Noublipo+).
+/// Données persistées pour streak, badges et stats (Toteo+).
 class GamificationData {
   GamificationData({
     this.currentStreak = 0,

@@ -5,7 +5,7 @@ import '../services/storage_service.dart';
 import '../utils/app_logger.dart';
 import '../../app_config.dart';
 
-/// Profil de conso intelligent (Noublipo+ Pro) : régimes, allergies, évitements, tentations.
+/// Profil de conso intelligent (Toteo+ Pro) : régimes, allergies, évitements, tentations.
 class ConsumptionProfileProvider extends ChangeNotifier {
   ConsumptionProfileProvider(this._storage) {
     _load();
@@ -91,7 +91,7 @@ class ConsumptionProfileProvider extends ChangeNotifier {
 
   /// Vérifie un nom de produit : avertissement réduction/tentation, substitut, ou raison d'éviter.
   ProfileCheckResult checkProduct(String productName) {
-    if (!isNoublipoPlus || productName.trim().isEmpty) {
+    if (!isToteoPlus || productName.trim().isEmpty) {
       return ProfileCheckResult();
     }
     final n = productName.trim().toLowerCase();

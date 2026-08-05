@@ -30,6 +30,13 @@ class AboutScreen extends StatelessWidget {
                 ),
           ),
           Text(
+            AppLocalizations.of(context).appTagline,
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                  fontWeight: FontWeight.w500,
+                ),
+          ),
+          Text(
             'Version $appVersion',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: Colors.grey,
@@ -39,12 +46,12 @@ class AboutScreen extends StatelessWidget {
           _Section(
             title: 'Créateur',
             icon: Icons.person_outline,
-            child: const Text(
-              'NopList a été créée par DesertYGL.\n'
-              'Application de liste de courses simple et fluide. '
-              'La version gratuite peut afficher des publicités discrètes ; '
-              'NopList+ (achat unique) retire les pubs et débloque les fonctions avancées.',
-              style: TextStyle(height: 1.4),
+            child: Text(
+              "${AppLocalizations.of(context).appTitle} a été créée par DesertYGL.\n"
+              "${AppLocalizations.of(context).appTagline} "
+              "La version gratuite peut afficher des publicités discrètes ; "
+              "${AppLocalizations.of(context).appTitlePlus} (achat unique) retire les pubs et débloque les fonctions avancées.",
+              style: const TextStyle(height: 1.4),
             ),
           ),
           _Section(
@@ -57,7 +64,7 @@ class AboutScreen extends StatelessWidget {
               '• Suppression rapide : glissez un article vers la gauche pour le supprimer ; un message permet d’annuler.\n'
               '• Couleurs et catégories : en mode Magasins (Paramètres), les carrés en haut permettent d\'ajouter ou définir des magasins ; touchez un carré pour lui donner un nom.\n'
               '• Partager : icône partage → « Exporter en texte » ou « Partager en temps réel » (connexion Google).\n'
-              '• Plusieurs listes et fonctions avancées : disponibles avec NopList+.\n'
+              '• Plusieurs listes et fonctions avancées : disponibles avec Tote \'O Recall+.\n'
               '• Paramètres (icône engrenage) : style des articles, mode nuit, capitalisation, rappels, catégories.',
               style: TextStyle(height: 1.5),
             ),
@@ -110,7 +117,7 @@ class AboutScreen extends StatelessWidget {
             title: 'Accessibilité (RGAA)',
             icon: Icons.accessibility_new_outlined,
             child: const Text(
-              'NopList vise une conformité aux critères d’accessibilité (RGAA, niveau AA dans la mesure du possible) : '
+              'Tote \'O Recall vise une conformité aux critères d’accessibilité (RGAA, niveau AA dans la mesure du possible) : '
               'contraste, tailles de touche, mode nuit, libellés TalkBack, information non portée par la seule couleur.',
               style: TextStyle(height: 1.5),
             ),

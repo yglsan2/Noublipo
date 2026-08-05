@@ -43,11 +43,11 @@ class ListProvider extends ChangeNotifier {
   ShoppingListModel _list = ShoppingListModel(id: 'main', name: 'Ma liste');
   bool _loading = true;
   String _searchQuery = '';
-  /// Filtre « À acheter » : n'afficher que les articles non cochés (Noublipo+).
+  /// Filtre « À acheter » : n'afficher que les articles non cochés (Toteo+).
   bool _showUncheckedOnly = false;
   List<ListTemplate> _listTemplates = [];
   List<ListGroup> _listGroups = [];
-  /// Mode sélection pour actions groupées (Noublipo+).
+  /// Mode sélection pour actions groupées (Toteo+).
   bool _selectionMode = false;
   final Set<String> _selectedItemIds = {};
   final List<({String addedName, String suggestion})> _pendingPartnerSuggestions = [];
@@ -59,11 +59,11 @@ class ListProvider extends ChangeNotifier {
 
   /// Toutes les listes (pour basculeur).
   List<ShoppingListModel> get allLists => List.unmodifiable(_lists);
-  /// Groupes de listes (Noublipo+).
+  /// Groupes de listes (Toteo+).
   List<ListGroup> get listGroups => List.unmodifiable(_listGroups);
-  /// Listes regroupées par groupe (Noublipo+). Sans groupe en dernier.
+  /// Listes regroupées par groupe (Toteo+). Sans groupe en dernier.
   List<({String? groupId, String? groupName, List<ShoppingListModel> lists})> getListsGrouped() {
-    if (!isNoublipoPlus || _listGroups.isEmpty) {
+    if (!isToteoPlus || _listGroups.isEmpty) {
       return [(groupId: null, groupName: null, lists: List.from(_lists))];
     }
     final result = <({String? groupId, String? groupName, List<ShoppingListModel> lists})>[];
@@ -80,7 +80,7 @@ class ListProvider extends ChangeNotifier {
   String get currentListId => _currentListId;
 
   /// Articles triés : à acheter en premier, puis « dans le panier » (cochés).
-  /// [sortMode] : 'order' (défaut), 'name', 'color', 'aisle' (Noublipo+).
+  /// [sortMode] : 'order' (défaut), 'name', 'color', 'aisle' (Toteo+).
   /// Pour 'aisle', [aisleOrder] et [favoriteStoreIndices] sont utilisés (liste selon rayon / magasin favori).
   List<ShoppingItem> get sortedItems => getSortedItems('order');
 
@@ -115,11 +115,27 @@ class ListProvider extends ChangeNotifier {
     return List.unmodifiable(lst);
   }
 
-  /// Total des prix renseignés (articles non cochés, Noublipo+).
+  /// Total des prix renseignés (articles non cochés, Toteo+).
   double get totalPriceUnchecked {
     return _list.items
         .where((e) => !e.checked && e.price != null && e.price! > 0)
         .fold<double>(0, (sum, e) => sum + (e.price ?? 0));
+  }
+
+  /// Noms récents uniques (liste courante, plus récents d'abord), pour chips d'ajout rapide.
+  List<String> recentItemNames({int limit = 8}) {
+    final seen = <String>{};
+    final out = <String>[];
+    for (final item in _list.items.reversed) {
+      final n = item.name.trim();
+      if (n.isEmpty) continue;
+      final key = n.toLowerCase();
+      if (seen.contains(key)) continue;
+      seen.add(key);
+      out.add(n);
+      if (out.length >= limit) break;
+    }
+    return out;
   }
 
   String get searchQuery => _searchQuery;
@@ -136,14 +152,14 @@ class ListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Articles triés + filtrés par recherche et option « À acheter » (Noublipo+).
+  /// Articles triés + filtrés par recherche et option « À acheter » (Toteo+).
   List<ShoppingItem> getFilteredSortedItems(
     String sortMode, {
     Map<int, int>? aisleOrder,
     List<int>? favoriteStoreIndices,
   }) {
     final list = getSortedItems(sortMode, aisleOrder: aisleOrder, favoriteStoreIndices: favoriteStoreIndices);
-    final onlyUnchecked = isNoublipoPlus && _showUncheckedOnly;
+    final onlyUnchecked = isToteoPlus && _showUncheckedOnly;
     final q = _searchQuery.trim();
     if (!onlyUnchecked && q.isEmpty) return list;
     final qLower = q.toLowerCase();
@@ -154,8 +170,9 @@ class ListProvider extends ChangeNotifier {
     }).toList();
   }
 
-  /// Réordonne un article (oldIndex/newIndex dans la liste affichée, après filtres). Noublipo+.
-  /// [sortMode] pour cohérence avec l'affichage.
+  /// Réordonne un article (oldIndex/newIndex au format Flutter ReorderableList :
+  /// [newIndex] est l’index avant ajustement ; on retire 1 si newIndex > oldIndex).
+  /// Persiste le champ [order] ; utile surtout avec le tri « ordre manuel ».
   Future<void> reorderItem(
     int oldIndex,
     int newIndex,
@@ -163,17 +180,20 @@ class ListProvider extends ChangeNotifier {
     Map<int, int>? aisleOrder,
     List<int>? favoriteStoreIndices,
   }) async {
-    if (!isNoublipoPlus) return;
     final displayed = getFilteredSortedItems(
       sortMode,
       aisleOrder: aisleOrder,
       favoriteStoreIndices: favoriteStoreIndices,
     );
-    if (oldIndex < 0 || newIndex < 0 || oldIndex >= displayed.length || newIndex >= displayed.length) return;
-    if (oldIndex == newIndex) return;
+    if (oldIndex < 0 || newIndex < 0 || oldIndex >= displayed.length || newIndex > displayed.length) {
+      return;
+    }
+    var to = newIndex;
+    if (to > oldIndex) to -= 1;
+    if (oldIndex == to) return;
     final reordered = List<ShoppingItem>.from(displayed);
     final item = reordered.removeAt(oldIndex);
-    reordered.insert(newIndex, item);
+    reordered.insert(to, item);
     final orderForId = <String, int>{};
     for (var i = 0; i < reordered.length; i++) {
       orderForId[reordered[i].id] = i;
@@ -190,13 +210,96 @@ class ListProvider extends ChangeNotifier {
     await _save();
   }
 
+  /// Réordonne au sein d’un sous-ensemble (ex. articles d’un même magasin).
+  /// Réassigne les valeurs [order] déjà possédées par le groupe, sans toucher aux autres.
+  Future<void> reorderWithinGroup(List<ShoppingItem> group, int oldIndex, int newIndex) async {
+    if (group.length < 2) return;
+    if (oldIndex < 0 || newIndex < 0 || oldIndex >= group.length || newIndex > group.length) return;
+    var to = newIndex;
+    if (to > oldIndex) to -= 1;
+    if (oldIndex == to) return;
+    final reordered = List<ShoppingItem>.from(group);
+    final moved = reordered.removeAt(oldIndex);
+    reordered.insert(to, moved);
+    final orders = group.map((e) => e.order).toList()..sort();
+    final orderForId = <String, int>{};
+    for (var i = 0; i < reordered.length; i++) {
+      orderForId[reordered[i].id] = orders[i];
+    }
+    final newItems = _list.items.map((e) {
+      final o = orderForId[e.id];
+      return o == null ? e : e.copyWith(order: o);
+    }).toList();
+    newItems.sort((a, b) => a.order.compareTo(b.order));
+    _list = _list.copyWith(items: newItems);
+    await _save();
+  }
+
+  /// Déplace [movedId] juste avant [targetId] dans l’ordre affiché (tri manuel).
+  Future<void> moveItemBefore(String movedId, String targetId) async {
+    if (movedId == targetId) return;
+    final displayed = getFilteredSortedItems('order');
+    final from = displayed.indexWhere((e) => e.id == movedId);
+    if (from < 0) return;
+    final list = List<ShoppingItem>.from(displayed);
+    final moved = list.removeAt(from);
+    final insertAt = list.indexWhere((e) => e.id == targetId);
+    if (insertAt < 0) return;
+    list.insert(insertAt, moved);
+    final orderForId = <String, int>{};
+    for (var i = 0; i < list.length; i++) {
+      orderForId[list[i].id] = i;
+    }
+    var extraOrder = list.length;
+    for (final e in _list.items) {
+      if (!orderForId.containsKey(e.id)) {
+        orderForId[e.id] = extraOrder++;
+      }
+    }
+    final newItems = _list.items.map((e) => e.copyWith(order: orderForId[e.id] ?? e.order)).toList();
+    newItems.sort((a, b) => a.order.compareTo(b.order));
+    _list = _list.copyWith(items: newItems);
+    await _save();
+  }
+
+  /// Place [movedId] à la fin du groupe magasin [colorIndex] (change éventuellement de magasin).
+  Future<void> moveItemToStore(String movedId, int colorIndex) async {
+    final displayed = getFilteredSortedItems('order');
+    final from = displayed.indexWhere((e) => e.id == movedId);
+    if (from < 0) return;
+    final item = displayed[from];
+    final withNewStore = item.colorIndex == colorIndex
+        ? item
+        : item.copyWith(colorIndex: colorIndex);
+    // Retirer puis ajouter à la fin des articles de ce magasin dans la liste ordonnée.
+    final without = List<ShoppingItem>.from(displayed)..removeAt(from);
+    var insertAt = without.lastIndexWhere((e) => e.colorIndex == colorIndex);
+    insertAt = insertAt < 0 ? without.length : insertAt + 1;
+    without.insert(insertAt, withNewStore);
+    final orderForId = <String, int>{};
+    for (var i = 0; i < without.length; i++) {
+      orderForId[without[i].id] = i;
+    }
+    final newItems = _list.items.map((e) {
+      if (e.id == movedId) {
+        return e.copyWith(order: orderForId[e.id] ?? e.order, colorIndex: colorIndex);
+      }
+      final o = orderForId[e.id];
+      return o == null ? e : e.copyWith(order: o);
+    }).toList();
+    newItems.sort((a, b) => a.order.compareTo(b.order));
+    _list = _list.copyWith(items: newItems);
+    notifyListeners();
+    await _save();
+  }
+
   /// Noms des articles de la liste actuelle (pour suggestions de saisie).
   List<String> get currentItemNames =>
       _list.items.map((e) => e.name).toSet().toList();
 
   bool get loading => _loading;
 
-  /// Dernière liste utilisée pour l'ajout rapide (suggestion). Noublipo+.
+  /// Dernière liste utilisée pour l'ajout rapide (suggestion). Toteo+.
   String? get lastQuickAddListName => _storage.lastQuickAddListName;
 
   Future<void> saveLastQuickAddListName(String name) async {
@@ -204,12 +307,12 @@ class ListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Modèles de liste enregistrés (Noublipo+).
+  /// Modèles de liste enregistrés (Toteo+).
   List<ListTemplate> get listTemplates => List.unmodifiable(_listTemplates);
 
-  /// Enregistre la liste actuelle comme modèle (Noublipo+).
+  /// Enregistre la liste actuelle comme modèle (Toteo+).
   Future<void> saveCurrentListAsTemplate(String templateName) async {
-    if (!isNoublipoPlus || isSharedList) return;
+    if (!isToteoPlus || isSharedList) return;
     final name = templateName.trim().isEmpty ? _list.name : templateName.trim();
     final items = _list.items
         .map((e) => ListTemplateItem(name: e.name, colorIndex: e.colorIndex))
@@ -220,9 +323,9 @@ class ListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Crée une nouvelle liste à partir d'un modèle (Noublipo+).
+  /// Crée une nouvelle liste à partir d'un modèle (Toteo+).
   Future<void> createListFromTemplate(ListTemplate template) async {
-    if (!isNoublipoPlus || isSharedList) return;
+    if (!isToteoPlus || isSharedList) return;
     final order = _lists.isEmpty ? 0 : _lists.map((e) => e.order).reduce((a, b) => a > b ? a : b) + 1;
     final newItems = template.items.asMap().entries.map((e) {
       return ShoppingItem(
@@ -247,17 +350,17 @@ class ListProvider extends ChangeNotifier {
     updateHomeWidgetFromList(_list);
   }
 
-  /// Supprime un modèle de liste (Noublipo+).
+  /// Supprime un modèle de liste (Toteo+).
   Future<void> deleteListTemplate(String templateId) async {
-    if (!isNoublipoPlus) return;
+    if (!isToteoPlus) return;
     _listTemplates = _listTemplates.where((t) => t.id != templateId).toList();
     await _storage.saveListTemplates(_listTemplates);
     notifyListeners();
   }
 
-  /// Ajoute un groupe de listes (Noublipo+).
+  /// Ajoute un groupe de listes (Toteo+).
   Future<void> addListGroup(String name) async {
-    if (!isNoublipoPlus || isSharedList) return;
+    if (!isToteoPlus || isSharedList) return;
     final order = _listGroups.isEmpty ? 0 : _listGroups.map((e) => e.order).reduce((a, b) => a > b ? a : b) + 1;
     _listGroups = [..._listGroups, ListGroup(id: _uuid.v4(), name: name.trim(), order: order)];
     await _storage.saveListGroups(_listGroups);
@@ -266,7 +369,7 @@ class ListProvider extends ChangeNotifier {
 
   /// Renomme un groupe.
   Future<void> renameListGroup(String groupId, String newName) async {
-    if (!isNoublipoPlus) return;
+    if (!isToteoPlus) return;
     final idx = _listGroups.indexWhere((g) => g.id == groupId);
     if (idx < 0) return;
     _listGroups = List.from(_listGroups)..[idx] = ListGroup(id: groupId, name: newName.trim(), order: _listGroups[idx].order);
@@ -276,7 +379,7 @@ class ListProvider extends ChangeNotifier {
 
   /// Supprime un groupe (les listes passent en sans groupe).
   Future<void> removeListGroup(String groupId) async {
-    if (!isNoublipoPlus) return;
+    if (!isToteoPlus) return;
     _listGroups = _listGroups.where((g) => g.id != groupId).toList();
     _lists = _lists.map((l) => l.groupId == groupId ? l.copyWith(groupId: null) : l).toList();
     await _storage.saveAllLists(_lists);
@@ -287,7 +390,7 @@ class ListProvider extends ChangeNotifier {
 
   /// Assigne une liste à un groupe (ou null pour sans groupe).
   Future<void> setListGroup(String listId, String? groupId) async {
-    if (!isNoublipoPlus || isSharedList) return;
+    if (!isToteoPlus || isSharedList) return;
     final idx = _lists.indexWhere((l) => l.id == listId);
     if (idx < 0) return;
     _lists = List.from(_lists)..[idx] = _lists[idx].copyWith(groupId: groupId);
@@ -296,7 +399,7 @@ class ListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Mode sélection pour actions groupées (Noublipo+).
+  /// Mode sélection pour actions groupées (Toteo+).
   bool get selectionMode => _selectionMode;
   Set<String> get selectedItemIds => Set.from(_selectedItemIds);
   int get selectedCount => _selectedItemIds.length;
@@ -318,20 +421,22 @@ class ListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Supprime les articles sélectionnés.
-  Future<void> removeSelectedItems() async {
-    if (!isNoublipoPlus || _selectedItemIds.isEmpty) return;
+  /// Supprime les articles sélectionnés. Retourne les articles retirés (pour undo).
+  Future<List<ShoppingItem>> removeSelectedItems() async {
+    if (!isToteoPlus || _selectedItemIds.isEmpty) return const [];
+    final removed = _list.items.where((e) => _selectedItemIds.contains(e.id)).toList();
     _list = _list.copyWith(
       items: _list.items.where((e) => !_selectedItemIds.contains(e.id)).toList(),
     );
     _selectedItemIds.clear();
     _selectionMode = false;
     await _save();
+    return removed;
   }
 
   /// Déplace les articles sélectionnés vers une autre liste.
   Future<void> moveSelectedItemsToList(String targetListId) async {
-    if (!isNoublipoPlus || _selectedItemIds.isEmpty || isSharedList) return;
+    if (!isToteoPlus || _selectedItemIds.isEmpty || isSharedList) return;
     final toMove = _list.items.where((e) => _selectedItemIds.contains(e.id)).toList();
     if (toMove.isEmpty) return;
     final targetIdx = _lists.indexWhere((l) => l.id == targetListId);
@@ -357,14 +462,14 @@ class ListProvider extends ChangeNotifier {
 
   /// Déplace les articles sélectionnés vers Achats futurs.
   Future<void> moveSelectedItemsToFutureList() async {
-    if (!isNoublipoPlus || _selectedItemIds.isEmpty) return;
+    if (!isToteoPlus || _selectedItemIds.isEmpty) return;
     _ensureAchatsFutursList();
     await moveSelectedItemsToList(kAchatsFutursListId);
   }
 
   /// Déplace les articles non cochés de la liste actuelle vers Achats futurs (Pro). À appeler avant ou après finishShopping() selon le flux.
   Future<void> moveUncheckedToFutureList() async {
-    if (!isNoublipoPlus || isSharedList) return;
+    if (!isToteoPlus || isSharedList) return;
     final unchecked = _list.items.where((e) => !e.checked).toList();
     if (unchecked.isEmpty) return;
     _ensureAchatsFutursList();
@@ -390,14 +495,14 @@ class ListProvider extends ChangeNotifier {
   bool get isCurrentListAchatsFuturs => _list.id == kAchatsFutursListId;
 
   void _ensureAchatsFutursList() {
-    if (!isNoublipoPlus) return;
+    if (!isToteoPlus) return;
     if (_lists.any((l) => l.id == kAchatsFutursListId)) return;
     final order = _lists.isEmpty ? 0 : _lists.map((e) => e.order).reduce((a, b) => a > b ? a : b) + 1;
     _lists = [..._lists, ShoppingListModel(id: kAchatsFutursListId, name: kAchatsFutursListName, order: order)];
   }
 
   void _ensureEngagementsList() {
-    if (!isNoublipoPlus) return;
+    if (!isToteoPlus) return;
     if (_lists.any((l) => l.id == kEngagementsListId)) return;
     final order = _lists.isEmpty ? 0 : _lists.map((e) => e.order).reduce((a, b) => a > b ? a : b) + 1;
     _lists = [..._lists, ShoppingListModel(id: kEngagementsListId, name: kEngagementsListName, order: order)];
@@ -439,11 +544,11 @@ class ListProvider extends ChangeNotifier {
       _storage.saveMainList(_list).catchError((e, stack) {
         AppLogger.error('_onSyncUpdate saveMainList', e, stack);
       });
-      notifyListeners();
       updateHomeWidgetFromList(_list);
     } else if (_sync?.isSignedIn == true && _list.items.isNotEmpty && isSharedList) {
       _sync!.saveList(_list);
     }
+    notifyListeners();
   }
 
   Future<void> _load() async {
@@ -466,7 +571,7 @@ class ListProvider extends ChangeNotifier {
       }
       _currentListId = id;
       _list = _lists.firstWhere((l) => l.id == _currentListId);
-      if (isNoublipoPlus) {
+      if (isToteoPlus) {
         _listTemplates = await _storage.loadListTemplates();
         _listGroups = await _storage.loadListGroups();
       }
@@ -491,7 +596,6 @@ class ListProvider extends ChangeNotifier {
     try {
       if (isSharedList) {
         await _storage.saveMainList(_list);
-        _scheduleSyncSave();
       } else {
         final idx = _lists.indexWhere((l) => l.id == _list.id);
         if (idx >= 0) {
@@ -501,6 +605,9 @@ class ListProvider extends ChangeNotifier {
         }
         await _storage.saveAllLists(_lists);
         await _storage.saveMainList(_list);
+      }
+      if (_sync?.isSignedIn == true) {
+        _scheduleSyncSave();
       }
       notifyListeners();
       updateHomeWidgetFromList(_list);
@@ -514,7 +621,7 @@ class ListProvider extends ChangeNotifier {
     _syncDebounceTimer?.cancel();
     _syncDebounceTimer = Timer(_syncDebounceDelay, () {
       _syncDebounceTimer = null;
-        if (isSharedList && _sync != null) {
+      if (_sync != null && _sync.isSignedIn) {
         _sync.saveList(_list);
       }
     });
@@ -581,7 +688,7 @@ class ListProvider extends ChangeNotifier {
     }
   }
 
-  /// Duplique la liste actuelle (nouvelle liste avec mêmes articles, Noublipo+).
+  /// Duplique la liste actuelle (nouvelle liste avec mêmes articles, Toteo+).
   Future<void> duplicateCurrentList() async {
     if (isSharedList) return;
     try {
@@ -702,13 +809,13 @@ class ListProvider extends ChangeNotifier {
     return targetListName;
   }
 
-  /// Ajoute un engagement implicite à la liste Engagements (Noublipo+) et planifie le rappel.
+  /// Ajoute un engagement implicite à la liste Engagements (Toteo+) et planifie le rappel.
   Future<void> addEngagementItem(
     String title, {
     int? reminderAt,
     String? reminderNote,
   }) async {
-    if (!isNoublipoPlus || isSharedList) return;
+    if (!isToteoPlus || isSharedList) return;
     _ensureEngagementsList();
     await _storage.saveAllLists(_lists);
     final engagementsList = _lists.firstWhere((l) => l.id == kEngagementsListId);
@@ -908,14 +1015,30 @@ class ListProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> removeChecked() async {
+  /// Retourne les articles cochés retirés (pour undo).
+  Future<List<ShoppingItem>> removeChecked() async {
     try {
+      final removed = _list.items.where((e) => e.checked).toList();
       _list = _list.copyWith(
         items: _list.items.where((e) => !e.checked).toList(),
       );
       await _save();
+      return removed;
     } catch (e, stack) {
       AppLogger.error('removeChecked', e, stack);
+      rethrow;
+    }
+  }
+
+  Future<void> restoreItems(List<ShoppingItem> items) async {
+    if (items.isEmpty) return;
+    try {
+      final newItems = List<ShoppingItem>.from(_list.items)..addAll(items);
+      newItems.sort((a, b) => a.order.compareTo(b.order));
+      _list = _list.copyWith(items: newItems);
+      await _save();
+    } catch (e, stack) {
+      AppLogger.error('restoreItems', e, stack);
       rethrow;
     }
   }
@@ -956,7 +1079,7 @@ class ListProvider extends ChangeNotifier {
 
   /// Déplace un article vers la liste "Achats futurs" (sans annuler le rappel). Pro uniquement.
   Future<void> moveItemToFutureList(String itemId) async {
-    if (!isNoublipoPlus || isSharedList) return;
+    if (!isToteoPlus || isSharedList) return;
     final item = _list.items.cast<ShoppingItem?>().firstWhere(
           (e) => e?.id == itemId,
           orElse: () => null,
@@ -1018,13 +1141,23 @@ class ListProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> signInWithGoogle() async {
+  /// `true` si connecté, `false` si annulé, throw si erreur.
+  Future<bool> signInWithGoogle() async {
     try {
-      await _sync?.signInWithGoogle();
+      return await _sync?.signInWithGoogle() ?? false;
     } catch (e, stack) {
       AppLogger.error('signInWithGoogle', e, stack);
       rethrow;
     }
+  }
+
+  bool get syncIsSaving => _sync?.isSaving ?? false;
+  String? get syncLastError => _sync?.lastSaveError;
+  void clearSyncError() => _sync?.clearLastSaveError();
+
+  Future<bool> retrySyncSave() async {
+    if (_sync == null || !_sync.isSignedIn) return false;
+    return _sync.saveList(_list);
   }
 
   Future<void> signOut() async {

@@ -9,7 +9,7 @@ import '../../../l10n/app_localizations.dart';
 import 'liquid_tile_background.dart';
 
 /// Une ligne d'article : bande couleur + nom + coche.
-/// Si [showPlusExtras] (Noublipo+), affiche aussi note, image, prix.
+/// Si [showPlusExtras] (Toteo+), affiche aussi note, image, prix.
 class ItemTile extends StatelessWidget {
   const ItemTile({
     super.key,
@@ -23,11 +23,15 @@ class ItemTile extends StatelessWidget {
     this.showPlusExtras = false,
     this.compact = false,
     this.wrapSized = false,
+    this.showTooltips = true,
+    this.onSecondaryTap,
   });
 
   final ShoppingItem item;
   final VoidCallback onTap;
   final VoidCallback onLongPress;
+  /// Clic droit (souris) : menu actions. Si null, utilise [onLongPress].
+  final VoidCallback? onSecondaryTap;
   final String? categoryLabel;
   final String tileStyle;
   final double? minHeight;
@@ -37,6 +41,8 @@ class ItemTile extends StatelessWidget {
   final bool compact;
   /// En true, la tuile se dimensionne à la largeur du contenu (pour Wrap, tous les articles comme les cochés).
   final bool wrapSized;
+  /// Désactiver pour éviter OverlayPortal dans ReorderableListView (crash LayoutBuilder).
+  final bool showTooltips;
 
   static double _tileBorderRadius(String style) {
     switch (style) {
@@ -82,6 +88,91 @@ class ItemTile extends StatelessWidget {
     }
 
     final effectiveMinH = compact ? 44.0 : minH;
+
+    /// Bulle Wrap : largeur = contenu (plusieurs articles par ligne).
+    if (compact && wrapSized) {
+      final nameStyle = TextStyle(
+        fontSize: (fs * 0.95).clamp(15.0, 17.0),
+        decoration: item.checked ? TextDecoration.lineThrough : null,
+        color: textColor,
+        fontWeight: isFilled ? FontWeight.w500 : null,
+      );
+      final bubbleRow = Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (!isFilled) ...[
+              Container(
+                width: 6,
+                height: 28,
+                decoration: BoxDecoration(
+                  color: color,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
+              const SizedBox(width: 8),
+            ],
+            if (item.recurringItemId != null) ...[
+              Icon(Icons.repeat, size: 14, color: secondaryColor),
+              const SizedBox(width: 4),
+            ],
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 200),
+              child: Text(
+                item.name,
+                style: nameStyle,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            const SizedBox(width: 6),
+            Icon(
+              item.checked ? Icons.check_circle : Icons.radio_button_unchecked,
+              color: item.checked
+                  ? (isFilled ? (isDark ? color : color.withValues(alpha: 0.9)) : color)
+                  : secondaryColor,
+              size: 22,
+            ),
+          ],
+        ),
+      );
+
+      final radius = _tileBorderRadius(tileStyle);
+      final clipRadius = BorderRadius.circular(radius);
+      // Pas de StackFit.expand (zebra/goutte) ici : le Wrap donne des contraintes
+      // non bornées → exceptions de layout. Fond Material simple pour les bulles.
+      final tileChild = Material(
+        color: tileColor,
+        shape: RoundedRectangleBorder(borderRadius: clipRadius),
+        clipBehavior: Clip.antiAlias,
+        child: bubbleRow,
+      );
+
+      final interactive = GestureDetector(
+        onSecondaryTapDown: (_) {
+          HapticFeedback.mediumImpact();
+          (onSecondaryTap ?? onLongPress)();
+        },
+        child: InkWell(
+          onTap: () {
+            HapticFeedback.lightImpact();
+            onTap();
+          },
+          onLongPress: () {
+            HapticFeedback.mediumImpact();
+            onLongPress();
+          },
+          borderRadius: clipRadius,
+          child: tileChild,
+        ),
+      );
+
+      return showTooltips
+          ? Tooltip(message: 'Clic droit : Modifier ou supprimer', child: interactive)
+          : interactive;
+    }
+
     Widget content = ConstrainedBox(
       constraints: BoxConstraints(minHeight: effectiveMinH),
       child: Padding(
@@ -257,22 +348,32 @@ class ItemTile extends StatelessWidget {
                               ),
                               if (item.recurringItemId != null) ...[
                                 const SizedBox(width: 4),
-                                Tooltip(
-                                  message: AppLocalizations.of(context).recurringTooltip,
-                                  child: Icon(Icons.repeat, size: 16, color: secondaryColor),
-                                ),
+                                if (showTooltips)
+                                  Tooltip(
+                                    message: AppLocalizations.of(context).recurringTooltip,
+                                    child: Icon(Icons.repeat, size: 16, color: secondaryColor),
+                                  )
+                                else
+                                  Icon(Icons.repeat, size: 16, color: secondaryColor),
                               ],
                               if (hasReminder) ...[
                                 const SizedBox(width: 6),
-                                Tooltip(
-                                  message: reminderTooltip(item.reminderAt, item.reminderNote),
-                                  preferBelow: false,
-                                  child: Icon(
+                                if (showTooltips)
+                                  Tooltip(
+                                    message: reminderTooltip(item.reminderAt, item.reminderNote),
+                                    preferBelow: false,
+                                    child: Icon(
+                                      Icons.schedule_outlined,
+                                      size: 16,
+                                      color: secondaryColor,
+                                    ),
+                                  )
+                                else
+                                  Icon(
                                     Icons.schedule_outlined,
                                     size: 16,
                                     color: secondaryColor,
                                   ),
-                                ),
                               ],
                             ],
                           ),
@@ -412,7 +513,7 @@ class ItemTile extends StatelessWidget {
     final inner = GestureDetector(
       onSecondaryTapDown: (_) {
         HapticFeedback.mediumImpact();
-        onLongPress();
+        (onSecondaryTap ?? onLongPress)();
       },
       child: InkWell(
         onTap: () {
@@ -462,15 +563,22 @@ class ItemTile extends StatelessWidget {
       tileChild = Material(color: tileColor, child: inner);
     }
 
-    return Tooltip(
-      message: 'Clic droit : Modifier ou supprimer',
-      child: tileStyle == 'bulle'
-          ? tileChild
-          : ClipRRect(
-              borderRadius: clipRadius,
-              child: tileChild,
-            ),
-    );
+    return showTooltips
+        ? Tooltip(
+            message: 'Clic droit : Modifier ou supprimer',
+            child: tileStyle == 'bulle'
+                ? tileChild
+                : ClipRRect(
+                    borderRadius: clipRadius,
+                    child: tileChild,
+                  ),
+          )
+        : (tileStyle == 'bulle'
+            ? tileChild
+            : ClipRRect(
+                borderRadius: clipRadius,
+                child: tileChild,
+              ));
   }
 }
 
@@ -489,13 +597,14 @@ class _ZebraTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      fit: StackFit.expand,
+      fit: StackFit.passthrough,
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(borderRadius),
-          child: CustomPaint(
-            painter: _ZebraPainter(color: color),
-            size: Size.infinite,
+        Positioned.fill(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(borderRadius),
+            child: CustomPaint(
+              painter: _ZebraPainter(color: color),
+            ),
           ),
         ),
         child,

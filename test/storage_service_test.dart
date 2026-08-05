@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:noublipo/core/models/shopping_list_model.dart';
-import 'package:noublipo/core/models/shopping_item.dart';
-import 'package:noublipo/core/services/storage_service.dart';
+import 'package:toteo/core/models/shopping_list_model.dart';
+import 'package:toteo/core/models/shopping_item.dart';
+import 'package:toteo/core/services/storage_service.dart';
 
 void main() {
   late SharedPreferences prefs;

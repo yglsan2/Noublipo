@@ -1,7 +1,8 @@
 {
   "@@locale": "id",
-  "appTitle": "NopList",
-  "appTitlePlus": "NopList+",
+  "appTitle": "Tote 'O Recall",
+  "appTitlePlus": "Tote 'O Recall+",
+  "appTagline": "Daftar yang tak pernah lupa!",
   "searchHint": "Search in list",
   "totalLabel": "Total",
   "addItem": "Add item",
@@ -218,7 +219,7 @@
   "save": "Save",
   "saveAsTemplateTitle": "Save as template",
   "saveButton": "Save",
-  "scanAvailablePlus": "Available in NopList+",
+  "scanAvailablePlus": "Available in Tote 'O Recall+",
   "scanTitle": "Scan",
   "selectedCount": "{n} selected",
   "@selectedCount": {
@@ -256,7 +257,7 @@
   "signInGoogleToEnable": "Sign in with Google to enable",
   "signInWithGoogle": "Sign in with Google",
   "sortColor": "Color",
-  "sortListLabel": "List sort (NopList+)",
+  "sortListLabel": "List sort (Tote 'O Recall+)",
   "sortName": "Name",
   "sortOrder": "Order",
   "styleBar": "Bar",
@@ -301,16 +302,31 @@
   "uncheckAll": "Hapus centang semua",
   "moveToFutureList": "Pindah ke belanja nanti",
   "deleteOrMoveToFuture": "Hapus « {name} » atau pindah ke belanja nanti?",
-  "@deleteOrMoveToFuture": { "placeholders": { "name": { "type": "String" } } },
+  "@deleteOrMoveToFuture": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "listFontScale": "Ukuran teks daftar",
   "listFontScaleSubtitle": "Sesuaikan agar nyaman dibaca",
   "shoppingMode": "Mode belanja",
   "shoppingModeSubtitle": "Tampilan sederhana dengan tombol besar di toko",
-  "onboardingWelcome": "Selamat datang di NopList",
+  "onboardingWelcome": "Selamat datang di Tote 'O Recall",
   "onboardingWelcomeSubtitle": "Mulai dengan daftar kosong atau pilih templat di bawah.",
   "startEmpty": "Mulai dengan daftar kosong",
   "progressCount": "{checked} / {total}",
-  "@progressCount": { "placeholders": { "checked": { "type": "int" }, "total": { "type": "int" } } },
+  "@progressCount": {
+    "placeholders": {
+      "checked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "sendLinkBy": "Kirim tautan lewat pesan atau email untuk mengundang",
   "syncConflictHint": "Kemungkinan konflik: perubahan telah digabung.",
   "statsMonthlyEvolution": "Evolusi bulanan",
@@ -326,22 +342,61 @@
   "shoppingSocialSubtitle": "Tren anonim: apa yang dibeli orang lain (data agregat, daftarmu tidak dibagikan)",
   "shoppingSocialPopularNearby": "Populer di dekatmu",
   "shoppingSocialTrendThisWeek": "Di area kamu, {percent}% pengguna membeli « {product} » minggu ini.",
-  "@shoppingSocialTrendThisWeek": { "placeholders": { "percent": { "type": "int" }, "product": { "type": "String" } } },
+  "@shoppingSocialTrendThisWeek": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialTrendsTitle": "Tren makanan (anonim)",
   "probableListEmptyHint": "Tambahkan belanja rutin dan selesaikan belanja agar aplikasi mempelajari kebiasaanmu dan menyarankan daftar perkiraan.",
   "probableListSelectAll": "Pilih semua",
   "probableListDeselectAll": "Batalkan pilihan",
   "probableListSelectedCount": "{count} item dipilih",
-  "@probableListSelectedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "probableListAddedCount": "{count} item ditambahkan ke daftarmu",
-  "@probableListAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartSeeMore": "Lihat lebih banyak",
   "smartCartSuggestionsCount": "{count} saran",
-  "@smartCartSuggestionsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartSuggestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddedCount": "{count} item ditambahkan",
-  "@smartCartAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingSocialAddProduct": "Tambah « {product} » ke daftarku",
-  "@shoppingSocialAddProduct": { "placeholders": { "product": { "type": "String" } } },
+  "@shoppingSocialAddProduct": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialDemoDataNote": "Data demo. Tren nyata dalam pembaruan mendatang. Tidak ada data pribadi dibagikan (GDPR).",
   "shoppingSocialPopularRecipes": "Resep populer",
   "shoppingSocialViewIngredients": "Lihat bahan",

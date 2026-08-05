@@ -56,6 +56,6 @@ const int kProLocaleCount = 1 + 33;
 /// Version classique : 15 langues les plus utilisées + système.
 /// Version Pro : 30 langues + système.
 List<LocaleOption> get localeOptionsForPicker {
-  final n = isNoublipoPlus ? kProLocaleCount : kClassicLocaleCount;
+  final n = isToteoPlus ? kProLocaleCount : kClassicLocaleCount;
   return _allOptions.take(n).toList();
 }

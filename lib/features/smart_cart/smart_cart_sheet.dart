@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show HapticFeedback;
 import 'package:provider/provider.dart';
-import '../../app_config.dart';
 import '../../core/models/recurring_item.dart';
 import '../../core/providers/consumption_profile_provider.dart';
 import '../../core/providers/gamification_provider.dart';
@@ -9,6 +8,7 @@ import '../../core/providers/list_provider.dart';
 import '../../core/providers/planning_provider.dart';
 import '../../core/providers/premium_provider.dart';
 import '../../l10n/app_localizations.dart';
+import '../paywall/paywall_screen.dart';
 import 'panic_checkout_sheet.dart';
 
 const int _kYouMightForgetInitialCount = 8;
@@ -142,12 +142,38 @@ class _SmartCartSheetState extends State<SmartCartSheet> {
 
   @override
   Widget build(BuildContext context) {
-    if (!context.watch<PremiumProvider>().isPremiumActive) return const SizedBox.shrink();
+    final l10n = AppLocalizations.of(context);
+    if (!context.watch<PremiumProvider>().isPremiumActive) {
+      return SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                l10n.premiumFeatureLocked,
+                style: Theme.of(context).textTheme.titleMedium,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              FilledButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.of(context).push(
+                    MaterialPageRoute<void>(builder: (_) => const PaywallScreen()),
+                  );
+                },
+                child: Text(l10n.upgradePromptCta),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
     final planning = context.watch<PlanningProvider>();
     final listProvider = context.watch<ListProvider>();
     final gamification = context.watch<GamificationProvider>();
     final profile = context.watch<ConsumptionProfileProvider>();
-    final l10n = AppLocalizations.of(context);
     final dueRecurring = SmartCartSheet.getDueRecurringNotOnList(planning, listProvider);
     final youMightForgetRaw = SmartCartSheet.getYouMightForgetItems(
       planning: planning,

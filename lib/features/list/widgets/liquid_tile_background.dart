@@ -46,15 +46,16 @@ class _LiquidTileBackgroundState extends State<LiquidTileBackground>
   @override
   Widget build(BuildContext context) {
     return Stack(
-      fit: StackFit.expand,
+      fit: StackFit.passthrough,
       children: [
-        CustomPaint(
-          painter: _LiquidMorphPainter(
-            color: widget.color,
-            borderRadius: widget.borderRadius,
-            t: _animation,
+        Positioned.fill(
+          child: CustomPaint(
+            painter: _LiquidMorphPainter(
+              color: widget.color,
+              borderRadius: widget.borderRadius,
+              t: _animation,
+            ),
           ),
-          size: Size.infinite,
         ),
         widget.child,
       ],

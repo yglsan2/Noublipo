@@ -1,7 +1,8 @@
 {
   "@@locale": "nl",
-  "appTitle": "NopList",
-  "appTitlePlus": "NopList+",
+  "appTitle": "Tote 'O Recall",
+  "appTitlePlus": "Tote 'O Recall+",
+  "appTagline": "De lijst die niets vergeet!",
   "searchHint": "Zoeken in de lijst",
   "totalLabel": "Totaal",
   "addItem": "Item toevoegen",
@@ -218,7 +219,7 @@
   "save": "Save",
   "saveAsTemplateTitle": "Save as template",
   "saveButton": "Save",
-  "scanAvailablePlus": "Available in NopList+",
+  "scanAvailablePlus": "Beschikbaar in Tote 'O Recall+",
   "scanTitle": "Scan",
   "selectedCount": "{n} selected",
   "@selectedCount": {
@@ -256,7 +257,7 @@
   "signInGoogleToEnable": "Sign in with Google to enable",
   "signInWithGoogle": "Sign in with Google",
   "sortColor": "Color",
-  "sortListLabel": "List sort (NopList+)",
+  "sortListLabel": "Lijstsortering (Tote 'O Recall+)",
   "sortName": "Name",
   "sortOrder": "Order",
   "styleBar": "Bar",
@@ -301,16 +302,31 @@
   "uncheckAll": "Alles uitvinken",
   "moveToFutureList": "Verplaats naar later",
   "deleteOrMoveToFuture": "« {name} » verwijderen of verplaatsen naar later?",
-  "@deleteOrMoveToFuture": { "placeholders": { "name": { "type": "String" } } },
+  "@deleteOrMoveToFuture": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "listFontScale": "Tekengrootte van de lijst",
   "listFontScaleSubtitle": "Aanpassen voor betere leesbaarheid",
   "shoppingMode": "Boodschappenmodus",
   "shoppingModeSubtitle": "Vereenvoudigde weergave met grote knoppen in de winkel",
-  "onboardingWelcome": "Welkom bij NopList",
+  "onboardingWelcome": "Welkom bij Tote 'O Recall!",
   "onboardingWelcomeSubtitle": "Begin met een lege lijst of kies een sjabloon hieronder.",
   "startEmpty": "Begin met lege lijst",
   "progressCount": "{checked} / {total}",
-  "@progressCount": { "placeholders": { "checked": { "type": "int" }, "total": { "type": "int" } } },
+  "@progressCount": {
+    "placeholders": {
+      "checked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "sendLinkBy": "Stuur de link via bericht of e-mail om uit te nodigen",
   "syncConflictHint": "Mogelijk conflict: wijzigingen zijn samengevoegd.",
   "statsMonthlyEvolution": "Maandelijkse evolutie",
@@ -326,22 +342,61 @@
   "shoppingSocialSubtitle": "Geanonimiseerde trends: wat anderen kopen (geaggregeerde gegevens, je lijst wordt niet gedeeld)",
   "shoppingSocialPopularNearby": "Populair bij jou in de buurt",
   "shoppingSocialTrendThisWeek": "In jouw omgeving koopt {percent} % van de gebruikers deze week « {product} ».",
-  "@shoppingSocialTrendThisWeek": { "placeholders": { "percent": { "type": "int" }, "product": { "type": "String" } } },
+  "@shoppingSocialTrendThisWeek": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialTrendsTitle": "Voedingstrends (geanonimiseerd)",
   "probableListEmptyHint": "Voeg terugkerende aankopen toe en rond boodschappen af zodat de app je gewoontes leert en een waarschijnlijke lijst voorstelt.",
   "probableListSelectAll": "Alles selecteren",
   "probableListDeselectAll": "Alles deselecteren",
   "probableListSelectedCount": "{count} artikel(s) geselecteerd",
-  "@probableListSelectedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "probableListAddedCount": "{count} artikel(s) toegevoegd aan je lijst",
-  "@probableListAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartSeeMore": "Meer tonen",
   "smartCartSuggestionsCount": "{count} suggestie(s)",
-  "@smartCartSuggestionsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartSuggestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddedCount": "{count} artikel(s) toegevoegd",
-  "@smartCartAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingSocialAddProduct": "« {product} » toevoegen aan mijn lijst",
-  "@shoppingSocialAddProduct": { "placeholders": { "product": { "type": "String" } } },
+  "@shoppingSocialAddProduct": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialDemoDataNote": "Demodata. Echte trends in een toekomstige update. Geen persoonsgegevens gedeeld (AVG).",
   "shoppingSocialPopularRecipes": "Populaire recepten",
   "shoppingSocialViewIngredients": "Ingrediënten bekijken",
@@ -349,5 +404,9 @@
   "proBadge": "Pro",
   "probableListFirstRunHint": "Bevestig of pas de voorgestelde lijst aan op basis van je gewoontes.",
   "shoppingSocialFirstRunHint": "Ontdek geanonimiseerde trends: geen persoonsgegevens gedeeld.",
-  "errorGeneric": "Er is een fout opgetreden."
+  "errorGeneric": "Er is een fout opgetreden.",
+  "paywallTitle": "Upgrade naar Tote 'O Recall+",
+  "upgradePromptMessage": "Ga naar Tote 'O Recall+ om je gewoontes te bewaren en slimme winkelhulp, waarschijnlijke lijst en sync te ontgrendelen.",
+  "upgradePromptCta": "Ontdek Tote 'O Recall+",
+  "trialGrantedTitle": "24 u Tote 'O Recall+ cadeau!"
 }

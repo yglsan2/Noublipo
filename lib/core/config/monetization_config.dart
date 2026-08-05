@@ -1,4 +1,4 @@
-// Configuration monétisation NopList : pubs discrètes, paywall, essais.
+// Configuration monétisation Tote 'O Recall : pubs discrètes, paywall, essais.
 // Prix proposé : 3,99 € one-time (achat unique).
 //
 // IDs prod : passer via --dart-define au build release, ex. :
@@ -9,7 +9,7 @@
 import '../../app_config.dart';
 
 /// Utiliser les pubs uniquement dans la version gratuite (flavor) et si pas premium actif.
-bool get shouldShowAds => !isNoublipoPlus;
+bool get shouldShowAds => !isToteoPlus;
 
 /// App ID AdMob (manifest Android / Info.plist iOS). Test ID Google par défaut.
 const String admobAppId = String.fromEnvironment(
@@ -60,7 +60,7 @@ const Duration minBackgroundDurationForAd = Duration(seconds: 35);
 /// Cooldown entre deux interstitielles.
 const Duration interstitialCooldown = Duration(minutes: 4);
 
-/// Prix affiché pour NopList+ (one-time). Remplacé par le prix Play Store si disponible.
+/// Prix affiché pour Tote 'O Recall+ (one-time). Remplacé par le prix Play Store si disponible.
 const String premiumPriceDisplay = '3,99 €';
 const String premiumProductId = String.fromEnvironment(
   'IAP_PRODUCT_ID',

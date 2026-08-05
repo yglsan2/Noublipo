@@ -4,9 +4,10 @@ import 'package:provider/provider.dart';
 import '../../app_config.dart';
 import '../../core/providers/premium_provider.dart';
 import '../../core/services/iap_service.dart';
+import '../../core/ui/app_feedback.dart';
 import '../../l10n/app_localizations.dart';
 
-/// Écran paywall : avantages NopList+, prix, CTA. Gamification émotionnelle (cadre gains).
+/// Écran paywall : avantages Tote 'O Recall+, prix, CTA.
 class PaywallScreen extends StatefulWidget {
   const PaywallScreen({super.key});
 
@@ -16,12 +17,59 @@ class PaywallScreen extends StatefulWidget {
 
 class _PaywallScreenState extends State<PaywallScreen> {
   bool _busy = false;
+  IapService? _iap;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final iap = context.read<IapService>();
+    if (!identical(_iap, iap)) {
+      _iap?.removeListener(_onIapEvent);
+      _iap = iap;
+      _iap!.addListener(_onIapEvent);
+    }
+  }
+
+  @override
+  void dispose() {
+    _iap?.removeListener(_onIapEvent);
+    super.dispose();
+  }
+
+  void _onIapEvent() {
+    final iap = _iap;
+    if (iap == null || !mounted) return;
+    final event = iap.lastEvent;
+    if (event == null) return;
+    final l10n = AppLocalizations.of(context);
+    switch (event.kind) {
+      case IapEventKind.purchased:
+        AppFeedback.success(context, l10n.purchaseSuccess);
+        iap.clearLastEvent();
+        Navigator.of(context).maybePop();
+      case IapEventKind.restored:
+        AppFeedback.success(context, l10n.purchaseRestoreSuccess);
+        iap.clearLastEvent();
+        Navigator.of(context).maybePop();
+      case IapEventKind.canceled:
+        AppFeedback.info(context, l10n.purchaseCancelled);
+        iap.clearLastEvent();
+        setState(() => _busy = false);
+      case IapEventKind.pending:
+        AppFeedback.info(context, l10n.purchasePending);
+        iap.clearLastEvent();
+      case IapEventKind.error:
+        AppFeedback.error(context, l10n.errorGeneric);
+        iap.clearLastEvent();
+        setState(() => _busy = false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
-    final iap = context.read<IapService>();
+    final iap = context.watch<IapService>();
     final price = iap.priceLabel;
 
     return Scaffold(
@@ -58,9 +106,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
             ),
             const SizedBox(height: 32),
             FilledButton(
-              onPressed: _busy || isNoublipoPlus
-                  ? null
-                  : () => _purchase(context),
+              onPressed: _busy || isToteoPlus ? null : () => _purchase(context),
               style: FilledButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
@@ -72,7 +118,7 @@ class _PaywallScreenState extends State<PaywallScreen> {
                     )
                   : Text(l10n.paywallCta(price)),
             ),
-            if (!isNoublipoPlus) ...[
+            if (!isToteoPlus) ...[
               const SizedBox(height: 12),
               TextButton(
                 onPressed: _busy ? null : () => _restorePurchase(context),
@@ -87,35 +133,27 @@ class _PaywallScreenState extends State<PaywallScreen> {
 
   Future<void> _purchase(BuildContext context) async {
     final premium = context.read<PremiumProvider>();
-    if (isNoublipoPlus || premium.isPremiumActive) return;
+    if (isToteoPlus || premium.isPremiumActive) return;
 
     final iap = context.read<IapService>();
     setState(() => _busy = true);
     try {
       if (!iap.isAvailable) {
         if (context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(AppLocalizations.of(context).errorGeneric),
-              behavior: SnackBarBehavior.floating,
-            ),
-          );
+          AppFeedback.error(context, AppLocalizations.of(context).errorGeneric);
         }
         return;
       }
       final started = await iap.buy();
       if (!started && context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(AppLocalizations.of(context).errorGeneric),
-            behavior: SnackBarBehavior.floating,
-          ),
-        );
-      } else if (context.mounted && premium.isPremiumActive) {
-        Navigator.of(context).maybePop();
+        AppFeedback.error(context, AppLocalizations.of(context).errorGeneric);
+        setState(() => _busy = false);
       }
-    } finally {
-      if (mounted) setState(() => _busy = false);
+    } catch (_) {
+      if (context.mounted) {
+        AppFeedback.error(context, AppLocalizations.of(context).errorGeneric);
+        setState(() => _busy = false);
+      }
     }
   }
 
@@ -125,20 +163,14 @@ class _PaywallScreenState extends State<PaywallScreen> {
     setState(() => _busy = true);
     try {
       await iap.restore();
-      // Laisse le stream appliquer l'achat.
       await Future<void>.delayed(const Duration(milliseconds: 800));
       if (!context.mounted) return;
       final l10n = AppLocalizations.of(context);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            premium.isPremiumActive ? l10n.paywallRestore : l10n.errorGeneric,
-          ),
-          behavior: SnackBarBehavior.floating,
-        ),
-      );
       if (premium.isPremiumActive) {
+        AppFeedback.success(context, l10n.purchaseRestoreSuccess);
         Navigator.of(context).maybePop();
+      } else {
+        AppFeedback.info(context, l10n.purchaseRestoreNone);
       }
     } finally {
       if (mounted) setState(() => _busy = false);

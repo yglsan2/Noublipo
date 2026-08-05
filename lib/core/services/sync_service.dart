@@ -50,10 +50,21 @@ class SyncService extends ChangeNotifier {
   String? _currentSharedListId;
   int _sharedListMemberCount = 0;
   String? _sharedListShortCode;
+  bool _isSaving = false;
+  String? _lastSaveError;
 
   User? get currentUser => _auth.currentUser;
   bool get isSignedIn => currentUser != null;
   ShoppingListModel? get remoteList => _remoteList;
+  /// True pendant un push Firestore.
+  bool get isSaving => _isSaving;
+  /// Dernière erreur de sync (null si OK).
+  String? get lastSaveError => _lastSaveError;
+  void clearLastSaveError() {
+    if (_lastSaveError == null) return;
+    _lastSaveError = null;
+    notifyListeners();
+  }
 
   /// Liste partagée avec d'autres (créée ou rejointe).
   bool get isSharedList => _currentSharedListId != null;
@@ -90,10 +101,11 @@ class SyncService extends ChangeNotifier {
   }
 
   /// Connexion avec Google pour activer la sync.
-  Future<void> signInWithGoogle() async {
+  /// Retourne `true` si connecté, `false` si l'utilisateur a annulé.
+  Future<bool> signInWithGoogle() async {
     try {
       final googleUser = await _googleSignIn.signIn();
-      if (googleUser == null) return;
+      if (googleUser == null) return false;
       final googleAuth = await googleUser.authentication;
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
@@ -101,6 +113,7 @@ class SyncService extends ChangeNotifier {
       );
       await _auth.signInWithCredential(credential);
       AppLogger.info('signInWithGoogle: OK');
+      return true;
     } catch (e, stack) {
       AppLogger.error('signInWithGoogle', e, stack);
       rethrow;
@@ -118,8 +131,12 @@ class SyncService extends ChangeNotifier {
   }
 
   /// Enregistre la liste sur Firestore (sync vers les autres).
-  Future<void> saveList(ShoppingListModel list) async {
-    if (currentUser == null) return;
+  /// Retourne `false` en cas d'échec (erreur exposée via [lastSaveError]).
+  Future<bool> saveList(ShoppingListModel list) async {
+    if (currentUser == null) return false;
+    _isSaving = true;
+    _lastSaveError = null;
+    notifyListeners();
     try {
       final payload = {
         ...list.toJson(),
@@ -130,8 +147,15 @@ class SyncService extends ChangeNotifier {
       } else {
         await _listRef.set(payload);
       }
+      _lastSaveError = null;
+      return true;
     } catch (e, stack) {
       AppLogger.warning('saveList', e, stack);
+      _lastSaveError = e.toString();
+      return false;
+    } finally {
+      _isSaving = false;
+      notifyListeners();
     }
   }
 

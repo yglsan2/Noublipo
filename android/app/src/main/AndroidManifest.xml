@@ -5,7 +5,7 @@
     <uses-permission android:name="com.android.vending.BILLING" />
     <uses-feature android:name="android.hardware.camera" android:required="false" />
     <application
-        android:label="NopList"
+        android:label="Tote 'O Recall"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -30,13 +30,13 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <data android:scheme="https" android:host="noubliepo.app" android:pathPrefix="/list"/>
-                <data android:scheme="noublipo" android:host="list"/>
+                <data android:scheme="toteo" android:host="list"/>
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:scheme="noublipo" android:host="quick_add"/>
+                <data android:scheme="toteo" android:host="quick_add"/>
             </intent-filter>
         </activity>
         <meta-data
@@ -47,14 +47,14 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="${admobAppId}"/>
         <receiver
-            android:name=".NoublipoWidgetProvider"
+            android:name=".ToteoWidgetProvider"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/noublipo_widget_info" />
+                android:resource="@xml/toteo_widget_info" />
         </receiver>
     </application>
     <queries>

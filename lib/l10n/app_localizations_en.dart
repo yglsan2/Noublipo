@@ -9,10 +9,13 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'NopList';
+  String get appTitle => 'Tote \'O Recall';
 
   @override
-  String get appTitlePlus => 'NopList+';
+  String get appTitlePlus => 'Tote \'O Recall+';
+
+  @override
+  String get appTagline => 'The list that never forgets!';
 
   @override
   String get searchHint => 'Search in list';
@@ -444,7 +447,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get categoryLabel => 'Category';
 
   @override
-  String get sortListLabel => 'List sort (NopList+)';
+  String get sortListLabel => 'List sort (Tote \'O Recall+)';
 
   @override
   String get sortOrder => 'Order';
@@ -621,7 +624,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get scanTitle => 'Scan';
 
   @override
-  String get scanAvailablePlus => 'Available in NopList+';
+  String get scanAvailablePlus => 'Available in Tote \'O Recall+';
 
   @override
   String get everyoneSeesSameList =>
@@ -799,7 +802,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Simplified view with large buttons in store';
 
   @override
-  String get onboardingWelcome => 'Welcome to NopList';
+  String get onboardingWelcome => 'Welcome to Tote \'O Recall';
 
   @override
   String get onboardingWelcomeSubtitle =>
@@ -1210,7 +1213,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get errorGeneric => 'An error occurred.';
 
   @override
-  String get paywallTitle => 'Upgrade to NopList+';
+  String get paywallTitle => 'Upgrade to Tote \'O Recall+';
 
   @override
   String get paywallSubtitle => 'Unlock your list\'s full potential';
@@ -1243,18 +1246,248 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get upgradePromptMessage =>
-      'Upgrade to NopList+ to keep your habits and unlock Smart cart, probable list and sync.';
+      'Upgrade to Tote \'O Recall+ to keep your habits and unlock Smart cart, probable list and sync.';
 
   @override
-  String get upgradePromptCta => 'Discover NopList+';
+  String get upgradePromptCta => 'Discover Tote \'O Recall+';
 
   @override
   String get upgradePromptLater => 'Later';
 
   @override
-  String get trialGrantedTitle => '24h of NopList+ free!';
+  String get trialGrantedTitle => '24h of Tote \'O Recall+ free!';
 
   @override
   String get trialGrantedMessage =>
       'You\'ve unlocked a free trial. Try Smart cart and probable list.';
+
+  @override
+  String get undo => 'Undo';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String itemAdded(String name) {
+    return '« $name » added';
+  }
+
+  @override
+  String get syncFailed => 'Sync failed. Check your connection.';
+
+  @override
+  String get syncCancelled => 'Sign-in cancelled.';
+
+  @override
+  String get syncStatusOk => 'Synced';
+
+  @override
+  String get syncStatusSyncing => 'Syncing…';
+
+  @override
+  String get syncStatusOffline => 'Offline';
+
+  @override
+  String get syncStatusError => 'Sync error';
+
+  @override
+  String scanProductNotFound(String name) {
+    return 'Unknown product — added as « $name »';
+  }
+
+  @override
+  String get scanFailed => 'Scan failed. Try again.';
+
+  @override
+  String get scanCameraDenied => 'Allow camera access to scan barcodes.';
+
+  @override
+  String get purchaseSuccess => 'Tote \'O Recall+ is on. Thanks!';
+
+  @override
+  String get purchaseCancelled => 'Purchase cancelled.';
+
+  @override
+  String get purchasePending => 'Purchase pending…';
+
+  @override
+  String get purchaseRestoreSuccess => 'Purchase restored.';
+
+  @override
+  String get purchaseRestoreNone => 'Nothing to restore.';
+
+  @override
+  String get onboardingStepAddTitle => 'Add items';
+
+  @override
+  String get onboardingStepAddBody =>
+      'Tap + to add what you need. Quick and simple.';
+
+  @override
+  String get onboardingStepCheckTitle => 'Check off in store';
+
+  @override
+  String get onboardingStepCheckBody =>
+      'Tick items as you go. Swipe to delete.';
+
+  @override
+  String get onboardingStepShareTitle => 'Share your list';
+
+  @override
+  String get onboardingStepShareBody =>
+      'Invite someone and shop together in real time.';
+
+  @override
+  String get onboardingStartEmpty => 'Start with an empty list';
+
+  @override
+  String get onboardingPickTemplate => 'Pick a template';
+
+  @override
+  String get onboardingNext => 'Next';
+
+  @override
+  String get onboardingSkip => 'Skip';
+
+  @override
+  String get hintSync => 'Sign in to sync your list across devices.';
+
+  @override
+  String get hintScan => 'Scan a barcode to add a product quickly.';
+
+  @override
+  String get hintSmartCart => 'Smart cart suggests what you might be missing.';
+
+  @override
+  String get hintGotIt => 'Got it';
+
+  @override
+  String get premiumFeatureLocked => 'Available with Tote \'O Recall+';
+
+  @override
+  String get planningEmptyCta => 'Add a reminder';
+
+  @override
+  String get birthdaysEmptyCta => 'Add a birthday';
+
+  @override
+  String get settingsSaveFailed => 'Couldn\'t save this setting.';
+
+  @override
+  String mealPresetTitle(String label) {
+    return '« $label » list?';
+  }
+
+  @override
+  String mealPresetBody(int count) {
+    return 'Add the $count typical items in one tap?';
+  }
+
+  @override
+  String get mealPresetPremiumOnly =>
+      'Express meal lists are available with Tote \'O Recall+.';
+
+  @override
+  String get mealPresetAddAll => 'Add all';
+
+  @override
+  String get mealPresetAddSingle => 'Just this name';
+
+  @override
+  String mealPresetAdded(int count, String label) {
+    return '$count items added ($label)';
+  }
+
+  @override
+  String get budgetCeiling => 'Budget ceiling (€)';
+
+  @override
+  String get budgetCeilingSubtitle =>
+      'Warn when the to-buy total exceeds this amount';
+
+  @override
+  String get budgetCeilingHint => 'e.g. 50';
+
+  @override
+  String budgetOverBanner(String total, String ceiling) {
+    return 'Over budget: $total € / $ceiling €';
+  }
+
+  @override
+  String get recentItems => 'Recent';
+
+  @override
+  String recallDueCard(int count) {
+    return '$count item(s) to restock?';
+  }
+
+  @override
+  String get recallDueCardCta => 'Open Smart cart';
+
+  @override
+  String get weeklyReminder => 'Shopping day reminder';
+
+  @override
+  String get weeklyReminderSubtitle =>
+      'Weekly notification so you don\'t forget your list';
+
+  @override
+  String get weeklyReminderDay => 'Day';
+
+  @override
+  String get weeklyReminderTime => 'Time';
+
+  @override
+  String get weeklyReminderMessage => 'Don\'t forget your Tote \'O Recall list';
+
+  @override
+  String get weekdayMon => 'Monday';
+
+  @override
+  String get weekdayTue => 'Tuesday';
+
+  @override
+  String get weekdayWed => 'Wednesday';
+
+  @override
+  String get weekdayThu => 'Thursday';
+
+  @override
+  String get weekdayFri => 'Friday';
+
+  @override
+  String get weekdaySat => 'Saturday';
+
+  @override
+  String get weekdaySun => 'Sunday';
+
+  @override
+  String get dragToReorder => 'Drag an item to move it';
+
+  @override
+  String get dragHandleTooltip => 'Move';
+
+  @override
+  String get longPressToDelete => 'Long-press to delete';
+
+  @override
+  String get orgModeLabel => 'Layout';
+
+  @override
+  String get orgModeBubbles => 'Bubbles';
+
+  @override
+  String get orgModeNumbered => 'List';
+
+  @override
+  String get orgModeManual => 'Custom';
+
+  @override
+  String get orgModeBubblesHint => 'Bubbles pack themselves';
+
+  @override
+  String get orgModeNumberedHint => 'Numbered list';
+
+  @override
+  String get orgModeManualHint => 'Drag to arrange your way';
 }

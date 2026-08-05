@@ -57,13 +57,13 @@ class BackupScreen extends StatelessWidget {
       final data = await storage.exportBackup();
       final json = const JsonEncoder.withIndent('  ').convert(data);
       final dir = await getTemporaryDirectory();
-      final name = 'noublipo_backup_${DateTime.now().toIso8601String().replaceAll(':', '-').split('.').first}.json';
+      final name = 'toteo_backup_${DateTime.now().toIso8601String().replaceAll(':', '-').split('.').first}.json';
       final path = '${dir.path}/$name';
       final file = File(path);
       await file.writeAsString(json);
       await Share.shareXFiles(
         [XFile(path)],
-        text: 'Sauvegarde Noublipo',
+        text: 'Sauvegarde Toteo',
       );
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

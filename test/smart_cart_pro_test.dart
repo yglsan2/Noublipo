@@ -1,16 +1,16 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:noublipo/core/models/gamification_data.dart';
-import 'package:noublipo/core/models/recurring_item.dart';
-import 'package:noublipo/core/models/seasonal_template.dart';
-import 'package:noublipo/core/services/storage_service.dart';
-import 'package:noublipo/core/providers/consumption_profile_provider.dart';
-import 'package:noublipo/core/providers/gamification_provider.dart';
-import 'package:noublipo/core/providers/list_provider.dart';
-import 'package:noublipo/core/providers/planning_provider.dart';
-import 'package:noublipo/core/services/reminder_service.dart';
-import 'package:noublipo/features/smart_cart/smart_cart_sheet.dart';
-import 'package:noublipo/features/smart_cart/shopping_social_sheet.dart';
+import 'package:toteo/core/models/gamification_data.dart';
+import 'package:toteo/core/models/recurring_item.dart';
+import 'package:toteo/core/models/seasonal_template.dart';
+import 'package:toteo/core/services/storage_service.dart';
+import 'package:toteo/core/providers/consumption_profile_provider.dart';
+import 'package:toteo/core/providers/gamification_provider.dart';
+import 'package:toteo/core/providers/list_provider.dart';
+import 'package:toteo/core/providers/planning_provider.dart';
+import 'package:toteo/core/services/reminder_service.dart';
+import 'package:toteo/features/smart_cart/smart_cart_sheet.dart';
+import 'package:toteo/features/smart_cart/shopping_social_sheet.dart';
 
 void main() {
   group('SmartCart getSeasonalItemNamesForMonth', () {

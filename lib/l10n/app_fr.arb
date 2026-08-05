@@ -1,7 +1,8 @@
 {
   "@@locale": "fr",
-  "appTitle": "NopList",
-  "appTitlePlus": "NopList+",
+  "appTitle": "Tote 'O Recall",
+  "appTitlePlus": "Tote 'O Recall+",
+  "appTagline": "La liste qui n'oublie rien !",
   "searchHint": "Rechercher dans la liste",
   "totalLabel": "Total",
   "addItem": "Ajouter un article",
@@ -136,10 +137,22 @@
   "listJoined": "Liste rejointe",
   "checkedItemsRemoved": "Articles cochés supprimés",
   "itemWillBeRemovedFromList": "« {name} » sera supprimé de la liste.",
-  "@itemWillBeRemovedFromList": { "placeholders": { "name": { "type": "String" } } },
+  "@itemWillBeRemovedFromList": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "copyCode": "Copier le code",
   "copyCodeLabel": "Copier le code : {code}",
-  "@copyCodeLabel": { "placeholders": { "code": { "type": "String" } } },
+  "@copyCodeLabel": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
   "backToPersonalList": "Retour à votre liste personnelle",
   "leaveSharedList": "Quitter la liste partagée",
   "leftListSnackbar": "Déconnecté. Liste conservée en local.",
@@ -148,7 +161,13 @@
   "syncEnabled": "Synchronisation activée",
   "signInWithGoogle": "Se connecter avec Google",
   "selectedCount": "{n} sélectionné(s)",
-  "@selectedCount": { "placeholders": { "n": { "type": "int" } } },
+  "@selectedCount": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
   "itemsDeleted": "Articles supprimés",
   "futurePurchases": "Achats futurs",
   "listLabel": "Liste",
@@ -174,7 +193,7 @@
   "categoryDefinedByStoresBar": "Définie par les magasins en haut",
   "tapSquareToSetStoreHint": "Touchez un carré en haut pour définir le magasin ou la catégorie.",
   "categoryLabel": "Catégorie",
-  "sortListLabel": "Tri de la liste (NopList+)",
+  "sortListLabel": "Tri de la liste (Tote 'O Recall+)",
   "sortOrder": "Ordre",
   "sortName": "Nom",
   "sortColor": "Couleur",
@@ -185,7 +204,16 @@
   "favoriteStoresSubtitle": "Ces rayons apparaissent en premier",
   "partnerSuggestionTitle": "Suggestion",
   "partnerSuggestionMessage": "Un partenaire a ajouté « {item} ». Ajouter aussi « {suggestion} » ?",
-  "@partnerSuggestionMessage": { "placeholders": { "item": { "type": "String" }, "suggestion": { "type": "String" } } },
+  "@partnerSuggestionMessage": {
+    "placeholders": {
+      "item": {
+        "type": "String"
+      },
+      "suggestion": {
+        "type": "String"
+      }
+    }
+  },
   "partnerSuggestionAdd": "Oui, ajouter",
   "partnerSuggestionNo": "Non",
   "showPrices": "Afficher les prix et le total",
@@ -198,9 +226,21 @@
   "noTemplates": "Aucun modèle. Enregistrez une liste comme modèle (menu ⋮).",
   "chooseTemplate": "Choisir un modèle",
   "templateItemCount": "{count} article(s)",
-  "@templateItemCount": { "placeholders": { "count": { "type": "int" } } },
+  "@templateItemCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "listCreatedFromTemplate": "Liste « {name} » créée",
-  "@listCreatedFromTemplate": { "placeholders": { "name": { "type": "String" } } },
+  "@listCreatedFromTemplate": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "newListTitle": "Nouvelle liste",
   "listNameHint": "Nom de la liste",
   "createButton": "Créer",
@@ -222,22 +262,52 @@
   "colorNameHint": "Ex : Carrefour, Fruits, Urgent… Les articles de cette couleur afficheront ce nom.",
   "categoryNameHint": "Nom du magasin ou de la catégorie",
   "shareJoinMessage": "Rejoignez ma liste de courses en temps réel : {link}",
-  "@shareJoinMessage": { "placeholders": { "link": { "type": "String" } } },
+  "@shareJoinMessage": {
+    "placeholders": {
+      "link": {
+        "type": "String"
+      }
+    }
+  },
   "shareSubject": "Liste {appName}",
-  "@shareSubject": { "placeholders": { "appName": { "type": "String" } } },
+  "@shareSubject": {
+    "placeholders": {
+      "appName": {
+        "type": "String"
+      }
+    }
+  },
   "joinListHint": "Collez le lien, le code à 8 caractères ou l'ID pour rejoindre la liste partagée.",
   "linkCodeHint": "Lien, code (ex. ABC12XYZ) ou ID",
   "participantsCount": "{count} participant(s)",
-  "@participantsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@participantsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "import": "Importer",
   "backupFileNotAccessible": "Fichier non accessible (ex. Web).",
   "backupImportError": "Erreur lors de l'import : {error}",
-  "@backupImportError": { "placeholders": { "error": { "type": "String" } } },
+  "@backupImportError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "scanTitle": "Scan",
-  "scanAvailablePlus": "Disponible en NopList+",
+  "scanAvailablePlus": "Disponible en Tote 'O Recall+",
   "everyoneSeesSameList": "Tout le monde voit la même liste et les modifications en direct.",
   "everyoneSeesSameListWithCount": "{count} participant(s) • Tout le monde voit la même liste en direct.",
-  "@everyoneSeesSameListWithCount": { "placeholders": { "count": { "type": "int" } } },
+  "@everyoneSeesSameListWithCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "voiceUnavailable": "Saisie vocale non disponible",
   "voiceError": "Saisie vocale indisponible",
   "colorLabel": "Couleur",
@@ -246,18 +316,42 @@
   "linkCopiedBrowser": "Lien copié : collez-le dans votre navigateur.",
   "signInToJoinList": "Connectez-vous avec Google pour rejoindre la liste.",
   "cannotJoinList": "Impossible de rejoindre : {error}",
-  "@cannotJoinList": { "placeholders": { "error": { "type": "String" } } },
+  "@cannotJoinList": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "autocompleteLabel": "Complétion automatique",
   "autocompleteSubtitle": "Proposer des articles du lexique en tapant (ex. pu… → purée, pull)",
   "addForLater": "Pour plus tard",
   "addForLaterSnackbar": "« {name} » ajouté à la liste (en attente)",
-  "@addForLaterSnackbar": { "placeholders": { "name": { "type": "String" } } },
+  "@addForLaterSnackbar": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "engagementDetectedTitle": "Engagement implicite détecté",
   "engagementDetectedMessage": "Créer un rappel pour « {title} » dans la liste Engagements ?",
-  "@engagementDetectedMessage": { "placeholders": { "title": { "type": "String" } } },
+  "@engagementDetectedMessage": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "createReminderButton": "Créer un rappel",
   "engagementReminderCreated": "Rappel créé : « {title} »",
-  "@engagementReminderCreated": { "placeholders": { "title": { "type": "String" } } },
+  "@engagementReminderCreated": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "birthdaysTitle": "Anniversaires",
   "birthdaysSubtitle": "Rappels 1 à 2 jours avant pour ne pas oublier",
   "addBirthday": "Ajouter un anniversaire",
@@ -270,7 +364,13 @@
   "emptyBirthdays": "Aucun anniversaire. Ajoutez-en pour recevoir une alerte 1 à 2 jours avant.",
   "editBirthday": "Modifier l'anniversaire",
   "deleteBirthdayConfirm": "Supprimer l'anniversaire de {name} ?",
-  "@deleteBirthdayConfirm": { "placeholders": { "name": { "type": "String" } } },
+  "@deleteBirthdayConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "celebrationTypeBirthday": "Anniversaire (naissance)",
   "celebrationTypeWedding": "Mariage",
   "celebrationTypeMeeting": "Rencontre",
@@ -278,34 +378,73 @@
   "birthdayYearOptional": "Année (optionnel, pour l'âge)",
   "celebrationTypeLabel": "Type",
   "ageYears": "{count} ans",
-  "@ageYears": { "placeholders": { "count": { "type": "int" } } },
+  "@ageYears": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "alreadyBoughtValidate": "Déjà acheté ? Valider",
   "addToRecurring": "Ajouter aux achats récurrents",
   "recurringAddedSnackbar": "« {name} » en achat récurrent (rappel dans 7 j)",
-  "@recurringAddedSnackbar": { "placeholders": { "name": { "type": "String" } } },
+  "@recurringAddedSnackbar": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "recurringTooltip": "Achat récurrent",
   "courseTerminee": "Course terminée",
   "courseTermineeConfirm": "Décocher tous les articles ? Tu peux recommencer une nouvelle course.",
   "uncheckAll": "Décocher tout",
   "moveToFutureList": "Déplacer vers Achats futurs",
   "deleteOrMoveToFuture": "Supprimer « {name} » ou le déplacer vers Achats futurs ?",
-  "@deleteOrMoveToFuture": { "placeholders": { "name": { "type": "String" } } },
+  "@deleteOrMoveToFuture": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "listFontScale": "Taille du texte de la liste",
   "listFontScaleSubtitle": "Ajuster pour une meilleure lisibilité",
   "shoppingMode": "Mode course en cours",
   "shoppingModeSubtitle": "Vue simplifiée avec gros boutons au magasin",
-  "onboardingWelcome": "Bienvenue dans NopList !",
+  "onboardingWelcome": "Bienvenue dans Tote 'O Recall !",
   "onboardingWelcomeSubtitle": "Tu peux démarrer avec une liste vide ou choisir un modèle ci‑dessous.",
   "startEmpty": "Commencer avec une liste vide",
   "progressCount": "{checked} / {total}",
-  "@progressCount": { "placeholders": { "checked": { "type": "int" }, "total": { "type": "int" } } },
+  "@progressCount": {
+    "placeholders": {
+      "checked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "sendLinkBy": "Envoyer le lien par message ou email pour inviter",
   "syncConflictHint": "Conflit possible : les modifications ont été fusionnées.",
   "smartCartTitle": "Aide course",
   "smartCartSubtitle": "Suggestions selon tes habitudes et le contexte",
   "smartCartDueTitle": "Habitudes",
   "smartCartDueMessage": "Tu n'as pas acheté « {name} » depuis {days} jour(s) (d'habitude tous les {recurrence} j). Tu en as besoin ?",
-  "@smartCartDueMessage": { "placeholders": { "name": { "type": "String" }, "days": { "type": "int" }, "recurrence": { "type": "int" } } },
+  "@smartCartDueMessage": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "days": {
+        "type": "int"
+      },
+      "recurrence": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddToList": "Oui, ajouter",
   "smartCartNotThisTime": "Pas cette fois",
   "smartCartContextTitle": "Contexte",
@@ -315,7 +454,13 @@
   "panicCheckoutTitle": "Vérifier avant la caisse",
   "panicCheckoutSubtitle": "As-tu bien pensé à tout ?",
   "panicCheckoutUncheckedCount": "{count} article(s) non coché(s)",
-  "@panicCheckoutUncheckedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@panicCheckoutUncheckedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "panicCheckoutAddMissing": "Ajouter les oubliés à la liste",
   "panicCheckoutAllGood": "Tout est bon, je passe en caisse",
   "panicCheckoutEmpty": "Aucun article à vérifier. Tu peux passer en caisse.",
@@ -324,7 +469,13 @@
   "streakCurrent": "Série actuelle",
   "streakBest": "Record",
   "streakCount": "{count} sortie(s)",
-  "@streakCount": { "placeholders": { "count": { "type": "int" } } },
+  "@streakCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "badgeMemoryMaster": "Memory Master",
   "badgeMemoryMasterDesc": "5 sorties sans oubli d'affilée",
   "badgeStreak10": "Champion",
@@ -339,7 +490,13 @@
   "statsZeroOubliSubtitle": "Courses sans rien déplacer vers Achats futurs",
   "statsNoDataYet": "Pas encore de données. Termine des courses pour voir tes stats.",
   "statsCountTimes": "{count} fois",
-  "@statsCountTimes": { "placeholders": { "count": { "type": "int" } } },
+  "@statsCountTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "profileConsumptionTitle": "Profil de conso",
   "profileConsumptionSubtitle": "Régimes, allergies, produits à éviter. Optionnel et sans jugement.",
   "profileCoachMode": "Mode conseil bienveillant",
@@ -380,14 +537,44 @@
   "profileTemptationSubstitute": "Substitut suggéré (optionnel)",
   "profileAddTemptation": "Ajouter un objectif",
   "profileReduceWarning": "Objectif en cours : réduire « {product} ». On ajoute quand même cette fois ?",
-  "@profileReduceWarning": { "placeholders": { "product": { "type": "String" } } },
+  "@profileReduceWarning": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "profileReduceWarningWithProgress": "Objectif en cours : réduire « {product} ». Ta progression : {percent} %. On ajoute quand même cette fois ?",
-  "@profileReduceWarningWithProgress": { "placeholders": { "product": { "type": "String" }, "percent": { "type": "int" } } },
+  "@profileReduceWarningWithProgress": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      },
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
   "profileSubstituteSuggestion": "Pour ton objectif « {product} », on te propose « {substitute} » comme alternative. Tu préfères quoi ?",
-  "@profileSubstituteSuggestion": { "placeholders": { "product": { "type": "String" }, "substitute": { "type": "String" } } },
+  "@profileSubstituteSuggestion": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      },
+      "substitute": {
+        "type": "String"
+      }
+    }
+  },
   "profileAddAnyway": "Oui, ajouter quand même",
   "profileReplaceWith": "Remplacer par « {name} »",
-  "@profileReplaceWith": { "placeholders": { "name": { "type": "String" } } },
+  "@profileReplaceWith": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "profileCancel": "Annuler",
   "statsPleasurePercent": "Où tu en es (plaisir)",
   "statsPleasureSubtitle": "Progression vers tes objectifs : part des achats type snacks / sucreries.",
@@ -406,22 +593,61 @@
   "shoppingSocialSubtitle": "Tendances anonymisées : ce que les autres achètent (données agrégées, sans partage de ta liste)",
   "shoppingSocialPopularNearby": "Populaire près de chez toi",
   "shoppingSocialTrendThisWeek": "Dans ta zone, {percent} % des utilisateurs achètent « {product} » cette semaine.",
-  "@shoppingSocialTrendThisWeek": { "placeholders": { "percent": { "type": "int" }, "product": { "type": "String" } } },
+  "@shoppingSocialTrendThisWeek": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialTrendsTitle": "Tendances alimentaires (anonymisées)",
   "probableListEmptyHint": "Ajoute des achats récurrents et termine des courses pour que l'app apprenne tes habitudes et te propose une liste probable.",
   "probableListSelectAll": "Tout sélectionner",
   "probableListDeselectAll": "Tout désélectionner",
   "probableListSelectedCount": "{count} article(s) sélectionné(s)",
-  "@probableListSelectedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "probableListAddedCount": "{count} article(s) ajouté(s) à ta liste",
-  "@probableListAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartSeeMore": "Voir plus",
   "smartCartSuggestionsCount": "{count} suggestion(s)",
-  "@smartCartSuggestionsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartSuggestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddedCount": "{count} article(s) ajouté(s)",
-  "@smartCartAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingSocialAddProduct": "Ajouter « {product} » à ma liste",
-  "@shoppingSocialAddProduct": { "placeholders": { "product": { "type": "String" } } },
+  "@shoppingSocialAddProduct": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialDemoDataNote": "Données de démonstration. Les tendances réelles arriveront avec une future mise à jour. Aucune donnée personnelle n'est partagée (RGPD).",
   "shoppingSocialPopularRecipes": "Recettes populaires",
   "shoppingSocialViewIngredients": "Voir les ingrédients",
@@ -430,20 +656,127 @@
   "probableListFirstRunHint": "Valide ou modifie la liste proposée selon tes habitudes.",
   "shoppingSocialFirstRunHint": "Découvre les tendances anonymisées : aucune donnée personnelle n'est partagée.",
   "errorGeneric": "Une erreur s'est produite.",
-  "paywallTitle": "Passe à NopList+",
+  "paywallTitle": "Passe à Tote 'O Recall+",
   "paywallSubtitle": "Débloque tout le potentiel de ta liste",
   "paywallBenefitNoAds": "Zéro pub, expérience fluide",
   "paywallBenefitSmartCart": "Aide course & liste probable",
   "paywallBenefitSync": "Sync sur tous tes appareils",
   "paywallBenefitStats": "Stats, badges et gamification",
   "paywallCta": "Débloquer pour {price}",
-  "@paywallCta": { "placeholders": { "price": { "type": "String" } } },
+  "@paywallCta": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
   "paywallTrialCta": "Essayer 24h gratuit",
   "paywallRestore": "Restaurer l'achat",
   "upgradePromptTitle": "Tu gères bien tes listes !",
-  "upgradePromptMessage": "Passe à NopList+ pour garder tes habitudes et débloquer l'Aide course, la liste probable et la sync.",
-  "upgradePromptCta": "Découvrir NopList+",
+  "upgradePromptMessage": "Passe à Tote 'O Recall+ pour garder tes habitudes et débloquer l'Aide course, la liste probable et la sync.",
+  "upgradePromptCta": "Découvrir Tote 'O Recall+",
   "upgradePromptLater": "Plus tard",
-  "trialGrantedTitle": "24h de NopList+ offertes !",
-  "trialGrantedMessage": "Tu as débloqué un essai gratuit. Profites-en pour tester l'Aide course et la liste probable."
+  "trialGrantedTitle": "24h de Tote 'O Recall+ offertes !",
+  "trialGrantedMessage": "Tu as débloqué un essai gratuit. Profites-en pour tester l'Aide course et la liste probable.",
+  "undo": "Annuler",
+  "retry": "Réessayer",
+  "itemAdded": "« {name} » ajouté",
+  "@itemAdded": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "syncFailed": "Synchronisation impossible. Vérifie ta connexion.",
+  "syncCancelled": "Connexion annulée.",
+  "syncStatusOk": "Synchronisé",
+  "syncStatusSyncing": "Synchronisation…",
+  "syncStatusOffline": "Hors ligne",
+  "syncStatusError": "Erreur de sync",
+  "scanProductNotFound": "Produit inconnu — ajouté comme « {name} »",
+  "@scanProductNotFound": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "scanFailed": "Scan impossible. Réessaie.",
+  "scanCameraDenied": "Autorise la caméra pour scanner un code-barres.",
+  "purchaseSuccess": "Tote 'O Recall+ activé. Merci !",
+  "purchaseCancelled": "Achat annulé.",
+  "purchasePending": "Achat en cours de validation…",
+  "purchaseRestoreSuccess": "Achat restauré.",
+  "purchaseRestoreNone": "Aucun achat à restaurer.",
+  "onboardingStepAddTitle": "Ajoute des articles",
+  "onboardingStepAddBody": "Tape sur + pour ajouter ce dont tu as besoin. Simple et rapide.",
+  "onboardingStepCheckTitle": "Coche en magasin",
+  "onboardingStepCheckBody": "Coche les articles au fur et à mesure. Glisse pour supprimer.",
+  "onboardingStepShareTitle": "Partage ta liste",
+  "onboardingStepShareBody": "Invite un proche pour faire les courses à deux en temps réel.",
+  "onboardingStartEmpty": "Commencer avec une liste vide",
+  "onboardingPickTemplate": "Choisir un modèle",
+  "onboardingNext": "Suivant",
+  "onboardingSkip": "Passer",
+  "hintSync": "Connecte-toi pour synchroniser ta liste sur tous tes appareils.",
+  "hintScan": "Scanne un code-barres pour ajouter un produit rapidement.",
+  "hintSmartCart": "L'Aide course te suggère ce qu'il te manque selon tes habitudes.",
+  "hintGotIt": "Compris",
+  "premiumFeatureLocked": "Disponible avec Tote 'O Recall+",
+  "planningEmptyCta": "Ajouter un rappel",
+  "birthdaysEmptyCta": "Ajouter un anniversaire",
+  "settingsSaveFailed": "Impossible d'enregistrer ce réglage.",
+  "mealPresetTitle": "Liste « {label} » ?",
+  "@mealPresetTitle": {
+    "placeholders": { "label": { "type": "String" } }
+  },
+  "mealPresetBody": "Ajouter les {count} articles typiques en un tap ?",
+  "@mealPresetBody": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "mealPresetPremiumOnly": "Les listes repas express sont disponibles avec Tote 'O Recall+.",
+  "mealPresetAddAll": "Tout ajouter",
+  "mealPresetAddSingle": "Juste ce nom",
+  "mealPresetAdded": "{count} articles ajoutés ({label})",
+  "@mealPresetAdded": {
+    "placeholders": {
+      "count": { "type": "int" },
+      "label": { "type": "String" }
+    }
+  },
+  "budgetCeiling": "Plafond budget (€)",
+  "budgetCeilingSubtitle": "Alerte si le total à acheter dépasse ce montant",
+  "budgetCeilingHint": "Ex. 50",
+  "budgetOverBanner": "Budget dépassé : {total} € / {ceiling} €",
+  "@budgetOverBanner": {
+    "placeholders": {
+      "total": { "type": "String" },
+      "ceiling": { "type": "String" }
+    }
+  },
+  "recentItems": "Récents",
+  "recallDueCard": "{count} article(s) à racheter ?",
+  "@recallDueCard": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "recallDueCardCta": "Voir l'Aide course",
+  "weeklyReminder": "Rappel jour de courses",
+  "weeklyReminderSubtitle": "Notification hebdomadaire pour ne pas oublier ta liste",
+  "weeklyReminderDay": "Jour",
+  "weeklyReminderTime": "Heure",
+  "weeklyReminderMessage": "N'oublie pas ta liste Tote 'O Recall",
+  "weekdayMon": "Lundi",
+  "weekdayTue": "Mardi",
+  "weekdayWed": "Mercredi",
+  "weekdayThu": "Jeudi",
+  "weekdayFri": "Vendredi",
+  "weekdaySat": "Samedi",
+  "weekdaySun": "Dimanche",
+  "dragToReorder": "Glisse un article pour le déplacer",
+  "dragHandleTooltip": "Déplacer",
+  "longPressToDelete": "Appui long pour supprimer",
+  "orgModeLabel": "Organisation",
+  "orgModeBubbles": "Bulles",
+  "orgModeNumbered": "Liste",
+  "orgModeManual": "Perso",
+  "orgModeBubblesHint": "Les bulles s’organisent toutes seules",
+  "orgModeNumberedHint": "Liste numérotée",
+  "orgModeManualHint": "Glisse pour ranger à ta façon"
 }

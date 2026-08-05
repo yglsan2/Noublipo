@@ -1,7 +1,8 @@
 {
   "@@locale": "ja",
-  "appTitle": "NopList",
-  "appTitlePlus": "NopList+",
+  "appTitle": "Tote 'O Recall",
+  "appTitlePlus": "Tote 'O Recall+",
+  "appTagline": "忘れない買い物リスト！",
   "searchHint": "Search in list",
   "totalLabel": "Total",
   "addItem": "Add item",
@@ -218,7 +219,7 @@
   "save": "Save",
   "saveAsTemplateTitle": "Save as template",
   "saveButton": "Save",
-  "scanAvailablePlus": "Available in NopList+",
+  "scanAvailablePlus": "Available in Tote 'O Recall+",
   "scanTitle": "Scan",
   "selectedCount": "{n} selected",
   "@selectedCount": {
@@ -256,7 +257,7 @@
   "signInGoogleToEnable": "Sign in with Google to enable",
   "signInWithGoogle": "Sign in with Google",
   "sortColor": "Color",
-  "sortListLabel": "List sort (NopList+)",
+  "sortListLabel": "List sort (Tote 'O Recall+)",
   "sortName": "Name",
   "sortOrder": "Order",
   "styleBar": "Bar",
@@ -301,16 +302,31 @@
   "uncheckAll": "すべて外す",
   "moveToFutureList": "後で買うリストへ",
   "deleteOrMoveToFuture": "「{name}」を削除しますか？後で買うリストへ移動しますか？",
-  "@deleteOrMoveToFuture": { "placeholders": { "name": { "type": "String" } } },
+  "@deleteOrMoveToFuture": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "listFontScale": "リストの文字サイズ",
   "listFontScaleSubtitle": "読みやすく調整",
   "shoppingMode": "お買い物モード",
   "shoppingModeSubtitle": "店で大きなボタンの簡易表示",
-  "onboardingWelcome": "NopList へようこそ！",
+  "onboardingWelcome": "Tote 'O Recall へようこそ！",
   "onboardingWelcomeSubtitle": "空のリストで始めるか、下からテンプレートを選べます。",
   "startEmpty": "空のリストで始める",
   "progressCount": "{checked} / {total}",
-  "@progressCount": { "placeholders": { "checked": { "type": "int" }, "total": { "type": "int" } } },
+  "@progressCount": {
+    "placeholders": {
+      "checked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "sendLinkBy": "メッセージやメールでリンクを送って招待",
   "syncConflictHint": "競合の可能性：変更はマージされました。",
   "statsMonthlyEvolution": "月間の推移",
@@ -326,22 +342,61 @@
   "shoppingSocialSubtitle": "匿名トレンド：他の人が買っているもの（集計データ、リストは共有されません）",
   "shoppingSocialPopularNearby": "お近くで人気",
   "shoppingSocialTrendThisWeek": "お住まいの地域では、{percent}％のユーザーが今週「{product}」を購入しています。",
-  "@shoppingSocialTrendThisWeek": { "placeholders": { "percent": { "type": "int" }, "product": { "type": "String" } } },
+  "@shoppingSocialTrendThisWeek": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialTrendsTitle": "食のトレンド（匿名）",
   "probableListEmptyHint": "定期購入を追加し、買い物を完了すると、アプリがあなたの習慣を学習して予想リストを提案します。",
   "probableListSelectAll": "すべて選択",
   "probableListDeselectAll": "選択解除",
   "probableListSelectedCount": "{count}件選択中",
-  "@probableListSelectedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "probableListAddedCount": "{count}件をリストに追加しました",
-  "@probableListAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartSeeMore": "もっと見る",
   "smartCartSuggestionsCount": "{count}件の提案",
-  "@smartCartSuggestionsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartSuggestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddedCount": "{count}件追加しました",
-  "@smartCartAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingSocialAddProduct": "「{product}」をリストに追加",
-  "@shoppingSocialAddProduct": { "placeholders": { "product": { "type": "String" } } },
+  "@shoppingSocialAddProduct": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialDemoDataNote": "デモデータです。実際のトレンドは今後の更新で提供されます。個人データは共有されません（GDPR）。",
   "shoppingSocialPopularRecipes": "人気レシピ",
   "shoppingSocialViewIngredients": "材料を見る",

@@ -1,4 +1,4 @@
-# ProGuard / R8 rules for NopList release builds
+# ProGuard / R8 rules for Tote 'O Recall release builds
 -keep class com.google.android.gms.ads.** { *; }
 -keep class com.google.android.gms.common.** { *; }
 -keep class com.android.billingclient.** { *; }

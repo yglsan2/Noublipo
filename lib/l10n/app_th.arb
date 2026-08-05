@@ -1,7 +1,8 @@
 {
   "@@locale": "th",
-  "appTitle": "NopList",
-  "appTitlePlus": "NopList+",
+  "appTitle": "Tote 'O Recall",
+  "appTitlePlus": "Tote 'O Recall+",
+  "appTagline": "รายการที่ไม่ลืมอะไรเลย!",
   "searchHint": "Search in list",
   "totalLabel": "Total",
   "addItem": "Add item",
@@ -218,7 +219,7 @@
   "save": "Save",
   "saveAsTemplateTitle": "Save as template",
   "saveButton": "Save",
-  "scanAvailablePlus": "Available in NopList+",
+  "scanAvailablePlus": "Available in Tote 'O Recall+",
   "scanTitle": "Scan",
   "selectedCount": "{n} selected",
   "@selectedCount": {
@@ -256,7 +257,7 @@
   "signInGoogleToEnable": "Sign in with Google to enable",
   "signInWithGoogle": "Sign in with Google",
   "sortColor": "Color",
-  "sortListLabel": "List sort (NopList+)",
+  "sortListLabel": "List sort (Tote 'O Recall+)",
   "sortName": "Name",
   "sortOrder": "Order",
   "styleBar": "Bar",
@@ -301,16 +302,31 @@
   "uncheckAll": "ยกเลิกทั้งหมด",
   "moveToFutureList": "ย้ายไปซื้อภายหลัง",
   "deleteOrMoveToFuture": "ลบ « {name} » หรือย้ายไปซื้อภายหลัง?",
-  "@deleteOrMoveToFuture": { "placeholders": { "name": { "type": "String" } } },
+  "@deleteOrMoveToFuture": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "listFontScale": "ขนาดตัวอักษรรายการ",
   "listFontScaleSubtitle": "ปรับเพื่อการอ่านที่สบายตา",
   "shoppingMode": "โหมดช้อปปิ้ง",
   "shoppingModeSubtitle": "มุมมองแบบย่อด้วยปุ่มใหญ่ในร้าน",
-  "onboardingWelcome": "ยินดีต้อนรับสู่ NopList",
+  "onboardingWelcome": "ยินดีต้อนรับสู่ Tote 'O Recall",
   "onboardingWelcomeSubtitle": "เริ่มด้วยรายการว่างหรือเลือกเทมเพลตด้านล่าง",
   "startEmpty": "เริ่มด้วยรายการว่าง",
   "progressCount": "{checked} / {total}",
-  "@progressCount": { "placeholders": { "checked": { "type": "int" }, "total": { "type": "int" } } },
+  "@progressCount": {
+    "placeholders": {
+      "checked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "sendLinkBy": "ส่งลิงก์ทางข้อความหรืออีเมลเพื่อเชิญ",
   "syncConflictHint": "อาจมีความขัดแย้ง: การเปลี่ยนแปลงถูกรวมแล้ว",
   "statsMonthlyEvolution": "วิวัฒนาการรายเดือน",
@@ -326,22 +342,61 @@
   "shoppingSocialSubtitle": "เทรนด์ไม่เปิดเผยตัว: คนอื่นซื้ออะไร (ข้อมูลรวม รายการของคุณไม่ถูกแชร์)",
   "shoppingSocialPopularNearby": "ยอดนิยมใกล้คุณ",
   "shoppingSocialTrendThisWeek": "ในพื้นที่ของคุณ {percent}% ของผู้ใช้ซื้อ « {product} » สัปดาห์นี้",
-  "@shoppingSocialTrendThisWeek": { "placeholders": { "percent": { "type": "int" }, "product": { "type": "String" } } },
+  "@shoppingSocialTrendThisWeek": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialTrendsTitle": "เทรนด์อาหาร (ไม่เปิดเผยตัว)",
   "probableListEmptyHint": "เพิ่มการซื้อซ้ำและทำรายการช้อปให้เสร็จ เพื่อให้แอปเรียนรู้นิสัยและเสนอรายการที่น่าจะเป็น",
   "probableListSelectAll": "เลือกทั้งหมด",
   "probableListDeselectAll": "ยกเลิกการเลือก",
   "probableListSelectedCount": "เลือก {count} รายการ",
-  "@probableListSelectedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "probableListAddedCount": "เพิ่ม {count} รายการในรายการของคุณแล้ว",
-  "@probableListAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartSeeMore": "ดูเพิ่มเติม",
   "smartCartSuggestionsCount": "{count} ข้อเสนอ",
-  "@smartCartSuggestionsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartSuggestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddedCount": "เพิ่ม {count} รายการแล้ว",
-  "@smartCartAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingSocialAddProduct": "เพิ่ม « {product} » ในรายการของฉัน",
-  "@shoppingSocialAddProduct": { "placeholders": { "product": { "type": "String" } } },
+  "@shoppingSocialAddProduct": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialDemoDataNote": "ข้อมูลสาธิต แนวโน้มจริงในอัปเดตครั้งถัดไป ไม่มีการแชร์ข้อมูลส่วนตัว (GDPR)",
   "shoppingSocialPopularRecipes": "สูตรยอดนิยม",
   "shoppingSocialViewIngredients": "ดูส่วนผสม",

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:noublipo/core/utils/quick_add_parser.dart';
+import 'package:toteo/core/utils/quick_add_parser.dart';
 
 void main() {
   group('QuickAddParser', () {

@@ -8,7 +8,7 @@ import '../../../core/providers/birthdays_provider.dart';
 import '../../../l10n/app_localizations.dart';
 import 'cake_with_candles_icon.dart';
 
-/// Écran Anniversaires (Noublipo+) : liste + rappels J-1 et J-2.
+/// Écran Anniversaires (Toteo+) : liste + rappels J-1 et J-2.
 /// Types : anniversaire, mariage, rencontre, autre. Année optionnelle pour l'âge.
 class BirthdaysScreen extends StatelessWidget {
   const BirthdaysScreen({super.key});
@@ -20,10 +20,10 @@ class BirthdaysScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!isNoublipoPlus) {
+    if (!isToteoPlus) {
       return Scaffold(
         appBar: AppBar(title: Text(AppLocalizations.of(context).birthdaysTitle)),
-        body: const Center(child: Text('Disponible en Noublipo+')),
+        body: const Center(child: Text('Disponible en Toteo+')),
       );
     }
     final l10n = AppLocalizations.of(context);
@@ -70,6 +70,17 @@ class BirthdaysScreen extends StatelessWidget {
                             color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                     ),
+                    if (isToteoPlus) ...[
+                      const SizedBox(height: 16),
+                      FilledButton.icon(
+                        onPressed: () => _showAddBirthdaySheet(
+                          context,
+                          context.read<BirthdaysProvider>(),
+                        ),
+                        icon: const Icon(Icons.add),
+                        label: Text(l10n.birthdaysEmptyCta),
+                      ),
+                    ],
                   ],
                 ),
               ),
@@ -90,7 +101,7 @@ class BirthdaysScreen extends StatelessWidget {
           );
         },
       ),
-      floatingActionButton: isNoublipoPlus
+      floatingActionButton: isToteoPlus
           ? FloatingActionButton.extended(
               onPressed: () => _showAddBirthdaySheet(context, context.read<BirthdaysProvider>()),
               icon: const Icon(Icons.add),

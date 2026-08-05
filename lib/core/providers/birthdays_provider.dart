@@ -5,7 +5,7 @@ import '../services/reminder_service.dart';
 import '../services/storage_service.dart';
 import '../utils/app_logger.dart';
 
-/// Gère la liste des anniversaires et la planification des rappels (Noublipo+).
+/// Gère la liste des anniversaires et la planification des rappels (Toteo+).
 class BirthdaysProvider extends ChangeNotifier {
   BirthdaysProvider(this._storage, this._reminder) {
     _load();

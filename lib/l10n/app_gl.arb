@@ -1,7 +1,8 @@
 {
   "@@locale": "gl",
-  "appTitle": "NopList",
-  "appTitlePlus": "NopList+",
+  "appTitle": "Tote 'O Recall",
+  "appTitlePlus": "Tote 'O Recall+",
+  "appTagline": "A lista que non esquece nada!",
   "searchHint": "Search in list",
   "totalLabel": "Total",
   "addItem": "Add item",
@@ -215,7 +216,7 @@
   "save": "Save",
   "saveAsTemplateTitle": "Save as template",
   "saveButton": "Save",
-  "scanAvailablePlus": "Available in NopList+",
+  "scanAvailablePlus": "Available in Tote 'O Recall+",
   "scanTitle": "Scan",
   "selectedCount": "{n} selected",
   "@selectedCount": {
@@ -253,7 +254,7 @@
   "signInGoogleToEnable": "Sign in with Google to enable",
   "signInWithGoogle": "Sign in with Google",
   "sortColor": "Color",
-  "sortListLabel": "List sort (NopList+)",
+  "sortListLabel": "List sort (Tote 'O Recall+)",
   "sortName": "Name",
   "sortOrder": "Order",
   "styleBar": "Bar",
@@ -306,22 +307,61 @@
   "shoppingSocialSubtitle": "Tendances anonymisées : ce que les autres achètent (données agrégées, sans partage de ta liste)",
   "shoppingSocialPopularNearby": "Populaire près de chez toi",
   "shoppingSocialTrendThisWeek": "Dans ta zone, {percent} % des utilisateurs achètent « {product} » cette semaine.",
-  "@shoppingSocialTrendThisWeek": { "placeholders": { "percent": { "type": "int" }, "product": { "type": "String" } } },
+  "@shoppingSocialTrendThisWeek": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialTrendsTitle": "Tendances alimentaires (anonymisées)",
   "probableListEmptyHint": "Ajoute des achats récurrents et termine des courses pour que l'app apprenne tes habitudes et te propose une liste probable.",
   "probableListSelectAll": "Tout sélectionner",
   "probableListDeselectAll": "Tout désélectionner",
   "probableListSelectedCount": "{count} article(s) sélectionné(s)",
-  "@probableListSelectedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "probableListAddedCount": "{count} article(s) ajouté(s) à ta liste",
-  "@probableListAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartSeeMore": "Voir plus",
   "smartCartSuggestionsCount": "{count} suggestion(s)",
-  "@smartCartSuggestionsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartSuggestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddedCount": "{count} article(s) ajouté(s)",
-  "@smartCartAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingSocialAddProduct": "Ajouter « {product} » à ma liste",
-  "@shoppingSocialAddProduct": { "placeholders": { "product": { "type": "String" } } },
+  "@shoppingSocialAddProduct": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialDemoDataNote": "Données de démonstration. Les tendances réelles arriveront avec une future mise à jour. Aucune donnée personnelle n'est partagée (RGPD).",
   "shoppingSocialPopularRecipes": "Recettes populaires",
   "shoppingSocialViewIngredients": "Voir les ingrédients",

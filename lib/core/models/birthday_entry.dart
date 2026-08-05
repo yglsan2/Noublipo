@@ -1,4 +1,4 @@
-/// Un anniversaire ou une fête à ne pas oublier (Noublipo+).
+/// Un anniversaire ou une fête à ne pas oublier (Toteo+).
 /// Type : anniversaire de naissance, mariage, rencontre, autre.
 class BirthdayEntry {
   const BirthdayEntry({

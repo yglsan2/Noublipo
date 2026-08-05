@@ -20,7 +20,7 @@ val admobAppIdProp: String =
         ?: "ca-app-pub-3940256099942544~3347511713"
 
 android {
-    namespace = "com.noublipo.noublipo"
+    namespace = "com.toteo.toteo"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -35,7 +35,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.noublipo.noublipo"
+        applicationId = "com.toteo.toteo"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
@@ -45,12 +45,12 @@ android {
 
     flavorDimensions += "app"
     productFlavors {
-        create("noublipo") {
+        create("toteo") {
             dimension = "app"
             applicationIdSuffix = ""
             versionNameSuffix = ""
         }
-        create("noublipo_plus") {
+        create("toteo_plus") {
             dimension = "app"
             applicationIdSuffix = ".plus"
             versionNameSuffix = "-plus"

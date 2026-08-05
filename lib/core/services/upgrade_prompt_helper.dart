@@ -7,7 +7,7 @@ import '../services/storage_service.dart';
 import '../../features/paywall/paywall_screen.dart';
 import '../../l10n/app_localizations.dart';
 
-/// Propose NopList+ au bon moment (habitudes) sans être intrusif.
+/// Propose Tote 'O Recall+ au bon moment (habitudes) sans être intrusif.
 class UpgradePromptHelper {
   UpgradePromptHelper(this._storage);
 

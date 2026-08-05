@@ -1,7 +1,8 @@
 {
   "@@locale": "et",
-  "appTitle": "NopList",
-  "appTitlePlus": "NopList+",
+  "appTitle": "Tote 'O Recall",
+  "appTitlePlus": "Tote 'O Recall+",
+  "appTagline": "Nimekiri, mis midagi ei unusta!",
   "searchHint": "Search in list",
   "totalLabel": "Total",
   "addItem": "Add item",
@@ -218,7 +219,7 @@
   "save": "Save",
   "saveAsTemplateTitle": "Save as template",
   "saveButton": "Save",
-  "scanAvailablePlus": "Available in NopList+",
+  "scanAvailablePlus": "Available in Tote 'O Recall+",
   "scanTitle": "Scan",
   "selectedCount": "{n} selected",
   "@selectedCount": {
@@ -256,7 +257,7 @@
   "signInGoogleToEnable": "Sign in with Google to enable",
   "signInWithGoogle": "Sign in with Google",
   "sortColor": "Color",
-  "sortListLabel": "List sort (NopList+)",
+  "sortListLabel": "List sort (Tote 'O Recall+)",
   "sortName": "Name",
   "sortOrder": "Order",
   "styleBar": "Bar",
@@ -301,16 +302,31 @@
   "uncheckAll": "Eemalda kõik",
   "moveToFutureList": "Liigu tulevastesse ostudesse",
   "deleteOrMoveToFuture": "Kustutada « {name} » või liigutada tulevastesse ostudesse?",
-  "@deleteOrMoveToFuture": { "placeholders": { "name": { "type": "String" } } },
+  "@deleteOrMoveToFuture": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "listFontScale": "Nimekirja teksti suurus",
   "listFontScaleSubtitle": "Kohandage parema loetavuse jaoks",
   "shoppingMode": "Osturežiim",
   "shoppingModeSubtitle": "Lihtsustatud vaade suurte nuppudega poes",
-  "onboardingWelcome": "Tere tulemast NopListsse!",
+  "onboardingWelcome": "Tere tulemast Tote 'O Recallsse!",
   "onboardingWelcomeSubtitle": "Alustage tühja nimekirjaga või valige allpool mall.",
   "startEmpty": "Alusta tühja nimekirjaga",
   "progressCount": "{checked} / {total}",
-  "@progressCount": { "placeholders": { "checked": { "type": "int" }, "total": { "type": "int" } } },
+  "@progressCount": {
+    "placeholders": {
+      "checked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "sendLinkBy": "Saada link sõnumiga või e-kirjaga kutsumiseks",
   "syncConflictHint": "Võimalik konflikt: muudatused on ühendatud.",
   "smartCartTitle": "Ostude abiline",
@@ -342,22 +358,61 @@
   "shoppingSocialSubtitle": "Anonüümitud trendid: mida teised ostavad (koondandmed, sinu nimekirja ei jagata)",
   "shoppingSocialPopularNearby": "Populaarne sinu lähedal",
   "shoppingSocialTrendThisWeek": "Sinu piirkonnas ostab {percent} % kasutajatest sel nädalal « {product} ».",
-  "@shoppingSocialTrendThisWeek": { "placeholders": { "percent": { "type": "int" }, "product": { "type": "String" } } },
+  "@shoppingSocialTrendThisWeek": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialTrendsTitle": "Toitumistrendid (anonüümsed)",
   "probableListEmptyHint": "Lisa korduvaid ostukaid ja lõpeta ostud, et rakendus õpiks sinu harjumusi ja pakub tõenäolist nimekirja.",
   "probableListSelectAll": "Vali kõik",
   "probableListDeselectAll": "Tühista valik",
   "probableListSelectedCount": "{count} üksus(t) valitud",
-  "@probableListSelectedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "probableListAddedCount": "{count} üksus(t) lisatud nimekirja",
-  "@probableListAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartSeeMore": "Näita rohkem",
   "smartCartSuggestionsCount": "{count} soovitust",
-  "@smartCartSuggestionsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartSuggestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddedCount": "{count} üksus(t) lisatud",
-  "@smartCartAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingSocialAddProduct": "Lisa « {product} » minu nimekirja",
-  "@shoppingSocialAddProduct": { "placeholders": { "product": { "type": "String" } } },
+  "@shoppingSocialAddProduct": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialDemoDataNote": "Demodata. Päris trendid tulevad tulevases uuenduses. Isikuandmeid ei jagata (GDPR).",
   "shoppingSocialPopularRecipes": "Populaarsed retseptid",
   "shoppingSocialViewIngredients": "Vaata koostisosi",

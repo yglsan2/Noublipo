@@ -13,7 +13,7 @@ class ProductLookupResult {
 }
 
 /// Service pour récupérer le nom d'un produit alimentaire via Open Food Facts (API v2).
-/// Utilisé par le scan code-barres (Noublipo+).
+/// Utilisé par le scan code-barres (Toteo+).
 class OpenFoodFactsService {
   OpenFoodFactsService._();
 

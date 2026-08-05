@@ -4,15 +4,15 @@ class ShoppingItem {
   String name;
   bool checked;
   int colorIndex;
-  /// Note (Noublipo+ uniquement)
+  /// Note (Toteo+ uniquement)
   String? note;
-  /// Quantité (Noublipo+ uniquement), ex: 2
+  /// Quantité (Toteo+ uniquement), ex: 2
   double? quantity;
-  /// Unité (Noublipo+ uniquement), ex: L, kg, pièce
+  /// Unité (Toteo+ uniquement), ex: L, kg, pièce
   String? unit;
-  /// Chemin image (Noublipo+ uniquement)
+  /// Chemin image (Toteo+ uniquement)
   String? imagePath;
-  /// Prix (Noublipo+ uniquement)
+  /// Prix (Toteo+ uniquement)
   double? price;
   /// Ordre d'affichage
   int order;

@@ -7,7 +7,7 @@ import '../utils/app_logger.dart';
 import '../../app_config.dart';
 
 /// État premium : version Plus (flavor), achat in-app, ou essai 24h.
-/// Expose [isPremiumActive] pour débloquer les fonctionnalités NopList+.
+/// Expose [isPremiumActive] pour débloquer les fonctionnalités Tote 'O Recall+.
 /// [currentIsActive] permet aux providers sans BuildContext de savoir si le user est premium.
 class PremiumProvider extends ChangeNotifier {
   PremiumProvider(this._storage) {
@@ -24,9 +24,9 @@ class PremiumProvider extends ChangeNotifier {
 
   bool get isLoaded => _loaded;
 
-  /// True si l'utilisateur a accès aux fonctionnalités NopList+ (flavor, achat ou essai).
+  /// True si l'utilisateur a accès aux fonctionnalités Tote 'O Recall+ (flavor, achat ou essai).
   bool get isPremiumActive {
-    if (isNoublipoPlus) return true;
+    if (isToteoPlus) return true;
     if (_purchased) return true;
     if (_trialEndMs != null &&
         DateTime.now().millisecondsSinceEpoch < _trialEndMs!) {

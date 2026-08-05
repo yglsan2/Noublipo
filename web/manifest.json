@@ -1,11 +1,11 @@
 {
-    "name": "noublipo",
-    "short_name": "noublipo",
+    "name": "Tote 'O Recall",
+    "short_name": "ToteRecall",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "La liste qui n'oublie rien !",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

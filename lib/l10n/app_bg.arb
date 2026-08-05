@@ -1,7 +1,8 @@
 {
   "@@locale": "bg",
-  "appTitle": "NopList",
-  "appTitlePlus": "NopList+",
+  "appTitle": "Tote 'O Recall",
+  "appTitlePlus": "Tote 'O Recall+",
+  "appTagline": "Списъкът, който нищо не забравя!",
   "searchHint": "Search in list",
   "totalLabel": "Total",
   "addItem": "Add item",
@@ -218,7 +219,7 @@
   "save": "Save",
   "saveAsTemplateTitle": "Save as template",
   "saveButton": "Save",
-  "scanAvailablePlus": "Available in NopList+",
+  "scanAvailablePlus": "Available in Tote 'O Recall+",
   "scanTitle": "Scan",
   "selectedCount": "{n} selected",
   "@selectedCount": {
@@ -256,7 +257,7 @@
   "signInGoogleToEnable": "Sign in with Google to enable",
   "signInWithGoogle": "Sign in with Google",
   "sortColor": "Color",
-  "sortListLabel": "List sort (NopList+)",
+  "sortListLabel": "List sort (Tote 'O Recall+)",
   "sortName": "Name",
   "sortOrder": "Order",
   "styleBar": "Bar",
@@ -301,16 +302,31 @@
   "uncheckAll": "Премахни всички",
   "moveToFutureList": "Премести за по-късни покупки",
   "deleteOrMoveToFuture": "Изтриване на « {name} » или преместване за по-късни покупки?",
-  "@deleteOrMoveToFuture": { "placeholders": { "name": { "type": "String" } } },
+  "@deleteOrMoveToFuture": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "listFontScale": "Размер на шрифта на списъка",
   "listFontScaleSubtitle": "Настройте за по-добра четимост",
   "shoppingMode": "Режим пазаруване",
   "shoppingModeSubtitle": "Опростен изглед с големи бутони в магазина",
-  "onboardingWelcome": "Добре дошли в NopList",
+  "onboardingWelcome": "Добре дошли в Tote 'O Recall",
   "onboardingWelcomeSubtitle": "Започнете с празен списък или изберете шаблон по-долу.",
   "startEmpty": "Започнете с празен списък",
   "progressCount": "{checked} / {total}",
-  "@progressCount": { "placeholders": { "checked": { "type": "int" }, "total": { "type": "int" } } },
+  "@progressCount": {
+    "placeholders": {
+      "checked": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "sendLinkBy": "Изпратете връзката със съобщение или имейл за покана",
   "syncConflictHint": "Възможен конфликт: промените са слети.",
   "statsMonthlyEvolution": "Месечна еволюция",
@@ -326,22 +342,61 @@
   "shoppingSocialSubtitle": "Анонимни тенденции: какво купуват другите (агрегирани данни, списъкът ти не се споделя)",
   "shoppingSocialPopularNearby": "Популярно близо до теб",
   "shoppingSocialTrendThisWeek": "В твоята зона {percent} % от потребителите купуват « {product} » тази седмица.",
-  "@shoppingSocialTrendThisWeek": { "placeholders": { "percent": { "type": "int" }, "product": { "type": "String" } } },
+  "@shoppingSocialTrendThisWeek": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      },
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialTrendsTitle": "Хранителни тенденции (анонимни)",
   "probableListEmptyHint": "Добавяй повтарящи се покупки и приключвай пазаруванията, за да научи приложението твоите навици и да предлага вероятен списък.",
   "probableListSelectAll": "Избери всички",
   "probableListDeselectAll": "Премахни избора",
   "probableListSelectedCount": "{count} артикул(а) избрани",
-  "@probableListSelectedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "probableListAddedCount": "{count} артикул(а) добавени в списъка",
-  "@probableListAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@probableListAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartSeeMore": "Виж още",
   "smartCartSuggestionsCount": "{count} предложение(я)",
-  "@smartCartSuggestionsCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartSuggestionsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "smartCartAddedCount": "{count} артикул(а) добавени",
-  "@smartCartAddedCount": { "placeholders": { "count": { "type": "int" } } },
+  "@smartCartAddedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "shoppingSocialAddProduct": "Добави « {product} » в списъка ми",
-  "@shoppingSocialAddProduct": { "placeholders": { "product": { "type": "String" } } },
+  "@shoppingSocialAddProduct": {
+    "placeholders": {
+      "product": {
+        "type": "String"
+      }
+    }
+  },
   "shoppingSocialDemoDataNote": "Демо данни. Реалните тенденции в бъдеща актуализация. Лични данни не се споделят (GDPR).",
   "shoppingSocialPopularRecipes": "Популярни рецепти",
   "shoppingSocialViewIngredients": "Виж съставките",

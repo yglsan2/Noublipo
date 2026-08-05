@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:noublipo/core/providers/list_provider.dart';
-import 'package:noublipo/core/services/reminder_service.dart';
-import 'package:noublipo/core/services/storage_service.dart';
+import 'package:toteo/core/providers/list_provider.dart';
+import 'package:toteo/core/services/reminder_service.dart';
+import 'package:toteo/core/services/storage_service.dart';
 
 Future<void> waitForLoading(ListProvider p) async {
   while (p.loading) {

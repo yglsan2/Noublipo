@@ -778,5 +778,146 @@
   "orgModeManual": "Custom",
   "orgModeBubblesHint": "Bubbles pack themselves",
   "orgModeNumberedHint": "Numbered list",
-  "orgModeManualHint": "Drag to arrange your way"
+  "orgModeManualHint": "Drag to arrange your way",
+  "recallDueCardHistoryCta": "Based on your history — open Smart cart",
+  "mealPresetBodySkip": "Add the {missing} missing items ({skipped} already at home or on the list)?",
+  "@mealPresetBodySkip": {
+    "placeholders": {
+      "missing": { "type": "int" },
+      "skipped": { "type": "int" }
+    }
+  },
+  "mealPresetAlreadyHave": "Already have: {names}",
+  "@mealPresetAlreadyHave": {
+    "placeholders": { "names": { "type": "String" } }
+  },
+  "mealPresetAddMissing": "Add {count}",
+  "@mealPresetAddMissing": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "pantryTitle": "Home stock",
+  "pantrySubtitle": "Track your pantry. At zero, add to the list.",
+  "pantryPremiumOnly": "Home stock is available with Tote 'O Recall+.",
+  "pantryItemName": "Item",
+  "pantryQty": "Qty",
+  "pantryAdd": "Add",
+  "pantryEmpty": "No items in stock",
+  "pantryOutOfStock": "Out of stock",
+  "pantryQtyLabel": "{qty} {unit}",
+  "@pantryQtyLabel": {
+    "placeholders": {
+      "qty": { "type": "String" },
+      "unit": { "type": "String" }
+    }
+  },
+  "pantryUseOne": "Use 1",
+  "pantryAddOne": "Add 1",
+  "pantryEmptyTitle": "Out of stock",
+  "pantryEmptyBody": "Add “{name}” to the shopping list?",
+  "@pantryEmptyBody": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "pantryAddToList": "Add to list",
+  "pantryAddedToList": "“{name}” added to the list",
+  "@pantryAddedToList": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "pantryEmptyAlreadyOnList": "“{name}” is already on the list",
+  "@pantryEmptyAlreadyOnList": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "pantryRestockTitle": "Update stock?",
+  "pantryRestockBody": "Add the {count} purchased items to home stock?",
+  "@pantryRestockBody": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "pantryRestockCta": "Yes, restock",
+  "geofenceTitle": "Near-store reminder",
+  "geofenceSubtitle": "Opt-in: notify when you’re near a favorite store (local GPS, no cloud).",
+  "geofenceEnable": "Enable proximity",
+  "geofenceEnableHint": "Checks when the app opens (no background tracking).",
+  "geofenceAddHere": "Save my current location",
+  "geofenceDefaultStore": "My store",
+  "geofenceAdded": "Store location saved",
+  "geofencePermissionDenied": "Location permission denied",
+  "geofenceLocationError": "Could not get location",
+  "geofenceRadiusLabel": "{meters} m radius",
+  "@geofenceRadiusLabel": {
+    "placeholders": { "meters": { "type": "int" } }
+  },
+  "geofenceNotifTitle": "You’re near the store",
+  "geofenceNotifBody": "{store} — {count} item(s) on your list",
+  "@geofenceNotifBody": {
+    "placeholders": {
+      "store": { "type": "String" },
+      "count": { "type": "int" }
+    }
+  },
+  "mealPresetAllCovered": "You already have everything for this meal — nothing to add!",
+  "mealPresetAllCoveredCta": "Nice",
+  "mealPresetNeedIt": "Need it",
+  "mealPresetInPantry": "Pantry",
+  "mealPresetOnList": "List",
+  "mealPresetInBoth": "OK",
+  "pantryAddedSnack": "“{name}” in stock",
+  "@pantryAddedSnack": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "pantryAutoAdded": "Out of stock → “{name}” added to the list",
+  "@pantryAutoAdded": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "pantryStatInStock": "{count} in stock",
+  "@pantryStatInStock": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "pantryStatLow": "{count} low",
+  "@pantryStatLow": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "pantryStatEmpty": "{count} empty",
+  "@pantryStatEmpty": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "pantrySearchHint": "Search pantry…",
+  "pantryFilterAll": "All",
+  "pantryFilterLow": "Low",
+  "pantryFilterEmpty": "Empty",
+  "pantryFilterEmptyResult": "Nothing in this filter",
+  "pantryLowHint": "Only {qty} left — restock soon",
+  "@pantryLowHint": {
+    "placeholders": { "qty": { "type": "String" } }
+  },
+  "pantryRestockDone": "Stock +{count}",
+  "@pantryRestockDone": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "recallDueQuickAdd": "Add top items",
+  "recallDueSeeAll": "See all",
+  "recallDueAdded": "{count} added to the list",
+  "@recallDueAdded": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "geofenceSetupTitle": "New store",
+  "geofenceSetupHint": "Save your current location — we’ll nudge you when you’re nearby.",
+  "geofenceStoreName": "Store name",
+  "geofencePickColor": "Store color",
+  "geofenceRadiusPick": "Detection zone",
+  "geofenceSaveHere": "Save here",
+  "geofenceLocating": "Locating…",
+  "geofenceAddedNamed": "“{name}” saved",
+  "@geofenceAddedNamed": {
+    "placeholders": { "name": { "type": "String" } }
+  },
+  "foodTypeLabel": "Food type",
+  "foodCatUnclassified": "Uncategorized",
+  "showFoodCategoryBadge": "Show food type",
+  "showFoodCategoryBadgeSubtitle": "Small badge under each item (Vegetables, Dairy…)",
+  "axisModeLabel": "Group by",
+  "axisModeStore": "Store",
+  "axisModeFood": "Type",
+  "axisModeDualStoreFood": "Store → type",
+  "axisModeDualFoodStore": "Type → store",
+  "reclassifyFoodList": "Reclassify food types",
+  "reclassifyFoodDone": "Food types updated"
 }

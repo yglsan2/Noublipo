@@ -4,7 +4,9 @@ import 'package:flutter/services.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/design_constants.dart';
 import '../../../core/constants/touch_constants.dart';
+import '../../../core/data/food_taxonomy.dart';
 import '../../../core/models/shopping_item.dart';
+import '../../../core/ui/food_category_style.dart';
 import '../../../l10n/app_localizations.dart';
 import 'liquid_tile_background.dart';
 
@@ -25,6 +27,8 @@ class ItemTile extends StatelessWidget {
     this.wrapSized = false,
     this.showTooltips = true,
     this.onSecondaryTap,
+    this.foodTypeLabel,
+    this.showFoodTypeBadge = false,
   });
 
   final ShoppingItem item;
@@ -33,6 +37,9 @@ class ItemTile extends StatelessWidget {
   /// Clic droit (souris) : menu actions. Si null, utilise [onLongPress].
   final VoidCallback? onSecondaryTap;
   final String? categoryLabel;
+  /// Libellé type d’aliment (ex. Légumes), affiché si [showFoodTypeBadge].
+  final String? foodTypeLabel;
+  final bool showFoodTypeBadge;
   final String tileStyle;
   final double? minHeight;
   final double? fontSize;
@@ -387,6 +394,40 @@ class ItemTile extends StatelessWidget {
                                   ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                          if (showFoodTypeBadge &&
+                              foodTypeLabel != null &&
+                              foodTypeLabel!.isNotEmpty &&
+                              !tightHeight) ...[
+                            const SizedBox(height: 4),
+                            Builder(
+                              builder: (context) {
+                                final cat = FoodTaxonomy.byId(item.foodCategoryId);
+                                final tint = FoodCategoryStyle.colorFor(cat);
+                                return Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                  decoration: BoxDecoration(
+                                    color: tint.withValues(alpha: 0.18),
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(color: tint.withValues(alpha: 0.35)),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(FoodCategoryStyle.icon(cat), size: 12, color: tint),
+                                      const SizedBox(width: 4),
+                                      Text(
+                                        foodTypeLabel!,
+                                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                              color: tint,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
                             ),
                           ],
                           if (showPlusExtras && ((item.quantity != null && item.quantity! > 0) || (item.unit != null && item.unit!.trim().isNotEmpty))) ...[

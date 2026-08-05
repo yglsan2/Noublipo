@@ -15,14 +15,37 @@ import '../../../core/utils/app_logger.dart';
 import '../../../core/models/recurring_item.dart';
 import '../../../core/providers/category_names_provider.dart';
 import '../../../core/providers/list_provider.dart';
+import '../../../core/providers/pantry_provider.dart';
 import '../../../core/providers/planning_provider.dart';
 import '../../../core/providers/settings_provider.dart';
 import '../../../core/data/product_lexicon.dart';
 import '../../../core/data/meal_presets.dart';
+import '../../../core/data/food_taxonomy.dart';
 import '../../../core/providers/premium_provider.dart';
+import '../../../core/ui/food_category_style.dart';
 import '../../../core/ui/meal_preset_dialog.dart';
+import '../../../core/utils/food_classifier.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../paywall/paywall_screen.dart';
+
+Map<String, MealOwnedSource> _mealOwnedSources(ListProvider list, PantryProvider pantry) {
+  final onList = list.currentItemNames.map((n) => n.trim().toLowerCase()).toSet();
+  final inPantry = pantry.ownedNamesLower;
+  final keys = {...onList, ...inPantry};
+  final out = <String, MealOwnedSource>{};
+  for (final k in keys) {
+    final l = onList.contains(k);
+    final p = inPantry.contains(k);
+    if (l && p) {
+      out[k] = MealOwnedSource.both;
+    } else if (p) {
+      out[k] = MealOwnedSource.pantry;
+    } else {
+      out[k] = MealOwnedSource.list;
+    }
+  }
+  return out;
+}
 
 /// Bottom sheet pour ajouter un article : champ texte + choix de couleur + suggestions.
 /// Toteo+ : note, image, prix, saisie vocale, complétion auto (lexique + « Pour plus tard »).
@@ -40,6 +63,7 @@ class AddItemSheet extends StatefulWidget {
     this.initialPrice,
     this.initialQuantity,
     this.initialUnit,
+    this.initialFoodCategoryId,
     required this.onSubmit,
     this.onAddForLater,
     this.onAddAsAlreadyBought,
@@ -57,6 +81,7 @@ class AddItemSheet extends StatefulWidget {
   final double? initialPrice;
   final double? initialQuantity;
   final String? initialUnit;
+  final String? initialFoodCategoryId;
   final void Function(
     String name,
     int colorIndex, {
@@ -68,6 +93,7 @@ class AddItemSheet extends StatefulWidget {
     double? price,
     double? quantity,
     String? unit,
+    String? foodCategoryId,
   }) onSubmit;
   /// Appelé quand l'utilisateur choisit « Pour plus tard » sur une suggestion : ajoute l'article à la liste (non coché).
   final void Function(String name)? onAddForLater;
@@ -89,6 +115,8 @@ class _AddItemSheetState extends State<AddItemSheet> {
   late final TextEditingController _quantityController;
   late final TextEditingController _unitController;
   late int _colorIndex;
+  String? _foodCategoryId;
+  bool _foodCategoryManual = false;
   DateTime? _reminderDate;
   TimeOfDay? _reminderTime;
   String? _imagePath;
@@ -114,12 +142,20 @@ class _AddItemSheetState extends State<AddItemSheet> {
     );
     _unitController = TextEditingController(text: widget.initialUnit ?? '');
     _colorIndex = widget.initialColorIndex;
+    _foodCategoryId = widget.initialFoodCategoryId;
+    _foodCategoryManual = widget.initialFoodCategoryId != null;
     _imagePath = widget.initialImagePath;
     if (widget.initialReminderAt != null) {
       final d = DateTime.fromMillisecondsSinceEpoch(widget.initialReminderAt!);
       _reminderDate = DateTime(d.year, d.month, d.day);
       _reminderTime = TimeOfDay(hour: d.hour, minute: d.minute);
     }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      if (widget.initialName.trim().isNotEmpty && !_foodCategoryManual) {
+        _refreshFoodCategory(widget.initialName);
+      }
+    });
   }
 
   @override
@@ -146,6 +182,15 @@ class _AddItemSheetState extends State<AddItemSheet> {
     return d.millisecondsSinceEpoch;
   }
 
+  void _refreshFoodCategory(String name) {
+    if (_foodCategoryManual) return;
+    final overrides = context.read<SettingsProvider>().foodCategoryOverrides;
+    final id = FoodClassifier.classify(name, overrides: overrides);
+    if (id != _foodCategoryId) {
+      setState(() => _foodCategoryId = id);
+    }
+  }
+
   void _updateCategoryNameFromIndex(CategoryNamesProvider provider) {
     final name = provider.getCategoryName(_colorIndex);
     if (_categoryNameController.text != (name ?? '')) {
@@ -169,10 +214,18 @@ class _AddItemSheetState extends State<AddItemSheet> {
       final preset = MealPresets.match(finalName);
       if (preset != null && widget.onExpandPreset != null) {
         final isPremium = context.read<PremiumProvider>().isPremiumActive;
+        final listP = context.read<ListProvider>();
+        final pantryP = context.read<PantryProvider>();
+        final owned = <String>{
+          ...listP.currentItemNames.map((n) => n.trim().toLowerCase()),
+          ...pantryP.ownedNamesLower,
+        };
         final action = await showMealPresetDialog(
           context,
           preset: preset,
           isPremium: isPremium,
+          alreadyOwnedLower: owned,
+          ownedSources: _mealOwnedSources(listP, pantryP),
         );
         if (!mounted) return;
         if (action == 'all') {
@@ -213,6 +266,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
       price: price,
       quantity: quantity,
       unit: unit,
+      foodCategoryId: _foodCategoryId,
     );
     if (mounted) Navigator.of(context).pop();
   }
@@ -439,7 +493,43 @@ class _AddItemSheetState extends State<AddItemSheet> {
                     ),
                   ),
                   onSubmitted: (_) => _submit(),
-                  onChanged: (_) => setState(() {}),
+                  onChanged: (v) {
+                    setState(() {});
+                    if (!_foodCategoryManual) {
+                      final overrides = context.read<SettingsProvider>().foodCategoryOverrides;
+                      final id = FoodClassifier.classify(v, overrides: overrides);
+                      if (id != _foodCategoryId) {
+                        HapticFeedback.selectionClick();
+                        setState(() => _foodCategoryId = id);
+                      }
+                    }
+                  },
+                ),
+                const SizedBox(height: 10),
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 220),
+                  switchInCurve: Curves.easeOut,
+                  child: KeyedSubtree(
+                    key: ValueKey(_foodCategoryId ?? '_none'),
+                    child: _FoodCategoryPicker(
+                      selectedId: _foodCategoryId,
+                      onChanged: (id) {
+                        HapticFeedback.selectionClick();
+                        setState(() {
+                          _foodCategoryId = id;
+                          _foodCategoryManual = true;
+                        });
+                        final n = _controller.text.trim();
+                        final premium = context.read<PremiumProvider>().isPremiumActive;
+                        if (premium && n.isNotEmpty && id != null) {
+                          context.read<SettingsProvider>().setFoodCategoryOverride(
+                                FoodTaxonomy.normalize(n),
+                                id,
+                              );
+                        }
+                      },
+                    ),
+                  ),
                 ),
                 if (!widget.isEdit)
                   Consumer<ListProvider>(
@@ -944,3 +1034,77 @@ class _AddItemSheetState extends State<AddItemSheet> {
     );
   }
 }
+
+class _FoodCategoryPicker extends StatelessWidget {
+  const _FoodCategoryPicker({
+    required this.selectedId,
+    required this.onChanged,
+  });
+
+  final String? selectedId;
+  final void Function(String? id) onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final lang = Localizations.localeOf(context).languageCode;
+    final theme = Theme.of(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.foodTypeLabel,
+          style: theme.textTheme.labelLarge?.copyWith(
+            color: theme.colorScheme.onSurfaceVariant,
+          ),
+        ),
+        const SizedBox(height: 8),
+        SizedBox(
+          height: 40,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: FilterChip(
+                  selected: selectedId == null,
+                  showCheckmark: false,
+                  avatar: Icon(
+                    Icons.help_outline,
+                    size: 18,
+                    color: selectedId == null
+                        ? theme.colorScheme.onSecondaryContainer
+                        : theme.colorScheme.onSurfaceVariant,
+                  ),
+                  label: Text(l10n.foodCatUnclassified),
+                  onSelected: (_) => onChanged(null),
+                ),
+              ),
+              for (final c in FoodTaxonomy.all)
+                if (c.id != FoodTaxonomy.other.id)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: FilterChip(
+                      selected: selectedId == c.id,
+                      showCheckmark: false,
+                      avatar: Icon(
+                        FoodCategoryStyle.icon(c),
+                        size: 18,
+                        color: selectedId == c.id
+                            ? theme.colorScheme.onSecondaryContainer
+                            : FoodCategoryStyle.colorFor(c),
+                      ),
+                      label: Text(c.labelFor(lang)),
+                      selectedColor: FoodCategoryStyle.colorFor(c).withValues(alpha: 0.35),
+                      onSelected: (_) => onChanged(c.id),
+                    ),
+                  ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+

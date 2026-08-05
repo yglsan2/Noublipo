@@ -12,6 +12,9 @@ class SettingsProvider extends ChangeNotifier {
     _categoryStyle = _storage.categoryStyle;
     _sortMode = _storage.sortMode;
     _listOrgMode = _storage.listOrgMode;
+    _listAxisMode = _storage.listAxisMode;
+    _showFoodCategoryBadge = _storage.showFoodCategoryBadge;
+    _foodCategoryOverrides = Map<String, String>.from(_storage.foodCategoryOverrides);
     _aisleOrder = Map<int, int>.from(_storage.aisleOrder);
     _favoriteStoreIndices = List<int>.from(_storage.favoriteStoreIndices);
     _showPrices = _storage.showPrices;
@@ -47,6 +50,9 @@ class SettingsProvider extends ChangeNotifier {
   String _categoryStyle = 'form';
   String _sortMode = 'order';
   String _listOrgMode = 'bubbles';
+  String _listAxisMode = 'store';
+  bool _showFoodCategoryBadge = true;
+  Map<String, String> _foodCategoryOverrides = {};
   Map<int, int> _aisleOrder = {};
   List<int> _favoriteStoreIndices = [];
   bool _showPrices = false;
@@ -76,6 +82,10 @@ class SettingsProvider extends ChangeNotifier {
   String get sortMode => _sortMode;
   /// 'bubbles' | 'numbered' | 'manual'
   String get listOrgMode => _listOrgMode;
+  /// 'store' | 'food' | 'dualStoreFood' | 'dualFoodStore'
+  String get listAxisMode => _listAxisMode;
+  bool get showFoodCategoryBadge => _showFoodCategoryBadge;
+  Map<String, String> get foodCategoryOverrides => Map.unmodifiable(_foodCategoryOverrides);
   Map<int, int> get aisleOrder => Map.unmodifiable(_aisleOrder);
   List<int> get favoriteStoreIndices => List.unmodifiable(_favoriteStoreIndices);
   bool get showPrices => _showPrices;
@@ -164,6 +174,39 @@ class SettingsProvider extends ChangeNotifier {
       notifyListeners();
     } catch (e, stack) {
       AppLogger.error('SettingsProvider.setListOrgMode', e, stack);
+      rethrow;
+    }
+  }
+
+  Future<void> setListAxisMode(String value) async {
+    try {
+      await _storage.setListAxisMode(value);
+      _listAxisMode = _storage.listAxisMode;
+      notifyListeners();
+    } catch (e, stack) {
+      AppLogger.error('SettingsProvider.setListAxisMode', e, stack);
+      rethrow;
+    }
+  }
+
+  Future<void> setShowFoodCategoryBadge(bool value) async {
+    try {
+      await _storage.setShowFoodCategoryBadge(value);
+      _showFoodCategoryBadge = value;
+      notifyListeners();
+    } catch (e, stack) {
+      AppLogger.error('SettingsProvider.setShowFoodCategoryBadge', e, stack);
+      rethrow;
+    }
+  }
+
+  Future<void> setFoodCategoryOverride(String normalizedName, String categoryId) async {
+    try {
+      await _storage.setFoodCategoryOverride(normalizedName, categoryId);
+      _foodCategoryOverrides = Map<String, String>.from(_storage.foodCategoryOverrides);
+      notifyListeners();
+    } catch (e, stack) {
+      AppLogger.error('SettingsProvider.setFoodCategoryOverride', e, stack);
       rethrow;
     }
   }
@@ -314,6 +357,9 @@ class SettingsProvider extends ChangeNotifier {
     _categoryStyle = _storage.categoryStyle;
     _sortMode = _storage.sortMode;
     _listOrgMode = _storage.listOrgMode;
+    _listAxisMode = _storage.listAxisMode;
+    _showFoodCategoryBadge = _storage.showFoodCategoryBadge;
+    _foodCategoryOverrides = Map<String, String>.from(_storage.foodCategoryOverrides);
     _aisleOrder = Map<int, int>.from(_storage.aisleOrder);
     _favoriteStoreIndices = List<int>.from(_storage.favoriteStoreIndices);
     _showPrices = _storage.showPrices;

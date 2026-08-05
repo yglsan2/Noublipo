@@ -19,10 +19,16 @@ class YouMightForgetItem {
     required this.name,
     this.colorIndex = 0,
     this.recurringItemId,
+    this.fromHistoryRhythm = false,
+    this.rhythmHint,
   });
   final String name;
   final int colorIndex;
   final String? recurringItemId;
+  /// True si déduit des intervalles d'achat (apprentissage historique).
+  final bool fromHistoryRhythm;
+  /// Ex. « tous les 7 j · il y a 9 j ».
+  final String? rhythmHint;
 }
 
 /// Feuille « Aide course » (SmartCart) : suggestions selon habitudes (récurrents dus) et contexte (froid, etc.).
@@ -99,6 +105,16 @@ class SmartCartSheet extends StatefulWidget {
       if (!isAllowed(n)) continue;
       seen.add(n.toLowerCase());
       result.add(YouMightForgetItem(name: n, colorIndex: r.colorIndex, recurringItemId: r.id));
+    }
+    for (final s in gamification.dueRepurchaseSuggestions()) {
+      if (!isAllowed(s.name)) continue;
+      seen.add(s.name.trim().toLowerCase());
+      result.add(YouMightForgetItem(
+        name: s.name,
+        colorIndex: s.colorIndex,
+        fromHistoryRhythm: true,
+        rhythmHint: 'tous les ${s.medianIntervalDays}j',
+      ));
     }
     for (final e in gamification.mostBoughtProducts(top: mostBoughtTop)) {
       if (!isAllowed(e.name)) continue;
@@ -442,7 +458,18 @@ class _YouMightForgetCardState extends State<_YouMightForgetCard> {
                   Padding(
                     padding: const EdgeInsets.only(right: 4),
                     child: FilterChip(
-                      label: Text(item.name),
+                      avatar: item.fromHistoryRhythm
+                          ? Icon(
+                              Icons.auto_awesome,
+                              size: 16,
+                              color: Theme.of(context).colorScheme.tertiary,
+                            )
+                          : null,
+                      label: Text(
+                        item.rhythmHint != null
+                            ? '${item.name} · ${item.rhythmHint}'
+                            : item.name,
+                      ),
                       deleteIcon: Semantics(
                         label: l10n.smartCartNotThisTime,
                         button: true,

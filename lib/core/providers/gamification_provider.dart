@@ -3,7 +3,7 @@ import '../models/gamification_data.dart';
 import '../models/shopping_item.dart';
 import '../services/storage_service.dart';
 import '../utils/app_logger.dart';
-import '../../app_config.dart';
+import '../utils/purchase_rhythm.dart';
 import 'premium_provider.dart';
 
 /// Streak « O oubli », badges et stats perso (Toteo+).
@@ -20,6 +20,15 @@ class GamificationProvider extends ChangeNotifier {
 
   GamificationData _data = GamificationData();
   bool _loaded = false;
+
+  /// Cache journalier des suggestions rythme (évite recalcul O(n) à chaque rebuild).
+  List<PurchaseRhythmSuggestion>? _rhythmCache;
+  String? _rhythmCacheDay;
+
+  void _invalidateRhythmCache() {
+    _rhythmCache = null;
+    _rhythmCacheDay = null;
+  }
 
   int get currentStreak => _data.currentStreak;
   int get bestStreak => _data.bestStreak;
@@ -106,6 +115,7 @@ class GamificationProvider extends ChangeNotifier {
       bestStreak: newBest,
       tripHistory: history,
     );
+    _invalidateRhythmCache();
     await _save();
     notifyListeners();
   }
@@ -122,6 +132,29 @@ class GamificationProvider extends ChangeNotifier {
     _data = _data.copyWith(forgottenCounts: counts);
     await _save();
     notifyListeners();
+  }
+
+  /// Suggestions « temps de racheter » (intervalles médians, cache 1 jour).
+  List<PurchaseRhythmSuggestion> dueRepurchaseSuggestions({
+    DateTime? now,
+    int minPurchases = PurchaseRhythm.minPurchases,
+  }) {
+    if (!PremiumProvider.currentIsActive) return const [];
+    final ref = now ?? DateTime.now();
+    final dayKey = '${ref.year}-${ref.month}-${ref.day}';
+    if (now == null && _rhythmCache != null && _rhythmCacheDay == dayKey) {
+      return _rhythmCache!;
+    }
+    final computed = PurchaseRhythm.dueSuggestions(
+      _data.tripHistory,
+      now: ref,
+      minPurchases: minPurchases,
+    );
+    if (now == null) {
+      _rhythmCache = computed;
+      _rhythmCacheDay = dayKey;
+    }
+    return computed;
   }
 
   /// Produits les plus achetés (top N, par nombre d'occurrences dans l'historique).

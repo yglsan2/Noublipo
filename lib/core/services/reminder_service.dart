@@ -218,4 +218,30 @@ class ReminderService {
       AppLogger.warning('cancelWeeklyShoppingReminder', e, stack);
     }
   }
+
+  /// Notification immédiate (ex. proximité magasin).
+  Future<void> showImmediate({
+    required int id,
+    required String title,
+    required String body,
+    String channelId = 'toteo_reminders',
+    String channelName = 'Rappels Tote \'O Recall',
+    String channelDescription = 'Rappels Tote \'O Recall',
+  }) async {
+    if (!_initialized) return;
+    try {
+      final details = NotificationDetails(
+        android: AndroidNotificationDetails(
+          channelId,
+          channelName,
+          channelDescription: channelDescription,
+          importance: Importance.high,
+          priority: Priority.high,
+        ),
+      );
+      await _plugin.show(id, title, body, details);
+    } catch (e, stack) {
+      AppLogger.warning('showImmediate', e, stack);
+    }
+  }
 }

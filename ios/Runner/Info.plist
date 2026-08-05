@@ -45,5 +45,7 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Tote 'O Recall utilise ta position pour te rappeler ta liste près d’un magasin favori (opt-in).</string>
 </dict>
 </plist>

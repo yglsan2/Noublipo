@@ -3,8 +3,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/birthday_entry.dart';
 import '../models/consumption_profile.dart';
 import '../models/gamification_data.dart';
+import '../models/geofence_store.dart';
 import '../models/list_group.dart';
 import '../models/list_template.dart';
+import '../models/pantry_item.dart';
 import '../models/recurring_item.dart';
 import '../models/seasonal_template.dart';
 import '../models/shopping_list_model.dart';
@@ -25,6 +27,10 @@ class StorageService {
   static const String _keySortMode = 'toteo_sort_mode'; // 'order' | 'name' | 'color' | 'aisle' (Toteo+)
   /// Organisation visuelle : 'bubbles' (auto) | 'numbered' | 'manual' (drag perso).
   static const String _keyListOrgMode = 'toteo_list_org_mode';
+  /// Axe d'orga : 'store' | 'food' | 'dualStoreFood' | 'dualFoodStore' (Plus pour hors store).
+  static const String _keyListAxisMode = 'toteo_list_axis_mode';
+  static const String _keyShowFoodCategoryBadge = 'toteo_show_food_category_badge';
+  static const String _keyFoodCategoryOverrides = 'toteo_food_category_overrides';
   static const String _keyAisleOrder = 'toteo_aisle_order'; // Map colorIndex -> aisle number (Pro)
   static const String _keyFavoriteStoreIndices = 'toteo_favorite_store_indices'; // List<int> (Pro)
   static const String _keyShowPrices = 'toteo_show_prices'; // (Toteo+)
@@ -47,6 +53,9 @@ class StorageService {
   static const String _keyShoppingMode = 'toteo_shopping_mode';
   static const String _keyArchivedLists = 'toteo_archived_lists';
   static const String _keyGamification = 'toteo_gamification';
+  static const String _keyPantryStock = 'toteo_pantry_stock';
+  static const String _keyGeofenceStores = 'toteo_geofence_stores';
+  static const String _keyGeofenceEnabled = 'toteo_geofence_enabled';
   static const String _keyConsumptionProfile = 'toteo_consumption_profile';
   static const String _keyCoachNutritionEnabled = 'toteo_coach_nutrition_enabled';
   static const String _keyPremiumPurchased = 'toteo_premium_purchased';
@@ -189,6 +198,57 @@ class StorageService {
       AppLogger.error('setListOrgMode', e, stack);
       rethrow;
     }
+  }
+
+  /// Axe magasin / type d’aliment. Défaut `store`.
+  String get listAxisMode {
+    final v = _prefs.getString(_keyListAxisMode);
+    if (v == 'food' || v == 'dualStoreFood' || v == 'dualFoodStore') return v!;
+    return 'store';
+  }
+
+  Future<void> setListAxisMode(String value) async {
+    try {
+      const allowed = {'store', 'food', 'dualStoreFood', 'dualFoodStore'};
+      await _prefs.setString(_keyListAxisMode, allowed.contains(value) ? value : 'store');
+    } catch (e, stack) {
+      AppLogger.error('setListAxisMode', e, stack);
+      rethrow;
+    }
+  }
+
+  bool get showFoodCategoryBadge => _prefs.getBool(_keyShowFoodCategoryBadge) ?? true;
+
+  Future<void> setShowFoodCategoryBadge(bool value) async {
+    await _prefs.setBool(_keyShowFoodCategoryBadge, value);
+  }
+
+  /// Overrides locaux nom normalisé → foodCategoryId (Plus).
+  Map<String, String> get foodCategoryOverrides {
+    final json = _prefs.getString(_keyFoodCategoryOverrides);
+    if (json == null) return {};
+    try {
+      final map = jsonDecode(json) as Map<String, dynamic>;
+      return map.map((k, v) => MapEntry(k, v.toString()));
+    } catch (e, stack) {
+      AppLogger.warning('foodCategoryOverrides: JSON invalide', e, stack);
+      return {};
+    }
+  }
+
+  Future<void> setFoodCategoryOverrides(Map<String, String> overrides) async {
+    try {
+      await _prefs.setString(_keyFoodCategoryOverrides, jsonEncode(overrides));
+    } catch (e, stack) {
+      AppLogger.error('setFoodCategoryOverrides', e, stack);
+      rethrow;
+    }
+  }
+
+  Future<void> setFoodCategoryOverride(String normalizedName, String categoryId) async {
+    final map = Map<String, String>.from(foodCategoryOverrides);
+    map[normalizedName] = categoryId;
+    await setFoodCategoryOverrides(map);
   }
 
   /// Ordre des rayons (colorIndex -> numéro de rayon). Pro.
@@ -643,6 +703,68 @@ class StorageService {
       await _prefs.setString(_keyGamification, jsonEncode(data.toJson()));
     } catch (e, stack) {
       AppLogger.error('saveGamificationData', e, stack);
+      rethrow;
+    }
+  }
+
+  /// Stock maison (Tote+).
+  Future<List<PantryItem>> loadPantryItems() async {
+    final json = _prefs.getString(_keyPantryStock);
+    if (json == null) return [];
+    try {
+      final list = jsonDecode(json) as List<dynamic>;
+      return list
+          .map((e) => PantryItem.fromJson(e as Map<String, dynamic>))
+          .where((e) => e.id.isNotEmpty && e.name.trim().isNotEmpty)
+          .toList();
+    } catch (e, stack) {
+      AppLogger.warning('loadPantryItems: JSON invalide', e, stack);
+      return [];
+    }
+  }
+
+  Future<void> savePantryItems(List<PantryItem> items) async {
+    try {
+      await _prefs.setString(
+        _keyPantryStock,
+        jsonEncode(items.map((e) => e.toJson()).toList()),
+      );
+    } catch (e, stack) {
+      AppLogger.error('savePantryItems', e, stack);
+      rethrow;
+    }
+  }
+
+  /// Géofences magasins (Tote+).
+  bool get geofenceEnabled => _prefs.getBool(_keyGeofenceEnabled) ?? false;
+
+  Future<void> setGeofenceEnabled(bool value) async {
+    await _prefs.setBool(_keyGeofenceEnabled, value);
+  }
+
+  Future<List<GeofenceStore>> loadGeofenceStores() async {
+    final json = _prefs.getString(_keyGeofenceStores);
+    if (json == null) return [];
+    try {
+      final list = jsonDecode(json) as List<dynamic>;
+      return list
+          .map((e) => GeofenceStore.fromJson(e as Map<String, dynamic>))
+          .where((e) => e.id.isNotEmpty)
+          .toList();
+    } catch (e, stack) {
+      AppLogger.warning('loadGeofenceStores: JSON invalide', e, stack);
+      return [];
+    }
+  }
+
+  Future<void> saveGeofenceStores(List<GeofenceStore> stores) async {
+    try {
+      await _prefs.setString(
+        _keyGeofenceStores,
+        jsonEncode(stores.map((e) => e.toJson()).toList()),
+      );
+    } catch (e, stack) {
+      AppLogger.error('saveGeofenceStores', e, stack);
       rethrow;
     }
   }

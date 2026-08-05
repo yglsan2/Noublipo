@@ -1501,4 +1501,275 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get orgModeManualHint => 'Glisse pour ranger à ta façon';
+
+  @override
+  String get recallDueCardHistoryCta =>
+      'D’après ton historique — voir l’Aide course';
+
+  @override
+  String mealPresetBodySkip(int missing, int skipped) {
+    return 'Ajouter les $missing articles manquants ($skipped déjà chez toi ou sur la liste) ?';
+  }
+
+  @override
+  String mealPresetAlreadyHave(String names) {
+    return 'Déjà : $names';
+  }
+
+  @override
+  String mealPresetAddMissing(int count) {
+    return 'Ajouter $count';
+  }
+
+  @override
+  String get pantryTitle => 'Stock maison';
+
+  @override
+  String get pantrySubtitle =>
+      'Suis ton placard. À zéro, on peut ajouter à la liste.';
+
+  @override
+  String get pantryPremiumOnly =>
+      'Le stock maison est disponible avec Tote \'O Recall+.';
+
+  @override
+  String get pantryItemName => 'Article';
+
+  @override
+  String get pantryQty => 'Qté';
+
+  @override
+  String get pantryAdd => 'Ajouter';
+
+  @override
+  String get pantryEmpty => 'Aucun article en stock';
+
+  @override
+  String get pantryOutOfStock => 'Rupture';
+
+  @override
+  String pantryQtyLabel(String qty, String unit) {
+    return '$qty $unit';
+  }
+
+  @override
+  String get pantryUseOne => 'Utiliser 1';
+
+  @override
+  String get pantryAddOne => 'Ajouter 1';
+
+  @override
+  String get pantryEmptyTitle => 'Plus en stock';
+
+  @override
+  String pantryEmptyBody(String name) {
+    return 'Ajouter « $name » à la liste de courses ?';
+  }
+
+  @override
+  String get pantryAddToList => 'Ajouter à la liste';
+
+  @override
+  String pantryAddedToList(String name) {
+    return '« $name » ajouté à la liste';
+  }
+
+  @override
+  String pantryEmptyAlreadyOnList(String name) {
+    return '« $name » est déjà sur la liste';
+  }
+
+  @override
+  String get pantryRestockTitle => 'Mettre à jour le stock ?';
+
+  @override
+  String pantryRestockBody(int count) {
+    return 'Ajouter les $count articles achetés au stock maison ?';
+  }
+
+  @override
+  String get pantryRestockCta => 'Oui, stocker';
+
+  @override
+  String get geofenceTitle => 'Rappel près du magasin';
+
+  @override
+  String get geofenceSubtitle =>
+      'Opt-in : notifie quand tu es près d’un magasin favori (GPS local, sans cloud).';
+
+  @override
+  String get geofenceEnable => 'Activer la proximité';
+
+  @override
+  String get geofenceEnableHint =>
+      'Vérifie à l’ouverture de l’app (pas de suivi en arrière-plan).';
+
+  @override
+  String get geofenceAddHere => 'Enregistrer ma position actuelle';
+
+  @override
+  String get geofenceDefaultStore => 'Mon magasin';
+
+  @override
+  String get geofenceAdded => 'Position magasin enregistrée';
+
+  @override
+  String get geofencePermissionDenied => 'Autorisation de localisation refusée';
+
+  @override
+  String get geofenceLocationError => 'Impossible d’obtenir la position';
+
+  @override
+  String geofenceRadiusLabel(int meters) {
+    return 'Rayon $meters m';
+  }
+
+  @override
+  String get geofenceNotifTitle => 'Tu es près du magasin';
+
+  @override
+  String geofenceNotifBody(String store, int count) {
+    return '$store — $count article(s) sur ta liste';
+  }
+
+  @override
+  String get mealPresetAllCovered =>
+      'Tu as déjà tout pour ce repas — rien à ajouter !';
+
+  @override
+  String get mealPresetAllCoveredCta => 'Parfait';
+
+  @override
+  String get mealPresetNeedIt => 'À prendre';
+
+  @override
+  String get mealPresetInPantry => 'Placard';
+
+  @override
+  String get mealPresetOnList => 'Liste';
+
+  @override
+  String get mealPresetInBoth => 'OK';
+
+  @override
+  String pantryAddedSnack(String name) {
+    return '« $name » en stock';
+  }
+
+  @override
+  String pantryAutoAdded(String name) {
+    return 'Rupture → « $name » ajouté à la liste';
+  }
+
+  @override
+  String pantryStatInStock(int count) {
+    return '$count en stock';
+  }
+
+  @override
+  String pantryStatLow(int count) {
+    return '$count bas';
+  }
+
+  @override
+  String pantryStatEmpty(int count) {
+    return '$count rupture';
+  }
+
+  @override
+  String get pantrySearchHint => 'Chercher dans le placard…';
+
+  @override
+  String get pantryFilterAll => 'Tous';
+
+  @override
+  String get pantryFilterLow => 'Bas';
+
+  @override
+  String get pantryFilterEmpty => 'Rupture';
+
+  @override
+  String get pantryFilterEmptyResult => 'Rien dans ce filtre';
+
+  @override
+  String pantryLowHint(String qty) {
+    return 'Plus que $qty — bientôt à racheter';
+  }
+
+  @override
+  String pantryRestockDone(int count) {
+    return 'Stock +$count';
+  }
+
+  @override
+  String get recallDueQuickAdd => 'Ajouter les premiers';
+
+  @override
+  String get recallDueSeeAll => 'Tout voir';
+
+  @override
+  String recallDueAdded(int count) {
+    return '$count ajouté(s) à la liste';
+  }
+
+  @override
+  String get geofenceSetupTitle => 'Nouveau magasin';
+
+  @override
+  String get geofenceSetupHint =>
+      'Enregistre ta position actuelle — on te rappellera ta liste à proximité.';
+
+  @override
+  String get geofenceStoreName => 'Nom du magasin';
+
+  @override
+  String get geofencePickColor => 'Couleur / rayon magasin';
+
+  @override
+  String get geofenceRadiusPick => 'Zone de détection';
+
+  @override
+  String get geofenceSaveHere => 'Enregistrer ici';
+
+  @override
+  String get geofenceLocating => 'Localisation…';
+
+  @override
+  String geofenceAddedNamed(String name) {
+    return '« $name » enregistré';
+  }
+
+  @override
+  String get foodTypeLabel => 'Type d’aliment';
+
+  @override
+  String get foodCatUnclassified => 'Non classé';
+
+  @override
+  String get showFoodCategoryBadge => 'Afficher le type d’aliment';
+
+  @override
+  String get showFoodCategoryBadgeSubtitle =>
+      'Petit badge sous chaque article (Légumes, Laitiers…)';
+
+  @override
+  String get axisModeLabel => 'Ranger par';
+
+  @override
+  String get axisModeStore => 'Magasin';
+
+  @override
+  String get axisModeFood => 'Type';
+
+  @override
+  String get axisModeDualStoreFood => 'Magasin → type';
+
+  @override
+  String get axisModeDualFoodStore => 'Type → magasin';
+
+  @override
+  String get reclassifyFoodList => 'Reclasser les types';
+
+  @override
+  String get reclassifyFoodDone => 'Types d’aliments mis à jour';
 }

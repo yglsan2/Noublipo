@@ -4,6 +4,8 @@ class ShoppingItem {
   String name;
   bool checked;
   int colorIndex;
+  /// Type d’aliment (axe séparé du magasin), ex. `vegetables`. Null = non classé.
+  String? foodCategoryId;
   /// Note (Toteo+ uniquement)
   String? note;
   /// Quantité (Toteo+ uniquement), ex: 2
@@ -28,6 +30,7 @@ class ShoppingItem {
     required this.name,
     this.checked = false,
     this.colorIndex = 0,
+    this.foodCategoryId,
     this.note,
     this.quantity,
     this.unit,
@@ -44,6 +47,8 @@ class ShoppingItem {
     String? name,
     bool? checked,
     int? colorIndex,
+    String? foodCategoryId,
+    bool clearFoodCategoryId = false,
     String? note,
     double? quantity,
     String? unit,
@@ -59,6 +64,7 @@ class ShoppingItem {
       name: name ?? this.name,
       checked: checked ?? this.checked,
       colorIndex: colorIndex ?? this.colorIndex,
+      foodCategoryId: clearFoodCategoryId ? null : (foodCategoryId ?? this.foodCategoryId),
       note: note ?? this.note,
       quantity: quantity ?? this.quantity,
       unit: unit ?? this.unit,
@@ -77,6 +83,7 @@ class ShoppingItem {
       'name': name,
       'checked': checked,
       'colorIndex': colorIndex,
+      if (foodCategoryId != null) 'foodCategoryId': foodCategoryId,
       'note': note,
       'quantity': quantity,
       'unit': unit,
@@ -95,6 +102,7 @@ class ShoppingItem {
       name: json['name'] as String,
       checked: json['checked'] as bool? ?? false,
       colorIndex: json['colorIndex'] as int? ?? 0,
+      foodCategoryId: json['foodCategoryId'] as String?,
       note: json['note'] as String?,
       quantity: (json['quantity'] as num?)?.toDouble(),
       unit: json['unit'] as String?,

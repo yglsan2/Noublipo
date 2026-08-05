@@ -7,6 +7,7 @@ import '../../../core/constants/touch_constants.dart';
 import '../../../core/data/meal_presets.dart';
 import '../../../core/layout/screen_layout.dart';
 import '../../../core/providers/list_provider.dart';
+import '../../../core/providers/pantry_provider.dart';
 import '../../../core/providers/premium_provider.dart';
 import '../../../core/providers/settings_provider.dart';
 import '../../../core/ui/app_feedback.dart';
@@ -16,6 +17,25 @@ import '../../../core/utils/quick_add_parser.dart';
 import '../../../core/utils/voice_text_cleaner.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../paywall/paywall_screen.dart';
+
+Map<String, MealOwnedSource> _quickMealOwnedSources(ListProvider list, PantryProvider pantry) {
+  final onList = list.currentItemNames.map((n) => n.trim().toLowerCase()).toSet();
+  final inPantry = pantry.ownedNamesLower;
+  final keys = {...onList, ...inPantry};
+  final out = <String, MealOwnedSource>{};
+  for (final k in keys) {
+    final l = onList.contains(k);
+    final p = inPantry.contains(k);
+    if (l && p) {
+      out[k] = MealOwnedSource.both;
+    } else if (p) {
+      out[k] = MealOwnedSource.pantry;
+    } else {
+      out[k] = MealOwnedSource.list;
+    }
+  }
+  return out;
+}
 
 /// Bottom sheet d'ajout rapide : une phrase → liste (optionnelle) + articles.
 /// Ex: "Pomme" → liste actuelle ; "Liste Auchan ajouter Pomme, lait" → liste Auchan.
@@ -47,17 +67,28 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
     final preset = MealPresets.match(text);
     if (preset != null) {
       final isPremium = context.read<PremiumProvider>().isPremiumActive;
+      final listP = context.read<ListProvider>();
+      final pantryP = context.read<PantryProvider>();
+      final owned = <String>{
+        ...listP.currentItemNames.map((n) => n.trim().toLowerCase()),
+        ...pantryP.ownedNamesLower,
+      };
       final action = await showMealPresetDialog(
         context,
         preset: preset,
         isPremium: isPremium,
+        alreadyOwnedLower: owned,
+        ownedSources: _quickMealOwnedSources(listP, pantryP),
       );
       if (!mounted) return;
       if (action == 'all') {
         final provider = context.read<ListProvider>();
         final settings = context.read<SettingsProvider>();
+        final missing = preset.items
+            .where((e) => !owned.contains(e.name.trim().toLowerCase()))
+            .toList();
         try {
-          for (final item in preset.items) {
+          for (final item in missing) {
             await provider.addItem(
               settings.applyCapitalization(item.name),
               colorIndex: item.colorIndex ?? preset.defaultColorIndex,
@@ -67,7 +98,7 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
           Navigator.of(context).pop();
           AppFeedback.success(
             context,
-            AppLocalizations.of(context).mealPresetAdded(preset.items.length, preset.label),
+            AppLocalizations.of(context).mealPresetAdded(missing.length, preset.label),
           );
         } catch (_) {
           if (mounted) {

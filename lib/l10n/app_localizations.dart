@@ -2855,6 +2855,456 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Glisse pour ranger à ta façon'**
   String get orgModeManualHint;
+
+  /// No description provided for @recallDueCardHistoryCta.
+  ///
+  /// In fr, this message translates to:
+  /// **'D’après ton historique — voir l’Aide course'**
+  String get recallDueCardHistoryCta;
+
+  /// No description provided for @mealPresetBodySkip.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter les {missing} articles manquants ({skipped} déjà chez toi ou sur la liste) ?'**
+  String mealPresetBodySkip(int missing, int skipped);
+
+  /// No description provided for @mealPresetAlreadyHave.
+  ///
+  /// In fr, this message translates to:
+  /// **'Déjà : {names}'**
+  String mealPresetAlreadyHave(String names);
+
+  /// No description provided for @mealPresetAddMissing.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter {count}'**
+  String mealPresetAddMissing(int count);
+
+  /// No description provided for @pantryTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Stock maison'**
+  String get pantryTitle;
+
+  /// No description provided for @pantrySubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Suis ton placard. À zéro, on peut ajouter à la liste.'**
+  String get pantrySubtitle;
+
+  /// No description provided for @pantryPremiumOnly.
+  ///
+  /// In fr, this message translates to:
+  /// **'Le stock maison est disponible avec Tote \'O Recall+.'**
+  String get pantryPremiumOnly;
+
+  /// No description provided for @pantryItemName.
+  ///
+  /// In fr, this message translates to:
+  /// **'Article'**
+  String get pantryItemName;
+
+  /// No description provided for @pantryQty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Qté'**
+  String get pantryQty;
+
+  /// No description provided for @pantryAdd.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter'**
+  String get pantryAdd;
+
+  /// No description provided for @pantryEmpty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aucun article en stock'**
+  String get pantryEmpty;
+
+  /// No description provided for @pantryOutOfStock.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rupture'**
+  String get pantryOutOfStock;
+
+  /// No description provided for @pantryQtyLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'{qty} {unit}'**
+  String pantryQtyLabel(String qty, String unit);
+
+  /// No description provided for @pantryUseOne.
+  ///
+  /// In fr, this message translates to:
+  /// **'Utiliser 1'**
+  String get pantryUseOne;
+
+  /// No description provided for @pantryAddOne.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter 1'**
+  String get pantryAddOne;
+
+  /// No description provided for @pantryEmptyTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Plus en stock'**
+  String get pantryEmptyTitle;
+
+  /// No description provided for @pantryEmptyBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter « {name} » à la liste de courses ?'**
+  String pantryEmptyBody(String name);
+
+  /// No description provided for @pantryAddToList.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter à la liste'**
+  String get pantryAddToList;
+
+  /// No description provided for @pantryAddedToList.
+  ///
+  /// In fr, this message translates to:
+  /// **'« {name} » ajouté à la liste'**
+  String pantryAddedToList(String name);
+
+  /// No description provided for @pantryEmptyAlreadyOnList.
+  ///
+  /// In fr, this message translates to:
+  /// **'« {name} » est déjà sur la liste'**
+  String pantryEmptyAlreadyOnList(String name);
+
+  /// No description provided for @pantryRestockTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mettre à jour le stock ?'**
+  String get pantryRestockTitle;
+
+  /// No description provided for @pantryRestockBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter les {count} articles achetés au stock maison ?'**
+  String pantryRestockBody(int count);
+
+  /// No description provided for @pantryRestockCta.
+  ///
+  /// In fr, this message translates to:
+  /// **'Oui, stocker'**
+  String get pantryRestockCta;
+
+  /// No description provided for @geofenceTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rappel près du magasin'**
+  String get geofenceTitle;
+
+  /// No description provided for @geofenceSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Opt-in : notifie quand tu es près d’un magasin favori (GPS local, sans cloud).'**
+  String get geofenceSubtitle;
+
+  /// No description provided for @geofenceEnable.
+  ///
+  /// In fr, this message translates to:
+  /// **'Activer la proximité'**
+  String get geofenceEnable;
+
+  /// No description provided for @geofenceEnableHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vérifie à l’ouverture de l’app (pas de suivi en arrière-plan).'**
+  String get geofenceEnableHint;
+
+  /// No description provided for @geofenceAddHere.
+  ///
+  /// In fr, this message translates to:
+  /// **'Enregistrer ma position actuelle'**
+  String get geofenceAddHere;
+
+  /// No description provided for @geofenceDefaultStore.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mon magasin'**
+  String get geofenceDefaultStore;
+
+  /// No description provided for @geofenceAdded.
+  ///
+  /// In fr, this message translates to:
+  /// **'Position magasin enregistrée'**
+  String get geofenceAdded;
+
+  /// No description provided for @geofencePermissionDenied.
+  ///
+  /// In fr, this message translates to:
+  /// **'Autorisation de localisation refusée'**
+  String get geofencePermissionDenied;
+
+  /// No description provided for @geofenceLocationError.
+  ///
+  /// In fr, this message translates to:
+  /// **'Impossible d’obtenir la position'**
+  String get geofenceLocationError;
+
+  /// No description provided for @geofenceRadiusLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rayon {meters} m'**
+  String geofenceRadiusLabel(int meters);
+
+  /// No description provided for @geofenceNotifTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tu es près du magasin'**
+  String get geofenceNotifTitle;
+
+  /// No description provided for @geofenceNotifBody.
+  ///
+  /// In fr, this message translates to:
+  /// **'{store} — {count} article(s) sur ta liste'**
+  String geofenceNotifBody(String store, int count);
+
+  /// No description provided for @mealPresetAllCovered.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tu as déjà tout pour ce repas — rien à ajouter !'**
+  String get mealPresetAllCovered;
+
+  /// No description provided for @mealPresetAllCoveredCta.
+  ///
+  /// In fr, this message translates to:
+  /// **'Parfait'**
+  String get mealPresetAllCoveredCta;
+
+  /// No description provided for @mealPresetNeedIt.
+  ///
+  /// In fr, this message translates to:
+  /// **'À prendre'**
+  String get mealPresetNeedIt;
+
+  /// No description provided for @mealPresetInPantry.
+  ///
+  /// In fr, this message translates to:
+  /// **'Placard'**
+  String get mealPresetInPantry;
+
+  /// No description provided for @mealPresetOnList.
+  ///
+  /// In fr, this message translates to:
+  /// **'Liste'**
+  String get mealPresetOnList;
+
+  /// No description provided for @mealPresetInBoth.
+  ///
+  /// In fr, this message translates to:
+  /// **'OK'**
+  String get mealPresetInBoth;
+
+  /// No description provided for @pantryAddedSnack.
+  ///
+  /// In fr, this message translates to:
+  /// **'« {name} » en stock'**
+  String pantryAddedSnack(String name);
+
+  /// No description provided for @pantryAutoAdded.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rupture → « {name} » ajouté à la liste'**
+  String pantryAutoAdded(String name);
+
+  /// No description provided for @pantryStatInStock.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count} en stock'**
+  String pantryStatInStock(int count);
+
+  /// No description provided for @pantryStatLow.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count} bas'**
+  String pantryStatLow(int count);
+
+  /// No description provided for @pantryStatEmpty.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count} rupture'**
+  String pantryStatEmpty(int count);
+
+  /// No description provided for @pantrySearchHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chercher dans le placard…'**
+  String get pantrySearchHint;
+
+  /// No description provided for @pantryFilterAll.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tous'**
+  String get pantryFilterAll;
+
+  /// No description provided for @pantryFilterLow.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bas'**
+  String get pantryFilterLow;
+
+  /// No description provided for @pantryFilterEmpty.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rupture'**
+  String get pantryFilterEmpty;
+
+  /// No description provided for @pantryFilterEmptyResult.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rien dans ce filtre'**
+  String get pantryFilterEmptyResult;
+
+  /// No description provided for @pantryLowHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Plus que {qty} — bientôt à racheter'**
+  String pantryLowHint(String qty);
+
+  /// No description provided for @pantryRestockDone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Stock +{count}'**
+  String pantryRestockDone(int count);
+
+  /// No description provided for @recallDueQuickAdd.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajouter les premiers'**
+  String get recallDueQuickAdd;
+
+  /// No description provided for @recallDueSeeAll.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tout voir'**
+  String get recallDueSeeAll;
+
+  /// No description provided for @recallDueAdded.
+  ///
+  /// In fr, this message translates to:
+  /// **'{count} ajouté(s) à la liste'**
+  String recallDueAdded(int count);
+
+  /// No description provided for @geofenceSetupTitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouveau magasin'**
+  String get geofenceSetupTitle;
+
+  /// No description provided for @geofenceSetupHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Enregistre ta position actuelle — on te rappellera ta liste à proximité.'**
+  String get geofenceSetupHint;
+
+  /// No description provided for @geofenceStoreName.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nom du magasin'**
+  String get geofenceStoreName;
+
+  /// No description provided for @geofencePickColor.
+  ///
+  /// In fr, this message translates to:
+  /// **'Couleur / rayon magasin'**
+  String get geofencePickColor;
+
+  /// No description provided for @geofenceRadiusPick.
+  ///
+  /// In fr, this message translates to:
+  /// **'Zone de détection'**
+  String get geofenceRadiusPick;
+
+  /// No description provided for @geofenceSaveHere.
+  ///
+  /// In fr, this message translates to:
+  /// **'Enregistrer ici'**
+  String get geofenceSaveHere;
+
+  /// No description provided for @geofenceLocating.
+  ///
+  /// In fr, this message translates to:
+  /// **'Localisation…'**
+  String get geofenceLocating;
+
+  /// No description provided for @geofenceAddedNamed.
+  ///
+  /// In fr, this message translates to:
+  /// **'« {name} » enregistré'**
+  String geofenceAddedNamed(String name);
+
+  /// No description provided for @foodTypeLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Type d’aliment'**
+  String get foodTypeLabel;
+
+  /// No description provided for @foodCatUnclassified.
+  ///
+  /// In fr, this message translates to:
+  /// **'Non classé'**
+  String get foodCatUnclassified;
+
+  /// No description provided for @showFoodCategoryBadge.
+  ///
+  /// In fr, this message translates to:
+  /// **'Afficher le type d’aliment'**
+  String get showFoodCategoryBadge;
+
+  /// No description provided for @showFoodCategoryBadgeSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Petit badge sous chaque article (Légumes, Laitiers…)'**
+  String get showFoodCategoryBadgeSubtitle;
+
+  /// No description provided for @axisModeLabel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ranger par'**
+  String get axisModeLabel;
+
+  /// No description provided for @axisModeStore.
+  ///
+  /// In fr, this message translates to:
+  /// **'Magasin'**
+  String get axisModeStore;
+
+  /// No description provided for @axisModeFood.
+  ///
+  /// In fr, this message translates to:
+  /// **'Type'**
+  String get axisModeFood;
+
+  /// No description provided for @axisModeDualStoreFood.
+  ///
+  /// In fr, this message translates to:
+  /// **'Magasin → type'**
+  String get axisModeDualStoreFood;
+
+  /// No description provided for @axisModeDualFoodStore.
+  ///
+  /// In fr, this message translates to:
+  /// **'Type → magasin'**
+  String get axisModeDualFoodStore;
+
+  /// No description provided for @reclassifyFoodList.
+  ///
+  /// In fr, this message translates to:
+  /// **'Reclasser les types'**
+  String get reclassifyFoodList;
+
+  /// No description provided for @reclassifyFoodDone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Types d’aliments mis à jour'**
+  String get reclassifyFoodDone;
 }
 
 class _AppLocalizationsDelegate

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show HapticFeedback;
 import 'package:provider/provider.dart';
-import '../../../app_config.dart';
 import '../../../core/providers/consumption_profile_provider.dart';
 import '../../../core/providers/premium_provider.dart';
 import '../../../core/providers/gamification_provider.dart';
@@ -64,6 +63,46 @@ class ListMoreMenu extends StatelessWidget {
                       const Icon(Icons.schedule_outlined, size: 22),
                       const SizedBox(width: 12),
                       Text(l10n.planningRecurrentSeasonal),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 'pantry',
+                  child: Row(
+                    children: [
+                      const Icon(Icons.kitchen_outlined, size: 22),
+                      const SizedBox(width: 12),
+                      Expanded(child: Text(l10n.pantryTitle)),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 6),
+                        child: Text(
+                          l10n.proBadge,
+                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontWeight: FontWeight.w600,
+                              ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                PopupMenuItem(
+                  value: 'reclassify_food',
+                  child: Row(
+                    children: [
+                      const Icon(Icons.category_outlined, size: 22),
+                      const SizedBox(width: 12),
+                      Expanded(child: Text(l10n.reclassifyFoodList)),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 6),
+                        child: Text(
+                          l10n.proBadge,
+                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                                fontWeight: FontWeight.w600,
+                              ),
+                        ),
+                      ),
                     ],
                   ),
                 ),

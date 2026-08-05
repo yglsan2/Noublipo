@@ -1490,4 +1490,274 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get orgModeManualHint => 'Drag to arrange your way';
+
+  @override
+  String get recallDueCardHistoryCta =>
+      'Based on your history — open Smart cart';
+
+  @override
+  String mealPresetBodySkip(int missing, int skipped) {
+    return 'Add the $missing missing items ($skipped already at home or on the list)?';
+  }
+
+  @override
+  String mealPresetAlreadyHave(String names) {
+    return 'Already have: $names';
+  }
+
+  @override
+  String mealPresetAddMissing(int count) {
+    return 'Add $count';
+  }
+
+  @override
+  String get pantryTitle => 'Home stock';
+
+  @override
+  String get pantrySubtitle => 'Track your pantry. At zero, add to the list.';
+
+  @override
+  String get pantryPremiumOnly =>
+      'Home stock is available with Tote \'O Recall+.';
+
+  @override
+  String get pantryItemName => 'Item';
+
+  @override
+  String get pantryQty => 'Qty';
+
+  @override
+  String get pantryAdd => 'Add';
+
+  @override
+  String get pantryEmpty => 'No items in stock';
+
+  @override
+  String get pantryOutOfStock => 'Out of stock';
+
+  @override
+  String pantryQtyLabel(String qty, String unit) {
+    return '$qty $unit';
+  }
+
+  @override
+  String get pantryUseOne => 'Use 1';
+
+  @override
+  String get pantryAddOne => 'Add 1';
+
+  @override
+  String get pantryEmptyTitle => 'Out of stock';
+
+  @override
+  String pantryEmptyBody(String name) {
+    return 'Add “$name” to the shopping list?';
+  }
+
+  @override
+  String get pantryAddToList => 'Add to list';
+
+  @override
+  String pantryAddedToList(String name) {
+    return '“$name” added to the list';
+  }
+
+  @override
+  String pantryEmptyAlreadyOnList(String name) {
+    return '“$name” is already on the list';
+  }
+
+  @override
+  String get pantryRestockTitle => 'Update stock?';
+
+  @override
+  String pantryRestockBody(int count) {
+    return 'Add the $count purchased items to home stock?';
+  }
+
+  @override
+  String get pantryRestockCta => 'Yes, restock';
+
+  @override
+  String get geofenceTitle => 'Near-store reminder';
+
+  @override
+  String get geofenceSubtitle =>
+      'Opt-in: notify when you’re near a favorite store (local GPS, no cloud).';
+
+  @override
+  String get geofenceEnable => 'Enable proximity';
+
+  @override
+  String get geofenceEnableHint =>
+      'Checks when the app opens (no background tracking).';
+
+  @override
+  String get geofenceAddHere => 'Save my current location';
+
+  @override
+  String get geofenceDefaultStore => 'My store';
+
+  @override
+  String get geofenceAdded => 'Store location saved';
+
+  @override
+  String get geofencePermissionDenied => 'Location permission denied';
+
+  @override
+  String get geofenceLocationError => 'Could not get location';
+
+  @override
+  String geofenceRadiusLabel(int meters) {
+    return '$meters m radius';
+  }
+
+  @override
+  String get geofenceNotifTitle => 'You’re near the store';
+
+  @override
+  String geofenceNotifBody(String store, int count) {
+    return '$store — $count item(s) on your list';
+  }
+
+  @override
+  String get mealPresetAllCovered =>
+      'You already have everything for this meal — nothing to add!';
+
+  @override
+  String get mealPresetAllCoveredCta => 'Nice';
+
+  @override
+  String get mealPresetNeedIt => 'Need it';
+
+  @override
+  String get mealPresetInPantry => 'Pantry';
+
+  @override
+  String get mealPresetOnList => 'List';
+
+  @override
+  String get mealPresetInBoth => 'OK';
+
+  @override
+  String pantryAddedSnack(String name) {
+    return '“$name” in stock';
+  }
+
+  @override
+  String pantryAutoAdded(String name) {
+    return 'Out of stock → “$name” added to the list';
+  }
+
+  @override
+  String pantryStatInStock(int count) {
+    return '$count in stock';
+  }
+
+  @override
+  String pantryStatLow(int count) {
+    return '$count low';
+  }
+
+  @override
+  String pantryStatEmpty(int count) {
+    return '$count empty';
+  }
+
+  @override
+  String get pantrySearchHint => 'Search pantry…';
+
+  @override
+  String get pantryFilterAll => 'All';
+
+  @override
+  String get pantryFilterLow => 'Low';
+
+  @override
+  String get pantryFilterEmpty => 'Empty';
+
+  @override
+  String get pantryFilterEmptyResult => 'Nothing in this filter';
+
+  @override
+  String pantryLowHint(String qty) {
+    return 'Only $qty left — restock soon';
+  }
+
+  @override
+  String pantryRestockDone(int count) {
+    return 'Stock +$count';
+  }
+
+  @override
+  String get recallDueQuickAdd => 'Add top items';
+
+  @override
+  String get recallDueSeeAll => 'See all';
+
+  @override
+  String recallDueAdded(int count) {
+    return '$count added to the list';
+  }
+
+  @override
+  String get geofenceSetupTitle => 'New store';
+
+  @override
+  String get geofenceSetupHint =>
+      'Save your current location — we’ll nudge you when you’re nearby.';
+
+  @override
+  String get geofenceStoreName => 'Store name';
+
+  @override
+  String get geofencePickColor => 'Store color';
+
+  @override
+  String get geofenceRadiusPick => 'Detection zone';
+
+  @override
+  String get geofenceSaveHere => 'Save here';
+
+  @override
+  String get geofenceLocating => 'Locating…';
+
+  @override
+  String geofenceAddedNamed(String name) {
+    return '“$name” saved';
+  }
+
+  @override
+  String get foodTypeLabel => 'Food type';
+
+  @override
+  String get foodCatUnclassified => 'Uncategorized';
+
+  @override
+  String get showFoodCategoryBadge => 'Show food type';
+
+  @override
+  String get showFoodCategoryBadgeSubtitle =>
+      'Small badge under each item (Vegetables, Dairy…)';
+
+  @override
+  String get axisModeLabel => 'Group by';
+
+  @override
+  String get axisModeStore => 'Store';
+
+  @override
+  String get axisModeFood => 'Type';
+
+  @override
+  String get axisModeDualStoreFood => 'Store → type';
+
+  @override
+  String get axisModeDualFoodStore => 'Type → store';
+
+  @override
+  String get reclassifyFoodList => 'Reclassify food types';
+
+  @override
+  String get reclassifyFoodDone => 'Food types updated';
 }

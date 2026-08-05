@@ -15,6 +15,7 @@ import '../services/reminder_service.dart';
 import '../services/storage_service.dart';
 import '../services/sync_service.dart';
 import '../utils/app_logger.dart';
+import '../utils/food_classifier.dart';
 
 /// État global des listes de courses (plusieurs listes comme Super Simple Shopping List).
 /// Si [SyncService] est fourni et liste partagée active, la liste affichée est celle du sync.
@@ -865,19 +866,30 @@ class ListProvider extends ChangeNotifier {
     String? unit,
     String? recurringItemId,
     bool checked = false,
+    String? foodCategoryId,
+    bool skipAutoClassify = false,
   }) async {
     try {
       final order = _list.items.isEmpty
           ? 0
           : _list.items.map((e) => e.order).reduce((a, b) => a > b ? a : b) + 1;
       final id = _uuid.v4();
+      final trimmed = name.trim();
+      final resolvedCategory = foodCategoryId ??
+          (skipAutoClassify
+              ? null
+              : FoodClassifier.classify(
+                  trimmed,
+                  overrides: _storage.foodCategoryOverrides,
+                ));
       _list = _list.copyWith(
         items: [
           ..._list.items,
           ShoppingItem(
             id: id,
-            name: name.trim(),
+            name: trimmed,
             colorIndex: colorIndex % AppColors.categoryColors.length,
+            foodCategoryId: resolvedCategory,
             order: order,
             checked: checked,
             reminderAt: reminderAt,
@@ -895,7 +907,7 @@ class ListProvider extends ChangeNotifier {
       if (_reminder != null && reminderAt != null && reminderAt > DateTime.now().millisecondsSinceEpoch) {
         await _reminder.scheduleReminder(
           id,
-          name.trim(),
+          trimmed,
           reminderNote?.trim(),
           DateTime.fromMillisecondsSinceEpoch(reminderAt),
         );
@@ -937,6 +949,8 @@ class ListProvider extends ChangeNotifier {
     double? quantity,
     String? unit,
     String? recurringItemId,
+    String? foodCategoryId,
+    bool clearFoodCategoryId = false,
   }) async {
     final idx = _list.items.indexWhere((e) => e.id == itemId);
     if (idx < 0) return;
@@ -952,6 +966,8 @@ class ListProvider extends ChangeNotifier {
       final updated = item.copyWith(
         name: name ?? item.name,
         colorIndex: colorIndex ?? item.colorIndex,
+        foodCategoryId: foodCategoryId,
+        clearFoodCategoryId: clearFoodCategoryId,
         reminderAt: newReminderAt,
         reminderNote: newReminderNote,
         note: note ?? item.note,
@@ -978,6 +994,36 @@ class ListProvider extends ChangeNotifier {
       AppLogger.error('updateItem', e, stack);
       rethrow;
     }
+  }
+
+  /// Reclasse tous les articles (classifier + overrides). Retourne un snapshot pour undo.
+  Future<List<ShoppingItem>> reclassifyAllFoodCategories() async {
+    final snapshot = _list.items.map((e) => e.copyWith()).toList(growable: false);
+    final overrides = _storage.foodCategoryOverrides;
+    final newItems = _list.items.map((item) {
+      final id = FoodClassifier.classify(item.name, overrides: overrides);
+      return item.copyWith(
+        foodCategoryId: id,
+        clearFoodCategoryId: id == null,
+      );
+    }).toList();
+    _list = _list.copyWith(items: newItems);
+    await _save();
+    return snapshot;
+  }
+
+  Future<void> restoreFoodCategoriesSnapshot(List<ShoppingItem> snapshot) async {
+    final byId = {for (final e in snapshot) e.id: e.foodCategoryId};
+    final newItems = _list.items.map((item) {
+      if (!byId.containsKey(item.id)) return item;
+      final cat = byId[item.id];
+      return item.copyWith(
+        foodCategoryId: cat,
+        clearFoodCategoryId: cat == null,
+      );
+    }).toList();
+    _list = _list.copyWith(items: newItems);
+    await _save();
   }
 
   Future<void> removeItem(String itemId) async {

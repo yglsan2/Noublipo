@@ -9,9 +9,12 @@ import 'app_config.dart';
 import 'core/providers/category_names_provider.dart';
 import 'core/providers/consumption_profile_provider.dart';
 import 'core/providers/gamification_provider.dart';
+import 'core/providers/geofence_provider.dart';
+import 'core/providers/pantry_provider.dart';
 import 'core/providers/premium_provider.dart';
 import 'core/services/ad_service.dart';
 import 'core/services/consent_service.dart';
+import 'core/services/geofence_monitor.dart';
 import 'core/services/iap_service.dart';
 import 'l10n/app_localizations.dart';
 import 'core/providers/list_provider.dart';
@@ -88,6 +91,12 @@ void main() async {
         ChangeNotifierProvider<ConsumptionProfileProvider>(
           create: (_) => ConsumptionProfileProvider(storage),
         ),
+        ChangeNotifierProvider<PantryProvider>(
+          create: (_) => PantryProvider(storage),
+        ),
+        ChangeNotifierProvider<GeofenceProvider>(
+          create: (_) => GeofenceProvider(storage),
+        ),
       ],
       child: const ToteoApp(),
     ),
@@ -101,17 +110,50 @@ class ToteoApp extends StatefulWidget {
   State<ToteoApp> createState() => _ToteoAppState();
 }
 
-class _ToteoAppState extends State<ToteoApp> {
+class _ToteoAppState extends State<ToteoApp> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       try {
         context.read<PlanningProvider>().scheduleDueRecurringReminders();
       } catch (e, stack) {
         AppLogger.warning('Planification des rappels récurrents', e, stack);
       }
+      unawaited(_checkGeofence());
     });
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      unawaited(_checkGeofence());
+    }
+  }
+
+  Future<void> _checkGeofence() async {
+    try {
+      final l10n = lookupAppLocalizations(
+        context.read<SettingsProvider>().localeOverride ?? const Locale('fr'),
+      );
+      await GeofenceMonitor.checkProximity(
+        geofence: context.read<GeofenceProvider>(),
+        listProvider: context.read<ListProvider>(),
+        reminders: context.read<ReminderService>(),
+        storage: context.read<StorageService>(),
+        notificationTitle: l10n.geofenceNotifTitle,
+        notificationBody: (store, count) => l10n.geofenceNotifBody(store, count),
+      );
+    } catch (e, stack) {
+      AppLogger.warning('Geofence check', e, stack);
+    }
   }
 
   @override

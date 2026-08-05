@@ -8,13 +8,16 @@ import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/design_constants.dart';
 import '../../../core/constants/touch_constants.dart';
 import '../../../core/data/meal_presets.dart';
+import '../../../core/data/food_taxonomy.dart';
 import '../../../core/layout/screen_layout.dart';
+import '../../../core/models/pantry_item.dart';
 import '../../../core/models/shopping_item.dart';
 import '../../../core/models/list_group.dart';
 import '../../../core/models/shopping_list_model.dart';
 import '../../../core/providers/category_names_provider.dart';
 import '../../../core/providers/gamification_provider.dart';
 import '../../../core/providers/list_provider.dart';
+import '../../../core/providers/pantry_provider.dart';
 import '../../../core/providers/settings_provider.dart';
 import '../widgets/add_item_sheet.dart';
 import '../widgets/budget_ceiling_field.dart';
@@ -26,6 +29,8 @@ import '../widgets/onboarding_dialog.dart';
 import '../widgets/quick_add_sheet.dart';
 import '../widgets/recall_due_card.dart';
 import '../../../core/ui/app_feedback.dart';
+import '../../../core/ui/food_category_style.dart';
+import '../../../core/ui/geofence_settings_section.dart';
 import '../../../core/services/reminder_service.dart';
 import 'about_screen.dart';
 import 'backup_screen.dart';
@@ -34,6 +39,7 @@ import '../../catalog/catalog_screen.dart';
 import '../../scan/scan_screen.dart';
 import '../../birthdays/birthdays_screen.dart';
 import '../../planning/planning_screen.dart';
+import '../../pantry/pantry_sheet.dart';
 import '../../smart_cart/panic_checkout_sheet.dart';
 import '../../smart_cart/probable_list_sheet.dart';
 import '../../smart_cart/shopping_social_sheet.dart';
@@ -46,6 +52,7 @@ import '../../../core/providers/premium_provider.dart';
 import '../../../core/services/storage_service.dart';
 import '../../../core/services/upgrade_prompt_helper.dart';
 import '../../../core/utils/app_logger.dart';
+import '../../../core/utils/list_axis_grouping.dart';
 import '../../../l10n/app_localizations.dart';
 
 /// Écran principal : liste d'articles + FAB "+" bien visible.
@@ -206,6 +213,9 @@ class ListScreen extends StatelessWidget {
                               layout: layout,
                               padding: padding,
                               tileStyle: tileStyle,
+                              axisMode: context.read<PremiumProvider>().isPremiumActive
+                                  ? settings.listAxisMode
+                                  : 'store',
                               numbered: isNumbered,
                               enableDrag: canDrag,
                               onMoveBefore: canDrag
@@ -254,6 +264,9 @@ class ListScreen extends StatelessWidget {
                                   item: item,
                                   categoryLabel:
                                       categoryNames.getCategoryName(item.colorIndex),
+                                  foodTypeLabel: FoodTaxonomy.byId(item.foodCategoryId)
+                                      ?.labelFor(Localizations.localeOf(context).languageCode),
+                                  showFoodTypeBadge: s.showFoodCategoryBadge,
                                   tileStyle: s.tileStyle,
                                   minHeight: layout.listItemMinHeight,
                                   fontSize: fontSize,
@@ -312,6 +325,45 @@ class ListScreen extends StatelessWidget {
         Navigator.of(context).push(
           MaterialPageRoute<void>(builder: (context) => const PlanningScreen()),
         );
+        break;
+      case 'pantry':
+        if (!context.read<PremiumProvider>().isPremiumActive) {
+          Navigator.of(context).push(
+            MaterialPageRoute<void>(builder: (context) => const PaywallScreen()),
+          );
+          return;
+        }
+        showModalBottomSheet<void>(
+          context: context,
+          isScrollControlled: true,
+          builder: (ctx) => const PantrySheet(),
+        );
+        break;
+      case 'reclassify_food':
+        if (!context.read<PremiumProvider>().isPremiumActive) {
+          Navigator.of(context).push(
+            MaterialPageRoute<void>(builder: (context) => const PaywallScreen()),
+          );
+          return;
+        }
+        {
+          final list = context.read<ListProvider>();
+          final l10n = AppLocalizations.of(context);
+          () async {
+            final snap = await list.reclassifyAllFoodCategories();
+            if (!context.mounted) return;
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(l10n.reclassifyFoodDone),
+                behavior: SnackBarBehavior.floating,
+                action: SnackBarAction(
+                  label: l10n.undo,
+                  onPressed: () => list.restoreFoodCategoriesSnapshot(snap),
+                ),
+              ),
+            );
+          }();
+        }
         break;
       case 'birthdays':
         Navigator.of(context).push(
@@ -716,7 +768,7 @@ class ListScreen extends StatelessWidget {
       builder: (ctx) => AddItemSheet(
         initialColorIndex: initialColorIndex,
         suggestionNames: _getSuggestionNames(context, provider),
-        onSubmit: (name, colorIndex, {reminderAt, reminderNote, updateReminder = false, note, imagePath, price, quantity, unit}) {
+        onSubmit: (name, colorIndex, {reminderAt, reminderNote, updateReminder = false, note, imagePath, price, quantity, unit, foodCategoryId}) {
           _addItemWithProfileCheck(
             context,
             name: name,
@@ -729,6 +781,8 @@ class ListScreen extends StatelessWidget {
             price: price,
             quantity: quantity,
             unit: unit,
+            foodCategoryId: foodCategoryId,
+            foodCategoryResolved: true,
           );
         },
         onAddForLater: context.read<PremiumProvider>().isPremiumActive
@@ -757,8 +811,15 @@ class ListScreen extends StatelessWidget {
     MealPreset preset,
   ) async {
     final settings = context.read<SettingsProvider>();
+    final owned = <String>{
+      ...provider.currentItemNames.map((n) => n.trim().toLowerCase()),
+      ...context.read<PantryProvider>().ownedNamesLower,
+    };
+    final missing = preset.items
+        .where((e) => !owned.contains(e.name.trim().toLowerCase()))
+        .toList();
     try {
-      for (final item in preset.items) {
+      for (final item in missing) {
         final name = settings.applyCapitalization(item.name);
         await provider.addItem(
           name,
@@ -768,7 +829,7 @@ class ListScreen extends StatelessWidget {
       if (!context.mounted) return;
       AppFeedback.success(
         context,
-        AppLocalizations.of(context).mealPresetAdded(preset.items.length, preset.label),
+        AppLocalizations.of(context).mealPresetAdded(missing.length, preset.label),
       );
     } catch (_) {
       if (context.mounted) {
@@ -789,6 +850,8 @@ class ListScreen extends StatelessWidget {
     double? price,
     double? quantity,
     String? unit,
+    String? foodCategoryId,
+    bool foodCategoryResolved = false,
   }) async {
     final listProvider = context.read<ListProvider>();
 
@@ -804,6 +867,8 @@ class ListScreen extends StatelessWidget {
           price: price,
           quantity: quantity,
           unit: unit,
+          foodCategoryId: foodCategoryId,
+          skipAutoClassify: foodCategoryResolved,
         );
         if (context.mounted) {
           AppFeedback.success(
@@ -983,9 +1048,10 @@ class ListScreen extends StatelessWidget {
         initialPrice: item.price,
         initialQuantity: item.quantity,
         initialUnit: item.unit,
+        initialFoodCategoryId: item.foodCategoryId,
         isEdit: true,
         suggestionNames: _getSuggestionNames(context, provider),
-        onSubmit: (name, colorIndex, {reminderAt, reminderNote, updateReminder = false, note, imagePath, price, quantity, unit}) {
+        onSubmit: (name, colorIndex, {reminderAt, reminderNote, updateReminder = false, note, imagePath, price, quantity, unit, foodCategoryId}) {
           provider.updateItem(
             item.id,
             name: name,
@@ -998,6 +1064,8 @@ class ListScreen extends StatelessWidget {
             price: price,
             quantity: quantity,
             unit: unit,
+            foodCategoryId: foodCategoryId,
+            clearFoodCategoryId: foodCategoryId == null,
           );
         },
       ),
@@ -1540,6 +1608,13 @@ class ListScreen extends StatelessWidget {
       try {
         await gamification.recordTripComplete(checkedItems, allChecked);
         await storage.incrementTripsCompletedCount();
+        List<PantryItem>? pantrySnap;
+        PantryProvider? pantry;
+        if (premium.isPremiumActive && checkedItems.isNotEmpty && context.mounted) {
+          pantry = context.read<PantryProvider>();
+          pantrySnap = pantry.snapshot();
+          await pantry.restockFromTrip(checkedItems);
+        }
         if (moveToFuture) {
           final uncheckedNames = p.list.items.where((e) => !e.checked).map((e) => e.name).toList();
           await gamification.recordForgotten(uncheckedNames);
@@ -1559,12 +1634,22 @@ class ListScreen extends StatelessWidget {
                 ),
               );
             }
-          } else {
-            if (context.mounted) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(l10n.courseTerminee)),
-              );
-            }
+          } else if (context.mounted) {
+            final msg = pantrySnap != null
+                ? '${l10n.courseTerminee} · ${l10n.pantryRestockDone(checkedItems.length)}'
+                : l10n.courseTerminee;
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(msg),
+                behavior: SnackBarBehavior.floating,
+                action: pantry != null && pantrySnap != null
+                    ? SnackBarAction(
+                        label: l10n.undo,
+                        onPressed: () => pantry!.restoreSnapshot(pantrySnap!),
+                      )
+                    : null,
+              ),
+            );
           }
         }
       } catch (e) {
@@ -1767,6 +1852,12 @@ class ListScreen extends StatelessWidget {
                         subtitle: Text(AppLocalizations.of(ctx).capitalizeSubtitle),
                         value: settings.capitalizeNames,
                         onChanged: (v) => settings.setCapitalizeNames(v),
+                      ),
+                      SwitchListTile(
+                        title: Text(AppLocalizations.of(ctx).showFoodCategoryBadge),
+                        subtitle: Text(AppLocalizations.of(ctx).showFoodCategoryBadgeSubtitle),
+                        value: settings.showFoodCategoryBadge,
+                        onChanged: (v) => settings.setShowFoodCategoryBadge(v),
                       ),
                       SwitchListTile(
                         title: Text(AppLocalizations.of(ctx).remindersPerItem),
@@ -1978,6 +2069,8 @@ class ListScreen extends StatelessWidget {
                         ],
                       ],
                       if (ctx.watch<PremiumProvider>().isPremiumActive) ...[
+                        const SizedBox(height: 16),
+                        const GeofenceSettingsSection(),
                         const SizedBox(height: 16),
                         ListTile(
                           leading: const Icon(Icons.eco_outlined),
@@ -2428,6 +2521,7 @@ class _FilledListByStore extends StatefulWidget {
     required this.onEditItem,
     required this.onToggleChecked,
     required this.buildTile,
+    this.axisMode = 'store',
     this.numbered = false,
     this.enableDrag = false,
     this.onMoveBefore,
@@ -2439,6 +2533,7 @@ class _FilledListByStore extends StatefulWidget {
   final ScreenLayout layout;
   final EdgeInsets padding;
   final String tileStyle;
+  final String axisMode;
   final void Function(int colorIndex) onEditStoreName;
   final void Function(ShoppingItem item) onConfirmDelete;
   final void Function(ShoppingItem item) onEditItem;
@@ -2478,17 +2573,28 @@ class _FilledListByStoreState extends State<_FilledListByStore> {
 
   @override
   Widget build(BuildContext context) {
-    final sections = _groupItemsByStore(widget.items);
+    final sections = groupItemsByAxis(widget.items, widget.axisMode);
     const sectionSpacing = 16.0;
     final theme = Theme.of(context);
     final sectionInnerPadding = 12.0;
     final bottomExtra = widget.layout.fabSize + 8.0;
+    final lang = Localizations.localeOf(context).languageCode;
+    final l10n = AppLocalizations.of(context);
 
     var n = 1;
     final numberById = <String, int>{};
-    for (final section in sections) {
-      for (final item in section.value) {
+    void numberItems(List<ShoppingItem> list) {
+      for (final item in list) {
         numberById[item.id] = n++;
+      }
+    }
+    for (final section in sections) {
+      if (section.subsections.isEmpty) {
+        numberItems(section.items);
+      } else {
+        for (final sub in section.subsections) {
+          numberItems(sub.items);
+        }
       }
     }
 
@@ -2505,13 +2611,14 @@ class _FilledListByStoreState extends State<_FilledListByStore> {
         children: [
           for (var s = 0; s < sections.length; s++) ...[
             if (s > 0) const SizedBox(height: sectionSpacing),
-            _buildStoreCard(
+            _buildAxisCard(
               context,
               theme: theme,
               sectionInnerPadding: sectionInnerPadding,
-              colorIndex: sections[s].key,
-              items: sections[s].value,
+              section: sections[s],
               numberById: numberById,
+              lang: lang,
+              l10n: l10n,
             ),
           ],
         ],
@@ -2519,14 +2626,132 @@ class _FilledListByStoreState extends State<_FilledListByStore> {
     );
   }
 
-  Widget _buildStoreCard(
+  String _foodTitle(AppLocalizations l10n, String lang, String sectionKey) {
+    final id = foodCategoryIdFromKey(sectionKey);
+    if (id == null) return l10n.foodCatUnclassified;
+    return FoodTaxonomy.byId(id)?.labelFor(lang) ?? l10n.foodCatUnclassified;
+  }
+
+  Widget _itemsBlock(List<ShoppingItem> items, Map<String, int> numberById) {
+    if (items.isEmpty) return const SizedBox.shrink();
+    if (widget.numbered) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          for (final item in items) ...[
+            SizedBox(
+              width: double.infinity,
+              child: _bubbleFor(
+                item,
+                wrapSized: false,
+                number: numberById[item.id],
+              ),
+            ),
+            SizedBox(height: widget.layout.listItemSpacing),
+          ],
+        ],
+      );
+    }
+    return Wrap(
+      spacing: 8,
+      runSpacing: widget.layout.listItemSpacing,
+      children: [
+        for (final item in items) _bubbleFor(item, wrapSized: true),
+      ],
+    );
+  }
+
+  Widget _buildAxisCard(
     BuildContext context, {
     required ThemeData theme,
     required double sectionInnerPadding,
-    required int colorIndex,
-    required List<ShoppingItem> items,
+    required ListAxisSection section,
     required Map<String, int> numberById,
+    required String lang,
+    required AppLocalizations l10n,
   }) {
+    final storeIdx = storeColorIndexFromKey(section.key);
+    final isStore = section.kind == ListAxisSectionKind.store;
+
+    final Widget header;
+    if (isStore && storeIdx != null) {
+      header = _StoreSectionHeader(
+        colorIndex: storeIdx,
+        categoryName: widget.categoryNames.getCategoryName(storeIdx),
+        tileStyle: widget.tileStyle,
+        onTap: () => widget.onEditStoreName(storeIdx),
+      );
+    } else {
+      final cat = FoodTaxonomy.byId(foodCategoryIdFromKey(section.key));
+      final tint = FoodCategoryStyle.colorFor(cat);
+      header = Padding(
+        padding: const EdgeInsets.only(bottom: 4),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(6),
+              decoration: BoxDecoration(
+                color: tint.withValues(alpha: 0.18),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Icon(FoodCategoryStyle.icon(cat), size: 18, color: tint),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Text(
+                _foodTitle(l10n, lang, section.key),
+                style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700),
+              ),
+            ),
+            Text(
+              '${section.subsections.isEmpty ? section.items.length : section.subsections.fold<int>(0, (n, s) => n + s.items.length)}',
+              style: theme.textTheme.labelMedium?.copyWith(
+                color: theme.colorScheme.onSurfaceVariant,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    final bodyChildren = <Widget>[];
+    if (section.subsections.isEmpty) {
+      bodyChildren.add(_itemsBlock(section.items, numberById));
+    } else {
+      for (var i = 0; i < section.subsections.length; i++) {
+        final sub = section.subsections[i];
+        if (i > 0) bodyChildren.add(SizedBox(height: widget.layout.listItemSpacing));
+        final subStore = storeColorIndexFromKey(sub.key);
+        if (sub.kind == ListAxisSectionKind.store && subStore != null) {
+          bodyChildren.add(
+            Padding(
+              padding: const EdgeInsets.only(top: 4, bottom: 4),
+              child: Text(
+                widget.categoryNames.getCategoryName(subStore) ??
+                    AppColors.nameFromIndex(subStore),
+                style: theme.textTheme.labelLarge?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ),
+          );
+        } else {
+          bodyChildren.add(
+            Padding(
+              padding: const EdgeInsets.only(top: 4, bottom: 4),
+              child: Text(
+                _foodTitle(l10n, lang, sub.key),
+                style: theme.textTheme.labelLarge?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ),
+          );
+        }
+        bodyChildren.add(_itemsBlock(sub.items, numberById));
+      }
+    }
+
     final card = Material(
       color: theme.colorScheme.surfaceContainerLow.withValues(alpha: 0.5),
       borderRadius: BorderRadius.circular(DesignConstants.cardBorderRadius),
@@ -2537,51 +2762,23 @@ class _FilledListByStoreState extends State<_FilledListByStore> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           children: [
-            _StoreSectionHeader(
-              colorIndex: colorIndex,
-              categoryName: widget.categoryNames.getCategoryName(colorIndex),
-              tileStyle: widget.tileStyle,
-              onTap: () => widget.onEditStoreName(colorIndex),
-            ),
-            if (items.isNotEmpty) ...[
+            header,
+            if (bodyChildren.isNotEmpty) ...[
               SizedBox(height: widget.layout.listItemSpacing),
-              if (widget.numbered)
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    for (final item in items) ...[
-                      SizedBox(
-                        width: double.infinity,
-                        child: _bubbleFor(
-                          item,
-                          wrapSized: false,
-                          number: numberById[item.id],
-                        ),
-                      ),
-                      SizedBox(height: widget.layout.listItemSpacing),
-                    ],
-                  ],
-                )
-              else
-                Wrap(
-                  spacing: 8,
-                  runSpacing: widget.layout.listItemSpacing,
-                  children: [
-                    for (final item in items)
-                      _bubbleFor(item, wrapSized: true),
-                  ],
-                ),
+              ...bodyChildren,
             ],
           ],
         ),
       ),
     );
 
-    if (!widget.enableDrag || widget.onMoveToStore == null) return card;
+    if (!widget.enableDrag || widget.onMoveToStore == null || storeIdx == null) {
+      return card;
+    }
 
     return DragTarget<String>(
       onWillAcceptWithDetails: (_) => true,
-      onAcceptWithDetails: (d) => widget.onMoveToStore!(d.data, colorIndex),
+      onAcceptWithDetails: (d) => widget.onMoveToStore!(d.data, storeIdx),
       builder: (context, candidate, rejected) {
         if (candidate.isEmpty) return card;
         return Material(
@@ -3328,6 +3525,115 @@ class _OrgModeChip extends StatelessWidget {
   }
 }
 
+/// Puce axe magasin / type (Plus pour hors magasin).
+class _AxisModeChip extends StatelessWidget {
+  const _AxisModeChip({required this.settings});
+
+  final SettingsProvider settings;
+
+  static const _modes = ['store', 'food', 'dualStoreFood', 'dualFoodStore'];
+
+  IconData _iconFor(String mode) {
+    switch (mode) {
+      case 'food':
+        return Icons.eco_outlined;
+      case 'dualStoreFood':
+        return Icons.account_tree_outlined;
+      case 'dualFoodStore':
+        return Icons.schema_outlined;
+      default:
+        return Icons.storefront_outlined;
+    }
+  }
+
+  String _labelFor(BuildContext context, String mode) {
+    final l10n = AppLocalizations.of(context);
+    switch (mode) {
+      case 'food':
+        return l10n.axisModeFood;
+      case 'dualStoreFood':
+        return l10n.axisModeDualStoreFood;
+      case 'dualFoodStore':
+        return l10n.axisModeDualFoodStore;
+      default:
+        return l10n.axisModeStore;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final premium = context.watch<PremiumProvider>().isPremiumActive;
+    final mode = premium ? settings.listAxisMode : 'store';
+    final l10n = AppLocalizations.of(context);
+
+    return PopupMenuButton<String>(
+      tooltip: l10n.axisModeLabel,
+      offset: const Offset(0, 36),
+      onSelected: (v) async {
+        HapticFeedback.selectionClick();
+        if (v != 'store' && !context.read<PremiumProvider>().isPremiumActive) {
+          Navigator.of(context).push(
+            MaterialPageRoute<void>(builder: (_) => const PaywallScreen()),
+          );
+          return;
+        }
+        await settings.setListAxisMode(v);
+      },
+      itemBuilder: (ctx) => [
+        for (final m in _modes)
+          PopupMenuItem<String>(
+            value: m,
+            child: Row(
+              children: [
+                Icon(_iconFor(m), size: 20),
+                const SizedBox(width: 10),
+                Expanded(child: Text(_labelFor(ctx, m))),
+                if (m != 'store' && !premium)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 6),
+                    child: Text(
+                      l10n.proBadge,
+                      style: Theme.of(ctx).textTheme.labelSmall?.copyWith(
+                            color: Theme.of(ctx).colorScheme.primary,
+                            fontWeight: FontWeight.w600,
+                          ),
+                    ),
+                  )
+                else if (m == mode)
+                  Icon(Icons.check, size: 18, color: Theme.of(ctx).colorScheme.primary),
+              ],
+            ),
+          ),
+      ],
+      child: Material(
+        color: Theme.of(context).colorScheme.tertiaryContainer,
+        borderRadius: BorderRadius.circular(20),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(_iconFor(mode), size: 18, color: Theme.of(context).colorScheme.onTertiaryContainer),
+              const SizedBox(width: 6),
+              Text(
+                _labelFor(context, mode),
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.onTertiaryContainer,
+                    ),
+              ),
+              Icon(
+                Icons.arrow_drop_down,
+                size: 18,
+                color: Theme.of(context).colorScheme.onTertiaryContainer,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 /// Barre rapide : ajout rapide (Plus), recherche (Plus), filtre « À acheter » + total.
 class _ListToolbar extends StatelessWidget {
   const _ListToolbar({
@@ -3396,6 +3702,8 @@ class _ListToolbar extends StatelessWidget {
           child: Row(
             children: [
               _OrgModeChip(settings: settings),
+              const SizedBox(width: 8),
+              _AxisModeChip(settings: settings),
               const SizedBox(width: 10),
               Expanded(
                 child: Text(

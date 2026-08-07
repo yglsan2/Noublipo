@@ -7,6 +7,7 @@ import '../../../core/providers/list_provider.dart';
 import '../../../core/providers/planning_provider.dart';
 import '../../../core/providers/premium_provider.dart';
 import '../../../core/services/storage_service.dart';
+import '../../../core/utils/content_l10n.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../smart_cart/smart_cart_sheet.dart';
 
@@ -91,15 +92,16 @@ class _RecallDueCardState extends State<RecallDueCard>
     final planning = context.watch<PlanningProvider>();
     final gamification = context.watch<GamificationProvider>();
     final list = context.watch<ListProvider>();
+    final l10n = AppLocalizations.of(context);
     final suggestions = SmartCartSheet.getYouMightForgetItems(
       planning: planning,
       listProvider: list,
       gamification: gamification,
+      l10n: l10n,
     );
     if (suggestions.isEmpty) return const SizedBox.shrink();
     final due = suggestions.length;
     final preview = suggestions.take(3).toList();
-    final l10n = AppLocalizations.of(context);
     final theme = Theme.of(context);
 
     return FadeTransition(
@@ -158,7 +160,7 @@ class _RecallDueCardState extends State<RecallDueCard>
                             avatar: s.fromHistoryRhythm
                                 ? const Icon(Icons.history, size: 14)
                                 : null,
-                            label: Text(s.name, style: theme.textTheme.labelMedium),
+                            label: Text(localizedProductName(l10n, s.name), style: theme.textTheme.labelMedium),
                             padding: EdgeInsets.zero,
                           ),
                         if (due > preview.length)

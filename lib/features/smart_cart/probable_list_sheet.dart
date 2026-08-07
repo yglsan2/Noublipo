@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart' show HapticFeedback;
 import 'package:provider/provider.dart';
-import '../../app_config.dart';
 import '../../core/providers/consumption_profile_provider.dart';
 import '../../core/providers/gamification_provider.dart';
 import '../../core/providers/list_provider.dart';
 import '../../core/providers/planning_provider.dart';
 import '../../core/providers/premium_provider.dart';
+import '../../core/utils/content_l10n.dart';
 import '../../l10n/app_localizations.dart';
 
 /// Un article de la liste probable (nom + optionnel récurrent).
@@ -85,7 +84,10 @@ List<_ProbableItem> _buildProbableList({
 
 /// Feuille « Liste probable de la semaine » (Pro) : suggère une liste à confirmer / modifier.
 class ProbableListSheet extends StatefulWidget {
-  const ProbableListSheet({super.key});
+  const ProbableListSheet({super.key, this.embedded = false});
+
+  /// Si true, contenu sans DraggableScrollableSheet (onglet Aide recall).
+  final bool embedded;
 
   @override
   State<ProbableListSheet> createState() => _ProbableListSheetState();
@@ -145,6 +147,192 @@ class _ProbableListSheetState extends State<ProbableListSheet> {
     final isLoading = planning.loading;
     _showFirstRunHintIfNeeded(context);
 
+    Widget body({ScrollController? scrollController, bool hideOuterTitle = false}) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (!hideOuterTitle)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    l10n.probableListTitle,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    l10n.probableListSubtitle,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                  ),
+                ],
+              ),
+            )
+          else
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+              child: Text(
+                l10n.probableListSubtitle,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+              ),
+            ),
+          if (items.isNotEmpty) ...[
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    l10n.probableListSelectedCount(selectedCount),
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          HapticFeedback.selectionClick();
+                          setState(() {
+                            for (var i = 0; i < items.length; i++) {
+                              _selectedIndices.add(i);
+                            }
+                          });
+                        },
+                        child: Text(l10n.probableListSelectAll),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          HapticFeedback.selectionClick();
+                          setState(() => _selectedIndices.clear());
+                        },
+                        child: Text(l10n.probableListDeselectAll),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 4),
+          ],
+          Expanded(
+            child: isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : items.isEmpty
+                    ? Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(24),
+                          child: Text(
+                            l10n.probableListEmptyHint,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                                ),
+                          ),
+                        ),
+                      )
+                    : ListView.builder(
+                        controller: scrollController,
+                        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+                        itemCount: items.length,
+                        itemBuilder: (context, index) {
+                          final item = items[index];
+                          final selected = _selectedIndices.contains(index);
+                          return Semantics(
+                            label: localizedProductName(l10n, item.name),
+                            toggled: selected,
+                            child: CheckboxListTile(
+                              value: selected,
+                              onChanged: (v) {
+                                HapticFeedback.selectionClick();
+                                setState(() {
+                                  if (v == true) {
+                                    _selectedIndices.add(index);
+                                  } else {
+                                    _selectedIndices.remove(index);
+                                  }
+                                });
+                              },
+                              title: Text(localizedProductName(l10n, item.name)),
+                            ),
+                          );
+                        },
+                      ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+            child: Row(
+              children: [
+                TextButton(
+                  onPressed: () {
+                    HapticFeedback.selectionClick();
+                    Navigator.pop(context);
+                  },
+                  child: Text(l10n.probableListCancel),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: FilledButton(
+                    onPressed: items.isEmpty || selectedCount == 0
+                        ? null
+                        : () async {
+                            HapticFeedback.selectionClick();
+                            final validIndices = _selectedIndices.where((i) => i >= 0 && i < items.length);
+                            final toAdd = validIndices.map((i) => items[i]).toList();
+                            var added = 0;
+                            for (final item in toAdd) {
+                              try {
+                                await listProvider.addItem(
+                                  item.name,
+                                  colorIndex: item.colorIndex,
+                                  recurringItemId: item.recurringItemId,
+                                );
+                                added++;
+                              } catch (_) {
+                                if (context.mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(AppLocalizations.of(context).errorGeneric),
+                                      behavior: SnackBarBehavior.floating,
+                                    ),
+                                  );
+                                }
+                                return;
+                              }
+                            }
+                            if (context.mounted) {
+                              Navigator.pop(context);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(l10n.probableListAddedCount(added)),
+                                  behavior: SnackBarBehavior.floating,
+                                ),
+                              );
+                            }
+                          },
+                    child: Text(l10n.probableListConfirm),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+    }
+
+    if (widget.embedded) {
+      return Semantics(
+        label: l10n.probableListTitle,
+        child: SafeArea(child: body(hideOuterTitle: true)),
+      );
+    }
+
     return Semantics(
       label: l10n.probableListTitle,
       child: DraggableScrollableSheet(
@@ -153,173 +341,7 @@ class _ProbableListSheetState extends State<ProbableListSheet> {
         maxChildSize: 0.9,
         expand: false,
         builder: (context, scrollController) {
-          return SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        l10n.probableListTitle,
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        l10n.probableListSubtitle,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Theme.of(context).colorScheme.onSurfaceVariant,
-                            ),
-                      ),
-                    ],
-                  ),
-                ),
-                if (items.isNotEmpty) ...[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          l10n.probableListSelectedCount(selectedCount),
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: Theme.of(context).colorScheme.onSurfaceVariant,
-                              ),
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                HapticFeedback.selectionClick();
-                                setState(() {
-                                  for (var i = 0; i < items.length; i++) {
-                                    _selectedIndices.add(i);
-                                  }
-                                });
-                              },
-                              child: Text(l10n.probableListSelectAll),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                HapticFeedback.selectionClick();
-                                setState(() => _selectedIndices.clear());
-                              },
-                              child: Text(l10n.probableListDeselectAll),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                ],
-                Expanded(
-                  child: isLoading
-                      ? const Center(child: CircularProgressIndicator())
-                      : items.isEmpty
-                          ? Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(24),
-                                child: Text(
-                                  l10n.probableListEmptyHint,
-                                  textAlign: TextAlign.center,
-                                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                                      ),
-                                ),
-                              ),
-                            )
-                          : ListView.builder(
-                              controller: scrollController,
-                              padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-                              itemCount: items.length,
-                              itemBuilder: (context, index) {
-                                final item = items[index];
-                                final selected = _selectedIndices.contains(index);
-                                return Semantics(
-                                  label: item.name,
-                                  toggled: selected,
-                                  child: CheckboxListTile(
-                                    value: selected,
-                                    onChanged: (v) {
-                                      HapticFeedback.selectionClick();
-                                      setState(() {
-                                        if (v == true) {
-                                          _selectedIndices.add(index);
-                                        } else {
-                                          _selectedIndices.remove(index);
-                                        }
-                                      });
-                                    },
-                                    title: Text(item.name),
-                                  ),
-                                );
-                              },
-                            ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-                  child: Row(
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          HapticFeedback.selectionClick();
-                          Navigator.pop(context);
-                        },
-                        child: Text(l10n.probableListCancel),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: FilledButton(
-                          onPressed: items.isEmpty || selectedCount == 0
-                              ? null
-                              : () async {
-                                  HapticFeedback.selectionClick();
-                                  final validIndices = _selectedIndices.where((i) => i >= 0 && i < items.length);
-                                  final toAdd = validIndices.map((i) => items[i]).toList();
-                                  var added = 0;
-                                  for (final item in toAdd) {
-                                    try {
-                                      await listProvider.addItem(
-                                        item.name,
-                                        colorIndex: item.colorIndex,
-                                        recurringItemId: item.recurringItemId,
-                                      );
-                                      added++;
-                                    } catch (_) {
-                                      if (context.mounted) {
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(
-                                            content: Text(AppLocalizations.of(context).errorGeneric),
-                                            behavior: SnackBarBehavior.floating,
-                                          ),
-                                        );
-                                      }
-                                      return;
-                                    }
-                                  }
-                                  if (context.mounted) {
-                                    Navigator.pop(context);
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(l10n.probableListAddedCount(added)),
-                                        behavior: SnackBarBehavior.floating,
-                                      ),
-                                    );
-                                  }
-                                },
-                          child: Text(l10n.probableListConfirm),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          );
+          return SafeArea(child: body(scrollController: scrollController));
         },
       ),
     );

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../../../app_config.dart';
-import '../../../core/models/consumption_profile.dart';
-import '../../../core/providers/consumption_profile_provider.dart';
-import '../../../core/providers/settings_provider.dart';
-import '../../../l10n/app_localizations.dart';
+import '../../core/models/consumption_profile.dart';
+import '../../core/providers/consumption_profile_provider.dart';
+import '../../core/providers/premium_provider.dart';
+import '../../core/providers/settings_provider.dart';
+import '../../core/utils/content_l10n.dart';
+import '../../l10n/app_localizations.dart';
 
 /// Feuille Profil de conso (Pro) : régimes, allergies, évitements, tentations.
 class ConsumptionProfileSheet extends StatelessWidget {
@@ -41,7 +42,7 @@ class ConsumptionProfileSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!isToteoPlus) return const SizedBox.shrink();
+    if (!context.watch<PremiumProvider>().isPremiumActive) return const SizedBox.shrink();
     final l10n = AppLocalizations.of(context);
     return DraggableScrollableSheet(
       initialChildSize: 0.7,
@@ -165,7 +166,7 @@ class ConsumptionProfileSheet extends StatelessWidget {
                         _ChipListField(
                           items: profile.productsToAvoid,
                           onChanged: profile.setProductsToAvoid,
-                          hint: 'alcool, porc…',
+                          hint: AppLocalizations.of(context).profileAvoidHint,
                         ),
                         const SizedBox(height: 24),
                         Text(l10n.profileBrandsToAvoid, style: Theme.of(context).textTheme.titleSmall),
@@ -173,7 +174,7 @@ class ConsumptionProfileSheet extends StatelessWidget {
                         _ChipListField(
                           items: profile.brandsToAvoid,
                           onChanged: profile.setBrandsToAvoid,
-                          hint: 'Marque…',
+                          hint: AppLocalizations.of(context).profileBrandHint,
                         ),
                         const SizedBox(height: 24),
                         Text(l10n.profileTemptations, style: Theme.of(context).textTheme.titleSmall),
@@ -268,9 +269,9 @@ class _AllergiesFieldState extends State<_AllergiesField> {
     return TextField(
       controller: _controller,
       maxLines: 3,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: 'arachides, lactose',
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
+        hintText: AppLocalizations.of(context).profileAllergensHint,
       ),
       onChanged: (v) {
         final list = v.split('\n').map((e) => e.trim()).where((e) => e.isNotEmpty).toList();
@@ -357,8 +358,10 @@ class _TemptationsList extends StatelessWidget {
       children: [
         ...profile.temptations.map((t) => Card(
               child: ListTile(
-                title: Text(t.productPattern),
-                subtitle: t.substitute != null ? Text('→ ${t.substitute}') : null,
+                title: Text(localizedProductName(l10n, t.productPattern)),
+                subtitle: t.substitute != null
+                    ? Text('→ ${localizedProductName(l10n, t.substitute!)}')
+                    : null,
                 trailing: IconButton(
                   icon: const Icon(Icons.close),
                   onPressed: () {

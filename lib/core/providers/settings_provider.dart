@@ -1,4 +1,7 @@
+import 'dart:async' show unawaited;
+
 import 'package:flutter/material.dart';
+import '../../l10n/l10n_safety.dart';
 import '../services/storage_service.dart';
 import '../utils/app_logger.dart';
 
@@ -24,11 +27,35 @@ class SettingsProvider extends ChangeNotifier {
     _weeklyReminderHour = _storage.weeklyReminderHour;
     _weeklyReminderMinute = _storage.weeklyReminderMinute;
     _autocomplete = _storage.autocomplete;
-    _localeLanguageCode = _storage.localeLanguageCode;
+    _localeLanguageCode = sanitizeLocaleLanguageCode(_storage.localeLanguageCode);
+    if (_localeLanguageCode != _storage.localeLanguageCode) {
+      // Langue enregistrée invalide / obsolète → revenir au système (ne jamais crasher).
+      unawaited(_storage.setLocaleLanguageCode(_localeLanguageCode));
+      AppLogger.warning(
+        'SettingsProvider: locale invalide « ${_storage.localeLanguageCode} » → système',
+      );
+    }
     _listFontScale = _storage.listFontScale;
     _shoppingMode = _storage.shoppingMode;
     _onboardingSeen = _storage.onboardingSeen;
     _coachNutritionEnabled = _storage.coachNutritionEnabled;
+    _hiddenSystemListIds = List<String>.from(_storage.hiddenSystemListIds);
+    _applyFoodAxisDefaultIfNeeded();
+  }
+
+  /// Une fois : bascule vers le classement par type (légumes, fruits…) si encore sur magasin.
+  Future<void> _applyFoodAxisDefaultIfNeeded() async {
+    if (_storage.axisFoodDefaultApplied) return;
+    try {
+      if (_listAxisMode == 'store') {
+        await _storage.setListAxisMode('food');
+        _listAxisMode = 'food';
+      }
+      await _storage.setAxisFoodDefaultApplied(true);
+      notifyListeners();
+    } catch (e, stack) {
+      AppLogger.warning('SettingsProvider._applyFoodAxisDefaultIfNeeded', e, stack);
+    }
   }
 
   Future<void> setCoachNutritionEnabled(bool value) async {
@@ -47,10 +74,10 @@ class SettingsProvider extends ChangeNotifier {
   String _tileStyle = 'bar';
   bool _darkMode = false;
   bool _remindersEnabled = false;
-  String _categoryStyle = 'form';
+  String _categoryStyle = 'legend';
   String _sortMode = 'order';
   String _listOrgMode = 'bubbles';
-  String _listAxisMode = 'store';
+  String _listAxisMode = 'food';
   bool _showFoodCategoryBadge = true;
   Map<String, String> _foodCategoryOverrides = {};
   Map<int, int> _aisleOrder = {};
@@ -67,14 +94,32 @@ class SettingsProvider extends ChangeNotifier {
   bool _shoppingMode = false;
   bool _onboardingSeen = false;
   bool _coachNutritionEnabled = true;
+  List<String> _hiddenSystemListIds = [];
 
   bool get capitalizeNames => _capitalizeNames;
   /// Code langue choisi (null = langue du système). Utilisé par MaterialApp.locale.
   String? get localeLanguageCode => _localeLanguageCode;
-  /// Locale à appliquer (null = système).
-  Locale? get localeOverride => _localeLanguageCode != null && _localeLanguageCode!.isNotEmpty
-      ? Locale(_localeLanguageCode!)
-      : null;
+
+  /// Locale forcée, toujours supportée ; null = langue système.
+  Locale? get localeOverride {
+    final code = sanitizeLocaleLanguageCode(_localeLanguageCode);
+    if (code == null) return null;
+    return resolveSupportedAppLocale(Locale(code));
+  }
+
+  /// Remet la langue sur le système (après un plantage l10n détecté).
+  Future<void> resetLocaleToSystem() async {
+    if (_localeLanguageCode == null) return;
+    try {
+      await _storage.setLocaleLanguageCode(null);
+      _localeLanguageCode = null;
+      notifyListeners();
+      AppLogger.warning('SettingsProvider: locale réinitialisée (système) après échec l10n');
+    } catch (e, stack) {
+      AppLogger.error('SettingsProvider.resetLocaleToSystem', e, stack);
+    }
+  }
+
   String get tileStyle => _tileStyle;
   bool get darkMode => _darkMode;
   bool get remindersEnabled => _remindersEnabled;
@@ -99,6 +144,8 @@ class SettingsProvider extends ChangeNotifier {
   bool get shoppingMode => _shoppingMode;
   bool get onboardingSeen => _onboardingSeen;
   bool get coachNutritionEnabled => _coachNutritionEnabled;
+  List<String> get hiddenSystemListIds => List.unmodifiable(_hiddenSystemListIds);
+  bool isSystemListHidden(String listId) => _hiddenSystemListIds.contains(listId);
   ThemeMode get themeMode => _darkMode ? ThemeMode.dark : ThemeMode.light;
 
   Future<void> setCapitalizeNames(bool value) async {
@@ -152,6 +199,23 @@ class SettingsProvider extends ChangeNotifier {
       notifyListeners();
     } catch (e, stack) {
       AppLogger.error('SettingsProvider.setCategoryStyle', e, stack);
+      rethrow;
+    }
+  }
+
+  Future<void> setSystemListHidden(String listId, bool hidden) async {
+    try {
+      final next = List<String>.from(_hiddenSystemListIds);
+      if (hidden) {
+        if (!next.contains(listId)) next.add(listId);
+      } else {
+        next.remove(listId);
+      }
+      await _storage.setHiddenSystemListIds(next);
+      _hiddenSystemListIds = List<String>.from(_storage.hiddenSystemListIds);
+      notifyListeners();
+    } catch (e, stack) {
+      AppLogger.error('SettingsProvider.setSystemListHidden', e, stack);
       rethrow;
     }
   }
@@ -301,15 +365,19 @@ class SettingsProvider extends ChangeNotifier {
   }
 
   Future<void> setLocaleLanguageCode(String? code) async {
-    final normalized = code == null || code.isEmpty ? null : code;
+    final normalized = sanitizeLocaleLanguageCode(code);
+    if (code != null && code.isNotEmpty && normalized == null) {
+      AppLogger.warning('SettingsProvider.setLocaleLanguageCode: code non supporté « $code »');
+      return;
+    }
     if (normalized == _localeLanguageCode) return;
     try {
       await _storage.setLocaleLanguageCode(normalized);
-      _localeLanguageCode = _storage.localeLanguageCode;
+      _localeLanguageCode = sanitizeLocaleLanguageCode(_storage.localeLanguageCode);
       notifyListeners();
     } catch (e, stack) {
       AppLogger.error('SettingsProvider.setLocaleLanguageCode', e, stack);
-      rethrow;
+      // Ne pas faire planter l’UI pour une préférence langue.
     }
   }
 
@@ -369,11 +437,12 @@ class SettingsProvider extends ChangeNotifier {
     _weeklyReminderHour = _storage.weeklyReminderHour;
     _weeklyReminderMinute = _storage.weeklyReminderMinute;
     _autocomplete = _storage.autocomplete;
-    _localeLanguageCode = _storage.localeLanguageCode;
+    _localeLanguageCode = sanitizeLocaleLanguageCode(_storage.localeLanguageCode);
     _listFontScale = _storage.listFontScale;
     _shoppingMode = _storage.shoppingMode;
     _onboardingSeen = _storage.onboardingSeen;
     _coachNutritionEnabled = _storage.coachNutritionEnabled;
+    _hiddenSystemListIds = List<String>.from(_storage.hiddenSystemListIds);
     notifyListeners();
   }
 

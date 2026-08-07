@@ -37,6 +37,8 @@ class AdService {
     int? backgroundDurationMs,
   }) async {
     if (isPremiumActive || !shouldShowAds || !ConsentService.canRequestAds) return;
+    // Ne jamais interrompre les moments « magiques » Recall (course terminée / restock).
+    if (moment == AdMoment.afterTripComplete) return;
     if (moment == AdMoment.appResume &&
         (backgroundDurationMs == null ||
             backgroundDurationMs < minBackgroundDurationForAd.inMilliseconds)) {

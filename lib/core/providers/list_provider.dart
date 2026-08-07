@@ -5,7 +5,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:uuid/uuid.dart';
 import '../constants/app_colors.dart';
 import '../data/product_pairings.dart';
-import '../../app_config.dart';
+import 'premium_provider.dart';
 import '../models/list_group.dart';
 import '../models/list_template.dart';
 import '../models/shopping_item.dart';
@@ -15,6 +15,7 @@ import '../services/reminder_service.dart';
 import '../services/storage_service.dart';
 import '../services/sync_service.dart';
 import '../utils/app_logger.dart';
+import '../utils/content_l10n.dart';
 import '../utils/food_classifier.dart';
 
 /// État global des listes de courses (plusieurs listes comme Super Simple Shopping List).
@@ -41,7 +42,7 @@ class ListProvider extends ChangeNotifier {
   List<ShoppingListModel> _lists = [];
   String _currentListId = 'main';
   /// Liste actuellement affichée (copie locale ou ref vers liste partagée).
-  ShoppingListModel _list = ShoppingListModel(id: 'main', name: 'Ma liste');
+  ShoppingListModel _list = ShoppingListModel(id: kMainListId, name: kDefaultMainListStoredName);
   bool _loading = true;
   String _searchQuery = '';
   /// Filtre « À acheter » : n'afficher que les articles non cochés (Toteo+).
@@ -64,7 +65,7 @@ class ListProvider extends ChangeNotifier {
   List<ListGroup> get listGroups => List.unmodifiable(_listGroups);
   /// Listes regroupées par groupe (Toteo+). Sans groupe en dernier.
   List<({String? groupId, String? groupName, List<ShoppingListModel> lists})> getListsGrouped() {
-    if (!isToteoPlus || _listGroups.isEmpty) {
+    if (!PremiumProvider.currentIsActive || _listGroups.isEmpty) {
       return [(groupId: null, groupName: null, lists: List.from(_lists))];
     }
     final result = <({String? groupId, String? groupName, List<ShoppingListModel> lists})>[];
@@ -160,7 +161,7 @@ class ListProvider extends ChangeNotifier {
     List<int>? favoriteStoreIndices,
   }) {
     final list = getSortedItems(sortMode, aisleOrder: aisleOrder, favoriteStoreIndices: favoriteStoreIndices);
-    final onlyUnchecked = isToteoPlus && _showUncheckedOnly;
+    final onlyUnchecked = PremiumProvider.currentIsActive && _showUncheckedOnly;
     final q = _searchQuery.trim();
     if (!onlyUnchecked && q.isEmpty) return list;
     final qLower = q.toLowerCase();
@@ -313,7 +314,7 @@ class ListProvider extends ChangeNotifier {
 
   /// Enregistre la liste actuelle comme modèle (Toteo+).
   Future<void> saveCurrentListAsTemplate(String templateName) async {
-    if (!isToteoPlus || isSharedList) return;
+    if (!PremiumProvider.currentIsActive || isSharedList) return;
     final name = templateName.trim().isEmpty ? _list.name : templateName.trim();
     final items = _list.items
         .map((e) => ListTemplateItem(name: e.name, colorIndex: e.colorIndex))
@@ -326,7 +327,7 @@ class ListProvider extends ChangeNotifier {
 
   /// Crée une nouvelle liste à partir d'un modèle (Toteo+).
   Future<void> createListFromTemplate(ListTemplate template) async {
-    if (!isToteoPlus || isSharedList) return;
+    if (!PremiumProvider.currentIsActive || isSharedList) return;
     final order = _lists.isEmpty ? 0 : _lists.map((e) => e.order).reduce((a, b) => a > b ? a : b) + 1;
     final newItems = template.items.asMap().entries.map((e) {
       return ShoppingItem(
@@ -353,7 +354,7 @@ class ListProvider extends ChangeNotifier {
 
   /// Supprime un modèle de liste (Toteo+).
   Future<void> deleteListTemplate(String templateId) async {
-    if (!isToteoPlus) return;
+    if (!PremiumProvider.currentIsActive) return;
     _listTemplates = _listTemplates.where((t) => t.id != templateId).toList();
     await _storage.saveListTemplates(_listTemplates);
     notifyListeners();
@@ -361,7 +362,7 @@ class ListProvider extends ChangeNotifier {
 
   /// Ajoute un groupe de listes (Toteo+).
   Future<void> addListGroup(String name) async {
-    if (!isToteoPlus || isSharedList) return;
+    if (!PremiumProvider.currentIsActive || isSharedList) return;
     final order = _listGroups.isEmpty ? 0 : _listGroups.map((e) => e.order).reduce((a, b) => a > b ? a : b) + 1;
     _listGroups = [..._listGroups, ListGroup(id: _uuid.v4(), name: name.trim(), order: order)];
     await _storage.saveListGroups(_listGroups);
@@ -370,7 +371,7 @@ class ListProvider extends ChangeNotifier {
 
   /// Renomme un groupe.
   Future<void> renameListGroup(String groupId, String newName) async {
-    if (!isToteoPlus) return;
+    if (!PremiumProvider.currentIsActive) return;
     final idx = _listGroups.indexWhere((g) => g.id == groupId);
     if (idx < 0) return;
     _listGroups = List.from(_listGroups)..[idx] = ListGroup(id: groupId, name: newName.trim(), order: _listGroups[idx].order);
@@ -380,7 +381,7 @@ class ListProvider extends ChangeNotifier {
 
   /// Supprime un groupe (les listes passent en sans groupe).
   Future<void> removeListGroup(String groupId) async {
-    if (!isToteoPlus) return;
+    if (!PremiumProvider.currentIsActive) return;
     _listGroups = _listGroups.where((g) => g.id != groupId).toList();
     _lists = _lists.map((l) => l.groupId == groupId ? l.copyWith(groupId: null) : l).toList();
     await _storage.saveAllLists(_lists);
@@ -391,7 +392,7 @@ class ListProvider extends ChangeNotifier {
 
   /// Assigne une liste à un groupe (ou null pour sans groupe).
   Future<void> setListGroup(String listId, String? groupId) async {
-    if (!isToteoPlus || isSharedList) return;
+    if (!PremiumProvider.currentIsActive || isSharedList) return;
     final idx = _lists.indexWhere((l) => l.id == listId);
     if (idx < 0) return;
     _lists = List.from(_lists)..[idx] = _lists[idx].copyWith(groupId: groupId);
@@ -424,7 +425,7 @@ class ListProvider extends ChangeNotifier {
 
   /// Supprime les articles sélectionnés. Retourne les articles retirés (pour undo).
   Future<List<ShoppingItem>> removeSelectedItems() async {
-    if (!isToteoPlus || _selectedItemIds.isEmpty) return const [];
+    if (!PremiumProvider.currentIsActive || _selectedItemIds.isEmpty) return const [];
     final removed = _list.items.where((e) => _selectedItemIds.contains(e.id)).toList();
     _list = _list.copyWith(
       items: _list.items.where((e) => !_selectedItemIds.contains(e.id)).toList(),
@@ -437,7 +438,7 @@ class ListProvider extends ChangeNotifier {
 
   /// Déplace les articles sélectionnés vers une autre liste.
   Future<void> moveSelectedItemsToList(String targetListId) async {
-    if (!isToteoPlus || _selectedItemIds.isEmpty || isSharedList) return;
+    if (!PremiumProvider.currentIsActive || _selectedItemIds.isEmpty || isSharedList) return;
     final toMove = _list.items.where((e) => _selectedItemIds.contains(e.id)).toList();
     if (toMove.isEmpty) return;
     final targetIdx = _lists.indexWhere((l) => l.id == targetListId);
@@ -463,14 +464,14 @@ class ListProvider extends ChangeNotifier {
 
   /// Déplace les articles sélectionnés vers Achats futurs.
   Future<void> moveSelectedItemsToFutureList() async {
-    if (!isToteoPlus || _selectedItemIds.isEmpty) return;
+    if (!PremiumProvider.currentIsActive || _selectedItemIds.isEmpty) return;
     _ensureAchatsFutursList();
     await moveSelectedItemsToList(kAchatsFutursListId);
   }
 
   /// Déplace les articles non cochés de la liste actuelle vers Achats futurs (Pro). À appeler avant ou après finishShopping() selon le flux.
   Future<void> moveUncheckedToFutureList() async {
-    if (!isToteoPlus || isSharedList) return;
+    if (!PremiumProvider.currentIsActive || isSharedList) return;
     final unchecked = _list.items.where((e) => !e.checked).toList();
     if (unchecked.isEmpty) return;
     _ensureAchatsFutursList();
@@ -496,14 +497,14 @@ class ListProvider extends ChangeNotifier {
   bool get isCurrentListAchatsFuturs => _list.id == kAchatsFutursListId;
 
   void _ensureAchatsFutursList() {
-    if (!isToteoPlus) return;
+    if (!PremiumProvider.currentIsActive) return;
     if (_lists.any((l) => l.id == kAchatsFutursListId)) return;
     final order = _lists.isEmpty ? 0 : _lists.map((e) => e.order).reduce((a, b) => a > b ? a : b) + 1;
     _lists = [..._lists, ShoppingListModel(id: kAchatsFutursListId, name: kAchatsFutursListName, order: order)];
   }
 
   void _ensureEngagementsList() {
-    if (!isToteoPlus) return;
+    if (!PremiumProvider.currentIsActive) return;
     if (_lists.any((l) => l.id == kEngagementsListId)) return;
     final order = _lists.isEmpty ? 0 : _lists.map((e) => e.order).reduce((a, b) => a > b ? a : b) + 1;
     _lists = [..._lists, ShoppingListModel(id: kEngagementsListId, name: kEngagementsListName, order: order)];
@@ -572,14 +573,14 @@ class ListProvider extends ChangeNotifier {
       }
       _currentListId = id;
       _list = _lists.firstWhere((l) => l.id == _currentListId);
-      if (isToteoPlus) {
+      if (PremiumProvider.currentIsActive) {
         _listTemplates = await _storage.loadListTemplates();
         _listGroups = await _storage.loadListGroups();
       }
       AppLogger.fine('ListProvider._load: ${_lists.length} listes');
     } catch (e, stack) {
       AppLogger.error('ListProvider._load', e, stack);
-      final main = ShoppingListModel(id: 'main', name: 'Ma liste');
+      final main = ShoppingListModel(id: kMainListId, name: kDefaultMainListStoredName);
       _lists = [main];
       _currentListId = main.id;
       _list = main;
@@ -647,12 +648,16 @@ class ListProvider extends ChangeNotifier {
   }
 
   /// Crée une nouvelle liste.
-  Future<void> addList(String name) async {
+  Future<void> addList(String name, {String emptyFallback = 'Nouvelle liste'}) async {
     if (isSharedList) return;
     try {
       final id = _uuid.v4();
       final order = _lists.isEmpty ? 0 : _lists.map((e) => e.order).reduce((a, b) => a > b ? a : b) + 1;
-      final newList = ShoppingListModel(id: id, name: name.trim().isEmpty ? 'Nouvelle liste' : name.trim(), order: order);
+      final newList = ShoppingListModel(
+        id: id,
+        name: name.trim().isEmpty ? emptyFallback : name.trim(),
+        order: order,
+      );
       _lists = [..._lists, newList]..sort((a, b) => a.order.compareTo(b.order));
       await _storage.saveAllLists(_lists);
       _currentListId = id;
@@ -669,10 +674,11 @@ class ListProvider extends ChangeNotifier {
   /// Supprime une liste (si vide ou après confirmation côté UI).
   Future<void> removeList(String listId) async {
     if (isSharedList) return;
+    if (listId == kAchatsFutursListId || listId == kEngagementsListId) return;
     try {
       _lists = _lists.where((l) => l.id != listId).toList();
       if (_lists.isEmpty) {
-        final main = ShoppingListModel(id: 'main', name: 'Ma liste');
+        final main = ShoppingListModel(id: kMainListId, name: kDefaultMainListStoredName);
         _lists = [main];
       }
       if (_currentListId == listId) {
@@ -690,7 +696,8 @@ class ListProvider extends ChangeNotifier {
   }
 
   /// Duplique la liste actuelle (nouvelle liste avec mêmes articles, Toteo+).
-  Future<void> duplicateCurrentList() async {
+  /// Duplique la liste courante (articles décochés).
+  Future<void> duplicateCurrentList({String copySuffix = ' (copie)'}) async {
     if (isSharedList) return;
     try {
       final id = _uuid.v4();
@@ -713,7 +720,7 @@ class ListProvider extends ChangeNotifier {
       }).toList();
       final newList = ShoppingListModel(
         id: id,
-        name: '${_list.name} (copie)',
+        name: '${_list.name}$copySuffix',
         items: newItems,
         order: order,
       );
@@ -732,6 +739,7 @@ class ListProvider extends ChangeNotifier {
   /// Renomme une liste.
   Future<void> renameList(String listId, String newName) async {
     if (isSharedList) return;
+    if (listId == kAchatsFutursListId || listId == kEngagementsListId) return;
     final idx = _lists.indexWhere((l) => l.id == listId);
     if (idx < 0) return;
     try {
@@ -793,7 +801,7 @@ class ListProvider extends ChangeNotifier {
           ...list.items,
           ShoppingItem(
             id: id,
-            name: name.trim(),
+            name: canonicalProductName(name),
             colorIndex: 0,
             order: order,
           ),
@@ -816,7 +824,7 @@ class ListProvider extends ChangeNotifier {
     int? reminderAt,
     String? reminderNote,
   }) async {
-    if (!isToteoPlus || isSharedList) return;
+    if (!PremiumProvider.currentIsActive || isSharedList) return;
     _ensureEngagementsList();
     await _storage.saveAllLists(_lists);
     final engagementsList = _lists.firstWhere((l) => l.id == kEngagementsListId);
@@ -854,6 +862,7 @@ class ListProvider extends ChangeNotifier {
 
   /// Ajoute un article (nom déjà capitalisé si option activée).
   /// [checked] : ajouter directement comme « déjà acheté » (ex. récurrent).
+  /// [listId] : cible une autre liste sans basculer (Tote+).
   Future<void> addItem(
     String name, {
     int colorIndex = 0,
@@ -868,13 +877,21 @@ class ListProvider extends ChangeNotifier {
     bool checked = false,
     String? foodCategoryId,
     bool skipAutoClassify = false,
+    String? listId,
   }) async {
-    try {
-      final order = _list.items.isEmpty
+    await AppLogger.runGuardedAsync('ListProvider.addItem', () async {
+      final targetId = (listId != null && listId.isNotEmpty) ? listId : _currentListId;
+      var listIdx = _lists.indexWhere((l) => l.id == targetId);
+      if (listIdx < 0) {
+        listIdx = _lists.indexWhere((l) => l.id == _currentListId);
+      }
+      if (listIdx < 0) return;
+      var targetList = _lists[listIdx];
+      final order = targetList.items.isEmpty
           ? 0
-          : _list.items.map((e) => e.order).reduce((a, b) => a > b ? a : b) + 1;
+          : targetList.items.map((e) => e.order).reduce((a, b) => a > b ? a : b) + 1;
       final id = _uuid.v4();
-      final trimmed = name.trim();
+      final trimmed = canonicalProductName(name);
       final resolvedCategory = foodCategoryId ??
           (skipAutoClassify
               ? null
@@ -882,9 +899,9 @@ class ListProvider extends ChangeNotifier {
                   trimmed,
                   overrides: _storage.foodCategoryOverrides,
                 ));
-      _list = _list.copyWith(
+      targetList = targetList.copyWith(
         items: [
-          ..._list.items,
+          ...targetList.items,
           ShoppingItem(
             id: id,
             name: trimmed,
@@ -903,6 +920,8 @@ class ListProvider extends ChangeNotifier {
           ),
         ],
       );
+      _lists = List.from(_lists)..[listIdx] = targetList;
+      if (_list.id == targetList.id) _list = targetList;
       await _save();
       if (_reminder != null && reminderAt != null && reminderAt > DateTime.now().millisecondsSinceEpoch) {
         await _reminder.scheduleReminder(
@@ -912,8 +931,50 @@ class ListProvider extends ChangeNotifier {
           DateTime.fromMillisecondsSinceEpoch(reminderAt),
         );
       }
+    });
+  }
+
+  /// Duplique une liste (articles décochés).
+  Future<void> duplicateList(String listId, {String copySuffix = ' (copie)'}) async {
+    if (isSharedList) return;
+    try {
+      final idx = _lists.indexWhere((l) => l.id == listId);
+      if (idx < 0) return;
+      final source = _lists[idx];
+      final id = _uuid.v4();
+      final order = _lists.isEmpty ? 0 : _lists.map((e) => e.order).reduce((a, b) => a > b ? a : b) + 1;
+      final newItems = source.items.map((e) {
+        return ShoppingItem(
+          id: _uuid.v4(),
+          name: e.name,
+          checked: false,
+          colorIndex: e.colorIndex,
+          order: e.order,
+          note: e.note,
+          quantity: e.quantity,
+          unit: e.unit,
+          imagePath: e.imagePath,
+          price: e.price,
+          reminderAt: e.reminderAt,
+          reminderNote: e.reminderNote,
+          foodCategoryId: e.foodCategoryId,
+        );
+      }).toList();
+      final newList = ShoppingListModel(
+        id: id,
+        name: '${source.name}$copySuffix',
+        items: newItems,
+        order: order,
+        groupId: source.groupId,
+      );
+      _lists = [..._lists, newList]..sort((a, b) => a.order.compareTo(b.order));
+      await _storage.saveAllLists(_lists);
+      _currentListId = id;
+      _list = newList;
+      await _storage.setCurrentListId(id);
+      notifyListeners();
     } catch (e, stack) {
-      AppLogger.error('addItem', e, stack);
+      AppLogger.error('duplicateList', e, stack);
       rethrow;
     }
   }
@@ -921,7 +982,7 @@ class ListProvider extends ChangeNotifier {
   Future<void> toggleChecked(String itemId) async {
     final idx = _list.items.indexWhere((e) => e.id == itemId);
     if (idx < 0) return;
-    try {
+    await AppLogger.runGuardedAsync('ListProvider.toggleChecked', () async {
       final item = _list.items[idx];
       final updated = item.copyWith(checked: !item.checked);
       final newItems = List<ShoppingItem>.from(_list.items)..[idx] = updated;
@@ -930,10 +991,7 @@ class ListProvider extends ChangeNotifier {
       if (updated.checked && item.recurringItemId != null) {
         _onRecurringItemChecked?.call(item.recurringItemId!);
       }
-    } catch (e, stack) {
-      AppLogger.error('toggleChecked', e, stack);
-      rethrow;
-    }
+    });
   }
 
   Future<void> updateItem(
@@ -964,7 +1022,7 @@ class ListProvider extends ChangeNotifier {
         await _reminder.cancelReminder(itemId);
       }
       final updated = item.copyWith(
-        name: name ?? item.name,
+        name: name != null ? canonicalProductName(name) : item.name,
         colorIndex: colorIndex ?? item.colorIndex,
         foodCategoryId: foodCategoryId,
         clearFoodCategoryId: clearFoodCategoryId,
@@ -998,18 +1056,20 @@ class ListProvider extends ChangeNotifier {
 
   /// Reclasse tous les articles (classifier + overrides). Retourne un snapshot pour undo.
   Future<List<ShoppingItem>> reclassifyAllFoodCategories() async {
-    final snapshot = _list.items.map((e) => e.copyWith()).toList(growable: false);
-    final overrides = _storage.foodCategoryOverrides;
-    final newItems = _list.items.map((item) {
-      final id = FoodClassifier.classify(item.name, overrides: overrides);
-      return item.copyWith(
-        foodCategoryId: id,
-        clearFoodCategoryId: id == null,
-      );
-    }).toList();
-    _list = _list.copyWith(items: newItems);
-    await _save();
-    return snapshot;
+    return AppLogger.runGuardedAsync('ListProvider.reclassifyAllFoodCategories', () async {
+      final snapshot = _list.items.map((e) => e.copyWith()).toList(growable: false);
+      final overrides = _storage.foodCategoryOverrides;
+      final newItems = _list.items.map((item) {
+        final id = FoodClassifier.classify(item.name, overrides: overrides);
+        return item.copyWith(
+          foodCategoryId: id,
+          clearFoodCategoryId: id == null,
+        );
+      }).toList();
+      _list = _list.copyWith(items: newItems);
+      await _save();
+      return snapshot;
+    });
   }
 
   Future<void> restoreFoodCategoriesSnapshot(List<ShoppingItem> snapshot) async {
@@ -1125,7 +1185,7 @@ class ListProvider extends ChangeNotifier {
 
   /// Déplace un article vers la liste "Achats futurs" (sans annuler le rappel). Pro uniquement.
   Future<void> moveItemToFutureList(String itemId) async {
-    if (!isToteoPlus || isSharedList) return;
+    if (!PremiumProvider.currentIsActive || isSharedList) return;
     final item = _list.items.cast<ShoppingItem?>().firstWhere(
           (e) => e?.id == itemId,
           orElse: () => null,
@@ -1217,7 +1277,7 @@ class ListProvider extends ChangeNotifier {
 
   Future<ShareLinkResult> createSharedList() async {
     final sync = _sync;
-    if (sync == null) throw StateError('Sync non disponible');
+    if (sync == null) throw StateError('SYNC_UNAVAILABLE');
     try {
       return await sync.createSharedList(_list);
     } catch (e, stack) {
@@ -1227,7 +1287,7 @@ class ListProvider extends ChangeNotifier {
   }
 
   Future<void> joinSharedList(String listIdOrLink) async {
-    if (_sync == null) throw StateError('Sync non disponible');
+    if (_sync == null) throw StateError('SYNC_UNAVAILABLE');
     try {
       await _sync.joinSharedList(listIdOrLink);
     } catch (e, stack) {

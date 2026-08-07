@@ -89,6 +89,22 @@ class _PaywallScreenState extends State<PaywallScreen> {
             ),
             const SizedBox(height: 28),
             _BenefitRow(
+              icon: Icons.psychology_outlined,
+              text: l10n.paywallBenefitRecall,
+            ),
+            _BenefitRow(
+              icon: Icons.folder_open_outlined,
+              text: l10n.paywallBenefitLists,
+            ),
+            _BenefitRow(
+              icon: Icons.category_outlined,
+              text: l10n.paywallBenefitAxis,
+            ),
+            _BenefitRow(
+              icon: Icons.restaurant_menu_outlined,
+              text: l10n.paywallBenefitMeals,
+            ),
+            _BenefitRow(
               icon: Icons.block,
               text: l10n.paywallBenefitNoAds,
             ),
@@ -97,12 +113,12 @@ class _PaywallScreenState extends State<PaywallScreen> {
               text: l10n.paywallBenefitSmartCart,
             ),
             _BenefitRow(
-              icon: Icons.sync,
-              text: l10n.paywallBenefitSync,
+              icon: Icons.storefront_outlined,
+              text: l10n.paywallBenefitStats,
             ),
             _BenefitRow(
-              icon: Icons.emoji_events,
-              text: l10n.paywallBenefitStats,
+              icon: Icons.qr_code_scanner_outlined,
+              text: l10n.paywallBenefitSync,
             ),
             const SizedBox(height: 32),
             FilledButton(
@@ -119,6 +135,16 @@ class _PaywallScreenState extends State<PaywallScreen> {
                   : Text(l10n.paywallCta(price)),
             ),
             if (!isToteoPlus) ...[
+              if (context.watch<PremiumProvider>().canStartTrial) ...[
+                const SizedBox(height: 12),
+                OutlinedButton(
+                  onPressed: _busy ? null : () => _startTrial(context),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
+                  child: Text(l10n.paywallTrialCta),
+                ),
+              ],
               const SizedBox(height: 12),
               TextButton(
                 onPressed: _busy ? null : () => _restorePurchase(context),
@@ -129,6 +155,20 @@ class _PaywallScreenState extends State<PaywallScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _startTrial(BuildContext context) async {
+    final premium = context.read<PremiumProvider>();
+    if (!premium.canStartTrial) return;
+    setState(() => _busy = true);
+    try {
+      await premium.grantTrial24h();
+      if (!context.mounted) return;
+      AppFeedback.success(context, AppLocalizations.of(context).trialGrantedTitle);
+      Navigator.of(context).maybePop();
+    } finally {
+      if (mounted) setState(() => _busy = false);
+    }
   }
 
   Future<void> _purchase(BuildContext context) async {

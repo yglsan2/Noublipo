@@ -18,54 +18,54 @@ class AppLocalizationsRu extends AppLocalizations {
   String get appTagline => 'Список, который ничего не забывает!';
 
   @override
-  String get searchHint => 'Search in list';
+  String get searchHint => 'Искать в списке';
 
   @override
   String get totalLabel => 'Total';
 
   @override
-  String get addItem => 'Add item';
+  String get addItem => 'Добавить элемент';
 
   @override
-  String get addToWhichStore => 'Ajouter à quel magasin ?';
+  String get addToWhichStore => 'Добавить в какой магазин?';
 
   @override
-  String get otherStore => 'Autre magasin';
+  String get otherStore => 'Другой магазин';
 
   @override
-  String get manageStores => 'Gérer les magasins';
+  String get manageStores => 'Управление магазинами';
 
   @override
   String get manageStoresSubtitle =>
-      'Ajouter, renommer ou supprimer un magasin';
+      'Добавить, переименовать или удалить магазин';
 
   @override
-  String get renameStore => 'Renommer';
+  String get renameStore => 'Переименовать';
 
   @override
-  String get deleteStore => 'Supprimer le magasin';
+  String get deleteStore => 'Удалить магазин';
 
   @override
-  String get storeDeletedSnackbar => 'Magasin supprimé';
+  String get storeDeletedSnackbar => 'Магазин удален';
 
   @override
-  String get storeNameOrUnset => 'Sans nom';
+  String get storeNameOrUnset => 'Безымянный';
 
   @override
   String get manageStoresHint =>
-      'Touchez un magasin pour le renommer, ou supprimez-le pour le retirer de la liste.';
+      'Коснитесь магазина, чтобы переименовать его, или удалите его, чтобы удалить из списка.';
 
   @override
-  String get tapToSetStoreName => 'Touchez pour définir un nom';
+  String get tapToSetStoreName => 'Нажмите, чтобы задать имя';
 
   @override
-  String get emptyList => 'Empty list';
+  String get emptyList => 'Пустой список';
 
   @override
-  String get tapToAdd => 'Tap here or + to add an item';
+  String get tapToAdd => 'Нажмите здесь или +, чтобы добавить элемент';
 
   @override
-  String get settings => 'Settings';
+  String get settings => 'Настройки';
 
   @override
   String get languageLabel => 'Язык';
@@ -78,357 +78,363 @@ class AppLocalizationsRu extends AppLocalizations {
       'По умолчанию — язык телефона. Нажмите на флаг, чтобы изменить.';
 
   @override
-  String get share => 'Share';
+  String get share => 'Делиться';
 
   @override
   String get more => 'Ещё';
 
   @override
-  String get catalogAndInspiration => 'Catalog & inspiration';
+  String get catalogAndInspiration => 'Каталог и вдохновение';
 
   @override
-  String get planningRecurrentSeasonal => 'Planning (recurring & seasonal)';
+  String get planningRecurrentSeasonal =>
+      'Планирование (периодическое и сезонное)';
 
   @override
-  String get scanBarcode => 'Scan barcode';
+  String get scanBarcode => 'Сканировать штрих-код';
 
   @override
-  String get quickAddListArticles => 'Quick add (list + items)';
+  String get quickAddListArticles => 'Быстрое добавление (список + элементы)';
 
   @override
-  String get selectItems => 'Select items';
+  String get selectItems => 'Выберите элементы';
 
   @override
-  String get removeChecked => 'Remove checked';
+  String get removeChecked => 'Удалить отмеченное';
 
   @override
-  String get newList => 'New list';
+  String get newList => 'Новый список';
 
   @override
-  String get duplicateList => 'Duplicate list';
+  String get duplicateList => 'Дублирующийся список';
 
   @override
-  String get saveAsTemplate => 'Save as template';
+  String get saveAsTemplate => 'Сохранить как шаблон';
 
   @override
-  String get newFromTemplate => 'New list from template';
+  String get newFromTemplate => 'Новый список из шаблона';
 
   @override
-  String get stats => 'Statistics';
+  String get stats => 'Статистика';
 
   @override
-  String get listDuplicated => 'List duplicated';
+  String get listDuplicated => 'Список продублирован';
 
   @override
-  String get quickAdd => 'Quick add';
+  String get quickAdd => 'Быстрое добавление';
 
   @override
   String noMatchForSearch(String query) {
-    return 'No item matches \"$query\"';
+    return 'Ни один элемент не соответствует \"$query\"';
   }
 
   @override
-  String get clear => 'Clear';
+  String get clear => 'Прозрачный';
 
   @override
-  String get noResults => 'No results';
+  String get noResults => 'Нет результатов';
 
   @override
-  String get clearSearchToSeeAll => 'Clear search to see all items';
+  String get clearSearchToSeeAll => 'Очистите поиск, чтобы увидеть все товары';
 
   @override
-  String get touchToCheck => 'Tap to check';
+  String get touchToCheck => 'Нажмите, чтобы проверить';
 
   @override
-  String get toBuy => 'To buy';
+  String get toBuy => 'Купить';
 
   @override
   String totalEuro(String value) {
-    return 'Total: $value €';
+    return 'Итого: $value €';
   }
 
   @override
-  String get itemRemoved => 'Item removed';
+  String get itemRemoved => 'Объект удален.';
 
   @override
-  String get cancel => 'Cancel';
+  String get cancel => 'Отмена';
 
   @override
-  String get delete => 'Delete';
+  String get delete => 'Удалить';
 
   @override
-  String get modify => 'Edit';
+  String get modify => 'Редактировать';
 
   @override
-  String get deleteArticleConfirm => 'Delete this item?';
+  String get deleteArticleConfirm => 'Удалить этот элемент?';
 
   @override
-  String get shareList => 'Share list';
+  String get shareList => 'Поделиться списком';
 
   @override
-  String get exportAsText => 'Export as text';
+  String get exportAsText => 'Экспортировать как текст';
 
   @override
-  String get about => 'About';
+  String get about => 'О';
 
   @override
-  String get backupRestore => 'Backup & restore';
+  String get backupRestore => 'Резервное копирование и восстановление';
 
   @override
-  String get backupExportImport => 'Export or import lists and settings';
+  String get backupExportImport => 'Экспорт или импорт списков и настроек';
 
   @override
-  String get backupScreenTitle => 'Backup and restore';
+  String get backupScreenTitle => 'Резервное копирование и восстановление';
 
   @override
-  String get backupExportTitle => 'Export backup';
+  String get backupExportTitle => 'Экспортировать резервную копию';
 
   @override
-  String get backupImportTitle => 'Import backup';
+  String get backupImportTitle => 'Импортировать резервную копию';
 
   @override
-  String get backupExportSubtitle => 'Generates a JSON file to share or store';
+  String get backupExportSubtitle =>
+      'Создает файл JSON для совместного использования или хранения.';
 
   @override
-  String get backupImportSubtitle =>
-      'Replace current data with the chosen file';
+  String get backupImportSubtitle => 'Заменить текущие данные выбранным файлом';
 
   @override
   String get backupIntro =>
-      'Export all your lists, settings and planning to a file, or restore from a backup.';
+      'Экспортируйте все свои списки, настройки и планирование в файл или восстановите их из резервной копии.';
 
   @override
-  String get backupExportSuccess => 'Backup exported. Share or save the file.';
+  String get backupExportSuccess =>
+      'Резервная копия экспортирована. Поделитесь или сохраните файл.';
 
   @override
   String get backupImportConfirm =>
-      'Current lists and settings will be replaced by the file content. Continue?';
+      'Текущие списки и настройки будут заменены содержимым файла. Продолжать?';
 
   @override
-  String get backupImportSuccess => 'Backup restored.';
+  String get backupImportSuccess => 'Резервная копия восстановлена.';
 
   @override
-  String get scanPlaceBarcode => 'Place the barcode in the frame';
+  String get scanPlaceBarcode => 'Поместите штрих-код в рамку';
 
   @override
   String scanProductAdded(String name) {
-    return '$name added to list';
+    return '$name добавлен в список';
   }
 
   @override
-  String get scanClose => 'Close';
+  String get scanClose => 'Закрывать';
 
   @override
   String sharedListCount(int count) {
-    return 'Shared • $count';
+    return 'Общий доступ • $count';
   }
 
   @override
-  String get sharedList => 'Shared';
+  String get sharedList => 'Общий';
 
   @override
-  String get listDeleted => 'List deleted';
+  String get listDeleted => 'Список удален.';
 
   @override
-  String get tooltipClear => 'Clear';
+  String get tooltipClear => 'Прозрачный';
 
   @override
-  String get tooltipSyncDone => 'Synced';
+  String get tooltipSyncDone => 'Синхронизировано';
 
   @override
-  String get tooltipSyncUpload => 'Sync on all devices';
+  String get tooltipSyncUpload => 'Синхронизировать на всех устройствах';
 
   @override
-  String get tooltipMoveTo => 'Move to';
+  String get tooltipMoveTo => 'Перейти к';
 
   @override
-  String get itemsMoved => 'Items moved';
+  String get itemsMoved => 'Элементы перемещены';
 
   @override
   String colorChipTapToSet(String name) {
-    return '$name – tap to set';
+    return '$name – нажмите, чтобы установить';
   }
 
   @override
-  String get deleteGroup => 'Delete group';
+  String get deleteGroup => 'Удалить группу';
 
   @override
-  String get deleteListConfirm => 'Delete this list?';
+  String get deleteListConfirm => 'Удалить этот список?';
 
   @override
-  String get sendListByMessage => 'Send list by message or email';
+  String get sendListByMessage =>
+      'Отправить список по сообщению или электронной почте';
 
   @override
-  String get copyList => 'Copy list';
+  String get copyList => 'Копировать список';
 
   @override
-  String get copyListSubtitle => 'Copy to clipboard (read-only)';
+  String get copyListSubtitle => 'Копировать в буфер обмена (только чтение)';
 
   @override
-  String get shareRealtime => 'Share in real time';
+  String get shareRealtime => 'Поделитесь в режиме реального времени';
 
   @override
-  String get shareRealtimeWithOthers => 'With others (same list, live)';
+  String get shareRealtimeWithOthers =>
+      'С другими (тот же список, в прямом эфире)';
 
   @override
-  String get signInGoogleToEnable => 'Sign in with Google to enable';
+  String get signInGoogleToEnable =>
+      'Войдите в систему с помощью Google, чтобы включить';
 
   @override
-  String get listEmptySnackbar => 'Empty list';
+  String get listEmptySnackbar => 'Пустой список';
 
   @override
-  String get listCopiedToClipboard => 'List copied to clipboard';
+  String get listCopiedToClipboard => 'Список скопирован в буфер обмена';
 
   @override
-  String get copyLink => 'Copy link';
+  String get copyLink => 'Копировать ссылку';
 
   @override
-  String get shareLink => 'Share link';
+  String get shareLink => 'Поделиться ссылкой';
 
   @override
-  String get newSharedList => 'New shared list';
+  String get newSharedList => 'Новый общий список';
 
   @override
   String get newSharedListConfirm =>
-      'You will leave the current list and create a new shared list from your personal list.';
+      'Вы покинете текущий список и создадите новый общий список из своего личного списка.';
 
   @override
-  String get create => 'Create';
+  String get create => 'Создавать';
 
   @override
-  String get createNewSharedList => 'Create a new shared list';
+  String get createNewSharedList => 'Создать новый общий список';
 
   @override
-  String get createShareLink => 'Create share link';
+  String get createShareLink => 'Создать ссылку для обмена';
 
   @override
-  String get joinList => 'Join a list';
+  String get joinList => 'Присоединяйтесь к списку';
 
   @override
-  String get linkCreated => 'Link created';
+  String get linkCreated => 'Ссылка создана';
 
   @override
   String get sendLinkToOthers =>
-      'Send the link or code so others can view and edit the list in real time.';
+      'Отправьте ссылку или код, чтобы другие могли просматривать и редактировать список в режиме реального времени.';
 
   @override
-  String get shortCode => 'Short code';
+  String get shortCode => 'Короткий код';
 
   @override
-  String get errorPrefix => 'Error';
+  String get errorPrefix => 'Ошибка';
 
   @override
-  String get linkCopied => 'Link copied';
+  String get linkCopied => 'Ссылка скопирована';
 
   @override
-  String get join => 'Join';
+  String get join => 'Присоединиться';
 
   @override
-  String get listJoined => 'List joined';
+  String get listJoined => 'Список присоединился';
 
   @override
-  String get checkedItemsRemoved => 'Checked items removed';
+  String get checkedItemsRemoved => 'Отмеченные элементы удалены';
 
   @override
   String itemWillBeRemovedFromList(String name) {
-    return '\"$name\" will be removed from the list.';
+    return '«$name» будет удалено из списка.';
   }
 
   @override
-  String get copyCode => 'Copy code';
+  String get copyCode => 'Скопировать код';
 
   @override
   String copyCodeLabel(String code) {
-    return 'Copy code: $code';
+    return 'Скопировать код: $code';
   }
 
   @override
-  String get backToPersonalList => 'Back to your personal list';
+  String get backToPersonalList => 'Вернуться к вашему личному списку';
 
   @override
-  String get leaveSharedList => 'Leave shared list';
+  String get leaveSharedList => 'Выйти из общего списка';
 
   @override
-  String get leftListSnackbar => 'Disconnected. List kept locally.';
+  String get leftListSnackbar => 'Отключено. Список хранится локально.';
 
   @override
-  String get disconnect => 'Disconnect';
+  String get disconnect => 'Отключить';
 
   @override
   String get signInGoogleSameAccount =>
-      'Sign in with the same Google account on each device to share the list in real time.';
+      'Войдите в одну и ту же учетную запись Google на каждом устройстве, чтобы поделиться списком в режиме реального времени.';
 
   @override
-  String get syncEnabled => 'Sync enabled';
+  String get syncEnabled => 'Синхронизация включена';
 
   @override
-  String get signInWithGoogle => 'Sign in with Google';
+  String get signInWithGoogle => 'Войти через Google';
 
   @override
   String selectedCount(int n) {
-    return '$n selected';
+    return '$n выбрано';
   }
 
   @override
-  String get itemsDeleted => 'Items deleted';
+  String get itemsDeleted => 'Элементы удалены';
 
   @override
-  String get futurePurchases => 'Future purchases';
+  String get futurePurchases => 'Будущие покупки';
 
   @override
-  String get listLabel => 'List';
+  String get listLabel => 'Список';
 
   @override
-  String get groupsLabel => 'Groups';
+  String get groupsLabel => 'Группы';
 
   @override
-  String get articleStyle => 'Item style';
+  String get articleStyle => 'Стиль элемента';
 
   @override
-  String get styleBar => 'Bar';
+  String get styleBar => 'Бар';
 
   @override
   String get styleFilled => 'Filled rectangle';
 
   @override
-  String get styleSuperRound => 'Pilule';
+  String get styleSuperRound => 'Таблетка';
 
   @override
-  String get styleLiquid => 'Goutte';
+  String get styleLiquid => 'Жидкость';
 
   @override
-  String get styleSticker => 'Sticker';
+  String get styleSticker => 'наклейка';
 
   @override
-  String get styleBulle => 'Bulles';
+  String get styleBulle => 'Пузыри';
 
   @override
-  String get styleZebra => 'Zébrure';
+  String get styleZebra => 'Зебра';
 
   @override
-  String get darkMode => 'Dark mode';
+  String get darkMode => 'Темный режим';
 
   @override
-  String get darkModeSubtitle => 'Dark theme, easy on the eyes';
+  String get darkModeSubtitle => 'Темная тема, приятная для глаз';
 
   @override
-  String get capitalizeNames => 'Capitalize item names';
+  String get capitalizeNames =>
+      'Начинайте названия предметов с заглавной буквы';
 
   @override
-  String get capitalizeSubtitle => 'First letter uppercase';
+  String get capitalizeSubtitle => 'Первая буква заглавная';
 
   @override
-  String get remindersPerItem => 'Reminders per item';
+  String get remindersPerItem => 'Напоминания для каждого элемента';
 
   @override
   String get remindersSubtitle =>
-      'Optional: alarm and note per item (hidden if disabled)';
+      'Необязательно: сигнал тревоги и примечание для каждого элемента (скрыто, если отключено)';
 
   @override
-  String get categoriesLabel => 'Categories (store, type…)';
+  String get categoriesLabel => 'Категории (магазин, тип…)';
 
   @override
-  String get formLabel => 'Form';
+  String get formLabel => 'Форма';
 
   @override
   String get legendLabel => 'Legend';
@@ -438,172 +444,188 @@ class AppLocalizationsRu extends AppLocalizations {
       'Form: optional name when adding. Legend: squares at top, tap a square to set (e.g. Carrefour).';
 
   @override
-  String get categoryDefinedByStoresBar => 'Définie par les magasins en haut';
+  String get categoryDefinedByStoresBar =>
+      'Устанавливается у панели магазинов вверху.';
 
   @override
   String get tapSquareToSetStoreHint =>
-      'Touchez un carré en haut pour définir le magasin ou la catégorie.';
+      'Коснитесь квадрата вверху, чтобы установить магазин или категорию.';
 
   @override
-  String get categoryLabel => 'Catégorie';
+  String get categoryLabel => 'Категория';
 
   @override
-  String get sortListLabel => 'List sort (Tote \'O Recall+)';
+  String get sortListLabel => 'Сортировка списка (Tote \'O Recall+)';
 
   @override
-  String get sortOrder => 'Order';
+  String get sortOrder => 'Заказ';
 
   @override
-  String get sortName => 'Name';
+  String get sortName => 'Имя';
 
   @override
-  String get sortColor => 'Color';
+  String get sortColor => 'Цвет';
 
   @override
-  String get sortAisle => 'Rayon';
+  String get sortAisle => 'Ряд';
 
   @override
-  String get aisleOrderTitle => 'Ordre des rayons';
+  String get aisleOrderTitle => 'Порядок проходов';
 
   @override
   String get aisleOrderSubtitle =>
-      'Numéro de rayon par catégorie (pour tri au magasin)';
+      'Номер прохода по категории (для сортировки в магазине)';
 
   @override
-  String get favoriteStoresTitle => 'Magasin(s) favori(s)';
+  String get favoriteStoresTitle => 'Любимый магазин(ы)';
 
   @override
-  String get favoriteStoresSubtitle => 'Ces rayons apparaissent en premier';
+  String get favoriteStoresSubtitle => 'Эти проходы появляются первыми';
 
   @override
-  String get partnerSuggestionTitle => 'Suggestion';
+  String get partnerSuggestionTitle => 'Предположение';
 
   @override
   String partnerSuggestionMessage(String item, String suggestion) {
-    return 'Un partenaire a ajouté « $item ». Ajouter aussi « $suggestion » ?';
+    return 'Партнер добавил «$item». Добавить « $suggestion» тоже?';
   }
 
   @override
-  String get partnerSuggestionAdd => 'Oui, ajouter';
+  String get partnerSuggestionAdd => 'Да, добавить';
 
   @override
-  String get partnerSuggestionNo => 'Non';
+  String get partnerSuggestionNo => 'Нет';
 
   @override
-  String get showPrices => 'Show prices and total';
+  String get showPrices => 'Показать цены и общую сумму';
 
   @override
-  String get showPricesSubtitle => 'Price per item and estimated total';
+  String get showPricesSubtitle =>
+      'Цена за единицу и ориентировочная общая сумма';
 
   @override
-  String get aboutSubtitle => 'User guide, author, GPL v3 licence, GDPR';
+  String get aboutSubtitle =>
+      'Руководство пользователя, автор, лицензия GPL v3, GDPR';
 
   @override
-  String get saveAsTemplateTitle => 'Save as template';
+  String get saveAsTemplateTitle => 'Сохранить как шаблон';
 
   @override
-  String get modelNameHint => 'Template name';
+  String get modelNameHint => 'Имя шаблона';
 
   @override
-  String get modelSaved => 'Template saved';
+  String get modelSaved => 'Шаблон сохранен.';
 
   @override
-  String get save => 'Save';
+  String get save => 'Сохранять';
 
   @override
-  String get noTemplates => 'No templates. Save a list as template (⋮ menu).';
+  String get noTemplates =>
+      'Никаких шаблонов. Сохраните список как шаблон (меню ⋮).';
 
   @override
-  String get chooseTemplate => 'Choose a template';
+  String get chooseTemplate => 'Выберите шаблон';
 
   @override
   String templateItemCount(int count) {
-    return '$count item(s)';
+    return '$count элемент(ы)';
   }
 
   @override
   String listCreatedFromTemplate(String name) {
-    return 'List \"$name\" created';
+    return 'Список \"$name\" создан.';
   }
 
   @override
-  String get newListTitle => 'New list';
+  String get newListTitle => 'Новый список';
 
   @override
-  String get listNameHint => 'List name';
+  String get listNameHint => 'Имя списка';
 
   @override
-  String get createButton => 'Create';
+  String get createButton => 'Создавать';
 
   @override
-  String get renameTitle => 'Rename';
+  String get renameTitle => 'Переименовать';
 
   @override
-  String get groupLabel => 'Group';
+  String get groupLabel => 'Группа';
 
   @override
-  String get noGroup => 'No group';
+  String get noGroup => 'Нет группы';
 
   @override
-  String get newGroupTitle => 'New group';
+  String get newGroupTitle => 'Новая группа';
 
   @override
-  String get groupNameHint => 'E.g. Shopping, DIY';
+  String get groupNameHint => 'Например. Шопинг, Своими руками';
 
   @override
-  String get listGroupsTitle => 'List groups';
+  String get listGroupsTitle => 'Список групп';
 
   @override
-  String get newButton => 'New';
+  String get newButton => 'Новый';
 
   @override
   String get noGroupsHint =>
-      'No groups. Create one to organize your lists (e.g. Shopping, DIY).';
+      'Никаких групп. Создайте его, чтобы упорядочить свои списки (например, «Покупки», «Сделай сам»).';
 
   @override
-  String get groupDeleted => 'Group deleted';
+  String get groupDeleted => 'Группа удалена';
 
   @override
-  String get renameGroupTitle => 'Rename group';
+  String get renameGroupTitle => 'Переименовать группу';
 
   @override
-  String get renameListTitle => 'Rename list';
+  String get renameListTitle => 'Переименовать список';
 
   @override
-  String get nameHint => 'Name';
+  String get nameHint => 'Имя';
 
   @override
-  String get saveButton => 'Save';
+  String get saveButton => 'Сохранять';
 
   @override
-  String get chooseGroup => 'Choose a group';
+  String get chooseGroup => 'Выберите группу';
 
   @override
-  String get nameForThisColor => 'Name for this color';
+  String get nameForThisColor => 'Название этого цвета';
 
   @override
   String get colorNameHint =>
-      'E.g. Carrefour, Fruit, Urgent. Items in this color will show this name.';
+      'Например. Карфур, Фрукты, Срочно. На предметах этого цвета будет указано это имя.';
 
   @override
-  String get categoryNameHint => 'Store or category name';
+  String get categoryNameHint => 'Название магазина или категории';
 
   @override
   String shareJoinMessage(String link) {
-    return 'Join my real-time shopping list: $link';
+    return 'Присоединяйтесь к моему списку покупок в реальном времени: $link';
   }
 
   @override
   String shareSubject(String appName) {
-    return 'List $appName';
+    return 'Список $appName';
   }
 
   @override
   String get joinListHint =>
-      'Paste the link, 8-character code or ID to join the shared list.';
+      'Вставьте ссылку, 8-значный код или идентификатор, чтобы присоединиться к общему списку.';
 
   @override
-  String get linkCodeHint => 'Link, code (e.g. ABC12XYZ) or ID';
+  String get joinListTitle => 'Присоединяйтесь к списку';
+
+  @override
+  String get engagementsListHint =>
+      'Напоминания и обязательства (например, «Мне нужно позвонить…»). Не список покупок — используйте для этого «Новый список».';
+
+  @override
+  String get futureListHint =>
+      'Купите позже. Заполняется, когда вы заканчиваете поездку, не получив всего.';
+
+  @override
+  String get linkCodeHint =>
+      'Ссылка, код (например, ABC12XYZ) или идентификатор';
 
   @override
   String participantsCount(int count) {
@@ -611,67 +633,69 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get import => 'Import';
+  String get import => 'Импорт';
 
   @override
-  String get backupFileNotAccessible => 'File not accessible (e.g. Web).';
+  String get backupFileNotAccessible =>
+      'Файл недоступен (например, через Интернет).';
 
   @override
   String backupImportError(String error) {
-    return 'Import error: $error';
+    return 'Ошибка импорта: $error';
   }
 
   @override
   String get scanTitle => 'Scan';
 
   @override
-  String get scanAvailablePlus => 'Available in Tote \'O Recall+';
+  String get scanAvailablePlus => 'Доступно в Tote \'O Recall+';
 
   @override
   String get everyoneSeesSameList =>
-      'Everyone sees the same list and changes in real time.';
+      'Все видят один и тот же список и изменения в реальном времени.';
 
   @override
   String everyoneSeesSameListWithCount(int count) {
-    return '$count participant(s) • Everyone sees the same list live.';
+    return '$count участник(ы) • Все видят один и тот же список в реальном времени.';
   }
 
   @override
-  String get voiceUnavailable => 'Voice input not available';
+  String get voiceUnavailable => 'Голосовой ввод недоступен';
 
   @override
-  String get voiceError => 'Voice input unavailable';
+  String get voiceError => 'Голосовой ввод недоступен';
 
   @override
-  String get colorLabel => 'Color';
+  String get colorLabel => 'Цвет';
 
   @override
-  String get addToListItem => 'Add to list';
+  String get addToListItem => 'Добавить в список';
 
   @override
   String get quickAddHint =>
-      'Enter at least one item (e.g. Apple or List Store : Apple)';
+      'Введите хотя бы один элемент (например, Apple или List Store: Apple).';
 
   @override
-  String get linkCopiedBrowser => 'Link copied: paste it in your browser.';
+  String get linkCopiedBrowser => 'Ссылка скопирована: вставьте ее в браузер.';
 
   @override
-  String get signInToJoinList => 'Sign in with Google to join the list.';
+  String get signInToJoinList =>
+      'Войдите в систему с помощью Google, чтобы присоединиться к списку.';
 
   @override
   String cannotJoinList(String error) {
-    return 'Cannot join: $error';
+    return 'Невозможно присоединиться: $error';
   }
 
   @override
-  String get autocompleteLabel => 'Auto-completion';
+  String get autocompleteLabel => 'Автозаполнение';
 
   @override
   String get autocompleteSubtitle =>
-      'Suggest items from the lexicon as you type (e.g. pu… → purée, pull)';
+      'Предлагайте слова из лексикона по мере ввода (например, пу… → пюре, тянуть)';
 
   @override
-  String get addForLater => 'For later';
+  String get addForLater => 'На потом';
 
   @override
   String addForLaterSnackbar(String name) {
@@ -679,97 +703,98 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get engagementDetectedTitle => 'Engagement implicite détecté';
+  String get engagementDetectedTitle => 'Обнаружено неявное обязательство';
 
   @override
   String engagementDetectedMessage(String title) {
-    return 'Créer un rappel pour « $title » dans la liste Engagements ?';
+    return 'Создать напоминание для « $title » в списке «Взаимодействия»?';
   }
 
   @override
-  String get createReminderButton => 'Créer un rappel';
+  String get createReminderButton => 'Создать напоминание';
 
   @override
   String engagementReminderCreated(String title) {
-    return 'Rappel créé : « $title »';
+    return 'Напоминание создано: « $title »';
   }
 
   @override
-  String get birthdaysTitle => 'Anniversaires';
+  String get birthdaysTitle => 'Дни рождения';
 
   @override
-  String get birthdaysSubtitle =>
-      'Rappels 1 à 2 jours avant pour ne pas oublier';
+  String get birthdaysSubtitle => 'Напоминания за 1–2 дня, чтобы не забыть';
 
   @override
-  String get addBirthday => 'Ajouter un anniversaire';
+  String get addBirthday => 'Добавить день рождения';
 
   @override
-  String get birthdayNameHint => 'Prénom ou nom (ex. Léontine, Gertrude)';
+  String get birthdayNameHint =>
+      'Имя или полное имя (например, Леонтина, Гертруда)';
 
   @override
-  String get birthdayDay => 'Jour';
+  String get birthdayDay => 'День';
 
   @override
-  String get birthdayMonth => 'Mois';
+  String get birthdayMonth => 'Месяц';
 
   @override
-  String get reminder1DayBefore => 'Rappel 1 jour avant';
+  String get reminder1DayBefore => 'Напоминание за 1 день до';
 
   @override
-  String get reminder2DaysBefore => 'Rappel 2 jours avant';
+  String get reminder2DaysBefore => 'Напоминание за 2 дня до';
 
   @override
-  String get birthdayDeleted => 'Anniversaire supprimé';
+  String get birthdayDeleted => 'День рождения удален.';
 
   @override
   String get emptyBirthdays =>
-      'Aucun anniversaire. Ajoutez-en pour recevoir une alerte 1 à 2 jours avant.';
+      'Никаких дней рождения. Добавьте немного, чтобы получить оповещение за 1–2 дня до этого.';
 
   @override
-  String get editBirthday => 'Modifier l\'anniversaire';
+  String get editBirthday => 'Изменить день рождения';
 
   @override
   String deleteBirthdayConfirm(String name) {
-    return 'Supprimer l\'anniversaire de $name ?';
+    return 'Удалить день рождения $name?';
   }
 
   @override
-  String get celebrationTypeBirthday => 'Anniversaire (naissance)';
+  String get celebrationTypeBirthday => 'День рождения';
 
   @override
-  String get celebrationTypeWedding => 'Mariage';
+  String get celebrationTypeWedding => 'Свадьба';
 
   @override
-  String get celebrationTypeMeeting => 'Rencontre';
+  String get celebrationTypeMeeting => 'Годовщина встречи';
 
   @override
-  String get celebrationTypeOther => 'Autre fête';
+  String get celebrationTypeOther => 'Другое торжество';
 
   @override
-  String get birthdayYearOptional => 'Année (optionnel, pour l\'âge)';
+  String get birthdayYearOptional =>
+      'Год (необязательно, в зависимости от возраста)';
 
   @override
-  String get celebrationTypeLabel => 'Type';
+  String get celebrationTypeLabel => 'Тип';
 
   @override
   String ageYears(int count) {
-    return '$count ans';
+    return '$count лет';
   }
 
   @override
-  String get alreadyBoughtValidate => 'Déjà acheté ? Valider';
+  String get alreadyBoughtValidate => 'Уже купили? Подтвердить';
 
   @override
-  String get addToRecurring => 'Ajouter aux achats récurrents';
+  String get addToRecurring => 'Добавить в повторяющиеся покупки';
 
   @override
   String recurringAddedSnackbar(String name) {
-    return '« $name » en achat récurrent (rappel dans 7 j)';
+    return '«$name» установить как повторяющееся (напоминание через 7 дней)';
   }
 
   @override
-  String get recurringTooltip => 'Achat récurrent';
+  String get recurringTooltip => 'Регулярная покупка';
 
   @override
   String get courseTerminee => 'Покупки завершены';
@@ -825,285 +850,289 @@ class AppLocalizationsRu extends AppLocalizations {
   String get syncConflictHint => 'Возможный конфликт: изменения объединены.';
 
   @override
-  String get smartCartTitle => 'Aide course';
+  String get smartCartTitle => 'Помощник по покупкам';
 
   @override
   String get smartCartSubtitle =>
-      'Suggestions selon tes habitudes et le contexte';
+      'Предложения, основанные на ваших привычках и контексте.';
 
   @override
-  String get smartCartDueTitle => 'Habitudes';
+  String get smartCartDueTitle => 'Привычки';
 
   @override
   String smartCartDueMessage(String name, int days, int recurrence) {
-    return 'Tu n\'as pas acheté « $name » depuis $days jour(s) (d\'habitude tous les $recurrence j). Tu en as besoin ?';
+    return 'Вы не купили « $name » в течение $days дня (обычно каждые $recurrence дня). Нужно это?';
   }
 
   @override
-  String get smartCartAddToList => 'Oui, ajouter';
+  String get smartCartAddToList => 'Да, добавить';
 
   @override
-  String get smartCartNotThisTime => 'Pas cette fois';
+  String get smartCartNotThisTime => 'Не в этот раз';
 
   @override
-  String get smartCartContextTitle => 'Contexte';
+  String get smartCartContextTitle => 'Контекст';
 
   @override
-  String get smartCartContextCold =>
-      'Il fait froid. As-tu assez de thé, soupe ?';
+  String get smartCartContextCold => 'Холодно. Хватит ли у вас чая, супа?';
 
   @override
-  String get smartCartContextCheck => 'Vérifier et ajouter';
+  String get smartCartContextCheck => 'Проверьте и добавьте';
 
   @override
-  String get smartCartNoSuggestions => 'Aucune suggestion pour le moment.';
+  String get smartCartNoSuggestions => 'На данный момент предложений нет.';
 
   @override
-  String get panicCheckoutTitle => 'Vérifier avant la caisse';
+  String get panicCheckoutTitle => 'Проверьте перед оформлением заказа';
 
   @override
-  String get panicCheckoutSubtitle => 'As-tu bien pensé à tout ?';
+  String get panicCheckoutSubtitle => 'Ты все вспомнил?';
 
   @override
   String panicCheckoutUncheckedCount(int count) {
-    return '$count article(s) non coché(s)';
+    return '$count неотмеченный элемент(ы)';
   }
 
   @override
-  String get panicCheckoutAddMissing => 'Ajouter les oubliés à la liste';
+  String get panicCheckoutAddMissing =>
+      'Добавить недостающие элементы в список';
 
   @override
-  String get panicCheckoutAllGood => 'Tout est bon, je passe en caisse';
+  String get panicCheckoutAllGood => 'Все хорошо, я заплачу';
 
   @override
   String get panicCheckoutEmpty =>
-      'Aucun article à vérifier. Tu peux passer en caisse.';
+      'Нечего проверять. Вы можете перейти к кассе.';
 
   @override
-  String get streakTitle => 'Streak « O oubli »';
+  String get streakTitle => 'Полоса нулевого забывания';
 
   @override
-  String get streakSubtitle => 'Sorties sans rien oublier d\'affilée';
+  String get streakSubtitle => 'Поездки подряд, ничего не забывая';
 
   @override
-  String get streakCurrent => 'Série actuelle';
+  String get streakCurrent => 'Текущая серия';
 
   @override
-  String get streakBest => 'Record';
+  String get streakBest => 'Лучший';
 
   @override
   String streakCount(int count) {
-    return '$count sortie(s)';
+    return '$count поездка(а)';
   }
 
   @override
-  String get badgeMemoryMaster => 'Memory Master';
+  String get badgeMemoryMaster => 'Мастер памяти';
 
   @override
-  String get badgeMemoryMasterDesc => '5 sorties sans oubli d\'affilée';
+  String get badgeMemoryMasterDesc => '5 поездок подряд, не забывая';
 
   @override
-  String get badgeStreak10 => 'Champion';
+  String get badgeStreak10 => 'Чемпион';
 
   @override
-  String get badgeStreak10Desc => '10 sorties sans oubli d\'affilée';
+  String get badgeStreak10Desc => '10 поездок подряд, не забывая';
 
   @override
-  String get badgeHundredTrips => 'Routard';
+  String get badgeHundredTrips => 'Дорожный воин';
 
   @override
-  String get badgeHundredTripsDesc => '100 courses terminées';
+  String get badgeHundredTripsDesc => '100 совершенных походов по магазинам';
 
   @override
-  String get statsMostBought => 'Produits les plus achetés';
+  String get statsMostBought => 'Самые покупаемые товары';
 
   @override
-  String get statsSpendingByCategory => 'Dépenses par catégorie';
+  String get statsSpendingByCategory => 'Расходы по категориям';
 
   @override
-  String get statsMostForgotten => 'Produits les plus souvent oubliés';
+  String get statsMostForgotten => 'Чаще всего забывают';
 
   @override
-  String get statsTotalTrips => 'Courses terminées';
+  String get statsTotalTrips => 'Завершенные поездки';
 
   @override
-  String get statsZeroOubliRate => 'Taux zéro oubli';
+  String get statsZeroOubliRate => 'Уровень нулевого забывания';
 
   @override
   String get statsZeroOubliSubtitle =>
-      'Courses sans rien déplacer vers Achats futurs';
+      'Поездки без ничего перенесены в будущий список';
 
   @override
   String get statsNoDataYet =>
-      'Pas encore de données. Termine des courses pour voir tes stats.';
+      'Данных пока нет. Совершайте поездки, чтобы просмотреть свою статистику.';
 
   @override
   String statsCountTimes(int count) {
-    return '$count fois';
+    return '$count раз';
   }
 
   @override
-  String get profileConsumptionTitle => 'Profil de conso';
+  String get profileConsumptionTitle => 'Профиль потребления';
 
   @override
   String get profileConsumptionSubtitle =>
-      'Régimes, allergies, produits à éviter. Optionnel et sans jugement.';
+      'Диета, аллергия, продукты, которых следует избегать. Необязательно и без осуждения.';
 
   @override
-  String get profileCoachMode => 'Mode conseil bienveillant';
+  String get profileCoachMode => 'Щадящий режим тренера';
 
   @override
   String get profileCoachModeSubtitle =>
-      'Rappels doux et suggestions de substituts quand tu ajoutes un article (tu peux désactiver à tout moment)';
+      'Мягкие напоминания и предложения по замене при добавлении элемента (вы можете отключить его в любой момент).';
 
   @override
-  String get profileObjectives => 'Objectifs à atteindre';
+  String get profileObjectives => 'Цели достижения';
 
   @override
   String get profileObjectivesSubtitle =>
-      'Choisis les objectifs qui te correspondent (sans jugement)';
+      'Выберите цели, которые вам подходят (без осуждения)';
 
   @override
-  String get profileObjectiveWeightLoss => 'Perte de poids';
+  String get profileObjectiveWeightLoss => 'Потеря веса';
 
   @override
-  String get profileObjectiveReduceBudget => 'Réduire le budget';
+  String get profileObjectiveReduceBudget => 'Сократить бюджет';
 
   @override
-  String get profileObjectiveEatBalanced => 'Manger plus équilibré';
+  String get profileObjectiveEatBalanced => 'Питайтесь более сбалансированно';
 
   @override
-  String get profileObjectiveReduceSugar => 'Réduire le sucre';
+  String get profileObjectiveReduceSugar => 'Уменьшите сахар';
 
   @override
   String get profileObjectiveReduceCholesterol =>
-      'Réduire le mauvais cholestérol';
+      'Снизить уровень плохого холестерина';
 
   @override
-  String get profileObjectiveMoreProteins => 'Augmenter les protéines';
+  String get profileObjectiveMoreProteins => 'Увеличение белка';
 
   @override
-  String get profileObjectiveLessMeat => 'Moins de viande / protéines animales';
+  String get profileObjectiveLessMeat => 'Меньше мяса/животного белка';
 
   @override
-  String get profileObjectiveEatHealthier => 'Manger plus sain';
+  String get profileObjectiveEatHealthier => 'Ешьте здоровее';
 
   @override
   String get profileObjectiveReduceUltraProcessed =>
-      'Réduire les ultra-transformés';
+      'Уменьшите количество ультраобработанных продуктов';
 
   @override
-  String get profileObjectiveReducePalmOil => 'Réduire l\'huile de palme';
+  String get profileObjectiveReducePalmOil =>
+      'Уменьшите количество пальмового масла';
 
   @override
-  String get profileObjectiveReduceFatty => 'Réduire les produits gras';
+  String get profileObjectiveReduceFatty => 'Уменьшите жирные продукты';
 
   @override
-  String get profileObjectiveReduceSalt => 'Réduire le sel';
+  String get profileObjectiveReduceSalt => 'Уменьшите количество соли';
 
   @override
-  String get profileObjectiveMoreFiber => 'Plus de fibres';
+  String get profileObjectiveMoreFiber => 'Больше клетчатки';
 
   @override
-  String get profileObjectiveMoreVegetables => 'Plus de légumes';
+  String get profileObjectiveMoreVegetables => 'Больше овощей';
 
   @override
-  String get profileDiet => 'Régime / préférences';
+  String get profileDiet => 'Диета/предпочтения';
 
   @override
-  String get profileVegan => 'Végan';
+  String get profileVegan => 'Веган';
 
   @override
-  String get profileVegetarian => 'Végétarien';
+  String get profileVegetarian => 'Вегетарианец';
 
   @override
-  String get profileGlutenFree => 'Sans gluten';
+  String get profileGlutenFree => 'Не содержит глютен';
 
   @override
-  String get profileLactoseFree => 'Sans lactose';
+  String get profileLactoseFree => 'Безлактозный';
 
   @override
-  String get profileBioOnly => 'Bio uniquement';
+  String get profileBioOnly => 'Только органическое';
 
   @override
-  String get profileLocalOnly => 'Local uniquement';
+  String get profileLocalOnly => 'Только местное';
 
   @override
-  String get profileFairTrade => 'Équitable';
+  String get profileFairTrade => 'Честная торговля';
 
   @override
-  String get profileNoAddedSugar => 'Sans sucre ajouté';
+  String get profileNoAddedSugar => 'Без добавления сахара';
 
   @override
-  String get profileAllergies => 'Allergies et intolérances';
+  String get profileAllergies => 'Аллергия и непереносимость';
 
   @override
-  String get profileAllergiesHint => 'Un par ligne (ex. arachides, lactose)';
+  String get profileAllergiesHint =>
+      'По одному на строку (например, арахис, лактоза)';
 
   @override
-  String get profileProductsToAvoid => 'Produits à éviter';
+  String get profileProductsToAvoid => 'Продукты, которых следует избегать';
 
   @override
-  String get profileProductsToAvoidHint => 'Alcool, porc, fast-food…';
+  String get profileProductsToAvoidHint => 'Алкоголь, свинина, фастфуд…';
 
   @override
-  String get profileBrandsToAvoid => 'Marques à éviter';
+  String get profileBrandsToAvoid => 'Бренды, которых следует избегать';
 
   @override
-  String get profileTemptations => 'Objectifs bien-être';
+  String get profileTemptations => 'Цели благополучия';
 
   @override
   String get profileTemptationsSubtitle =>
-      'On t\'accompagne avec bienveillance : rappels doux et idées de substituts, sans jugement.';
+      'Мы поддерживаем вас мягкими напоминаниями и идеями-заменителями, без осуждения.';
 
   @override
-  String get profileTemptationProduct => 'Produit (ex. chocolat, soda)';
+  String get profileTemptationProduct =>
+      'Продукт (например, шоколад, газировка)';
 
   @override
-  String get profileTemptationSubstitute => 'Substitut suggéré (optionnel)';
+  String get profileTemptationSubstitute =>
+      'Предлагаемая замена (необязательно)';
 
   @override
-  String get profileAddTemptation => 'Ajouter un objectif';
+  String get profileAddTemptation => 'Добавить цель';
 
   @override
   String profileReduceWarning(String product) {
-    return 'Objectif en cours : réduire « $product ». On ajoute quand même cette fois ?';
+    return 'Цель в процессе: уменьшить « $product». Все равно добавить на этот раз?';
   }
 
   @override
   String profileReduceWarningWithProgress(String product, int percent) {
-    return 'Objectif en cours : réduire « $product ». Ta progression : $percent %. On ajoute quand même cette fois ?';
+    return 'Цель в процессе: уменьшить « $product». Ваш прогресс: $percent %. Все равно добавить на этот раз?';
   }
 
   @override
   String profileSubstituteSuggestion(String product, String substitute) {
-    return 'Pour ton objectif « $product », on te propose « $substitute » comme alternative. Tu préfères quoi ?';
+    return 'Для вашей цели « $product» мы предлагаем «$substitute» в качестве альтернативы. Что вы предпочитаете?';
   }
 
   @override
-  String get profileAddAnyway => 'Oui, ajouter quand même';
+  String get profileAddAnyway => 'Да, все равно добавь';
 
   @override
   String profileReplaceWith(String name) {
-    return 'Remplacer par « $name »';
+    return 'Заменить на «$name»';
   }
 
   @override
-  String get profileCancel => 'Annuler';
+  String get profileCancel => 'Отмена';
 
   @override
-  String get statsPleasurePercent => 'Où tu en es (plaisir)';
+  String get statsPleasurePercent => 'Где вы находитесь (удовольствие)';
 
   @override
   String get statsPleasureSubtitle =>
-      'Progression vers tes objectifs : part des achats type snacks / sucreries.';
+      'Прогресс в достижении ваших целей: доля покупок закусок/сладостей.';
 
   @override
-  String get statsBalanceScore => 'Progression équilibre';
+  String get statsBalanceScore => 'Прогресс баланса';
 
   @override
   String get statsBalanceSubtitle =>
-      'Ta progression vers un équilibre qui te convient (sans jugement).';
+      'Ваш прогресс в достижении баланса, который работает для вас (без осуждения).';
 
   @override
   String get statsMonthlyEvolution => 'Месячная динамика';
@@ -1219,332 +1248,386 @@ class AppLocalizationsRu extends AppLocalizations {
   String get errorGeneric => 'Произошла ошибка.';
 
   @override
-  String get paywallTitle => 'Passe à Tote \'O Recall+';
+  String get paywallTitle => 'Обновите до Tote \'O Recall+';
 
   @override
-  String get paywallSubtitle => 'Débloque tout le potentiel de ta liste';
+  String get paywallSubtitle => 'Раскройте весь потенциал своего списка';
 
   @override
-  String get paywallBenefitNoAds => 'Zéro pub, expérience fluide';
+  String get paywallBenefitNoAds => 'Нет рекламы, приятный опыт';
 
   @override
-  String get paywallBenefitSmartCart => 'Aide course & liste probable';
+  String get paywallBenefitSmartCart =>
+      'Вспомните советы и рекомендации по привычкам';
 
   @override
-  String get paywallBenefitSync => 'Sync sur tous tes appareils';
+  String get paywallBenefitSync => 'Синхронизируйте на всех ваших устройствах';
 
   @override
-  String get paywallBenefitStats => 'Stats, badges et gamification';
+  String get paywallBenefitStats =>
+      'Мультисписки, домашний ассортимент, без рекламы';
+
+  @override
+  String get paywallBenefitLists =>
+      'Несколько списков, четко управляемых в одном месте';
+
+  @override
+  String get paywallBenefitMeals =>
+      'Приготовьте еду: раклет, аперитив, барбекю…';
+
+  @override
+  String get paywallBenefitAxis => 'Выбирайте по типу еды';
 
   @override
   String paywallCta(String price) {
-    return 'Débloquer pour $price';
+    return 'Разблокировать для $price';
   }
 
   @override
-  String get paywallTrialCta => 'Essayer 24h gratuit';
+  String get paywallTrialCta => 'Попробуйте 24 часа бесплатно';
 
   @override
-  String get paywallRestore => 'Restaurer l\'achat';
+  String get paywallRestore => 'Восстановить покупку';
 
   @override
-  String get upgradePromptTitle => 'Tu gères bien tes listes !';
+  String get upgradePromptTitle => 'У тебя все отлично!';
 
   @override
   String get upgradePromptMessage =>
-      'Passe à Tote \'O Recall+ pour garder tes habitudes et débloquer l\'Aide course, la liste probable et la sync.';
+      'Обновите версию до Tote \'O Recall+, чтобы сохранить свои привычки и разблокировать интеллектуальную корзину, возможный список и синхронизацию.';
 
   @override
-  String get upgradePromptCta => 'Découvrir Tote \'O Recall+';
+  String get upgradePromptCta => 'Откройте для себя Tote \'O Recall+';
 
   @override
-  String get upgradePromptLater => 'Plus tard';
+  String get upgradePromptLater => 'Позже';
 
   @override
-  String get trialGrantedTitle => '24h de Tote \'O Recall+ offertes !';
+  String get trialGrantedTitle => '24 часа Tote \'O Recall+ бесплатно!';
 
   @override
   String get trialGrantedMessage =>
-      'Tu as débloqué un essai gratuit. Profites-en pour tester l\'Aide course et la liste probable.';
+      'Вы разблокировали бесплатную пробную версию. Попробуйте Умную корзину и возможный список.';
 
   @override
-  String get undo => 'Annuler';
+  String get undo => 'Отменить';
 
   @override
-  String get retry => 'Réessayer';
+  String get retry => 'Повторить попытку';
 
   @override
   String itemAdded(String name) {
-    return '« $name » ajouté';
+    return '« $name» добавлено';
   }
 
   @override
-  String get syncFailed => 'Synchronisation impossible. Vérifie ta connexion.';
+  String get syncFailed =>
+      'Синхронизация не удалась. Проверьте свое соединение.';
 
   @override
-  String get syncCancelled => 'Connexion annulée.';
+  String get syncCancelled => 'Вход отменен.';
 
   @override
-  String get syncStatusOk => 'Synchronisé';
+  String get syncStatusOk => 'Синхронизировано';
 
   @override
-  String get syncStatusSyncing => 'Synchronisation…';
+  String get syncStatusSyncing => 'Синхронизация…';
 
   @override
-  String get syncStatusOffline => 'Hors ligne';
+  String get syncStatusOffline => 'Оффлайн';
 
   @override
-  String get syncStatusError => 'Erreur de sync';
+  String get syncStatusError => 'Ошибка синхронизации';
 
   @override
   String scanProductNotFound(String name) {
-    return 'Produit inconnu — ajouté comme « $name »';
+    return 'Неизвестный продукт — добавлен как « $name »';
   }
 
   @override
-  String get scanFailed => 'Scan impossible. Réessaie.';
+  String get scanFailed => 'Сканирование не удалось. Попробуйте еще раз.';
 
   @override
   String get scanCameraDenied =>
-      'Autorise la caméra pour scanner un code-barres.';
+      'Разрешите камере доступ к сканированию штрих-кодов.';
 
   @override
-  String get purchaseSuccess => 'Tote \'O Recall+ activé. Merci !';
+  String get purchaseSuccess => 'Tote \'O Recall+ включен. Спасибо!';
 
   @override
-  String get purchaseCancelled => 'Achat annulé.';
+  String get purchaseCancelled => 'Покупка отменена.';
 
   @override
-  String get purchasePending => 'Achat en cours de validation…';
+  String get purchasePending => 'Покупка ожидается…';
 
   @override
-  String get purchaseRestoreSuccess => 'Achat restauré.';
+  String get purchaseRestoreSuccess => 'Покупка восстановлена.';
 
   @override
-  String get purchaseRestoreNone => 'Aucun achat à restaurer.';
+  String get purchaseRestoreNone => 'Нечего восстанавливать.';
 
   @override
-  String get onboardingStepAddTitle => 'Ajoute des articles';
+  String get onboardingStepAddTitle => 'Снимайте в одно касание';
 
   @override
   String get onboardingStepAddBody =>
-      'Tape sur + pour ajouter ce dont tu as besoin. Simple et rapide.';
+      'Нажмите +, чтобы отметить, что вам нужно. Менее 2 секунд — и он в списке.';
 
   @override
-  String get onboardingStepCheckTitle => 'Coche en magasin';
+  String get onboardingStepCheckTitle => 'Ничего не забыть';
 
   @override
   String get onboardingStepCheckBody =>
-      'Coche les articles au fur et à mesure. Glisse pour supprimer.';
+      'Приложение напоминает вам, что из ваших привычек стоит купить повторно — до и во время покупок.';
 
   @override
-  String get onboardingStepShareTitle => 'Partage ta liste';
+  String get onboardingStepShareTitle => 'Закончи, чтобы запомнить';
 
   @override
   String get onboardingStepShareBody =>
-      'Invite un proche pour faire les courses à deux en temps réel.';
+      'Когда покупки сделаны, подтвердите это: Tote запоминает, что вы покупаете, чтобы лучше напомнить вам в следующий раз.';
 
   @override
-  String get onboardingStartEmpty => 'Commencer avec une liste vide';
+  String get menuMoreFeatures => 'Более…';
 
   @override
-  String get onboardingPickTemplate => 'Choisir un modèle';
+  String get menuAdvancedFeatures => 'Передовой';
 
   @override
-  String get onboardingNext => 'Suivant';
+  String get listDisplayOptions => 'Отображать';
 
   @override
-  String get onboardingSkip => 'Passer';
+  String get emptyListRecallHint =>
+      'Добавьте товар или свой обычный товар, если вы уже делали покупки раньше.';
+
+  @override
+  String get addYourUsualItems => 'Добавьте свои привычки';
+
+  @override
+  String get smartCartTabForget => 'Забыл';
+
+  @override
+  String get smartCartTabWeek => 'Неделя';
+
+  @override
+  String get settingsSectionAppearance => 'Появление';
+
+  @override
+  String get settingsSectionShopping => 'Покупки и напоминания';
+
+  @override
+  String get settingsSectionAccount => 'Счет';
+
+  @override
+  String get settingsSectionAdvanced => 'Передовой';
+
+  @override
+  String get chooseStoreOptional => 'Сменить магазин';
+
+  @override
+  String get paywallBenefitRecall =>
+      'Напомните помощь: перестаньте забывать в магазине';
+
+  @override
+  String get onboardingStartEmpty => 'Начните с пустого списка';
+
+  @override
+  String get onboardingPickTemplate => 'Выберите шаблон';
+
+  @override
+  String get onboardingNext => 'Следующий';
+
+  @override
+  String get onboardingSkip => 'Пропускать';
 
   @override
   String get hintSync =>
-      'Connecte-toi pour synchroniser ta liste sur tous tes appareils.';
+      'Войдите, чтобы синхронизировать свой список между устройствами.';
 
   @override
-  String get hintScan =>
-      'Scanne un code-barres pour ajouter un produit rapidement.';
+  String get hintScan => 'Сканируйте штрих-код, чтобы быстро добавить продукт.';
 
   @override
-  String get hintSmartCart =>
-      'L\'Aide course te suggère ce qu\'il te manque selon tes habitudes.';
+  String get hintSmartCart => 'Умная корзина подскажет, чего вам не хватает.';
 
   @override
-  String get hintGotIt => 'Compris';
+  String get hintGotIt => 'Понятно';
 
   @override
-  String get premiumFeatureLocked => 'Disponible avec Tote \'O Recall+';
+  String get premiumFeatureLocked => 'Доступно с Tote \'O Recall+';
 
   @override
-  String get planningEmptyCta => 'Ajouter un rappel';
+  String get planningEmptyCta => 'Добавить напоминание';
 
   @override
-  String get birthdaysEmptyCta => 'Ajouter un anniversaire';
+  String get birthdaysEmptyCta => 'Добавить день рождения';
 
   @override
-  String get settingsSaveFailed => 'Impossible d\'enregistrer ce réglage.';
+  String get settingsSaveFailed => 'Не удалось сохранить эту настройку.';
 
   @override
   String mealPresetTitle(String label) {
-    return 'Liste « $label » ?';
+    return '« $label » список?';
   }
 
   @override
   String mealPresetBody(int count) {
-    return 'Ajouter les $count articles typiques en un tap ?';
+    return 'Добавить $count типичные элементы одним нажатием?';
   }
 
   @override
   String get mealPresetPremiumOnly =>
-      'Les listes repas express sont disponibles avec Tote \'O Recall+.';
+      'Списки экспресс-питания доступны через Tote \'O Recall+.';
 
   @override
-  String get mealPresetAddAll => 'Tout ajouter';
+  String get mealPresetAddAll => 'Добавить все';
 
   @override
-  String get mealPresetAddSingle => 'Juste ce nom';
+  String get mealPresetAddSingle => 'Просто это имя';
 
   @override
   String mealPresetAdded(int count, String label) {
-    return '$count articles ajoutés ($label)';
+    return 'Добавлено $count элементов ($label)';
   }
 
   @override
-  String get budgetCeiling => 'Plafond budget (€)';
+  String get budgetCeiling => 'Потолок бюджета (€)';
 
   @override
   String get budgetCeilingSubtitle =>
-      'Alerte si le total à acheter dépasse ce montant';
+      'Предупреждать, когда общая сумма покупок превышает эту сумму';
 
   @override
-  String get budgetCeilingHint => 'Ex. 50';
+  String get budgetCeilingHint => 'например 50';
 
   @override
   String budgetOverBanner(String total, String ceiling) {
-    return 'Budget dépassé : $total € / $ceiling €';
+    return 'Превышение бюджета: $total € / $ceiling €';
   }
 
   @override
-  String get recentItems => 'Récents';
+  String get recentItems => 'Недавний';
 
   @override
   String recallDueCard(int count) {
-    return '$count article(s) à racheter ?';
+    return '$count товар(ы) для пополнения запасов?';
   }
 
   @override
-  String get recallDueCardCta => 'Voir l\'Aide course';
+  String get recallDueCardCta => 'Открыть умную корзину';
 
   @override
-  String get weeklyReminder => 'Rappel jour de courses';
+  String get weeklyReminder => 'Напоминание о дне покупок';
 
   @override
   String get weeklyReminderSubtitle =>
-      'Notification hebdomadaire pour ne pas oublier ta liste';
+      'Еженедельное уведомление, чтобы вы не забыли свой список';
 
   @override
-  String get weeklyReminderDay => 'Jour';
+  String get weeklyReminderDay => 'День';
 
   @override
-  String get weeklyReminderTime => 'Heure';
+  String get weeklyReminderTime => 'Время';
 
   @override
-  String get weeklyReminderMessage => 'N\'oublie pas ta liste Tote \'O Recall';
+  String get weeklyReminderMessage =>
+      'Не забудьте свой список Tote \'O Recall.';
 
   @override
-  String get weekdayMon => 'Lundi';
+  String get weekdayMon => 'Понедельник';
 
   @override
-  String get weekdayTue => 'Mardi';
+  String get weekdayTue => 'Вторник';
 
   @override
-  String get weekdayWed => 'Mercredi';
+  String get weekdayWed => 'Среда';
 
   @override
-  String get weekdayThu => 'Jeudi';
+  String get weekdayThu => 'Четверг';
 
   @override
-  String get weekdayFri => 'Vendredi';
+  String get weekdayFri => 'Пятница';
 
   @override
-  String get weekdaySat => 'Samedi';
+  String get weekdaySat => 'Суббота';
 
   @override
-  String get weekdaySun => 'Dimanche';
+  String get weekdaySun => 'Воскресенье';
 
   @override
-  String get dragToReorder => 'Glisse un article pour le déplacer';
+  String get dragToReorder => 'Перетащите элемент, чтобы переместить его';
 
   @override
-  String get dragHandleTooltip => 'Déplacer';
+  String get dragHandleTooltip => 'Двигаться';
 
   @override
-  String get longPressToDelete => 'Appui long pour supprimer';
+  String get longPressToDelete => 'Нажмите и удерживайте, чтобы удалить';
 
   @override
-  String get orgModeLabel => 'Organisation';
+  String get orgModeLabel => 'Макет';
 
   @override
-  String get orgModeBubbles => 'Bulles';
+  String get orgModeBubbles => 'Пузыри';
 
   @override
-  String get orgModeNumbered => 'Liste';
+  String get orgModeNumbered => 'Список';
 
   @override
-  String get orgModeManual => 'Perso';
+  String get orgModeManual => 'Обычай';
 
   @override
-  String get orgModeBubblesHint => 'Les bulles s’organisent toutes seules';
+  String get orgModeBubblesHint => 'Пузыри упаковываются сами';
 
   @override
-  String get orgModeNumberedHint => 'Liste numérotée';
+  String get orgModeNumberedHint => 'Нумерованный список';
 
   @override
-  String get orgModeManualHint => 'Glisse pour ranger à ta façon';
+  String get orgModeManualHint => 'Перетащите, чтобы упорядочить свой путь';
 
   @override
   String get recallDueCardHistoryCta =>
-      'D’après ton historique — voir l’Aide course';
+      'На основе вашей истории — откройте Умную корзину';
 
   @override
   String mealPresetBodySkip(int missing, int skipped) {
-    return 'Ajouter les $missing articles manquants ($skipped déjà chez toi ou sur la liste) ?';
+    return 'Добавить $missing недостающие предметы ($skipped уже дома или в списке)?';
   }
 
   @override
   String mealPresetAlreadyHave(String names) {
-    return 'Déjà : $names';
+    return 'Уже есть: $names';
   }
 
   @override
   String mealPresetAddMissing(int count) {
-    return 'Ajouter $count';
+    return 'Добавить $count';
   }
 
   @override
-  String get pantryTitle => 'Stock maison';
+  String get pantryTitle => 'Домашний инвентарь';
 
   @override
   String get pantrySubtitle =>
-      'Suis ton placard. À zéro, on peut ajouter à la liste.';
+      'Отслеживайте свою кладовую. При нуле добавьте в список.';
 
   @override
   String get pantryPremiumOnly =>
-      'Le stock maison est disponible avec Tote \'O Recall+.';
+      'Товары для дома доступны с Tote \'O Recall+.';
 
   @override
-  String get pantryItemName => 'Article';
+  String get pantryItemName => 'Элемент';
 
   @override
-  String get pantryQty => 'Qté';
+  String get pantryQty => 'Кол-во';
 
   @override
-  String get pantryAdd => 'Ajouter';
+  String get pantryAdd => 'Добавлять';
 
   @override
-  String get pantryEmpty => 'Aucun article en stock';
+  String get pantryEmpty => 'Нет товаров на складе';
 
   @override
-  String get pantryOutOfStock => 'Rupture';
+  String get pantryOutOfStock => 'Распродано';
 
   @override
   String pantryQtyLabel(String qty, String unit) {
@@ -1552,223 +1635,3164 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get pantryUseOne => 'Utiliser 1';
+  String get pantryUseOne => 'Используйте 1';
 
   @override
-  String get pantryAddOne => 'Ajouter 1';
+  String get pantryAddOne => 'Добавить 1';
 
   @override
-  String get pantryEmptyTitle => 'Plus en stock';
+  String get pantryEmptyTitle => 'Распродано';
 
   @override
   String pantryEmptyBody(String name) {
-    return 'Ajouter « $name » à la liste de courses ?';
+    return 'Добавить «$name» в список покупок?';
   }
 
   @override
-  String get pantryAddToList => 'Ajouter à la liste';
+  String get pantryAddToList => 'Добавить в список';
 
   @override
   String pantryAddedToList(String name) {
-    return '« $name » ajouté à la liste';
+    return '«$name» добавлен в список';
   }
 
   @override
   String pantryEmptyAlreadyOnList(String name) {
-    return '« $name » est déjà sur la liste';
+    return '«$name» уже в списке';
   }
 
   @override
-  String get pantryRestockTitle => 'Mettre à jour le stock ?';
+  String get pantryRestockTitle => 'Обновить акции?';
 
   @override
   String pantryRestockBody(int count) {
-    return 'Ajouter les $count articles achetés au stock maison ?';
+    return 'Добавить купленные $count товары на склад?';
   }
 
   @override
-  String get pantryRestockCta => 'Oui, stocker';
+  String get pantryRestockCta => 'Да, пополнить запасы';
 
   @override
-  String get geofenceTitle => 'Rappel près du magasin';
+  String get geofenceTitle => 'Напоминание о ближайшем магазине';
 
   @override
   String get geofenceSubtitle =>
-      'Opt-in : notifie quand tu es près d’un magasin favori (GPS local, sans cloud).';
+      'Включение: уведомляйте, когда вы находитесь рядом с любимым магазином (местный GPS, без облаков).';
 
   @override
-  String get geofenceEnable => 'Activer la proximité';
+  String get geofenceEnable => 'Включить близость';
 
   @override
   String get geofenceEnableHint =>
-      'Vérifie à l’ouverture de l’app (pas de suivi en arrière-plan).';
+      'Проверяет, когда приложение открывается (без фонового отслеживания).';
 
   @override
-  String get geofenceAddHere => 'Enregistrer ma position actuelle';
+  String get geofenceAddHere => 'Сохранить мое текущее местоположение';
 
   @override
-  String get geofenceDefaultStore => 'Mon magasin';
+  String get geofenceDefaultStore => 'Мой магазин';
 
   @override
-  String get geofenceAdded => 'Position magasin enregistrée';
+  String get geofenceAdded => 'Местоположение магазина сохранено.';
 
   @override
-  String get geofencePermissionDenied => 'Autorisation de localisation refusée';
+  String get geofencePermissionDenied =>
+      'Разрешение на определение местоположения отклонено';
 
   @override
-  String get geofenceLocationError => 'Impossible d’obtenir la position';
+  String get geofenceLocationError => 'Не удалось получить местоположение';
 
   @override
   String geofenceRadiusLabel(int meters) {
-    return 'Rayon $meters m';
+    return '$meters радиус м';
   }
 
   @override
-  String get geofenceNotifTitle => 'Tu es près du magasin';
+  String get geofenceNotifTitle => 'Вы рядом с магазином';
 
   @override
   String geofenceNotifBody(String store, int count) {
-    return '$store — $count article(s) sur ta liste';
+    return '$store — $count элемент(ы) в вашем списке';
   }
 
   @override
   String get mealPresetAllCovered =>
-      'Tu as déjà tout pour ce repas — rien à ajouter !';
+      'Все для этого блюда у вас уже есть — добавить нечего!';
 
   @override
-  String get mealPresetAllCoveredCta => 'Parfait';
+  String get mealPresetAllCoveredCta => 'Хороший';
 
   @override
-  String get mealPresetNeedIt => 'À prendre';
+  String get mealPresetNeedIt => 'нужно это';
 
   @override
-  String get mealPresetInPantry => 'Placard';
+  String get mealPresetInPantry => 'Кладовая';
 
   @override
-  String get mealPresetOnList => 'Liste';
+  String get mealPresetOnList => 'Список';
 
   @override
-  String get mealPresetInBoth => 'OK';
+  String get mealPresetInBoth => 'ХОРОШО';
 
   @override
   String pantryAddedSnack(String name) {
-    return '« $name » en stock';
+    return '“$name” на складе';
   }
 
   @override
   String pantryAutoAdded(String name) {
-    return 'Rupture → « $name » ajouté à la liste';
+    return 'Нет в наличии → «$name» добавлен в список';
   }
 
   @override
   String pantryStatInStock(int count) {
-    return '$count en stock';
+    return '$count в наличии';
   }
 
   @override
   String pantryStatLow(int count) {
-    return '$count bas';
+    return '$count низкий';
   }
 
   @override
   String pantryStatEmpty(int count) {
-    return '$count rupture';
+    return '$count пусто';
   }
 
   @override
-  String get pantrySearchHint => 'Chercher dans le placard…';
+  String get pantrySearchHint => 'Обыскать кладовку…';
 
   @override
-  String get pantryFilterAll => 'Tous';
+  String get pantryFilterAll => 'Все';
 
   @override
-  String get pantryFilterLow => 'Bas';
+  String get pantryFilterLow => 'Низкий';
 
   @override
-  String get pantryFilterEmpty => 'Rupture';
+  String get pantryFilterEmpty => 'Пустой';
 
   @override
-  String get pantryFilterEmptyResult => 'Rien dans ce filtre';
+  String get pantryFilterEmptyResult => 'В этом фильтре ничего нет';
 
   @override
   String pantryLowHint(String qty) {
-    return 'Plus que $qty — bientôt à racheter';
+    return 'Осталось только $qty — скоро пополнение';
   }
 
   @override
   String pantryRestockDone(int count) {
-    return 'Stock +$count';
+    return 'Акции +$count';
   }
 
   @override
-  String get recallDueQuickAdd => 'Ajouter les premiers';
+  String get recallDueQuickAdd => 'Добавить топ-элементы';
 
   @override
-  String get recallDueSeeAll => 'Tout voir';
+  String get recallDueSeeAll => 'Посмотреть все';
 
   @override
   String recallDueAdded(int count) {
-    return '$count ajouté(s) à la liste';
+    return '$count добавлен в список';
   }
 
   @override
-  String get geofenceSetupTitle => 'Nouveau magasin';
+  String get geofenceSetupTitle => 'Новый магазин';
 
   @override
   String get geofenceSetupHint =>
-      'Enregistre ta position actuelle — on te rappellera ta liste à proximité.';
+      'Сохраните свое текущее местоположение — мы подтолкнем вас, когда вы будете рядом.';
 
   @override
-  String get geofenceStoreName => 'Nom du magasin';
+  String get geofenceStoreName => 'Название магазина';
 
   @override
-  String get geofencePickColor => 'Couleur / rayon magasin';
+  String get geofencePickColor => 'Цвет магазина';
 
   @override
-  String get geofenceRadiusPick => 'Zone de détection';
+  String get geofenceRadiusPick => 'Зона обнаружения';
 
   @override
-  String get geofenceSaveHere => 'Enregistrer ici';
+  String get geofenceSaveHere => 'Сохранить здесь';
 
   @override
-  String get geofenceLocating => 'Localisation…';
+  String get geofenceLocating => 'Поиск…';
 
   @override
   String geofenceAddedNamed(String name) {
-    return '« $name » enregistré';
+    return '«$name» сохранено.';
   }
 
   @override
-  String get foodTypeLabel => 'Type d’aliment';
+  String get foodTypeLabel => 'Тип еды';
 
   @override
-  String get foodCatUnclassified => 'Non classé';
+  String get foodCatUnclassified => 'Без категории';
 
   @override
-  String get showFoodCategoryBadge => 'Afficher le type d’aliment';
+  String get foodCatFruits => 'Фрукты';
+
+  @override
+  String get foodCatVegetables => 'Овощи';
+
+  @override
+  String get foodCatMushrooms => 'Грибы';
+
+  @override
+  String get foodCatDairy => 'Молочные продукты и яйца';
+
+  @override
+  String get foodCatMeat => 'Мясо';
+
+  @override
+  String get foodCatDeli => 'Колбасы';
+
+  @override
+  String get foodCatFish => 'Рыба и морепродукты';
+
+  @override
+  String get foodCatBakery => 'Выпечка';
+
+  @override
+  String get foodCatDrinks => 'Напитки';
+
+  @override
+  String get foodCatGrocery => 'Бакалея';
+
+  @override
+  String get foodCatSnacks => 'Закуски';
+
+  @override
+  String get foodCatDesserts => 'Десерты';
+
+  @override
+  String get foodCatSweets => 'Сладости';
+
+  @override
+  String get foodCatFrozen => 'Заморозка';
+
+  @override
+  String get foodCatHygiene => 'Гигиена';
+
+  @override
+  String get foodCatHousehold => 'Дом';
+
+  @override
+  String get foodCatPets => 'Питомцы';
+
+  @override
+  String get foodCatBaby => 'Детское';
+
+  @override
+  String get foodCatOther => 'Другое';
+
+  @override
+  String get myList => 'Мой список';
+
+  @override
+  String get engagementsListName => 'Обязательства';
+
+  @override
+  String get listCopySuffix => ' (копия)';
+
+  @override
+  String deleteListConfirmEmpty(String name) {
+    return '«$name» будет удалён.';
+  }
+
+  @override
+  String deleteListConfirmWithItems(String name, int count) {
+    return 'В «$name» $count позиц. Всё будет удалено.';
+  }
+
+  @override
+  String get showFoodCategoryBadge => 'Показать тип еды';
 
   @override
   String get showFoodCategoryBadgeSubtitle =>
-      'Petit badge sous chaque article (Légumes, Laitiers…)';
+      'Небольшой значок под каждым товаром (Овощи, Молочные продукты…)';
 
   @override
-  String get axisModeLabel => 'Ranger par';
+  String get axisModeLabel => 'Группировать по';
 
   @override
-  String get axisModeStore => 'Magasin';
+  String get axisModeStore => 'Магазин';
 
   @override
-  String get axisModeFood => 'Type';
+  String get axisModeFood => 'Тип еды (овощи, фрукты…)';
 
   @override
-  String get axisModeDualStoreFood => 'Magasin → type';
+  String get axisModeDualStoreFood => 'Магазин → тип';
 
   @override
-  String get axisModeDualFoodStore => 'Type → magasin';
+  String get axisModeDualFoodStore => 'Тип → магазин';
 
   @override
-  String get reclassifyFoodList => 'Reclasser les types';
+  String get reclassifyFoodList =>
+      'Переклассифицировать типы продуктов питания';
 
   @override
-  String get reclassifyFoodDone => 'Types d’aliments mis à jour';
+  String get reclassifyFoodDone => 'Обновлены типы продуктов питания';
+
+  @override
+  String get listsHubTitle => 'Мои списки';
+
+  @override
+  String get listsHubSubtitle =>
+      'Переключите списки или создайте новый — управляйте всем в одном месте';
+
+  @override
+  String get listsHubManage => 'Мои списки';
+
+  @override
+  String get listsHubOpen => 'Открыть';
+
+  @override
+  String listsHubItemCount(int count) {
+    return '$count элемент(ы)';
+  }
+
+  @override
+  String get listsHubSystemBadge => 'Система';
+
+  @override
+  String get listsHubHideFromBar => 'Скрыть из бара';
+
+  @override
+  String get listsHubShowInBar => 'Показать в баре';
+
+  @override
+  String get listsHubCurrent => 'Открыть';
+
+  @override
+  String get listsHubOrganizeGroups => 'Организуйте группы';
+
+  @override
+  String get addToListLabel => 'добавить в';
+
+  @override
+  String get toggleAxisByType => 'Тип';
+
+  @override
+  String get toggleAxisByStore => 'Магазин';
+
+  @override
+  String get axisChipTooltipType =>
+      'Групповые позиции: Овощи, Фрукты, Молочные продукты, Мясо…';
+
+  @override
+  String get axisChipTooltipStore => 'Группировать товары по магазинам/цветам';
+
+  @override
+  String get axisHintBanner =>
+      'Ваш список сгруппирован по типу (овощи, фрукты…). Перейдите в «Магазин», чтобы сгруппировать по продавцам.';
+
+  @override
+  String get axisHintBannerStore =>
+      'Совет: переключитесь на «Тип», чтобы сгруппировать овощи, фрукты, молочные продукты…';
+
+  @override
+  String get listsHubChipTooltip =>
+      'Создание, открытие, переименование или удаление списка';
+
+  @override
+  String get storesLegendHint =>
+      'Коснитесь цветной метки, чтобы назвать магазин (Carrefour, market…)';
+
+  @override
+  String get toBuyTooltip => 'Показывать только то, что осталось забрать';
+
+  @override
+  String get displayOptionsTooltip =>
+      'Пузырьки, нумерованный список или группировка по магазинам/типам';
+
+  @override
+  String get mealPresetsChipTooltip =>
+      'Добавляйте все ингредиенты для блюда сразу';
+
+  @override
+  String get quickAddChipTooltip => 'Добавить несколько элементов подряд';
+
+  @override
+  String get usualsChipTooltip =>
+      'Повторно добавьте наиболее часто используемые элементы';
+
+  @override
+  String get emptyListTypeHint =>
+      'С Plus ваш список группируется по типу: овощи, фрукты, молочные продукты…';
+
+  @override
+  String get mealPresetsMenu => 'Приготовь еду';
+
+  @override
+  String get mealPresetsPickerTitle => 'Какое блюдо приготовить?';
+
+  @override
+  String get mealPresetsPickerSubtitle =>
+      'Добавляет каждый недостающий ингредиент в список';
+
+  @override
+  String mealPresetsItemsCount(int count) {
+    return '$count ингредиенты';
+  }
+
+  @override
+  String get smartCartEmptyTitle => 'Пока нет предложений';
+
+  @override
+  String get smartCartEmptyBody =>
+      'Делайте покупки несколько раз или создайте повторяющийся товар — советы основаны на ваших привычках.';
+
+  @override
+  String get smartCartEmptyCtaPlanning => 'Открытая планировка';
+
+  @override
+  String smartCartWhyDue(int days) {
+    return 'Причитается · обычно каждые $days d';
+  }
+
+  @override
+  String get smartCartWhyOften => 'Покупаю часто';
+
+  @override
+  String get smartCartAddToOtherList => 'Другой список…';
+
+  @override
+  String panicRemainingCount(int count) {
+    return '$count осталось захватить';
+  }
+
+  @override
+  String get panicMarkChecked => 'Отметить как занятое';
+
+  @override
+  String get panicGroupedHint =>
+      'Сгруппировано, как ваш список. Отмечайте по ходу дела.';
+
+  @override
+  String get reclassifyFoodHint =>
+      'Элементы без категорий: переклассифицируйте для более понятных разделов.';
+
+  @override
+  String get catalogTapHint => 'Нажмите на товар, чтобы добавить его в список.';
+
+  @override
+  String get statsOverview => 'Обзор';
+
+  @override
+  String get statsCurrentList => 'Текущий список';
+
+  @override
+  String get statsInCartChecked => 'В корзине (проверено)';
+
+  @override
+  String get statsEstimatedTotalUnchecked =>
+      'Расчетная общая сумма (не отмечено)';
+
+  @override
+  String get statsYourStats => 'Ваша статистика';
+
+  @override
+  String get statsAllListsSection => 'Все списки';
+
+  @override
+  String get statsListsCount => 'Количество списков';
+
+  @override
+  String get statsPlanningSection => 'Планирование';
+
+  @override
+  String get statsRecurringPurchases => 'Регулярные покупки';
+
+  @override
+  String get statsSeasonalTemplates => 'Сезонные шаблоны';
+
+  @override
+  String get statsModelsSection => 'Шаблоны';
+
+  @override
+  String get statsSavedListModels => 'Сохраненные шаблоны списков';
+
+  @override
+  String categoryIndexed(int index) {
+    return 'Категория $index';
+  }
+
+  @override
+  String get planningTitle => 'Планирование';
+
+  @override
+  String get planningTabRecurring => 'повторяющийся';
+
+  @override
+  String get planningTabSeasonal => 'Сезонный';
+
+  @override
+  String get planningRecurringIntro =>
+      'Товары, которые вы покупаете регулярно. Добавьте их в свой список, когда придет время.';
+
+  @override
+  String get createRecurringPurchase => 'Создайте повторяющуюся покупку';
+
+  @override
+  String get fillListWithRecurring =>
+      'Добавьте все повторяющиеся элементы в список';
+
+  @override
+  String get recurringEmptyHint =>
+      'Повторных покупок пока нет.\nНапример. Молоко каждые 7 дней.';
+
+  @override
+  String get deleteRecurringConfirmTitle =>
+      'Удалить этот повторяющийся элемент?';
+
+  @override
+  String deleteRecurringConfirmBody(String name) {
+    return '«$name» больше не будет в ваших регулярных покупках.';
+  }
+
+  @override
+  String addedItemSnack(String name) {
+    return 'Добавлено: $name';
+  }
+
+  @override
+  String addedItemsToListSnack(int count) {
+    return '$count элемент(ы) добавлен в список';
+  }
+
+  @override
+  String neverBoughtEveryDays(int days) {
+    return 'Никогда не покупал • Каждые $days д';
+  }
+
+  @override
+  String boughtDaysAgoEveryDays(int daysAgo, int days) {
+    return '$daysAgo дня назад • Каждые $days дня';
+  }
+
+  @override
+  String get dueToBuySuffix => '• Должный';
+
+  @override
+  String get newRecurringPurchase => 'Новая регулярная покупка';
+
+  @override
+  String get editRecurringPurchase => 'Изменить повторяющуюся покупку';
+
+  @override
+  String get articleLabel => 'Элемент';
+
+  @override
+  String get articleHintExample => 'Например. Молоко';
+
+  @override
+  String get freqOncePerWeek => '1×/неделя';
+
+  @override
+  String get freqOncePerTwoWeeks => '1×/2 недели';
+
+  @override
+  String get freqOncePerMonth => '1×/месяц';
+
+  @override
+  String freqEveryDays(int days) {
+    return 'Каждые $days d';
+  }
+
+  @override
+  String get seasonalIntro =>
+      'Списки покупок по случаю (Рождество, возвращение в школу…). Добавьте каждый элемент в свой список сразу.';
+
+  @override
+  String seasonalAddedSnack(int count, String name) {
+    return 'Добавлено $count элемент(ов) ($name)';
+  }
+
+  @override
+  String get addAll => 'Добавить все';
+
+  @override
+  String recurringDueBanner(int count) {
+    return '$count периодическая покупка(и) подлежит оплате';
+  }
+
+  @override
+  String get seasonalTpl_noel => 'Christmas';
+
+  @override
+  String get seasonalTpl_rentree => 'Back to school';
+
+  @override
+  String get seasonalTpl_ete => 'Summer / Holidays';
+
+  @override
+  String get seasonalTpl_halloween => 'Halloween';
+
+  @override
+  String get prod_ail => 'Чеснок';
+
+  @override
+  String get prod_avocats => 'Авокадо';
+
+  @override
+  String get prod_baguette => 'Багет';
+
+  @override
+  String get prod_bananes => 'Бананы';
+
+  @override
+  String get prod_basilic => 'Базилик';
+
+  @override
+  String get prod_beurre => 'Масло';
+
+  @override
+  String get prod_biscuits => 'Файлы cookie';
+
+  @override
+  String get prod_biere => 'Пиво';
+
+  @override
+  String get prod_bieres => 'Пиво';
+
+  @override
+  String get prod_bonbons => 'Конфеты';
+
+  @override
+  String get prod_bouillon => 'Бульон';
+
+  @override
+  String get prod_bouteilles_deau => 'Бутылки с водой';
+
+  @override
+  String get prod_brioche => 'Бриошь';
+
+  @override
+  String get prod_buche => 'Святочный пирог из поленьев';
+
+  @override
+  String get prod_cacahuetes => 'Арахис';
+
+  @override
+  String get prod_cafe => 'Кофе';
+
+  @override
+  String get prod_cahiers => 'Тетради';
+
+  @override
+  String get prod_carottes => 'Морковь';
+
+  @override
+  String get prod_cartable => 'Школьный портфель';
+
+  @override
+  String get prod_champagne => 'шампанское';
+
+  @override
+  String get prod_chapeau => 'Шляпа';
+
+  @override
+  String get prod_charbon_allume_feu => 'Древесный уголь / разжигатели огня';
+
+  @override
+  String get prod_charcuterie => 'Колбасные изделия';
+
+  @override
+  String get prod_chips => 'Чипсы';
+
+  @override
+  String get prod_chocolat => 'Шоколад';
+
+  @override
+  String get prod_chocolats => 'Шоколадные конфеты';
+
+  @override
+  String get prod_citrons => 'Лимоны';
+
+  @override
+  String get prod_citrouille => 'Тыква';
+
+  @override
+  String get prod_concombre => 'Огурец';
+
+  @override
+  String get prod_confiture => 'Варенье';
+
+  @override
+  String get prod_conserves => 'Консервы';
+
+  @override
+  String get prod_cornichons => 'Соленья';
+
+  @override
+  String get prod_courgettes => 'Цуккини';
+
+  @override
+  String get prod_crackers => 'Крекеры';
+
+  @override
+  String get prod_croissants => 'Круассаны';
+
+  @override
+  String get prod_creme_fraiche => 'Сметана';
+
+  @override
+  String get prod_creme_solaire => 'солнцезащитный крем';
+
+  @override
+  String get prod_cereales => 'Злак';
+
+  @override
+  String get prod_dentifrice => 'Зубная паста';
+
+  @override
+  String get prod_deguisement => 'Костюм';
+
+  @override
+  String get prod_eau => 'Вода';
+
+  @override
+  String get prod_farine => 'Мука';
+
+  @override
+  String get prod_filet_de_poisson => 'Рыбное филе';
+
+  @override
+  String get prod_foie_gras => 'Фуа-гра';
+
+  @override
+  String get prod_fraises => 'Клубника';
+
+  @override
+  String get prod_frites => 'Картошка фри';
+
+  @override
+  String get prod_fromage => 'Сыр';
+
+  @override
+  String get prod_fromage_rape => 'Тертый сыр';
+
+  @override
+  String get prod_fromage_a_fondue => 'Фондю сыр';
+
+  @override
+  String get prod_fromage_a_raclette => 'сыр раклет';
+
+  @override
+  String get prod_glaces => 'Мороженое';
+
+  @override
+  String get prod_glaciere => 'Кулер';
+
+  @override
+  String get prod_gommes => 'Ластики';
+
+  @override
+  String get prod_guirlandes => 'Гирлянды';
+
+  @override
+  String get prod_huile => 'Масло';
+
+  @override
+  String get prod_huile_d => 'Оливковое масло';
+
+  @override
+  String get prod_jambon => 'ветчина';
+
+  @override
+  String get prod_jouets => 'Игрушки';
+
+  @override
+  String get prod_jus_d => 'апельсиновый сок';
+
+  @override
+  String get prod_ketchup => 'Кетчуп';
+
+  @override
+  String get prod_lait => 'Молоко';
+
+  @override
+  String get prod_lardons => 'кусочки бекона';
+
+  @override
+  String get prod_lessive => 'Стиральный порошок';
+
+  @override
+  String get prod_lunettes_de_soleil => 'Солнцезащитные очки';
+
+  @override
+  String get prod_legumes_surgeles => 'Замороженные овощи';
+
+  @override
+  String get prod_legumineuses => 'Legumes';
+
+  @override
+  String get prod_miel => 'Мед';
+
+  @override
+  String get prod_moutarde => 'Горчица';
+
+  @override
+  String get prod_mozzarella => 'Моцарелла';
+
+  @override
+  String get prod_nutella => 'Nutella';
+
+  @override
+  String get prod_oignons => 'Лук';
+
+  @override
+  String get prod_olives => 'Оливки';
+
+  @override
+  String get prod_oranges => 'Апельсины';
+
+  @override
+  String get prod_pain => 'Хлеб';
+
+  @override
+  String get prod_pain_burger => 'Булочки для бургеров';
+
+  @override
+  String get prod_pain_de_mie => 'Сэндвич-хлеб';
+
+  @override
+  String get prod_papier_toilette => 'Туалетная бумага';
+
+  @override
+  String get prod_parmesan => 'пармезан';
+
+  @override
+  String get prod_pizza => 'Пицца';
+
+  @override
+  String get prod_plats_prepares => 'Готовые блюда';
+
+  @override
+  String get prod_poireaux => 'Лук-порей';
+
+  @override
+  String get prod_poires => 'Груши';
+
+  @override
+  String get prod_poivre => 'Перец';
+
+  @override
+  String get prod_poivrons => 'перец';
+
+  @override
+  String get prod_pommes => 'Яблоки';
+
+  @override
+  String get prod_pommes_de_terre => 'Картофель';
+
+  @override
+  String get prod_poubelles => 'Мешки для мусора';
+
+  @override
+  String get prod_poulet => 'Курица';
+
+  @override
+  String get prod_pate_a_pizza => 'Тесто для пиццы';
+
+  @override
+  String get prod_pates => 'макароны';
+
+  @override
+  String get prod_raisin => 'Виноград';
+
+  @override
+  String get prod_riz => 'Рис';
+
+  @override
+  String get prod_regle => 'Линейка';
+
+  @override
+  String get prod_salade => 'Латук';
+
+  @override
+  String get prod_salade_verte => 'Зеленый салат';
+
+  @override
+  String get prod_sandwiches => 'Сэндвичи';
+
+  @override
+  String get prod_sapin => 'Рождественская елка';
+
+  @override
+  String get prod_sauce_burger => 'соус для бургера';
+
+  @override
+  String get prod_sauce_salsa => 'Сальса';
+
+  @override
+  String get prod_sauce_tomate => 'Томатный соус';
+
+  @override
+  String get prod_saucisses => 'Колбаски';
+
+  @override
+  String get prod_saucisson => 'Салями';
+
+  @override
+  String get prod_saumon => 'Лосось';
+
+  @override
+  String get prod_savon => 'Мыло';
+
+  @override
+  String get prod_sel => 'Соль';
+
+  @override
+  String get prod_shampoing => 'Шампунь';
+
+  @override
+  String get prod_soda => 'Газировка';
+
+  @override
+  String get prod_steak => 'Стейк';
+
+  @override
+  String get prod_steaks_haches => 'Котлеты для бургеров';
+
+  @override
+  String get prod_stylos => 'Ручки';
+
+  @override
+  String get prod_sucre => 'Сахар';
+
+  @override
+  String get prod_the => 'Чай';
+
+  @override
+  String get prod_tomates => 'Помидоры';
+
+  @override
+  String get prod_tortillas => 'Тортильи';
+
+  @override
+  String get prod_trousse => 'Пенал';
+
+  @override
+  String get prod_viande_hachee => 'Фарш';
+
+  @override
+  String get prod_viande_pour_grillades => 'Мясо гриль';
+
+  @override
+  String get prod_vin => 'Вино';
+
+  @override
+  String get prod_vin_blanc => 'Белое вино';
+
+  @override
+  String get prod_vinaigre => 'Уксус';
+
+  @override
+  String get prod_yaourt => 'Йогурт';
+
+  @override
+  String get prod_eponge => 'Губка';
+
+  @override
+  String get prod_oeufs => 'Яйца';
+
+  @override
+  String get catalogCat_fruits => 'Фрукты и овощи';
+
+  @override
+  String get catalogCat_dairy => 'Молочные продукты';
+
+  @override
+  String get catalogCat_bakery => 'Выпечка';
+
+  @override
+  String get catalogCat_meat => 'Мясо и рыба';
+
+  @override
+  String get catalogCat_grocery => 'Бакалея';
+
+  @override
+  String get catalogCat_beverages => 'Напитки';
+
+  @override
+  String get catalogCat_frozen => 'Замороженные';
+
+  @override
+  String get catalogCat_hygiene => 'Гигиена и дом';
+
+  @override
+  String get mealLbl_raclette => 'Raclette';
+
+  @override
+  String get mealLbl_apero => 'Aperitif';
+
+  @override
+  String get mealLbl_barbecue => 'Barbecue';
+
+  @override
+  String get mealLbl_petit_dej => 'Breakfast';
+
+  @override
+  String get mealLbl_carbonara => 'Carbonara pasta';
+
+  @override
+  String get mealLbl_salade => 'Mixed salad';
+
+  @override
+  String get mealLbl_fondue => 'Fondue';
+
+  @override
+  String get mealLbl_pizza => 'Homemade pizza';
+
+  @override
+  String get mealLbl_crepes => 'Crepes';
+
+  @override
+  String get mealLbl_tacos => 'Tacos / fajitas';
+
+  @override
+  String get mealLbl_soupe => 'Soup';
+
+  @override
+  String get mealLbl_burger => 'Burgers';
+
+  @override
+  String get aboutCreator => 'Creator';
+
+  @override
+  String get aboutHowTo => 'How to use';
+
+  @override
+  String get aboutPrivacy => 'Privacy';
+
+  @override
+  String get aboutPrivacyFull => 'Full privacy policy';
+
+  @override
+  String get aboutLicense => 'License';
+
+  @override
+  String get aboutLicenseFull => 'View full GPL v3 license';
+
+  @override
+  String get aboutAccessibility => 'Accessibility';
+
+  @override
+  String get aboutCredits => 'Credits';
+
+  @override
+  String aboutVersion(String version) {
+    return 'Version $version';
+  }
+
+  @override
+  String aboutCreatorBody(String app, String tagline, String appPlus) {
+    return '$app was created by DesertYGL.\n$tagline The free version may show discreet ads; $appPlus (one-time purchase) removes ads and unlocks advanced features.';
+  }
+
+  @override
+  String get aboutHowToBody =>
+      '• Add an item: tap the + button at the bottom right, enter a name and optionally pick a color.\n• Check / uncheck: tap an item (in cart = checked).\n• Edit or delete: long-press an item, then Edit or Delete.\n• Quick delete: swipe an item left to delete; a snackbar lets you undo.\n• Colors and categories: in Stores mode (Settings), the chips at the top let you add or name stores; tap a chip to name it.\n• Share: share icon → Export as text or Real-time share (Google sign-in).\n• Multiple lists and advanced features: available with Tote \'O Recall+.\n• Settings (gear icon): item style, dark mode, capitalization, reminders, categories.';
+
+  @override
+  String get quickAddHelp =>
+      'Current list: type the item. Other list: “List Name add item” or “List Name: item, item”.';
+
+  @override
+  String get quickAddHintExample => 'E.g. Apple | List Store: Apple, milk';
+
+  @override
+  String quickAddListChip(String name) {
+    return 'List $name';
+  }
+
+  @override
+  String get pasteTooltip => 'Paste';
+
+  @override
+  String get dictateTooltip => 'Dictate';
+
+  @override
+  String get editItemTitle => 'Edit item';
+
+  @override
+  String get deleteReminderTooltip => 'Delete reminder';
+
+  @override
+  String get deletePhotoTooltip => 'Delete photo';
+
+  @override
+  String get priceHint => 'Estimated price (optional, e.g. 2.50)';
+
+  @override
+  String get qtyHint => 'Qty (e.g. 2)';
+
+  @override
+  String get unitHint => 'Unit (L, kg…)';
+
+  @override
+  String get noteHint => 'Note (e.g. brand, detail)';
+
+  @override
+  String get rightClickEditDelete => 'Right-click: Edit or delete';
+
+  @override
+  String get leaveSharedListAction => 'Leave shared list';
+
+  @override
+  String errorPrefixColon(String error) {
+    return 'Error: $error';
+  }
+
+  @override
+  String get notifChannelProximity => 'Store nearby';
+
+  @override
+  String get notifChannelProximityDesc =>
+      'Reminder when you are near a favorite store';
+
+  @override
+  String get notifChannelItemReminders => 'Per-item reminders';
+
+  @override
+  String get notifChannelRecurring => 'Recurring purchases';
+
+  @override
+  String get notifChannelRecurringDesc =>
+      'Reminder for purchases on a regular schedule';
+
+  @override
+  String get notifChannelBirthdays => 'Birthdays';
+
+  @override
+  String get notifChannelBirthdaysDesc => 'Reminders (1–2 days before)';
+
+  @override
+  String get notifChannelWeekly => 'Weekly reminder';
+
+  @override
+  String get notifChannelWeeklyDesc => 'Weekly reminder for your list';
+
+  @override
+  String get notifChannelDefault => 'Tote \'O Recall reminders';
+
+  @override
+  String get notifRecurringTitle => 'Recurring purchase due';
+
+  @override
+  String scanUnknownArticle(String code) {
+    return 'Item ($code)';
+  }
+
+  @override
+  String get birthdayYearHint => 'e.g. 1990';
+
+  @override
+  String get profileAvoidHint => 'alcohol, pork…';
+
+  @override
+  String get profileBrandHint => 'Brand…';
+
+  @override
+  String get profileAllergensHint => 'peanuts, lactose';
+
+  @override
+  String smartCartRhythmEveryDays(int days) {
+    return 'every ${days}d';
+  }
+
+  @override
+  String get aboutPrivacyBody =>
+      'Data controller: the app publisher (DesertYGL).\n\n• Data collected: shopping lists and settings locally; if syncing (Google): account ID and Firebase data; ads (free version): advertising IDs via the AdMob SDK.\n• Purposes: provide the app, optional sync, show ads (free).\n• Legal basis: contract performance / legitimate interest; consent for personalized ads where required.\n• Retention: local data until uninstall; sync account per Google/Firebase policy.\n• Rights: access, rectification, deletion — contact the publisher.';
+
+  @override
+  String get aboutAccessibilityBody =>
+      'The app aims for accessibility best practices (contrast, touch targets, screen readers). Please report any barriers.';
+
+  @override
+  String get aboutCreditsBody =>
+      'Material Design icons (Google). Open-source libraries as listed in dependency licenses. Tote \'O Recall product and brand: DesertYGL.';
+
+  @override
+  String quickAddAddedOne(String item, String list) {
+    return '$item added to « $list »';
+  }
+
+  @override
+  String quickAddAddedMany(int count, String list) {
+    return '$count items added to « $list »';
+  }
+
+  @override
+  String get quickAddExampleHint => 'Ex: Apple | Liste Auchan : Apple, milk';
+
+  @override
+  String get itemNameHint => 'Item name';
+
+  @override
+  String get speakNowHint => 'Speak now...';
+
+  @override
+  String get listeningTooltip => 'Listening';
+
+  @override
+  String get voiceInputTooltip => 'Voice input';
+
+  @override
+  String get birthYearHint => 'Year of birth (e.g. 1990)';
+
+  @override
+  String get profileHintName => 'First name or nickname';
+
+  @override
+  String get profileHintEmail => 'email@example.com';
+
+  @override
+  String get profileHintCity => 'City';
+
+  @override
+  String get smartCartRhythmTitle => 'Shopping rhythm';
+
+  @override
+  String get smartCartRhythmBody =>
+      'Analysis of your shopping habits to anticipate your needs.';
+
+  @override
+  String get notifChannelRemindersName => 'Toteo reminders';
+
+  @override
+  String get notifChannelRemindersDesc => 'Shopping reminders and alerts';
+
+  @override
+  String get notifChannelGeofenceName => 'Store alerts';
+
+  @override
+  String get notifChannelGeofenceDesc => 'Notifications near a store';
+
+  @override
+  String backupErrorPrefix(String error) {
+    return 'Error: $error';
+  }
+
+  @override
+  String get tooltipEdit => 'Edit';
+
+  @override
+  String get tooltipDelete => 'Delete';
+
+  @override
+  String get tooltipDuplicate => 'Duplicate';
+
+  @override
+  String get tooltipPostpone => 'Postpone';
+
+  @override
+  String get tooltipDetails => 'Details';
+
+  @override
+  String get aboutLegalTitle => 'Legal notice';
+
+  @override
+  String get aboutCompanyLine => 'Publisher: Benjamin San / NoubliPo';
+
+  @override
+  String get aboutSirenLine => 'SIREN: 941 826 115';
+
+  @override
+  String get aboutAddressLine =>
+      'Address: 60 rue François 1er, 75008 Paris, France';
+
+  @override
+  String get aboutHostingLine =>
+      'Hosting: Firebase / Google Cloud (USA) — Firebase Authentication, Cloud Firestore, Firebase Storage, Firebase Hosting.';
+
+  @override
+  String get aboutContactLine => 'Contact: benjamin.san@outlook.fr';
+
+  @override
+  String get aboutPrivacyTitle => 'Privacy policy';
+
+  @override
+  String get aboutPrivacyIntro =>
+      'Tote \'O Recall (NoubliPo) collects and processes the following data:';
+
+  @override
+  String get aboutPrivacyBullet1 =>
+      'Account: email, display name (Firebase Authentication).';
+
+  @override
+  String get aboutPrivacyBullet2 =>
+      'Lists and items: synced via Cloud Firestore when signed in.';
+
+  @override
+  String get aboutPrivacyBullet3 => 'Item photos: stored on Firebase Storage.';
+
+  @override
+  String get aboutPrivacyBullet4 =>
+      'Location (optional): used only for store alerts (geofencing), with your consent.';
+
+  @override
+  String get aboutPrivacyBullet5 =>
+      'Local data: lists, preferences and cache stay on your device.';
+
+  @override
+  String get aboutRightsTitle => 'Your rights';
+
+  @override
+  String get aboutRightsBody =>
+      'Under GDPR, you may access, rectify or delete your data. Contact us at benjamin.san@outlook.fr. You can also delete your account from the app.';
+
+  @override
+  String aboutVersionLabel(String version) {
+    return 'Version $version';
+  }
+
+  @override
+  String get aboutLicenseBody =>
+      'This application is distributed under the GNU GPL v3 license. You are free to use, modify and redistribute this software under the terms of the GPL v3.';
+
+  @override
+  String notifBuyAgainTitle(String name) {
+    return 'Buy again: $name';
+  }
+
+  @override
+  String notifItemReminderBody(String title) {
+    return 'Reminder: $title';
+  }
+
+  @override
+  String notifBirthdayTitle(String celebration, String name) {
+    return '$name\'s $celebration';
+  }
+
+  @override
+  String notifBirthdayTomorrow(String celebration, String name) {
+    return 'Tomorrow: $name\'s $celebration';
+  }
+
+  @override
+  String notifBirthdayInDays(int days, String celebration, String name) {
+    return 'In $days days: $name\'s $celebration';
+  }
+
+  @override
+  String get birthdaysRemindersPrefix => 'Reminders';
+
+  @override
+  String get inCartLabel => 'In cart';
+
+  @override
+  String get listeningSpeakClearly => 'Listening... Speak clearly.';
+
+  @override
+  String get reminderOptionalHint => 'Reminder (optional)';
+
+  @override
+  String get dateLabelShort => 'Date';
+
+  @override
+  String get timeLabelShort => 'Time';
+
+  @override
+  String get reminderNoteExampleHint => 'Ex: important — go to the store';
+
+  @override
+  String get noteQtyPhotoSection => 'Note, quantity, photo';
+
+  @override
+  String get photoLabel => 'Photo';
+
+  @override
+  String get changePhotoLabel => 'Change';
+
+  @override
+  String voiceRecognized(String text) {
+    return 'Recognized: $text';
+  }
+
+  @override
+  String imageErrorPrefix(String error) {
+    return 'Image: $error';
+  }
+
+  @override
+  String get backupShareSubject => 'Toteo backup';
+
+  @override
+  String get prod_courge => 'Давить';
+
+  @override
+  String get prod_croutons => 'Гренки';
+
+  @override
+  String get prod_sauce_cesar => 'соус Цезарь';
+
+  @override
+  String get socialTrendVeggies => 'More seasonal vegetables this week';
+
+  @override
+  String get socialTrendSoups => 'Soups and hot meals trending up';
+
+  @override
+  String get socialRecipeSoup => 'Seasonal soup';
+
+  @override
+  String get socialRecipeCaesar => 'Caesar salad';
+
+  @override
+  String get colorName_0 => 'Красный';
+
+  @override
+  String get colorName_1 => 'Розовый';
+
+  @override
+  String get colorName_2 => 'Фиолетовый';
+
+  @override
+  String get colorName_3 => 'Сине-фиолетовый';
+
+  @override
+  String get colorName_4 => 'Индиго';
+
+  @override
+  String get colorName_5 => 'Синий';
+
+  @override
+  String get colorName_6 => 'Голубой';
+
+  @override
+  String get colorName_7 => 'Бирюзовый';
+
+  @override
+  String get colorName_8 => 'Зелёный';
+
+  @override
+  String get colorName_9 => 'Светло-зелёный';
+
+  @override
+  String get colorName_10 => 'Лаймовый';
+
+  @override
+  String get colorName_11 => 'Жёлтый';
+
+  @override
+  String get colorName_12 => 'Янтарный';
+
+  @override
+  String get colorName_13 => 'Оранжевый';
+
+  @override
+  String get colorName_14 => 'Коралловый';
+
+  @override
+  String get colorName_15 => 'Коричневый';
+
+  @override
+  String get prod_creme => 'Крем';
+
+  @override
+  String get prod_return => ') возвращаться';
+
+  @override
+  String get prod_abricot => 'Абрикос';
+
+  @override
+  String get prod_abricots_secs => 'Курага';
+
+  @override
+  String get prod_adhesif => 'Клей';
+
+  @override
+  String get prod_adoucissant => 'адукиссант';
+
+  @override
+  String get prod_agneau => 'Аньо';
+
+  @override
+  String get prod_agrafeuse => 'Аграфейза';
+
+  @override
+  String get prod_agraves => 'Агрейвс';
+
+  @override
+  String get prod_ajout_quand_un_partenaire_ou_l =>
+      'Ajout quand un partenaire (или l';
+
+  @override
+  String get prod_algues_nori => 'Альгес нори';
+
+  @override
+  String get prod_algues_wakame => 'Альгес вакаме';
+
+  @override
+  String get prod_allumettes => 'Аллюметы';
+
+  @override
+  String get prod_amandes => 'Миндаль';
+
+  @override
+  String get prod_ampoule => 'Ампула';
+
+  @override
+  String get prod_ananas => 'Ананас';
+
+  @override
+  String get prod_anchois => 'Аншуа';
+
+  @override
+  String get prod_andouille => 'Андуй';
+
+  @override
+  String get prod_aneth => 'Анет';
+
+  @override
+  String get prod_anneaux => 'Анно';
+
+  @override
+  String get prod_apero_dinatoire => 'Динатурный аперо';
+
+  @override
+  String get prod_apres_rasage => 'после бритья';
+
+  @override
+  String get prod_apres_shampoing => 'Кондиционер';
+
+  @override
+  String get prod_aperitif => 'Аперитив';
+
+  @override
+  String get prod_apero => 'Аперитив';
+
+  @override
+  String get prod_artichaut => 'Артишок';
+
+  @override
+  String get prod_asperges => 'Спаржа';
+
+  @override
+  String get prod_aubergine => 'Баклажан';
+
+  @override
+  String get prod_babybel => 'Babybel';
+
+  @override
+  String get prod_bac_a_peinture => 'Лоток для краски';
+
+  @override
+  String get prod_bacon => 'Бекон';
+
+  @override
+  String get prod_baies_de_goji => 'Байес де Годжи';
+
+  @override
+  String get prod_bain_de_bouche => 'Бен де буш';
+
+  @override
+  String get prod_bambou => 'Бамбу';
+
+  @override
+  String get prod_barbecue => 'Барбекю';
+
+  @override
+  String get prod_barres_chocolatees => 'Шоколадные батончики';
+
+  @override
+  String get prod_basilic_thai => 'Тайский базилик';
+
+  @override
+  String get prod_batterie => 'Батарея';
+
+  @override
+  String get prod_biberon => 'Биберон';
+
+  @override
+  String get prod_biscottes => 'Бискотты';
+
+  @override
+  String get prod_biscuits_bio => 'Бисквитное печенье';
+
+  @override
+  String get prod_biere_sans_alcool => 'Безалкогольное пиво';
+
+  @override
+  String get prod_blanc_doeuf => 'Яичный белок';
+
+  @override
+  String get prod_blanquette => 'Одеяло';
+
+  @override
+  String get prod_bloc_de_foie_gras => 'Блок де фуа-гра';
+
+  @override
+  String get prod_boissons => 'Буассон';
+
+  @override
+  String get prod_bok_choy => 'Бок Чой';
+
+  @override
+  String get prod_bonite_sechee => 'Сушеный скумбрия';
+
+  @override
+  String get prod_boudin_noir => 'Буден Нуар';
+
+  @override
+  String get prod_bouillon_cube => 'Стоковый кубик';
+
+  @override
+  String get prod_boulangerie => 'Булочная';
+
+  @override
+  String get prod_boulettes => 'Булеты';
+
+  @override
+  String get prod_boulgour => 'Булгур';
+
+  @override
+  String get prod_boulons => 'Булоны';
+
+  @override
+  String get prod_boursin => 'Бурсен';
+
+  @override
+  String get prod_bretzels => 'Бретцели';
+
+  @override
+  String get prod_brie => 'Бри';
+
+  @override
+  String get prod_briquet => 'Брикет';
+
+  @override
+  String get prod_brochettes => 'Брошетки';
+
+  @override
+  String get prod_brocoli => 'Брокколи';
+
+  @override
+  String get prod_brosse_a_dents => 'Зубная щетка';
+
+  @override
+  String get prod_bulots => 'Булоты';
+
+  @override
+  String get prod_burgers => 'Бургеры';
+
+  @override
+  String get prod_burin => 'Бурин';
+
+  @override
+  String get prod_boeuf => 'Говядина';
+
+  @override
+  String get prod_boeuf_bourguignon => 'Говядина по-бургундски';
+
+  @override
+  String get prod_cabillaud => 'Треска';
+
+  @override
+  String get prod_cacao_en_poudre => 'Какао-порошок';
+
+  @override
+  String get prod_cafe_bio => 'Органический кофе';
+
+  @override
+  String get prod_cafe_en_grains => 'Кофейные зерна';
+
+  @override
+  String get prod_cafe_moulu => 'Молотый кофе';
+
+  @override
+  String get prod_cafe_soluble => 'Растворимый кофе';
+
+  @override
+  String get prod_calamar_seche => 'Кальмары сушеные';
+
+  @override
+  String get prod_camembert => 'камамбер';
+
+  @override
+  String get prod_canard => 'Утка';
+
+  @override
+  String get prod_cannelle => 'Корица';
+
+  @override
+  String get prod_capres => 'Капре';
+
+  @override
+  String get prod_caprice_des_dieux => 'Каприс де Дьё';
+
+  @override
+  String get prod_carnet => 'Книжка';
+
+  @override
+  String get prod_carottes_crues => 'Сырая морковь';
+
+  @override
+  String get prod_carrelage => 'Каррельаж';
+
+  @override
+  String get prod_carte_recharge => 'Карта пополнения';
+
+  @override
+  String get prod_cartes_postales => 'Почтовые карты';
+
+  @override
+  String get prod_cartouche_filtre => 'Картушный фильтр';
+
+  @override
+  String get prod_caviar_daubergine => 'Икра баклажановая';
+
+  @override
+  String get prod_champignons => 'Шампиньоны';
+
+  @override
+  String get prod_champignons_noirs => 'Шампиньоны нуар';
+
+  @override
+  String get prod_champignons_shiitake => 'Шампиньоны шиитаке';
+
+  @override
+  String get prod_chantilly => 'Шантильи';
+
+  @override
+  String get prod_charcuterie_artisanale => 'Ремесленные мясные закуски';
+
+  @override
+  String get prod_chauffage => 'Шофаж';
+
+  @override
+  String get prod_cheddar => 'чеддер';
+
+  @override
+  String get prod_chevilles => 'Шевиль';
+
+  @override
+  String get prod_chewing_gum => 'Жевательная резинка';
+
+  @override
+  String get prod_chicoree => 'Цикорий';
+
+  @override
+  String get prod_chipolatas => 'Чиполатас';
+
+  @override
+  String get prod_chocolat_au_lait => 'Шоколад с молоком';
+
+  @override
+  String get prod_chocolat_bio => 'Шоколадная биография';
+
+  @override
+  String get prod_chocolat_blanc => 'Шоколад Блан';
+
+  @override
+  String get prod_chocolat_en_poudre => 'Какао-порошок';
+
+  @override
+  String get prod_chocolat_noir => 'Шоколад нуар';
+
+  @override
+  String get prod_chocolat_noir_85 => '85% темный шоколад';
+
+  @override
+  String get prod_chou => 'Капуста';
+
+  @override
+  String get prod_chou_chinois => 'Чоу-китайцы';
+
+  @override
+  String get prod_choucroute => 'Шукрут';
+
+  @override
+  String get prod_chevre => 'Козий сыр';
+
+  @override
+  String get prod_ciboulette => 'Шнитт-лук';
+
+  @override
+  String get prod_cidre => 'Сидр';
+
+  @override
+  String get prod_cigares => 'Сигареты';
+
+  @override
+  String get prod_cigarettes => 'Сигареты';
+
+  @override
+  String get prod_citron => 'Цитрон';
+
+  @override
+  String get prod_citronnelle => 'Цитроннель';
+
+  @override
+  String get prod_clous => 'Клоус';
+
+  @override
+  String get prod_cle => 'Ключ';
+
+  @override
+  String get prod_cle_a_molette => 'Разводной ключ';
+
+  @override
+  String get prod_clementines => 'Клементины';
+
+  @override
+  String get prod_colle => 'Колле';
+
+  @override
+  String get prod_colle_carrelage => 'Колле Каррельаж';
+
+  @override
+  String get prod_collier => 'Кольер';
+
+  @override
+  String get prod_compote => 'Компот';
+
+  @override
+  String get prod_compote_bio => 'Компот био';
+
+  @override
+  String get prod_comte => 'Comté';
+
+  @override
+  String get prod_confiture_bio => 'Конфитюр био';
+
+  @override
+  String get prod_confiture_dabricot => 'Конфитюр из абрикосов';
+
+  @override
+  String get prod_confiture_de_fraises => 'Конфитюр де фреш';
+
+  @override
+  String get prod_confiture_maison => 'Конфитюрный дом';
+
+  @override
+  String get prod_contreplaque => 'Фанера';
+
+  @override
+  String get prod_coquillages => 'Кокильяжи';
+
+  @override
+  String get prod_cordon_bleu => 'Кордон Блю';
+
+  @override
+  String get prod_coriandre_fraiche => 'Свежая кинза';
+
+  @override
+  String get prod_corn_flakes => 'Кукурузные хлопья';
+
+  @override
+  String get prod_cotons => 'Котоны';
+
+  @override
+  String get prod_couches => 'Диваны';
+
+  @override
+  String get prod_coulis => 'Кулис';
+
+  @override
+  String get prod_coupe => 'Купе';
+
+  @override
+  String get prod_crackers_naturels => 'Обычные крекеры';
+
+  @override
+  String get prod_crackers_sans_sel => 'Крекеры без сел';
+
+  @override
+  String get prod_cranberries => 'Клюква';
+
+  @override
+  String get prod_crevettes => 'Креветка';
+
+  @override
+  String get prod_crochet => 'крючком';
+
+  @override
+  String get prod_crustaces => 'Моллюски';
+
+  @override
+  String get prod_creme_de_coco => 'Кокосовый крем';
+
+  @override
+  String get prod_creme_dessert => 'Десертный крем';
+
+  @override
+  String get prod_creme_hydratante => 'Увлажняющий крем';
+
+  @override
+  String get prod_creme_liquide => 'Готовим крем';
+
+  @override
+  String get prod_creme_epaisse => 'Густой крем';
+
+  @override
+  String get prod_cremant => 'Crémant';
+
+  @override
+  String get prod_cremone => 'Кремовый болт';
+
+  @override
+  String get prod_crepes => 'Crêpes';
+
+  @override
+  String get prod_curry => 'Карри';
+
+  @override
+  String get prod_curry_massaman => 'Карри массаман';
+
+  @override
+  String get prod_curry_rouge => 'Карри румяна';
+
+  @override
+  String get prod_curry_vert => 'Карри верт';
+
+  @override
+  String get prod_cutter => 'Резак';
+
+  @override
+  String get prod_cable => 'Кабель';
+
+  @override
+  String get prod_celeri => 'Сельдерей';
+
+  @override
+  String get prod_coeur_de_palmier => 'Сердце пальмы';
+
+  @override
+  String get prod_dashi => 'Даши';
+
+  @override
+  String get prod_dattes => 'Даты';
+
+  @override
+  String get prod_digestif => 'Дижестив';
+
+  @override
+  String get prod_dim_sum => 'Дим-сам';
+
+  @override
+  String get prod_douille => 'Дуйе';
+
+  @override
+  String get prod_decafeine => 'Кофе без кофеина';
+
+  @override
+  String get prod_decapant => 'Средство для снятия краски';
+
+  @override
+  String get prod_demaquillant => 'Средство для снятия макияжа';
+
+  @override
+  String get prod_demaquillant_yeux => 'Средство для снятия макияжа с глаз';
+
+  @override
+  String get prod_deodorant => 'Дезодорант';
+
+  @override
+  String get prod_desherbant => 'Уничтожитель сорняков';
+
+  @override
+  String get prod_desinfectant => 'Дезинфицирующее средство';
+
+  @override
+  String get prod_detachant => 'Пятновыводитель';
+
+  @override
+  String get prod_eau_aromatisee => 'Ароматизированная вода';
+
+  @override
+  String get prod_eau_de_toilette => 'Туалетная вода';
+
+  @override
+  String get prod_eau_petillante => 'Газированная вода';
+
+  @override
+  String get prod_edamame => 'Эдамаме';
+
+  @override
+  String get prod_emmental => 'Эмменталь';
+
+  @override
+  String get prod_endives => 'Эндивий';
+
+  @override
+  String get prod_enduit => 'Эндуит';
+
+  @override
+  String get prod_engrais => 'Анграйс';
+
+  @override
+  String get prod_enveloppes => 'Конверты';
+
+  @override
+  String get prod_escalope => 'Эскалоп';
+
+  @override
+  String get prod_faisselle => 'Фейсель';
+
+  @override
+  String get prod_farine_complete => 'Цельнозерновая мука';
+
+  @override
+  String get prod_feta => 'Фета';
+
+  @override
+  String get prod_feuilles_de_riz => 'Фей де Риз';
+
+  @override
+  String get prod_figues_sechees => 'Инжир сушеный';
+
+  @override
+  String get prod_fil_dentaire => 'Зубной фильтр';
+
+  @override
+  String get prod_filet => 'Филе';
+
+  @override
+  String get prod_fils_electriques => 'Электрический провод';
+
+  @override
+  String get prod_filtre_a_eau => 'Фильтр для воды';
+
+  @override
+  String get prod_fleurs => 'Флер';
+
+  @override
+  String get prod_flocons_davoine => 'Овсяные хлопья';
+
+  @override
+  String get prod_fondue => 'Фондю';
+
+  @override
+  String get prod_fondue_savoyarde => 'Савойское фондю';
+
+  @override
+  String get prod_fromage_blanc => 'Фромаж Блан';
+
+  @override
+  String get prod_fromage_de_chevre => 'Козий сыр';
+
+  @override
+  String get prod_fromage_fermier => 'Фромаж Фермье';
+
+  @override
+  String get prod_fruits => 'Фрукты';
+
+  @override
+  String get prod_fruits_legumes => 'Фрукты и овощи';
+
+  @override
+  String get prod_fruits_bio => 'Фрукты био';
+
+  @override
+  String get prod_fruits_congeles => 'Замороженные фрукты';
+
+  @override
+  String get prod_fruits_de_mer => 'Фрукты де Мер';
+
+  @override
+  String get prod_fruits_du_marche => 'Рынок фруктов';
+
+  @override
+  String get prod_fruits_frais => 'Свежие фрукты';
+
+  @override
+  String get prod_fruits_secs => 'Сухофрукты';
+
+  @override
+  String get prod_galette_de_cereales => 'Зерновой торт';
+
+  @override
+  String get prod_galettes_de_riz => 'Галетт де Риз';
+
+  @override
+  String get prod_gel_douche => 'Гель для душа';
+
+  @override
+  String get prod_gibier => 'Жибье';
+
+  @override
+  String get prod_gingembre => 'Имбирь';
+
+  @override
+  String get prod_gingembre_marine => 'Имбирь маринованный';
+
+  @override
+  String get prod_gommage => 'Гоммаж';
+
+  @override
+  String get prod_graines => 'Зерно';
+
+  @override
+  String get prod_graines_de_chia => 'Зерно де Чиа';
+
+  @override
+  String get prod_graines_de_lin => 'Грайнес-де-Лин';
+
+  @override
+  String get prod_grattage => 'Граттаж';
+
+  @override
+  String get prod_guacamole => 'Гуакамоле';
+
+  @override
+  String get prod_gateau => 'Торт';
+
+  @override
+  String get prod_gateaux_secs => 'Файлы cookie';
+
+  @override
+  String get prod_halloween => 'Хэллоуин';
+
+  @override
+  String get prod_haricots => 'Фасоль';
+
+  @override
+  String get prod_haricots_blancs => 'Белая фасоль';
+
+  @override
+  String get prod_haricots_rouges => 'Красная фасоль';
+
+  @override
+  String get prod_haricots_verts => 'зеленая фасоль';
+
+  @override
+  String get prod_herbes => 'Травы';
+
+  @override
+  String get prod_homard => 'Хомард';
+
+  @override
+  String get prod_houmous => 'Хумус';
+
+  @override
+  String get prod_huile_dolive_bio => 'Биография Уиль д\'Оливе';
+
+  @override
+  String get prod_huile_de_sesame => 'Кунжутное масло';
+
+  @override
+  String get prod_huitres => 'Устрицы';
+
+  @override
+  String get prod_hygiene_maison => 'Дом и гигиена';
+
+  @override
+  String get prod_impregnation => 'Герметик для дерева';
+
+  @override
+  String get prod_infusion => 'Настой';
+
+  @override
+  String get prod_infusion_froide => 'Холодный травяной чай';
+
+  @override
+  String get prod_interrupteur => 'прерыватель';
+
+  @override
+  String get prod_jambon_cru => 'Жамбон Крю';
+
+  @override
+  String get prod_javel => 'Жавель';
+
+  @override
+  String get prod_joint => 'Соединение';
+
+  @override
+  String get prod_joint_carrelage => 'Совместный вагон';
+
+  @override
+  String get prod_joint_torique => 'Совместный крутящий момент';
+
+  @override
+  String get prod_journal => 'Журнал';
+
+  @override
+  String get prod_jus => 'Джус';
+
+  @override
+  String get prod_jus_de_fruit => 'Фруктовый сок';
+
+  @override
+  String get prod_jus_de_fruit_naturel => 'Натуральный фруктовый сок';
+
+  @override
+  String get prod_jus_de_raisin => 'Жюс де изюм';
+
+  @override
+  String get prod_jus_dorange => 'Джус доранж';
+
+  @override
+  String get prod_kimchi => 'Kimchi';
+
+  @override
+  String get prod_kiri => 'Кири';
+
+  @override
+  String get prod_kiwi => 'киви';
+
+  @override
+  String get prod_laine_de_verre => 'Лен де Верре';
+
+  @override
+  String get prod_lait_bio => 'Лайт биография';
+
+  @override
+  String get prod_lait_bebe => 'Детская смесь';
+
+  @override
+  String get prod_lait_concentre => 'Сгущенное молоко';
+
+  @override
+  String get prod_lait_damande => 'Миндальное молоко';
+
+  @override
+  String get prod_lait_davoine => 'Овсяное молоко';
+
+  @override
+  String get prod_lait_de_coco => 'Кокосовое молоко';
+
+  @override
+  String get prod_lait_de_soja => 'Соевое молоко';
+
+  @override
+  String get prod_lait_demaquillant => 'Очищающее молочко';
+
+  @override
+  String get prod_lait_en_poudre => 'Lait en poudre';
+
+  @override
+  String get prod_lait_vegetal => 'Растительное молоко';
+
+  @override
+  String get prod_laitue => 'Латук';
+
+  @override
+  String get prod_lambris => 'Ламбрис';
+
+  @override
+  String get prod_lame_de_scie => 'Хромой науки';
+
+  @override
+  String get prod_langoustines => 'Лангустины';
+
+  @override
+  String get prod_lapin => 'Лапин';
+
+  @override
+  String get prod_lard => 'Сало';
+
+  @override
+  String get prod_lasagnes => 'Лазанья';
+
+  @override
+  String get prod_lasure => 'Лазура';
+
+  @override
+  String get prod_laurier => 'Лавровый лист';
+
+  @override
+  String get prod_lentilles => 'Чечевица';
+
+  @override
+  String get prod_lentilles_corail => 'Чечевица кораил';
+
+  @override
+  String get prod_levure_maltee => 'Солодовый экстракт';
+
+  @override
+  String get prod_lime => 'Лайм';
+
+  @override
+  String get prod_limette => 'Лиметт';
+
+  @override
+  String get prod_lingettes => 'Линжетты';
+
+  @override
+  String get prod_lingettes_bebe => 'Детские салфетки';
+
+  @override
+  String get prod_liquide_vaisselle => 'Ликвид Вайссель';
+
+  @override
+  String get prod_loto => 'Лото';
+
+  @override
+  String get prod_legumes => 'Овощи';
+
+  @override
+  String get prod_legumes_bio => 'Органические овощи';
+
+  @override
+  String get prod_legumes_crus => 'Сырые овощи';
+
+  @override
+  String get prod_legumes_du_marche => 'Рыночные овощи';
+
+  @override
+  String get prod_legumes_grilles => 'Овощи гриль';
+
+  @override
+  String get prod_mdf => 'МДФ';
+
+  @override
+  String get prod_madeleines => 'Мадлен';
+
+  @override
+  String get prod_magazine => 'Журнал';
+
+  @override
+  String get prod_mangue => 'манго';
+
+  @override
+  String get prod_maquereau => 'Скумбрия';
+
+  @override
+  String get prod_marteau => 'Марто';
+
+  @override
+  String get prod_mascarpone => 'Маскарпоне';
+
+  @override
+  String get prod_masque => 'Маска';
+
+  @override
+  String get prod_masse => 'Массе';
+
+  @override
+  String get prod_mastic => 'Мастика';
+
+  @override
+  String get prod_mayonnaise => 'Майонез';
+
+  @override
+  String get prod_mais => 'Кукуруза';
+
+  @override
+  String get prod_melon => 'Дыня';
+
+  @override
+  String get prod_menthe => 'Менте';
+
+  @override
+  String get prod_merguez => 'Мергес';
+
+  @override
+  String get prod_miel_bio => 'Миэль биография';
+
+  @override
+  String get prod_miel_du_producteur => 'Мель дю продюсер';
+
+  @override
+  String get prod_mirin => 'Мирин';
+
+  @override
+  String get prod_morbier => 'Морбье';
+
+  @override
+  String get prod_mortadelle => 'Мортадель';
+
+  @override
+  String get prod_mouchoirs => 'Мушуар';
+
+  @override
+  String get prod_moules => 'Моллюски';
+
+  @override
+  String get prod_mousse_a_raser => 'Пена для бритья';
+
+  @override
+  String get prod_muesli => 'Мюсли';
+
+  @override
+  String get prod_muesli_barres => 'Мюсли баррес';
+
+  @override
+  String get prod_muesli_bio => 'Мюсли био';
+
+  @override
+  String get prod_muscade => 'Мускатный орех';
+
+  @override
+  String get prod_meches => 'Сверла';
+
+  @override
+  String get prod_metre => 'Измерительная лента';
+
+  @override
+  String get prod_mures_blanches => 'Белая шелковица';
+
+  @override
+  String get prod_nam_pla => 'Нам пла';
+
+  @override
+  String get prod_navet => 'Репа';
+
+  @override
+  String get prod_nectar => 'Нектар';
+
+  @override
+  String get prod_nems => 'Немс';
+
+  @override
+  String get prod_nettoyant_sol => 'Неттоянт соль';
+
+  @override
+  String get prod_niveau => 'Ниво';
+
+  @override
+  String get prod_noisettes => 'Фундук';
+
+  @override
+  String get prod_noix => 'Грецкие орехи';
+
+  @override
+  String get prod_noix_de_cajou => 'Нуа де Кажу';
+
+  @override
+  String get prod_noix_du_bresil => 'Бразильские орехи';
+
+  @override
+  String get prod_nouilles => 'Нуй';
+
+  @override
+  String get prod_nouilles_instantanees => 'Лапша быстрого приготовления';
+
+  @override
+  String get prod_noel => 'Рождество';
+
+  @override
+  String get prod_nuggets => 'Наггетсы';
+
+  @override
+  String get prod_nuoc_mam => 'Рыбный соус';
+
+  @override
+  String get prod_olives_du_marche => 'Рынок оливок';
+
+  @override
+  String get prod_origan => 'Орегано';
+
+  @override
+  String get prod_pain_aux_cereales => 'Хлеб с семечками';
+
+  @override
+  String get prod_pain_bio => 'Биография боли';
+
+  @override
+  String get prod_pain_complet => 'Цельнозерновой хлеб';
+
+  @override
+  String get prod_pain_de_campagne => 'Деревенский хлеб';
+
+  @override
+  String get prod_pain_de_viande => 'Боль де вианде';
+
+  @override
+  String get prod_palets_bretons => 'Палец бретонский';
+
+  @override
+  String get prod_pamplemousse => 'Грейпфрут';
+
+  @override
+  String get prod_pancetta => 'Панчетта';
+
+  @override
+  String get prod_panneau_osb => 'Панно OSB';
+
+  @override
+  String get prod_papier_de_verre => 'Папье де верре';
+
+  @override
+  String get prod_paprika => 'Паприка';
+
+  @override
+  String get prod_parfum => 'Парфюм';
+
+  @override
+  String get prod_parquet => 'Паркет';
+
+  @override
+  String get prod_pastilles => 'Пастилки';
+
+  @override
+  String get prod_pastis => 'Пастис';
+
+  @override
+  String get prod_pasteque => 'Арбуз';
+
+  @override
+  String get prod_pate_carbonara => 'Паштет карбонара';
+
+  @override
+  String get prod_pates_carbonara => 'Паштеты карбонара';
+
+  @override
+  String get prod_patere => 'Крючок для одежды';
+
+  @override
+  String get prod_paumelle => 'Помель';
+
+  @override
+  String get prod_pave => 'Брусчатка';
+
+  @override
+  String get prod_peinture => 'Пейнтуре';
+
+  @override
+  String get prod_perceuse => 'Персеуз';
+
+  @override
+  String get prod_persil => 'Петрушка';
+
+  @override
+  String get prod_pesto => 'Песто';
+
+  @override
+  String get prod_petit_dej => 'Петит-деж';
+
+  @override
+  String get prod_petit_dejeuner => 'Маленький девёнер';
+
+  @override
+  String get prod_petit_suisse => 'Маленькая Швейцария';
+
+  @override
+  String get prod_petit_dejeuner_2 => 'Завтрак';
+
+  @override
+  String get prod_petits_pois => 'Горох';
+
+  @override
+  String get prod_pickles => 'Соленья';
+
+  @override
+  String get prod_pile => 'Куча';
+
+  @override
+  String get prod_pince => 'Пинс';
+
+  @override
+  String get prod_pinceau => 'Пинсо';
+
+  @override
+  String get prod_pizza_maison => 'Пицца-хаус';
+
+  @override
+  String get prod_pizza_surgelee => 'Замороженная пицца';
+
+  @override
+  String get prod_planche => 'Планш';
+
+  @override
+  String get prod_plantes => 'Плантес';
+
+  @override
+  String get prod_plantes_aromatiques => 'Ароматические растения';
+
+  @override
+  String get prod_plaque_de_platre => 'Гипсокартон';
+
+  @override
+  String get prod_plat_prepare => 'Готовая еда';
+
+  @override
+  String get prod_poignee => 'Дверная ручка';
+
+  @override
+  String get prod_poireau => 'лук-порей';
+
+  @override
+  String get prod_pois_casses => 'Колотый горох';
+
+  @override
+  String get prod_pois_chiches => 'Нут';
+
+  @override
+  String get prod_poisson => 'Пуассон';
+
+  @override
+  String get prod_poisson_frais => 'Пуассон фрайс';
+
+  @override
+  String get prod_polystyrene => 'Полистирол';
+
+  @override
+  String get prod_pommes_de_terre_vapeur => 'Картофель на пару';
+
+  @override
+  String get prod_popcorn => 'Попкорн';
+
+  @override
+  String get prod_porc => 'свинина';
+
+  @override
+  String get prod_porto => 'Порту';
+
+  @override
+  String get prod_pot => 'Горшок';
+
+  @override
+  String get prod_pot_au_feu => 'Пот-о-фе';
+
+  @override
+  String get prod_potage => 'Потаж';
+
+  @override
+  String get prod_potiron => 'Тыква';
+
+  @override
+  String get prod_poudre => 'Пудр';
+
+  @override
+  String get prod_poulet_fermier => 'Пуле Фермье';
+
+  @override
+  String get prod_pousse_de_bambou => 'Пусс де бамбук';
+
+  @override
+  String get prod_pousses_de_soja => 'Пусс де соя';
+
+  @override
+  String get prod_presse => 'Пресса';
+
+  @override
+  String get prod_prise => 'Приз';
+
+  @override
+  String get prod_produit_vitres => 'Продукты витрины';
+
+  @override
+  String get prod_produits_laitiers => 'Продукты';
+
+  @override
+  String get prod_prune => 'слива';
+
+  @override
+  String get prod_pruneaux => 'Прюно';
+
+  @override
+  String get prod_pull => 'Тянуть';
+
+  @override
+  String get prod_punaises => 'Пунаисы';
+
+  @override
+  String get prod_puree => 'Картофельное пюре';
+
+  @override
+  String get prod_puree_damandes => 'Миндальное масло';
+
+  @override
+  String get prod_puree_d => 'Пюре';
+
+  @override
+  String get prod_puree_de_noisettes => 'Масло фундука';
+
+  @override
+  String get prod_pate_brisee => 'Песочное тесто';
+
+  @override
+  String get prod_pate_de_crevettes => 'Креветочная паста';
+
+  @override
+  String get prod_pate_de_curry => 'Паста карри';
+
+  @override
+  String get prod_pate_de_piment => 'Паста чили';
+
+  @override
+  String get prod_pate_feuilletee => 'Слоеное тесто';
+
+  @override
+  String get prod_pate_miso => 'Мисо-паста';
+
+  @override
+  String get prod_pates_carbonara_2 => 'Паста Карбонара';
+
+  @override
+  String get prod_pates_completes => 'Цельнозерновая паста';
+
+  @override
+  String get prod_pates_fraiches => 'Свежая паста';
+
+  @override
+  String get prod_pate => 'Pâté';
+
+  @override
+  String get prod_peche => 'Персик';
+
+  @override
+  String get prod_quiche => 'Киш';
+
+  @override
+  String get prod_quiche_legumes => 'Овощной киш';
+
+  @override
+  String get prod_quinoa => 'Quinoa';
+
+  @override
+  String get prod_quinoa_bio => 'Киноа био';
+
+  @override
+  String get prod_raccord => 'Раккорд';
+
+  @override
+  String get prod_raclette => 'Раклетт';
+
+  @override
+  String get prod_radiateur => 'Радиатор';
+
+  @override
+  String get prod_radis => 'Редис';
+
+  @override
+  String get prod_raisin_sec => 'Изюм';
+
+  @override
+  String get prod_ravioli => 'Равиоли';
+
+  @override
+  String get prod_raviolis_chinois => 'Равиоли китайские';
+
+  @override
+  String get prod_razor => 'Бритва';
+
+  @override
+  String get prod_reblochon => 'Реблошон';
+
+  @override
+  String get prod_recharge_briquet => 'Перезарядка брикета';
+
+  @override
+  String get prod_rentree_scolaire => 'Обратно в школу';
+
+  @override
+  String get prod_rhum => 'Ром';
+
+  @override
+  String get prod_rideau => 'Ридо';
+
+  @override
+  String get prod_rillettes => 'Рийетты';
+
+  @override
+  String get prod_riz_basmati => 'Риз басмати';
+
+  @override
+  String get prod_riz_complet => 'Риз завершен';
+
+  @override
+  String get prod_riz_glutineux => 'Риз Глютинукс';
+
+  @override
+  String get prod_riz_thai => 'Тайский рис';
+
+  @override
+  String get prod_robineterie => 'Робинетери';
+
+  @override
+  String get prod_romarin => 'Розмари';
+
+  @override
+  String get prod_rondele => 'Rondelé';
+
+  @override
+  String get prod_roquefort => 'Рокфор';
+
+  @override
+  String get prod_rouleau => 'Руло';
+
+  @override
+  String get prod_ruban_isolant => 'Рубан изолянт';
+
+  @override
+  String get prod_rape => 'Тертый сыр';
+
+  @override
+  String get prod_sac_poubelle => 'Сак пубель';
+
+  @override
+  String get prod_saint_nectaire => 'Сен-Нектер';
+
+  @override
+  String get prod_sake => 'Sake';
+
+  @override
+  String get prod_salade_composee => 'Составитель салата';
+
+  @override
+  String get prod_salade_composee_2 => 'Микс-салат';
+
+  @override
+  String get prod_salsa => 'Сальса';
+
+  @override
+  String get prod_samoussas => 'Самусса';
+
+  @override
+  String get prod_sandwich_maison => 'Домашний сэндвич';
+
+  @override
+  String get prod_sardines => 'Сардины';
+
+  @override
+  String get prod_sauce => 'Соус';
+
+  @override
+  String get prod_sauce_bechamel => 'Соус Бешамель';
+
+  @override
+  String get prod_sauce_fish => 'Рыбный соус';
+
+  @override
+  String get prod_sauce_hoisin => 'Соус хойсин';
+
+  @override
+  String get prod_sauce_nuoc_mam => 'Рыбный соус';
+
+  @override
+  String get prod_sauce_oyster => 'Соус устричный';
+
+  @override
+  String get prod_sauce_soja => 'Соевый соус';
+
+  @override
+  String get prod_sauce_sriracha => 'Соус шрирача';
+
+  @override
+  String get prod_sauce_teriyaki => 'Соус терияки';
+
+  @override
+  String get prod_saucisson_sec => 'Сосиссон сек';
+
+  @override
+  String get prod_saumon_fume => 'Копченый лосось';
+
+  @override
+  String get prod_scie => 'Наука';
+
+  @override
+  String get prod_scotch => 'Скотч';
+
+  @override
+  String get prod_seitan => 'Сейтан';
+
+  @override
+  String get prod_seitan_bio => 'Сейтан биография';
+
+  @override
+  String get prod_semoule => 'Семуле';
+
+  @override
+  String get prod_serrure => 'Серрур';
+
+  @override
+  String get prod_serviettes_hygieniques => 'Гигиенические прокладки';
+
+  @override
+  String get prod_silicone => 'Силикон';
+
+  @override
+  String get prod_sirop => 'Сироп';
+
+  @override
+  String get prod_smoothie => 'Смузи';
+
+  @override
+  String get prod_soda_light => 'Газировка светлая';
+
+  @override
+  String get prod_soda_sans_alcool => 'Газировка без алкоголя';
+
+  @override
+  String get prod_sorbet => 'Сорбет';
+
+  @override
+  String get prod_soupe => 'Суп';
+
+  @override
+  String get prod_soupe_potage => 'Суп/похлебка';
+
+  @override
+  String get prod_soupe_miso => 'Суп мисо';
+
+  @override
+  String get prod_soupe_pho => 'Суп фо';
+
+  @override
+  String get prod_spiruline => 'Спирулин';
+
+  @override
+  String get prod_steak_de_soja => 'Стейк де соя';
+
+  @override
+  String get prod_steak_vegetal => 'Растительный стейк';
+
+  @override
+  String get prod_stylo => 'Ручка';
+
+  @override
+  String get prod_surgeles => 'Замороженные продукты';
+
+  @override
+  String get prod_serum => 'сыворотка';
+
+  @override
+  String get prod_sesame => 'Кунжут';
+
+  @override
+  String get prod_tabac => 'Табак';
+
+  @override
+  String get prod_tablette => 'Таблетка';
+
+  @override
+  String get prod_taboule => 'Табуле';
+
+  @override
+  String get prod_tacos_fajitas => 'Тако/фахитас';
+
+  @override
+  String get prod_tahini => 'Тахини';
+
+  @override
+  String get prod_tampons => 'Тампоны';
+
+  @override
+  String get prod_tapenade => 'Тапенад';
+
+  @override
+  String get prod_tapioca => 'Тапиока';
+
+  @override
+  String get prod_tartare => 'Тартар';
+
+  @override
+  String get prod_tarte => 'Пирог';
+
+  @override
+  String get prod_tarte_salade => 'Салатный пирог';
+
+  @override
+  String get prod_tartine => 'Тост';
+
+  @override
+  String get prod_tartines => 'Хрустящие хлебцы';
+
+  @override
+  String get prod_tasseau => 'Тассо';
+
+  @override
+  String get prod_tempeh => 'Темпе';
+
+  @override
+  String get prod_tempura => 'Темпура';
+
+  @override
+  String get prod_terreau => 'Терро';
+
+  @override
+  String get prod_terrine => 'Террин';
+
+  @override
+  String get prod_thermostat => 'Термостат';
+
+  @override
+  String get prod_thon => 'Тунец';
+
+  @override
+  String get prod_thym => 'Тимьян';
+
+  @override
+  String get prod_the_bio => 'Органический чай';
+
+  @override
+  String get prod_the_noir => 'Черный чай';
+
+  @override
+  String get prod_the_vert => 'Зеленый чай';
+
+  @override
+  String get prod_timbre => 'Тембр';
+
+  @override
+  String get prod_tisane => 'Тизане';
+
+  @override
+  String get prod_tofu => 'Tofu';
+
+  @override
+  String get prod_tofu_bio => 'Биография тофу';
+
+  @override
+  String get prod_tofu_soyeux => 'Тофу сойе';
+
+  @override
+  String get prod_tomates_cerises => 'Помидоры черри';
+
+  @override
+  String get prod_tortellini => 'Тортеллини';
+
+  @override
+  String get prod_tournevis => 'Турневис';
+
+  @override
+  String get prod_tringle => 'Трингл';
+
+  @override
+  String get prod_truite => 'Форель';
+
+  @override
+  String get prod_truite_fumee => 'Копченая форель';
+
+  @override
+  String get prod_tuyau => 'Туяу';
+
+  @override
+  String get prod_vache_qui_rit => 'Vache qui rit';
+
+  @override
+  String get prod_veau => 'Во';
+
+  @override
+  String get prod_vermicelles => 'Вермишель';
+
+  @override
+  String get prod_vermicelles_de_riz => 'Вермишель де Риз';
+
+  @override
+  String get prod_vernis => 'Вернис';
+
+  @override
+  String get prod_vernis_a_ongles => 'Лак для ногтей';
+
+  @override
+  String get prod_verrue => 'Веррю';
+
+  @override
+  String get prod_viande => 'Вианде';
+
+  @override
+  String get prod_viande_hachee_2 => 'Вианде хачи';
+
+  @override
+  String get prod_viandes_poissons => 'Виандес и Пуассон';
+
+  @override
+  String get prod_viennoiseries => 'Веннуазсерия';
+
+  @override
+  String get prod_vinaigre_de_riz => 'Винегре де Риз';
+
+  @override
+  String get prod_vinaigrette => 'Винегрет';
+
+  @override
+  String get prod_vis => 'Вис';
+
+  @override
+  String get prod_visseuse => 'Виссеза';
+
+  @override
+  String get prod_volaille => 'Волай';
+
+  @override
+  String get prod_wasabi => 'Wasabi';
+
+  @override
+  String get prod_whisky => 'Виски';
+
+  @override
+  String get prod_white_spirit => 'Уайт-спирит';
+
+  @override
+  String get prod_wrap => 'Сворачивать';
+
+  @override
+  String get prod_wrap_leger => 'Легкое обертывание';
+
+  @override
+  String get prod_wrap_maison => 'Домашняя обертка';
+
+  @override
+  String get prod_yaourt_glace => 'Замороженный йогурт';
+
+  @override
+  String get prod_yaourt_nature => 'Обычный йогурт';
+
+  @override
+  String get prod_zeste => 'Зесте';
+
+  @override
+  String get prod_les => '';
+
+  @override
+  String get prod_le => '';
+
+  @override
+  String get prod_echelle => 'Лестница';
+
+  @override
+  String get prod_ecrevisses => 'Рак';
+
+  @override
+  String get prod_ecrous => 'Гайки (фурнитура)';
+
+  @override
+  String get prod_epicerie => 'Бакалея';
+
+  @override
+  String get prod_epices => 'Специи';
+
+  @override
+  String get prod_epinards => 'Шпинат';
+
+  @override
+  String get prod_equerre => 'Правило квадрата';
+
+  @override
+  String get prod_etagere => 'Полка';
+
+  @override
+  String get prod_etau => 'тиски';
+
+  @override
+  String get prod_ete_vacances => 'Лето/Отпуск';
+
+  @override
+  String get prod_aaaeeeeiiouuucoeae => '';
+
+  @override
+  String get prod_oeufs_bio => 'Органические яйца';
+
+  @override
+  String get prod_oeufs_fermiers => 'Яйца на свободном выгуле';
+
+  @override
+  String get prod_oeuf => 'Яйцо';
+
+  @override
+  String get moreOptions => 'More options';
+
+  @override
+  String get errorNotSignedIn => 'Not signed in';
+
+  @override
+  String get errorInvalidShareLink => 'Invalid link or code';
+
+  @override
+  String get errorListNotFound => 'List not found';
+
+  @override
+  String errorBackupNewerVersion(String version) {
+    return 'Backup from a newer version ($version) is not supported.';
+  }
+
+  @override
+  String get errorSyncUnavailable => 'Sync unavailable';
 }

@@ -24,12 +24,21 @@ import '../widgets/budget_ceiling_field.dart';
 import '../widgets/item_tile.dart';
 import '../widgets/list_empty_state.dart';
 import '../widgets/list_more_menu.dart';
+import '../widgets/list_toolbar.dart';
+import '../widgets/lists_hub_sheet.dart';
+import '../widgets/meal_presets_picker_sheet.dart';
+import '../widgets/name_input_dialog.dart';
 import '../widgets/list_screen_title.dart';
 import '../widgets/onboarding_dialog.dart';
 import '../widgets/quick_add_sheet.dart';
 import '../widgets/recall_due_card.dart';
 import '../../../core/ui/app_feedback.dart';
+import '../../../core/utils/food_classifier.dart';
+import '../../../core/utils/content_l10n.dart';
+import '../../../core/utils/list_display_name.dart';
 import '../../../core/ui/food_category_style.dart';
+import '../../../l10n/app_localizations.dart';
+import '../../../core/utils/list_axis_grouping.dart';
 import '../../../core/ui/geofence_settings_section.dart';
 import '../../../core/services/reminder_service.dart';
 import 'about_screen.dart';
@@ -37,12 +46,9 @@ import 'backup_screen.dart';
 import 'stats_screen.dart';
 import '../../catalog/catalog_screen.dart';
 import '../../scan/scan_screen.dart';
-import '../../birthdays/birthdays_screen.dart';
 import '../../planning/planning_screen.dart';
 import '../../pantry/pantry_sheet.dart';
 import '../../smart_cart/panic_checkout_sheet.dart';
-import '../../smart_cart/probable_list_sheet.dart';
-import '../../smart_cart/shopping_social_sheet.dart';
 import '../../smart_cart/smart_cart_sheet.dart';
 import '../../paywall/paywall_screen.dart';
 import '../../profile/consumption_profile_sheet.dart';
@@ -52,8 +58,6 @@ import '../../../core/providers/premium_provider.dart';
 import '../../../core/services/storage_service.dart';
 import '../../../core/services/upgrade_prompt_helper.dart';
 import '../../../core/utils/app_logger.dart';
-import '../../../core/utils/list_axis_grouping.dart';
-import '../../../l10n/app_localizations.dart';
 
 /// Écran principal : liste d'articles + FAB "+" bien visible.
 class ListScreen extends StatelessWidget {
@@ -119,17 +123,22 @@ class ListScreen extends StatelessWidget {
                 aisleOrder: settings.sortMode == 'aisle' ? settings.aisleOrder : null,
                 favoriteStoreIndices: settings.sortMode == 'aisle' ? settings.favoriteStoreIndices : null,
               );
-              final listSwitcher = provider.isSharedList || !isPremiumActive || provider.allLists.length < 2
+              final listSwitcher = provider.isSharedList || !isPremiumActive
                   ? null
                   : _ListSwitcher(
                       provider: provider,
+                      hiddenSystemIds: settings.hiddenSystemListIds.toSet(),
                       onSelect: (id) => provider.setCurrentList(id),
-                      onAdd: () => _showAddListDialog(context, provider),
-                      onManageGroups: () => _showManageGroupsSheet(context, provider),
-                      onLongPress: (list) => _showListActions(context, provider, list),
+                      onManage: () => showListsHubSheet(
+                        context,
+                        onOrganizeGroups: () => _showManageGroupsSheet(context, provider),
+                      ),
                     );
               final colorLegend = settings.categoryStyle == 'legend'
-                  ? _ColorLegendBar(categoryNames: categoryNames)
+                  ? _ColorLegendBar(
+                      categoryNames: categoryNames,
+                      compact: settings.shoppingMode,
+                    )
                   : null;
               final padding = EdgeInsets.fromLTRB(
                 layout.contentPaddingHorizontal,
@@ -140,8 +149,14 @@ class ListScreen extends StatelessWidget {
               if (provider.selectionMode && isPremiumActive) {
                 return Column(
                   children: [
-                    ...[listSwitcher, colorLegend].whereType<Widget>(),
-                    _SelectionModeBar(provider: provider),
+                    if (listSwitcher != null) listSwitcher,
+                    _ScrollableListChrome(
+                      maxHeightFraction: 0.4,
+                      children: [
+                        if (colorLegend != null) colorLegend,
+                        _SelectionModeBar(provider: provider),
+                      ],
+                    ),
                     Expanded(
                       child: _buildSelectionModeList(
                         context,
@@ -161,9 +176,16 @@ class ListScreen extends StatelessWidget {
                 final isSearchEmpty = provider.searchQuery.trim().isNotEmpty;
                 return Column(
                   children: [
-                    ...[listSwitcher, colorLegend].whereType<Widget>(),
-                    RecallDueCard(
-                      contentPaddingHorizontal: layout.contentPaddingHorizontal,
+                    if (listSwitcher != null) listSwitcher,
+                    _ScrollableListChrome(
+                      maxHeightFraction: 0.45,
+                      children: [
+                        if (colorLegend != null) colorLegend,
+                        _SpecialListBanner(listId: provider.list.id),
+                        RecallDueCard(
+                          contentPaddingHorizontal: layout.contentPaddingHorizontal,
+                        ),
+                      ],
                     ),
                     Expanded(
                       child: ListEmptyState(
@@ -174,6 +196,28 @@ class ListScreen extends StatelessWidget {
                       onTapAdd: () => _addItem(context),
                       onQuickAdd: () => _showQuickAdd(context),
                       showQuickAddChip: isPremiumActive,
+                      showMealPresetsChip: isPremiumActive,
+                      onMealPresets: () => showMealPresetsPickerSheet(context),
+                      showUsualsChip: isPremiumActive &&
+                          context.read<GamificationProvider>().mostBoughtProducts(top: 5).isNotEmpty,
+                      onAddUsuals: () {
+                        final usuals = context.read<GamificationProvider>().mostBoughtProducts(top: 8);
+                        var n = 0;
+                        for (final e in usuals) {
+                          if (!provider.currentItemNames
+                              .map((x) => x.trim().toLowerCase())
+                              .contains(e.name.trim().toLowerCase())) {
+                            provider.addItem(e.name);
+                            n++;
+                          }
+                        }
+                        if (context.mounted && n > 0) {
+                          AppFeedback.success(
+                            context,
+                            AppLocalizations.of(context).itemAdded('$n'),
+                          );
+                        }
+                      },
                       contentPaddingHorizontal: layout.contentPaddingHorizontal,
                     ),
                     ),
@@ -182,15 +226,28 @@ class ListScreen extends StatelessWidget {
               }
               return Column(
                   children: [
-                    ...[listSwitcher, colorLegend].whereType<Widget>(),
-                    RecallDueCard(
-                      contentPaddingHorizontal: layout.contentPaddingHorizontal,
-                    ),
-                    _ListToolbar(
-                      layout: layout,
-                      provider: provider,
-                      settings: settings,
-                      onQuickAdd: () => _showQuickAdd(context),
+                    if (listSwitcher != null) listSwitcher,
+                    _ScrollableListChrome(
+                      maxHeightFraction: 0.48,
+                      children: [
+                        if (colorLegend != null) colorLegend,
+                        _SpecialListBanner(listId: provider.list.id),
+                        RecallDueCard(
+                          contentPaddingHorizontal: layout.contentPaddingHorizontal,
+                        ),
+                        ListToolbar(
+                          layout: layout,
+                          provider: provider,
+                          settings: settings,
+                          onPanicCheckout: isPremiumActive
+                              ? () => showModalBottomSheet<void>(
+                                    context: context,
+                                    isScrollControlled: true,
+                                    builder: (ctx) => const PanicCheckoutSheet(),
+                                  )
+                              : null,
+                        ),
+                      ],
                     ),
                     Expanded(
                       child: Builder(
@@ -259,13 +316,25 @@ class ListScreen extends StatelessWidget {
                               },
                               buildTile: (item, {required bool wrapSized, int? number}) {
                                 final s = context.read<SettingsProvider>();
-                                final fontSize = layout.listItemFontSize * s.listFontScale;
+                                final fontSize = layout.listItemFontSize *
+                                    s.listFontScale *
+                                    (s.shoppingMode ? 1.2 : 1.0);
+                                final foodId = FoodClassifier.effectiveCategoryId(
+                                  item.name,
+                                  item.foodCategoryId,
+                                  overrides: s.foodCategoryOverrides,
+                                );
+                                final foodLabel = foodId == null
+                                    ? null
+                                    : localizedFoodCategoryLabel(
+                                        AppLocalizations.of(context),
+                                        foodId,
+                                      );
                                 final tile = ItemTile(
                                   item: item,
                                   categoryLabel:
                                       categoryNames.getCategoryName(item.colorIndex),
-                                  foodTypeLabel: FoodTaxonomy.byId(item.foodCategoryId)
-                                      ?.labelFor(Localizations.localeOf(context).languageCode),
+                                  foodTypeLabel: foodLabel,
                                   showFoodTypeBadge: s.showFoodCategoryBadge,
                                   tileStyle: s.tileStyle,
                                   minHeight: layout.listItemMinHeight,
@@ -274,7 +343,7 @@ class ListScreen extends StatelessWidget {
                                       context.read<PremiumProvider>().isPremiumActive,
                                   compact: true,
                                   wrapSized: wrapSized,
-                                  showTooltips: false,
+                                  showTooltips: true,
                                   onTap: () {},
                                   onLongPress: () {},
                                 );
@@ -306,6 +375,7 @@ class ListScreen extends StatelessWidget {
             ),
       floatingActionButton: _BigAddButton(
         onPressed: () => _addItem(context),
+        onLongPress: () => _showStorePickerThenAdd(context, context.read<ListProvider>()),
       ),
         ),
         const _UpgradePromptTrigger(),
@@ -365,11 +435,6 @@ class ListScreen extends StatelessWidget {
           }();
         }
         break;
-      case 'birthdays':
-        Navigator.of(context).push(
-          MaterialPageRoute<void>(builder: (context) => const BirthdaysScreen()),
-        );
-        break;
       case 'scan':
         Navigator.of(context).push(
           MaterialPageRoute<void>(builder: (context) => const ScanScreen()),
@@ -398,21 +463,26 @@ class ListScreen extends StatelessWidget {
           builder: (ctx) => const SmartCartSheet(),
         );
         break;
-      case 'probable_list':
+      case 'more_features':
         showModalBottomSheet<void>(
           context: context,
-          isScrollControlled: true,
-          builder: (ctx) => const ProbableListSheet(),
+          builder: (ctx) => ListMoreFeaturesSheet(
+            onSelected: (v) => _handleMoreSelected(context, v),
+          ),
         );
         break;
-      case 'shopping_social':
-        showModalBottomSheet<void>(
-          context: context,
-          isScrollControlled: true,
-          builder: (ctx) => const ShoppingSocialSheet(),
+      case 'paywall':
+        Navigator.of(context).push(
+          MaterialPageRoute<void>(builder: (context) => const PaywallScreen()),
         );
         break;
       case 'panic_checkout':
+        if (!context.read<PremiumProvider>().isPremiumActive) {
+          Navigator.of(context).push(
+            MaterialPageRoute<void>(builder: (context) => const PaywallScreen()),
+          );
+          return;
+        }
         showModalBottomSheet<void>(
           context: context,
           isScrollControlled: true,
@@ -425,16 +495,40 @@ class ListScreen extends StatelessWidget {
       case 'remove_checked':
         _removeChecked(context);
         break;
-      case 'new_list':
-        _showAddListDialog(context, provider);
-        break;
-      case 'duplicate_list':
-        provider.duplicateCurrentList();
-        if (context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(AppLocalizations.of(context).listDuplicated)),
+      case 'geofence':
+        if (!context.read<PremiumProvider>().isPremiumActive) {
+          Navigator.of(context).push(
+            MaterialPageRoute<void>(builder: (context) => const PaywallScreen()),
           );
+          return;
         }
+        showModalBottomSheet<void>(
+          context: context,
+          isScrollControlled: true,
+          showDragHandle: true,
+          builder: (ctx) => SafeArea(
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: 16,
+                right: 16,
+                top: 8,
+                bottom: 16 + MediaQuery.viewInsetsOf(ctx).bottom,
+              ),
+              child: const SingleChildScrollView(
+                child: GeofenceSettingsSection(),
+              ),
+            ),
+          ),
+        );
+        break;
+      case 'lists_hub':
+        showListsHubSheet(
+          context,
+          onOrganizeGroups: () => _showManageGroupsSheet(context, provider),
+        );
+        break;
+      case 'meal_presets':
+        showMealPresetsPickerSheet(context);
         break;
       case 'save_as_template':
         _showSaveAsTemplateDialog(context, provider);
@@ -479,7 +573,7 @@ class ListScreen extends StatelessWidget {
                 provider.toggleItemSelection(item.id);
               },
             ),
-            title: Text(item.name),
+            title: Text(localizedProductName(AppLocalizations.of(context), item.name)),
             subtitle: categoryNames.getCategoryName(item.colorIndex) != null
                 ? Text(categoryNames.getCategoryName(item.colorIndex)!)
                 : null,
@@ -520,7 +614,18 @@ class ListScreen extends StatelessWidget {
 
   void _addItem(BuildContext context) {
     final provider = context.read<ListProvider>();
-    _showStorePickerThenAdd(context, provider);
+    final settings = context.read<SettingsProvider>();
+    var colorIndex = 0;
+    if (provider.items.isNotEmpty) {
+      final counts = <int, int>{};
+      for (final item in provider.items) {
+        counts[item.colorIndex] = (counts[item.colorIndex] ?? 0) + 1;
+      }
+      colorIndex = counts.entries.reduce((a, b) => a.value >= b.value ? a : b).key;
+    } else if (settings.favoriteStoreIndices.isNotEmpty) {
+      colorIndex = settings.favoriteStoreIndices.first;
+    }
+    _openAddItemSheet(context, provider, initialColorIndex: colorIndex);
   }
 
   void _showStorePickerThenAdd(BuildContext context, ListProvider provider) {
@@ -532,14 +637,22 @@ class ListScreen extends StatelessWidget {
       for (final e in sections) {
         storeEntries.add(MapEntry(
           e.key,
-          categoryNames.getCategoryName(e.key) ?? AppColors.nameFromIndex(e.key),
+          resolvedCategoryColorLabel(
+            AppLocalizations.of(context),
+            e.key,
+            categoryNames.getCategoryName(e.key),
+          ),
         ));
       }
     } else {
       for (var i = 0; i < 8; i++) {
         storeEntries.add(MapEntry(
           i,
-          categoryNames.getCategoryName(i) ?? AppColors.nameFromIndex(i),
+          resolvedCategoryColorLabel(
+            AppLocalizations.of(context),
+            i,
+            categoryNames.getCategoryName(i),
+          ),
         ));
       }
     }
@@ -628,9 +741,11 @@ class ListScreen extends StatelessWidget {
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      categoryNames.getCategoryName(colorIndex)?.trim().isNotEmpty == true
-                          ? categoryNames.getCategoryName(colorIndex)!
-                          : AppColors.nameFromIndex(colorIndex),
+                      resolvedCategoryColorLabel(
+                        AppLocalizations.of(context),
+                        colorIndex,
+                        categoryNames.getCategoryName(colorIndex),
+                      ),
                       style: Theme.of(ctx).textTheme.titleMedium,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -661,7 +776,7 @@ class ListScreen extends StatelessWidget {
                 } catch (e) {
                   if (context.mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('${l10n.errorPrefix} : $e'), behavior: SnackBarBehavior.floating),
+                      SnackBar(content: Text('${l10n.errorPrefix} : ${localizedAppError(l10n, e)}'), behavior: SnackBarBehavior.floating),
                     );
                   }
                 }
@@ -737,7 +852,7 @@ class ListScreen extends StatelessWidget {
                                   } catch (e) {
                                     if (ctx.mounted) {
                                       ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text('${l10n.errorPrefix} : $e'), behavior: SnackBarBehavior.floating),
+                                        SnackBar(content: Text('${l10n.errorPrefix} : ${localizedAppError(l10n, e)}'), behavior: SnackBarBehavior.floating),
                                       );
                                     }
                                   }
@@ -768,7 +883,7 @@ class ListScreen extends StatelessWidget {
       builder: (ctx) => AddItemSheet(
         initialColorIndex: initialColorIndex,
         suggestionNames: _getSuggestionNames(context, provider),
-        onSubmit: (name, colorIndex, {reminderAt, reminderNote, updateReminder = false, note, imagePath, price, quantity, unit, foodCategoryId}) {
+        onSubmit: (name, colorIndex, {reminderAt, reminderNote, updateReminder = false, note, imagePath, price, quantity, unit, foodCategoryId, listId}) {
           _addItemWithProfileCheck(
             context,
             name: name,
@@ -783,6 +898,7 @@ class ListScreen extends StatelessWidget {
             unit: unit,
             foodCategoryId: foodCategoryId,
             foodCategoryResolved: true,
+            listId: listId,
           );
         },
         onAddForLater: context.read<PremiumProvider>().isPremiumActive
@@ -829,7 +945,10 @@ class ListScreen extends StatelessWidget {
       if (!context.mounted) return;
       AppFeedback.success(
         context,
-        AppLocalizations.of(context).mealPresetAdded(missing.length, preset.label),
+        AppLocalizations.of(context).mealPresetAdded(
+          missing.length,
+          localizedMealPresetLabel(AppLocalizations.of(context), preset.id),
+        ),
       );
     } catch (_) {
       if (context.mounted) {
@@ -852,6 +971,7 @@ class ListScreen extends StatelessWidget {
     String? unit,
     String? foodCategoryId,
     bool foodCategoryResolved = false,
+    String? listId,
   }) async {
     final listProvider = context.read<ListProvider>();
 
@@ -869,11 +989,19 @@ class ListScreen extends StatelessWidget {
           unit: unit,
           foodCategoryId: foodCategoryId,
           skipAutoClassify: foodCategoryResolved,
+          listId: listId,
         );
+        if (listId != null &&
+            listId.isNotEmpty &&
+            listId != listProvider.currentListId &&
+            context.mounted) {
+          listProvider.setCurrentList(listId);
+        }
         if (context.mounted) {
+          final l10n = AppLocalizations.of(context);
           AppFeedback.success(
             context,
-            AppLocalizations.of(context).itemAdded(itemName),
+            l10n.itemAdded(localizedProductName(l10n, itemName)),
           );
         }
       } catch (_) {
@@ -902,7 +1030,10 @@ class ListScreen extends StatelessWidget {
           context: context,
           builder: (ctx) => AlertDialog(
             title: Text(l10n.profileConsumptionTitle),
-            content: Text(l10n.profileSubstituteSuggestion(name, result.substitute!)),
+            content: Text(l10n.profileSubstituteSuggestion(
+              localizedProductName(l10n, name),
+              localizedProductName(l10n, result.substitute!),
+            )),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(ctx, 'cancel'),
@@ -914,7 +1045,9 @@ class ListScreen extends StatelessWidget {
               ),
               FilledButton(
                 onPressed: () => Navigator.pop(ctx, 'replace'),
-                child: Text(l10n.profileReplaceWith(result.substitute!)),
+                child: Text(l10n.profileReplaceWith(
+                  localizedProductName(l10n, result.substitute!),
+                )),
               ),
             ],
           ),
@@ -928,9 +1061,10 @@ class ListScreen extends StatelessWidget {
       } else {
         final gamification = context.read<GamificationProvider>();
         final percent = gamification.balanceScore.round();
+        final displayName = localizedProductName(l10n, name);
         final content = percent > 0
-            ? l10n.profileReduceWarningWithProgress(name, percent)
-            : l10n.profileReduceWarning(name);
+            ? l10n.profileReduceWarningWithProgress(displayName, percent)
+            : l10n.profileReduceWarning(displayName);
         final addAnyway = await showDialog<bool>(
           context: context,
           builder: (ctx) => AlertDialog(
@@ -1001,7 +1135,9 @@ class ListScreen extends StatelessWidget {
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(AppLocalizations.of(context).recurringAddedSnackbar(item.name)),
+                          content: Text(AppLocalizations.of(context).recurringAddedSnackbar(
+                            localizedProductName(AppLocalizations.of(context), item.name),
+                          )),
                           behavior: SnackBarBehavior.floating,
                         ),
                       );
@@ -1009,7 +1145,7 @@ class ListScreen extends StatelessWidget {
                   } catch (e) {
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('${l10n.errorPrefix}: $e')),
+                        SnackBar(content: Text('${l10n.errorPrefix}: ${localizedAppError(l10n, e)}')),
                       );
                     }
                   }
@@ -1051,7 +1187,7 @@ class ListScreen extends StatelessWidget {
         initialFoodCategoryId: item.foodCategoryId,
         isEdit: true,
         suggestionNames: _getSuggestionNames(context, provider),
-        onSubmit: (name, colorIndex, {reminderAt, reminderNote, updateReminder = false, note, imagePath, price, quantity, unit, foodCategoryId}) {
+        onSubmit: (name, colorIndex, {reminderAt, reminderNote, updateReminder = false, note, imagePath, price, quantity, unit, foodCategoryId, listId}) {
           provider.updateItem(
             item.id,
             name: name,
@@ -1082,8 +1218,12 @@ class ListScreen extends StatelessWidget {
     showDialog<String?>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: Text(offerMoveToFuture ? l10n.deleteOrMoveToFuture(item.name) : l10n.deleteArticleConfirm),
-        content: Text(l10n.itemWillBeRemovedFromList(item.name)),
+        title: Text(offerMoveToFuture
+            ? l10n.deleteOrMoveToFuture(localizedProductName(l10n, item.name))
+            : l10n.deleteArticleConfirm),
+        content: Text(l10n.itemWillBeRemovedFromList(
+          localizedProductName(l10n, item.name),
+        )),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, null),
@@ -1119,7 +1259,7 @@ class ListScreen extends StatelessWidget {
         } catch (e) {
           if (context.mounted) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('${l10n.errorPrefix}: $e')),
+              SnackBar(content: Text('${l10n.errorPrefix}: ${localizedAppError(l10n, e)}')),
             );
           }
         }
@@ -1195,32 +1335,36 @@ class ListScreen extends StatelessWidget {
   }
 
   void _shareListAsText(BuildContext context, ListProvider provider) {
+    final l10n = AppLocalizations.of(context);
     final lines = provider.sortedItems
-        .map((e) => '${e.checked ? "[x]" : "[ ]"} ${e.name}')
+        .map((e) => '${e.checked ? "[x]" : "[ ]"} ${localizedProductName(l10n, e.name)}')
         .toList();
     if (lines.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context).emptyList)),
+        SnackBar(content: Text(l10n.emptyList)),
       );
       return;
     }
-    Share.share(lines.join('\n'), subject: '$appName - Ma liste');
+    final listTitle = localizedShoppingListName(l10n, provider.list);
+    Share.share(lines.join('\n'), subject: '$appName - $listTitle');
   }
 
   Future<void> _copyListToClipboard(BuildContext context, ListProvider provider) async {
+    final l10n = AppLocalizations.of(context);
     final lines = provider.sortedItems
-        .map((e) => '${e.checked ? "[x]" : "[ ]"} ${e.name}')
+        .map((e) => '${e.checked ? "[x]" : "[ ]"} ${localizedProductName(l10n, e.name)}')
         .toList();
     if (lines.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context).emptyList)),
+        SnackBar(content: Text(l10n.emptyList)),
       );
       return;
     }
-    await Clipboard.setData(ClipboardData(text: '${provider.list.name}\n${lines.join('\n')}'));
+    final listTitle = localizedShoppingListName(l10n, provider.list);
+    await Clipboard.setData(ClipboardData(text: '$listTitle\n${lines.join('\n')}'));
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppLocalizations.of(context).listCopiedToClipboard)),
+        SnackBar(content: Text(l10n.listCopiedToClipboard)),
       );
     }
   }
@@ -1440,7 +1584,7 @@ class ListScreen extends StatelessWidget {
     } catch (e) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('${AppLocalizations.of(context).errorPrefix} : $e')),
+          SnackBar(content: Text('${AppLocalizations.of(context).errorPrefix} : ${localizedAppError(AppLocalizations.of(context), e)}')),
         );
       }
     }
@@ -1456,68 +1600,10 @@ class ListScreen extends StatelessWidget {
   }
 
   void _showJoinListSheet(BuildContext context, ListProvider provider) {
-    final controller = TextEditingController();
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
-      builder: (ctx) => SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(
-            left: 24,
-            right: 24,
-            top: 24,
-            bottom: 24 + MediaQuery.of(ctx).viewPadding.bottom + MediaQuery.of(ctx).viewInsets.bottom,
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                'Rejoindre une liste',
-                style: Theme.of(ctx).textTheme.titleLarge,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                AppLocalizations.of(context).joinListHint,
-                style: Theme.of(ctx).textTheme.bodyMedium,
-              ),
-              const SizedBox(height: 16),
-              TextField(
-                controller: controller,
-                decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context).linkCodeHint,
-                  border: const OutlineInputBorder(),
-                ),
-                maxLines: 2,
-                textCapitalization: TextCapitalization.characters,
-              ),
-              const SizedBox(height: 24),
-              FilledButton(
-                onPressed: () async {
-                  final text = controller.text.trim();
-                  if (text.isEmpty) return;
-                  try {
-                    await provider.joinSharedList(text);
-                    if (ctx.mounted) Navigator.pop(ctx);
-                    if (context.mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(AppLocalizations.of(context).listJoined)),
-                      );
-                    }
-                  } catch (e) {
-                    if (context.mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('${AppLocalizations.of(context).errorPrefix} : $e')),
-                      );
-                    }
-                  }
-                },
-                child: Text(AppLocalizations.of(context).join),
-              ),
-            ],
-          ),
-        ),
-      ),
+      builder: (ctx) => _JoinListSheet(provider: provider),
     );
   }
 
@@ -1655,7 +1741,7 @@ class ListScreen extends StatelessWidget {
       } catch (e) {
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('${l10n.errorPrefix}: $e')),
+            SnackBar(content: Text('${l10n.errorPrefix}: ${localizedAppError(l10n, e)}')),
           );
         }
       }
@@ -1671,7 +1757,10 @@ class ListScreen extends StatelessWidget {
       context: context,
       builder: (ctx) => AlertDialog(
         title: Text(l10n.partnerSuggestionTitle),
-        content: Text(l10n.partnerSuggestionMessage(first.addedName, first.suggestion)),
+        content: Text(l10n.partnerSuggestionMessage(
+          localizedProductName(l10n, first.addedName),
+          localizedProductName(l10n, first.suggestion),
+        )),
         actions: [
           TextButton(
             onPressed: () {
@@ -1720,7 +1809,11 @@ class ListScreen extends StatelessWidget {
                       controller: scrollController,
                       itemCount: AppColors.categoryColors.length,
                       itemBuilder: (context, i) {
-                        final name = categoryNames.getCategoryName(i) ?? AppColors.categoryColorNames[i];
+                        final name = resolvedCategoryColorLabel(
+                          AppLocalizations.of(context),
+                          i,
+                          categoryNames.getCategoryName(i),
+                        );
                         final value = order[i] ?? (i + 1);
                         return ListTile(
                           leading: CircleAvatar(
@@ -1782,6 +1875,10 @@ class ListScreen extends StatelessWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      ExpansionTile(
+                        initiallyExpanded: true,
+                        title: Text(AppLocalizations.of(ctx).settingsSectionAppearance),
+                        children: [
                       Text(l10n.languageLabel, style: Theme.of(ctx).textTheme.titleSmall),
                       const SizedBox(height: 4),
                       Text(
@@ -1833,12 +1930,32 @@ class ListScreen extends StatelessWidget {
                           DropdownMenuItem(value: 'bar', child: Row(children: [Icon(Icons.view_agenda, size: 20), const SizedBox(width: 8), Text(AppLocalizations.of(ctx).styleBar)])),
                           DropdownMenuItem(value: 'filled', child: Row(children: [Icon(Icons.square, size: 20), const SizedBox(width: 8), Text(AppLocalizations.of(ctx).styleFilled)])),
                           DropdownMenuItem(value: 'super_round', child: Row(children: [Icon(Icons.rounded_corner, size: 20), const SizedBox(width: 8), Text(AppLocalizations.of(ctx).styleSuperRound)])),
-                          DropdownMenuItem(value: 'goutte', child: Row(children: [Icon(Icons.water_drop_outlined, size: 20), const SizedBox(width: 8), Text(AppLocalizations.of(ctx).styleLiquid)])),
-                          DropdownMenuItem(value: 'sticker', child: Row(children: [Icon(Icons.note_outlined, size: 20), const SizedBox(width: 8), Text(AppLocalizations.of(ctx).styleSticker)])),
-                          DropdownMenuItem(value: 'bulle', child: Row(children: [Icon(Icons.bubble_chart_outlined, size: 20), const SizedBox(width: 8), Text(AppLocalizations.of(ctx).styleBulle)])),
-                          DropdownMenuItem(value: 'zebra', child: Row(children: [Icon(Icons.view_stream_outlined, size: 20), const SizedBox(width: 8), Text(AppLocalizations.of(ctx).styleZebra)])),
+                          if (!const {'bar', 'filled', 'super_round'}.contains(settings.tileStyle))
+                            DropdownMenuItem(value: settings.tileStyle, child: Text(settings.tileStyle)),
                         ],
                         onChanged: (v) => v != null ? settings.setTileStyle(v) : null,
+                      ),
+                      ExpansionTile(
+                        title: Text(AppLocalizations.of(ctx).settingsSectionAdvanced),
+                        children: [
+                          Wrap(
+                            spacing: 8,
+                            children: [
+                              for (final e in [
+                                ('goutte', AppLocalizations.of(ctx).styleLiquid, Icons.water_drop_outlined),
+                                ('sticker', AppLocalizations.of(ctx).styleSticker, Icons.note_outlined),
+                                ('bulle', AppLocalizations.of(ctx).styleBulle, Icons.bubble_chart_outlined),
+                                ('zebra', AppLocalizations.of(ctx).styleZebra, Icons.view_stream_outlined),
+                              ])
+                                FilterChip(
+                                  avatar: Icon(e.$3, size: 18),
+                                  label: Text(e.$2),
+                                  selected: settings.tileStyle == e.$1,
+                                  onSelected: (_) => settings.setTileStyle(e.$1),
+                                ),
+                            ],
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 16),
                       SwitchListTile(
@@ -1858,12 +1975,6 @@ class ListScreen extends StatelessWidget {
                         subtitle: Text(AppLocalizations.of(ctx).showFoodCategoryBadgeSubtitle),
                         value: settings.showFoodCategoryBadge,
                         onChanged: (v) => settings.setShowFoodCategoryBadge(v),
-                      ),
-                      SwitchListTile(
-                        title: Text(AppLocalizations.of(ctx).remindersPerItem),
-                        subtitle: Text(AppLocalizations.of(ctx).remindersSubtitle),
-                        value: settings.remindersEnabled,
-                        onChanged: (v) => settings.setRemindersEnabled(v),
                       ),
                       const SizedBox(height: 8),
                       Text(AppLocalizations.of(ctx).listFontScale, style: Theme.of(ctx).textTheme.titleSmall),
@@ -1891,11 +2002,28 @@ class ListScreen extends StatelessWidget {
                         AppLocalizations.of(ctx).listFontScaleSubtitle,
                         style: Theme.of(ctx).textTheme.bodySmall?.copyWith(color: Colors.grey),
                       ),
+                        ],
+                      ),
+                      ExpansionTile(
+                        initiallyExpanded: true,
+                        title: Text(AppLocalizations.of(ctx).settingsSectionShopping),
+                        children: [
+                      SwitchListTile(
+                        title: Text(AppLocalizations.of(ctx).remindersPerItem),
+                        subtitle: Text(AppLocalizations.of(ctx).remindersSubtitle),
+                        value: settings.remindersEnabled,
+                        onChanged: (v) => settings.setRemindersEnabled(v),
+                      ),
                       SwitchListTile(
                         title: Text(AppLocalizations.of(ctx).shoppingMode),
                         subtitle: Text(AppLocalizations.of(ctx).shoppingModeSubtitle),
                         value: settings.shoppingMode,
-                        onChanged: (v) => settings.setShoppingMode(v),
+                        onChanged: (v) async {
+                          await settings.setShoppingMode(v);
+                          if (v && ctx.mounted) {
+                            ctx.read<ListProvider>().setShowUncheckedOnly(true);
+                          }
+                        },
                       ),
                       const SizedBox(height: 16),
                       Text(AppLocalizations.of(ctx).categoriesLabel, style: Theme.of(ctx).textTheme.titleSmall),
@@ -1957,7 +2085,11 @@ class ListScreen extends StatelessWidget {
                               return Padding(
                                 padding: const EdgeInsets.only(right: 4),
                                 child: FilterChip(
-                                  label: Text(context.read<CategoryNamesProvider>().getCategoryName(i) ?? AppColors.categoryColorNames[i]),
+                                  label: Text(resolvedCategoryColorLabel(
+                                    AppLocalizations.of(context),
+                                    i,
+                                    context.read<CategoryNamesProvider>().getCategoryName(i),
+                                  )),
                                   selected: selected,
                                   onSelected: (_) {
                                     final next = List<int>.from(settings.favoriteStoreIndices);
@@ -2086,7 +2218,11 @@ class ListScreen extends StatelessWidget {
                           },
                         ),
                       ],
-                      const SizedBox(height: 24),
+                        ],
+                      ),
+                      ExpansionTile(
+                        title: Text(AppLocalizations.of(ctx).settingsSectionAccount),
+                        children: [
                       ListTile(
                         leading: const Icon(Icons.backup_outlined),
                         title: Text(AppLocalizations.of(context).backupRestore),
@@ -2127,6 +2263,8 @@ class ListScreen extends StatelessWidget {
                           );
                         },
                       ),
+                        ],
+                      ),
                     ],
                 );
                 },
@@ -2139,35 +2277,27 @@ class ListScreen extends StatelessWidget {
   }
 
   void _showSaveAsTemplateDialog(BuildContext context, ListProvider provider) {
-    final controller = TextEditingController(text: provider.list.name);
     showDialog<void>(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(AppLocalizations.of(ctx).saveAsTemplateTitle),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          decoration: InputDecoration(hintText: AppLocalizations.of(ctx).modelNameHint),
-          textCapitalization: TextCapitalization.sentences,
-          onSubmitted: (_) => Navigator.pop(ctx),
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(AppLocalizations.of(ctx).cancel)),
-          FilledButton(
-            onPressed: () async {
-              await provider.saveCurrentListAsTemplate(controller.text.trim());
-              if (context.mounted) {
-                Navigator.pop(ctx);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text(AppLocalizations.of(context).modelSaved)),
-                );
-              }
-            },
-            child: Text(AppLocalizations.of(ctx).saveButton),
-          ),
-        ],
-      ),
-    ).then((_) => controller.dispose());
+      builder: (ctx) {
+        final l10n = AppLocalizations.of(ctx);
+        return NameInputDialog(
+          title: l10n.saveAsTemplateTitle,
+          hint: l10n.modelNameHint,
+          cancelLabel: l10n.cancel,
+          confirmLabel: l10n.saveButton,
+          initialValue: localizedShoppingListName(l10n, provider.list),
+          onConfirm: (name) async {
+            await provider.saveCurrentListAsTemplate(name);
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(AppLocalizations.of(context).modelSaved)),
+              );
+            }
+          },
+        );
+      },
+    );
   }
 
   void _showNewFromTemplateSheet(BuildContext context, ListProvider provider) {
@@ -2214,107 +2344,20 @@ class ListScreen extends StatelessWidget {
     );
   }
 
-  void _showAddListDialog(BuildContext context, ListProvider provider) {
-    final controller = TextEditingController();
-    showDialog<void>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(AppLocalizations.of(ctx).newListTitle),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          decoration: InputDecoration(hintText: AppLocalizations.of(ctx).listNameHint),
-          textCapitalization: TextCapitalization.sentences,
-          onSubmitted: (_) => Navigator.pop(ctx),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: Text(AppLocalizations.of(ctx).cancel),
-          ),
-          FilledButton(
-            onPressed: () {
-              provider.addList(controller.text.trim());
-              Navigator.pop(ctx);
-            },
-            child: Text(AppLocalizations.of(ctx).createButton),
-          ),
-        ],
-      ),
-    ).then((_) => controller.dispose());
-  }
-
-  void _showListActions(BuildContext context, ListProvider provider, ShoppingListModel list) {
-    showModalBottomSheet<void>(
-      context: context,
-      builder: (ctx) => SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: const Icon(Icons.edit_outlined),
-              title: Text(AppLocalizations.of(context).renameTitle),
-              onTap: () {
-                Navigator.pop(ctx);
-                _showRenameListDialog(context, provider, list);
-              },
-            ),
-            if (context.read<PremiumProvider>().isPremiumActive && provider.listGroups.isNotEmpty)
-              ListTile(
-                leading: const Icon(Icons.folder_outlined),
-                title: Text(AppLocalizations.of(context).groupLabel),
-                subtitle: Text(
-                    list.groupId == null
-                        ? 'Sans groupe'
-                        : (() {
-                            final found = provider.listGroups.where((g) => g.id == list.groupId).toList();
-                            return found.isEmpty ? '—' : found.first.name;
-                          })(),
-                  ),
-                onTap: () {
-                  Navigator.pop(ctx);
-                  _showSetListGroupSheet(context, provider, list);
-                },
-              ),
-            ListTile(
-              leading: Icon(Icons.delete_outline, color: Theme.of(ctx).colorScheme.error),
-              title: Text(AppLocalizations.of(context).delete, style: TextStyle(color: Theme.of(ctx).colorScheme.error)),
-              onTap: () {
-                Navigator.pop(ctx);
-                _confirmDeleteList(context, provider, list);
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   void _showAddGroupDialog(BuildContext context, ListProvider provider) {
-    final controller = TextEditingController();
     showDialog<void>(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(AppLocalizations.of(ctx).newGroupTitle),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          decoration: InputDecoration(hintText: AppLocalizations.of(ctx).groupNameHint),
-          textCapitalization: TextCapitalization.sentences,
-          onSubmitted: (_) => Navigator.pop(ctx),
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(AppLocalizations.of(ctx).cancel)),
-          FilledButton(
-            onPressed: () async {
-              await provider.addListGroup(controller.text.trim());
-              if (context.mounted) Navigator.pop(ctx);
-            },
-            child: Text(AppLocalizations.of(ctx).createButton),
-          ),
-        ],
-      ),
-    ).then((_) => controller.dispose());
+      builder: (ctx) {
+        final l10n = AppLocalizations.of(ctx);
+        return NameInputDialog(
+          title: l10n.newGroupTitle,
+          hint: l10n.groupNameHint,
+          cancelLabel: l10n.cancel,
+          confirmLabel: l10n.createButton,
+          onConfirm: (name) => provider.addListGroup(name),
+        );
+      },
+    );
   }
 
   void _showManageGroupsSheet(BuildContext context, ListProvider provider) {
@@ -2374,118 +2417,20 @@ class ListScreen extends StatelessWidget {
   }
 
   void _showRenameGroupDialog(BuildContext context, ListProvider provider, ListGroup group) {
-    final controller = TextEditingController(text: group.name);
     showDialog<void>(
       context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(AppLocalizations.of(ctx).renameGroupTitle),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          decoration: InputDecoration(hintText: AppLocalizations.of(ctx).nameHint),
-          onSubmitted: (_) => Navigator.pop(ctx),
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(AppLocalizations.of(ctx).cancel)),
-          FilledButton(
-            onPressed: () async {
-              await provider.renameListGroup(group.id, controller.text.trim());
-              if (context.mounted) Navigator.pop(ctx);
-            },
-            child: Text(AppLocalizations.of(ctx).saveButton),
-          ),
-        ],
-      ),
-    ).then((_) => controller.dispose());
-  }
-
-  void _showSetListGroupSheet(BuildContext context, ListProvider provider, ShoppingListModel list) {
-    showModalBottomSheet<void>(
-      context: context,
-      builder: (ctx) => SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Text(AppLocalizations.of(ctx).chooseGroup, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600)),
-            ),
-            ListTile(
-              title: Text(AppLocalizations.of(ctx).noGroup),
-              selected: list.groupId == null,
-              onTap: () async {
-                await provider.setListGroup(list.id, null);
-                if (context.mounted) Navigator.pop(ctx);
-              },
-            ),
-            ...provider.listGroups.map((g) => ListTile(
-                  title: Text(g.name),
-                  selected: list.groupId == g.id,
-                  onTap: () async {
-                    await provider.setListGroup(list.id, g.id);
-                    if (context.mounted) Navigator.pop(ctx);
-                  },
-                )),
-          ],
-        ),
-      ),
+      builder: (ctx) {
+        final l10n = AppLocalizations.of(ctx);
+        return NameInputDialog(
+          title: l10n.renameGroupTitle,
+          hint: l10n.nameHint,
+          cancelLabel: l10n.cancel,
+          confirmLabel: l10n.saveButton,
+          initialValue: group.name,
+          onConfirm: (name) => provider.renameListGroup(group.id, name),
+        );
+      },
     );
-  }
-
-  void _showRenameListDialog(BuildContext context, ListProvider provider, ShoppingListModel list) {
-    final controller = TextEditingController(text: list.name);
-    showDialog<void>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(AppLocalizations.of(ctx).renameListTitle),
-        content: TextField(
-          controller: controller,
-          autofocus: true,
-          decoration: InputDecoration(hintText: AppLocalizations.of(ctx).nameHint),
-          textCapitalization: TextCapitalization.sentences,
-          onSubmitted: (_) => Navigator.pop(ctx),
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx), child: Text(AppLocalizations.of(ctx).cancel)),
-          FilledButton(
-            onPressed: () {
-              provider.renameList(list.id, controller.text.trim());
-              Navigator.pop(ctx);
-            },
-            child: Text(AppLocalizations.of(ctx).saveButton),
-          ),
-        ],
-      ),
-    ).then((_) => controller.dispose());
-  }
-
-  void _confirmDeleteList(BuildContext context, ListProvider provider, ShoppingListModel list) {
-    showDialog<bool>(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text(AppLocalizations.of(ctx).deleteListConfirm),
-        content: Text(
-          list.items.isEmpty
-              ? '« ${list.name} » sera supprimée.'
-              : '« ${list.name} » contient ${list.items.length} article(s). Tout sera supprimé.',
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(AppLocalizations.of(ctx).cancel)),
-          FilledButton(
-            onPressed: () => Navigator.pop(ctx, true),
-            style: FilledButton.styleFrom(backgroundColor: Theme.of(ctx).colorScheme.error),
-            child: Text(AppLocalizations.of(ctx).delete),
-          ),
-        ],
-      ),
-    ).then((ok) {
-      if (ok == true) {
-        provider.removeList(list.id);
-        if (context.mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context).listDeleted)));
-        }
-      }
-    });
   }
 }
 
@@ -2609,6 +2554,28 @@ class _FilledListByStoreState extends State<_FilledListByStore> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.min,
         children: [
+          if (widget.axisMode == 'food' || widget.axisMode.startsWith('dual'))
+            Builder(
+              builder: (context) {
+                final unclassified = widget.items.where((item) {
+                  final id = FoodClassifier.effectiveCategoryId(
+                    item.name,
+                    item.foodCategoryId,
+                  );
+                  return id == null;
+                }).length;
+                if (unclassified == 0) return const SizedBox.shrink();
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: Text(
+                    l10n.reclassifyFoodHint,
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                );
+              },
+            ),
           for (var s = 0; s < sections.length; s++) ...[
             if (s > 0) const SizedBox(height: sectionSpacing),
             _buildAxisCard(
@@ -2626,10 +2593,10 @@ class _FilledListByStoreState extends State<_FilledListByStore> {
     );
   }
 
-  String _foodTitle(AppLocalizations l10n, String lang, String sectionKey) {
+  String _foodTitle(AppLocalizations l10n, String sectionKey) {
     final id = foodCategoryIdFromKey(sectionKey);
     if (id == null) return l10n.foodCatUnclassified;
-    return FoodTaxonomy.byId(id)?.labelFor(lang) ?? l10n.foodCatUnclassified;
+    return localizedFoodCategoryLabel(l10n, id);
   }
 
   Widget _itemsBlock(List<ShoppingItem> items, Map<String, int> numberById) {
@@ -2684,29 +2651,37 @@ class _FilledListByStoreState extends State<_FilledListByStore> {
     } else {
       final cat = FoodTaxonomy.byId(foodCategoryIdFromKey(section.key));
       final tint = FoodCategoryStyle.colorFor(cat);
+      final count = section.subsections.isEmpty
+          ? section.items.length
+          : section.subsections.fold<int>(0, (n, s) => n + s.items.length);
       header = Padding(
-        padding: const EdgeInsets.only(bottom: 4),
+        padding: const EdgeInsets.only(bottom: 8),
         child: Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(6),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: tint.withValues(alpha: 0.18),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(12),
               ),
-              child: Icon(FoodCategoryStyle.icon(cat), size: 18, color: tint),
+              child: Icon(FoodCategoryStyle.icon(cat), size: 20, color: tint),
             ),
-            const SizedBox(width: 10),
+            const SizedBox(width: 12),
             Expanded(
-              child: Text(
-                _foodTitle(l10n, lang, section.key),
-                style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w700),
-              ),
-            ),
-            Text(
-              '${section.subsections.isEmpty ? section.items.length : section.subsections.fold<int>(0, (n, s) => n + s.items.length)}',
-              style: theme.textTheme.labelMedium?.copyWith(
-                color: theme.colorScheme.onSurfaceVariant,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    _foodTitle(l10n, section.key),
+                    style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
+                  ),
+                  Text(
+                    l10n.listsHubItemCount(count),
+                    style: theme.textTheme.labelMedium?.copyWith(
+                      color: theme.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
@@ -2727,8 +2702,11 @@ class _FilledListByStoreState extends State<_FilledListByStore> {
             Padding(
               padding: const EdgeInsets.only(top: 4, bottom: 4),
               child: Text(
-                widget.categoryNames.getCategoryName(subStore) ??
-                    AppColors.nameFromIndex(subStore),
+                resolvedCategoryColorLabel(
+                  AppLocalizations.of(context),
+                  subStore,
+                  widget.categoryNames.getCategoryName(subStore),
+                ),
                 style: theme.textTheme.labelLarge?.copyWith(
                   color: theme.colorScheme.onSurfaceVariant,
                 ),
@@ -2740,7 +2718,7 @@ class _FilledListByStoreState extends State<_FilledListByStore> {
             Padding(
               padding: const EdgeInsets.only(top: 4, bottom: 4),
               child: Text(
-                _foodTitle(l10n, lang, sub.key),
+                _foodTitle(l10n, sub.key),
                 style: theme.textTheme.labelLarge?.copyWith(
                   color: theme.colorScheme.onSurfaceVariant,
                 ),
@@ -2943,9 +2921,11 @@ class _StoreSectionHeader extends StatelessWidget {
     final color = AppColors.categoryColors[colorIndex % AppColors.categoryColors.length];
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final label = (categoryName?.trim().isNotEmpty == true)
-        ? categoryName!
-        : AppColors.nameFromIndex(colorIndex);
+    final label = resolvedCategoryColorLabel(
+      AppLocalizations.of(context),
+      colorIndex,
+      categoryName,
+    );
     final tileColor = isDark
         ? color.withValues(alpha: DesignConstants.storeHeaderColorAlphaDark)
         : color.withValues(alpha: DesignConstants.storeHeaderColorAlphaLight);
@@ -3159,9 +3139,13 @@ class _FilledBalancedList extends StatelessWidget {
 
 /// Barre des magasins (enseignes) : carrés de couleur en haut ; tap sur un carré pour ajouter ou définir un magasin (ex. Carrefour). Tout ce qui est de cette couleur = ce magasin/catégorie.
 class _ColorLegendBar extends StatelessWidget {
-  const _ColorLegendBar({required this.categoryNames});
+  const _ColorLegendBar({
+    required this.categoryNames,
+    this.compact = false,
+  });
 
   final CategoryNamesProvider categoryNames;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
@@ -3174,13 +3158,12 @@ class _ColorLegendBar extends StatelessWidget {
           final width = (constraints.maxWidth - horizontalPadding).clamp(200.0, double.infinity);
           const spacing = 8.0;
           const runSpacing = 6.0;
-          const minChipSize = 28.0;
-          const maxChipSize = 40.0;
+          final minChipSize = compact ? 22.0 : 28.0;
+          final maxChipSize = compact ? 28.0 : 40.0;
           const chipsPerRowTarget = 8;
           final chipSize = (width / chipsPerRowTarget - spacing).clamp(minChipSize, maxChipSize);
-          final showLabelUnderChip = chipSize >= 34;
           const verticalPadding = 8.0;
-          const maxContentHeight = 140.0;
+          final maxContentHeight = compact ? 72.0 : 160.0;
 
           return Padding(
             padding: const EdgeInsets.only(
@@ -3189,26 +3172,43 @@ class _ColorLegendBar extends StatelessWidget {
               top: verticalPadding,
               bottom: verticalPadding,
             ),
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxHeight: maxContentHeight),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Wrap(
-                  spacing: spacing,
-                  runSpacing: runSpacing,
-                  alignment: WrapAlignment.center,
-                  children: List.generate(
-                    AppColors.categoryColors.length,
-                    (i) => _LegendChip(
-                      chipSize: chipSize,
-                      colorIndex: i,
-                      categoryName: categoryNames.getCategoryName(i),
-                      showLabel: showLabelUnderChip,
-                      onTap: () => showSetCategoryNameSheet(context, i, categoryNames),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (!compact)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 6),
+                    child: Text(
+                      AppLocalizations.of(context).storesLegendHint,
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                            color: Theme.of(context).colorScheme.onSurfaceVariant,
+                          ),
+                    ),
+                  ),
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxHeight: maxContentHeight),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Wrap(
+                      spacing: spacing,
+                      runSpacing: runSpacing,
+                      alignment: WrapAlignment.center,
+                      children: List.generate(
+                        AppColors.categoryColors.length,
+                        (i) => _LegendChip(
+                          chipSize: chipSize,
+                          colorIndex: i,
+                          categoryName: categoryNames.getCategoryName(i),
+                          showLabel: true,
+                          compact: compact,
+                          onTap: () => showSetCategoryNameSheet(context, i, categoryNames),
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
           );
         },
@@ -3222,132 +3222,148 @@ class _ColorLegendBar extends StatelessWidget {
     CategoryNamesProvider categoryNames,
   ) {
     HapticFeedback.selectionClick();
-    final initialName = categoryNames.getCategoryName(colorIndex) ?? '';
-    final controller = TextEditingController(text: initialName);
-    final color = AppColors.categoryColors[colorIndex];
-    final hasInitialName = initialName.isNotEmpty;
     showModalBottomSheet<void>(
       context: context,
       isScrollControlled: true,
-      builder: (ctx) => SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(
-            left: 24,
-            right: 24,
-            top: 24,
-            bottom: 24 + MediaQuery.of(ctx).viewPadding.bottom + MediaQuery.of(ctx).viewInsets.bottom,
+      builder: (ctx) => _SetCategoryNameSheet(
+        colorIndex: colorIndex,
+        categoryNames: categoryNames,
+        scaffoldContext: context,
+      ),
+    );
+  }
+}
+
+/// Possède son [TextEditingController] pour éviter « used after disposed ».
+class _SetCategoryNameSheet extends StatefulWidget {
+  const _SetCategoryNameSheet({
+    required this.colorIndex,
+    required this.categoryNames,
+    required this.scaffoldContext,
+  });
+
+  final int colorIndex;
+  final CategoryNamesProvider categoryNames;
+  final BuildContext scaffoldContext;
+
+  @override
+  State<_SetCategoryNameSheet> createState() => _SetCategoryNameSheetState();
+}
+
+class _SetCategoryNameSheetState extends State<_SetCategoryNameSheet> {
+  late final TextEditingController _controller;
+  late final bool _hasInitialName;
+  bool _busy = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final initial = widget.categoryNames.getCategoryName(widget.colorIndex) ?? '';
+    _hasInitialName = initial.isNotEmpty;
+    _controller = TextEditingController(text: initial);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  Future<void> _save(String name) async {
+    if (_busy) return;
+    setState(() => _busy = true);
+    final scaffold = widget.scaffoldContext;
+    try {
+      if (mounted) Navigator.pop(context);
+      await widget.categoryNames.setCategoryName(widget.colorIndex, name);
+    } catch (e) {
+      if (scaffold.mounted) {
+        ScaffoldMessenger.of(scaffold).showSnackBar(
+          SnackBar(
+            content: Text('${AppLocalizations.of(scaffold).errorPrefix} : ${localizedAppError(AppLocalizations.of(scaffold), e)}'),
+            behavior: SnackBarBehavior.floating,
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      width: 32,
-                      height: 32,
-                      decoration: BoxDecoration(
-                        color: color,
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: AppColors.darken(color, 0.2)),
-                      ),
+        );
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final color = AppColors.categoryColors[widget.colorIndex];
+    final l10n = AppLocalizations.of(context);
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: 24,
+          right: 24,
+          top: 24,
+          bottom: 24 + MediaQuery.of(context).viewPadding.bottom + MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    width: 32,
+                    height: 32,
+                    decoration: BoxDecoration(
+                      color: color,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: AppColors.darken(color, 0.2)),
                     ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Text(
-                        AppLocalizations.of(ctx).nameForThisColor,
-                        style: Theme.of(ctx).textTheme.titleMedium,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  AppLocalizations.of(ctx).colorNameHint,
-                  style: Theme.of(ctx).textTheme.bodySmall?.copyWith(color: Colors.grey),
-                  maxLines: 2,
-                ),
-                const SizedBox(height: 16),
-                TextField(
-                  controller: controller,
-                  autofocus: true,
-                  textCapitalization: TextCapitalization.sentences,
-                  decoration: InputDecoration(
-                    hintText: AppLocalizations.of(ctx).categoryNameHint,
-                    border: const OutlineInputBorder(),
                   ),
-                  onSubmitted: (value) => _saveCategoryNameAndPop(ctx, context, colorIndex, value.trim(), categoryNames, controller),
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    if (hasInitialName)
-                      TextButton(
-                        onPressed: () => _clearCategoryNameAndPop(ctx, context, colorIndex, categoryNames, controller),
-                        child: Text(AppLocalizations.of(ctx).clear, style: TextStyle(color: Theme.of(ctx).colorScheme.error)),
-                      ),
-                    const SizedBox(width: 8),
-                    FilledButton(
-                      onPressed: () => _saveCategoryNameAndPop(ctx, context, colorIndex, controller.text.trim(), categoryNames, controller),
-                      child: Text(AppLocalizations.of(ctx).saveButton),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Text(
+                      l10n.nameForThisColor,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
-                  ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text(
+                l10n.colorNameHint,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.grey),
+                maxLines: 2,
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                controller: _controller,
+                autofocus: true,
+                enabled: !_busy,
+                textCapitalization: TextCapitalization.sentences,
+                decoration: InputDecoration(
+                  hintText: l10n.categoryNameHint,
+                  border: const OutlineInputBorder(),
                 ),
-              ],
-            ),
+                onSubmitted: (value) => _save(value.trim()),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  if (_hasInitialName)
+                    TextButton(
+                      onPressed: _busy ? null : () => _save(''),
+                      child: Text(l10n.clear, style: TextStyle(color: Theme.of(context).colorScheme.error)),
+                    ),
+                  const SizedBox(width: 8),
+                  FilledButton(
+                    onPressed: _busy ? null : () => _save(_controller.text.trim()),
+                    child: Text(l10n.saveButton),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
     );
-  }
-
-  static Future<void> _saveCategoryNameAndPop(
-    BuildContext sheetContext,
-    BuildContext scaffoldContext,
-    int colorIndex,
-    String name,
-    CategoryNamesProvider categoryNames,
-    TextEditingController? controller,
-  ) async {
-    if (sheetContext.mounted) Navigator.pop(sheetContext);
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      try {
-        await categoryNames.setCategoryName(colorIndex, name);
-      } catch (e) {
-        if (scaffoldContext.mounted) {
-          ScaffoldMessenger.of(scaffoldContext).showSnackBar(
-            SnackBar(content: Text('${AppLocalizations.of(scaffoldContext).errorPrefix} : $e'), behavior: SnackBarBehavior.floating),
-          );
-        }
-      } finally {
-        controller?.dispose();
-      }
-    });
-  }
-
-  static Future<void> _clearCategoryNameAndPop(
-    BuildContext sheetContext,
-    BuildContext scaffoldContext,
-    int colorIndex,
-    CategoryNamesProvider categoryNames,
-    TextEditingController? controller,
-  ) async {
-    if (sheetContext.mounted) Navigator.pop(sheetContext);
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      try {
-        await categoryNames.setCategoryName(colorIndex, '');
-      } catch (e) {
-        if (scaffoldContext.mounted) {
-          ScaffoldMessenger.of(scaffoldContext).showSnackBar(
-            SnackBar(content: Text('${AppLocalizations.of(scaffoldContext).errorPrefix} : $e'), behavior: SnackBarBehavior.floating),
-          );
-        }
-      } finally {
-        controller?.dispose();
-      }
-    });
   }
 }
 
@@ -3358,19 +3374,25 @@ class _LegendChip extends StatelessWidget {
     required this.categoryName,
     required this.showLabel,
     required this.onTap,
+    this.compact = false,
   });
 
   final double chipSize;
   final int colorIndex;
   final String? categoryName;
   final bool showLabel;
+  final bool compact;
   final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final color = AppColors.categoryColors[colorIndex];
-    final label = (categoryName?.trim().isNotEmpty == true) ? categoryName : null;
-    final tooltipMessage = label ?? AppLocalizations.of(context).colorChipTapToSet(AppColors.nameFromIndex(colorIndex));
+    final label = resolvedCategoryColorLabel(
+      AppLocalizations.of(context),
+      colorIndex,
+      categoryName,
+    );
+    final tooltipMessage = AppLocalizations.of(context).colorChipTapToSet(label);
     return Tooltip(
       message: tooltipMessage,
       child: Material(
@@ -3403,16 +3425,17 @@ class _LegendChip extends StatelessWidget {
                     ],
                   ),
                 ),
-                if (showLabel && label != null) ...[
+                if (showLabel) ...[
                   SizedBox(height: chipSize > 36 ? 4 : 2),
                   SizedBox(
-                    width: chipSize + 6,
-                    height: 12,
+                    width: chipSize + (compact ? 10 : 14),
+                    height: compact ? 11 : 14,
                     child: Text(
                       label,
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            fontSize: 9,
-                            color: Colors.grey.shade700,
+                            fontSize: compact ? 8 : 10,
+                            fontWeight: FontWeight.w600,
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -3425,415 +3448,6 @@ class _LegendChip extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-/// Puce compacte du mode d’organisation : affiche le mode actuel ; tap → menu pour changer.
-class _OrgModeChip extends StatelessWidget {
-  const _OrgModeChip({required this.settings});
-
-  final SettingsProvider settings;
-
-  static const _modes = ['bubbles', 'numbered', 'manual'];
-
-  IconData _iconFor(String mode) {
-    switch (mode) {
-      case 'numbered':
-        return Icons.format_list_numbered;
-      case 'manual':
-        return Icons.open_with;
-      default:
-        return Icons.bubble_chart_outlined;
-    }
-  }
-
-  String _labelFor(BuildContext context, String mode) {
-    final l10n = AppLocalizations.of(context);
-    switch (mode) {
-      case 'numbered':
-        return l10n.orgModeNumbered;
-      case 'manual':
-        return l10n.orgModeManual;
-      default:
-        return l10n.orgModeBubbles;
-    }
-  }
-
-  Future<void> _applyMode(String mode) async {
-    await settings.setListOrgMode(mode);
-    if (mode == 'manual' && settings.sortMode != 'order') {
-      await settings.setSortMode('order');
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final mode = settings.listOrgMode == 'numbered' || settings.listOrgMode == 'manual'
-        ? settings.listOrgMode
-        : 'bubbles';
-    final l10n = AppLocalizations.of(context);
-
-    return PopupMenuButton<String>(
-      tooltip: l10n.orgModeLabel,
-      offset: const Offset(0, 36),
-      onSelected: (v) async {
-        HapticFeedback.selectionClick();
-        await _applyMode(v);
-      },
-      itemBuilder: (ctx) => [
-        for (final m in _modes)
-          PopupMenuItem<String>(
-            value: m,
-            child: Row(
-              children: [
-                Icon(_iconFor(m), size: 20),
-                const SizedBox(width: 10),
-                Expanded(child: Text(_labelFor(ctx, m))),
-                if (m == mode)
-                  Icon(Icons.check, size: 18, color: Theme.of(ctx).colorScheme.primary),
-              ],
-            ),
-          ),
-      ],
-      child: Material(
-        color: Theme.of(context).colorScheme.secondaryContainer,
-        borderRadius: BorderRadius.circular(20),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(_iconFor(mode), size: 18, color: Theme.of(context).colorScheme.onSecondaryContainer),
-              const SizedBox(width: 6),
-              Text(
-                _labelFor(context, mode),
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.onSecondaryContainer,
-                    ),
-              ),
-              Icon(
-                Icons.arrow_drop_down,
-                size: 18,
-                color: Theme.of(context).colorScheme.onSecondaryContainer,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/// Puce axe magasin / type (Plus pour hors magasin).
-class _AxisModeChip extends StatelessWidget {
-  const _AxisModeChip({required this.settings});
-
-  final SettingsProvider settings;
-
-  static const _modes = ['store', 'food', 'dualStoreFood', 'dualFoodStore'];
-
-  IconData _iconFor(String mode) {
-    switch (mode) {
-      case 'food':
-        return Icons.eco_outlined;
-      case 'dualStoreFood':
-        return Icons.account_tree_outlined;
-      case 'dualFoodStore':
-        return Icons.schema_outlined;
-      default:
-        return Icons.storefront_outlined;
-    }
-  }
-
-  String _labelFor(BuildContext context, String mode) {
-    final l10n = AppLocalizations.of(context);
-    switch (mode) {
-      case 'food':
-        return l10n.axisModeFood;
-      case 'dualStoreFood':
-        return l10n.axisModeDualStoreFood;
-      case 'dualFoodStore':
-        return l10n.axisModeDualFoodStore;
-      default:
-        return l10n.axisModeStore;
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final premium = context.watch<PremiumProvider>().isPremiumActive;
-    final mode = premium ? settings.listAxisMode : 'store';
-    final l10n = AppLocalizations.of(context);
-
-    return PopupMenuButton<String>(
-      tooltip: l10n.axisModeLabel,
-      offset: const Offset(0, 36),
-      onSelected: (v) async {
-        HapticFeedback.selectionClick();
-        if (v != 'store' && !context.read<PremiumProvider>().isPremiumActive) {
-          Navigator.of(context).push(
-            MaterialPageRoute<void>(builder: (_) => const PaywallScreen()),
-          );
-          return;
-        }
-        await settings.setListAxisMode(v);
-      },
-      itemBuilder: (ctx) => [
-        for (final m in _modes)
-          PopupMenuItem<String>(
-            value: m,
-            child: Row(
-              children: [
-                Icon(_iconFor(m), size: 20),
-                const SizedBox(width: 10),
-                Expanded(child: Text(_labelFor(ctx, m))),
-                if (m != 'store' && !premium)
-                  Padding(
-                    padding: const EdgeInsets.only(left: 6),
-                    child: Text(
-                      l10n.proBadge,
-                      style: Theme.of(ctx).textTheme.labelSmall?.copyWith(
-                            color: Theme.of(ctx).colorScheme.primary,
-                            fontWeight: FontWeight.w600,
-                          ),
-                    ),
-                  )
-                else if (m == mode)
-                  Icon(Icons.check, size: 18, color: Theme.of(ctx).colorScheme.primary),
-              ],
-            ),
-          ),
-      ],
-      child: Material(
-        color: Theme.of(context).colorScheme.tertiaryContainer,
-        borderRadius: BorderRadius.circular(20),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(_iconFor(mode), size: 18, color: Theme.of(context).colorScheme.onTertiaryContainer),
-              const SizedBox(width: 6),
-              Text(
-                _labelFor(context, mode),
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.onTertiaryContainer,
-                    ),
-              ),
-              Icon(
-                Icons.arrow_drop_down,
-                size: 18,
-                color: Theme.of(context).colorScheme.onTertiaryContainer,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-/// Barre rapide : ajout rapide (Plus), recherche (Plus), filtre « À acheter » + total.
-class _ListToolbar extends StatelessWidget {
-  const _ListToolbar({
-    required this.layout,
-    required this.provider,
-    required this.settings,
-    required this.onQuickAdd,
-  });
-
-  final ScreenLayout layout;
-  final ListProvider provider;
-  final SettingsProvider settings;
-  final VoidCallback onQuickAdd;
-
-  @override
-  Widget build(BuildContext context) {
-    final isPremiumActive = context.watch<PremiumProvider>().isPremiumActive;
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        if (isPremiumActive)
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: layout.contentPaddingHorizontal, vertical: 6),
-            child: Row(
-              children: [
-                ActionChip(
-                  avatar: Icon(Icons.bolt, size: 18, color: Theme.of(context).colorScheme.primary),
-                  label: Text(AppLocalizations.of(context).quickAdd),
-                  onPressed: () {
-                    HapticFeedback.selectionClick();
-                    onQuickAdd();
-                  },
-                ),
-              ],
-            ),
-          ),
-        if (context.watch<PremiumProvider>().isPremiumActive)
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: layout.contentPaddingHorizontal, vertical: 4),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: AppLocalizations.of(context).searchHint,
-                isDense: true,
-                prefixIcon: const Icon(Icons.search, size: 22),
-                suffixIcon: provider.searchQuery.isNotEmpty
-                    ? IconButton(
-                        icon: const Icon(Icons.close, size: 20),
-                        onPressed: () => provider.setSearchQuery(''),
-                        tooltip: AppLocalizations.of(context).tooltipClear,
-                      )
-                    : null,
-                border: const OutlineInputBorder(),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              ),
-              onChanged: (v) => provider.setSearchQuery(v),
-            ),
-          ),
-        Padding(
-          padding: EdgeInsets.only(
-            left: layout.contentPaddingHorizontal,
-            right: layout.contentPaddingHorizontal,
-            top: 4,
-            bottom: 4,
-          ),
-          child: Row(
-            children: [
-              _OrgModeChip(settings: settings),
-              const SizedBox(width: 8),
-              _AxisModeChip(settings: settings),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  settings.listOrgMode == 'manual'
-                      ? '${AppLocalizations.of(context).dragToReorder} · ${AppLocalizations.of(context).longPressToDelete}'
-                      : settings.listOrgMode == 'numbered'
-                          ? '${AppLocalizations.of(context).orgModeNumberedHint} · ${AppLocalizations.of(context).longPressToDelete}'
-                          : '${AppLocalizations.of(context).orgModeBubblesHint} · ${AppLocalizations.of(context).longPressToDelete}',
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.grey.shade600,
-                        fontSize: 12,
-                      ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              if (context.watch<PremiumProvider>().isPremiumActive) ...[
-                const SizedBox(width: 8),
-                FilterChip(
-                  label: Text(AppLocalizations.of(context).toBuy),
-                  selected: provider.showUncheckedOnly,
-                  onSelected: (_) {
-                    HapticFeedback.selectionClick();
-                    provider.setShowUncheckedOnly(!provider.showUncheckedOnly);
-                  },
-                ),
-              ],
-              if (context.watch<PremiumProvider>().isPremiumActive &&
-                  settings.showPrices &&
-                  provider.totalPriceUnchecked > 0) ...[
-                const SizedBox(width: 8),
-                Builder(
-                  builder: (context) {
-                    final ceiling = settings.budgetCeiling;
-                    final total = provider.totalPriceUnchecked;
-                    final over = ceiling != null && total > ceiling;
-                    return Text(
-                      AppLocalizations.of(context).totalEuro(total.toStringAsFixed(2)),
-                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: over
-                                ? Theme.of(context).colorScheme.error
-                                : Theme.of(context).colorScheme.primary,
-                          ),
-                    );
-                  },
-                ),
-              ],
-            ],
-          ),
-        ),
-        if (context.watch<PremiumProvider>().isPremiumActive &&
-            settings.showPrices &&
-            settings.budgetCeiling != null &&
-            provider.totalPriceUnchecked > settings.budgetCeiling!)
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: layout.contentPaddingHorizontal,
-              vertical: 4,
-            ),
-            child: Material(
-              color: Theme.of(context).colorScheme.errorContainer,
-              borderRadius: BorderRadius.circular(8),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                child: Row(
-                  children: [
-                    Icon(Icons.warning_amber_rounded,
-                        size: 20, color: Theme.of(context).colorScheme.error),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        AppLocalizations.of(context).budgetOverBanner(
-                          provider.totalPriceUnchecked.toStringAsFixed(2),
-                          settings.budgetCeiling!.toStringAsFixed(0),
-                        ),
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Theme.of(context).colorScheme.onErrorContainer,
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        if (provider.recentItemNames().isNotEmpty)
-          Padding(
-            padding: EdgeInsets.only(
-              left: layout.contentPaddingHorizontal,
-              right: layout.contentPaddingHorizontal,
-              bottom: 6,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  AppLocalizations.of(context).recentItems,
-                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
-                ),
-                const SizedBox(height: 4),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      for (final name in provider.recentItemNames())
-                        Padding(
-                          padding: const EdgeInsets.only(right: 6),
-                          child: ActionChip(
-                            label: Text(name),
-                            visualDensity: VisualDensity.compact,
-                            onPressed: () {
-                              HapticFeedback.selectionClick();
-                              provider.addItem(name);
-                              AppFeedback.success(
-                                context,
-                                AppLocalizations.of(context).itemAdded(name),
-                              );
-                            },
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-      ],
     );
   }
 }
@@ -3921,7 +3535,10 @@ class _SelectionModeBar extends StatelessWidget {
                               children: [
                                 const Icon(Icons.list, size: 20),
                                 const SizedBox(width: 8),
-                                Text(l.name),
+                                Text(localizedShoppingListName(
+                                  AppLocalizations.of(context),
+                                  l,
+                                )),
                               ],
                             ),
                           )),
@@ -3935,26 +3552,137 @@ class _SelectionModeBar extends StatelessWidget {
   }
 }
 
+/// Chrome au-dessus de la liste : scrollable si trop haut (évite BOTTOM OVERFLOW).
+class _ScrollableListChrome extends StatelessWidget {
+  const _ScrollableListChrome({
+    required this.children,
+    this.maxHeightFraction = 0.45,
+  });
+
+  final List<Widget> children;
+  final double maxHeightFraction;
+
+  @override
+  Widget build(BuildContext context) {
+    if (children.isEmpty) return const SizedBox.shrink();
+    final maxH = MediaQuery.sizeOf(context).height * maxHeightFraction;
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxHeight: maxH),
+      child: SingleChildScrollView(
+        primary: false,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: children,
+        ),
+      ),
+    );
+  }
+}
+
 /// Sélecteur de listes (pastilles) : bascule + nouvelle liste. Avec groupes (Toteo+).
+/// Bandeau explicatif pour les listes système (Engagements / Achats futurs).
+class _SpecialListBanner extends StatelessWidget {
+  const _SpecialListBanner({required this.listId});
+
+  final String listId;
+
+  @override
+  Widget build(BuildContext context) {
+    final String? hint;
+    IconData? icon;
+    if (listId == kEngagementsListId) {
+      hint = AppLocalizations.of(context).engagementsListHint;
+      icon = Icons.handshake_outlined;
+    } else if (listId == kAchatsFutursListId) {
+      hint = AppLocalizations.of(context).futureListHint;
+      icon = Icons.schedule_outlined;
+    } else {
+      hint = null;
+    }
+    if (hint == null) return const SizedBox.shrink();
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 4, 12, 4),
+      child: Material(
+        color: theme.colorScheme.secondaryContainer.withValues(alpha: 0.65),
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(icon, size: 20, color: theme.colorScheme.onSecondaryContainer),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  hint,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.colorScheme.onSecondaryContainer,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _ListSwitcher extends StatelessWidget {
   const _ListSwitcher({
     required this.provider,
+    required this.hiddenSystemIds,
     required this.onSelect,
-    required this.onAdd,
-    required this.onManageGroups,
-    required this.onLongPress,
+    required this.onManage,
   });
 
   final ListProvider provider;
+  final Set<String> hiddenSystemIds;
   final void Function(String id) onSelect;
-  final VoidCallback onAdd;
-  final VoidCallback onManageGroups;
-  final void Function(ShoppingListModel list) onLongPress;
+  final VoidCallback onManage;
+
+  List<ShoppingListModel> get _visibleLists {
+    return provider.allLists.where((list) {
+      final system =
+          list.id == kEngagementsListId || list.id == kAchatsFutursListId;
+      if (system && hiddenSystemIds.contains(list.id)) return false;
+      return true;
+    }).toList();
+  }
+
+  Widget _listChip(BuildContext context, ShoppingListModel list) {
+    final selected = list.id == provider.currentListId;
+    final isEngagements = list.id == kEngagementsListId;
+    final isFuture = list.id == kAchatsFutursListId;
+    final icon = isEngagements
+        ? Icons.handshake_outlined
+        : isFuture
+            ? Icons.schedule_outlined
+            : null;
+    return Padding(
+      padding: const EdgeInsets.only(right: 8),
+      child: FilterChip(
+        avatar: icon != null ? Icon(icon, size: 18) : null,
+        label: Text(localizedShoppingListName(AppLocalizations.of(context), list)),
+        selected: selected,
+        onSelected: (_) {
+          HapticFeedback.selectionClick();
+          onSelect(list.id);
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final grouped = provider.getListsGrouped();
-    final hasGroups = context.watch<PremiumProvider>().isPremiumActive && provider.listGroups.isNotEmpty;
+    final hasGroups = provider.listGroups.isNotEmpty;
+    final visible = _visibleLists;
+    final visibleIds = visible.map((e) => e.id).toSet();
     return Material(
       elevation: 0,
       color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
@@ -3965,8 +3693,24 @@ class _ListSwitcher extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           child: Row(
             children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: Tooltip(
+                  message: AppLocalizations.of(context).listsHubChipTooltip,
+                  child: ActionChip(
+                    avatar: const Icon(Icons.folder_open_outlined, size: 18),
+                    label: Text(AppLocalizations.of(context).listsHubTitle),
+                    onPressed: () {
+                      HapticFeedback.selectionClick();
+                      onManage();
+                    },
+                  ),
+                ),
+              ),
               if (hasGroups)
                 ...grouped.expand((g) {
+                  final lists = g.lists.where((l) => visibleIds.contains(l.id)).toList();
+                  if (lists.isEmpty) return <Widget>[];
                   final chips = <Widget>[
                     if (g.groupName != null)
                       Padding(
@@ -3978,77 +3722,98 @@ class _ListSwitcher extends StatelessWidget {
                           visualDensity: VisualDensity.compact,
                         ),
                       ),
-                    ...g.lists.map((list) => Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: GestureDetector(
-                            onLongPress: () {
-                              HapticFeedback.mediumImpact();
-                              onLongPress(list);
-                            },
-                            onSecondaryTapDown: (_) {
-                              HapticFeedback.mediumImpact();
-                              onLongPress(list);
-                            },
-                            child: FilterChip(
-                              label: Text(list.name),
-                              selected: list.id == provider.currentListId,
-                              onSelected: (_) {
-                                HapticFeedback.selectionClick();
-                                onSelect(list.id);
-                              },
-                            ),
-                          ),
-                        )),
+                    ...lists.map((list) => _listChip(context, list)),
                   ];
                   return chips;
                 }),
               if (!hasGroups)
-                ...provider.allLists.map((list) => Padding(
-                      padding: const EdgeInsets.only(right: 8),
-                      child: GestureDetector(
-                        onLongPress: () {
-                          HapticFeedback.mediumImpact();
-                          onLongPress(list);
-                        },
-                        onSecondaryTapDown: (_) {
-                          HapticFeedback.mediumImpact();
-                          onLongPress(list);
-                        },
-                        child: FilterChip(
-                          label: Text(list.name),
-                          selected: list.id == provider.currentListId,
-                          onSelected: (_) {
-                            HapticFeedback.selectionClick();
-                            onSelect(list.id);
-                          },
-                        ),
-                      ),
-                    )),
-              Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: ActionChip(
-                  avatar: const Icon(Icons.add, size: 18),
-                  label: Text(AppLocalizations.of(context).listLabel),
-                  onPressed: () {
-                    HapticFeedback.selectionClick();
-                    onAdd();
-                  },
-                ),
-              ),
-              if (context.watch<PremiumProvider>().isPremiumActive && !provider.isSharedList)
-                Padding(
-                  padding: const EdgeInsets.only(left: 4),
-                  child: ActionChip(
-                    avatar: const Icon(Icons.folder_outlined, size: 18),
-                    label: Text(AppLocalizations.of(context).groupsLabel),
-                    onPressed: () {
-                      HapticFeedback.selectionClick();
-                      onManageGroups();
-                    },
-                  ),
-                ),
+                ...visible.map((list) => _listChip(context, list)),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _JoinListSheet extends StatefulWidget {
+  const _JoinListSheet({required this.provider});
+
+  final ListProvider provider;
+
+  @override
+  State<_JoinListSheet> createState() => _JoinListSheetState();
+}
+
+class _JoinListSheetState extends State<_JoinListSheet> {
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: 24,
+          right: 24,
+          top: 24,
+          bottom: 24 + MediaQuery.of(context).viewPadding.bottom + MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(l10n.joinListTitle, style: Theme.of(context).textTheme.titleLarge),
+            const SizedBox(height: 8),
+            Text(l10n.joinListHint, style: Theme.of(context).textTheme.bodyMedium),
+            const SizedBox(height: 16),
+            TextField(
+              controller: _controller,
+              decoration: InputDecoration(
+                hintText: l10n.linkCodeHint,
+                border: const OutlineInputBorder(),
+              ),
+              maxLines: 2,
+              textCapitalization: TextCapitalization.characters,
+            ),
+            const SizedBox(height: 24),
+            FilledButton(
+              onPressed: () async {
+                final text = _controller.text.trim();
+                if (text.isEmpty) return;
+                try {
+                  await widget.provider.joinSharedList(text);
+                  if (!mounted) return;
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(l10n.listJoined)),
+                  );
+                } catch (e) {
+                  if (!mounted) return;
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        '${l10n.errorPrefix} : ${localizedAppError(l10n, e)}',
+                      ),
+                    ),
+                  );
+                }
+              },
+              child: Text(l10n.join),
+            ),
+          ],
         ),
       ),
     );
@@ -4163,7 +3928,7 @@ void _showSyncSheet(BuildContext context, ListProvider provider, {required bool 
                     children: isSignedIn
                 ? [
                     Text(
-                      'Synchronisé',
+                      AppLocalizations.of(context).syncStatusOk,
                       style: Theme.of(ctx).textTheme.titleLarge,
                     ),
                     const SizedBox(height: 8),
@@ -4193,7 +3958,7 @@ void _showSyncSheet(BuildContext context, ListProvider provider, {required bool 
                           }
                         },
                         icon: const Icon(Icons.exit_to_app),
-                        label: const Text('Quitter la liste partagée'),
+                        label: Text(AppLocalizations.of(context).leaveSharedListAction),
                       ),
                     ],
                     const SizedBox(height: 24),
@@ -4213,12 +3978,12 @@ void _showSyncSheet(BuildContext context, ListProvider provider, {required bool 
                   ]
                 : [
                     Text(
-                      'Synchroniser sur tous les appareils',
+                      AppLocalizations.of(context).tooltipSyncUpload,
                       style: Theme.of(ctx).textTheme.titleLarge,
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Connectez-vous avec le même compte Google sur chaque appareil pour partager la liste en temps réel.',
+                      AppLocalizations.of(context).signInGoogleSameAccount,
                       style: Theme.of(ctx).textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 24),
@@ -4260,10 +4025,12 @@ void _showSyncSheet(BuildContext context, ListProvider provider, {required bool 
 }
 
 /// Bouton + large et facile à taper (gros doigts), retour haptique, taille adaptée à l'écran.
+/// Appui long : choisir le magasin avant d’ajouter.
 class _BigAddButton extends StatelessWidget {
-  const _BigAddButton({required this.onPressed});
+  const _BigAddButton({required this.onPressed, this.onLongPress});
 
   final VoidCallback onPressed;
+  final VoidCallback? onLongPress;
 
   @override
   Widget build(BuildContext context) {
@@ -4275,13 +4042,21 @@ class _BigAddButton extends StatelessWidget {
       child: SizedBox(
         width: size,
         height: size,
-        child: FloatingActionButton(
-          onPressed: () {
-            HapticFeedback.mediumImpact();
-            onPressed();
-          },
-          tooltip: AppLocalizations.of(context).addItem,
-          child: Icon(Icons.add, size: size * 0.5, semanticLabel: AppLocalizations.of(context).addItem),
+        child: GestureDetector(
+          onLongPress: onLongPress == null
+              ? null
+              : () {
+                  HapticFeedback.mediumImpact();
+                  onLongPress!();
+                },
+          child: FloatingActionButton(
+            onPressed: () {
+              HapticFeedback.mediumImpact();
+              onPressed();
+            },
+            tooltip: AppLocalizations.of(context).addItem,
+            child: Icon(Icons.add, size: size * 0.5, semanticLabel: AppLocalizations.of(context).addItem),
+          ),
         ),
       ),
     );

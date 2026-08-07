@@ -1,5 +1,7 @@
 import '../models/shopping_item.dart';
 import '../data/food_taxonomy.dart';
+import 'app_logger.dart';
+import 'food_classifier.dart';
 
 /// Section d’affichage pour l’axe magasin / type.
 class ListAxisSection {
@@ -23,17 +25,30 @@ List<ListAxisSection> groupItemsByAxis(
   List<ShoppingItem> items,
   String axisMode,
 ) {
-  switch (axisMode) {
-    case 'food':
-      return _groupByFood(items);
-    case 'dualStoreFood':
-      return _dualStoreThenFood(items);
-    case 'dualFoodStore':
-      return _dualFoodThenStore(items);
-    case 'store':
-    default:
-      return _groupByStore(items);
-  }
+  return AppLogger.runGuardedSync(
+    'groupItemsByAxis($axisMode)',
+    () {
+      switch (axisMode) {
+        case 'food':
+          return _groupByFood(items);
+        case 'dualStoreFood':
+          return _dualStoreThenFood(items);
+        case 'dualFoodStore':
+          return _dualFoodThenStore(items);
+        case 'store':
+        default:
+          return _groupByStore(items);
+      }
+    },
+    rethrowError: false,
+    fallback: () => [
+      ListAxisSection(
+        key: 'store_0',
+        kind: ListAxisSectionKind.store,
+        items: items,
+      ),
+    ],
+  );
 }
 
 List<ListAxisSection> _groupByStore(List<ShoppingItem> items) {
@@ -61,7 +76,11 @@ List<ListAxisSection> _groupByFood(List<ShoppingItem> items) {
   final order = <String>[];
   final map = <String, List<ShoppingItem>>{};
   for (final item in items) {
-    final id = item.foodCategoryId ?? '_none';
+    final id = FoodClassifier.effectiveCategoryId(
+          item.name,
+          item.foodCategoryId,
+        ) ??
+        '_none';
     if (!map.containsKey(id)) {
       order.add(id);
       map[id] = [];

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show HapticFeedback;
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import '../../../app_config.dart';
-import '../../../core/constants/design_constants.dart';
-import '../../../core/models/birthday_entry.dart';
-import '../../../core/providers/birthdays_provider.dart';
-import '../../../l10n/app_localizations.dart';
+import '../../core/constants/design_constants.dart';
+import '../../core/models/birthday_entry.dart';
+import '../../core/providers/birthdays_provider.dart';
+import '../../core/providers/premium_provider.dart';
+import '../../l10n/app_localizations.dart';
 import 'cake_with_candles_icon.dart';
 
 /// Écran Anniversaires (Toteo+) : liste + rappels J-1 et J-2.
@@ -13,17 +14,20 @@ import 'cake_with_candles_icon.dart';
 class BirthdaysScreen extends StatelessWidget {
   const BirthdaysScreen({super.key});
 
-  static const _monthNames = [
-    'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
-    'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre',
-  ];
+  static List<String> _monthNames(BuildContext context) {
+    final locale = Localizations.localeOf(context).toString();
+    return List.generate(12, (i) {
+      final d = DateTime(2024, i + 1, 1);
+      return DateFormat.MMMM(locale).format(d);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    if (!isToteoPlus) {
+    if (!context.watch<PremiumProvider>().isPremiumActive) {
       return Scaffold(
         appBar: AppBar(title: Text(AppLocalizations.of(context).birthdaysTitle)),
-        body: const Center(child: Text('Disponible en Toteo+')),
+        body: Center(child: Text(AppLocalizations.of(context).scanAvailablePlus)),
       );
     }
     final l10n = AppLocalizations.of(context);
@@ -70,7 +74,7 @@ class BirthdaysScreen extends StatelessWidget {
                             color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                     ),
-                    if (isToteoPlus) ...[
+                    if (context.watch<PremiumProvider>().isPremiumActive) ...[
                       const SizedBox(height: 16),
                       FilledButton.icon(
                         onPressed: () => _showAddBirthdaySheet(
@@ -93,7 +97,7 @@ class BirthdaysScreen extends StatelessWidget {
               final b = list[i];
               return _BirthdayTile(
                 entry: b,
-                monthLabel: _monthNames[b.month - 1],
+                monthLabel: _monthNames(context)[b.month - 1],
                 onTap: () => _showEditBirthdaySheet(context, provider, b),
                 onDelete: () => _confirmDelete(context, provider, b),
               );
@@ -101,7 +105,7 @@ class BirthdaysScreen extends StatelessWidget {
           );
         },
       ),
-      floatingActionButton: isToteoPlus
+      floatingActionButton: context.watch<PremiumProvider>().isPremiumActive
           ? FloatingActionButton.extended(
               onPressed: () => _showAddBirthdaySheet(context, context.read<BirthdaysProvider>()),
               icon: const Icon(Icons.add),
@@ -215,7 +219,7 @@ class BirthdaysScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(DesignConstants.cardBorderRadius),
                               ),
                             ),
-                            items: _monthNames.asMap().entries
+                            items: _monthNames(context).asMap().entries
                                 .map((e) => DropdownMenuItem(value: e.key + 1, child: Text(e.value)))
                                 .toList(),
                             onChanged: (v) => setState(() => month = v ?? 1),
@@ -228,7 +232,7 @@ class BirthdaysScreen extends StatelessWidget {
                       controller: yearController,
                       decoration: InputDecoration(
                         labelText: l10n.birthdayYearOptional,
-                        hintText: 'ex. 1990',
+                        hintText: l10n.birthdayYearHint,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(DesignConstants.cardBorderRadius),
                         ),
@@ -300,7 +304,10 @@ class BirthdaysScreen extends StatelessWidget {
           );
         },
       ),
-    );
+    ).whenComplete(() {
+      nameController.dispose();
+      yearController.dispose();
+    });
   }
 
   static void _confirmDelete(BuildContext context, BirthdaysProvider provider, BirthdayEntry entry) {
@@ -353,7 +360,7 @@ class _BirthdayTile extends StatelessWidget {
     final now = DateTime.now();
     final years = entry.yearsAtNext(now);
     final shortName = BirthdayEntry.abbreviatedName(entry.name);
-    final typeShort = entry.typeShortLabel();
+    final typeShort = BirthdaysScreen._typeLabel(entry.type, l10n);
     final reminderLabel = entry.reminderDaysBefore.map((d) => 'J-$d').join(', ');
 
     String titleLine = '$shortName • $typeShort';
@@ -378,7 +385,7 @@ class _BirthdayTile extends StatelessWidget {
           style: Theme.of(context).textTheme.titleSmall,
         ),
         subtitle: Text(
-          '${entry.name} — ${entry.day} $monthLabel • Rappels $reminderLabel',
+          '${entry.name} — ${entry.day} $monthLabel • ${l10n.birthdaysRemindersPrefix} $reminderLabel',
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),

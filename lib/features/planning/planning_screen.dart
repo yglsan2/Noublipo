@@ -6,6 +6,7 @@ import '../../../core/models/recurring_item.dart';
 import '../../../core/models/seasonal_template.dart';
 import '../../../core/providers/list_provider.dart';
 import '../../../core/providers/planning_provider.dart';
+import '../../../core/utils/content_l10n.dart';
 import '../../../l10n/app_localizations.dart';
 
 /// Écran Planification : achats récurrents et listes saisonnières.
@@ -37,19 +38,20 @@ class _PlanningScreenState extends State<PlanningScreen>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Planification'),
+        title: Text(l10n.planningTitle),
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () => Navigator.of(context).pop(),
-          tooltip: 'Fermer',
+          tooltip: l10n.scanClose,
         ),
         bottom: TabBar(
           controller: _tabController,
-          tabs: const [
-            Tab(text: 'Récurrents', icon: Icon(Icons.repeat)),
-            Tab(text: 'Saisonniers', icon: Icon(Icons.wb_sunny_outlined)),
+          tabs: [
+            Tab(text: l10n.planningTabRecurring, icon: const Icon(Icons.repeat)),
+            Tab(text: l10n.planningTabSeasonal, icon: const Icon(Icons.wb_sunny_outlined)),
           ],
         ),
       ),
@@ -73,11 +75,12 @@ class _RecurringTab extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
         final list = planning.recurringItems;
+        final l10n = AppLocalizations.of(context);
         return ListView(
           padding: const EdgeInsets.all(16),
           children: [
             Text(
-              'Articles que tu achètes à intervalle régulier. Ajoute-les à ta liste quand c\'est le moment.',
+              l10n.planningRecurringIntro,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
@@ -86,20 +89,21 @@ class _RecurringTab extends StatelessWidget {
             OutlinedButton.icon(
               onPressed: () => _showAddRecurringSheet(context, planning),
               icon: const Icon(Icons.add),
-              label: const Text('Créer un achat récurrent'),
+              label: Text(l10n.createRecurringPurchase),
             ),
             if (list.isNotEmpty) ...[
               const SizedBox(height: 8),
               FilledButton.icon(
                 onPressed: () => _fillListWithRecurring(context, list),
                 icon: const Icon(Icons.playlist_add),
-                label: const Text('Remplir la liste avec tous les récurrents'),
+                label: Text(l10n.fillListWithRecurring),
               ),
               const SizedBox(height: 8),
               Builder(
                 builder: (context) {
                   final due = list.where((e) => e.isDue).toList();
                   if (due.isEmpty) return const SizedBox.shrink();
+                  final l10n = AppLocalizations.of(context);
                   return Card(
                     margin: const EdgeInsets.only(bottom: 16),
                     color: Theme.of(context).colorScheme.primaryContainer,
@@ -109,14 +113,14 @@ class _RecurringTab extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            '${due.length} achat(s) récurrent(s) à prévoir',
+                            l10n.recurringDueBanner(due.length),
                             style: Theme.of(context).textTheme.titleSmall,
                           ),
                           const SizedBox(height: 8),
                           FilledButton.tonalIcon(
                             onPressed: () => _fillListWithRecurring(context, due),
                             icon: const Icon(Icons.add_shopping_cart),
-                            label: const Text('Ajouter à la liste'),
+                            label: Text(l10n.addToListItem),
                           ),
                         ],
                       ),
@@ -133,7 +137,7 @@ class _RecurringTab extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        'Aucun achat récurrent.\nEx. : Lait tous les 7 jours.',
+                        l10n.recurringEmptyHint,
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                               color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -143,7 +147,7 @@ class _RecurringTab extends StatelessWidget {
                       FilledButton.icon(
                         onPressed: () => _showAddRecurringSheet(context, planning),
                         icon: const Icon(Icons.add),
-                        label: Text(AppLocalizations.of(context).planningEmptyCta),
+                        label: Text(l10n.planningEmptyCta),
                       ),
                     ],
                   ),
@@ -201,15 +205,18 @@ class _RecurringTab extends StatelessWidget {
   void _confirmDeleteRecurring(
       BuildContext context, PlanningProvider planning, RecurringItem item) {
     HapticFeedback.selectionClick();
+    final l10n = AppLocalizations.of(context);
     showDialog<void>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Supprimer ce récurrent ?'),
-        content: Text('« ${item.name } » ne sera plus dans tes achats récurrents.'),
+        title: Text(l10n.deleteRecurringConfirmTitle),
+        content: Text(l10n.deleteRecurringConfirmBody(
+          localizedProductName(l10n, item.name),
+        )),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx),
-            child: const Text('Annuler'),
+            child: Text(l10n.cancel),
           ),
           FilledButton(
             onPressed: () async {
@@ -219,7 +226,7 @@ class _RecurringTab extends StatelessWidget {
             style: FilledButton.styleFrom(
               backgroundColor: Theme.of(context).colorScheme.error,
             ),
-            child: const Text('Supprimer'),
+            child: Text(l10n.delete),
           ),
         ],
       ),
@@ -236,7 +243,9 @@ class _RecurringTab extends StatelessWidget {
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Ajouté : ${item.name}'),
+          content: Text(AppLocalizations.of(context).addedItemSnack(
+            localizedProductName(AppLocalizations.of(context), item.name),
+          )),
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -257,7 +266,7 @@ class _RecurringTab extends StatelessWidget {
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('${items.length} article(s) ajouté(s) à la liste'),
+          content: Text(AppLocalizations.of(context).addedItemsToListSnack(items.length)),
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -280,16 +289,18 @@ class _RecurringTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final displayName = localizedProductName(l10n, item.name);
     final color = AppColors.categoryColors[
         item.colorIndex % AppColors.categoryColors.length];
     final days = item.daysSinceLastCheck;
     final isDue = item.isDue;
     String subtitle;
     if (days == null) {
-      subtitle = 'Jamais acheté • Tous les ${item.recurrenceDays} j';
+      subtitle = l10n.neverBoughtEveryDays(item.recurrenceDays);
     } else {
-      subtitle =
-          'Il y a $days j • Tous les ${item.recurrenceDays} j${isDue ? " • À acheter" : ""}';
+      subtitle = l10n.boughtDaysAgoEveryDays(days, item.recurrenceDays) +
+          (isDue ? l10n.dueToBuySuffix : '');
     }
     return Card(
       margin: const EdgeInsets.only(bottom: 8),
@@ -297,14 +308,14 @@ class _RecurringTile extends StatelessWidget {
         leading: CircleAvatar(
           backgroundColor: color.withValues(alpha: 0.3),
           child: Text(
-            item.name.isNotEmpty ? item.name[0].toUpperCase() : '?',
+            displayName.isNotEmpty ? displayName[0].toUpperCase() : '?',
             style: TextStyle(
               color: color,
               fontWeight: FontWeight.bold,
             ),
           ),
         ),
-        title: Text(item.name),
+        title: Text(displayName),
         subtitle: Text(subtitle),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
@@ -312,7 +323,7 @@ class _RecurringTile extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.add_shopping_cart),
               onPressed: onAddToList,
-              tooltip: 'Ajouter à la liste',
+              tooltip: l10n.addToListItem,
             ),
             PopupMenuButton<String>(
               icon: const Icon(Icons.more_vert),
@@ -321,10 +332,10 @@ class _RecurringTile extends StatelessWidget {
                 if (v == 'delete') onDelete();
               },
               itemBuilder: (context) => [
-                const PopupMenuItem(value: 'edit', child: Text('Modifier')),
-                const PopupMenuItem(
+                PopupMenuItem(value: 'edit', child: Text(l10n.modify)),
+                PopupMenuItem(
                   value: 'delete',
-                  child: Text('Supprimer', style: TextStyle(color: Colors.red)),
+                  child: Text(l10n.delete, style: const TextStyle(color: Colors.red)),
                 ),
               ],
             ),
@@ -377,6 +388,7 @@ class _RecurringFormSheetState extends State<_RecurringFormSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Padding(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -390,16 +402,16 @@ class _RecurringFormSheetState extends State<_RecurringFormSheet> {
             children: [
               Text(
                 widget.initialName == null
-                    ? 'Nouvel achat récurrent'
-                    : 'Modifier l\'achat récurrent',
+                    ? l10n.newRecurringPurchase
+                    : l10n.editRecurringPurchase,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 16),
               TextField(
                 controller: _nameController,
-                decoration: const InputDecoration(
-                  labelText: 'Article',
-                  hintText: 'Ex. Lait',
+                decoration: InputDecoration(
+                  labelText: l10n.articleLabel,
+                  hintText: l10n.articleHintExample,
                 ),
                 textCapitalization: TextCapitalization.sentences,
               ),
@@ -408,21 +420,22 @@ class _RecurringFormSheetState extends State<_RecurringFormSheet> {
                 spacing: 8,
                 children: presetDays.map((d) {
                   final selected = _days == d;
+                  final label = d == 7
+                      ? l10n.freqOncePerWeek
+                      : d == 14
+                          ? l10n.freqOncePerTwoWeeks
+                          : d == 30
+                              ? l10n.freqOncePerMonth
+                              : l10n.freqEveryDays(d);
                   return ChoiceChip(
-                    label: Text(d == 7
-                        ? '1× / semaine'
-                        : d == 14
-                            ? '1× / 2 sem.'
-                            : d == 30
-                                ? '1× / mois'
-                                : 'Tous les $d j'),
+                    label: Text(label),
                     selected: selected,
                     onSelected: (v) => setState(() => _days = d),
                   );
                 }).toList(),
               ),
               const SizedBox(height: 12),
-              Text('Couleur',
+              Text(l10n.colorLabel,
                   style: Theme.of(context).textTheme.labelMedium),
               const SizedBox(height: 4),
               Wrap(
@@ -454,7 +467,7 @@ class _RecurringFormSheetState extends State<_RecurringFormSheet> {
                   if (name.isEmpty) return;
                   widget.onSave(name, _colorIndex, _days);
                 },
-                child: const Text('Enregistrer'),
+                child: Text(l10n.saveButton),
               ),
             ],
           ),
@@ -473,11 +486,12 @@ class _SeasonalTab extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
         final templates = planning.seasonalTemplates;
+        final l10n = AppLocalizations.of(context);
         return ListView(
           padding: const EdgeInsets.all(16),
           children: [
             Text(
-              'Listes d\'achats pour une occasion (Noël, rentrée…). Tu peux ajouter tous les articles d\'un coup à ta liste.',
+              l10n.seasonalIntro,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
                   ),
@@ -496,14 +510,25 @@ class _SeasonalTab extends StatelessWidget {
   void _addSeasonalToList(BuildContext context, SeasonalTemplate template) {
     HapticFeedback.selectionClick();
     final listProvider = context.read<ListProvider>();
+    final l10n = AppLocalizations.of(context);
+    final tplName = localizedSeasonalTemplateName(
+      l10n,
+      template.id,
+      fallbackName: template.name,
+    );
     for (final item in template.items) {
-      listProvider.addItem(item.name, colorIndex: item.colorIndex);
+      listProvider.addItem(
+        item.name,
+        colorIndex: item.colorIndex,
+      );
     }
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(
-              '${template.items.length} article(s) ajoutés (${template.name})'),
+          content: Text(l10n.seasonalAddedSnack(
+            template.items.length,
+            tplName,
+          )),
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -522,6 +547,12 @@ class _SeasonalCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final title = localizedSeasonalTemplateName(
+      l10n,
+      template.id,
+      fallbackName: template.name,
+    );
     return Card(
       margin: const EdgeInsets.only(bottom: 12),
       child: Padding(
@@ -533,7 +564,7 @@ class _SeasonalCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    template.name,
+                    title,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -542,7 +573,7 @@ class _SeasonalCard extends StatelessWidget {
                 FilledButton.tonalIcon(
                   onPressed: onAddAll,
                   icon: const Icon(Icons.add),
-                  label: const Text('Tout ajouter'),
+                  label: Text(l10n.addAll),
                 ),
               ],
             ),
@@ -554,7 +585,7 @@ class _SeasonalCard extends StatelessWidget {
                 children: template.items
                     .map((e) => Chip(
                           label: Text(
-                            e.name,
+                            localizedProductName(l10n, e.name),
                             style: Theme.of(context).textTheme.labelSmall,
                           ),
                           visualDensity: VisualDensity.compact,

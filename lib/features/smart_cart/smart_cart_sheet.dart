@@ -7,9 +7,12 @@ import '../../core/providers/gamification_provider.dart';
 import '../../core/providers/list_provider.dart';
 import '../../core/providers/planning_provider.dart';
 import '../../core/providers/premium_provider.dart';
+import '../../core/utils/content_l10n.dart';
 import '../../l10n/app_localizations.dart';
 import '../paywall/paywall_screen.dart';
+import '../planning/planning_screen.dart';
 import 'panic_checkout_sheet.dart';
+import 'probable_list_sheet.dart';
 
 const int _kYouMightForgetInitialCount = 8;
 
@@ -82,6 +85,7 @@ class SmartCartSheet extends StatefulWidget {
     required PlanningProvider planning,
     required ListProvider listProvider,
     required GamificationProvider gamification,
+    required AppLocalizations l10n,
     ConsumptionProfileProvider? profile,
     int mostBoughtTop = 8,
   }) {
@@ -113,7 +117,7 @@ class SmartCartSheet extends StatefulWidget {
         name: s.name,
         colorIndex: s.colorIndex,
         fromHistoryRhythm: true,
-        rhythmHint: 'tous les ${s.medianIntervalDays}j',
+        rhythmHint: l10n.smartCartRhythmEveryDays(s.medianIntervalDays),
       ));
     }
     for (final e in gamification.mostBoughtProducts(top: mostBoughtTop)) {
@@ -136,24 +140,38 @@ class _SmartCartSheetState extends State<SmartCartSheet> {
   /// Noms (lowercase) des suggestions que l'utilisateur a ignorées cette session.
   final Set<String> _dismissedSuggestions = {};
 
-  /// Suggère des noms selon le contexte (saison, heure). Ex: froid -> thé, soupe ; matin -> café.
-  static List<String> getContextSuggestions(DateTime now, ListProvider listProvider) {
+  /// Suggestions contextuelles basées sur l’historique (plus de mock Thé/Soupe).
+  static List<YouMightForgetItem> getContextSuggestions(
+    DateTime now,
+    ListProvider listProvider,
+    GamificationProvider gamification,
+    AppLocalizations l10n,
+  ) {
     final onList = listProvider.currentItemNames.map((n) => n.toLowerCase()).toSet();
-    final month = now.month;
-    final hour = now.hour;
-    final suggestions = <String>[];
-    bool notOnList(String name) => !onList.any((n) => n.contains(name.toLowerCase()));
-    // Hiver (nov, déc, janv, fév) : thé, soupe
-    if (month >= 11 || month <= 2) {
-      for (final name in ['Thé', 'Soupe']) {
-        if (notOnList(name)) suggestions.add(name);
+    final result = <YouMightForgetItem>[];
+    final seen = <String>{};
+    for (final s in gamification.dueRepurchaseSuggestions()) {
+      final key = s.name.trim().toLowerCase();
+      if (onList.contains(key) || seen.contains(key)) continue;
+      seen.add(key);
+      result.add(YouMightForgetItem(
+        name: s.name,
+        colorIndex: s.colorIndex,
+        fromHistoryRhythm: true,
+        rhythmHint: l10n.smartCartRhythmEveryDays(s.medianIntervalDays),
+      ));
+      if (result.length >= 4) break;
+    }
+    if (result.length < 4) {
+      for (final e in gamification.mostBoughtProducts(top: 8)) {
+        final key = e.name.trim().toLowerCase();
+        if (onList.contains(key) || seen.contains(key)) continue;
+        seen.add(key);
+        result.add(YouMightForgetItem(name: e.name, fromHistoryRhythm: false, rhythmHint: null));
+        if (result.length >= 4) break;
       }
     }
-    // Matin (avant 10h) : café
-    if (hour < 10 && notOnList('Café')) {
-      suggestions.add('Café');
-    }
-    return suggestions;
+    return result;
   }
 
   @override
@@ -195,20 +213,25 @@ class _SmartCartSheetState extends State<SmartCartSheet> {
       planning: planning,
       listProvider: listProvider,
       gamification: gamification,
+      l10n: l10n,
       profile: profile,
     );
     final youMightForget = youMightForgetRaw
         .where((e) => !_dismissedSuggestions.contains(e.name.trim().toLowerCase()))
         .toList();
-    final contextItems = getContextSuggestions(DateTime.now(), listProvider);
+    final contextItems = getContextSuggestions(DateTime.now(), listProvider, gamification, l10n)
+        .where((e) => !_dismissedSuggestions.contains(e.name.trim().toLowerCase()))
+        .toList();
     final hasUnchecked = listProvider.items.any((e) => !e.checked);
 
     return Semantics(
       label: l10n.smartCartTitle,
-      child: DraggableScrollableSheet(
-      initialChildSize: 0.5,
+      child: DefaultTabController(
+        length: 2,
+        child: DraggableScrollableSheet(
+      initialChildSize: 0.55,
       minChildSize: 0.3,
-      maxChildSize: 0.9,
+      maxChildSize: 0.92,
       expand: false,
       builder: (context, scrollController) {
         return SafeArea(
@@ -216,7 +239,7 @@ class _SmartCartSheetState extends State<SmartCartSheet> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+                padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -231,24 +254,61 @@ class _SmartCartSheetState extends State<SmartCartSheet> {
                             color: Theme.of(context).colorScheme.onSurfaceVariant,
                           ),
                     ),
+                    const SizedBox(height: 8),
+                    TabBar(
+                      tabs: [
+                        Tab(text: l10n.smartCartTabForget),
+                        Tab(text: l10n.smartCartTabWeek),
+                      ],
+                    ),
                   ],
                 ),
               ),
               Expanded(
-                child: ListView(
+                child: TabBarView(
+                  children: [
+                    ListView(
                   controller: scrollController,
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
                   children: [
                     if (youMightForget.isEmpty && dueRecurring.isEmpty && contextItems.isEmpty && !hasUnchecked)
                       Padding(
                         padding: const EdgeInsets.all(24),
-                        child: Center(
-                          child: Text(
-                            l10n.smartCartNoSuggestions,
-                            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                  color: Theme.of(context).colorScheme.onSurfaceVariant,
-                                ),
-                          ),
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.psychology_outlined,
+                              size: 48,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              l10n.smartCartEmptyTitle,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              l10n.smartCartEmptyBody,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                                  ),
+                            ),
+                            const SizedBox(height: 20),
+                            OutlinedButton.icon(
+                              onPressed: () {
+                                Navigator.pop(context);
+                                Navigator.of(context).push(
+                                  MaterialPageRoute<void>(
+                                    builder: (_) => const PlanningScreen(),
+                                  ),
+                                );
+                              },
+                              icon: const Icon(Icons.event_repeat_outlined),
+                              label: Text(l10n.smartCartEmptyCtaPlanning),
+                            ),
+                          ],
                         ),
                       )
                     else ...[
@@ -301,39 +361,33 @@ class _SmartCartSheetState extends State<SmartCartSheet> {
                         _sectionTitle(context, l10n.smartCartContextTitle),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 8),
-                          child: Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    l10n.smartCartContextCold,
-                                    style: Theme.of(context).textTheme.bodyLarge,
+                          child: _YouMightForgetCard(
+                            items: contextItems,
+                            listProvider: listProvider,
+                            onDismiss: (name) {
+                              HapticFeedback.selectionClick();
+                              setState(() => _dismissedSuggestions.add(name.trim().toLowerCase()));
+                            },
+                            onAddAll: () async {
+                              HapticFeedback.selectionClick();
+                              var count = 0;
+                              for (final item in contextItems) {
+                                await listProvider.addItem(
+                                  item.name,
+                                  colorIndex: item.colorIndex,
+                                );
+                                count++;
+                              }
+                              if (context.mounted) {
+                                Navigator.pop(context);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(l10n.smartCartAddedCount(count)),
+                                    behavior: SnackBarBehavior.floating,
                                   ),
-                                  const SizedBox(height: 12),
-                                  FilledButton.icon(
-                                    onPressed: () {
-                                      HapticFeedback.selectionClick();
-                                      for (final name in contextItems) {
-                                        listProvider.addItem(name, colorIndex: 0);
-                                      }
-                                      if (context.mounted) {
-                                        Navigator.pop(context);
-                                        ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(
-                                            content: Text(AppLocalizations.of(context).addToListItem),
-                                            behavior: SnackBarBehavior.floating,
-                                          ),
-                                        );
-                                      }
-                                    },
-                                    icon: const Icon(Icons.add_circle_outline, size: 20),
-                                    label: Text(l10n.smartCartContextCheck),
-                                  ),
-                                ],
-                              ),
-                            ),
+                                );
+                              }
+                            },
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -367,12 +421,16 @@ class _SmartCartSheetState extends State<SmartCartSheet> {
                     ],
                   ],
                 ),
+                    const ProbableListSheet(embedded: true),
+                  ],
+                ),
               ),
             ],
           ),
         );
       },
     ),
+      ),
   );
   }
 
@@ -467,8 +525,10 @@ class _YouMightForgetCardState extends State<_YouMightForgetCard> {
                           : null,
                       label: Text(
                         item.rhythmHint != null
-                            ? '${item.name} · ${item.rhythmHint}'
-                            : item.name,
+                            ? '${localizedProductName(l10n, item.name)} · ${item.rhythmHint}'
+                            : (item.fromHistoryRhythm
+                                ? localizedProductName(l10n, item.name)
+                                : '${localizedProductName(l10n, item.name)} · ${l10n.smartCartWhyOften}'),
                       ),
                       deleteIcon: Semantics(
                         label: l10n.smartCartNotThisTime,
@@ -549,21 +609,22 @@ class _DueRecurringTile extends StatelessWidget {
           children: [
             Text(
               l10n.smartCartDueMessage(
-                item.name,
+                localizedProductName(l10n, item.name),
                 days,
                 item.recurrenceDays,
               ),
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+            Wrap(
+              alignment: WrapAlignment.end,
+              spacing: 8,
+              runSpacing: 8,
               children: [
                 TextButton(
                   onPressed: onNotThisTime,
                   child: Text(l10n.smartCartNotThisTime),
                 ),
-                const SizedBox(width: 8),
                 FilledButton(
                   onPressed: onAdd,
                   child: Text(l10n.smartCartAddToList),

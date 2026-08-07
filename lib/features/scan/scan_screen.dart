@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:provider/provider.dart';
-import '../../../app_config.dart';
-import '../../../core/providers/list_provider.dart';
-import '../../../core/providers/settings_provider.dart';
-import '../../../core/services/open_food_facts_service.dart';
-import '../../../core/services/storage_service.dart';
-import '../../../core/ui/app_feedback.dart';
-import '../../../l10n/app_localizations.dart';
+import '../../core/providers/list_provider.dart';
+import '../../core/providers/premium_provider.dart';
+import '../../core/providers/settings_provider.dart';
+import '../../core/services/open_food_facts_service.dart';
+import '../../core/services/storage_service.dart';
+import '../../core/ui/app_feedback.dart';
+import '../../l10n/app_localizations.dart';
 
 /// Écran de scan de code-barres (Toteo+) : ajoute le produit scanné à la liste actuelle.
 class ScanScreen extends StatefulWidget {
@@ -50,7 +50,7 @@ class _ScanScreenState extends State<ScanScreen> {
   }
 
   Future<void> _onDetect(BarcodeCapture capture) async {
-    if (!isToteoPlus || !mounted || _hasScanned) return;
+    if (!context.read<PremiumProvider>().isPremiumActive || !mounted || _hasScanned) return;
     final barcodes = capture.barcodes;
     if (barcodes.isEmpty) return;
     final barcode = barcodes.first;
@@ -69,7 +69,7 @@ class _ScanScreenState extends State<ScanScreen> {
       final result = await OpenFoodFactsService.lookupByBarcode(code);
       final found = result.productName != null && result.productName!.isNotEmpty;
       final displayName = settings.applyCapitalization(
-        found ? result.productName! : 'Article ($code)',
+        found ? result.productName! : l10n.scanUnknownArticle(code),
       );
 
       await listProvider.addItem(displayName);
@@ -92,7 +92,7 @@ class _ScanScreenState extends State<ScanScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (!isToteoPlus) {
+    if (!context.read<PremiumProvider>().isPremiumActive) {
       return Scaffold(
         appBar: AppBar(title: Text(AppLocalizations.of(context).scanTitle)),
         body: Center(child: Text(AppLocalizations.of(context).scanAvailablePlus)),

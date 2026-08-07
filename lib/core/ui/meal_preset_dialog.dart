@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../data/meal_presets.dart';
+import '../utils/content_l10n.dart';
 import '../../l10n/app_localizations.dart';
 
 /// Origine d’un article déjà « couvert » pour un preset repas.
@@ -16,6 +17,7 @@ Future<String?> showMealPresetDialog(
   Map<String, MealOwnedSource> ownedSources = const {},
 }) {
   final l10n = AppLocalizations.of(context);
+  final displayMeal = localizedMealPresetLabel(l10n, preset.id);
   final missing = preset.items
       .where((e) => !alreadyOwnedLower.contains(e.name.trim().toLowerCase()))
       .toList();
@@ -39,7 +41,7 @@ Future<String?> showMealPresetDialog(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              l10n.mealPresetTitle(preset.label),
+              l10n.mealPresetTitle(displayMeal),
               style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 8),
@@ -66,17 +68,18 @@ Future<String?> showMealPresetDialog(
                   children: [
                     for (final item in missing)
                       _MealRow(
-                        name: item.name,
+                        name: localizedProductName(l10n, item.name),
                         missing: true,
                         trailingLabel: l10n.mealPresetNeedIt,
                       ),
                     for (final item in owned)
                       _MealRow(
-                        name: item.name,
+                        name: localizedProductName(l10n, item.name),
                         missing: false,
                         trailingLabel: _sourceLabel(
                           l10n,
-                          ownedSources[item.name.trim().toLowerCase()] ?? MealOwnedSource.list,
+                          ownedSources[item.name.trim().toLowerCase()] ??
+                              MealOwnedSource.list,
                         ),
                       ),
                   ],

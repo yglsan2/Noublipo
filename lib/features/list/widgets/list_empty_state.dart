@@ -4,7 +4,7 @@ import '../../../core/constants/touch_constants.dart';
 import '../../../core/layout/screen_layout.dart';
 import '../../../l10n/app_localizations.dart';
 
-/// État vide de la liste : message central + optionnel chip "Ajout rapide" et ligne "Aucun résultat".
+/// État vide de la liste : message Recall + CTA + option habituels / ajout rapide.
 class ListEmptyState extends StatelessWidget {
   const ListEmptyState({
     super.key,
@@ -14,7 +14,11 @@ class ListEmptyState extends StatelessWidget {
     required this.onClearSearch,
     required this.onTapAdd,
     this.onQuickAdd,
+    this.onAddUsuals,
+    this.onMealPresets,
     this.showQuickAddChip = false,
+    this.showUsualsChip = false,
+    this.showMealPresetsChip = false,
     this.contentPaddingHorizontal = 16,
   });
 
@@ -24,26 +28,67 @@ class ListEmptyState extends StatelessWidget {
   final VoidCallback onClearSearch;
   final VoidCallback onTapAdd;
   final VoidCallback? onQuickAdd;
+  final VoidCallback? onAddUsuals;
+  final VoidCallback? onMealPresets;
   final bool showQuickAddChip;
+  final bool showUsualsChip;
+  final bool showMealPresetsChip;
   final double contentPaddingHorizontal;
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
-        if (showQuickAddChip && onQuickAdd != null)
+        if ((showUsualsChip && onAddUsuals != null) ||
+            (showQuickAddChip && onQuickAdd != null) ||
+            (showMealPresetsChip && onMealPresets != null))
           Padding(
             padding: EdgeInsets.symmetric(horizontal: contentPaddingHorizontal, vertical: 6),
             child: Align(
               alignment: Alignment.centerLeft,
-              child: ActionChip(
-                avatar: Icon(Icons.bolt, size: 18, color: Theme.of(context).colorScheme.primary),
-                label: Text(AppLocalizations.of(context).quickAdd),
-                onPressed: () {
-                  HapticFeedback.selectionClick();
-                  onQuickAdd!();
-                },
+              child: Wrap(
+                spacing: 8,
+                runSpacing: 6,
+                children: [
+                  if (showUsualsChip && onAddUsuals != null)
+                    Tooltip(
+                      message: l10n.usualsChipTooltip,
+                      child: ActionChip(
+                        avatar: Icon(Icons.history, size: 18, color: Theme.of(context).colorScheme.primary),
+                        label: Text(l10n.addYourUsualItems),
+                        onPressed: () {
+                          HapticFeedback.selectionClick();
+                          onAddUsuals!();
+                        },
+                      ),
+                    ),
+                  if (showQuickAddChip && onQuickAdd != null)
+                    Tooltip(
+                      message: l10n.quickAddChipTooltip,
+                      child: ActionChip(
+                        avatar: Icon(Icons.bolt, size: 18, color: Theme.of(context).colorScheme.primary),
+                        label: Text(l10n.quickAdd),
+                        onPressed: () {
+                          HapticFeedback.selectionClick();
+                          onQuickAdd!();
+                        },
+                      ),
+                    ),
+                  if (showMealPresetsChip && onMealPresets != null)
+                    Tooltip(
+                      message: l10n.mealPresetsChipTooltip,
+                      child: ActionChip(
+                        avatar: Icon(Icons.restaurant_menu_outlined, size: 18, color: Theme.of(context).colorScheme.primary),
+                        label: Text(l10n.mealPresetsMenu),
+                        onPressed: () {
+                          HapticFeedback.selectionClick();
+                          onMealPresets!();
+                        },
+                      ),
+                    ),
+                ],
               ),
             ),
           ),
@@ -56,7 +101,7 @@ class ListEmptyState extends StatelessWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
-                    AppLocalizations.of(context).noMatchForSearch(searchQuery),
+                    l10n.noMatchForSearch(searchQuery),
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey.shade700),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -64,7 +109,7 @@ class ListEmptyState extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: onClearSearch,
-                  child: Text(AppLocalizations.of(context).clear),
+                  child: Text(l10n.clear),
                 ),
               ],
             ),
@@ -82,7 +127,8 @@ class ListEmptyState extends StatelessWidget {
                         maxWidth: c.maxWidth.clamp(0, 400),
                         maxHeight: c.maxHeight.clamp(0, 400),
                       ),
-                      child: InkWell(
+                      child: SingleChildScrollView(
+                        child: InkWell(
                         onTap: () {
                           HapticFeedback.lightImpact();
                           if (isSearchEmpty) {
@@ -105,23 +151,47 @@ class ListEmptyState extends StatelessWidget {
                               ),
                               SizedBox(height: layout.isTablet ? 20 : 16),
                               Text(
-                                isSearchEmpty ? AppLocalizations.of(context).noResults : AppLocalizations.of(context).emptyList,
+                                isSearchEmpty ? l10n.noResults : l10n.emptyList,
                                 style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.grey),
                                 textAlign: TextAlign.center,
                               ),
                               const SizedBox(height: 8),
                               Text(
                                 isSearchEmpty
-                                    ? AppLocalizations.of(context).clearSearchToSeeAll
-                                    : AppLocalizations.of(context).tapToAdd,
+                                    ? l10n.clearSearchToSeeAll
+                                    : l10n.emptyListRecallHint,
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey),
-                                maxLines: 2,
+                                maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
                               ),
+                              if (!isSearchEmpty && showMealPresetsChip) ...[
+                                const SizedBox(height: 10),
+                                Text(
+                                  l10n.emptyListTypeHint,
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                        color: Theme.of(context).colorScheme.primary,
+                                      ),
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                              if (!isSearchEmpty) ...[
+                                const SizedBox(height: 16),
+                                FilledButton.icon(
+                                  onPressed: () {
+                                    HapticFeedback.lightImpact();
+                                    onTapAdd();
+                                  },
+                                  icon: const Icon(Icons.add),
+                                  label: Text(l10n.tapToAdd),
+                                ),
+                              ],
                             ],
                           ),
                         ),
+                      ),
                       ),
                     ),
                   ),

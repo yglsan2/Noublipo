@@ -23,8 +23,19 @@ migrate_working_dir/
 # is commented out by default.
 #.vscode/
 
-# Flutter/Dart/Pub related
-**/doc/api/
+# Local l10n tooling
+.venv-l10n/
+tool/l10n_cache/
+tool/l10n_cache_prod/
+tool/l10n_cache_re/
+tool/l10n_cache_stats_planning/
+tool/l10n_cache_stubs/
+tool/l10n_logs/
+tool/l10n_missing/
+tool/l10n_pids/
+tool/__pycache__/
+tool/content_l10n_meta.json
+
 **/ios/Flutter/.last_build_id
 .dart_tool/
 .flutter-plugins-dependencies

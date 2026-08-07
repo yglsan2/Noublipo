@@ -1,6 +1,10 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/widgets.dart' show WidgetsBinding;
 import 'package:home_widget/home_widget.dart';
 import '../models/shopping_list_model.dart';
+import '../utils/content_l10n.dart';
+import '../utils/list_display_name.dart';
+import '../../l10n/app_localizations.dart';
 
 /// Nombre max d'articles affichés dans le widget « grand ».
 const int homeWidgetMaxItemNames = 5;
@@ -12,12 +16,15 @@ Future<void> updateHomeWidgetFromList(ShoppingListModel list) async {
   try {
     final uncheckedItems = list.items.where((e) => !e.checked).toList();
     final unchecked = uncheckedItems.length;
-    await HomeWidget.saveWidgetData<String>('list_name', list.name);
+    final locale = WidgetsBinding.instance.platformDispatcher.locale;
+    final l10n = lookupAppLocalizations(locale);
+    final displayName = localizedShoppingListName(l10n, list);
+    await HomeWidget.saveWidgetData<String>('list_name', displayName);
     await HomeWidget.saveWidgetData<int>('unchecked_count', unchecked);
     for (var i = 0; i < homeWidgetMaxItemNames; i++) {
       await HomeWidget.saveWidgetData<String>(
         'item_$i',
-        i < uncheckedItems.length ? uncheckedItems[i].name : '',
+        i < uncheckedItems.length ? localizedProductName(l10n, uncheckedItems[i].name) : '',
       );
     }
     await HomeWidget.updateWidget(androidName: 'ToteoWidgetProvider');

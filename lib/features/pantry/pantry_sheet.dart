@@ -8,6 +8,7 @@ import '../../core/providers/gamification_provider.dart';
 import '../../core/providers/list_provider.dart';
 import '../../core/providers/pantry_provider.dart';
 import '../../core/providers/premium_provider.dart';
+import '../../core/utils/content_l10n.dart';
 import '../../l10n/app_localizations.dart';
 import '../paywall/paywall_screen.dart';
 
@@ -41,9 +42,10 @@ class _PantrySheetState extends State<PantrySheet> {
     _nameCtrl.clear();
     HapticFeedback.lightImpact();
     if (context.mounted) {
+      final l10n = AppLocalizations.of(context);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(AppLocalizations.of(context).pantryAddedSnack(name)),
+          content: Text(l10n.pantryAddedSnack(localizedProductName(l10n, name))),
           behavior: SnackBarBehavior.floating,
           duration: const Duration(seconds: 2),
         ),
@@ -69,7 +71,9 @@ class _PantrySheetState extends State<PantrySheet> {
     if (already) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(l10n.pantryEmptyAlreadyOnList(emptied.name)),
+          content: Text(l10n.pantryEmptyAlreadyOnList(
+            localizedProductName(l10n, emptied.name),
+          )),
           behavior: SnackBarBehavior.floating,
         ),
       );
@@ -82,7 +86,9 @@ class _PantrySheetState extends State<PantrySheet> {
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(l10n.pantryAutoAdded(emptied.name)),
+        content: Text(l10n.pantryAutoAdded(
+          localizedProductName(l10n, emptied.name),
+        )),
         behavior: SnackBarBehavior.floating,
         action: SnackBarAction(
           label: l10n.undo,
@@ -286,7 +292,7 @@ class _PantrySheetState extends State<PantrySheet> {
                       final s = quickAdd[i];
                       return ActionChip(
                         avatar: const Icon(Icons.bolt, size: 16),
-                        label: Text(s.name),
+                        label: Text(localizedProductName(l10n, s.name)),
                         onPressed: () async {
                           HapticFeedback.selectionClick();
                           await pantry.upsert(name: s.name, quantity: 1);
@@ -440,7 +446,7 @@ class _PantryTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      item.name,
+                      localizedProductName(l10n, item.name),
                       style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
                     ),
                     Text(

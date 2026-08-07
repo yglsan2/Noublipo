@@ -18,371 +18,375 @@ class AppLocalizationsHr extends AppLocalizations {
   String get appTagline => 'Lista koja ništa ne zaboravlja!';
 
   @override
-  String get searchHint => 'Search in list';
+  String get searchHint => 'Traži na popisu';
 
   @override
   String get totalLabel => 'Total';
 
   @override
-  String get addItem => 'Add item';
+  String get addItem => 'Dodaj stavku';
 
   @override
-  String get addToWhichStore => 'Ajouter à quel magasin ?';
+  String get addToWhichStore => 'Dodati u koju trgovinu?';
 
   @override
-  String get otherStore => 'Autre magasin';
+  String get otherStore => 'Druga trgovina';
 
   @override
-  String get manageStores => 'Gérer les magasins';
+  String get manageStores => 'Upravljajte trgovinama';
 
   @override
   String get manageStoresSubtitle =>
-      'Ajouter, renommer ou supprimer un magasin';
+      'Dodavanje, preimenovanje ili brisanje trgovine';
 
   @override
-  String get renameStore => 'Renommer';
+  String get renameStore => 'Preimenovati';
 
   @override
-  String get deleteStore => 'Supprimer le magasin';
+  String get deleteStore => 'Izbriši trgovinu';
 
   @override
-  String get storeDeletedSnackbar => 'Magasin supprimé';
+  String get storeDeletedSnackbar => 'Trgovina izbrisana';
 
   @override
-  String get storeNameOrUnset => 'Sans nom';
+  String get storeNameOrUnset => 'Neimenovano';
 
   @override
   String get manageStoresHint =>
-      'Touchez un magasin pour le renommer, ou supprimez-le pour le retirer de la liste.';
+      'Dodirnite trgovinu da biste je preimenovali ili je izbrišite da biste je uklonili s popisa.';
 
   @override
-  String get tapToSetStoreName => 'Touchez pour définir un nom';
+  String get tapToSetStoreName => 'Dodirnite za postavljanje imena';
 
   @override
-  String get emptyList => 'Empty list';
+  String get emptyList => 'Prazna lista';
 
   @override
-  String get tapToAdd => 'Tap here or + to add an item';
+  String get tapToAdd => 'Dodirnite ovdje ili + za dodavanje stavke';
 
   @override
-  String get settings => 'Settings';
+  String get settings => 'postavke';
 
   @override
-  String get languageLabel => 'Langue';
+  String get languageLabel => 'Jezik';
 
   @override
-  String get languageSystem => 'Système';
+  String get languageSystem => 'sustav';
 
   @override
   String get languageSelectorHint =>
-      'La langue du téléphone est utilisée par défaut. Cliquez sur un drapeau pour changer.';
+      'Jezik telefona koristi se prema zadanim postavkama. Dodirnite zastavu za promjenu.';
 
   @override
-  String get share => 'Share';
+  String get share => 'Udio';
 
   @override
-  String get more => 'More';
+  String get more => 'Više';
 
   @override
-  String get catalogAndInspiration => 'Catalog & inspiration';
+  String get catalogAndInspiration => 'Katalog i inspiracija';
 
   @override
-  String get planningRecurrentSeasonal => 'Planning (recurring & seasonal)';
+  String get planningRecurrentSeasonal =>
+      'Planiranje (ponavljajuće i sezonsko)';
 
   @override
-  String get scanBarcode => 'Scan barcode';
+  String get scanBarcode => 'Skeniraj crtični kod';
 
   @override
-  String get quickAddListArticles => 'Quick add (list + items)';
+  String get quickAddListArticles => 'Brzo dodavanje (popis + stavke)';
 
   @override
-  String get selectItems => 'Select items';
+  String get selectItems => 'Odaberite stavke';
 
   @override
-  String get removeChecked => 'Remove checked';
+  String get removeChecked => 'Ukloni označeno';
 
   @override
-  String get newList => 'New list';
+  String get newList => 'Novi popis';
 
   @override
-  String get duplicateList => 'Duplicate list';
+  String get duplicateList => 'Duplicirani popis';
 
   @override
-  String get saveAsTemplate => 'Save as template';
+  String get saveAsTemplate => 'Spremi kao predložak';
 
   @override
-  String get newFromTemplate => 'New list from template';
+  String get newFromTemplate => 'Novi popis iz predloška';
 
   @override
-  String get stats => 'Statistics';
+  String get stats => 'Statistika';
 
   @override
-  String get listDuplicated => 'List duplicated';
+  String get listDuplicated => 'Popis je dupliciran';
 
   @override
-  String get quickAdd => 'Quick add';
+  String get quickAdd => 'Brzo dodavanje';
 
   @override
   String noMatchForSearch(String query) {
-    return 'No item matches \"$query\"';
+    return 'Nijedna stavka ne odgovara \"$query\"';
   }
 
   @override
-  String get clear => 'Clear';
+  String get clear => 'Jasan';
 
   @override
-  String get noResults => 'No results';
+  String get noResults => 'Nema rezultata';
 
   @override
-  String get clearSearchToSeeAll => 'Clear search to see all items';
+  String get clearSearchToSeeAll =>
+      'Očistite pretraživanje da biste vidjeli sve stavke';
 
   @override
-  String get touchToCheck => 'Tap to check';
+  String get touchToCheck => 'Dodirnite za provjeru';
 
   @override
-  String get toBuy => 'To buy';
+  String get toBuy => 'Za kupnju';
 
   @override
   String totalEuro(String value) {
-    return 'Total: $value €';
+    return 'Ukupno: $value €';
   }
 
   @override
-  String get itemRemoved => 'Item removed';
+  String get itemRemoved => 'Stavka uklonjena';
 
   @override
-  String get cancel => 'Cancel';
+  String get cancel => 'Otkazati';
 
   @override
-  String get delete => 'Delete';
+  String get delete => 'Izbrisati';
 
   @override
-  String get modify => 'Edit';
+  String get modify => 'Uredi';
 
   @override
-  String get deleteArticleConfirm => 'Delete this item?';
+  String get deleteArticleConfirm => 'Izbrisati ovu stavku?';
 
   @override
-  String get shareList => 'Share list';
+  String get shareList => 'Podijeli popis';
 
   @override
-  String get exportAsText => 'Export as text';
+  String get exportAsText => 'Izvezi kao tekst';
 
   @override
-  String get about => 'About';
+  String get about => 'Oko';
 
   @override
-  String get backupRestore => 'Backup & restore';
+  String get backupRestore => 'Sigurnosno kopiranje i vraćanje';
 
   @override
-  String get backupExportImport => 'Export or import lists and settings';
+  String get backupExportImport => 'Izvoz ili uvoz popisa i postavki';
 
   @override
-  String get backupScreenTitle => 'Backup and restore';
+  String get backupScreenTitle => 'Sigurnosno kopiranje i vraćanje';
 
   @override
-  String get backupExportTitle => 'Export backup';
+  String get backupExportTitle => 'Izvoz sigurnosne kopije';
 
   @override
-  String get backupImportTitle => 'Import backup';
+  String get backupImportTitle => 'Uvezi sigurnosnu kopiju';
 
   @override
-  String get backupExportSubtitle => 'Generates a JSON file to share or store';
+  String get backupExportSubtitle =>
+      'Generira JSON datoteku za dijeljenje ili pohranu';
 
   @override
   String get backupImportSubtitle =>
-      'Replace current data with the chosen file';
+      'Zamijenite trenutne podatke odabranom datotekom';
 
   @override
   String get backupIntro =>
-      'Export all your lists, settings and planning to a file, or restore from a backup.';
+      'Izvezite sve svoje popise, postavke i planiranje u datoteku ili ih vratite iz sigurnosne kopije.';
 
   @override
-  String get backupExportSuccess => 'Backup exported. Share or save the file.';
+  String get backupExportSuccess =>
+      'Sigurnosna kopija je izvezena. Podijelite ili spremite datoteku.';
 
   @override
   String get backupImportConfirm =>
-      'Current lists and settings will be replaced by the file content. Continue?';
+      'Trenutni popisi i postavke bit će zamijenjeni sadržajem datoteke. Nastaviti?';
 
   @override
-  String get backupImportSuccess => 'Backup restored.';
+  String get backupImportSuccess => 'Sigurnosna kopija vraćena.';
 
   @override
-  String get scanPlaceBarcode => 'Place the barcode in the frame';
+  String get scanPlaceBarcode => 'Postavite crtični kod u okvir';
 
   @override
   String scanProductAdded(String name) {
-    return '$name added to list';
+    return '$name dodan na popis';
   }
 
   @override
-  String get scanClose => 'Close';
+  String get scanClose => 'Zatvoriti';
 
   @override
   String sharedListCount(int count) {
-    return 'Shared • $count';
+    return 'Podijeljeno • $count';
   }
 
   @override
-  String get sharedList => 'Shared';
+  String get sharedList => 'Podijeljeno';
 
   @override
-  String get listDeleted => 'List deleted';
+  String get listDeleted => 'Popis izbrisan';
 
   @override
-  String get tooltipClear => 'Clear';
+  String get tooltipClear => 'Jasan';
 
   @override
-  String get tooltipSyncDone => 'Synced';
+  String get tooltipSyncDone => 'Sinkronizirano';
 
   @override
-  String get tooltipSyncUpload => 'Sync on all devices';
+  String get tooltipSyncUpload => 'Sinkronizacija na svim uređajima';
 
   @override
-  String get tooltipMoveTo => 'Move to';
+  String get tooltipMoveTo => 'Premjesti u';
 
   @override
-  String get itemsMoved => 'Items moved';
+  String get itemsMoved => 'Stavke su premještene';
 
   @override
   String colorChipTapToSet(String name) {
-    return '$name – tap to set';
+    return '$name – dodirnite za postavljanje';
   }
 
   @override
-  String get deleteGroup => 'Delete group';
+  String get deleteGroup => 'Izbriši grupu';
 
   @override
-  String get deleteListConfirm => 'Delete this list?';
+  String get deleteListConfirm => 'Izbrisati ovaj popis?';
 
   @override
-  String get sendListByMessage => 'Send list by message or email';
+  String get sendListByMessage => 'Pošaljite popis porukom ili e-poštom';
 
   @override
-  String get copyList => 'Copy list';
+  String get copyList => 'Kopiraj popis';
 
   @override
-  String get copyListSubtitle => 'Copy to clipboard (read-only)';
+  String get copyListSubtitle => 'Kopiraj u međuspremnik (samo za čitanje)';
 
   @override
-  String get shareRealtime => 'Share in real time';
+  String get shareRealtime => 'Dijelite u stvarnom vremenu';
 
   @override
-  String get shareRealtimeWithOthers => 'With others (same list, live)';
+  String get shareRealtimeWithOthers => 'S drugima (ista lista, uživo)';
 
   @override
-  String get signInGoogleToEnable => 'Sign in with Google to enable';
+  String get signInGoogleToEnable => 'Prijavite se s Googleom da omogućite';
 
   @override
-  String get listEmptySnackbar => 'Empty list';
+  String get listEmptySnackbar => 'Prazna lista';
 
   @override
-  String get listCopiedToClipboard => 'List copied to clipboard';
+  String get listCopiedToClipboard => 'Popis je kopiran u međuspremnik';
 
   @override
-  String get copyLink => 'Copy link';
+  String get copyLink => 'Kopiraj vezu';
 
   @override
-  String get shareLink => 'Share link';
+  String get shareLink => 'Podijelite vezu';
 
   @override
-  String get newSharedList => 'New shared list';
+  String get newSharedList => 'Novi dijeljeni popis';
 
   @override
   String get newSharedListConfirm =>
-      'You will leave the current list and create a new shared list from your personal list.';
+      'Napustit ćete trenutni popis i stvoriti novi dijeljeni popis iz svog osobnog popisa.';
 
   @override
-  String get create => 'Create';
+  String get create => 'Stvoriti';
 
   @override
-  String get createNewSharedList => 'Create a new shared list';
+  String get createNewSharedList => 'Napravite novi zajednički popis';
 
   @override
-  String get createShareLink => 'Create share link';
+  String get createShareLink => 'Stvorite vezu za dijeljenje';
 
   @override
-  String get joinList => 'Join a list';
+  String get joinList => 'Pridružite se popisu';
 
   @override
-  String get linkCreated => 'Link created';
+  String get linkCreated => 'Veza je stvorena';
 
   @override
   String get sendLinkToOthers =>
-      'Send the link or code so others can view and edit the list in real time.';
+      'Pošaljite vezu ili kod kako bi drugi mogli pregledavati i uređivati ​​popis u stvarnom vremenu.';
 
   @override
-  String get shortCode => 'Short code';
+  String get shortCode => 'Kratki kod';
 
   @override
-  String get errorPrefix => 'Error';
+  String get errorPrefix => 'Greška';
 
   @override
-  String get linkCopied => 'Link copied';
+  String get linkCopied => 'Veza je kopirana';
 
   @override
-  String get join => 'Join';
+  String get join => 'Pridruži se';
 
   @override
-  String get listJoined => 'List joined';
+  String get listJoined => 'Popis je pridružen';
 
   @override
-  String get checkedItemsRemoved => 'Checked items removed';
+  String get checkedItemsRemoved => 'Označene stavke uklonjene';
 
   @override
   String itemWillBeRemovedFromList(String name) {
-    return '\"$name\" will be removed from the list.';
+    return '\"$name\" bit će uklonjen s popisa.';
   }
 
   @override
-  String get copyCode => 'Copy code';
+  String get copyCode => 'Kopiraj kod';
 
   @override
   String copyCodeLabel(String code) {
-    return 'Copy code: $code';
+    return 'Kopiraj kod: $code';
   }
 
   @override
-  String get backToPersonalList => 'Back to your personal list';
+  String get backToPersonalList => 'Povratak na vaš osobni popis';
 
   @override
-  String get leaveSharedList => 'Leave shared list';
+  String get leaveSharedList => 'Napusti dijeljeni popis';
 
   @override
-  String get leftListSnackbar => 'Disconnected. List kept locally.';
+  String get leftListSnackbar => 'Isključeno. Popis se čuva lokalno.';
 
   @override
-  String get disconnect => 'Disconnect';
+  String get disconnect => 'Prekini vezu';
 
   @override
   String get signInGoogleSameAccount =>
-      'Sign in with the same Google account on each device to share the list in real time.';
+      'Prijavite se s istim Google računom na svakom uređaju kako biste podijelili popis u stvarnom vremenu.';
 
   @override
-  String get syncEnabled => 'Sync enabled';
+  String get syncEnabled => 'Sinkronizacija omogućena';
 
   @override
-  String get signInWithGoogle => 'Sign in with Google';
+  String get signInWithGoogle => 'Prijavite se s Googleom';
 
   @override
   String selectedCount(int n) {
-    return '$n selected';
+    return '$n odabrano';
   }
 
   @override
-  String get itemsDeleted => 'Items deleted';
+  String get itemsDeleted => 'Stavke izbrisane';
 
   @override
-  String get futurePurchases => 'Future purchases';
+  String get futurePurchases => 'Buduće kupnje';
 
   @override
-  String get listLabel => 'List';
+  String get listLabel => 'Popis';
 
   @override
-  String get groupsLabel => 'Groups';
+  String get groupsLabel => 'grupe';
 
   @override
-  String get articleStyle => 'Item style';
+  String get articleStyle => 'Stil predmeta';
 
   @override
   String get styleBar => 'Bar';
@@ -391,44 +395,44 @@ class AppLocalizationsHr extends AppLocalizations {
   String get styleFilled => 'Filled rectangle';
 
   @override
-  String get styleSuperRound => 'Pilule';
+  String get styleSuperRound => 'Pilula';
 
   @override
-  String get styleLiquid => 'Goutte';
+  String get styleLiquid => 'Tekućina';
 
   @override
-  String get styleSticker => 'Sticker';
+  String get styleSticker => 'Naljepnica';
 
   @override
-  String get styleBulle => 'Bulles';
+  String get styleBulle => 'Mjehurići';
 
   @override
-  String get styleZebra => 'Zébrure';
+  String get styleZebra => 'Zebra';
 
   @override
-  String get darkMode => 'Dark mode';
+  String get darkMode => 'Tamni način rada';
 
   @override
-  String get darkModeSubtitle => 'Dark theme, easy on the eyes';
+  String get darkModeSubtitle => 'Tamna tema, ugodna za oči';
 
   @override
-  String get capitalizeNames => 'Capitalize item names';
+  String get capitalizeNames => 'Nazive stavki pišite velikim slovom';
 
   @override
-  String get capitalizeSubtitle => 'First letter uppercase';
+  String get capitalizeSubtitle => 'Prvo slovo veliko';
 
   @override
-  String get remindersPerItem => 'Reminders per item';
+  String get remindersPerItem => 'Podsjetnici po artiklu';
 
   @override
   String get remindersSubtitle =>
-      'Optional: alarm and note per item (hidden if disabled)';
+      'Izborno: alarm i bilješka po stavci (skriveno ako je onemogućeno)';
 
   @override
-  String get categoriesLabel => 'Categories (store, type…)';
+  String get categoriesLabel => 'Kategorije (trgovina, vrsta…)';
 
   @override
-  String get formLabel => 'Form';
+  String get formLabel => 'Oblik';
 
   @override
   String get legendLabel => 'Legend';
@@ -438,172 +442,187 @@ class AppLocalizationsHr extends AppLocalizations {
       'Form: optional name when adding. Legend: squares at top, tap a square to set (e.g. Carrefour).';
 
   @override
-  String get categoryDefinedByStoresBar => 'Définie par les magasins en haut';
+  String get categoryDefinedByStoresBar =>
+      'Postavljen uz traku trgovine na vrhu';
 
   @override
   String get tapSquareToSetStoreHint =>
-      'Touchez un carré en haut pour définir le magasin ou la catégorie.';
+      'Dodirnite kvadrat na vrhu da postavite trgovinu ili kategoriju.';
 
   @override
-  String get categoryLabel => 'Catégorie';
+  String get categoryLabel => 'Kategorija';
 
   @override
-  String get sortListLabel => 'List sort (Tote \'O Recall+)';
+  String get sortListLabel => 'Poredaj popis (Tote \'O Recall+)';
 
   @override
-  String get sortOrder => 'Order';
+  String get sortOrder => 'Redoslijed';
 
   @override
-  String get sortName => 'Name';
+  String get sortName => 'Ime';
 
   @override
-  String get sortColor => 'Color';
+  String get sortColor => 'Boja';
 
   @override
-  String get sortAisle => 'Rayon';
+  String get sortAisle => 'Prolaz';
 
   @override
-  String get aisleOrderTitle => 'Ordre des rayons';
+  String get aisleOrderTitle => 'Redoslijed prolaza';
 
   @override
   String get aisleOrderSubtitle =>
-      'Numéro de rayon par catégorie (pour tri au magasin)';
+      'Broj prolaza po kategoriji (za sortiranje u trgovini)';
 
   @override
-  String get favoriteStoresTitle => 'Magasin(s) favori(s)';
+  String get favoriteStoresTitle => 'Omiljene trgovine';
 
   @override
-  String get favoriteStoresSubtitle => 'Ces rayons apparaissent en premier';
+  String get favoriteStoresSubtitle => 'Ti se prolazi pojavljuju prvi';
 
   @override
-  String get partnerSuggestionTitle => 'Suggestion';
+  String get partnerSuggestionTitle => 'Prijedlog';
 
   @override
   String partnerSuggestionMessage(String item, String suggestion) {
-    return 'Un partenaire a ajouté « $item ». Ajouter aussi « $suggestion » ?';
+    return 'Partner je dodao « $item ». Dodati i « $suggestion »?';
   }
 
   @override
-  String get partnerSuggestionAdd => 'Oui, ajouter';
+  String get partnerSuggestionAdd => 'Da, dodati';
 
   @override
-  String get partnerSuggestionNo => 'Non';
+  String get partnerSuggestionNo => 'Ne';
 
   @override
-  String get showPrices => 'Show prices and total';
+  String get showPrices => 'Prikaži cijene i ukupno';
 
   @override
-  String get showPricesSubtitle => 'Price per item and estimated total';
+  String get showPricesSubtitle =>
+      'Cijena po artiklu i procijenjeni ukupni iznos';
 
   @override
-  String get aboutSubtitle => 'User guide, author, GPL v3 licence, GDPR';
+  String get aboutSubtitle =>
+      'Korisnički priručnik, autor, GPL v3 licenca, GDPR';
 
   @override
-  String get saveAsTemplateTitle => 'Save as template';
+  String get saveAsTemplateTitle => 'Spremi kao predložak';
 
   @override
-  String get modelNameHint => 'Template name';
+  String get modelNameHint => 'Naziv predloška';
 
   @override
-  String get modelSaved => 'Template saved';
+  String get modelSaved => 'Predložak spremljen';
 
   @override
-  String get save => 'Save';
+  String get save => 'Uštedjeti';
 
   @override
-  String get noTemplates => 'No templates. Save a list as template (⋮ menu).';
+  String get noTemplates =>
+      'Nema šablona. Spremite popis kao predložak (⋮ izbornik).';
 
   @override
-  String get chooseTemplate => 'Choose a template';
+  String get chooseTemplate => 'Odaberite predložak';
 
   @override
   String templateItemCount(int count) {
-    return '$count item(s)';
+    return '$count stavki';
   }
 
   @override
   String listCreatedFromTemplate(String name) {
-    return 'List \"$name\" created';
+    return 'Popis \"$name\" stvoren';
   }
 
   @override
-  String get newListTitle => 'New list';
+  String get newListTitle => 'Novi popis';
 
   @override
-  String get listNameHint => 'List name';
+  String get listNameHint => 'Naziv popisa';
 
   @override
-  String get createButton => 'Create';
+  String get createButton => 'Stvoriti';
 
   @override
-  String get renameTitle => 'Rename';
+  String get renameTitle => 'Preimenovati';
 
   @override
-  String get groupLabel => 'Group';
+  String get groupLabel => 'Skupina';
 
   @override
-  String get noGroup => 'No group';
+  String get noGroup => 'Nema grupe';
 
   @override
-  String get newGroupTitle => 'New group';
+  String get newGroupTitle => 'Nova grupa';
 
   @override
-  String get groupNameHint => 'E.g. Shopping, DIY';
+  String get groupNameHint => 'npr. Kupnja, DIY';
 
   @override
-  String get listGroupsTitle => 'List groups';
+  String get listGroupsTitle => 'Popis grupa';
 
   @override
-  String get newButton => 'New';
+  String get newButton => 'Novi';
 
   @override
   String get noGroupsHint =>
-      'No groups. Create one to organize your lists (e.g. Shopping, DIY).';
+      'Nema grupa. Napravite jedan da organizirate svoje popise (npr. Shopping, DIY).';
 
   @override
-  String get groupDeleted => 'Group deleted';
+  String get groupDeleted => 'Grupa izbrisana';
 
   @override
-  String get renameGroupTitle => 'Rename group';
+  String get renameGroupTitle => 'Preimenuj grupu';
 
   @override
-  String get renameListTitle => 'Rename list';
+  String get renameListTitle => 'Preimenuj popis';
 
   @override
-  String get nameHint => 'Name';
+  String get nameHint => 'Ime';
 
   @override
-  String get saveButton => 'Save';
+  String get saveButton => 'Uštedjeti';
 
   @override
-  String get chooseGroup => 'Choose a group';
+  String get chooseGroup => 'Odaberite grupu';
 
   @override
-  String get nameForThisColor => 'Name for this color';
+  String get nameForThisColor => 'Naziv za ovu boju';
 
   @override
   String get colorNameHint =>
-      'E.g. Carrefour, Fruit, Urgent. Items in this color will show this name.';
+      'npr. Carrefour, Voće, Hitno. Stavke u ovoj boji prikazat će ovo ime.';
 
   @override
-  String get categoryNameHint => 'Store or category name';
+  String get categoryNameHint => 'Naziv trgovine ili kategorije';
 
   @override
   String shareJoinMessage(String link) {
-    return 'Join my real-time shopping list: $link';
+    return 'Pridružite se mom popisu za kupovinu u stvarnom vremenu: $link';
   }
 
   @override
   String shareSubject(String appName) {
-    return 'List $appName';
+    return 'Popis $appName';
   }
 
   @override
   String get joinListHint =>
-      'Paste the link, 8-character code or ID to join the shared list.';
+      'Zalijepite vezu, kôd od 8 znakova ili ID da biste se pridružili dijeljenom popisu.';
 
   @override
-  String get linkCodeHint => 'Link, code (e.g. ABC12XYZ) or ID';
+  String get joinListTitle => 'Pridružite se popisu';
+
+  @override
+  String get engagementsListHint =>
+      'Podsjetnici i obveze (npr. \"Moram nazvati...\"). Nije popis za kupnju - za to koristite \"Novi popis\".';
+
+  @override
+  String get futureListHint =>
+      'Kupi kasnije. Ispunjava se kada završite putovanje, a da niste dobili sve.';
+
+  @override
+  String get linkCodeHint => 'Veza, šifra (npr. ABC12XYZ) ili ID';
 
   @override
   String participantsCount(int count) {
@@ -611,206 +630,208 @@ class AppLocalizationsHr extends AppLocalizations {
   }
 
   @override
-  String get import => 'Import';
+  String get import => 'Uvoz';
 
   @override
-  String get backupFileNotAccessible => 'File not accessible (e.g. Web).';
+  String get backupFileNotAccessible =>
+      'Datoteci nije moguće pristupiti (npr. Web).';
 
   @override
   String backupImportError(String error) {
-    return 'Import error: $error';
+    return 'Pogreška pri uvozu: $error';
   }
 
   @override
   String get scanTitle => 'Scan';
 
   @override
-  String get scanAvailablePlus => 'Available in Tote \'O Recall+';
+  String get scanAvailablePlus => 'Dostupno u Tote \'O Recall+';
 
   @override
   String get everyoneSeesSameList =>
-      'Everyone sees the same list and changes in real time.';
+      'Svi vide isti popis i promjene u stvarnom vremenu.';
 
   @override
   String everyoneSeesSameListWithCount(int count) {
-    return '$count participant(s) • Everyone sees the same list live.';
+    return '$count sudionik(i) • Svi vide isti popis uživo.';
   }
 
   @override
-  String get voiceUnavailable => 'Voice input not available';
+  String get voiceUnavailable => 'Glasovni unos nije dostupan';
 
   @override
-  String get voiceError => 'Voice input unavailable';
+  String get voiceError => 'Glasovni unos nije dostupan';
 
   @override
-  String get colorLabel => 'Color';
+  String get colorLabel => 'Boja';
 
   @override
-  String get addToListItem => 'Add to list';
+  String get addToListItem => 'Dodaj na popis';
 
   @override
   String get quickAddHint =>
-      'Enter at least one item (e.g. Apple or List Store : Apple)';
+      'Unesite barem jednu stavku (npr. Apple ili List Store : Apple)';
 
   @override
-  String get linkCopiedBrowser => 'Link copied: paste it in your browser.';
+  String get linkCopiedBrowser =>
+      'Veza je kopirana: zalijepite je u svoj preglednik.';
 
   @override
-  String get signInToJoinList => 'Sign in with Google to join the list.';
+  String get signInToJoinList =>
+      'Prijavite se s Googleom da biste se pridružili popisu.';
 
   @override
   String cannotJoinList(String error) {
-    return 'Cannot join: $error';
+    return 'Ne mogu se pridružiti: $error';
   }
 
   @override
-  String get autocompleteLabel => 'Auto-completion';
+  String get autocompleteLabel => 'Automatsko dovršavanje';
 
   @override
   String get autocompleteSubtitle =>
-      'Suggest items from the lexicon as you type (e.g. pu… → purée, pull)';
+      'Predlaže stavke iz leksikona dok upisujete (npr. pu… → purée, pull)';
 
   @override
-  String get addForLater => 'For later';
+  String get addForLater => 'Za kasnije';
 
   @override
   String addForLaterSnackbar(String name) {
-    return '« $name » added to list (pending)';
+    return '« $name » dodan na popis (na čekanju)';
   }
 
   @override
-  String get engagementDetectedTitle => 'Engagement implicite détecté';
+  String get engagementDetectedTitle => 'Otkrivena implicitna obveza';
 
   @override
   String engagementDetectedMessage(String title) {
-    return 'Créer un rappel pour « $title » dans la liste Engagements ?';
+    return 'Napraviti podsjetnik za « $title » na popisu angažmana?';
   }
 
   @override
-  String get createReminderButton => 'Créer un rappel';
+  String get createReminderButton => 'Izradi podsjetnik';
 
   @override
   String engagementReminderCreated(String title) {
-    return 'Rappel créé : « $title »';
+    return 'Podsjetnik stvoren: « $title »';
   }
 
   @override
-  String get birthdaysTitle => 'Anniversaires';
+  String get birthdaysTitle => 'rođendani';
 
   @override
-  String get birthdaysSubtitle =>
-      'Rappels 1 à 2 jours avant pour ne pas oublier';
+  String get birthdaysSubtitle => 'Podsjetnici 1-2 dana prije da ne zaboravite';
 
   @override
-  String get addBirthday => 'Ajouter un anniversaire';
+  String get addBirthday => 'Dodaj rođendan';
 
   @override
-  String get birthdayNameHint => 'Prénom ou nom (ex. Léontine, Gertrude)';
+  String get birthdayNameHint => 'Ime ili puno ime (npr. Léontine, Gertrude)';
 
   @override
-  String get birthdayDay => 'Jour';
+  String get birthdayDay => 'Dan';
 
   @override
-  String get birthdayMonth => 'Mois';
+  String get birthdayMonth => 'Mjesec';
 
   @override
-  String get reminder1DayBefore => 'Rappel 1 jour avant';
+  String get reminder1DayBefore => 'Podsjetnik 1 dan prije';
 
   @override
-  String get reminder2DaysBefore => 'Rappel 2 jours avant';
+  String get reminder2DaysBefore => 'Podsjetnik 2 dana prije';
 
   @override
-  String get birthdayDeleted => 'Anniversaire supprimé';
+  String get birthdayDeleted => 'Rođendan je uklonjen';
 
   @override
   String get emptyBirthdays =>
-      'Aucun anniversaire. Ajoutez-en pour recevoir une alerte 1 à 2 jours avant.';
+      'Nema rođendana. Dodajte neke da biste dobili upozorenje 1-2 dana prije.';
 
   @override
-  String get editBirthday => 'Modifier l\'anniversaire';
+  String get editBirthday => 'Uredi rođendan';
 
   @override
   String deleteBirthdayConfirm(String name) {
-    return 'Supprimer l\'anniversaire de $name ?';
+    return 'Izbrisati $name rođendan?';
   }
 
   @override
-  String get celebrationTypeBirthday => 'Anniversaire (naissance)';
+  String get celebrationTypeBirthday => 'Rođendan';
 
   @override
-  String get celebrationTypeWedding => 'Mariage';
+  String get celebrationTypeWedding => 'Vjenčanje';
 
   @override
-  String get celebrationTypeMeeting => 'Rencontre';
+  String get celebrationTypeMeeting => 'Obljetnica susreta';
 
   @override
-  String get celebrationTypeOther => 'Autre fête';
+  String get celebrationTypeOther => 'Drugo slavlje';
 
   @override
-  String get birthdayYearOptional => 'Année (optionnel, pour l\'âge)';
+  String get birthdayYearOptional => 'Godina (nije obavezno, za dob)';
 
   @override
-  String get celebrationTypeLabel => 'Type';
+  String get celebrationTypeLabel => 'Tip';
 
   @override
   String ageYears(int count) {
-    return '$count ans';
+    return '$count godina';
   }
 
   @override
-  String get alreadyBoughtValidate => 'Déjà acheté ? Valider';
+  String get alreadyBoughtValidate => 'Već kupili? Potvrdi';
 
   @override
-  String get addToRecurring => 'Ajouter aux achats récurrents';
+  String get addToRecurring => 'Dodaj u ponavljajuće kupnje';
 
   @override
   String recurringAddedSnackbar(String name) {
-    return '« $name » en achat récurrent (rappel dans 7 j)';
+    return '« $name » postavljeno kao ponavljajuće (podsjetnik za 7 dana)';
   }
 
   @override
-  String get recurringTooltip => 'Achat récurrent';
+  String get recurringTooltip => 'Ponavljajuća kupnja';
 
   @override
-  String get courseTerminee => 'Course terminée';
+  String get courseTerminee => 'Kupovina obavljena';
 
   @override
   String get courseTermineeConfirm =>
-      'Décocher tous les articles ? Tu peux recommencer une nouvelle course.';
+      'Poništiti odabir svih stavki? Možete započeti novi popis.';
 
   @override
-  String get uncheckAll => 'Décocher tout';
+  String get uncheckAll => 'Odznačite sve';
 
   @override
-  String get moveToFutureList => 'Déplacer vers Achats futurs';
+  String get moveToFutureList => 'Prijeđite na buduće kupnje';
 
   @override
   String deleteOrMoveToFuture(String name) {
-    return 'Supprimer « $name » ou le déplacer vers Achats futurs ?';
+    return 'Izbrisati « $name » ili prijeći na buduće kupnje?';
   }
 
   @override
-  String get listFontScale => 'Taille du texte de la liste';
+  String get listFontScale => 'Veličina teksta popisa';
 
   @override
-  String get listFontScaleSubtitle => 'Ajuster pour une meilleure lisibilité';
+  String get listFontScaleSubtitle => 'Podesite za bolju čitljivost';
 
   @override
-  String get shoppingMode => 'Mode course en cours';
+  String get shoppingMode => 'Način kupovine';
 
   @override
   String get shoppingModeSubtitle =>
-      'Vue simplifiée avec gros boutons au magasin';
+      'Pojednostavljeni prikaz s velikim gumbima u trgovini';
 
   @override
-  String get onboardingWelcome => 'Bienvenue dans Tote \'O Recall !';
+  String get onboardingWelcome => 'Dobrodošli u Tote \'O Recall';
 
   @override
   String get onboardingWelcomeSubtitle =>
-      'Tu peux démarrer avec une liste vide ou choisir un modèle ci‑dessous.';
+      'Započnite s praznim popisom ili odaberite predložak u nastavku.';
 
   @override
-  String get startEmpty => 'Commencer avec une liste vide';
+  String get startEmpty => 'Počnite s praznim popisom';
 
   @override
   String progressCount(int checked, int total) {
@@ -818,363 +839,362 @@ class AppLocalizationsHr extends AppLocalizations {
   }
 
   @override
-  String get sendLinkBy => 'Envoyer le lien par message ou email pour inviter';
+  String get sendLinkBy => 'Pošaljite link porukom ili e-poštom za poziv';
 
   @override
-  String get syncConflictHint =>
-      'Conflit possible : les modifications ont été fusionnées.';
+  String get syncConflictHint => 'Mogući sukob: promjene su spojene.';
 
   @override
-  String get smartCartTitle => 'Aide course';
+  String get smartCartTitle => 'Pomoćnik u kupovini';
 
   @override
   String get smartCartSubtitle =>
-      'Suggestions selon tes habitudes et le contexte';
+      'Prijedlozi temeljeni na vašim navikama i kontekstu';
 
   @override
-  String get smartCartDueTitle => 'Habitudes';
+  String get smartCartDueTitle => 'Navike';
 
   @override
   String smartCartDueMessage(String name, int days, int recurrence) {
-    return 'Tu n\'as pas acheté « $name » depuis $days jour(s) (d\'habitude tous les $recurrence j). Tu en as besoin ?';
+    return 'Niste kupili « $name » $days dana (obično svakih $recurrence dana). Trebate li?';
   }
 
   @override
-  String get smartCartAddToList => 'Oui, ajouter';
+  String get smartCartAddToList => 'Da, dodati';
 
   @override
-  String get smartCartNotThisTime => 'Pas cette fois';
+  String get smartCartNotThisTime => 'Ne ovaj put';
 
   @override
-  String get smartCartContextTitle => 'Contexte';
+  String get smartCartContextTitle => 'Kontekst';
 
   @override
-  String get smartCartContextCold =>
-      'Il fait froid. As-tu assez de thé, soupe ?';
+  String get smartCartContextCold => 'Hladno je. Imate li dovoljno čaja, juhe?';
 
   @override
-  String get smartCartContextCheck => 'Vérifier et ajouter';
+  String get smartCartContextCheck => 'Provjerite i dodajte';
 
   @override
-  String get smartCartNoSuggestions => 'Aucune suggestion pour le moment.';
+  String get smartCartNoSuggestions => 'Trenutačno nema prijedloga.';
 
   @override
-  String get panicCheckoutTitle => 'Vérifier avant la caisse';
+  String get panicCheckoutTitle => 'Provjerite prije odjave';
 
   @override
-  String get panicCheckoutSubtitle => 'As-tu bien pensé à tout ?';
+  String get panicCheckoutSubtitle => 'Jeste li se svega sjetili?';
 
   @override
   String panicCheckoutUncheckedCount(int count) {
-    return '$count article(s) non coché(s)';
+    return '$count neoznačenih stavki';
   }
 
   @override
-  String get panicCheckoutAddMissing => 'Ajouter les oubliés à la liste';
+  String get panicCheckoutAddMissing =>
+      'Dodajte stavke koje nedostaju na popis';
 
   @override
-  String get panicCheckoutAllGood => 'Tout est bon, je passe en caisse';
+  String get panicCheckoutAllGood => 'Sve u redu, idem platiti';
 
   @override
   String get panicCheckoutEmpty =>
-      'Aucun article à vérifier. Tu peux passer en caisse.';
+      'Ništa za provjeriti. Možete otići na blagajnu.';
 
   @override
-  String get streakTitle => 'Streak « O oubli »';
+  String get streakTitle => 'Zero-zaboravljeni niz';
 
   @override
-  String get streakSubtitle => 'Sorties sans rien oublier d\'affilée';
+  String get streakSubtitle => 'Putujte u nizu, a da ništa ne zaboravite';
 
   @override
-  String get streakCurrent => 'Série actuelle';
+  String get streakCurrent => 'Trenutni niz';
 
   @override
-  String get streakBest => 'Record';
+  String get streakBest => 'Najbolje';
 
   @override
   String streakCount(int count) {
-    return '$count sortie(s)';
+    return '$count putovanja';
   }
 
   @override
-  String get badgeMemoryMaster => 'Memory Master';
+  String get badgeMemoryMaster => 'Majstor pamćenja';
 
   @override
-  String get badgeMemoryMasterDesc => '5 sorties sans oubli d\'affilée';
+  String get badgeMemoryMasterDesc => '5 putovanja zaredom bez zaborava';
 
   @override
-  String get badgeStreak10 => 'Champion';
+  String get badgeStreak10 => 'Prvak';
 
   @override
-  String get badgeStreak10Desc => '10 sorties sans oubli d\'affilée';
+  String get badgeStreak10Desc => '10 putovanja zaredom bez zaborava';
 
   @override
-  String get badgeHundredTrips => 'Routard';
+  String get badgeHundredTrips => 'Cestovni ratnik';
 
   @override
-  String get badgeHundredTripsDesc => '100 courses terminées';
+  String get badgeHundredTripsDesc => '100 odrađenih shopping putovanja';
 
   @override
-  String get statsMostBought => 'Produits les plus achetés';
+  String get statsMostBought => 'Najkupovaniji proizvodi';
 
   @override
-  String get statsSpendingByCategory => 'Dépenses par catégorie';
+  String get statsSpendingByCategory => 'Potrošnja po kategorijama';
 
   @override
-  String get statsMostForgotten => 'Produits les plus souvent oubliés';
+  String get statsMostForgotten => 'Najčešće se zaboravlja';
 
   @override
-  String get statsTotalTrips => 'Courses terminées';
+  String get statsTotalTrips => 'Završena putovanja';
 
   @override
-  String get statsZeroOubliRate => 'Taux zéro oubli';
+  String get statsZeroOubliRate => 'Stopa nula zaborava';
 
   @override
   String get statsZeroOubliSubtitle =>
-      'Courses sans rien déplacer vers Achats futurs';
+      'Putovanja bez premještanja na budući popis';
 
   @override
   String get statsNoDataYet =>
-      'Pas encore de données. Termine des courses pour voir tes stats.';
+      'Još nema podataka. Dovršite putovanja da biste vidjeli svoju statistiku.';
 
   @override
   String statsCountTimes(int count) {
-    return '$count fois';
+    return '$count puta';
   }
 
   @override
-  String get profileConsumptionTitle => 'Profil de conso';
+  String get profileConsumptionTitle => 'Profil potrošnje';
 
   @override
   String get profileConsumptionSubtitle =>
-      'Régimes, allergies, produits à éviter. Optionnel et sans jugement.';
+      'Dijeta, alergije, proizvodi koje treba izbjegavati. Izborno i bez prosuđivanja.';
 
   @override
-  String get profileCoachMode => 'Mode conseil bienveillant';
+  String get profileCoachMode => 'Nježni trenerski način rada';
 
   @override
   String get profileCoachModeSubtitle =>
-      'Rappels doux et suggestions de substituts quand tu ajoutes un article (tu peux désactiver à tout moment)';
+      'Nježni podsjetnici i prijedlozi zamjena kada dodate stavku (možete isključiti bilo kada)';
 
   @override
-  String get profileObjectives => 'Objectifs à atteindre';
+  String get profileObjectives => 'Ciljevi koje treba postići';
 
   @override
   String get profileObjectivesSubtitle =>
-      'Choisis les objectifs qui te correspondent (sans jugement)';
+      'Odaberite ciljeve koji vam odgovaraju (bez prosuđivanja)';
 
   @override
-  String get profileObjectiveWeightLoss => 'Perte de poids';
+  String get profileObjectiveWeightLoss => 'Gubitak težine';
 
   @override
-  String get profileObjectiveReduceBudget => 'Réduire le budget';
+  String get profileObjectiveReduceBudget => 'Smanjite proračun';
 
   @override
-  String get profileObjectiveEatBalanced => 'Manger plus équilibré';
+  String get profileObjectiveEatBalanced => 'Jedite uravnoteženije';
 
   @override
-  String get profileObjectiveReduceSugar => 'Réduire le sucre';
+  String get profileObjectiveReduceSugar => 'Smanjite šećer';
 
   @override
-  String get profileObjectiveReduceCholesterol =>
-      'Réduire le mauvais cholestérol';
+  String get profileObjectiveReduceCholesterol => 'Smanjite loš kolesterol';
 
   @override
-  String get profileObjectiveMoreProteins => 'Augmenter les protéines';
+  String get profileObjectiveMoreProteins => 'Povećajte količinu proteina';
 
   @override
-  String get profileObjectiveLessMeat => 'Moins de viande / protéines animales';
+  String get profileObjectiveLessMeat => 'Manje mesa / životinjskih proteina';
 
   @override
-  String get profileObjectiveEatHealthier => 'Manger plus sain';
+  String get profileObjectiveEatHealthier => 'Jedite zdravije';
 
   @override
   String get profileObjectiveReduceUltraProcessed =>
-      'Réduire les ultra-transformés';
+      'Smanjite ultraprerađenu hranu';
 
   @override
-  String get profileObjectiveReducePalmOil => 'Réduire l\'huile de palme';
+  String get profileObjectiveReducePalmOil => 'Smanjite palmino ulje';
 
   @override
-  String get profileObjectiveReduceFatty => 'Réduire les produits gras';
+  String get profileObjectiveReduceFatty => 'Smanjite masne proizvode';
 
   @override
-  String get profileObjectiveReduceSalt => 'Réduire le sel';
+  String get profileObjectiveReduceSalt => 'Smanjite sol';
 
   @override
-  String get profileObjectiveMoreFiber => 'Plus de fibres';
+  String get profileObjectiveMoreFiber => 'Više vlakana';
 
   @override
-  String get profileObjectiveMoreVegetables => 'Plus de légumes';
+  String get profileObjectiveMoreVegetables => 'Više povrća';
 
   @override
-  String get profileDiet => 'Régime / préférences';
+  String get profileDiet => 'Dijeta / preferencije';
 
   @override
-  String get profileVegan => 'Végan';
+  String get profileVegan => 'veganska';
 
   @override
-  String get profileVegetarian => 'Végétarien';
+  String get profileVegetarian => 'Vegetarijanac';
 
   @override
-  String get profileGlutenFree => 'Sans gluten';
+  String get profileGlutenFree => 'Bez glutena';
 
   @override
-  String get profileLactoseFree => 'Sans lactose';
+  String get profileLactoseFree => 'Bez laktoze';
 
   @override
-  String get profileBioOnly => 'Bio uniquement';
+  String get profileBioOnly => 'Samo organski';
 
   @override
-  String get profileLocalOnly => 'Local uniquement';
+  String get profileLocalOnly => 'Samo lokalno';
 
   @override
-  String get profileFairTrade => 'Équitable';
+  String get profileFairTrade => 'Poštena trgovina';
 
   @override
-  String get profileNoAddedSugar => 'Sans sucre ajouté';
+  String get profileNoAddedSugar => 'Bez dodanog šećera';
 
   @override
-  String get profileAllergies => 'Allergies et intolérances';
+  String get profileAllergies => 'Alergije i intolerancije';
 
   @override
-  String get profileAllergiesHint => 'Un par ligne (ex. arachides, lactose)';
+  String get profileAllergiesHint => 'Jedan po retku (npr. kikiriki, laktoza)';
 
   @override
-  String get profileProductsToAvoid => 'Produits à éviter';
+  String get profileProductsToAvoid => 'Proizvodi koje treba izbjegavati';
 
   @override
-  String get profileProductsToAvoidHint => 'Alcool, porc, fast-food…';
+  String get profileProductsToAvoidHint => 'Alkohol, svinjetina, brza hrana…';
 
   @override
-  String get profileBrandsToAvoid => 'Marques à éviter';
+  String get profileBrandsToAvoid => 'Marke koje treba izbjegavati';
 
   @override
-  String get profileTemptations => 'Objectifs bien-être';
+  String get profileTemptations => 'Ciljevi dobrobiti';
 
   @override
   String get profileTemptationsSubtitle =>
-      'On t\'accompagne avec bienveillance : rappels doux et idées de substituts, sans jugement.';
+      'Podržavamo vas blagim podsjetnicima i zamjenskim idejama, bez osuđivanja.';
 
   @override
-  String get profileTemptationProduct => 'Produit (ex. chocolat, soda)';
+  String get profileTemptationProduct => 'Proizvod (npr. čokolada, sok)';
 
   @override
-  String get profileTemptationSubstitute => 'Substitut suggéré (optionnel)';
+  String get profileTemptationSubstitute =>
+      'Predložena zamjena (nije obavezno)';
 
   @override
-  String get profileAddTemptation => 'Ajouter un objectif';
+  String get profileAddTemptation => 'Dodajte cilj';
 
   @override
   String profileReduceWarning(String product) {
-    return 'Objectif en cours : réduire « $product ». On ajoute quand même cette fois ?';
+    return 'Cilj u tijeku: smanjiti « $product ». Ovaj put ipak dodati?';
   }
 
   @override
   String profileReduceWarningWithProgress(String product, int percent) {
-    return 'Objectif en cours : réduire « $product ». Ta progression : $percent %. On ajoute quand même cette fois ?';
+    return 'Cilj u tijeku: smanjiti « $product ». Vaš napredak: $percent %. Ovaj put ipak dodati?';
   }
 
   @override
   String profileSubstituteSuggestion(String product, String substitute) {
-    return 'Pour ton objectif « $product », on te propose « $substitute » comme alternative. Tu préfères quoi ?';
+    return 'Za vaš cilj « $product predlažemo « $substitute » kao alternativu. Što preferirate?';
   }
 
   @override
-  String get profileAddAnyway => 'Oui, ajouter quand même';
+  String get profileAddAnyway => 'Da, svejedno dodaj';
 
   @override
   String profileReplaceWith(String name) {
-    return 'Remplacer par « $name »';
+    return 'Zamijeni s « $name »';
   }
 
   @override
-  String get profileCancel => 'Annuler';
+  String get profileCancel => 'Otkazati';
 
   @override
-  String get statsPleasurePercent => 'Où tu en es (plaisir)';
+  String get statsPleasurePercent => 'Gdje si (zadovoljstvo)';
 
   @override
   String get statsPleasureSubtitle =>
-      'Progression vers tes objectifs : part des achats type snacks / sucreries.';
+      'Napredak prema vašim ciljevima: udio u kupnji grickalica/slatkiša.';
 
   @override
-  String get statsBalanceScore => 'Progression équilibre';
+  String get statsBalanceScore => 'Uravnotežite napredak';
 
   @override
   String get statsBalanceSubtitle =>
-      'Ta progression vers un équilibre qui te convient (sans jugement).';
+      'Vaš napredak prema ravnoteži koja vam odgovara (bez osuđivanja).';
 
   @override
-  String get statsMonthlyEvolution => 'Évolution mensuelle';
+  String get statsMonthlyEvolution => 'Mjesečna evolucija';
 
   @override
-  String get statsMonthlySubtitle => 'Ce mois vs mois précédent';
+  String get statsMonthlySubtitle => 'Ovaj mjesec u odnosu na prethodni mjesec';
 
   @override
-  String get smartCartYouMightForget => 'Tu allais oublier';
+  String get smartCartYouMightForget => 'Možda ste zaboravili';
 
   @override
   String get smartCartYouMightForgetSubtitle =>
-      'D\'après tes habitudes, l\'historique et la saison';
+      'Na temelju vaših navika, povijesti i sezone';
 
   @override
-  String get smartCartAddAllSuggested => 'Tout ajouter';
+  String get smartCartAddAllSuggested => 'Dodaj sve';
 
   @override
-  String get probableListTitle => 'Liste probable de la semaine';
+  String get probableListTitle => 'Vjerojatni popis za tjedan';
 
   @override
   String get probableListSubtitle =>
-      'Voici ta liste probable pour la semaine, d\'après ton historique, les récurrents et la saison. Veux-tu la confirmer ?';
+      'Ovo je vaš vjerojatni popis za tjedan, na temelju vaše povijesti, ponavljajućih predmeta i sezone. Želite li potvrditi?';
 
   @override
-  String get probableListConfirm => 'Confirmer et ajouter à ma liste';
+  String get probableListConfirm => 'Potvrdi i dodaj na moj popis';
 
   @override
-  String get probableListCancel => 'Annuler';
+  String get probableListCancel => 'Otkazati';
 
   @override
-  String get shoppingSocialTitle => 'Shopping social';
+  String get shoppingSocialTitle => 'Društvena kupnja';
 
   @override
   String get shoppingSocialSubtitle =>
-      'Tendances anonymisées : ce que les autres achètent (données agrégées, sans partage de ta liste)';
+      'Anonimizirani trendovi: što drugi kupuju (zbirni podaci, vaš se popis ne dijeli)';
 
   @override
-  String get shoppingSocialPopularNearby => 'Populaire près de chez toi';
+  String get shoppingSocialPopularNearby => 'Popularno u vašoj blizini';
 
   @override
   String shoppingSocialTrendThisWeek(int percent, String product) {
-    return 'Dans ta zone, $percent % des utilisateurs achètent « $product » cette semaine.';
+    return 'U vašem području, $percent% korisnika kupuje « $product » ovaj tjedan.';
   }
 
   @override
   String get shoppingSocialTrendsTitle =>
-      'Tendances alimentaires (anonymisées)';
+      'Prehrambeni trendovi (anonimizirano)';
 
   @override
   String get probableListEmptyHint =>
-      'Ajoute des achats récurrents et termine des courses pour que l\'app apprenne tes habitudes et te propose une liste probable.';
+      'Dodajte stavke koje se ponavljaju i dovršite kupnju kako bi aplikacija naučila vaše navike i mogla predložiti vjerojatni popis.';
 
   @override
-  String get probableListSelectAll => 'Tout sélectionner';
+  String get probableListSelectAll => 'Odaberite sve';
 
   @override
-  String get probableListDeselectAll => 'Tout désélectionner';
+  String get probableListDeselectAll => 'Poništi odabir svih';
 
   @override
   String probableListSelectedCount(int count) {
-    return '$count article(s) sélectionné(s)';
+    return '$count stavki odabrano';
   }
 
   @override
   String probableListAddedCount(int count) {
-    return '$count article(s) ajouté(s) à ta liste';
+    return '$count stavki dodanih na vaš popis';
   }
 
   @override
-  String get smartCartSeeMore => 'Voir plus';
+  String get smartCartSeeMore => 'Pogledajte više';
 
   @override
   String smartCartSuggestionsCount(int count) {
@@ -1183,369 +1203,422 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String smartCartAddedCount(int count) {
-    return '$count article(s) ajouté(s)';
+    return '$count stavki je dodano';
   }
 
   @override
   String shoppingSocialAddProduct(String product) {
-    return 'Ajouter « $product » à ma liste';
+    return 'Dodaj « $product » na moj popis';
   }
 
   @override
   String get shoppingSocialDemoDataNote =>
-      'Données de démonstration. Les tendances réelles arriveront avec une future mise à jour. Aucune donnée personnelle n\'est partagée (RGPD).';
+      'Demo podaci. Pravi trendovi doći će u budućem ažuriranju. Ne dijele se osobni podaci (GDPR).';
 
   @override
-  String get shoppingSocialPopularRecipes => 'Recettes populaires';
+  String get shoppingSocialPopularRecipes => 'Popularni recepti';
 
   @override
-  String get shoppingSocialViewIngredients => 'Voir les ingrédients';
+  String get shoppingSocialViewIngredients => 'Pogledajte sastojke';
 
   @override
   String get shoppingSocialAddIngredientsToList =>
-      'Ajouter les ingrédients à ma liste';
+      'Dodaj sastojke na moj popis';
 
   @override
   String get proBadge => 'Pro';
 
   @override
   String get probableListFirstRunHint =>
-      'Valide ou modifie la liste proposée selon tes habitudes.';
+      'Potvrdite ili prilagodite predloženi popis na temelju svojih navika.';
 
   @override
   String get shoppingSocialFirstRunHint =>
-      'Découvre les tendances anonymisées : aucune donnée personnelle n\'est partagée.';
+      'Otkrijte anonimizirane trendove: ne dijele se osobni podaci.';
 
   @override
-  String get errorGeneric => 'Une erreur s\'est produite.';
+  String get errorGeneric => 'Došlo je do pogreške.';
 
   @override
-  String get paywallTitle => 'Passe à Tote \'O Recall+';
+  String get paywallTitle => 'Nadogradite na Tote \'O Recall+';
 
   @override
-  String get paywallSubtitle => 'Débloque tout le potentiel de ta liste';
+  String get paywallSubtitle => 'Otključajte puni potencijal svog popisa';
 
   @override
-  String get paywallBenefitNoAds => 'Zéro pub, expérience fluide';
+  String get paywallBenefitNoAds => 'Nema oglasa, ugodno iskustvo';
 
   @override
-  String get paywallBenefitSmartCart => 'Aide course & liste probable';
+  String get paywallBenefitSmartCart =>
+      'Prisjetite se prijedloga pomoći i navika';
 
   @override
-  String get paywallBenefitSync => 'Sync sur tous tes appareils';
+  String get paywallBenefitSync => 'Sinkronizirajte na svim svojim uređajima';
 
   @override
-  String get paywallBenefitStats => 'Stats, badges et gamification';
+  String get paywallBenefitStats => 'Više popisa, kućne zalihe, bez oglasa';
+
+  @override
+  String get paywallBenefitLists =>
+      'Višestruki popisi kojima se jasno upravlja na jednom mjestu';
+
+  @override
+  String get paywallBenefitMeals =>
+      'Pripremite jelo: raclette, aperitiv, roštilj…';
+
+  @override
+  String get paywallBenefitAxis => 'Kupujte prema vrsti hrane';
 
   @override
   String paywallCta(String price) {
-    return 'Débloquer pour $price';
+    return 'Otključaj za $price';
   }
 
   @override
-  String get paywallTrialCta => 'Essayer 24h gratuit';
+  String get paywallTrialCta => 'Isprobajte 24 sata besplatno';
 
   @override
-  String get paywallRestore => 'Restaurer l\'achat';
+  String get paywallRestore => 'Obnovi kupnju';
 
   @override
-  String get upgradePromptTitle => 'Tu gères bien tes listes !';
+  String get upgradePromptTitle => 'Super ti ide!';
 
   @override
   String get upgradePromptMessage =>
-      'Passe à Tote \'O Recall+ pour garder tes habitudes et débloquer l\'Aide course, la liste probable et la sync.';
+      'Nadogradite na Tote \'O Recall+ da zadržite svoje navike i otključate pametnu košaricu, vjerojatni popis i sinkronizaciju.';
 
   @override
-  String get upgradePromptCta => 'Découvrir Tote \'O Recall+';
+  String get upgradePromptCta => 'Otkrijte Tote \'O Recall+';
 
   @override
-  String get upgradePromptLater => 'Plus tard';
+  String get upgradePromptLater => 'Kasnije';
 
   @override
-  String get trialGrantedTitle => '24h de Tote \'O Recall+ offertes !';
+  String get trialGrantedTitle => '24 sata Tote \'O Recall+ besplatno!';
 
   @override
   String get trialGrantedMessage =>
-      'Tu as débloqué un essai gratuit. Profites-en pour tester l\'Aide course et la liste probable.';
+      'Otključali ste besplatno probno razdoblje. Isprobajte Smart cart i vjerojatni popis.';
 
   @override
-  String get undo => 'Annuler';
+  String get undo => 'Poništi';
 
   @override
-  String get retry => 'Réessayer';
+  String get retry => 'Pokušaj ponovo';
 
   @override
   String itemAdded(String name) {
-    return '« $name » ajouté';
+    return '« $name » dodano';
   }
 
   @override
-  String get syncFailed => 'Synchronisation impossible. Vérifie ta connexion.';
+  String get syncFailed => 'Sinkronizacija nije uspjela. Provjerite vezu.';
 
   @override
-  String get syncCancelled => 'Connexion annulée.';
+  String get syncCancelled => 'Prijava je otkazana.';
 
   @override
-  String get syncStatusOk => 'Synchronisé';
+  String get syncStatusOk => 'Sinkronizirano';
 
   @override
-  String get syncStatusSyncing => 'Synchronisation…';
+  String get syncStatusSyncing => 'Sinkronizacija…';
 
   @override
-  String get syncStatusOffline => 'Hors ligne';
+  String get syncStatusOffline => 'Izvan mreže';
 
   @override
-  String get syncStatusError => 'Erreur de sync';
+  String get syncStatusError => 'Pogreška sinkronizacije';
 
   @override
   String scanProductNotFound(String name) {
-    return 'Produit inconnu — ajouté comme « $name »';
+    return 'Nepoznat proizvod — dodan kao « $name »';
   }
 
   @override
-  String get scanFailed => 'Scan impossible. Réessaie.';
+  String get scanFailed => 'Skeniranje nije uspjelo. Pokušajte ponovo.';
 
   @override
   String get scanCameraDenied =>
-      'Autorise la caméra pour scanner un code-barres.';
+      'Dopusti pristup kameri za skeniranje crtičnih kodova.';
 
   @override
-  String get purchaseSuccess => 'Tote \'O Recall+ activé. Merci !';
+  String get purchaseSuccess => 'Tote \'O Recall+ je uključen. Hvala!';
 
   @override
-  String get purchaseCancelled => 'Achat annulé.';
+  String get purchaseCancelled => 'Kupnja otkazana.';
 
   @override
-  String get purchasePending => 'Achat en cours de validation…';
+  String get purchasePending => 'Kupnja na čekanju…';
 
   @override
-  String get purchaseRestoreSuccess => 'Achat restauré.';
+  String get purchaseRestoreSuccess => 'Kupnja je vraćena.';
 
   @override
-  String get purchaseRestoreNone => 'Aucun achat à restaurer.';
+  String get purchaseRestoreNone => 'Ništa za vratiti.';
 
   @override
-  String get onboardingStepAddTitle => 'Ajoute des articles';
+  String get onboardingStepAddTitle => 'Snimite jednim dodirom';
 
   @override
   String get onboardingStepAddBody =>
-      'Tape sur + pour ajouter ce dont tu as besoin. Simple et rapide.';
+      'Dodirnite + da biste zabilježili što vam je potrebno. Manje od 2 sekunde, na popisu je.';
 
   @override
-  String get onboardingStepCheckTitle => 'Coche en magasin';
+  String get onboardingStepCheckTitle => 'Ne zaboravi ništa';
 
   @override
   String get onboardingStepCheckBody =>
-      'Coche les articles au fur et à mesure. Glisse pour supprimer.';
+      'Aplikacija vas podsjeća što trebate ponovno kupiti od svojih navika — prije i tijekom kupovine.';
 
   @override
-  String get onboardingStepShareTitle => 'Partage ta liste';
+  String get onboardingStepShareTitle => 'Završi za pamćenje';
 
   @override
   String get onboardingStepShareBody =>
-      'Invite un proche pour faire les courses à deux en temps réel.';
+      'Kada je kupnja gotova, potvrdite je: Tote uči što kupujete kako bi vas sljedeći put bolje podsjetio.';
 
   @override
-  String get onboardingStartEmpty => 'Commencer avec une liste vide';
+  String get menuMoreFeatures => 'Više…';
 
   @override
-  String get onboardingPickTemplate => 'Choisir un modèle';
+  String get menuAdvancedFeatures => 'Napredno';
 
   @override
-  String get onboardingNext => 'Suivant';
+  String get listDisplayOptions => 'Prikaz';
 
   @override
-  String get onboardingSkip => 'Passer';
+  String get emptyListRecallHint =>
+      'Dodajte artikl ili svoje uobičajene ako ste već kupovali.';
+
+  @override
+  String get addYourUsualItems => 'Dodajte svoje uobičajene';
+
+  @override
+  String get smartCartTabForget => 'Zaboravio';
+
+  @override
+  String get smartCartTabWeek => 'Tjedan';
+
+  @override
+  String get settingsSectionAppearance => 'Izgled';
+
+  @override
+  String get settingsSectionShopping => 'Kupnja i podsjetnici';
+
+  @override
+  String get settingsSectionAccount => 'Račun';
+
+  @override
+  String get settingsSectionAdvanced => 'Napredno';
+
+  @override
+  String get chooseStoreOptional => 'Promjena trgovine';
+
+  @override
+  String get paywallBenefitRecall =>
+      'Pomoć pri opozivu: prestanite zaboravljati u trgovini';
+
+  @override
+  String get onboardingStartEmpty => 'Počnite s praznim popisom';
+
+  @override
+  String get onboardingPickTemplate => 'Odaberite predložak';
+
+  @override
+  String get onboardingNext => 'Sljedeći';
+
+  @override
+  String get onboardingSkip => 'Preskočiti';
 
   @override
   String get hintSync =>
-      'Connecte-toi pour synchroniser ta liste sur tous tes appareils.';
+      'Prijavite se za sinkronizaciju popisa na svim uređajima.';
 
   @override
-  String get hintScan =>
-      'Scanne un code-barres pour ajouter un produit rapidement.';
+  String get hintScan => 'Skenirajte crtični kod za brzo dodavanje proizvoda.';
 
   @override
   String get hintSmartCart =>
-      'L\'Aide course te suggère ce qu\'il te manque selon tes habitudes.';
+      'Pametna košarica predlaže što bi vam moglo nedostajati.';
 
   @override
-  String get hintGotIt => 'Compris';
+  String get hintGotIt => 'shvaćam';
 
   @override
-  String get premiumFeatureLocked => 'Disponible avec Tote \'O Recall+';
+  String get premiumFeatureLocked => 'Dostupno uz Tote \'O Recall+';
 
   @override
-  String get planningEmptyCta => 'Ajouter un rappel';
+  String get planningEmptyCta => 'Dodajte podsjetnik';
 
   @override
-  String get birthdaysEmptyCta => 'Ajouter un anniversaire';
+  String get birthdaysEmptyCta => 'Dodajte rođendan';
 
   @override
-  String get settingsSaveFailed => 'Impossible d\'enregistrer ce réglage.';
+  String get settingsSaveFailed => 'Nije moguće spremiti ovu postavku.';
 
   @override
   String mealPresetTitle(String label) {
-    return 'Liste « $label » ?';
+    return '« $label » popis?';
   }
 
   @override
   String mealPresetBody(int count) {
-    return 'Ajouter les $count articles typiques en un tap ?';
+    return 'Dodati $count tipične stavke jednim dodirom?';
   }
 
   @override
   String get mealPresetPremiumOnly =>
-      'Les listes repas express sont disponibles avec Tote \'O Recall+.';
+      'Brzi popisi obroka dostupni su uz Tote \'O Recall+.';
 
   @override
-  String get mealPresetAddAll => 'Tout ajouter';
+  String get mealPresetAddAll => 'Dodaj sve';
 
   @override
-  String get mealPresetAddSingle => 'Juste ce nom';
+  String get mealPresetAddSingle => 'Samo ovo ime';
 
   @override
   String mealPresetAdded(int count, String label) {
-    return '$count articles ajoutés ($label)';
+    return '$count stavki dodano ($label)';
   }
 
   @override
-  String get budgetCeiling => 'Plafond budget (€)';
+  String get budgetCeiling => 'Gornja granica proračuna (€)';
 
   @override
   String get budgetCeilingSubtitle =>
-      'Alerte si le total à acheter dépasse ce montant';
+      'Upozori kada ukupni iznos za kupnju premaši ovaj iznos';
 
   @override
-  String get budgetCeilingHint => 'Ex. 50';
+  String get budgetCeilingHint => 'npr. 50';
 
   @override
   String budgetOverBanner(String total, String ceiling) {
-    return 'Budget dépassé : $total € / $ceiling €';
+    return 'Preko proračuna: $total € / $ceiling €';
   }
 
   @override
-  String get recentItems => 'Récents';
+  String get recentItems => 'Nedavno';
 
   @override
   String recallDueCard(int count) {
-    return '$count article(s) à racheter ?';
+    return '$count artikal(a) za obnovu zaliha?';
   }
 
   @override
-  String get recallDueCardCta => 'Voir l\'Aide course';
+  String get recallDueCardCta => 'Otvorite Pametnu košaricu';
 
   @override
-  String get weeklyReminder => 'Rappel jour de courses';
+  String get weeklyReminder => 'Podsjetnik na dan kupovine';
 
   @override
   String get weeklyReminderSubtitle =>
-      'Notification hebdomadaire pour ne pas oublier ta liste';
+      'Tjedna obavijest kako ne biste zaboravili svoj popis';
 
   @override
-  String get weeklyReminderDay => 'Jour';
+  String get weeklyReminderDay => 'Dan';
 
   @override
-  String get weeklyReminderTime => 'Heure';
+  String get weeklyReminderTime => 'Vrijeme';
 
   @override
-  String get weeklyReminderMessage => 'N\'oublie pas ta liste Tote \'O Recall';
+  String get weeklyReminderMessage =>
+      'Ne zaboravite svoju Tote \'O Recall listu';
 
   @override
-  String get weekdayMon => 'Lundi';
+  String get weekdayMon => 'ponedjeljak';
 
   @override
-  String get weekdayTue => 'Mardi';
+  String get weekdayTue => 'utorak';
 
   @override
-  String get weekdayWed => 'Mercredi';
+  String get weekdayWed => 'srijeda';
 
   @override
-  String get weekdayThu => 'Jeudi';
+  String get weekdayThu => 'četvrtak';
 
   @override
-  String get weekdayFri => 'Vendredi';
+  String get weekdayFri => 'petak';
 
   @override
-  String get weekdaySat => 'Samedi';
+  String get weekdaySat => 'subota';
 
   @override
-  String get weekdaySun => 'Dimanche';
+  String get weekdaySun => 'nedjelja';
 
   @override
-  String get dragToReorder => 'Glisse un article pour le déplacer';
+  String get dragToReorder => 'Povucite stavku da je premjestite';
 
   @override
-  String get dragHandleTooltip => 'Déplacer';
+  String get dragHandleTooltip => 'Potez';
 
   @override
-  String get longPressToDelete => 'Appui long pour supprimer';
+  String get longPressToDelete => 'Dugo pritisnite za brisanje';
 
   @override
-  String get orgModeLabel => 'Organisation';
+  String get orgModeLabel => 'Izgled';
 
   @override
-  String get orgModeBubbles => 'Bulles';
+  String get orgModeBubbles => 'Mjehurići';
 
   @override
-  String get orgModeNumbered => 'Liste';
+  String get orgModeNumbered => 'Popis';
 
   @override
-  String get orgModeManual => 'Perso';
+  String get orgModeManual => 'Običaj';
 
   @override
-  String get orgModeBubblesHint => 'Les bulles s’organisent toutes seules';
+  String get orgModeBubblesHint => 'Mjehurići se sami pakiraju';
 
   @override
-  String get orgModeNumberedHint => 'Liste numérotée';
+  String get orgModeNumberedHint => 'Numerirani popis';
 
   @override
-  String get orgModeManualHint => 'Glisse pour ranger à ta façon';
+  String get orgModeManualHint => 'Povucite da uredite svoj put';
 
   @override
   String get recallDueCardHistoryCta =>
-      'D’après ton historique — voir l’Aide course';
+      'Na temelju vaše povijesti — otvorite Pametnu košaricu';
 
   @override
   String mealPresetBodySkip(int missing, int skipped) {
-    return 'Ajouter les $missing articles manquants ($skipped déjà chez toi ou sur la liste) ?';
+    return 'Dodati $missing stavke koje nedostaju ($skipped već kod kuće ili na popisu)?';
   }
 
   @override
   String mealPresetAlreadyHave(String names) {
-    return 'Déjà : $names';
+    return 'Već imate: $names';
   }
 
   @override
   String mealPresetAddMissing(int count) {
-    return 'Ajouter $count';
+    return 'Dodaj $count';
   }
 
   @override
-  String get pantryTitle => 'Stock maison';
+  String get pantryTitle => 'Domaća zaliha';
 
   @override
   String get pantrySubtitle =>
-      'Suis ton placard. À zéro, on peut ajouter à la liste.';
+      'Pratite svoju smočnicu. Na nuli dodajte na popis.';
 
   @override
   String get pantryPremiumOnly =>
-      'Le stock maison est disponible avec Tote \'O Recall+.';
+      'Kućne zalihe dostupne su uz Tote \'O Recall+.';
 
   @override
-  String get pantryItemName => 'Article';
+  String get pantryItemName => 'Artikal';
 
   @override
-  String get pantryQty => 'Qté';
+  String get pantryQty => 'Kol';
 
   @override
-  String get pantryAdd => 'Ajouter';
+  String get pantryAdd => 'Dodati';
 
   @override
-  String get pantryEmpty => 'Aucun article en stock';
+  String get pantryEmpty => 'Nema artikala na skladištu';
 
   @override
-  String get pantryOutOfStock => 'Rupture';
+  String get pantryOutOfStock => 'Nema na skladištu';
 
   @override
   String pantryQtyLabel(String qty, String unit) {
@@ -1553,223 +1626,3160 @@ class AppLocalizationsHr extends AppLocalizations {
   }
 
   @override
-  String get pantryUseOne => 'Utiliser 1';
+  String get pantryUseOne => 'Koristite 1';
 
   @override
-  String get pantryAddOne => 'Ajouter 1';
+  String get pantryAddOne => 'Dodaj 1';
 
   @override
-  String get pantryEmptyTitle => 'Plus en stock';
+  String get pantryEmptyTitle => 'Nema na skladištu';
 
   @override
   String pantryEmptyBody(String name) {
-    return 'Ajouter « $name » à la liste de courses ?';
+    return 'Dodati “$name” na popis za kupovinu?';
   }
 
   @override
-  String get pantryAddToList => 'Ajouter à la liste';
+  String get pantryAddToList => 'Dodaj na popis';
 
   @override
   String pantryAddedToList(String name) {
-    return '« $name » ajouté à la liste';
+    return '“$name” dodan na popis';
   }
 
   @override
   String pantryEmptyAlreadyOnList(String name) {
-    return '« $name » est déjà sur la liste';
+    return '“$name” je već na popisu';
   }
 
   @override
-  String get pantryRestockTitle => 'Mettre à jour le stock ?';
+  String get pantryRestockTitle => 'Ažurirati zalihu?';
 
   @override
   String pantryRestockBody(int count) {
-    return 'Ajouter les $count articles achetés au stock maison ?';
+    return 'Dodati $count kupljene artikle u kućnu zalihu?';
   }
 
   @override
-  String get pantryRestockCta => 'Oui, stocker';
+  String get pantryRestockCta => 'Da, obnoviti zalihe';
 
   @override
-  String get geofenceTitle => 'Rappel près du magasin';
+  String get geofenceTitle => 'Podsjetnik u blizini trgovine';
 
   @override
   String get geofenceSubtitle =>
-      'Opt-in : notifie quand tu es près d’un magasin favori (GPS local, sans cloud).';
+      'Uključite se: obavijestite kada ste u blizini omiljene trgovine (lokalni GPS, bez oblaka).';
 
   @override
-  String get geofenceEnable => 'Activer la proximité';
+  String get geofenceEnable => 'Omogući blizinu';
 
   @override
   String get geofenceEnableHint =>
-      'Vérifie à l’ouverture de l’app (pas de suivi en arrière-plan).';
+      'Provjerava kada se aplikacija otvori (bez pozadinskog praćenja).';
 
   @override
-  String get geofenceAddHere => 'Enregistrer ma position actuelle';
+  String get geofenceAddHere => 'Spremi moju trenutnu lokaciju';
 
   @override
-  String get geofenceDefaultStore => 'Mon magasin';
+  String get geofenceDefaultStore => 'Moja trgovina';
 
   @override
-  String get geofenceAdded => 'Position magasin enregistrée';
+  String get geofenceAdded => 'Lokacija trgovine spremljena';
 
   @override
-  String get geofencePermissionDenied => 'Autorisation de localisation refusée';
+  String get geofencePermissionDenied => 'Dopuštenje za lokaciju odbijeno';
 
   @override
-  String get geofenceLocationError => 'Impossible d’obtenir la position';
+  String get geofenceLocationError => 'Nije moguće dobiti lokaciju';
 
   @override
   String geofenceRadiusLabel(int meters) {
-    return 'Rayon $meters m';
+    return '$meters m radijus';
   }
 
   @override
-  String get geofenceNotifTitle => 'Tu es près du magasin';
+  String get geofenceNotifTitle => 'U blizini ste trgovine';
 
   @override
   String geofenceNotifBody(String store, int count) {
-    return '$store — $count article(s) sur ta liste';
+    return '$store — $count stavki na vašem popisu';
   }
 
   @override
   String get mealPresetAllCovered =>
-      'Tu as déjà tout pour ce repas — rien à ajouter !';
+      'Već imate sve za ovo jelo — nemate što dodati!';
 
   @override
-  String get mealPresetAllCoveredCta => 'Parfait';
+  String get mealPresetAllCoveredCta => 'Lijepo';
 
   @override
-  String get mealPresetNeedIt => 'À prendre';
+  String get mealPresetNeedIt => 'Trebam ga';
 
   @override
-  String get mealPresetInPantry => 'Placard';
+  String get mealPresetInPantry => 'Ostava';
 
   @override
-  String get mealPresetOnList => 'Liste';
+  String get mealPresetOnList => 'Popis';
 
   @override
-  String get mealPresetInBoth => 'OK';
+  String get mealPresetInBoth => 'U REDU';
 
   @override
   String pantryAddedSnack(String name) {
-    return '« $name » en stock';
+    return '“$name” na zalihi';
   }
 
   @override
   String pantryAutoAdded(String name) {
-    return 'Rupture → « $name » ajouté à la liste';
+    return 'Nema na skladištu → “$name” dodan na popis';
   }
 
   @override
   String pantryStatInStock(int count) {
-    return '$count en stock';
+    return '$count na zalihi';
   }
 
   @override
   String pantryStatLow(int count) {
-    return '$count bas';
+    return '$count nisko';
   }
 
   @override
   String pantryStatEmpty(int count) {
-    return '$count rupture';
+    return '$count prazno';
   }
 
   @override
-  String get pantrySearchHint => 'Chercher dans le placard…';
+  String get pantrySearchHint => 'Pretraži smočnicu…';
 
   @override
-  String get pantryFilterAll => 'Tous';
+  String get pantryFilterAll => 'Sve';
 
   @override
-  String get pantryFilterLow => 'Bas';
+  String get pantryFilterLow => 'Niska';
 
   @override
-  String get pantryFilterEmpty => 'Rupture';
+  String get pantryFilterEmpty => 'Prazan';
 
   @override
-  String get pantryFilterEmptyResult => 'Rien dans ce filtre';
+  String get pantryFilterEmptyResult => 'Ništa u ovom filtru';
 
   @override
   String pantryLowHint(String qty) {
-    return 'Plus que $qty — bientôt à racheter';
+    return 'Još samo $qty — uskoro obnovite zalihe';
   }
 
   @override
   String pantryRestockDone(int count) {
-    return 'Stock +$count';
+    return 'Zaliha +$count';
   }
 
   @override
-  String get recallDueQuickAdd => 'Ajouter les premiers';
+  String get recallDueQuickAdd => 'Dodajte vrhunske stavke';
 
   @override
-  String get recallDueSeeAll => 'Tout voir';
+  String get recallDueSeeAll => 'Vidi sve';
 
   @override
   String recallDueAdded(int count) {
-    return '$count ajouté(s) à la liste';
+    return '$count dodan na popis';
   }
 
   @override
-  String get geofenceSetupTitle => 'Nouveau magasin';
+  String get geofenceSetupTitle => 'Nova trgovina';
 
   @override
   String get geofenceSetupHint =>
-      'Enregistre ta position actuelle — on te rappellera ta liste à proximité.';
+      'Spremite svoju trenutnu lokaciju — gurnut ćemo vas kad budete u blizini.';
 
   @override
-  String get geofenceStoreName => 'Nom du magasin';
+  String get geofenceStoreName => 'Naziv trgovine';
 
   @override
-  String get geofencePickColor => 'Couleur / rayon magasin';
+  String get geofencePickColor => 'Pohranite boju';
 
   @override
-  String get geofenceRadiusPick => 'Zone de détection';
+  String get geofenceRadiusPick => 'Zona detekcije';
 
   @override
-  String get geofenceSaveHere => 'Enregistrer ici';
+  String get geofenceSaveHere => 'Spremite ovdje';
 
   @override
-  String get geofenceLocating => 'Localisation…';
+  String get geofenceLocating => 'Lociranje...';
 
   @override
   String geofenceAddedNamed(String name) {
-    return '« $name » enregistré';
+    return '“$name” spremljeno';
   }
 
   @override
-  String get foodTypeLabel => 'Type d’aliment';
+  String get foodTypeLabel => 'Vrsta hrane';
 
   @override
-  String get foodCatUnclassified => 'Non classé';
+  String get foodCatUnclassified => 'Nekategorizirano';
 
   @override
-  String get showFoodCategoryBadge => 'Afficher le type d’aliment';
+  String get foodCatFruits => 'Voće';
+
+  @override
+  String get foodCatVegetables => 'Povrće';
+
+  @override
+  String get foodCatMushrooms => 'Gljive';
+
+  @override
+  String get foodCatDairy => 'Mliječni proizvodi i jaja';
+
+  @override
+  String get foodCatMeat => 'Meso';
+
+  @override
+  String get foodCatDeli => 'Mesni narezci';
+
+  @override
+  String get foodCatFish => 'Riba i morski plodovi';
+
+  @override
+  String get foodCatBakery => 'Pekara';
+
+  @override
+  String get foodCatDrinks => 'Pića';
+
+  @override
+  String get foodCatGrocery => 'Ostava';
+
+  @override
+  String get foodCatSnacks => 'Grickalice';
+
+  @override
+  String get foodCatDesserts => 'Deserti';
+
+  @override
+  String get foodCatSweets => 'Slatkiši';
+
+  @override
+  String get foodCatFrozen => 'Smrznuto';
+
+  @override
+  String get foodCatHygiene => 'Osobna njega';
+
+  @override
+  String get foodCatHousehold => 'Kućanstvo';
+
+  @override
+  String get foodCatPets => 'Kućni ljubimci';
+
+  @override
+  String get foodCatBaby => 'Bebe';
+
+  @override
+  String get foodCatOther => 'Ostalo';
+
+  @override
+  String get myList => 'Moj popis';
+
+  @override
+  String get engagementsListName => 'Obveze';
+
+  @override
+  String get listCopySuffix => ' (kopija)';
+
+  @override
+  String deleteListConfirmEmpty(String name) {
+    return '„$name“ će biti obrisan.';
+  }
+
+  @override
+  String deleteListConfirmWithItems(String name, int count) {
+    return '„$name“ ima $count stavki. Sve će biti obrisano.';
+  }
+
+  @override
+  String get showFoodCategoryBadge => 'Prikaži vrstu hrane';
 
   @override
   String get showFoodCategoryBadgeSubtitle =>
-      'Petit badge sous chaque article (Légumes, Laitiers…)';
+      'Mala značka ispod svake stavke (povrće, mliječni proizvodi…)';
 
   @override
-  String get axisModeLabel => 'Ranger par';
+  String get axisModeLabel => 'Grupiraj po';
 
   @override
-  String get axisModeStore => 'Magasin';
+  String get axisModeStore => 'Trgovina';
 
   @override
-  String get axisModeFood => 'Type';
+  String get axisModeFood => 'Vrsta hrane (povrće, voće…)';
 
   @override
-  String get axisModeDualStoreFood => 'Magasin → type';
+  String get axisModeDualStoreFood => 'Spremi → vrsta';
 
   @override
-  String get axisModeDualFoodStore => 'Type → magasin';
+  String get axisModeDualFoodStore => 'Tip → trgovina';
 
   @override
-  String get reclassifyFoodList => 'Reclasser les types';
+  String get reclassifyFoodList => 'Preklasificirajte vrste hrane';
 
   @override
-  String get reclassifyFoodDone => 'Types d’aliments mis à jour';
+  String get reclassifyFoodDone => 'Vrste hrane ažurirane';
+
+  @override
+  String get listsHubTitle => 'Moje liste';
+
+  @override
+  String get listsHubSubtitle =>
+      'Promijenite popise ili izradite novi — upravljajte svime na jednom mjestu';
+
+  @override
+  String get listsHubManage => 'Moje liste';
+
+  @override
+  String get listsHubOpen => 'Otvoriti';
+
+  @override
+  String listsHubItemCount(int count) {
+    return '$count stavki';
+  }
+
+  @override
+  String get listsHubSystemBadge => 'sustav';
+
+  @override
+  String get listsHubHideFromBar => 'Sakrij se od bara';
+
+  @override
+  String get listsHubShowInBar => 'Prikaz u baru';
+
+  @override
+  String get listsHubCurrent => 'Otvoriti';
+
+  @override
+  String get listsHubOrganizeGroups => 'Organizirajte se u grupe';
+
+  @override
+  String get addToListLabel => 'Dodaj u';
+
+  @override
+  String get toggleAxisByType => 'Tip';
+
+  @override
+  String get toggleAxisByStore => 'Trgovina';
+
+  @override
+  String get axisChipTooltipType =>
+      'Grupirajte stavke: povrće, voće, mliječni proizvodi, meso…';
+
+  @override
+  String get axisChipTooltipStore => 'Grupirajte artikle po trgovini / boji';
+
+  @override
+  String get axisHintBanner =>
+      'Vaš popis je grupiran prema vrsti (povrće, voće…). Prijeđite na Trgovinu za grupiranje prema prodavaču.';
+
+  @override
+  String get axisHintBannerStore =>
+      'Savjet: prebacite se na Vrsta za grupiranje povrća, voća, mliječnih proizvoda…';
+
+  @override
+  String get listsHubChipTooltip =>
+      'Stvorite, otvorite, preimenujte ili izbrišite popis';
+
+  @override
+  String get storesLegendHint =>
+      'Dodirnite žeton u boji da biste imenovali trgovinu (Carrefour, market…)';
+
+  @override
+  String get toBuyTooltip => 'Pokažite samo ono što je preostalo za pokupiti';
+
+  @override
+  String get displayOptionsTooltip =>
+      'Oblačići, numerirani popis ili grupiranje u trgovini/vrsti';
+
+  @override
+  String get mealPresetsChipTooltip => 'Dodajte sve sastojke za obrok odjednom';
+
+  @override
+  String get quickAddChipTooltip => 'Dodajte nekoliko stavki u nizu';
+
+  @override
+  String get usualsChipTooltip => 'Ponovno dodajte svoje najčešće stavke';
+
+  @override
+  String get emptyListTypeHint =>
+      'Uz Plus, vaš popis grupira prema vrsti: povrće, voće, mliječni proizvodi…';
+
+  @override
+  String get mealPresetsMenu => 'Pripremite obrok';
+
+  @override
+  String get mealPresetsPickerTitle => 'Koji obrok pripremiti?';
+
+  @override
+  String get mealPresetsPickerSubtitle =>
+      'Dodaje svaki sastojak koji nedostaje na popis';
+
+  @override
+  String mealPresetsItemsCount(int count) {
+    return '$count sastojaka';
+  }
+
+  @override
+  String get smartCartEmptyTitle => 'Još nema prijedloga';
+
+  @override
+  String get smartCartEmptyBody =>
+      'Kupujte nekoliko puta ili stvorite artikl koji se ponavlja - savjeti se temelje na vašim navikama.';
+
+  @override
+  String get smartCartEmptyCtaPlanning => 'Otvoreno planiranje';
+
+  @override
+  String smartCartWhyDue(int days) {
+    return 'Rok · obično svaki $days d';
+  }
+
+  @override
+  String get smartCartWhyOften => 'Često se kupuje';
+
+  @override
+  String get smartCartAddToOtherList => 'Drugi popis…';
+
+  @override
+  String panicRemainingCount(int count) {
+    return '$count preostalo za zgrabiti';
+  }
+
+  @override
+  String get panicMarkChecked => 'Označi kao zauzeto';
+
+  @override
+  String get panicGroupedHint =>
+      'Grupirani poput vašeg popisa - označite u hodu';
+
+  @override
+  String get reclassifyFoodHint =>
+      'Nekategorizirane stavke: ponovno klasificirajte za jasnije dijelove';
+
+  @override
+  String get catalogTapHint => 'Dodirnite stavku da je dodate na svoj popis.';
+
+  @override
+  String get statsOverview => 'Pregled';
+
+  @override
+  String get statsCurrentList => 'Trenutni popis';
+
+  @override
+  String get statsInCartChecked => 'U košarici (provjereno)';
+
+  @override
+  String get statsEstimatedTotalUnchecked =>
+      'Procijenjeni ukupni iznos (neoznačeno)';
+
+  @override
+  String get statsYourStats => 'Vaša statistika';
+
+  @override
+  String get statsAllListsSection => 'Svi popisi';
+
+  @override
+  String get statsListsCount => 'Broj lista';
+
+  @override
+  String get statsPlanningSection => 'Planiranje';
+
+  @override
+  String get statsRecurringPurchases => 'Kupnje koje se ponavljaju';
+
+  @override
+  String get statsSeasonalTemplates => 'Sezonski predlošci';
+
+  @override
+  String get statsModelsSection => 'Predlošci';
+
+  @override
+  String get statsSavedListModels => 'Spremljeni predlošci popisa';
+
+  @override
+  String categoryIndexed(int index) {
+    return 'Kategorija $index';
+  }
+
+  @override
+  String get planningTitle => 'Planiranje';
+
+  @override
+  String get planningTabRecurring => 'Ponavljajuće';
+
+  @override
+  String get planningTabSeasonal => 'Sezonski';
+
+  @override
+  String get planningRecurringIntro =>
+      'Predmeti koje kupujete po redovnom rasporedu. Dodajte ih na svoj popis kada za to dođe vrijeme.';
+
+  @override
+  String get createRecurringPurchase => 'Izradite kupnju koja se ponavlja';
+
+  @override
+  String get fillListWithRecurring =>
+      'Dodajte sve stavke koje se ponavljaju na popis';
+
+  @override
+  String get recurringEmptyHint =>
+      'Još nema ponavljajućih kupnji.\nnpr. Mlijeko svakih 7 dana.';
+
+  @override
+  String get deleteRecurringConfirmTitle =>
+      'Izbrisati ovu stavku koja se ponavlja?';
+
+  @override
+  String deleteRecurringConfirmBody(String name) {
+    return '“$name” više neće biti u vašim ponavljajućim kupnjama.';
+  }
+
+  @override
+  String addedItemSnack(String name) {
+    return 'Dodano: $name';
+  }
+
+  @override
+  String addedItemsToListSnack(int count) {
+    return '$count stavki dodano na popis';
+  }
+
+  @override
+  String neverBoughtEveryDays(int days) {
+    return 'Nikada kupljen • Svaki $days d';
+  }
+
+  @override
+  String boughtDaysAgoEveryDays(int daysAgo, int days) {
+    return 'Prije $daysAgo dana • Svaki $days dan';
+  }
+
+  @override
+  String get dueToBuySuffix => '• Dospjelo';
+
+  @override
+  String get newRecurringPurchase => 'Nova kupnja koja se ponavlja';
+
+  @override
+  String get editRecurringPurchase => 'Uredite kupnju koja se ponavlja';
+
+  @override
+  String get articleLabel => 'Artikal';
+
+  @override
+  String get articleHintExample => 'npr. Mlijeko';
+
+  @override
+  String get freqOncePerWeek => '1×/tjedan';
+
+  @override
+  String get freqOncePerTwoWeeks => '1× / 2 tjedna';
+
+  @override
+  String get freqOncePerMonth => '1× / mjesec';
+
+  @override
+  String freqEveryDays(int days) {
+    return 'Svaki $days d';
+  }
+
+  @override
+  String get seasonalIntro =>
+      'Popisi za kupovinu za prigodu (Božić, povratak u školu...). Dodajte svaku stavku na svoj popis odjednom.';
+
+  @override
+  String seasonalAddedSnack(int count, String name) {
+    return '$count stavki dodano ($name)';
+  }
+
+  @override
+  String get addAll => 'Dodaj sve';
+
+  @override
+  String recurringDueBanner(int count) {
+    return '$count ponavljajuće kupnje dospjele';
+  }
+
+  @override
+  String get seasonalTpl_noel => 'Christmas';
+
+  @override
+  String get seasonalTpl_rentree => 'Back to school';
+
+  @override
+  String get seasonalTpl_ete => 'Summer / Holidays';
+
+  @override
+  String get seasonalTpl_halloween => 'Halloween';
+
+  @override
+  String get prod_ail => 'Češnjak';
+
+  @override
+  String get prod_avocats => 'Avokado';
+
+  @override
+  String get prod_baguette => 'baget';
+
+  @override
+  String get prod_bananes => 'Banane';
+
+  @override
+  String get prod_basilic => 'Bosiljak';
+
+  @override
+  String get prod_beurre => 'Maslac';
+
+  @override
+  String get prod_biscuits => 'Kolačići';
+
+  @override
+  String get prod_biere => 'Pivo';
+
+  @override
+  String get prod_bieres => 'piva';
+
+  @override
+  String get prod_bonbons => 'Bombon';
+
+  @override
+  String get prod_bouillon => 'Bujon';
+
+  @override
+  String get prod_bouteilles_deau => 'Boce za vodu';
+
+  @override
+  String get prod_brioche => 'Brioš';
+
+  @override
+  String get prod_buche => 'Badnjak';
+
+  @override
+  String get prod_cacahuetes => 'kikiriki';
+
+  @override
+  String get prod_cafe => 'Kava';
+
+  @override
+  String get prod_cahiers => 'Bilježnice';
+
+  @override
+  String get prod_carottes => 'mrkva';
+
+  @override
+  String get prod_cartable => 'Školska torba';
+
+  @override
+  String get prod_champagne => 'šampanjac';
+
+  @override
+  String get prod_chapeau => 'Šešir';
+
+  @override
+  String get prod_charbon_allume_feu => 'Drveni ugljen / potpaljivači vatre';
+
+  @override
+  String get prod_charcuterie => 'Hladni naresci';
+
+  @override
+  String get prod_chips => 'Čips';
+
+  @override
+  String get prod_chocolat => 'Čokolada';
+
+  @override
+  String get prod_chocolats => 'čokolade';
+
+  @override
+  String get prod_citrons => 'Limuni';
+
+  @override
+  String get prod_citrouille => 'Bundeva';
+
+  @override
+  String get prod_concombre => 'Krastavac';
+
+  @override
+  String get prod_confiture => 'Pekmez';
+
+  @override
+  String get prod_conserves => 'Konzervirana hrana';
+
+  @override
+  String get prod_cornichons => 'Kiseli krastavci';
+
+  @override
+  String get prod_courgettes => 'Tikvica';
+
+  @override
+  String get prod_crackers => 'Krekeri';
+
+  @override
+  String get prod_croissants => 'Kroasani';
+
+  @override
+  String get prod_creme_fraiche => 'Kiselo vrhnje';
+
+  @override
+  String get prod_creme_solaire => 'Zaštita od sunca';
+
+  @override
+  String get prod_cereales => 'Žitarica';
+
+  @override
+  String get prod_dentifrice => 'Pasta za zube';
+
+  @override
+  String get prod_deguisement => 'Kostim';
+
+  @override
+  String get prod_eau => 'Voda';
+
+  @override
+  String get prod_farine => 'Brašno';
+
+  @override
+  String get prod_filet_de_poisson => 'Riblji file';
+
+  @override
+  String get prod_foie_gras => 'Foie gras';
+
+  @override
+  String get prod_fraises => 'Jagode';
+
+  @override
+  String get prod_frites => 'Pomfrit';
+
+  @override
+  String get prod_fromage => 'Sir';
+
+  @override
+  String get prod_fromage_rape => 'Naribani sir';
+
+  @override
+  String get prod_fromage_a_fondue => 'Sir za fondue';
+
+  @override
+  String get prod_fromage_a_raclette => 'Raclette sir';
+
+  @override
+  String get prod_glaces => 'Sladoled';
+
+  @override
+  String get prod_glaciere => 'Hladnjak';
+
+  @override
+  String get prod_gommes => 'Gumice za brisanje';
+
+  @override
+  String get prod_guirlandes => 'Girlande';
+
+  @override
+  String get prod_huile => 'Ulje';
+
+  @override
+  String get prod_huile_d => 'Maslinovo ulje';
+
+  @override
+  String get prod_jambon => 'šunka';
+
+  @override
+  String get prod_jouets => 'igračke';
+
+  @override
+  String get prod_jus_d => 'Sok od naranče';
+
+  @override
+  String get prod_ketchup => 'Kečap';
+
+  @override
+  String get prod_lait => 'Mlijeko';
+
+  @override
+  String get prod_lardons => 'Komadi slanine';
+
+  @override
+  String get prod_lessive => 'Deterdžent za pranje rublja';
+
+  @override
+  String get prod_lunettes_de_soleil => 'Sunčane naočale';
+
+  @override
+  String get prod_legumes_surgeles => 'Smrznuto povrće';
+
+  @override
+  String get prod_legumineuses => 'Legumes';
+
+  @override
+  String get prod_miel => 'Med';
+
+  @override
+  String get prod_moutarde => 'Senf';
+
+  @override
+  String get prod_mozzarella => 'Mozzarella';
+
+  @override
+  String get prod_nutella => 'Nutella';
+
+  @override
+  String get prod_oignons => 'Luk';
+
+  @override
+  String get prod_olives => 'Masline';
+
+  @override
+  String get prod_oranges => 'Naranče';
+
+  @override
+  String get prod_pain => 'Kruh';
+
+  @override
+  String get prod_pain_burger => 'Burger lepinje';
+
+  @override
+  String get prod_pain_de_mie => 'Kruh za sendviče';
+
+  @override
+  String get prod_papier_toilette => 'Toaletni papir';
+
+  @override
+  String get prod_parmesan => 'Parmezan';
+
+  @override
+  String get prod_pizza => 'Pizza';
+
+  @override
+  String get prod_plats_prepares => 'Gotova jela';
+
+  @override
+  String get prod_poireaux => 'poriluk';
+
+  @override
+  String get prod_poires => 'Kruške';
+
+  @override
+  String get prod_poivre => 'Papar';
+
+  @override
+  String get prod_poivrons => 'paprike';
+
+  @override
+  String get prod_pommes => 'Jabuke';
+
+  @override
+  String get prod_pommes_de_terre => 'krumpir';
+
+  @override
+  String get prod_poubelles => 'Vreće za smeće';
+
+  @override
+  String get prod_poulet => 'Piletina';
+
+  @override
+  String get prod_pate_a_pizza => 'Tijesto za pizzu';
+
+  @override
+  String get prod_pates => 'Tjestenina';
+
+  @override
+  String get prod_raisin => 'Grožđe';
+
+  @override
+  String get prod_riz => 'Riža';
+
+  @override
+  String get prod_regle => 'Vladar';
+
+  @override
+  String get prod_salade => 'Zelena salata';
+
+  @override
+  String get prod_salade_verte => 'Zelena salata';
+
+  @override
+  String get prod_sandwiches => 'Sendviči';
+
+  @override
+  String get prod_sapin => 'jelka';
+
+  @override
+  String get prod_sauce_burger => 'Umak za pljeskavice';
+
+  @override
+  String get prod_sauce_salsa => 'Salsa';
+
+  @override
+  String get prod_sauce_tomate => 'Umak od rajčice';
+
+  @override
+  String get prod_saucisses => 'kobasice';
+
+  @override
+  String get prod_saucisson => 'Salama';
+
+  @override
+  String get prod_saumon => 'Losos';
+
+  @override
+  String get prod_savon => 'Sapun';
+
+  @override
+  String get prod_sel => 'Sol';
+
+  @override
+  String get prod_shampoing => 'Šampon';
+
+  @override
+  String get prod_soda => 'Soda';
+
+  @override
+  String get prod_steak => 'Odrezak';
+
+  @override
+  String get prod_steaks_haches => 'Pljeskavice';
+
+  @override
+  String get prod_stylos => 'Olovke';
+
+  @override
+  String get prod_sucre => 'Šećer';
+
+  @override
+  String get prod_the => 'Čaj';
+
+  @override
+  String get prod_tomates => 'rajčice';
+
+  @override
+  String get prod_tortillas => 'Tortilje';
+
+  @override
+  String get prod_trousse => 'Pernica';
+
+  @override
+  String get prod_viande_hachee => 'Mljeveno meso';
+
+  @override
+  String get prod_viande_pour_grillades => 'Pecite meso na roštilju';
+
+  @override
+  String get prod_vin => 'Vino';
+
+  @override
+  String get prod_vin_blanc => 'Bijelo vino';
+
+  @override
+  String get prod_vinaigre => 'Ocat';
+
+  @override
+  String get prod_yaourt => 'Jogurt';
+
+  @override
+  String get prod_eponge => 'Spužva';
+
+  @override
+  String get prod_oeufs => 'jaja';
+
+  @override
+  String get catalogCat_fruits => 'Voće i povrće';
+
+  @override
+  String get catalogCat_dairy => 'Mliječni proizvodi';
+
+  @override
+  String get catalogCat_bakery => 'Pekara';
+
+  @override
+  String get catalogCat_meat => 'Meso i riba';
+
+  @override
+  String get catalogCat_grocery => 'Namirnice';
+
+  @override
+  String get catalogCat_beverages => 'Pića';
+
+  @override
+  String get catalogCat_frozen => 'Smrznuto';
+
+  @override
+  String get catalogCat_hygiene => 'Higijena i dom';
+
+  @override
+  String get mealLbl_raclette => 'Raclette';
+
+  @override
+  String get mealLbl_apero => 'Aperitif';
+
+  @override
+  String get mealLbl_barbecue => 'Barbecue';
+
+  @override
+  String get mealLbl_petit_dej => 'Breakfast';
+
+  @override
+  String get mealLbl_carbonara => 'Carbonara pasta';
+
+  @override
+  String get mealLbl_salade => 'Mixed salad';
+
+  @override
+  String get mealLbl_fondue => 'Fondue';
+
+  @override
+  String get mealLbl_pizza => 'Homemade pizza';
+
+  @override
+  String get mealLbl_crepes => 'Crepes';
+
+  @override
+  String get mealLbl_tacos => 'Tacos / fajitas';
+
+  @override
+  String get mealLbl_soupe => 'Soup';
+
+  @override
+  String get mealLbl_burger => 'Burgers';
+
+  @override
+  String get aboutCreator => 'Creator';
+
+  @override
+  String get aboutHowTo => 'How to use';
+
+  @override
+  String get aboutPrivacy => 'Privacy';
+
+  @override
+  String get aboutPrivacyFull => 'Full privacy policy';
+
+  @override
+  String get aboutLicense => 'License';
+
+  @override
+  String get aboutLicenseFull => 'View full GPL v3 license';
+
+  @override
+  String get aboutAccessibility => 'Accessibility';
+
+  @override
+  String get aboutCredits => 'Credits';
+
+  @override
+  String aboutVersion(String version) {
+    return 'Version $version';
+  }
+
+  @override
+  String aboutCreatorBody(String app, String tagline, String appPlus) {
+    return '$app was created by DesertYGL.\n$tagline The free version may show discreet ads; $appPlus (one-time purchase) removes ads and unlocks advanced features.';
+  }
+
+  @override
+  String get aboutHowToBody =>
+      '• Add an item: tap the + button at the bottom right, enter a name and optionally pick a color.\n• Check / uncheck: tap an item (in cart = checked).\n• Edit or delete: long-press an item, then Edit or Delete.\n• Quick delete: swipe an item left to delete; a snackbar lets you undo.\n• Colors and categories: in Stores mode (Settings), the chips at the top let you add or name stores; tap a chip to name it.\n• Share: share icon → Export as text or Real-time share (Google sign-in).\n• Multiple lists and advanced features: available with Tote \'O Recall+.\n• Settings (gear icon): item style, dark mode, capitalization, reminders, categories.';
+
+  @override
+  String get quickAddHelp =>
+      'Current list: type the item. Other list: “List Name add item” or “List Name: item, item”.';
+
+  @override
+  String get quickAddHintExample => 'E.g. Apple | List Store: Apple, milk';
+
+  @override
+  String quickAddListChip(String name) {
+    return 'List $name';
+  }
+
+  @override
+  String get pasteTooltip => 'Paste';
+
+  @override
+  String get dictateTooltip => 'Dictate';
+
+  @override
+  String get editItemTitle => 'Edit item';
+
+  @override
+  String get deleteReminderTooltip => 'Delete reminder';
+
+  @override
+  String get deletePhotoTooltip => 'Delete photo';
+
+  @override
+  String get priceHint => 'Estimated price (optional, e.g. 2.50)';
+
+  @override
+  String get qtyHint => 'Qty (e.g. 2)';
+
+  @override
+  String get unitHint => 'Unit (L, kg…)';
+
+  @override
+  String get noteHint => 'Note (e.g. brand, detail)';
+
+  @override
+  String get rightClickEditDelete => 'Right-click: Edit or delete';
+
+  @override
+  String get leaveSharedListAction => 'Leave shared list';
+
+  @override
+  String errorPrefixColon(String error) {
+    return 'Error: $error';
+  }
+
+  @override
+  String get notifChannelProximity => 'Store nearby';
+
+  @override
+  String get notifChannelProximityDesc =>
+      'Reminder when you are near a favorite store';
+
+  @override
+  String get notifChannelItemReminders => 'Per-item reminders';
+
+  @override
+  String get notifChannelRecurring => 'Recurring purchases';
+
+  @override
+  String get notifChannelRecurringDesc =>
+      'Reminder for purchases on a regular schedule';
+
+  @override
+  String get notifChannelBirthdays => 'Birthdays';
+
+  @override
+  String get notifChannelBirthdaysDesc => 'Reminders (1–2 days before)';
+
+  @override
+  String get notifChannelWeekly => 'Weekly reminder';
+
+  @override
+  String get notifChannelWeeklyDesc => 'Weekly reminder for your list';
+
+  @override
+  String get notifChannelDefault => 'Tote \'O Recall reminders';
+
+  @override
+  String get notifRecurringTitle => 'Recurring purchase due';
+
+  @override
+  String scanUnknownArticle(String code) {
+    return 'Item ($code)';
+  }
+
+  @override
+  String get birthdayYearHint => 'e.g. 1990';
+
+  @override
+  String get profileAvoidHint => 'alcohol, pork…';
+
+  @override
+  String get profileBrandHint => 'Brand…';
+
+  @override
+  String get profileAllergensHint => 'peanuts, lactose';
+
+  @override
+  String smartCartRhythmEveryDays(int days) {
+    return 'every ${days}d';
+  }
+
+  @override
+  String get aboutPrivacyBody =>
+      'Data controller: the app publisher (DesertYGL).\n\n• Data collected: shopping lists and settings locally; if syncing (Google): account ID and Firebase data; ads (free version): advertising IDs via the AdMob SDK.\n• Purposes: provide the app, optional sync, show ads (free).\n• Legal basis: contract performance / legitimate interest; consent for personalized ads where required.\n• Retention: local data until uninstall; sync account per Google/Firebase policy.\n• Rights: access, rectification, deletion — contact the publisher.';
+
+  @override
+  String get aboutAccessibilityBody =>
+      'The app aims for accessibility best practices (contrast, touch targets, screen readers). Please report any barriers.';
+
+  @override
+  String get aboutCreditsBody =>
+      'Material Design icons (Google). Open-source libraries as listed in dependency licenses. Tote \'O Recall product and brand: DesertYGL.';
+
+  @override
+  String quickAddAddedOne(String item, String list) {
+    return '$item added to « $list »';
+  }
+
+  @override
+  String quickAddAddedMany(int count, String list) {
+    return '$count items added to « $list »';
+  }
+
+  @override
+  String get quickAddExampleHint => 'Ex: Apple | Liste Auchan : Apple, milk';
+
+  @override
+  String get itemNameHint => 'Item name';
+
+  @override
+  String get speakNowHint => 'Speak now...';
+
+  @override
+  String get listeningTooltip => 'Listening';
+
+  @override
+  String get voiceInputTooltip => 'Voice input';
+
+  @override
+  String get birthYearHint => 'Year of birth (e.g. 1990)';
+
+  @override
+  String get profileHintName => 'First name or nickname';
+
+  @override
+  String get profileHintEmail => 'email@example.com';
+
+  @override
+  String get profileHintCity => 'City';
+
+  @override
+  String get smartCartRhythmTitle => 'Shopping rhythm';
+
+  @override
+  String get smartCartRhythmBody =>
+      'Analysis of your shopping habits to anticipate your needs.';
+
+  @override
+  String get notifChannelRemindersName => 'Toteo reminders';
+
+  @override
+  String get notifChannelRemindersDesc => 'Shopping reminders and alerts';
+
+  @override
+  String get notifChannelGeofenceName => 'Store alerts';
+
+  @override
+  String get notifChannelGeofenceDesc => 'Notifications near a store';
+
+  @override
+  String backupErrorPrefix(String error) {
+    return 'Error: $error';
+  }
+
+  @override
+  String get tooltipEdit => 'Edit';
+
+  @override
+  String get tooltipDelete => 'Delete';
+
+  @override
+  String get tooltipDuplicate => 'Duplicate';
+
+  @override
+  String get tooltipPostpone => 'Postpone';
+
+  @override
+  String get tooltipDetails => 'Details';
+
+  @override
+  String get aboutLegalTitle => 'Legal notice';
+
+  @override
+  String get aboutCompanyLine => 'Publisher: Benjamin San / NoubliPo';
+
+  @override
+  String get aboutSirenLine => 'SIREN: 941 826 115';
+
+  @override
+  String get aboutAddressLine =>
+      'Address: 60 rue François 1er, 75008 Paris, France';
+
+  @override
+  String get aboutHostingLine =>
+      'Hosting: Firebase / Google Cloud (USA) — Firebase Authentication, Cloud Firestore, Firebase Storage, Firebase Hosting.';
+
+  @override
+  String get aboutContactLine => 'Contact: benjamin.san@outlook.fr';
+
+  @override
+  String get aboutPrivacyTitle => 'Privacy policy';
+
+  @override
+  String get aboutPrivacyIntro =>
+      'Tote \'O Recall (NoubliPo) collects and processes the following data:';
+
+  @override
+  String get aboutPrivacyBullet1 =>
+      'Account: email, display name (Firebase Authentication).';
+
+  @override
+  String get aboutPrivacyBullet2 =>
+      'Lists and items: synced via Cloud Firestore when signed in.';
+
+  @override
+  String get aboutPrivacyBullet3 => 'Item photos: stored on Firebase Storage.';
+
+  @override
+  String get aboutPrivacyBullet4 =>
+      'Location (optional): used only for store alerts (geofencing), with your consent.';
+
+  @override
+  String get aboutPrivacyBullet5 =>
+      'Local data: lists, preferences and cache stay on your device.';
+
+  @override
+  String get aboutRightsTitle => 'Your rights';
+
+  @override
+  String get aboutRightsBody =>
+      'Under GDPR, you may access, rectify or delete your data. Contact us at benjamin.san@outlook.fr. You can also delete your account from the app.';
+
+  @override
+  String aboutVersionLabel(String version) {
+    return 'Version $version';
+  }
+
+  @override
+  String get aboutLicenseBody =>
+      'This application is distributed under the GNU GPL v3 license. You are free to use, modify and redistribute this software under the terms of the GPL v3.';
+
+  @override
+  String notifBuyAgainTitle(String name) {
+    return 'Buy again: $name';
+  }
+
+  @override
+  String notifItemReminderBody(String title) {
+    return 'Reminder: $title';
+  }
+
+  @override
+  String notifBirthdayTitle(String celebration, String name) {
+    return '$name\'s $celebration';
+  }
+
+  @override
+  String notifBirthdayTomorrow(String celebration, String name) {
+    return 'Tomorrow: $name\'s $celebration';
+  }
+
+  @override
+  String notifBirthdayInDays(int days, String celebration, String name) {
+    return 'In $days days: $name\'s $celebration';
+  }
+
+  @override
+  String get birthdaysRemindersPrefix => 'Reminders';
+
+  @override
+  String get inCartLabel => 'In cart';
+
+  @override
+  String get listeningSpeakClearly => 'Listening... Speak clearly.';
+
+  @override
+  String get reminderOptionalHint => 'Reminder (optional)';
+
+  @override
+  String get dateLabelShort => 'Date';
+
+  @override
+  String get timeLabelShort => 'Time';
+
+  @override
+  String get reminderNoteExampleHint => 'Ex: important — go to the store';
+
+  @override
+  String get noteQtyPhotoSection => 'Note, quantity, photo';
+
+  @override
+  String get photoLabel => 'Photo';
+
+  @override
+  String get changePhotoLabel => 'Change';
+
+  @override
+  String voiceRecognized(String text) {
+    return 'Recognized: $text';
+  }
+
+  @override
+  String imageErrorPrefix(String error) {
+    return 'Image: $error';
+  }
+
+  @override
+  String get backupShareSubject => 'Toteo backup';
+
+  @override
+  String get prod_courge => 'Squash';
+
+  @override
+  String get prod_croutons => 'Krutoni';
+
+  @override
+  String get prod_sauce_cesar => 'Cezar preljev';
+
+  @override
+  String get socialTrendVeggies => 'More seasonal vegetables this week';
+
+  @override
+  String get socialTrendSoups => 'Soups and hot meals trending up';
+
+  @override
+  String get socialRecipeSoup => 'Seasonal soup';
+
+  @override
+  String get socialRecipeCaesar => 'Caesar salad';
+
+  @override
+  String get colorName_0 => 'Crvena';
+
+  @override
+  String get colorName_1 => 'Ružičasta';
+
+  @override
+  String get colorName_2 => 'Ljubičasta';
+
+  @override
+  String get colorName_3 => 'Plavoljubičasta';
+
+  @override
+  String get colorName_4 => 'Indigo';
+
+  @override
+  String get colorName_5 => 'Plava';
+
+  @override
+  String get colorName_6 => 'Cijan';
+
+  @override
+  String get colorName_7 => 'Tirkizna';
+
+  @override
+  String get colorName_8 => 'Zelena';
+
+  @override
+  String get colorName_9 => 'Svijetlozelena';
+
+  @override
+  String get colorName_10 => 'Limeta';
+
+  @override
+  String get colorName_11 => 'Žuta';
+
+  @override
+  String get colorName_12 => 'Jantar';
+
+  @override
+  String get colorName_13 => 'Narančasta';
+
+  @override
+  String get colorName_14 => 'Koraljna';
+
+  @override
+  String get colorName_15 => 'Smeđa';
+
+  @override
+  String get prod_creme => 'Krema';
+
+  @override
+  String get prod_return => ') povratak';
+
+  @override
+  String get prod_abricot => 'Marelica';
+
+  @override
+  String get prod_abricots_secs => 'Suhe marelice';
+
+  @override
+  String get prod_adhesif => 'Ljepilo';
+
+  @override
+  String get prod_adoucissant => 'Adoucissant';
+
+  @override
+  String get prod_agneau => 'Agneau';
+
+  @override
+  String get prod_agrafeuse => 'Agrafeuse';
+
+  @override
+  String get prod_agraves => 'Agraves';
+
+  @override
+  String get prod_ajout_quand_un_partenaire_ou_l =>
+      'Ajout quand un partenaire (ou l';
+
+  @override
+  String get prod_algues_nori => 'Algues nori';
+
+  @override
+  String get prod_algues_wakame => 'Algues wakame';
+
+  @override
+  String get prod_allumettes => 'Allumettes';
+
+  @override
+  String get prod_amandes => 'bademi';
+
+  @override
+  String get prod_ampoule => 'Ampula';
+
+  @override
+  String get prod_ananas => 'Ananas';
+
+  @override
+  String get prod_anchois => 'Anchois';
+
+  @override
+  String get prod_andouille => 'Andouille';
+
+  @override
+  String get prod_aneth => 'Aneth';
+
+  @override
+  String get prod_anneaux => 'Anneaux';
+
+  @override
+  String get prod_apero_dinatoire => 'Apero dinatoire';
+
+  @override
+  String get prod_apres_rasage => 'Losion poslije brijanja';
+
+  @override
+  String get prod_apres_shampoing => 'Regenerator';
+
+  @override
+  String get prod_aperitif => 'Aperitiv';
+
+  @override
+  String get prod_apero => 'Aperitiv';
+
+  @override
+  String get prod_artichaut => 'Artičoka';
+
+  @override
+  String get prod_asperges => 'Šparoga';
+
+  @override
+  String get prod_aubergine => 'Patlidžan';
+
+  @override
+  String get prod_babybel => 'Babybel';
+
+  @override
+  String get prod_bac_a_peinture => 'Ladica za boju';
+
+  @override
+  String get prod_bacon => 'Slanina';
+
+  @override
+  String get prod_baies_de_goji => 'Baies de goji';
+
+  @override
+  String get prod_bain_de_bouche => 'Bain de bouche';
+
+  @override
+  String get prod_bambou => 'Bambus';
+
+  @override
+  String get prod_barbecue => 'Roštilj';
+
+  @override
+  String get prod_barres_chocolatees => 'Čokoladice';
+
+  @override
+  String get prod_basilic_thai => 'tajlandski bosiljak';
+
+  @override
+  String get prod_batterie => 'Baterija';
+
+  @override
+  String get prod_biberon => 'Biberon';
+
+  @override
+  String get prod_biscottes => 'Biskote';
+
+  @override
+  String get prod_biscuits_bio => 'Keksi bio';
+
+  @override
+  String get prod_biere_sans_alcool => 'Bezalkoholno pivo';
+
+  @override
+  String get prod_blanc_doeuf => 'Bjelance';
+
+  @override
+  String get prod_blanquette => 'Blanquette';
+
+  @override
+  String get prod_bloc_de_foie_gras => 'Bloc de foie gras';
+
+  @override
+  String get prod_boissons => 'Boissons';
+
+  @override
+  String get prod_bok_choy => 'Bok choy';
+
+  @override
+  String get prod_bonite_sechee => 'Sušene palamide';
+
+  @override
+  String get prod_boudin_noir => 'Boudin noir';
+
+  @override
+  String get prod_bouillon_cube => 'Stock kocka';
+
+  @override
+  String get prod_boulangerie => 'Boulangerie';
+
+  @override
+  String get prod_boulettes => 'Buleti';
+
+  @override
+  String get prod_boulgour => 'Boulgour';
+
+  @override
+  String get prod_boulons => 'Boulons';
+
+  @override
+  String get prod_boursin => 'Boursin';
+
+  @override
+  String get prod_bretzels => 'Bretzels';
+
+  @override
+  String get prod_brie => 'Brie';
+
+  @override
+  String get prod_briquet => 'Briket';
+
+  @override
+  String get prod_brochettes => 'Brošete';
+
+  @override
+  String get prod_brocoli => 'Brokula';
+
+  @override
+  String get prod_brosse_a_dents => 'Četkica za zube';
+
+  @override
+  String get prod_bulots => 'Bulots';
+
+  @override
+  String get prod_burgers => 'hamburgeri';
+
+  @override
+  String get prod_burin => 'Burin';
+
+  @override
+  String get prod_boeuf => 'Govedina';
+
+  @override
+  String get prod_boeuf_bourguignon => 'Goveđi bourguignon';
+
+  @override
+  String get prod_cabillaud => 'Bakalar';
+
+  @override
+  String get prod_cacao_en_poudre => 'Kakao u prahu';
+
+  @override
+  String get prod_cafe_bio => 'Organska kava';
+
+  @override
+  String get prod_cafe_en_grains => 'Zrna kave';
+
+  @override
+  String get prod_cafe_moulu => 'Mljevena kava';
+
+  @override
+  String get prod_cafe_soluble => 'Instant kava';
+
+  @override
+  String get prod_calamar_seche => 'Sušene lignje';
+
+  @override
+  String get prod_camembert => 'Camembert';
+
+  @override
+  String get prod_canard => 'Canard';
+
+  @override
+  String get prod_cannelle => 'Cimet';
+
+  @override
+  String get prod_capres => 'Capres';
+
+  @override
+  String get prod_caprice_des_dieux => 'Caprice des dieux';
+
+  @override
+  String get prod_carnet => 'karnet';
+
+  @override
+  String get prod_carottes_crues => 'Sirova mrkva';
+
+  @override
+  String get prod_carrelage => 'Carrelage';
+
+  @override
+  String get prod_carte_recharge => 'Nadopuna karte';
+
+  @override
+  String get prod_cartes_postales => 'Cartes postales';
+
+  @override
+  String get prod_cartouche_filtre => 'Kartušni filtar';
+
+  @override
+  String get prod_caviar_daubergine => 'Kavijar od patlidžana';
+
+  @override
+  String get prod_champignons => 'šampinjoni';
+
+  @override
+  String get prod_champignons_noirs => 'Crni šampinjoni';
+
+  @override
+  String get prod_champignons_shiitake => 'Šampinjoni shiitake';
+
+  @override
+  String get prod_chantilly => 'Chantilly';
+
+  @override
+  String get prod_charcuterie_artisanale => 'Zanatske kobasice';
+
+  @override
+  String get prod_chauffage => 'Chauffage';
+
+  @override
+  String get prod_cheddar => 'Cheddar';
+
+  @override
+  String get prod_chevilles => 'Chevilles';
+
+  @override
+  String get prod_chewing_gum => 'Žvakaća guma';
+
+  @override
+  String get prod_chicoree => 'Cikorija';
+
+  @override
+  String get prod_chipolatas => 'Chipolatas';
+
+  @override
+  String get prod_chocolat_au_lait => 'Čokolada s mlijekom';
+
+  @override
+  String get prod_chocolat_bio => 'Bio čokolada';
+
+  @override
+  String get prod_chocolat_blanc => 'Bijela čokolada';
+
+  @override
+  String get prod_chocolat_en_poudre => 'Kakao u prahu';
+
+  @override
+  String get prod_chocolat_noir => 'Čokoladni noir';
+
+  @override
+  String get prod_chocolat_noir_85 => '85% crna čokolada';
+
+  @override
+  String get prod_chou => 'Kupus';
+
+  @override
+  String get prod_chou_chinois => 'Chou chinois';
+
+  @override
+  String get prod_choucroute => 'Choucroute';
+
+  @override
+  String get prod_chevre => 'Kozji sir';
+
+  @override
+  String get prod_ciboulette => 'Vlasac';
+
+  @override
+  String get prod_cidre => 'Cidre';
+
+  @override
+  String get prod_cigares => 'Cigare';
+
+  @override
+  String get prod_cigarettes => 'Cigarete';
+
+  @override
+  String get prod_citron => 'Limun';
+
+  @override
+  String get prod_citronnelle => 'Citronnelle';
+
+  @override
+  String get prod_clous => 'Clous';
+
+  @override
+  String get prod_cle => 'Ključ';
+
+  @override
+  String get prod_cle_a_molette => 'Podesivi ključ';
+
+  @override
+  String get prod_clementines => 'Klementine';
+
+  @override
+  String get prod_colle => 'Colle';
+
+  @override
+  String get prod_colle_carrelage => 'Colle carrelage';
+
+  @override
+  String get prod_collier => 'Collier';
+
+  @override
+  String get prod_compote => 'Ispirjanjeno voće';
+
+  @override
+  String get prod_compote_bio => 'Kompot bio';
+
+  @override
+  String get prod_comte => 'Comté';
+
+  @override
+  String get prod_confiture_bio => 'Confiture bio';
+
+  @override
+  String get prod_confiture_dabricot => 'Confiture d\'abricot';
+
+  @override
+  String get prod_confiture_de_fraises => 'Confiture de fraises';
+
+  @override
+  String get prod_confiture_maison => 'Confiture maison';
+
+  @override
+  String get prod_contreplaque => 'Šperploča';
+
+  @override
+  String get prod_coquillages => 'Coquillages';
+
+  @override
+  String get prod_cordon_bleu => 'Plava traka';
+
+  @override
+  String get prod_coriandre_fraiche => 'Svježi cilantro';
+
+  @override
+  String get prod_corn_flakes => 'Kukuruzne pahuljice';
+
+  @override
+  String get prod_cotons => 'Cotons';
+
+  @override
+  String get prod_couches => 'Kauči';
+
+  @override
+  String get prod_coulis => 'Coulis';
+
+  @override
+  String get prod_coupe => 'Kupe';
+
+  @override
+  String get prod_crackers_naturels => 'Obični krekeri';
+
+  @override
+  String get prod_crackers_sans_sel => 'Krekeri bez sel';
+
+  @override
+  String get prod_cranberries => 'brusnice';
+
+  @override
+  String get prod_crevettes => 'škampi';
+
+  @override
+  String get prod_crochet => 'Heklanje';
+
+  @override
+  String get prod_crustaces => 'Školjke';
+
+  @override
+  String get prod_creme_de_coco => 'Krema od kokosa';
+
+  @override
+  String get prod_creme_dessert => 'Desertna krema';
+
+  @override
+  String get prod_creme_hydratante => 'Ovlaživač';
+
+  @override
+  String get prod_creme_liquide => 'Vrhnje za kuhanje';
+
+  @override
+  String get prod_creme_epaisse => 'Gusta krema';
+
+  @override
+  String get prod_cremant => 'Crémant';
+
+  @override
+  String get prod_cremone => 'Cremone vijak';
+
+  @override
+  String get prod_crepes => 'Crêpes';
+
+  @override
+  String get prod_curry => 'Curry';
+
+  @override
+  String get prod_curry_massaman => 'Curry masažar';
+
+  @override
+  String get prod_curry_rouge => 'Curry rumenilo';
+
+  @override
+  String get prod_curry_vert => 'Curry vert';
+
+  @override
+  String get prod_cutter => 'Rezač';
+
+  @override
+  String get prod_cable => 'Kabel';
+
+  @override
+  String get prod_celeri => 'Celer';
+
+  @override
+  String get prod_coeur_de_palmier => 'Srce dlana';
+
+  @override
+  String get prod_dashi => 'Dashi';
+
+  @override
+  String get prod_dattes => 'Datumi';
+
+  @override
+  String get prod_digestif => 'Digestiv';
+
+  @override
+  String get prod_dim_sum => 'Dim sum';
+
+  @override
+  String get prod_douille => 'Douille';
+
+  @override
+  String get prod_decafeine => 'Kava bez kofeina';
+
+  @override
+  String get prod_decapant => 'Skidač boje';
+
+  @override
+  String get prod_demaquillant => 'Odstranjivač šminke';
+
+  @override
+  String get prod_demaquillant_yeux => 'Odstranjivač šminke s očiju';
+
+  @override
+  String get prod_deodorant => 'Dezodorans';
+
+  @override
+  String get prod_desherbant => 'Ubojica korova';
+
+  @override
+  String get prod_desinfectant => 'Sredstvo za dezinfekciju';
+
+  @override
+  String get prod_detachant => 'Sredstvo za uklanjanje mrlja';
+
+  @override
+  String get prod_eau_aromatisee => 'Voda s okusom';
+
+  @override
+  String get prod_eau_de_toilette => 'Toaletna voda';
+
+  @override
+  String get prod_eau_petillante => 'Gazirana voda';
+
+  @override
+  String get prod_edamame => 'Edamame';
+
+  @override
+  String get prod_emmental => 'ementalac';
+
+  @override
+  String get prod_endives => 'Endivija';
+
+  @override
+  String get prod_enduit => 'Enduit';
+
+  @override
+  String get prod_engrais => 'Engrais';
+
+  @override
+  String get prod_enveloppes => 'Omotnice';
+
+  @override
+  String get prod_escalope => 'Eskalop';
+
+  @override
+  String get prod_faisselle => 'Faisselle';
+
+  @override
+  String get prod_farine_complete => 'Integralno pšenično brašno';
+
+  @override
+  String get prod_feta => 'Feta';
+
+  @override
+  String get prod_feuilles_de_riz => 'Feuilles de riz';
+
+  @override
+  String get prod_figues_sechees => 'Suhe smokve';
+
+  @override
+  String get prod_fil_dentaire => 'Fil zubar';
+
+  @override
+  String get prod_filet => 'File';
+
+  @override
+  String get prod_fils_electriques => 'Električna žica';
+
+  @override
+  String get prod_filtre_a_eau => 'Filter za vodu';
+
+  @override
+  String get prod_fleurs => 'Fleurs';
+
+  @override
+  String get prod_flocons_davoine => 'Zobene pahuljice';
+
+  @override
+  String get prod_fondue => 'Fondi';
+
+  @override
+  String get prod_fondue_savoyarde => 'Fondue savoyarde';
+
+  @override
+  String get prod_fromage_blanc => 'Fromage blanc';
+
+  @override
+  String get prod_fromage_de_chevre => 'Kozji sir';
+
+  @override
+  String get prod_fromage_fermier => 'Fromage fermier';
+
+  @override
+  String get prod_fruits => 'Voće';
+
+  @override
+  String get prod_fruits_legumes => 'Voće i povrće';
+
+  @override
+  String get prod_fruits_bio => 'Voće bio';
+
+  @override
+  String get prod_fruits_congeles => 'Smrznuto voće';
+
+  @override
+  String get prod_fruits_de_mer => 'Fruits de mer';
+
+  @override
+  String get prod_fruits_du_marche => 'Tržišno voće';
+
+  @override
+  String get prod_fruits_frais => 'Svježe voće';
+
+  @override
+  String get prod_fruits_secs => 'Sušeno voće';
+
+  @override
+  String get prod_galette_de_cereales => 'Kolač od žitarica';
+
+  @override
+  String get prod_galettes_de_riz => 'Galettes de riz';
+
+  @override
+  String get prod_gel_douche => 'Gel za tuširanje';
+
+  @override
+  String get prod_gibier => 'Gibier';
+
+  @override
+  String get prod_gingembre => 'Đumbir';
+
+  @override
+  String get prod_gingembre_marine => 'Ukiseljeni đumbir';
+
+  @override
+  String get prod_gommage => 'Gommage';
+
+  @override
+  String get prod_graines => 'Graines';
+
+  @override
+  String get prod_graines_de_chia => 'Chia zrna';
+
+  @override
+  String get prod_graines_de_lin => 'Graines de lin';
+
+  @override
+  String get prod_grattage => 'Grattage';
+
+  @override
+  String get prod_guacamole => 'Guacamole';
+
+  @override
+  String get prod_gateau => 'Torta';
+
+  @override
+  String get prod_gateaux_secs => 'Kolačići';
+
+  @override
+  String get prod_halloween => 'Noć vještica';
+
+  @override
+  String get prod_haricots => 'Haricots';
+
+  @override
+  String get prod_haricots_blancs => 'Bijeli grah';
+
+  @override
+  String get prod_haricots_rouges => 'Crveni grah';
+
+  @override
+  String get prod_haricots_verts => 'Zeleni grah';
+
+  @override
+  String get prod_herbes => 'Herbes';
+
+  @override
+  String get prod_homard => 'Homard';
+
+  @override
+  String get prod_houmous => 'Humus';
+
+  @override
+  String get prod_huile_dolive_bio => 'Huile d\'olive bio';
+
+  @override
+  String get prod_huile_de_sesame => 'Sezamovo ulje';
+
+  @override
+  String get prod_huitres => 'kamenice';
+
+  @override
+  String get prod_hygiene_maison => 'Dom i higijena';
+
+  @override
+  String get prod_impregnation => 'Brtvilo za drvo';
+
+  @override
+  String get prod_infusion => 'Infuzija';
+
+  @override
+  String get prod_infusion_froide => 'Ledeni biljni čaj';
+
+  @override
+  String get prod_interrupteur => 'Interrupteur';
+
+  @override
+  String get prod_jambon_cru => 'Jambon cru';
+
+  @override
+  String get prod_javel => 'Javel';
+
+  @override
+  String get prod_joint => 'Zajednički';
+
+  @override
+  String get prod_joint_carrelage => 'Zglobna karela';
+
+  @override
+  String get prod_joint_torique => 'Zglobni torik';
+
+  @override
+  String get prod_journal => 'Časopis';
+
+  @override
+  String get prod_jus => 'Jus';
+
+  @override
+  String get prod_jus_de_fruit => 'Voćni sok';
+
+  @override
+  String get prod_jus_de_fruit_naturel => 'Prirodni voćni sok';
+
+  @override
+  String get prod_jus_de_raisin => 'Jus od grožđica';
+
+  @override
+  String get prod_jus_dorange => 'Jus dorange';
+
+  @override
+  String get prod_kimchi => 'Kimchi';
+
+  @override
+  String get prod_kiri => 'Kiri';
+
+  @override
+  String get prod_kiwi => 'Kivi';
+
+  @override
+  String get prod_laine_de_verre => 'Laine de verre';
+
+  @override
+  String get prod_lait_bio => 'Lait bio';
+
+  @override
+  String get prod_lait_bebe => 'Formula za bebe';
+
+  @override
+  String get prod_lait_concentre => 'Kondenzirano mlijeko';
+
+  @override
+  String get prod_lait_damande => 'Bademovo mlijeko';
+
+  @override
+  String get prod_lait_davoine => 'Zobeno mlijeko';
+
+  @override
+  String get prod_lait_de_coco => 'Lait de coco';
+
+  @override
+  String get prod_lait_de_soja => 'Sojino mlijeko';
+
+  @override
+  String get prod_lait_demaquillant => 'Mlijeko za čišćenje';
+
+  @override
+  String get prod_lait_en_poudre => 'Lait en poudre';
+
+  @override
+  String get prod_lait_vegetal => 'Biljno mlijeko';
+
+  @override
+  String get prod_laitue => 'Zelena salata';
+
+  @override
+  String get prod_lambris => 'Lambris';
+
+  @override
+  String get prod_lame_de_scie => 'Lame de scie';
+
+  @override
+  String get prod_langoustines => 'langošice';
+
+  @override
+  String get prod_lapin => 'Lapin';
+
+  @override
+  String get prod_lard => 'Mast';
+
+  @override
+  String get prod_lasagnes => 'Lazanje';
+
+  @override
+  String get prod_lasure => 'Lasure';
+
+  @override
+  String get prod_laurier => 'lovorov list';
+
+  @override
+  String get prod_lentilles => 'Leća';
+
+  @override
+  String get prod_lentilles_corail => 'Lentilles corail';
+
+  @override
+  String get prod_levure_maltee => 'Ekstrakt slada';
+
+  @override
+  String get prod_lime => 'Vapno';
+
+  @override
+  String get prod_limette => 'Limette';
+
+  @override
+  String get prod_lingettes => 'Lingete';
+
+  @override
+  String get prod_lingettes_bebe => 'Bebi maramice';
+
+  @override
+  String get prod_liquide_vaisselle => 'Liquide vaisselle';
+
+  @override
+  String get prod_loto => 'Loto';
+
+  @override
+  String get prod_legumes => 'Povrće';
+
+  @override
+  String get prod_legumes_bio => 'Organsko povrće';
+
+  @override
+  String get prod_legumes_crus => 'Sirovo povrće';
+
+  @override
+  String get prod_legumes_du_marche => 'Tržišno povrće';
+
+  @override
+  String get prod_legumes_grilles => 'Povrće na žaru';
+
+  @override
+  String get prod_mdf => 'MDF';
+
+  @override
+  String get prod_madeleines => 'Madeleines';
+
+  @override
+  String get prod_magazine => 'Časopis';
+
+  @override
+  String get prod_mangue => 'Mango';
+
+  @override
+  String get prod_maquereau => 'Skuša';
+
+  @override
+  String get prod_marteau => 'Marteau';
+
+  @override
+  String get prod_mascarpone => 'Mascarpone';
+
+  @override
+  String get prod_masque => 'Maska';
+
+  @override
+  String get prod_masse => 'Misa';
+
+  @override
+  String get prod_mastic => 'Mastika';
+
+  @override
+  String get prod_mayonnaise => 'Majoneza';
+
+  @override
+  String get prod_mais => 'Kukuruz';
+
+  @override
+  String get prod_melon => 'Dinja';
+
+  @override
+  String get prod_menthe => 'Menthe';
+
+  @override
+  String get prod_merguez => 'Merguez';
+
+  @override
+  String get prod_miel_bio => 'Miel biografija';
+
+  @override
+  String get prod_miel_du_producteur => 'Miel du produceur';
+
+  @override
+  String get prod_mirin => 'Mirin';
+
+  @override
+  String get prod_morbier => 'Morbier';
+
+  @override
+  String get prod_mortadelle => 'mortadela';
+
+  @override
+  String get prod_mouchoirs => 'Mouchoirs';
+
+  @override
+  String get prod_moules => 'Dagnje';
+
+  @override
+  String get prod_mousse_a_raser => 'Pjena za brijanje';
+
+  @override
+  String get prod_muesli => 'Muesli';
+
+  @override
+  String get prod_muesli_barres => 'Muesli barres';
+
+  @override
+  String get prod_muesli_bio => 'Muesli bio';
+
+  @override
+  String get prod_muscade => 'Muškatni oraščić';
+
+  @override
+  String get prod_meches => 'svrdla';
+
+  @override
+  String get prod_metre => 'Mjerna traka';
+
+  @override
+  String get prod_mures_blanches => 'Bijeli dudovi';
+
+  @override
+  String get prod_nam_pla => 'Nam pla';
+
+  @override
+  String get prod_navet => 'Repa';
+
+  @override
+  String get prod_nectar => 'Nektar';
+
+  @override
+  String get prod_nems => 'Nems';
+
+  @override
+  String get prod_nettoyant_sol => 'Nettoyant sol';
+
+  @override
+  String get prod_niveau => 'Niveau';
+
+  @override
+  String get prod_noisettes => 'Lješnjaci';
+
+  @override
+  String get prod_noix => 'Orasi';
+
+  @override
+  String get prod_noix_de_cajou => 'Noix de cajou';
+
+  @override
+  String get prod_noix_du_bresil => 'brazilski orah';
+
+  @override
+  String get prod_nouilles => 'Nouilles';
+
+  @override
+  String get prod_nouilles_instantanees => 'Instant rezanci';
+
+  @override
+  String get prod_noel => 'Božić';
+
+  @override
+  String get prod_nuggets => 'Nuggets';
+
+  @override
+  String get prod_nuoc_mam => 'Riblji umak';
+
+  @override
+  String get prod_olives_du_marche => 'Tržište maslina';
+
+  @override
+  String get prod_origan => 'Origano';
+
+  @override
+  String get prod_pain_aux_cereales => 'Kruh sa sjemenkama';
+
+  @override
+  String get prod_pain_bio => 'Biobol';
+
+  @override
+  String get prod_pain_complet => 'Integralni kruh';
+
+  @override
+  String get prod_pain_de_campagne => 'Seoski kruh';
+
+  @override
+  String get prod_pain_de_viande => 'Viande bol';
+
+  @override
+  String get prod_palets_bretons => 'Bretonske palete';
+
+  @override
+  String get prod_pamplemousse => 'Grejp';
+
+  @override
+  String get prod_pancetta => 'Panceta';
+
+  @override
+  String get prod_panneau_osb => 'Panneau OSB';
+
+  @override
+  String get prod_papier_de_verre => 'Papier de verre';
+
+  @override
+  String get prod_paprika => 'Paprika';
+
+  @override
+  String get prod_parfum => 'Parfem';
+
+  @override
+  String get prod_parquet => 'Parket';
+
+  @override
+  String get prod_pastilles => 'Pastile';
+
+  @override
+  String get prod_pastis => 'Pastis';
+
+  @override
+  String get prod_pasteque => 'Lubenica';
+
+  @override
+  String get prod_pate_carbonara => 'Pašteta carbonara';
+
+  @override
+  String get prod_pates_carbonara => 'Paštete carbonara';
+
+  @override
+  String get prod_patere => 'Kukica za kaput';
+
+  @override
+  String get prod_paumelle => 'Paumelle';
+
+  @override
+  String get prod_pave => 'Kaldrma';
+
+  @override
+  String get prod_peinture => 'slikanje';
+
+  @override
+  String get prod_perceuse => 'Perceuse';
+
+  @override
+  String get prod_persil => 'Peršin';
+
+  @override
+  String get prod_pesto => 'Pesto';
+
+  @override
+  String get prod_petit_dej => 'Petit dej';
+
+  @override
+  String get prod_petit_dejeuner => 'Petit dejeuner';
+
+  @override
+  String get prod_petit_suisse => 'Petit suisse';
+
+  @override
+  String get prod_petit_dejeuner_2 => 'Doručak';
+
+  @override
+  String get prod_petits_pois => 'Grašak';
+
+  @override
+  String get prod_pickles => 'Kiseli krastavci';
+
+  @override
+  String get prod_pile => 'Hrpa';
+
+  @override
+  String get prod_pince => 'Pince';
+
+  @override
+  String get prod_pinceau => 'Pinceau';
+
+  @override
+  String get prod_pizza_maison => 'Pizza maison';
+
+  @override
+  String get prod_pizza_surgelee => 'Smrznuta pizza';
+
+  @override
+  String get prod_planche => 'Planche';
+
+  @override
+  String get prod_plantes => 'Plantes';
+
+  @override
+  String get prod_plantes_aromatiques => 'Aromatične biljke';
+
+  @override
+  String get prod_plaque_de_platre => 'Suhozidom';
+
+  @override
+  String get prod_plat_prepare => 'Gotovo jelo';
+
+  @override
+  String get prod_poignee => 'Kvaka za vrata';
+
+  @override
+  String get prod_poireau => 'Poriluk';
+
+  @override
+  String get prod_pois_casses => 'Split grašak';
+
+  @override
+  String get prod_pois_chiches => 'Slanutak';
+
+  @override
+  String get prod_poisson => 'Poisson';
+
+  @override
+  String get prod_poisson_frais => 'Poisson frais';
+
+  @override
+  String get prod_polystyrene => 'Polistiren';
+
+  @override
+  String get prod_pommes_de_terre_vapeur => 'Krumpir kuhan na pari';
+
+  @override
+  String get prod_popcorn => 'Kokice';
+
+  @override
+  String get prod_porc => 'Porc';
+
+  @override
+  String get prod_porto => 'Porto';
+
+  @override
+  String get prod_pot => 'Lonac';
+
+  @override
+  String get prod_pot_au_feu => 'Pot-au-feu';
+
+  @override
+  String get prod_potage => 'Potaž';
+
+  @override
+  String get prod_potiron => 'Bundeva';
+
+  @override
+  String get prod_poudre => 'Poudre';
+
+  @override
+  String get prod_poulet_fermier => 'Poulet fermier';
+
+  @override
+  String get prod_pousse_de_bambou => 'Pousse de bambou';
+
+  @override
+  String get prod_pousses_de_soja => 'Pousses de soja';
+
+  @override
+  String get prod_presse => 'Presse';
+
+  @override
+  String get prod_prise => 'Nagrada';
+
+  @override
+  String get prod_produit_vitres => 'Produit vitres';
+
+  @override
+  String get prod_produits_laitiers => 'Produits laitiers';
+
+  @override
+  String get prod_prune => 'Šljiva';
+
+  @override
+  String get prod_pruneaux => 'Pruneaux';
+
+  @override
+  String get prod_pull => 'Vuci';
+
+  @override
+  String get prod_punaises => 'Punaises';
+
+  @override
+  String get prod_puree => 'Pire od krumpira';
+
+  @override
+  String get prod_puree_damandes => 'Maslac od badema';
+
+  @override
+  String get prod_puree_d => 'Pire';
+
+  @override
+  String get prod_puree_de_noisettes => 'Maslac od lješnjaka';
+
+  @override
+  String get prod_pate_brisee => 'Prhko tijesto';
+
+  @override
+  String get prod_pate_de_crevettes => 'Pasta od kozica';
+
+  @override
+  String get prod_pate_de_curry => 'Curry pasta';
+
+  @override
+  String get prod_pate_de_piment => 'Pasta od čilija';
+
+  @override
+  String get prod_pate_feuilletee => 'Lisnato tijesto';
+
+  @override
+  String get prod_pate_miso => 'Miso pasta';
+
+  @override
+  String get prod_pates_carbonara_2 => 'Carbonara tjestenina';
+
+  @override
+  String get prod_pates_completes => 'Tjestenina od punog zrna pšenice';
+
+  @override
+  String get prod_pates_fraiches => 'Svježa tjestenina';
+
+  @override
+  String get prod_pate => 'Pâté';
+
+  @override
+  String get prod_peche => 'Breskva';
+
+  @override
+  String get prod_quiche => 'Quiche';
+
+  @override
+  String get prod_quiche_legumes => 'Quiche od povrća';
+
+  @override
+  String get prod_quinoa => 'Quinoa';
+
+  @override
+  String get prod_quinoa_bio => 'Kvinoja bio';
+
+  @override
+  String get prod_raccord => 'Raccord';
+
+  @override
+  String get prod_raclette => 'Raclette';
+
+  @override
+  String get prod_radiateur => 'Radiateur';
+
+  @override
+  String get prod_radis => 'Rotkvica';
+
+  @override
+  String get prod_raisin_sec => 'Grožđice';
+
+  @override
+  String get prod_ravioli => 'Ravioli';
+
+  @override
+  String get prod_raviolis_chinois => 'Ravioli chinois';
+
+  @override
+  String get prod_razor => 'Britva';
+
+  @override
+  String get prod_reblochon => 'Reblochon';
+
+  @override
+  String get prod_recharge_briquet => 'Napunite briket';
+
+  @override
+  String get prod_rentree_scolaire => 'Povratak u školu';
+
+  @override
+  String get prod_rhum => 'Rhum';
+
+  @override
+  String get prod_rideau => 'Rideau';
+
+  @override
+  String get prod_rillettes => 'Rillettes';
+
+  @override
+  String get prod_riz_basmati => 'Riz basmati';
+
+  @override
+  String get prod_riz_complet => 'Riz kompletan';
+
+  @override
+  String get prod_riz_glutineux => 'Riz glutineux';
+
+  @override
+  String get prod_riz_thai => 'tajlandska riža';
+
+  @override
+  String get prod_robineterie => 'Robineterija';
+
+  @override
+  String get prod_romarin => 'ružmarin';
+
+  @override
+  String get prod_rondele => 'Rondelé';
+
+  @override
+  String get prod_roquefort => 'Roquefort';
+
+  @override
+  String get prod_rouleau => 'Rouleau';
+
+  @override
+  String get prod_ruban_isolant => 'Ruban izolator';
+
+  @override
+  String get prod_rape => 'Ribani sir';
+
+  @override
+  String get prod_sac_poubelle => 'Sac poubelle';
+
+  @override
+  String get prod_saint_nectaire => 'Saint-nectaire';
+
+  @override
+  String get prod_sake => 'Sake';
+
+  @override
+  String get prod_salade_composee => 'Salata composee';
+
+  @override
+  String get prod_salade_composee_2 => 'Miješana salata';
+
+  @override
+  String get prod_salsa => 'Salsa';
+
+  @override
+  String get prod_samoussas => 'Samoussas';
+
+  @override
+  String get prod_sandwich_maison => 'Domaći sendvič';
+
+  @override
+  String get prod_sardines => 'Sardine';
+
+  @override
+  String get prod_sauce => 'Umak';
+
+  @override
+  String get prod_sauce_bechamel => 'Bešamel umak';
+
+  @override
+  String get prod_sauce_fish => 'Umak za ribu';
+
+  @override
+  String get prod_sauce_hoisin => 'Umak hoisin';
+
+  @override
+  String get prod_sauce_nuoc_mam => 'Riblji umak';
+
+  @override
+  String get prod_sauce_oyster => 'Umak od kamenica';
+
+  @override
+  String get prod_sauce_soja => 'Umak od soje';
+
+  @override
+  String get prod_sauce_sriracha => 'Umak sriracha';
+
+  @override
+  String get prod_sauce_teriyaki => 'Umak teriyaki';
+
+  @override
+  String get prod_saucisson_sec => 'Saucisson sec';
+
+  @override
+  String get prod_saumon_fume => 'Dimljeni losos';
+
+  @override
+  String get prod_scie => 'Scie';
+
+  @override
+  String get prod_scotch => 'Scotch';
+
+  @override
+  String get prod_seitan => 'Seitan';
+
+  @override
+  String get prod_seitan_bio => 'Seitan bio';
+
+  @override
+  String get prod_semoule => 'Semoule';
+
+  @override
+  String get prod_serrure => 'Serrure';
+
+  @override
+  String get prod_serviettes_hygieniques => 'Higijenski ulošci';
+
+  @override
+  String get prod_silicone => 'Silikon';
+
+  @override
+  String get prod_sirop => 'Sirop';
+
+  @override
+  String get prod_smoothie => 'Smoothie';
+
+  @override
+  String get prod_soda_light => 'Soda svjetlo';
+
+  @override
+  String get prod_soda_sans_alcool => 'Soda bez alkohola';
+
+  @override
+  String get prod_sorbet => 'Šerbet';
+
+  @override
+  String get prod_soupe => 'Juha';
+
+  @override
+  String get prod_soupe_potage => 'Juha / potaž';
+
+  @override
+  String get prod_soupe_miso => 'Juha miso';
+
+  @override
+  String get prod_soupe_pho => 'Soupe pho';
+
+  @override
+  String get prod_spiruline => 'Spirulin';
+
+  @override
+  String get prod_steak_de_soja => 'Odrezak de soja';
+
+  @override
+  String get prod_steak_vegetal => 'Odrezak na biljnoj bazi';
+
+  @override
+  String get prod_stylo => 'Stylo';
+
+  @override
+  String get prod_surgeles => 'Smrznuta hrana';
+
+  @override
+  String get prod_serum => 'Serum';
+
+  @override
+  String get prod_sesame => 'Sezam';
+
+  @override
+  String get prod_tabac => 'Tabac';
+
+  @override
+  String get prod_tablette => 'Tableta';
+
+  @override
+  String get prod_taboule => 'Tabule';
+
+  @override
+  String get prod_tacos_fajitas => 'Tacosi/fajitas';
+
+  @override
+  String get prod_tahini => 'Tahini';
+
+  @override
+  String get prod_tampons => 'Tamponi';
+
+  @override
+  String get prod_tapenade => 'tapenada';
+
+  @override
+  String get prod_tapioca => 'Tapioka';
+
+  @override
+  String get prod_tartare => 'Tartar';
+
+  @override
+  String get prod_tarte => 'Pita';
+
+  @override
+  String get prod_tarte_salade => 'Salata tart';
+
+  @override
+  String get prod_tartine => 'Tost';
+
+  @override
+  String get prod_tartines => 'Hrskavi kruh';
+
+  @override
+  String get prod_tasseau => 'Tasseau';
+
+  @override
+  String get prod_tempeh => 'Tempeh';
+
+  @override
+  String get prod_tempura => 'Tempura';
+
+  @override
+  String get prod_terreau => 'Terreau';
+
+  @override
+  String get prod_terrine => 'Terina';
+
+  @override
+  String get prod_thermostat => 'Termostat';
+
+  @override
+  String get prod_thon => 'Tuna';
+
+  @override
+  String get prod_thym => 'Timijan';
+
+  @override
+  String get prod_the_bio => 'Organski čaj';
+
+  @override
+  String get prod_the_noir => 'Crni čaj';
+
+  @override
+  String get prod_the_vert => 'Zeleni čaj';
+
+  @override
+  String get prod_timbre => 'Timbar';
+
+  @override
+  String get prod_tisane => 'Čaj';
+
+  @override
+  String get prod_tofu => 'Tofu';
+
+  @override
+  String get prod_tofu_bio => 'Tofu bio';
+
+  @override
+  String get prod_tofu_soyeux => 'Tofu soyeux';
+
+  @override
+  String get prod_tomates_cerises => 'Cherry rajčice';
+
+  @override
+  String get prod_tortellini => 'Tortelini';
+
+  @override
+  String get prod_tournevis => 'Tournevis';
+
+  @override
+  String get prod_tringle => 'Trostruki';
+
+  @override
+  String get prod_truite => 'Pastrva';
+
+  @override
+  String get prod_truite_fumee => 'Dimljena pastrva';
+
+  @override
+  String get prod_tuyau => 'Tuyau';
+
+  @override
+  String get prod_vache_qui_rit => 'Vache qui rit';
+
+  @override
+  String get prod_veau => 'Veau';
+
+  @override
+  String get prod_vermicelles => 'Vermicelles';
+
+  @override
+  String get prod_vermicelles_de_riz => 'Vermicelles de riz';
+
+  @override
+  String get prod_vernis => 'Vernis';
+
+  @override
+  String get prod_vernis_a_ongles => 'Lak za nokte';
+
+  @override
+  String get prod_verrue => 'Verrue';
+
+  @override
+  String get prod_viande => 'Viande';
+
+  @override
+  String get prod_viande_hachee_2 => 'Viande hachee';
+
+  @override
+  String get prod_viandes_poissons => 'Viandes & Poissons';
+
+  @override
+  String get prod_viennoiseries => 'Viennoiseries';
+
+  @override
+  String get prod_vinaigre_de_riz => 'Vinaigre de riz';
+
+  @override
+  String get prod_vinaigrette => 'Vinaigrette';
+
+  @override
+  String get prod_vis => 'Vis';
+
+  @override
+  String get prod_visseuse => 'Visseuse';
+
+  @override
+  String get prod_volaille => 'Volaille';
+
+  @override
+  String get prod_wasabi => 'Wasabi';
+
+  @override
+  String get prod_whisky => 'Viski';
+
+  @override
+  String get prod_white_spirit => 'Bijeli špirit';
+
+  @override
+  String get prod_wrap => 'Zamotati';
+
+  @override
+  String get prod_wrap_leger => 'Lagani omot';
+
+  @override
+  String get prod_wrap_maison => 'Domaća obloga';
+
+  @override
+  String get prod_yaourt_glace => 'Smrznuti jogurt';
+
+  @override
+  String get prod_yaourt_nature => 'Obični jogurt';
+
+  @override
+  String get prod_zeste => 'Zeste';
+
+  @override
+  String get prod_les => '';
+
+  @override
+  String get prod_le => '';
+
+  @override
+  String get prod_echelle => 'Ljestve';
+
+  @override
+  String get prod_ecrevisses => 'Rakovi';
+
+  @override
+  String get prod_ecrous => 'matice (hardver)';
+
+  @override
+  String get prod_epicerie => 'Trgovina namirnicama';
+
+  @override
+  String get prod_epices => 'Začini';
+
+  @override
+  String get prod_epinards => 'Špinat';
+
+  @override
+  String get prod_equerre => 'Pravilo kvadrata';
+
+  @override
+  String get prod_etagere => 'Polica';
+
+  @override
+  String get prod_etau => 'Mengele';
+
+  @override
+  String get prod_ete_vacances => 'Ljeto / Odmor';
+
+  @override
+  String get prod_aaaeeeeiiouuucoeae => '';
+
+  @override
+  String get prod_oeufs_bio => 'Organska jaja';
+
+  @override
+  String get prod_oeufs_fermiers => 'Jaja slobodnog uzgoja';
+
+  @override
+  String get prod_oeuf => 'Jaje';
+
+  @override
+  String get moreOptions => 'More options';
+
+  @override
+  String get errorNotSignedIn => 'Not signed in';
+
+  @override
+  String get errorInvalidShareLink => 'Invalid link or code';
+
+  @override
+  String get errorListNotFound => 'List not found';
+
+  @override
+  String errorBackupNewerVersion(String version) {
+    return 'Backup from a newer version ($version) is not supported.';
+  }
+
+  @override
+  String get errorSyncUnavailable => 'Sync unavailable';
 }

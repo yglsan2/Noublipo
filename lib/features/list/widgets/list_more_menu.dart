@@ -9,8 +9,7 @@ import '../../../core/providers/planning_provider.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../smart_cart/smart_cart_sheet.dart';
 
-/// Menu "Plus" de l'AppBar : catalogue, planification, scan, ajout rapide, etc.
-/// Délègue les actions via [onSelected].
+/// Menu compact centré Recall : Aide, panic, stock, planif, course terminée + « Plus… ».
 class ListMoreMenu extends StatelessWidget {
   const ListMoreMenu({
     super.key,
@@ -23,8 +22,7 @@ class ListMoreMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ListProvider>(
       builder: (context, provider, _) {
-        final premium = context.watch<PremiumProvider>();
-        final isPremiumActive = premium.isPremiumActive;
+        final isPremiumActive = context.watch<PremiumProvider>().isPremiumActive;
         return Consumer4<ListProvider, PlanningProvider, GamificationProvider, ConsumptionProfileProvider>(
           builder: (context, listP, planning, gamification, profile, _) {
             final suggestionCount = isPremiumActive
@@ -32,276 +30,213 @@ class ListMoreMenu extends StatelessWidget {
                     planning: planning,
                     listProvider: listP,
                     gamification: gamification,
+                    l10n: AppLocalizations.of(context),
                     profile: profile,
                   ).length
                 : 0;
             return PopupMenuButton<String>(
-          icon: const Icon(Icons.more_vert),
-          tooltip: AppLocalizations.of(context).more,
-          onSelected: (value) {
-            HapticFeedback.selectionClick();
-            onSelected(context, value);
-          },
-          itemBuilder: (context) {
-            final l10n = AppLocalizations.of(context);
-            return [
-              if (isPremiumActive) ...[
-                PopupMenuItem(
-                  value: 'catalog',
-                  child: Row(
-                    children: [
-                      const Icon(Icons.storefront_outlined, size: 22),
-                      const SizedBox(width: 12),
-                      Text(l10n.catalogAndInspiration),
-                    ],
-                  ),
-                ),
-                PopupMenuItem(
-                  value: 'planning',
-                  child: Row(
-                    children: [
-                      const Icon(Icons.schedule_outlined, size: 22),
-                      const SizedBox(width: 12),
-                      Text(l10n.planningRecurrentSeasonal),
-                    ],
-                  ),
-                ),
-                PopupMenuItem(
-                  value: 'pantry',
-                  child: Row(
-                    children: [
-                      const Icon(Icons.kitchen_outlined, size: 22),
-                      const SizedBox(width: 12),
-                      Expanded(child: Text(l10n.pantryTitle)),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 6),
-                        child: Text(
-                          l10n.proBadge,
-                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                                fontWeight: FontWeight.w600,
+              icon: const Icon(Icons.more_vert),
+              tooltip: AppLocalizations.of(context).more,
+              onSelected: (value) {
+                HapticFeedback.selectionClick();
+                onSelected(context, value);
+              },
+              itemBuilder: (context) {
+                final l10n = AppLocalizations.of(context);
+                return [
+                  if (isPremiumActive) ...[
+                    PopupMenuItem(
+                      value: 'smart_cart',
+                      child: Row(
+                        children: [
+                          const Icon(Icons.psychology_outlined, size: 22),
+                          const SizedBox(width: 12),
+                          Expanded(child: Text(l10n.smartCartTitle)),
+                          if (suggestionCount > 0)
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.primaryContainer,
+                                borderRadius: BorderRadius.circular(12),
                               ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                PopupMenuItem(
-                  value: 'reclassify_food',
-                  child: Row(
-                    children: [
-                      const Icon(Icons.category_outlined, size: 22),
-                      const SizedBox(width: 12),
-                      Expanded(child: Text(l10n.reclassifyFoodList)),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 6),
-                        child: Text(
-                          l10n.proBadge,
-                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                                fontWeight: FontWeight.w600,
+                              child: Text(
+                                '$suggestionCount',
+                                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                                    ),
                               ),
-                        ),
+                            ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-                PopupMenuItem(
-                  value: 'birthdays',
-                  child: Row(
-                    children: [
-                      const Icon(Icons.cake_outlined, size: 22),
-                      const SizedBox(width: 12),
-                      Text(l10n.birthdaysTitle),
-                    ],
-                  ),
-                ),
-                PopupMenuItem(
-                  value: 'scan',
-                  child: Row(
-                    children: [
-                      const Icon(Icons.qr_code_scanner_outlined, size: 22),
-                      const SizedBox(width: 12),
-                      Text(l10n.scanBarcode),
-                    ],
-                  ),
-                ),
-                PopupMenuItem(
-                  value: 'quick_add',
-                  child: Row(
-                    children: [
-                      const Icon(Icons.bolt_outlined, size: 22),
-                      const SizedBox(width: 12),
-                      Text(l10n.quickAddListArticles),
-                    ],
-                  ),
-                ),
-                PopupMenuItem(
-                  value: 'smart_cart',
-                  child: Row(
-                    children: [
-                      const Icon(Icons.psychology_outlined, size: 22),
-                      const SizedBox(width: 12),
-                      Expanded(child: Text(l10n.smartCartTitle)),
-                      if (suggestionCount > 0)
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.primaryContainer,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Text(
-                            '$suggestionCount',
-                            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                                  color: Theme.of(context).colorScheme.onPrimaryContainer,
-                                ),
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-                PopupMenuItem(
-                  value: 'probable_list',
-                  child: Row(
-                    children: [
-                      const Icon(Icons.playlist_add_check_outlined, size: 22),
-                      const SizedBox(width: 12),
-                      Expanded(child: Text(l10n.probableListTitle)),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 6),
-                        child: Text(
-                          l10n.proBadge,
-                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                                fontWeight: FontWeight.w600,
-                              ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                PopupMenuItem(
-                  value: 'shopping_social',
-                  child: Row(
-                    children: [
-                      const Icon(Icons.people_outline, size: 22),
-                      const SizedBox(width: 12),
-                      Expanded(child: Text(l10n.shoppingSocialTitle)),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 6),
-                        child: Text(
-                          l10n.proBadge,
-                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                                color: Theme.of(context).colorScheme.primary,
-                                fontWeight: FontWeight.w600,
-                              ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                PopupMenuItem(
-                  value: 'panic_checkout',
-                  child: Row(
-                    children: [
-                      const Icon(Icons.checklist_rtl, size: 22),
-                      const SizedBox(width: 12),
-                      Text(l10n.panicCheckoutTitle),
-                    ],
-                  ),
-                ),
-                if (!provider.isSharedList && !provider.selectionMode)
-                  PopupMenuItem(
-                    value: 'selection_mode',
-                    child: Row(
-                      children: [
-                        const Icon(Icons.checklist_outlined, size: 22),
-                        const SizedBox(width: 12),
-                        Text(l10n.selectItems),
-                      ],
                     ),
-                  ),
-              ],
-              PopupMenuItem(
-                value: 'finish_shopping',
-                child: Row(
-                  children: [
-                    const Icon(Icons.check_circle_outline, size: 22),
-                    const SizedBox(width: 12),
-                    Text(l10n.courseTerminee),
+                    PopupMenuItem(
+                      value: 'panic_checkout',
+                      child: Row(
+                        children: [
+                          const Icon(Icons.checklist_rtl, size: 22),
+                          const SizedBox(width: 12),
+                          Text(l10n.panicCheckoutTitle),
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem(
+                      value: 'pantry',
+                      child: Row(
+                        children: [
+                          const Icon(Icons.kitchen_outlined, size: 22),
+                          const SizedBox(width: 12),
+                          Text(l10n.pantryTitle),
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem(
+                      value: 'planning',
+                      child: Row(
+                        children: [
+                          const Icon(Icons.schedule_outlined, size: 22),
+                          const SizedBox(width: 12),
+                          Text(l10n.planningRecurrentSeasonal),
+                        ],
+                      ),
+                    ),
                   ],
-                ),
-              ),
-              PopupMenuItem(
-                value: 'remove_checked',
-                child: Row(
-                  children: [
-                    const Icon(Icons.delete_sweep_outlined, size: 22),
-                    const SizedBox(width: 12),
-                    Text(l10n.removeChecked),
-                  ],
-                ),
-              ),
-              if (!provider.isSharedList && isPremiumActive) ...[
-                PopupMenuItem(
-                  value: 'new_list',
-                  child: Row(
-                    children: [
-                      const Icon(Icons.add, size: 22),
-                      const SizedBox(width: 12),
-                      Text(l10n.newList),
-                    ],
-                  ),
-                ),
-                PopupMenuItem(
-                  value: 'duplicate_list',
-                  child: Row(
-                    children: [
-                      const Icon(Icons.copy, size: 22),
-                      const SizedBox(width: 12),
-                      Text(l10n.duplicateList),
-                    ],
-                  ),
-                ),
-                if (!provider.isSharedList) ...[
                   PopupMenuItem(
-                    value: 'save_as_template',
+                    value: 'finish_shopping',
                     child: Row(
                       children: [
-                        const Icon(Icons.save_outlined, size: 22),
+                        const Icon(Icons.check_circle_outline, size: 22),
                         const SizedBox(width: 12),
-                        Text(l10n.saveAsTemplate),
+                        Text(l10n.courseTerminee),
                       ],
                     ),
                   ),
                   PopupMenuItem(
-                    value: 'new_from_template',
+                    value: 'remove_checked',
                     child: Row(
                       children: [
-                        const Icon(Icons.post_add_outlined, size: 22),
+                        const Icon(Icons.delete_sweep_outlined, size: 22),
                         const SizedBox(width: 12),
-                        Text(l10n.newFromTemplate),
+                        Text(l10n.removeChecked),
                       ],
                     ),
                   ),
+                  const PopupMenuDivider(),
                   PopupMenuItem(
-                    value: 'stats',
+                    value: 'more_features',
                     child: Row(
                       children: [
-                        const Icon(Icons.bar_chart_outlined, size: 22),
+                        const Icon(Icons.more_horiz, size: 22),
                         const SizedBox(width: 12),
-                        Text(l10n.stats),
+                        Text(l10n.menuMoreFeatures),
                       ],
                     ),
                   ),
-                ],
-              ],
-            ];
-          },
-        );
+                ];
+              },
+            );
           },
         );
       },
+    );
+  }
+}
+
+/// Feuille « Plus… » : chaque entrée a un rôle distinct (pas de doublons hub/créer/dupliquer).
+class ListMoreFeaturesSheet extends StatelessWidget {
+  const ListMoreFeaturesSheet({
+    super.key,
+    required this.onSelected,
+  });
+
+  final void Function(String value) onSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final provider = context.watch<ListProvider>();
+    final isPremiumActive = context.watch<PremiumProvider>().isPremiumActive;
+    final theme = Theme.of(context);
+
+    Widget tile(IconData icon, String label, String value, {String? subtitle, bool locked = false}) {
+      return ListTile(
+        leading: Icon(locked ? Icons.lock_outline : icon),
+        title: Text(label),
+        subtitle: subtitle != null ? Text(subtitle) : null,
+        trailing: locked
+            ? Text(
+                l10n.proBadge,
+                style: theme.textTheme.labelSmall?.copyWith(
+                  color: theme.colorScheme.primary,
+                  fontWeight: FontWeight.w600,
+                ),
+              )
+            : null,
+        onTap: () {
+          Navigator.pop(context);
+          onSelected(locked ? 'paywall' : value);
+        },
+      );
+    }
+
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+              child: Text(l10n.menuMoreFeatures, style: theme.textTheme.titleMedium),
+            ),
+            if (isPremiumActive) ...[
+              tile(
+                Icons.restaurant_menu_outlined,
+                l10n.mealPresetsMenu,
+                'meal_presets',
+                subtitle: l10n.mealPresetsPickerSubtitle,
+              ),
+              tile(Icons.qr_code_scanner_outlined, l10n.scanBarcode, 'scan'),
+              tile(Icons.bolt_outlined, l10n.quickAddListArticles, 'quick_add'),
+              if (!provider.isSharedList && !provider.selectionMode)
+                tile(Icons.checklist_outlined, l10n.selectItems, 'selection_mode'),
+              tile(Icons.storefront_outlined, l10n.catalogAndInspiration, 'catalog'),
+              if (!provider.isSharedList)
+                tile(
+                  Icons.folder_open_outlined,
+                  l10n.listsHubTitle,
+                  'lists_hub',
+                  subtitle: l10n.listsHubSubtitle,
+                ),
+              tile(
+                Icons.near_me_outlined,
+                l10n.geofenceTitle,
+                'geofence',
+                subtitle: l10n.geofenceSubtitle,
+              ),
+              if (!provider.isSharedList) ...[
+                tile(Icons.save_outlined, l10n.saveAsTemplate, 'save_as_template'),
+                tile(Icons.post_add_outlined, l10n.newFromTemplate, 'new_from_template'),
+              ],
+              tile(Icons.bar_chart_outlined, l10n.stats, 'stats'),
+              tile(
+                Icons.category_outlined,
+                l10n.reclassifyFoodList,
+                'reclassify_food',
+                subtitle: l10n.reclassifyFoodHint,
+              ),
+            ] else ...[
+              // Free : teasers concrets → paywall (pas un seul cadenas opaque).
+              tile(Icons.psychology_outlined, l10n.smartCartTitle, 'paywall', locked: true),
+              tile(Icons.folder_open_outlined, l10n.listsHubTitle, 'paywall', locked: true),
+              tile(Icons.restaurant_menu_outlined, l10n.mealPresetsMenu, 'paywall', locked: true),
+              tile(Icons.category_outlined, l10n.toggleAxisByType, 'paywall', locked: true),
+              tile(Icons.qr_code_scanner_outlined, l10n.scanBarcode, 'paywall', locked: true),
+              tile(Icons.near_me_outlined, l10n.geofenceTitle, 'paywall', locked: true),
+            ],
+            const SizedBox(height: 8),
+          ],
+        ),
+      ),
     );
   }
 }

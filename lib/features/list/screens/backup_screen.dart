@@ -13,6 +13,7 @@ import '../../../core/providers/planning_provider.dart';
 import '../../../core/providers/settings_provider.dart';
 import '../../../core/services/storage_service.dart';
 import '../../../core/utils/app_logger.dart';
+import '../../../core/utils/list_display_name.dart';
 import '../../../l10n/app_localizations.dart';
 
 /// Écran Sauvegarde / Restauration : export JSON et import.
@@ -63,7 +64,7 @@ class BackupScreen extends StatelessWidget {
       await file.writeAsString(json);
       await Share.shareXFiles(
         [XFile(path)],
-        text: 'Sauvegarde Toteo',
+        text: AppLocalizations.of(context).backupShareSubject,
       );
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -74,7 +75,13 @@ class BackupScreen extends StatelessWidget {
       AppLogger.error('BackupScreen._exportBackup', e, stack);
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Erreur : $e')),
+          SnackBar(
+            content: Text(
+              AppLocalizations.of(context).backupErrorPrefix(
+                localizedAppError(AppLocalizations.of(context), e),
+              ),
+            ),
+          ),
         );
       }
     }
@@ -149,7 +156,13 @@ class BackupScreen extends StatelessWidget {
       // ignore: use_build_context_synchronously
       if (context.mounted) {
         messenger.showSnackBar(
-          SnackBar(content: Text(AppLocalizations.of(context).backupImportError(e.toString()))),
+          SnackBar(
+            content: Text(
+              AppLocalizations.of(context).backupImportError(
+                localizedAppError(AppLocalizations.of(context), e),
+              ),
+            ),
+          ),
         );
       }
     }

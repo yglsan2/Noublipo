@@ -170,7 +170,7 @@ class SyncService extends ChangeNotifier {
 
   /// Crée une liste partagée (lien à envoyer). Retourne l'id et le code court.
   Future<ShareLinkResult> createSharedList(ShoppingListModel list) async {
-    if (currentUser == null) throw StateError('Non connecté');
+    if (currentUser == null) throw StateError('NOT_SIGNED_IN');
     try {
       final listId = _uuid.v4();
       String shortCode = _generateShortCode();
@@ -208,9 +208,9 @@ class SyncService extends ChangeNotifier {
 
   /// Rejoint une liste partagée (avec l'id, un lien ou le code à 8 caractères).
   Future<void> joinSharedList(String listIdOrLinkOrCode) async {
-    if (currentUser == null) throw StateError('Non connecté');
+    if (currentUser == null) throw StateError('NOT_SIGNED_IN');
     final input = listIdOrLinkOrCode.trim();
-    if (input.isEmpty) throw ArgumentError('Lien ou code invalide');
+    if (input.isEmpty) throw ArgumentError('INVALID_SHARE_LINK');
     try {
       String listId = _extractListIdFromLink(input);
       if (listId.isEmpty && input.length == 8 && RegExp(r'^[A-Za-z2-9]+$').hasMatch(input)) {
@@ -220,10 +220,10 @@ class SyncService extends ChangeNotifier {
         }
       }
       if (listId.isEmpty) listId = input;
-      if (listId.isEmpty) throw ArgumentError('Lien ou code invalide');
+      if (listId.isEmpty) throw ArgumentError('INVALID_SHARE_LINK');
       final ref = _firestore.collection('lists').doc(listId);
       final snap = await ref.get();
-      if (!snap.exists) throw StateError('Liste introuvable');
+      if (!snap.exists) throw StateError('LIST_NOT_FOUND');
       await ref.update({
         'memberIds': FieldValue.arrayUnion([_userId]),
       });

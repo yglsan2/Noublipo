@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:speech_to_text/speech_to_text.dart';
-import '../../../app_config.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/utils/voice_text_cleaner.dart';
 import '../../../core/utils/implicit_commitment_detector.dart';
@@ -21,10 +20,13 @@ import '../../../core/providers/settings_provider.dart';
 import '../../../core/data/product_lexicon.dart';
 import '../../../core/data/meal_presets.dart';
 import '../../../core/data/food_taxonomy.dart';
+import '../../../core/models/shopping_list_model.dart';
 import '../../../core/providers/premium_provider.dart';
 import '../../../core/ui/food_category_style.dart';
+import '../../../core/utils/list_display_name.dart';
 import '../../../core/ui/meal_preset_dialog.dart';
 import '../../../core/utils/food_classifier.dart';
+import '../../../core/utils/content_l10n.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../paywall/paywall_screen.dart';
 
@@ -94,6 +96,7 @@ class AddItemSheet extends StatefulWidget {
     double? quantity,
     String? unit,
     String? foodCategoryId,
+    String? listId,
   }) onSubmit;
   /// Appelé quand l'utilisateur choisit « Pour plus tard » sur une suggestion : ajoute l'article à la liste (non coché).
   final void Function(String name)? onAddForLater;
@@ -117,6 +120,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
   late int _colorIndex;
   String? _foodCategoryId;
   bool _foodCategoryManual = false;
+  String? _targetListId;
   DateTime? _reminderDate;
   TimeOfDay? _reminderTime;
   String? _imagePath;
@@ -208,7 +212,8 @@ class _AddItemSheetState extends State<AddItemSheet> {
     }
     if (!mounted) return;
     final settings = context.read<SettingsProvider>();
-    final finalName = settings.applyCapitalization(name);
+    // Canonise vers FR si reconnu (saisie KO/JA/AR/…), sinon garde le texte libre.
+    final finalName = settings.applyCapitalization(canonicalProductName(name));
 
     if (!widget.isEdit) {
       final preset = MealPresets.match(finalName);
@@ -247,14 +252,14 @@ class _AddItemSheetState extends State<AddItemSheet> {
 
     final reminderAt = settings.remindersEnabled ? _getReminderAtMs() : null;
     final reminderNote = settings.remindersEnabled ? _reminderNoteController.text.trim() : null;
-    final note = isToteoPlus ? (_noteController.text.trim().isEmpty ? null : _noteController.text.trim()) : null;
-    final priceStr = isToteoPlus ? _priceController.text.trim().replaceFirst(RegExp(r','), '.') : '';
+    final note = context.read<PremiumProvider>().isPremiumActive ? (_noteController.text.trim().isEmpty ? null : _noteController.text.trim()) : null;
+    final priceStr = context.read<PremiumProvider>().isPremiumActive ? _priceController.text.trim().replaceFirst(RegExp(r','), '.') : '';
     final priceParsed = priceStr.isNotEmpty ? double.tryParse(priceStr) : null;
-    final price = isToteoPlus && priceParsed != null && priceParsed > 0 ? priceParsed : null;
-    final quantityStr = isToteoPlus ? _quantityController.text.trim().replaceFirst(RegExp(r','), '.') : '';
+    final price = context.read<PremiumProvider>().isPremiumActive && priceParsed != null && priceParsed > 0 ? priceParsed : null;
+    final quantityStr = context.read<PremiumProvider>().isPremiumActive ? _quantityController.text.trim().replaceFirst(RegExp(r','), '.') : '';
     final quantityParsed = quantityStr.isNotEmpty ? double.tryParse(quantityStr) : null;
-    final quantity = isToteoPlus && quantityParsed != null && quantityParsed > 0 ? quantityParsed : null;
-    final unit = isToteoPlus ? (_unitController.text.trim().isEmpty ? null : _unitController.text.trim()) : null;
+    final quantity = context.read<PremiumProvider>().isPremiumActive && quantityParsed != null && quantityParsed > 0 ? quantityParsed : null;
+    final unit = context.read<PremiumProvider>().isPremiumActive ? (_unitController.text.trim().isEmpty ? null : _unitController.text.trim()) : null;
     widget.onSubmit(
       finalName,
       _colorIndex,
@@ -262,17 +267,18 @@ class _AddItemSheetState extends State<AddItemSheet> {
       reminderNote: reminderNote?.isEmpty == true ? null : reminderNote,
       updateReminder: widget.isEdit && settings.remindersEnabled,
       note: note,
-      imagePath: isToteoPlus ? _imagePath : null,
+      imagePath: context.read<PremiumProvider>().isPremiumActive ? _imagePath : null,
       price: price,
       quantity: quantity,
       unit: unit,
       foodCategoryId: _foodCategoryId,
+      listId: _targetListId,
     );
     if (mounted) Navigator.of(context).pop();
   }
 
   Future<void> _startVoiceInput() async {
-    if (!isToteoPlus || _isListening) return;
+    if (!context.read<PremiumProvider>().isPremiumActive || _isListening) return;
     try {
       final speech = SpeechToText();
       final available = await speech.initialize();
@@ -302,7 +308,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                   if (mounted) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Reconnu : $cleaned'),
+                        content: Text(AppLocalizations.of(context).voiceRecognized(cleaned)),
                         behavior: SnackBarBehavior.floating,
                         duration: const Duration(seconds: 2),
                       ),
@@ -385,7 +391,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
       } catch (e) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('${l10n.errorPrefix}: $e')),
+            SnackBar(content: Text('${l10n.errorPrefix}: ${localizedAppError(l10n, e)}')),
           );
         }
       }
@@ -393,7 +399,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
   }
 
   Future<void> _pickImage() async {
-    if (!isToteoPlus) return;
+    if (!context.read<PremiumProvider>().isPremiumActive) return;
     try {
       final picker = ImagePicker();
       final xFile = await picker.pickImage(source: ImageSource.gallery);
@@ -407,7 +413,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Image : $e')),
+          SnackBar(content: Text(AppLocalizations.of(context).imageErrorPrefix('$e'))),
         );
       }
     }
@@ -415,20 +421,29 @@ class _AddItemSheetState extends State<AddItemSheet> {
 
   List<String> _filteredSuggestions(BuildContext context) {
     final q = _controller.text.trim();
-    if (q.length < 2) return [];
+    if (q.isEmpty) return [];
+    final l10n = AppLocalizations.of(context);
     final qLower = q.toLowerCase();
     final fromHistory = widget.suggestionNames
         .take(80)
+        .map((s) => localizedProductName(l10n, s))
         .where((s) => s.toLowerCase().contains(qLower) && s.toLowerCase() != qLower)
         .toSet()
         .toList();
     fromHistory.sort((a, b) => a.toLowerCase().indexOf(qLower).compareTo(b.toLowerCase().indexOf(qLower)));
-    if (isToteoPlus && context.read<SettingsProvider>().autocomplete) {
-      final fromLexicon = ProductLexicon.suggestionsForPrefix(q, limit: 10);
-      final combined = <String>{...fromHistory.take(3), ...fromLexicon};
-      return combined.take(10).toList();
+    final fromAliases = localizedProductSuggestions(l10n, q, limit: 12);
+    if (context.read<PremiumProvider>().isPremiumActive && context.read<SettingsProvider>().autocomplete) {
+      final fromLexicon = ProductLexicon.suggestionsForPrefix(q, limit: 10)
+          .map((s) => localizedProductName(l10n, s));
+      final combined = <String>{
+        ...fromHistory.take(3),
+        ...fromAliases,
+        ...fromLexicon,
+      };
+      return combined.take(12).toList();
     }
-    return fromHistory.take(5).toList();
+    final combined = <String>{...fromHistory.take(5), ...fromAliases};
+    return combined.take(10).toList();
   }
 
   @override
@@ -462,7 +477,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 12),
                     child: Text(
-                      'Modifier l\'article',
+                      AppLocalizations.of(context).editItemTitle,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ),
@@ -471,16 +486,20 @@ class _AddItemSheetState extends State<AddItemSheet> {
                   autofocus: true,
                   textCapitalization: TextCapitalization.sentences,
                   decoration: InputDecoration(
-                    hintText: _isListening ? 'Parlez maintenant...' : 'Nom de l\'article',
+                    hintText: _isListening
+                        ? AppLocalizations.of(context).speakNowHint
+                        : AppLocalizations.of(context).itemNameHint,
                     prefixIcon: const Icon(Icons.shopping_basket_outlined),
-                    suffixIcon: isToteoPlus
+                    suffixIcon: context.read<PremiumProvider>().isPremiumActive
                         ? IconButton(
                             icon: Icon(
                               _isListening ? Icons.mic : Icons.mic_none_outlined,
                               color: _isListening ? Theme.of(context).colorScheme.primary : null,
                             ),
                             onPressed: _isListening ? null : _startVoiceInput,
-                            tooltip: _isListening ? 'Écoute en cours' : 'Saisie vocale',
+                            tooltip: _isListening
+                                ? AppLocalizations.of(context).listeningTooltip
+                                : AppLocalizations.of(context).voiceInputTooltip,
                           )
                         : null,
                     filled: true,
@@ -505,6 +524,52 @@ class _AddItemSheetState extends State<AddItemSheet> {
                     }
                   },
                 ),
+                if (!widget.isEdit && context.watch<PremiumProvider>().isPremiumActive)
+                  Consumer<ListProvider>(
+                    builder: (context, listP, _) {
+                      if (listP.isSharedList || listP.allLists.length < 2) {
+                        return const SizedBox.shrink();
+                      }
+                      final current = _targetListId ?? listP.currentListId;
+                      final options = listP.allLists
+                          .where((l) => l.id != kEngagementsListId)
+                          .toList();
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: InputDecorator(
+                          decoration: InputDecoration(
+                            labelText: AppLocalizations.of(context).addToListLabel,
+                            isDense: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(DesignConstants.cardBorderRadius),
+                            ),
+                            prefixIcon: const Icon(Icons.playlist_add_check_outlined, size: 20),
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton<String>(
+                              isExpanded: true,
+                              value: options.any((l) => l.id == current) ? current : options.first.id,
+                              items: [
+                                for (final list in options)
+                                  DropdownMenuItem(
+                                    value: list.id,
+                                    child: Text(
+                                      '${localizedShoppingListName(AppLocalizations.of(context), list)} (${list.items.length})',
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                              ],
+                              onChanged: (id) {
+                                if (id == null) return;
+                                HapticFeedback.selectionClick();
+                                setState(() => _targetListId = id);
+                              },
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 const SizedBox(height: 10),
                 AnimatedSwitcher(
                   duration: const Duration(milliseconds: 220),
@@ -552,7 +617,10 @@ class _AddItemSheetState extends State<AddItemSheet> {
                               children: [
                                 for (final name in recents)
                                   ActionChip(
-                                    label: Text(name),
+                                    label: Text(localizedProductName(
+                                      AppLocalizations.of(context),
+                                      name,
+                                    )),
                                     visualDensity: VisualDensity.compact,
                                     onPressed: () {
                                       HapticFeedback.selectionClick();
@@ -568,7 +636,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                       );
                     },
                   ),
-                if (!widget.isEdit && isToteoPlus && widget.onAddAsAlreadyBought != null)
+                if (!widget.isEdit && context.read<PremiumProvider>().isPremiumActive && widget.onAddAsAlreadyBought != null)
                   Consumer<PlanningProvider>(
                     builder: (context, planning, _) {
                       final q = _controller.text.trim();
@@ -594,7 +662,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                       );
                     },
                   ),
-                if (isToteoPlus && _isListening)
+                if (context.read<PremiumProvider>().isPremiumActive && _isListening)
                   Padding(
                     padding: const EdgeInsets.only(top: 6),
                     child: Row(
@@ -602,7 +670,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                         Icon(Icons.record_voice_over, size: 16, color: Theme.of(context).colorScheme.primary),
                         const SizedBox(width: 6),
                         Text(
-                          'Écoute en cours... Parlez clairement.',
+                          AppLocalizations.of(context).listeningSpeakClearly,
                           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                 color: Theme.of(context).colorScheme.primary,
                               ),
@@ -689,8 +757,11 @@ class _AddItemSheetState extends State<AddItemSheet> {
                         size: 20,
                         color: fromHistory ? Colors.grey.shade600 : Theme.of(context).colorScheme.primary,
                       ),
-                      title: Text(s, style: Theme.of(context).textTheme.bodyMedium),
-                      trailing: isToteoPlus && widget.onAddForLater != null
+                      title: Text(
+                        localizedProductName(AppLocalizations.of(context), s),
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      trailing: context.read<PremiumProvider>().isPremiumActive && widget.onAddForLater != null
                           ? TextButton.icon(
                               icon: const Icon(Icons.schedule, size: 18),
                               label: Text(AppLocalizations.of(context).addForLater),
@@ -700,7 +771,9 @@ class _AddItemSheetState extends State<AddItemSheet> {
                                 if (mounted) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
-                                      content: Text(AppLocalizations.of(context).addForLaterSnackbar(s)),
+                                      content: Text(AppLocalizations.of(context).addForLaterSnackbar(
+                                        localizedProductName(AppLocalizations.of(context), s),
+                                      )),
                                       behavior: SnackBarBehavior.floating,
                                     ),
                                   );
@@ -719,7 +792,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                 ExpansionTile(
                   tilePadding: EdgeInsets.zero,
                   title: Text(
-                    'Plus d\'options',
+                    AppLocalizations.of(context).moreOptions,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.w500,
@@ -738,13 +811,13 @@ class _AddItemSheetState extends State<AddItemSheet> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          if (isToteoPlus)
+                          if (context.read<PremiumProvider>().isPremiumActive)
                             Padding(
                               padding: const EdgeInsets.only(bottom: 12),
                               child: TextField(
                                 controller: _priceController,
                                 decoration: InputDecoration(
-                                  hintText: 'Prix estimé (optionnel, ex: 2.50)',
+                                  hintText: AppLocalizations.of(context).priceHint,
                                   isDense: true,
                                   prefixIcon: const Icon(Icons.euro_outlined, size: 20),
                                   border: OutlineInputBorder(
@@ -768,7 +841,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                                 child: TextField(
                                   controller: _categoryNameController,
                                   decoration: InputDecoration(
-                                    hintText: 'Nom de catégorie (optionnel)',
+                                    hintText: AppLocalizations.of(context).categoryNameHint,
                                     isDense: true,
                                     prefixIcon: const Icon(Icons.label_outline, size: 20),
                                     border: OutlineInputBorder(
@@ -793,7 +866,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Rappel (optionnel)',
+                                      AppLocalizations.of(context).reminderOptionalHint,
                                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                             color: Colors.grey.shade700,
                                             fontWeight: FontWeight.w500,
@@ -804,7 +877,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                                       children: [
                                         TextButton.icon(
                                           icon: const Icon(Icons.calendar_today, size: 20),
-                                          label: Text(_reminderDate == null ? 'Date' : '${_reminderDate!.day}/${_reminderDate!.month}/${_reminderDate!.year}'),
+                                          label: Text(_reminderDate == null ? AppLocalizations.of(context).dateLabelShort : '${_reminderDate!.day}/${_reminderDate!.month}/${_reminderDate!.year}'),
                                           onPressed: () async {
                                             final d = await showDatePicker(
                                               context: context,
@@ -818,7 +891,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                                         const SizedBox(width: 8),
                                         TextButton.icon(
                                           icon: const Icon(Icons.access_time, size: 20),
-                                          label: Text(_reminderTime == null ? 'Heure' : '${_reminderTime!.hour.toString().padLeft(2, '0')}:${_reminderTime!.minute.toString().padLeft(2, '0')}'),
+                                          label: Text(_reminderTime == null ? AppLocalizations.of(context).timeLabelShort : '${_reminderTime!.hour.toString().padLeft(2, '0')}:${_reminderTime!.minute.toString().padLeft(2, '0')}'),
                                           onPressed: () async {
                                             final t = await showTimePicker(
                                               context: context,
@@ -834,7 +907,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                                               _reminderDate = null;
                                               _reminderTime = null;
                                             }),
-                                            tooltip: 'Supprimer le rappel',
+                                            tooltip: AppLocalizations.of(context).deleteReminderTooltip,
                                           ),
                                       ],
                                     ),
@@ -842,7 +915,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                                     TextField(
                                       controller: _reminderNoteController,
                                       decoration: InputDecoration(
-                                        hintText: 'Ex: important > aller chez Auchan',
+                                        hintText: AppLocalizations.of(context).reminderNoteExampleHint,
                                         isDense: true,
                                         prefixIcon: const Icon(Icons.note_outlined, size: 20),
                                         border: OutlineInputBorder(
@@ -857,9 +930,9 @@ class _AddItemSheetState extends State<AddItemSheet> {
                               );
                             },
                           ),
-                          if (isToteoPlus) ...[
+                          if (context.read<PremiumProvider>().isPremiumActive) ...[
                             Text(
-                              'Note, quantité, photo',
+                              AppLocalizations.of(context).noteQtyPhotoSection,
                               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                     color: Colors.grey.shade700,
                                     fontWeight: FontWeight.w500,
@@ -874,7 +947,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                                   child: TextField(
                                     controller: _quantityController,
                                     decoration: InputDecoration(
-                                      hintText: 'Qté (ex: 2)',
+                                      hintText: AppLocalizations.of(context).qtyHint,
                                       isDense: true,
                                       prefixIcon: const Icon(Icons.numbers, size: 20),
                                       border: OutlineInputBorder(
@@ -891,7 +964,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                                   child: TextField(
                                     controller: _unitController,
                                     decoration: InputDecoration(
-                                      hintText: 'Unité (L, kg…)',
+                                      hintText: AppLocalizations.of(context).unitHint,
                                       isDense: true,
                                       prefixIcon: const Icon(Icons.straighten_outlined, size: 20),
                                       border: OutlineInputBorder(
@@ -908,7 +981,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                             TextField(
                               controller: _noteController,
                               decoration: InputDecoration(
-                                hintText: 'Note (ex: marque, détail)',
+                                hintText: AppLocalizations.of(context).noteHint,
                                 isDense: true,
                                 prefixIcon: const Icon(Icons.note_outlined, size: 20),
                                 border: OutlineInputBorder(
@@ -923,7 +996,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                               children: [
                                 OutlinedButton.icon(
                                   icon: const Icon(Icons.image_outlined, size: 20),
-                                  label: Text(_imagePath == null ? 'Photo' : 'Changer'),
+                                  label: Text(_imagePath == null ? AppLocalizations.of(context).photoLabel : AppLocalizations.of(context).changePhotoLabel),
                                   onPressed: _pickImage,
                                 ),
                                 if (_imagePath != null) ...[
@@ -943,7 +1016,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                                   IconButton(
                                     icon: const Icon(Icons.close),
                                     onPressed: () => setState(() => _imagePath = null),
-                                    tooltip: 'Supprimer la photo',
+                                    tooltip: AppLocalizations.of(context).deletePhotoTooltip,
                                   ),
                                 ],
                               ],
@@ -991,7 +1064,11 @@ class _AddItemSheetState extends State<AddItemSheet> {
       children: List.generate(
         AppColors.categoryColors.length,
         (i) => Tooltip(
-          message: AppColors.nameFromIndex(i),
+          message: resolvedCategoryColorLabel(
+            AppLocalizations.of(context),
+            i,
+            categoryNames.getCategoryName(i),
+          ),
           child: Material(
             color: Colors.transparent,
             child: InkWell(
@@ -1047,7 +1124,6 @@ class _FoodCategoryPicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final lang = Localizations.localeOf(context).languageCode;
     final theme = Theme.of(context);
 
     return Column(
@@ -1095,7 +1171,7 @@ class _FoodCategoryPicker extends StatelessWidget {
                             ? theme.colorScheme.onSecondaryContainer
                             : FoodCategoryStyle.colorFor(c),
                       ),
-                      label: Text(c.labelFor(lang)),
+                      label: Text(localizedFoodCategoryLabel(l10n, c.id)),
                       selectedColor: FoodCategoryStyle.colorFor(c).withValues(alpha: 0.35),
                       onSelected: (_) => onChanged(c.id),
                     ),

@@ -7,6 +7,9 @@ import '../../../core/constants/touch_constants.dart';
 import '../../../core/data/food_taxonomy.dart';
 import '../../../core/models/shopping_item.dart';
 import '../../../core/ui/food_category_style.dart';
+import '../../../core/utils/content_l10n.dart';
+import '../../../core/utils/food_classifier.dart';
+import '../../../core/utils/list_display_name.dart';
 import '../../../l10n/app_localizations.dart';
 import 'liquid_tile_background.dart';
 
@@ -86,10 +89,23 @@ class ItemTile extends StatelessWidget {
         ? (isDark ? Colors.white70 : Colors.black54)
         : (isDark ? Colors.grey.shade400 : Colors.grey.shade600);
 
+    final l10n = AppLocalizations.of(context);
+    final displayName = localizedProductName(l10n, item.name);
+
+    final resolvedFoodId = FoodClassifier.effectiveCategoryId(item.name, item.foodCategoryId);
+    final resolvedFoodCat = FoodTaxonomy.byId(resolvedFoodId);
+    final resolvedFoodLabel = foodTypeLabel ??
+        (resolvedFoodId == null
+            ? null
+            : localizedFoodCategoryLabel(l10n, resolvedFoodId));
+    final foodHoverTip = resolvedFoodLabel != null && resolvedFoodLabel.isNotEmpty
+        ? '$displayName → $resolvedFoodLabel'
+        : null;
+
     String reminderTooltip(int? at, String? note) {
       final noteTrimmed = note?.trim();
       if (noteTrimmed != null && noteTrimmed.isNotEmpty) return noteTrimmed;
-      if (at == null) return 'Rappel';
+      if (at == null) return l10n.remindersPerItem;
       final d = DateTime.fromMillisecondsSinceEpoch(at);
       return '${d.day}/${d.month}/${d.year} ${d.hour.toString().padLeft(2, '0')}:${d.minute.toString().padLeft(2, '0')}';
     }
@@ -127,7 +143,7 @@ class ItemTile extends StatelessWidget {
             ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 200),
               child: Text(
-                item.name,
+                displayName,
                 style: nameStyle,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -176,7 +192,7 @@ class ItemTile extends StatelessWidget {
       );
 
       return showTooltips
-          ? Tooltip(message: 'Clic droit : Modifier ou supprimer', child: interactive)
+          ? Tooltip(message: l10n.rightClickEditDelete, child: interactive)
           : interactive;
     }
 
@@ -206,7 +222,7 @@ class ItemTile extends StatelessWidget {
                               ],
                               Flexible(
                                 child: Text(
-                                  item.name,
+                                  displayName,
                                   style: TextStyle(
                                     fontSize: (fs * 0.95).clamp(15.0, 17.0),
                                     decoration: item.checked ? TextDecoration.lineThrough : null,
@@ -228,7 +244,7 @@ class ItemTile extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                item.name,
+                                displayName,
                                 style: TextStyle(
                                   fontSize: (fs * 0.95).clamp(15.0, 17.0),
                                   decoration: item.checked ? TextDecoration.lineThrough : null,
@@ -288,7 +304,7 @@ class ItemTile extends StatelessWidget {
                           ],
                           Flexible(
                             child: Text(
-                              item.name,
+                              displayName,
                               style: TextStyle(
                                 fontSize: (fs * 0.95).clamp(15.0, 17.0),
                                 decoration: item.checked ? TextDecoration.lineThrough : null,
@@ -309,7 +325,7 @@ class ItemTile extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            item.name,
+                            displayName,
                             style: TextStyle(
                               fontSize: (fs * 0.95).clamp(15.0, 17.0),
                               decoration: item.checked ? TextDecoration.lineThrough : null,
@@ -341,8 +357,8 @@ class ItemTile extends StatelessWidget {
                               Expanded(
                                 child: Text(
                                   tightHeight && showCategory
-                                      ? '${item.name} · $categoryLabel'
-                                      : item.name,
+                                      ? '$displayName · $categoryLabel'
+                                      : displayName,
                                   style: TextStyle(
                                     fontSize: tightHeight ? (fs * 0.9).clamp(14.0, 16.0) : fs,
                                     decoration: item.checked ? TextDecoration.lineThrough : null,
@@ -357,7 +373,7 @@ class ItemTile extends StatelessWidget {
                                 const SizedBox(width: 4),
                                 if (showTooltips)
                                   Tooltip(
-                                    message: AppLocalizations.of(context).recurringTooltip,
+                                    message: l10n.recurringTooltip,
                                     child: Icon(Icons.repeat, size: 16, color: secondaryColor),
                                   )
                                 else
@@ -397,14 +413,12 @@ class ItemTile extends StatelessWidget {
                             ),
                           ],
                           if (showFoodTypeBadge &&
-                              foodTypeLabel != null &&
-                              foodTypeLabel!.isNotEmpty &&
-                              !tightHeight) ...[
+                              resolvedFoodLabel != null &&
+                              resolvedFoodLabel.isNotEmpty) ...[
                             const SizedBox(height: 4),
                             Builder(
                               builder: (context) {
-                                final cat = FoodTaxonomy.byId(item.foodCategoryId);
-                                final tint = FoodCategoryStyle.colorFor(cat);
+                                final tint = FoodCategoryStyle.colorFor(resolvedFoodCat);
                                 return Container(
                                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                                   decoration: BoxDecoration(
@@ -415,14 +429,18 @@ class ItemTile extends StatelessWidget {
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Icon(FoodCategoryStyle.icon(cat), size: 12, color: tint),
+                                      Icon(FoodCategoryStyle.icon(resolvedFoodCat), size: 12, color: tint),
                                       const SizedBox(width: 4),
-                                      Text(
-                                        foodTypeLabel!,
-                                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                                              color: tint,
-                                              fontWeight: FontWeight.w600,
-                                            ),
+                                      Flexible(
+                                        child: Text(
+                                          resolvedFoodLabel,
+                                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                                color: tint,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -516,7 +534,7 @@ class ItemTile extends StatelessWidget {
                                 Icon(Icons.shopping_cart, size: 14, color: secondaryColor),
                                 const SizedBox(width: 4),
                                 Text(
-                                  'Dans le panier',
+                                  l10n.inCartLabel,
                                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                         color: secondaryColor,
                                         fontSize: (fs * 0.8).clamp(11.0, 13.0),
@@ -606,7 +624,8 @@ class ItemTile extends StatelessWidget {
 
     return showTooltips
         ? Tooltip(
-            message: 'Clic droit : Modifier ou supprimer',
+            message: foodHoverTip ?? l10n.rightClickEditDelete,
+            waitDuration: const Duration(milliseconds: 400),
             child: tileStyle == 'bulle'
                 ? tileChild
                 : ClipRRect(
@@ -614,12 +633,23 @@ class ItemTile extends StatelessWidget {
                     child: tileChild,
                   ),
           )
-        : (tileStyle == 'bulle'
-            ? tileChild
-            : ClipRRect(
-                borderRadius: clipRadius,
-                child: tileChild,
-              ));
+        : (foodHoverTip != null
+            ? Tooltip(
+                message: foodHoverTip,
+                waitDuration: const Duration(milliseconds: 350),
+                child: tileStyle == 'bulle'
+                    ? tileChild
+                    : ClipRRect(
+                        borderRadius: clipRadius,
+                        child: tileChild,
+                      ),
+              )
+            : (tileStyle == 'bulle'
+                ? tileChild
+                : ClipRRect(
+                    borderRadius: clipRadius,
+                    child: tileChild,
+                  )));
   }
 }
 

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show HapticFeedback;
-import 'package:flutter/semantics.dart';
 import 'package:provider/provider.dart';
-import '../../app_config.dart';
 import '../../core/providers/list_provider.dart';
 import '../../core/providers/premium_provider.dart';
+import '../../core/utils/content_l10n.dart';
 import '../../l10n/app_localizations.dart';
 
 /// Données mock pour les tendances « quartier » (remplaçables par une API plus tard).
@@ -39,17 +38,23 @@ List<ShoppingSocialMockData> getShoppingSocialMockTrends() {
   ];
 }
 
-List<FoodTrendMock> getFoodTrendsMock() {
-  return const [
-    FoodTrendMock(label: 'Plus de légumes de saison cette semaine'),
-    FoodTrendMock(label: 'Soupes et plats chauds en hausse'),
+List<FoodTrendMock> getFoodTrendsMock(AppLocalizations l10n) {
+  return [
+    FoodTrendMock(label: l10n.socialTrendVeggies),
+    FoodTrendMock(label: l10n.socialTrendSoups),
   ];
 }
 
-List<MockRecipe> getPopularRecipesMock() {
-  return const [
-    MockRecipe(name: 'Soupe de saison', ingredients: ['Carottes', 'Pommes de terre', 'Poireaux', 'Courge', 'Crème']),
-    MockRecipe(name: 'Salade César', ingredients: ['Poulet', 'Parmesan', 'Croûtons', 'Salade', 'Sauce César']),
+List<MockRecipe> getPopularRecipesMock(AppLocalizations l10n) {
+  return [
+    MockRecipe(
+      name: l10n.socialRecipeSoup,
+      ingredients: const ['Carottes', 'Pommes de terre', 'Poireaux', 'Courge', 'Crème'],
+    ),
+    MockRecipe(
+      name: l10n.socialRecipeCaesar,
+      ingredients: const ['Poulet', 'Parmesan', 'Croûtons', 'Salade', 'Sauce César'],
+    ),
   ];
 }
 
@@ -85,8 +90,8 @@ class _ShoppingSocialSheetState extends State<ShoppingSocialSheet> {
     final l10n = AppLocalizations.of(context);
     _showFirstRunHintIfNeeded(context);
     final trends = getShoppingSocialMockTrends();
-    final foodTrends = getFoodTrendsMock();
-    final recipes = getPopularRecipesMock();
+    final foodTrends = getFoodTrendsMock(l10n);
+    final recipes = getPopularRecipesMock(l10n);
     final listProvider = context.watch<ListProvider>();
 
     return Semantics(
@@ -148,7 +153,10 @@ class _ShoppingSocialSheetState extends State<ShoppingSocialSheet> {
                               ),
                             ),
                             title: Text(
-                              l10n.shoppingSocialTrendThisWeek(t.percent, t.product),
+                              l10n.shoppingSocialTrendThisWeek(
+                                t.percent,
+                                localizedProductName(l10n, t.product),
+                              ),
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
                             trailing: IconButton(
@@ -159,13 +167,17 @@ class _ShoppingSocialSheetState extends State<ShoppingSocialSheet> {
                                 if (context.mounted) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
-                                      content: Text(l10n.shoppingSocialAddProduct(t.product)),
+                                      content: Text(l10n.shoppingSocialAddProduct(
+                                        localizedProductName(l10n, t.product),
+                                      )),
                                       behavior: SnackBarBehavior.floating,
                                     ),
                                   );
                                 }
                               },
-                              tooltip: l10n.shoppingSocialAddProduct(t.product),
+                              tooltip: l10n.shoppingSocialAddProduct(
+                                localizedProductName(l10n, t.product),
+                              ),
                             ),
                           ),
                         );
@@ -285,7 +297,10 @@ class _RecipeCardState extends State<_RecipeCard> {
                 children: [
                   ...widget.recipe.ingredients.map((ing) => Padding(
                         padding: const EdgeInsets.only(bottom: 4),
-                        child: Text('• $ing', style: Theme.of(context).textTheme.bodyMedium),
+                        child: Text(
+                          '• ${localizedProductName(l10n, ing)}',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
                       )),
                   const SizedBox(height: 8),
                   FilledButton.icon(

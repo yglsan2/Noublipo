@@ -3,7 +3,7 @@ import '../data/product_substitutions.dart';
 import '../models/consumption_profile.dart';
 import '../services/storage_service.dart';
 import '../utils/app_logger.dart';
-import '../../app_config.dart';
+import 'premium_provider.dart';
 
 /// Profil de conso intelligent (Toteo+ Pro) : régimes, allergies, évitements, tentations.
 class ConsumptionProfileProvider extends ChangeNotifier {
@@ -91,7 +91,7 @@ class ConsumptionProfileProvider extends ChangeNotifier {
 
   /// Vérifie un nom de produit : avertissement réduction/tentation, substitut, ou raison d'éviter.
   ProfileCheckResult checkProduct(String productName) {
-    if (!isToteoPlus || productName.trim().isEmpty) {
+    if (!PremiumProvider.currentIsActive || productName.trim().isEmpty) {
       return ProfileCheckResult();
     }
     final n = productName.trim().toLowerCase();

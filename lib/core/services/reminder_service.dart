@@ -1,7 +1,10 @@
 import 'dart:io';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest_all.dart' as tz_data;
+import '../../l10n/app_localizations.dart';
+import '../../l10n/l10n_safety.dart';
 import '../utils/app_logger.dart';
 
 /// Planifie et annule les notifications de rappel par article.
@@ -13,6 +16,15 @@ class ReminderService {
 
   final FlutterLocalNotificationsPlugin _plugin = FlutterLocalNotificationsPlugin();
   bool _initialized = false;
+
+  AppLocalizations get _l10n {
+    try {
+      final locale = WidgetsBinding.instance.platformDispatcher.locale;
+      return safeLookupAppLocalizations(locale);
+    } catch (_) {
+      return safeLookupAppLocalizations(kL10nFallbackLocale);
+    }
+  }
 
   void _init() {
     if (Platform.isAndroid) {
@@ -46,12 +58,13 @@ class ReminderService {
   Future<void> scheduleReminder(String itemId, String title, String? body, DateTime at) async {
     if (!_initialized || at.isBefore(DateTime.now())) return;
     try {
+      final l10n = _l10n;
       final id = _idFromItemId(itemId);
       final details = NotificationDetails(
         android: AndroidNotificationDetails(
           'toteo_reminders',
-          'Rappels Tote \'O Recall',
-          channelDescription: 'Rappels par article',
+          l10n.notifChannelDefault,
+          channelDescription: l10n.notifChannelItemReminders,
           importance: Importance.defaultImportance,
         ),
       );
@@ -59,7 +72,7 @@ class ReminderService {
       await _plugin.zonedSchedule(
         id,
         title,
-        body ?? 'Rappel : $title',
+        body ?? l10n.notifItemReminderBody(title),
         when,
         details,
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
@@ -83,21 +96,22 @@ class ReminderService {
   Future<void> scheduleRecurringReminder(String recurringItemId, String name, DateTime when) async {
     if (!_initialized || when.isBefore(DateTime.now())) return;
     try {
+      final l10n = _l10n;
       await _plugin.cancel(_idFromRecurringId(recurringItemId));
       final id = _idFromRecurringId(recurringItemId);
       final details = NotificationDetails(
         android: AndroidNotificationDetails(
           'toteo_recurring',
-          'Achats récurrents',
-          channelDescription: 'Rappel pour achats à intervalle régulier',
+          l10n.notifChannelRecurring,
+          channelDescription: l10n.notifChannelRecurringDesc,
           importance: Importance.defaultImportance,
         ),
       );
       final whenTz = tz.TZDateTime.from(when, tz.local);
       await _plugin.zonedSchedule(
         id,
-        'À racheter : $name',
-        'Achat récurrent à prévoir',
+        l10n.notifBuyAgainTitle(name),
+        l10n.notifRecurringTitle,
         whenTz,
         details,
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
@@ -126,27 +140,28 @@ class ReminderService {
     String name,
     DateTime when, {
     required int daysBefore,
-    String celebrationLabel = 'Anniversaire',
+    required String celebrationLabel,
   }) async {
     if (!_initialized || when.isBefore(DateTime.now())) return;
     try {
+      final l10n = _l10n;
       final id = _idFromBirthday(birthdayId, daysBefore);
       await _plugin.cancel(id);
       final details = NotificationDetails(
         android: AndroidNotificationDetails(
           'toteo_birthdays',
-          'Anniversaires',
-          channelDescription: 'Rappels (J-1, J-2)',
+          l10n.notifChannelBirthdays,
+          channelDescription: l10n.notifChannelBirthdaysDesc,
           importance: Importance.defaultImportance,
         ),
       );
       final whenTz = tz.TZDateTime.from(when, tz.local);
       final body = daysBefore == 1
-          ? 'Demain : $celebrationLabel de $name'
-          : 'Dans $daysBefore jours : $celebrationLabel de $name';
+          ? l10n.notifBirthdayTomorrow(celebrationLabel, name)
+          : l10n.notifBirthdayInDays(daysBefore, celebrationLabel, name);
       await _plugin.zonedSchedule(
         id,
-        '$celebrationLabel de $name',
+        l10n.notifBirthdayTitle(celebrationLabel, name),
         body,
         whenTz,
         details,
@@ -181,12 +196,13 @@ class ReminderService {
   }) async {
     if (!_initialized) return;
     try {
+      final l10n = _l10n;
       await _plugin.cancel(_weeklyReminderId);
       final details = NotificationDetails(
         android: AndroidNotificationDetails(
           'toteo_weekly',
-          'Rappel courses',
-          channelDescription: 'Rappel hebdomadaire pour la liste',
+          l10n.notifChannelWeekly,
+          channelDescription: l10n.notifChannelWeeklyDesc,
           importance: Importance.defaultImportance,
         ),
       );
@@ -225,16 +241,17 @@ class ReminderService {
     required String title,
     required String body,
     String channelId = 'toteo_reminders',
-    String channelName = 'Rappels Tote \'O Recall',
-    String channelDescription = 'Rappels Tote \'O Recall',
+    String? channelName,
+    String? channelDescription,
   }) async {
     if (!_initialized) return;
     try {
+      final l10n = _l10n;
       final details = NotificationDetails(
         android: AndroidNotificationDetails(
           channelId,
-          channelName,
-          channelDescription: channelDescription,
+          channelName ?? l10n.notifChannelDefault,
+          channelDescription: channelDescription ?? l10n.notifChannelDefault,
           importance: Importance.high,
           priority: Priority.high,
         ),

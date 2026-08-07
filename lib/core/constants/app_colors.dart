@@ -26,7 +26,8 @@ class AppColors {
     Color(0xFF6D5B52), // Brun
   ];
 
-  /// Noms courts pour affichage (optionnel : tooltip, légende).
+  /// @Deprecated Affichage via `localizedCategoryColorName` (l10n).
+  @Deprecated('Use localizedCategoryColorName')
   static const List<String> categoryColorNames = [
     'Rouge',
     'Rose',
@@ -50,6 +51,7 @@ class AppColors {
     return categoryColors[index % categoryColors.length];
   }
 
+  @Deprecated('Use localizedCategoryColorName')
   static String nameFromIndex(int index) {
     return categoryColorNames[index % categoryColorNames.length];
   }

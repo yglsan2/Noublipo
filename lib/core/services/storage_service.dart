@@ -24,11 +24,15 @@ class StorageService {
   static const String _keyDarkMode = 'toteo_dark_mode';
   static const String _keyRemindersEnabled = 'toteo_reminders_enabled';
   static const String _keyCategoryStyle = 'toteo_category_style'; // 'form' | 'legend' (magasins/enseignes)
+  /// Listes système masquées de la barre (ids Engagements / Achats futurs).
+  static const String _keyHiddenSystemListIds = 'toteo_hidden_system_list_ids';
   static const String _keySortMode = 'toteo_sort_mode'; // 'order' | 'name' | 'color' | 'aisle' (Toteo+)
   /// Organisation visuelle : 'bubbles' (auto) | 'numbered' | 'manual' (drag perso).
   static const String _keyListOrgMode = 'toteo_list_org_mode';
   /// Axe d'orga : 'store' | 'food' | 'dualStoreFood' | 'dualFoodStore' (Plus pour hors store).
   static const String _keyListAxisMode = 'toteo_list_axis_mode';
+  /// Migration one-shot : défaut « ranger par type » (fruits, légumes…).
+  static const String _keyAxisFoodDefaultApplied = 'toteo_axis_food_default_v1';
   static const String _keyShowFoodCategoryBadge = 'toteo_show_food_category_badge';
   static const String _keyFoodCategoryOverrides = 'toteo_food_category_overrides';
   static const String _keyAisleOrder = 'toteo_aisle_order'; // Map colorIndex -> aisle number (Pro)
@@ -60,6 +64,7 @@ class StorageService {
   static const String _keyCoachNutritionEnabled = 'toteo_coach_nutrition_enabled';
   static const String _keyPremiumPurchased = 'toteo_premium_purchased';
   static const String _keyPremiumTrialEndMs = 'toteo_premium_trial_end_ms';
+  static const String _keyPremiumTrialUsed = 'toteo_premium_trial_used';
   static const String _keyUpgradePromptLastShownMs = 'toteo_upgrade_prompt_last_shown_ms';
   static const String _keyFirstOpenMs = 'toteo_first_open_ms';
   static const String _keyTripsCompletedCount = 'toteo_trips_completed_count';
@@ -158,14 +163,32 @@ class StorageService {
     }
   }
 
-  /// Style de catégories : 'form' = nom dans le formulaire d'ajout, 'legend' = magasins (carrés en haut, clic pour ajouter/définir enseigne, marché, supermarché…).
-  String get categoryStyle => _prefs.getString(_keyCategoryStyle) ?? 'form';
+  /// Style de catégories : 'form' = nom dans le formulaire d'ajout, 'legend' = magasins en haut.
+  /// Défaut `legend` si jamais défini (listes de magasins visibles).
+  String get categoryStyle {
+    if (!_prefs.containsKey(_keyCategoryStyle)) return 'legend';
+    return _prefs.getString(_keyCategoryStyle) ?? 'legend';
+  }
 
   Future<void> setCategoryStyle(String value) async {
     try {
       await _prefs.setString(_keyCategoryStyle, value == 'legend' ? 'legend' : 'form');
     } catch (e, stack) {
       AppLogger.error('setCategoryStyle', e, stack);
+      rethrow;
+    }
+  }
+
+  List<String> get hiddenSystemListIds {
+    final raw = _prefs.getStringList(_keyHiddenSystemListIds);
+    return raw == null ? const [] : List<String>.from(raw);
+  }
+
+  Future<void> setHiddenSystemListIds(List<String> ids) async {
+    try {
+      await _prefs.setStringList(_keyHiddenSystemListIds, ids);
+    } catch (e, stack) {
+      AppLogger.error('setHiddenSystemListIds', e, stack);
       rethrow;
     }
   }
@@ -200,8 +223,9 @@ class StorageService {
     }
   }
 
-  /// Axe magasin / type d’aliment. Défaut `store`.
+  /// Axe magasin / type d’aliment. Défaut `food` (rayons fruits, légumes…) si jamais défini.
   String get listAxisMode {
+    if (!_prefs.containsKey(_keyListAxisMode)) return 'food';
     final v = _prefs.getString(_keyListAxisMode);
     if (v == 'food' || v == 'dualStoreFood' || v == 'dualFoodStore') return v!;
     return 'store';
@@ -215,6 +239,12 @@ class StorageService {
       AppLogger.error('setListAxisMode', e, stack);
       rethrow;
     }
+  }
+
+  bool get axisFoodDefaultApplied => _prefs.getBool(_keyAxisFoodDefaultApplied) ?? false;
+
+  Future<void> setAxisFoodDefaultApplied(bool value) async {
+    await _prefs.setBool(_keyAxisFoodDefaultApplied, value);
   }
 
   bool get showFoodCategoryBadge => _prefs.getBool(_keyShowFoodCategoryBadge) ?? true;
@@ -475,14 +505,16 @@ class StorageService {
   /// Charge la liste principale (compatibilité / migration).
   Future<ShoppingListModel> loadMainList() async {
     final json = _prefs.getString(_keyList);
-    if (json == null) return ShoppingListModel(id: 'main', name: 'Ma liste');
+    if (json == null) {
+      return ShoppingListModel(id: kMainListId, name: kDefaultMainListStoredName);
+    }
     try {
       return ShoppingListModel.fromJson(
         jsonDecode(json) as Map<String, dynamic>,
       );
     } catch (e, stack) {
       AppLogger.warning('loadMainList: JSON invalide, liste par défaut', e, stack);
-      return ShoppingListModel(id: 'main', name: 'Ma liste');
+      return ShoppingListModel(id: kMainListId, name: kDefaultMainListStoredName);
     }
   }
 
@@ -826,12 +858,16 @@ class StorageService {
         await _prefs.remove(_keyPremiumTrialEndMs);
       } else {
         await _prefs.setInt(_keyPremiumTrialEndMs, value);
+        await _prefs.setBool(_keyPremiumTrialUsed, true);
       }
     } catch (e, stack) {
       AppLogger.error('setPremiumTrialEndMs', e, stack);
       rethrow;
     }
   }
+
+  /// True si un essai 24h a déjà été accordé (paywall ou badge).
+  bool get premiumTrialUsed => _prefs.getBool(_keyPremiumTrialUsed) ?? false;
 
   /// Dernière fois qu'on a montré le prompt d'upgrade (pour ne pas harceler).
   int? get upgradePromptLastShownMs => _prefs.getInt(_keyUpgradePromptLastShownMs);
@@ -922,7 +958,7 @@ class StorageService {
   Future<void> importBackup(Map<String, dynamic> data) async {
     final version = (data['version'] as num?)?.toInt() ?? 0;
     if (version > backupVersion) {
-      throw Exception('Sauvegarde d\'une version plus récente ($version), non supportée.');
+      throw Exception('BACKUP_NEWER_VERSION:$version');
     }
 
     final listsList = data['lists'] as List<dynamic>?;

@@ -1,5 +1,11 @@
 import 'shopping_item.dart';
 
+/// Id de la liste principale (persisté).
+const String kMainListId = 'main';
+
+/// Nom stocké par défaut (historique FR) — l’UI doit passer par localizedShoppingListName.
+const String kDefaultMainListStoredName = 'Ma liste';
+
 /// Une liste de courses (une seule pour Toteo, plusieurs pour Toteo+).
 class ShoppingListModel {
   final String id;
@@ -13,7 +19,7 @@ class ShoppingListModel {
 
   ShoppingListModel({
     required this.id,
-    this.name = 'Ma liste',
+    this.name = kDefaultMainListStoredName,
     List<ShoppingItem>? items,
     this.order = 0,
     this.plannedDate,
@@ -53,7 +59,7 @@ class ShoppingListModel {
     final itemsList = json['items'] as List<dynamic>?;
     return ShoppingListModel(
       id: json['id'] as String,
-      name: json['name'] as String? ?? 'Ma liste',
+      name: json['name'] as String? ?? kDefaultMainListStoredName,
       items: itemsList
               ?.map((e) => ShoppingItem.fromJson(e as Map<String, dynamic>))
               .toList() ??

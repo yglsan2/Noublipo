@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 
-import '../config/monetization_config.dart';
 import '../services/storage_service.dart';
 import '../services/upgrade_prompt_helper.dart';
 import '../utils/app_logger.dart';
@@ -38,6 +37,10 @@ class PremiumProvider extends ChangeNotifier {
   bool get isTrialActive =>
       _trialEndMs != null &&
       DateTime.now().millisecondsSinceEpoch < _trialEndMs!;
+
+  /// True si l'utilisateur peut encore démarrer un essai 24h depuis le paywall.
+  bool get canStartTrial =>
+      !isToteoPlus && !_purchased && !isTrialActive && !_storage.premiumTrialUsed;
 
   /// Fin de l'essai (timestamp ms), null si pas d'essai.
   int? get trialEndMs => _trialEndMs;

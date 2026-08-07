@@ -22,6 +22,8 @@ class GeofenceMonitor {
     required StorageService storage,
     required String notificationTitle,
     required String Function(String storeLabel, int itemCount) notificationBody,
+    required String channelName,
+    required String channelDescription,
   }) async {
     if (kIsWeb) return;
     if (!(Platform.isAndroid || Platform.isIOS)) return;
@@ -63,8 +65,8 @@ class GeofenceMonitor {
           title: notificationTitle,
           body: notificationBody(store.label, count),
           channelId: 'toteo_geofence',
-          channelName: 'Proximité magasin',
-          channelDescription: 'Rappel quand tu es près d\'un magasin favori',
+          channelName: channelName,
+          channelDescription: channelDescription,
         );
         await storage.setHintSeen(key);
       }

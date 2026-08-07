@@ -2,8 +2,7 @@ import 'dart:developer' as developer;
 
 import 'package:flutter/foundation.dart';
 
-/// Logger central pour Tote 'O Recall : logs structurés + sortie console en debug.
-/// Utiliser [developer.log] (visible dans DevTools) + [debugPrint] en mode debug.
+/// Logger central pour Tote 'O Recall : logs structurés + helpers robustesse.
 class AppLogger {
   AppLogger._();
 
@@ -23,6 +22,57 @@ class AppLogger {
 
   static void error(String message, [Object? error, StackTrace? stack]) {
     _log('ERROR', message, error, stack);
+  }
+
+  /// Un seul catch pour plusieurs étapes dans [action] (règle ~1 catch / 4 try).
+  static Future<T> runGuardedAsync<T>(
+    String operation,
+    Future<T> Function() action, {
+    T Function()? fallback,
+    void Function()? finallyCleanup,
+    bool rethrowError = true,
+  }) async {
+    try {
+      fine('$operation: start');
+      final result = await action();
+      fine('$operation: ok');
+      return result;
+    } catch (e, stack) {
+      error('$operation: failed', e, stack);
+      if (!rethrowError && fallback != null) return fallback();
+      rethrow;
+    } finally {
+      try {
+        finallyCleanup?.call();
+      } catch (e, stack) {
+        warning('$operation: finally cleanup failed', e, stack);
+      }
+    }
+  }
+
+  static T runGuardedSync<T>(
+    String operation,
+    T Function() action, {
+    T Function()? fallback,
+    void Function()? finallyCleanup,
+    bool rethrowError = true,
+  }) {
+    try {
+      fine('$operation: start');
+      final result = action();
+      fine('$operation: ok');
+      return result;
+    } catch (e, stack) {
+      error('$operation: failed', e, stack);
+      if (!rethrowError && fallback != null) return fallback();
+      rethrow;
+    } finally {
+      try {
+        finallyCleanup?.call();
+      } catch (e, stack) {
+        warning('$operation: finally cleanup failed', e, stack);
+      }
+    }
   }
 
   static void _log(String level, String message, [Object? error, StackTrace? stack]) {

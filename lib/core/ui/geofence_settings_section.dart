@@ -7,6 +7,7 @@ import '../constants/app_colors.dart';
 import '../providers/category_names_provider.dart';
 import '../providers/geofence_provider.dart';
 import '../services/geofence_monitor.dart';
+import '../utils/app_logger.dart';
 import '../../l10n/app_localizations.dart';
 
 /// Bloc réglages géofence (Tote+) — setup guidé + liste des magasins.
@@ -53,84 +54,86 @@ class _GeofenceSettingsSectionState extends State<GeofenceSettingsSection> {
             final bottom = MediaQuery.viewInsetsOf(ctx).bottom;
             return Padding(
               padding: EdgeInsets.fromLTRB(20, 0, 20, 16 + bottom),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    l10n.geofenceSetupTitle,
-                    style: Theme.of(ctx).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.w700,
-                        ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    l10n.geofenceSetupHint,
-                    style: Theme.of(ctx).textTheme.bodySmall?.copyWith(
-                          color: Theme.of(ctx).colorScheme.onSurfaceVariant,
-                        ),
-                  ),
-                  const SizedBox(height: 16),
-                  TextField(
-                    controller: nameCtrl,
-                    decoration: InputDecoration(
-                      labelText: l10n.geofenceStoreName,
-                      border: const OutlineInputBorder(),
-                    ),
-                    textCapitalization: TextCapitalization.sentences,
-                  ),
-                  const SizedBox(height: 12),
-                  Text(l10n.geofencePickColor, style: Theme.of(ctx).textTheme.labelLarge),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: List.generate(AppColors.categoryColors.length.clamp(0, 8), (i) {
-                      final c = AppColors.categoryColors[i];
-                      final selected = colorIndex == i;
-                      return GestureDetector(
-                        onTap: () => setLocal(() => colorIndex = i),
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 160),
-                          width: 36,
-                          height: 36,
-                          decoration: BoxDecoration(
-                            color: c,
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: selected
-                                  ? Theme.of(ctx).colorScheme.onSurface
-                                  : Colors.transparent,
-                              width: 3,
-                            ),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      l10n.geofenceSetupTitle,
+                      style: Theme.of(ctx).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.w700,
                           ),
-                          child: selected
-                              ? const Icon(Icons.check, color: Colors.white, size: 18)
-                              : null,
-                        ),
-                      );
-                    }),
-                  ),
-                  const SizedBox(height: 12),
-                  Text(l10n.geofenceRadiusPick, style: Theme.of(ctx).textTheme.labelLarge),
-                  const SizedBox(height: 8),
-                  SegmentedButton<double>(
-                    segments: const [
-                      ButtonSegment(value: 100, label: Text('100 m')),
-                      ButtonSegment(value: 150, label: Text('150 m')),
-                      ButtonSegment(value: 250, label: Text('250 m')),
-                      ButtonSegment(value: 400, label: Text('400 m')),
-                    ],
-                    selected: {radius},
-                    onSelectionChanged: (s) => setLocal(() => radius = s.first),
-                  ),
-                  const SizedBox(height: 16),
-                  FilledButton.icon(
-                    onPressed: () => Navigator.pop(ctx, true),
-                    icon: const Icon(Icons.my_location),
-                    label: Text(l10n.geofenceSaveHere),
-                  ),
-                ],
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      l10n.geofenceSetupHint,
+                      style: Theme.of(ctx).textTheme.bodySmall?.copyWith(
+                            color: Theme.of(ctx).colorScheme.onSurfaceVariant,
+                          ),
+                    ),
+                    const SizedBox(height: 16),
+                    TextField(
+                      controller: nameCtrl,
+                      decoration: InputDecoration(
+                        labelText: l10n.geofenceStoreName,
+                        border: const OutlineInputBorder(),
+                      ),
+                      textCapitalization: TextCapitalization.sentences,
+                    ),
+                    const SizedBox(height: 12),
+                    Text(l10n.geofencePickColor, style: Theme.of(ctx).textTheme.labelLarge),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: List.generate(AppColors.categoryColors.length.clamp(0, 8), (i) {
+                        final c = AppColors.categoryColors[i];
+                        final selected = colorIndex == i;
+                        return GestureDetector(
+                          onTap: () => setLocal(() => colorIndex = i),
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 160),
+                            width: 36,
+                            height: 36,
+                            decoration: BoxDecoration(
+                              color: c,
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: selected
+                                    ? Theme.of(ctx).colorScheme.onSurface
+                                    : Colors.transparent,
+                                width: 3,
+                              ),
+                            ),
+                            child: selected
+                                ? const Icon(Icons.check, color: Colors.white, size: 18)
+                                : null,
+                          ),
+                        );
+                      }),
+                    ),
+                    const SizedBox(height: 12),
+                    Text(l10n.geofenceRadiusPick, style: Theme.of(ctx).textTheme.labelLarge),
+                    const SizedBox(height: 8),
+                    SegmentedButton<double>(
+                      segments: const [
+                        ButtonSegment(value: 100, label: Text('100 m')),
+                        ButtonSegment(value: 150, label: Text('150 m')),
+                        ButtonSegment(value: 250, label: Text('250 m')),
+                        ButtonSegment(value: 400, label: Text('400 m')),
+                      ],
+                      selected: {radius},
+                      onSelectionChanged: (s) => setLocal(() => radius = s.first),
+                    ),
+                    const SizedBox(height: 16),
+                    FilledButton.icon(
+                      onPressed: () => Navigator.pop(ctx, true),
+                      icon: const Icon(Icons.my_location),
+                      label: Text(l10n.geofenceSaveHere),
+                    ),
+                  ],
+                ),
               ),
             );
           },
@@ -138,10 +141,12 @@ class _GeofenceSettingsSectionState extends State<GeofenceSettingsSection> {
       },
     );
 
-    if (confirmed != true || !context.mounted) {
-      nameCtrl.dispose();
-      return;
-    }
+    final rawName = nameCtrl.text.trim();
+    nameCtrl.dispose();
+
+    if (confirmed != true || !context.mounted) return;
+
+    final label = rawName.isEmpty ? l10n.geofenceDefaultStore : rawName;
 
     setState(() => _saving = true);
     try {
@@ -151,9 +156,6 @@ class _GeofenceSettingsSectionState extends State<GeofenceSettingsSection> {
           timeLimit: Duration(seconds: 12),
         ),
       );
-      final label = nameCtrl.text.trim().isEmpty
-          ? l10n.geofenceDefaultStore
-          : nameCtrl.text.trim();
       await geo.addFromCurrentLocation(
         label: label,
         latitude: pos.latitude,
@@ -171,14 +173,14 @@ class _GeofenceSettingsSectionState extends State<GeofenceSettingsSection> {
           ),
         );
       }
-    } catch (_) {
+    } catch (e, stack) {
+      AppLogger.warning('GeofenceSettingsSection._addStore', e, stack);
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(l10n.geofenceLocationError)),
         );
       }
     } finally {
-      nameCtrl.dispose();
       if (mounted) setState(() => _saving = false);
     }
   }

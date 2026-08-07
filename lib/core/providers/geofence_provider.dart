@@ -59,7 +59,7 @@ class GeofenceProvider extends ChangeNotifier {
     double radiusMeters = 150,
   }) async {
     if (!PremiumProvider.currentIsActive) return;
-    final n = label.trim().isEmpty ? 'Magasin' : label.trim();
+    final n = label.trim().isEmpty ? 'Store' : label.trim();
     _stores = [
       ..._stores,
       GeofenceStore(

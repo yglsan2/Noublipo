@@ -34,6 +34,7 @@ class MealPresets {
       'ô': 'o', 'ö': 'o',
       'ù': 'u', 'û': 'u', 'ü': 'u',
       'ç': 'c',
+      'œ': 'oe', 'æ': 'ae',
       "'": '', '’': '', '-': ' ',
     };
     for (final e in map.entries) {

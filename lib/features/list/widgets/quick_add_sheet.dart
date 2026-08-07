@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:speech_to_text/speech_to_text.dart';
-import '../../../app_config.dart';
 import '../../../core/constants/touch_constants.dart';
 import '../../../core/data/meal_presets.dart';
 import '../../../core/layout/screen_layout.dart';
@@ -13,6 +12,7 @@ import '../../../core/providers/settings_provider.dart';
 import '../../../core/ui/app_feedback.dart';
 import '../../../core/ui/meal_preset_dialog.dart';
 import '../../../core/utils/app_logger.dart';
+import '../../../core/utils/content_l10n.dart';
 import '../../../core/utils/quick_add_parser.dart';
 import '../../../core/utils/voice_text_cleaner.dart';
 import '../../../l10n/app_localizations.dart';
@@ -98,7 +98,10 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
           Navigator.of(context).pop();
           AppFeedback.success(
             context,
-            AppLocalizations.of(context).mealPresetAdded(missing.length, preset.label),
+            AppLocalizations.of(context).mealPresetAdded(
+              missing.length,
+              localizedMealPresetLabel(AppLocalizations.of(context), preset.id),
+            ),
           );
         } catch (_) {
           if (mounted) {
@@ -139,9 +142,10 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
       }
       Navigator.of(context).pop();
       final count = capitalized.length;
+      final l10n = AppLocalizations.of(context);
       final msg = count == 1
-          ? '${capitalized.single} ajouté à « $listName »'
-          : '$count articles ajoutés à « $listName »';
+          ? l10n.quickAddAddedOne(capitalized.single, listName)
+          : l10n.quickAddAddedMany(count, listName);
       AppFeedback.success(context, msg);
     } catch (_) {
       if (mounted) {
@@ -168,7 +172,7 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
   }
 
   Future<void> _startVoiceInput() async {
-    if (!isToteoPlus || _isListening) return;
+    if (!context.read<PremiumProvider>().isPremiumActive || _isListening) return;
     try {
       final speech = SpeechToText();
       final available = await speech.initialize();
@@ -251,20 +255,21 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                'Ajout rapide',
+                AppLocalizations.of(context).quickAdd,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 6),
               Text(
-                'Liste actuelle : tapez l\'article. Autre liste : « Liste Nom liste ajouter article » ou « Liste Nom : article, article ».',
+                AppLocalizations.of(context).quickAddHelp,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.grey.shade700),
                 maxLines: 3,
               ),
-              if (isToteoPlus) ...[
+              if (context.read<PremiumProvider>().isPremiumActive) ...[
                 Consumer<ListProvider>(
                   builder: (context, provider, _) {
                     final last = provider.lastQuickAddListName;
                     if (last == null || last.isEmpty) return const SizedBox.shrink();
+                    final l10n = AppLocalizations.of(context);
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 8),
                       child: Wrap(
@@ -272,9 +277,10 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
                         children: [
                           ActionChip(
                             avatar: const Icon(Icons.history, size: 18),
-                            label: Text('Liste $last'),
+                            label: Text(l10n.quickAddListChip(last)),
                             onPressed: () {
                               final t = _controller.text.trim();
+                              // Syntaxe parseur : mots-clés FR « Liste » / « ajouter ».
                               _controller.text = t.isEmpty ? 'Liste $last ajouter ' : 'Liste $last ajouter $t';
                               setState(() {});
                             },
@@ -291,7 +297,7 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
                 autofocus: true,
                 textCapitalization: TextCapitalization.sentences,
                 decoration: InputDecoration(
-                  hintText: 'Ex: Pomme | Liste Auchan : Pomme, lait',
+                  hintText: AppLocalizations.of(context).quickAddExampleHint,
                   prefixIcon: const Icon(Icons.add_task_outlined),
                   suffixIcon: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -299,7 +305,7 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
                       IconButton(
                         icon: const Icon(Icons.content_paste_outlined, size: 22),
                         onPressed: _pasteFromClipboard,
-                        tooltip: 'Coller',
+                        tooltip: AppLocalizations.of(context).pasteTooltip,
                       ),
                       IconButton(
                         icon: Icon(
@@ -307,7 +313,7 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
                           color: _isListening ? Theme.of(context).colorScheme.primary : null,
                         ),
                         onPressed: _isListening ? null : _startVoiceInput,
-                        tooltip: 'Dicter',
+                        tooltip: AppLocalizations.of(context).dictateTooltip,
                       ),
                     ],
                   ),
@@ -324,7 +330,7 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
                       Icon(Icons.record_voice_over, size: 18, color: Theme.of(context).colorScheme.primary),
                       const SizedBox(width: 8),
                       Text(
-                        'Parlez maintenant…',
+                        AppLocalizations.of(context).speakNowHint,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: Theme.of(context).colorScheme.primary,
                             ),

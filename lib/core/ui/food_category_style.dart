@@ -26,6 +26,10 @@ abstract final class FoodCategoryStyle {
         return Icons.kitchen_outlined;
       case 'snacks':
         return Icons.cookie_outlined;
+      case 'mushroom':
+        return Icons.spa_outlined;
+      case 'desserts':
+        return Icons.cake_outlined;
       case 'sweets':
         return Icons.icecream_outlined;
       case 'frozen':

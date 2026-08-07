@@ -17,6 +17,7 @@ import 'core/services/consent_service.dart';
 import 'core/services/geofence_monitor.dart';
 import 'core/services/iap_service.dart';
 import 'l10n/app_localizations.dart';
+import 'l10n/l10n_safety.dart';
 import 'core/providers/list_provider.dart';
 import 'core/providers/birthdays_provider.dart';
 import 'core/providers/planning_provider.dart';
@@ -28,9 +29,45 @@ import 'core/theme/app_theme.dart';
 import 'core/utils/app_logger.dart';
 import 'features/splash/splash_screen.dart';
 
+/// Demande de reset locale après une erreur l10n (traitée dans [ToteoApp]).
+bool _pendingLocaleReset = false;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   AppLogger.info("Démarrage Tote 'O Recall");
+
+  // Erreurs Flutter (dont l10n) : log + éventuellement reset langue, sans tuer le process.
+  final previousOnError = FlutterError.onError;
+  FlutterError.onError = (details) {
+    AppLogger.error('FlutterError', details.exception, details.stack);
+    if (isLocalizationFailure(details.exception)) {
+      AppLogger.warning('Échec localisation détecté — repli langue système au prochain rebuild');
+      _pendingLocaleReset = true;
+    }
+    previousOnError?.call(details);
+  };
+  ErrorWidget.builder = (details) {
+    AppLogger.error('ErrorWidget', details.exception, details.stack);
+    final isL10n = isLocalizationFailure(details.exception);
+    return Material(
+      color: const Color(0xFFFFF8F6),
+      child: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Text(
+              isL10n
+                  ? 'Language error — falling back…\nErreur de langue — bascule en cours…'
+                  : 'Something went wrong.\nUne erreur est survenue.',
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 16, color: Color(0xFF5C2B29)),
+            ),
+          ),
+        ),
+      ),
+    );
+  };
+
   SyncService? syncService;
   try {
     await Firebase.initializeApp();
@@ -140,9 +177,10 @@ class _ToteoAppState extends State<ToteoApp> with WidgetsBindingObserver {
 
   Future<void> _checkGeofence() async {
     try {
-      final l10n = lookupAppLocalizations(
-        context.read<SettingsProvider>().localeOverride ?? const Locale('fr'),
+      final locale = resolveSupportedAppLocale(
+        context.read<SettingsProvider>().localeOverride ?? kL10nFallbackLocale,
       );
+      final l10n = safeLookupAppLocalizations(locale);
       await GeofenceMonitor.checkProximity(
         geofence: context.read<GeofenceProvider>(),
         listProvider: context.read<ListProvider>(),
@@ -150,6 +188,8 @@ class _ToteoAppState extends State<ToteoApp> with WidgetsBindingObserver {
         storage: context.read<StorageService>(),
         notificationTitle: l10n.geofenceNotifTitle,
         notificationBody: (store, count) => l10n.geofenceNotifBody(store, count),
+        channelName: l10n.notifChannelProximity,
+        channelDescription: l10n.notifChannelProximityDesc,
       );
     } catch (e, stack) {
       AppLogger.warning('Geofence check', e, stack);
@@ -160,20 +200,50 @@ class _ToteoAppState extends State<ToteoApp> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return Consumer<SettingsProvider>(
       builder: (context, settings, _) {
+        if (_pendingLocaleReset) {
+          _pendingLocaleReset = false;
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            unawaited(settings.resetLocaleToSystem());
+          });
+        }
+        final resolvedOverride = settings.localeOverride;
         return MaterialApp(
           title: appName,
           theme: AppTheme.light,
           darkTheme: AppTheme.dark,
           themeMode: settings.themeMode,
-          locale: settings.localeOverride,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          locale: resolvedOverride,
+          localizationsDelegates: safeAppLocalizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           localeResolutionCallback: (locale, supported) {
-            if (settings.localeOverride != null) return settings.localeOverride;
-            for (final s in supported) {
-              if (s.languageCode == locale?.languageCode) return s;
+            // Jamais une locale non supportée (sinon lookupAppLocalizations jette).
+            if (resolvedOverride != null) {
+              return resolveSupportedAppLocale(resolvedOverride);
             }
-            return supported.isNotEmpty ? supported.first : locale;
+            return resolveSupportedAppLocale(locale);
+          },
+          builder: (context, child) {
+            // Filet de sécurité UI : un sous-arbre qui plante (ex. ICU) n’écrase pas tout.
+            ErrorWidget.builder = (details) {
+              AppLogger.error('ErrorWidget(builder)', details.exception, details.stack);
+              if (isLocalizationFailure(details.exception)) {
+                _pendingLocaleReset = true;
+              }
+              return Material(
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Text(
+                      isLocalizationFailure(details.exception)
+                          ? '…'
+                          : '!',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              );
+            };
+            return child ?? const SizedBox.shrink();
           },
           home: const SplashScreen(),
         );

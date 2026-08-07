@@ -23,8 +23,8 @@ class _OnboardingDialogState extends State<OnboardingDialog> {
 
   static const _icons = [
     Icons.add_circle_outline,
+    Icons.psychology_outlined,
     Icons.check_circle_outline,
-    Icons.share_outlined,
   ];
 
   @override

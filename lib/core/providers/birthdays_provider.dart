@@ -1,9 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flutter/widgets.dart';
 import '../models/birthday_entry.dart';
 import '../services/reminder_service.dart';
 import '../services/storage_service.dart';
 import '../utils/app_logger.dart';
+import '../../l10n/app_localizations.dart';
+import '../../l10n/l10n_safety.dart';
 
 /// Gère la liste des anniversaires et la planification des rappels (Toteo+).
 class BirthdaysProvider extends ChangeNotifier {
@@ -36,6 +38,7 @@ class BirthdaysProvider extends ChangeNotifier {
 
   Future<void> _scheduleAllReminders() async {
     final now = DateTime.now();
+    final l10n = _l10n;
     for (final b in _list) {
       final next = b.nextOccurrence(now);
       for (final daysBefore in b.reminderDaysBefore) {
@@ -46,7 +49,7 @@ class BirthdaysProvider extends ChangeNotifier {
             b.name,
             when,
             daysBefore: daysBefore,
-            celebrationLabel: _celebrationLabel(b.type),
+            celebrationLabel: _celebrationLabel(b.type, l10n),
           );
         }
       }
@@ -80,6 +83,7 @@ class BirthdaysProvider extends ChangeNotifier {
   Future<void> _scheduleRemindersFor(BirthdayEntry entry) async {
     final now = DateTime.now();
     final next = entry.nextOccurrence(now);
+    final l10n = _l10n;
     for (final daysBefore in entry.reminderDaysBefore) {
       final when = next.subtract(Duration(days: daysBefore));
       if (when.isAfter(now)) {
@@ -88,18 +92,32 @@ class BirthdaysProvider extends ChangeNotifier {
           entry.name,
           when,
           daysBefore: daysBefore,
-          celebrationLabel: _celebrationLabel(entry.type),
+          celebrationLabel: _celebrationLabel(entry.type, l10n),
         );
       }
     }
   }
 
-  static String _celebrationLabel(CelebrationType type) {
+  static String _celebrationLabel(CelebrationType type, AppLocalizations l10n) {
     switch (type) {
-      case CelebrationType.birthday: return 'Anniversaire';
-      case CelebrationType.wedding: return 'Mariage';
-      case CelebrationType.meeting: return 'Rencontre';
-      case CelebrationType.other: return 'Fête';
+      case CelebrationType.birthday:
+        return l10n.celebrationTypeBirthday;
+      case CelebrationType.wedding:
+        return l10n.celebrationTypeWedding;
+      case CelebrationType.meeting:
+        return l10n.celebrationTypeMeeting;
+      case CelebrationType.other:
+        return l10n.celebrationTypeOther;
+    }
+  }
+
+  AppLocalizations get _l10n {
+    try {
+      return safeLookupAppLocalizations(
+        WidgetsBinding.instance.platformDispatcher.locale,
+      );
+    } catch (_) {
+      return safeLookupAppLocalizations(kL10nFallbackLocale);
     }
   }
 

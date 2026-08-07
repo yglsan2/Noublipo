@@ -18,54 +18,54 @@ class AppLocalizationsEl extends AppLocalizations {
   String get appTagline => 'Η λίστα που δεν ξεχνά τίποτα!';
 
   @override
-  String get searchHint => 'Search in list';
+  String get searchHint => 'Αναζήτηση στη λίστα';
 
   @override
   String get totalLabel => 'Total';
 
   @override
-  String get addItem => 'Add item';
+  String get addItem => 'Προσθήκη στοιχείου';
 
   @override
-  String get addToWhichStore => 'Ajouter à quel magasin ?';
+  String get addToWhichStore => 'Προσθήκη σε ποιο κατάστημα;';
 
   @override
-  String get otherStore => 'Autre magasin';
+  String get otherStore => 'Άλλο κατάστημα';
 
   @override
-  String get manageStores => 'Gérer les magasins';
+  String get manageStores => 'Διαχείριση καταστημάτων';
 
   @override
   String get manageStoresSubtitle =>
-      'Ajouter, renommer ou supprimer un magasin';
+      'Προσθήκη, μετονομασία ή διαγραφή καταστήματος';
 
   @override
-  String get renameStore => 'Renommer';
+  String get renameStore => 'Μετονομάζω';
 
   @override
-  String get deleteStore => 'Supprimer le magasin';
+  String get deleteStore => 'Διαγραφή καταστήματος';
 
   @override
-  String get storeDeletedSnackbar => 'Magasin supprimé';
+  String get storeDeletedSnackbar => 'Το κατάστημα διαγράφηκε';
 
   @override
-  String get storeNameOrUnset => 'Sans nom';
+  String get storeNameOrUnset => 'Ανώνυμος';
 
   @override
   String get manageStoresHint =>
-      'Touchez un magasin pour le renommer, ou supprimez-le pour le retirer de la liste.';
+      'Πατήστε ένα κατάστημα για να το μετονομάσετε ή διαγράψτε το για να το αφαιρέσετε από τη λίστα.';
 
   @override
-  String get tapToSetStoreName => 'Touchez pour définir un nom';
+  String get tapToSetStoreName => 'Πατήστε για να ορίσετε ένα όνομα';
 
   @override
-  String get emptyList => 'Empty list';
+  String get emptyList => 'Κενή λίστα';
 
   @override
-  String get tapToAdd => 'Tap here or + to add an item';
+  String get tapToAdd => 'Πατήστε εδώ ή + για να προσθέσετε ένα στοιχείο';
 
   @override
-  String get settings => 'Settings';
+  String get settings => 'Ρυθμίσεις';
 
   @override
   String get languageLabel => 'Γλώσσα';
@@ -78,357 +78,362 @@ class AppLocalizationsEl extends AppLocalizations {
       'Από προεπιλογή χρησιμοποιείται η γλώσσα της συσκευής. Πατήστε μια σημαία για αλλαγή.';
 
   @override
-  String get share => 'Share';
+  String get share => 'Μερίδιο';
 
   @override
   String get more => 'Περισσότερα';
 
   @override
-  String get catalogAndInspiration => 'Catalog & inspiration';
+  String get catalogAndInspiration => 'Κατάλογος & έμπνευση';
 
   @override
-  String get planningRecurrentSeasonal => 'Planning (recurring & seasonal)';
+  String get planningRecurrentSeasonal =>
+      'Σχεδιασμός (επαναλαμβανόμενος και εποχιακός)';
 
   @override
-  String get scanBarcode => 'Scan barcode';
+  String get scanBarcode => 'Σάρωση γραμμικού κώδικα';
 
   @override
-  String get quickAddListArticles => 'Quick add (list + items)';
+  String get quickAddListArticles => 'Γρήγορη προσθήκη (λίστα + στοιχεία)';
 
   @override
-  String get selectItems => 'Select items';
+  String get selectItems => 'Επιλέξτε στοιχεία';
 
   @override
-  String get removeChecked => 'Remove checked';
+  String get removeChecked => 'Κατάργηση επιλεγμένο';
 
   @override
-  String get newList => 'New list';
+  String get newList => 'Νέα λίστα';
 
   @override
-  String get duplicateList => 'Duplicate list';
+  String get duplicateList => 'Διπλότυπη λίστα';
 
   @override
-  String get saveAsTemplate => 'Save as template';
+  String get saveAsTemplate => 'Αποθήκευση ως πρότυπο';
 
   @override
-  String get newFromTemplate => 'New list from template';
+  String get newFromTemplate => 'Νέα λίστα από το πρότυπο';
 
   @override
-  String get stats => 'Statistics';
+  String get stats => 'Στατιστική';
 
   @override
-  String get listDuplicated => 'List duplicated';
+  String get listDuplicated => 'Η λίστα είναι διπλό';
 
   @override
-  String get quickAdd => 'Quick add';
+  String get quickAdd => 'Γρήγορη προσθήκη';
 
   @override
   String noMatchForSearch(String query) {
-    return 'No item matches \"$query\"';
+    return 'Κανένα στοιχείο δεν ταιριάζει με το \"$query\"';
   }
 
   @override
-  String get clear => 'Clear';
+  String get clear => 'Σαφής';
 
   @override
-  String get noResults => 'No results';
+  String get noResults => 'Κανένα αποτέλεσμα';
 
   @override
-  String get clearSearchToSeeAll => 'Clear search to see all items';
+  String get clearSearchToSeeAll =>
+      'Εκκαθαρίστε την αναζήτηση για να δείτε όλα τα στοιχεία';
 
   @override
-  String get touchToCheck => 'Tap to check';
+  String get touchToCheck => 'Πατήστε για έλεγχο';
 
   @override
-  String get toBuy => 'To buy';
+  String get toBuy => 'Να αγοράσω';
 
   @override
   String totalEuro(String value) {
-    return 'Total: $value €';
+    return 'Σύνολο: $value €';
   }
 
   @override
-  String get itemRemoved => 'Item removed';
+  String get itemRemoved => 'Το στοιχείο καταργήθηκε';
 
   @override
-  String get cancel => 'Cancel';
+  String get cancel => 'Ματαίωση';
 
   @override
-  String get delete => 'Delete';
+  String get delete => 'Διαγράφω';
 
   @override
-  String get modify => 'Edit';
+  String get modify => 'Εκδίδω';
 
   @override
-  String get deleteArticleConfirm => 'Delete this item?';
+  String get deleteArticleConfirm => 'Διαγραφή αυτού του στοιχείου;';
 
   @override
-  String get shareList => 'Share list';
+  String get shareList => 'Κοινή χρήση λίστας';
 
   @override
-  String get exportAsText => 'Export as text';
+  String get exportAsText => 'Εξαγωγή ως κείμενο';
 
   @override
-  String get about => 'About';
+  String get about => 'Για';
 
   @override
-  String get backupRestore => 'Backup & restore';
+  String get backupRestore => 'Δημιουργία αντιγράφων ασφαλείας και επαναφορά';
 
   @override
-  String get backupExportImport => 'Export or import lists and settings';
+  String get backupExportImport => 'Εξαγωγή ή εισαγωγή λιστών και ρυθμίσεων';
 
   @override
-  String get backupScreenTitle => 'Backup and restore';
+  String get backupScreenTitle =>
+      'Δημιουργία αντιγράφων ασφαλείας και επαναφορά';
 
   @override
-  String get backupExportTitle => 'Export backup';
+  String get backupExportTitle => 'Εξαγωγή αντιγράφων ασφαλείας';
 
   @override
-  String get backupImportTitle => 'Import backup';
+  String get backupImportTitle => 'Εισαγωγή αντιγράφων ασφαλείας';
 
   @override
-  String get backupExportSubtitle => 'Generates a JSON file to share or store';
+  String get backupExportSubtitle =>
+      'Δημιουργεί ένα αρχείο JSON για κοινή χρήση ή αποθήκευση';
 
   @override
   String get backupImportSubtitle =>
-      'Replace current data with the chosen file';
+      'Αντικαταστήστε τα τρέχοντα δεδομένα με το επιλεγμένο αρχείο';
 
   @override
   String get backupIntro =>
-      'Export all your lists, settings and planning to a file, or restore from a backup.';
+      'Εξαγάγετε όλες τις λίστες, τις ρυθμίσεις και τον προγραμματισμό σας σε ένα αρχείο ή πραγματοποιήστε επαναφορά από ένα αντίγραφο ασφαλείας.';
 
   @override
-  String get backupExportSuccess => 'Backup exported. Share or save the file.';
+  String get backupExportSuccess =>
+      'Έγινε εξαγωγή αντιγράφων ασφαλείας. Κοινή χρήση ή αποθήκευση του αρχείου.';
 
   @override
   String get backupImportConfirm =>
-      'Current lists and settings will be replaced by the file content. Continue?';
+      'Οι τρέχουσες λίστες και ρυθμίσεις θα αντικατασταθούν από το περιεχόμενο του αρχείου. Συνεχίζω;';
 
   @override
-  String get backupImportSuccess => 'Backup restored.';
+  String get backupImportSuccess => 'Έγινε επαναφορά του αντιγράφου ασφαλείας.';
 
   @override
-  String get scanPlaceBarcode => 'Place the barcode in the frame';
+  String get scanPlaceBarcode => 'Τοποθετήστε το barcode στο πλαίσιο';
 
   @override
   String scanProductAdded(String name) {
-    return '$name added to list';
+    return '$name προστέθηκε στη λίστα';
   }
 
   @override
-  String get scanClose => 'Close';
+  String get scanClose => 'Κοντά';
 
   @override
   String sharedListCount(int count) {
-    return 'Shared • $count';
+    return 'Κοινή χρήση • $count';
   }
 
   @override
-  String get sharedList => 'Shared';
+  String get sharedList => 'Κοινή χρήση';
 
   @override
-  String get listDeleted => 'List deleted';
+  String get listDeleted => 'Η λίστα διαγράφηκε';
 
   @override
-  String get tooltipClear => 'Clear';
+  String get tooltipClear => 'Σαφής';
 
   @override
-  String get tooltipSyncDone => 'Synced';
+  String get tooltipSyncDone => 'Συγχρονίστηκε';
 
   @override
-  String get tooltipSyncUpload => 'Sync on all devices';
+  String get tooltipSyncUpload => 'Συγχρονισμός σε όλες τις συσκευές';
 
   @override
-  String get tooltipMoveTo => 'Move to';
+  String get tooltipMoveTo => 'Μετακίνηση σε';
 
   @override
-  String get itemsMoved => 'Items moved';
+  String get itemsMoved => 'Τα στοιχεία μετακινήθηκαν';
 
   @override
   String colorChipTapToSet(String name) {
-    return '$name – tap to set';
+    return '$name – πατήστε για ρύθμιση';
   }
 
   @override
-  String get deleteGroup => 'Delete group';
+  String get deleteGroup => 'Διαγραφή ομάδας';
 
   @override
-  String get deleteListConfirm => 'Delete this list?';
+  String get deleteListConfirm => 'Διαγραφή αυτής της λίστας;';
 
   @override
-  String get sendListByMessage => 'Send list by message or email';
+  String get sendListByMessage => 'Αποστολή λίστας με μήνυμα ή email';
 
   @override
-  String get copyList => 'Copy list';
+  String get copyList => 'Αντιγραφή λίστας';
 
   @override
-  String get copyListSubtitle => 'Copy to clipboard (read-only)';
+  String get copyListSubtitle => 'Αντιγραφή στο πρόχειρο (μόνο για ανάγνωση)';
 
   @override
-  String get shareRealtime => 'Share in real time';
+  String get shareRealtime => 'Κοινοποιήστε σε πραγματικό χρόνο';
 
   @override
-  String get shareRealtimeWithOthers => 'With others (same list, live)';
+  String get shareRealtimeWithOthers => 'Με άλλους (ίδια λίστα, ζωντανά)';
 
   @override
-  String get signInGoogleToEnable => 'Sign in with Google to enable';
+  String get signInGoogleToEnable => 'Συνδεθείτε με το Google για ενεργοποίηση';
 
   @override
-  String get listEmptySnackbar => 'Empty list';
+  String get listEmptySnackbar => 'Κενή λίστα';
 
   @override
-  String get listCopiedToClipboard => 'List copied to clipboard';
+  String get listCopiedToClipboard => 'Η λίστα αντιγράφηκε στο πρόχειρο';
 
   @override
-  String get copyLink => 'Copy link';
+  String get copyLink => 'Αντιγραφή συνδέσμου';
 
   @override
-  String get shareLink => 'Share link';
+  String get shareLink => 'Κοινή χρήση συνδέσμου';
 
   @override
-  String get newSharedList => 'New shared list';
+  String get newSharedList => 'Νέα κοινόχρηστη λίστα';
 
   @override
   String get newSharedListConfirm =>
-      'You will leave the current list and create a new shared list from your personal list.';
+      'Θα αποχωρήσετε από την τρέχουσα λίστα και θα δημιουργήσετε μια νέα κοινόχρηστη λίστα από την προσωπική σας λίστα.';
 
   @override
-  String get create => 'Create';
+  String get create => 'Δημιουργώ';
 
   @override
-  String get createNewSharedList => 'Create a new shared list';
+  String get createNewSharedList => 'Δημιουργήστε μια νέα κοινόχρηστη λίστα';
 
   @override
-  String get createShareLink => 'Create share link';
+  String get createShareLink => 'Δημιουργία συνδέσμου κοινής χρήσης';
 
   @override
-  String get joinList => 'Join a list';
+  String get joinList => 'Εγγραφείτε σε μια λίστα';
 
   @override
-  String get linkCreated => 'Link created';
+  String get linkCreated => 'Ο σύνδεσμος δημιουργήθηκε';
 
   @override
   String get sendLinkToOthers =>
-      'Send the link or code so others can view and edit the list in real time.';
+      'Στείλτε τον σύνδεσμο ή τον κωδικό ώστε οι άλλοι να μπορούν να δουν και να επεξεργαστούν τη λίστα σε πραγματικό χρόνο.';
 
   @override
-  String get shortCode => 'Short code';
+  String get shortCode => 'Σύντομος κωδικός';
 
   @override
-  String get errorPrefix => 'Error';
+  String get errorPrefix => 'Σφάλμα';
 
   @override
-  String get linkCopied => 'Link copied';
+  String get linkCopied => 'Ο σύνδεσμος αντιγράφηκε';
 
   @override
-  String get join => 'Join';
+  String get join => 'Ενώνω';
 
   @override
-  String get listJoined => 'List joined';
+  String get listJoined => 'Η λίστα εντάχθηκε';
 
   @override
-  String get checkedItemsRemoved => 'Checked items removed';
+  String get checkedItemsRemoved => 'Τα επιλεγμένα στοιχεία καταργήθηκαν';
 
   @override
   String itemWillBeRemovedFromList(String name) {
-    return '\"$name\" will be removed from the list.';
+    return 'Το \"$name\" θα αφαιρεθεί από τη λίστα.';
   }
 
   @override
-  String get copyCode => 'Copy code';
+  String get copyCode => 'Αντιγραφή κωδικού';
 
   @override
   String copyCodeLabel(String code) {
-    return 'Copy code: $code';
+    return 'Αντιγραφή κωδικού: $code';
   }
 
   @override
-  String get backToPersonalList => 'Back to your personal list';
+  String get backToPersonalList => 'Επιστροφή στην προσωπική σας λίστα';
 
   @override
-  String get leaveSharedList => 'Leave shared list';
+  String get leaveSharedList => 'Αποχώρηση από κοινόχρηστη λίστα';
 
   @override
-  String get leftListSnackbar => 'Disconnected. List kept locally.';
+  String get leftListSnackbar => 'Ασύνδετος. Κατάλογος διατηρείται τοπικά.';
 
   @override
-  String get disconnect => 'Disconnect';
+  String get disconnect => 'Αποσυνδέω';
 
   @override
   String get signInGoogleSameAccount =>
-      'Sign in with the same Google account on each device to share the list in real time.';
+      'Συνδεθείτε με τον ίδιο λογαριασμό Google σε κάθε συσκευή για να μοιραστείτε τη λίστα σε πραγματικό χρόνο.';
 
   @override
-  String get syncEnabled => 'Sync enabled';
+  String get syncEnabled => 'Ο συγχρονισμός ενεργοποιήθηκε';
 
   @override
-  String get signInWithGoogle => 'Sign in with Google';
+  String get signInWithGoogle => 'Συνδεθείτε με το Google';
 
   @override
   String selectedCount(int n) {
-    return '$n selected';
+    return 'Επιλέχτηκε $n';
   }
 
   @override
-  String get itemsDeleted => 'Items deleted';
+  String get itemsDeleted => 'Τα στοιχεία διαγράφηκαν';
 
   @override
-  String get futurePurchases => 'Future purchases';
+  String get futurePurchases => 'Μελλοντικές αγορές';
 
   @override
-  String get listLabel => 'List';
+  String get listLabel => 'Λίστα';
 
   @override
-  String get groupsLabel => 'Groups';
+  String get groupsLabel => 'Ομάδες';
 
   @override
-  String get articleStyle => 'Item style';
+  String get articleStyle => 'Στυλ αντικειμένου';
 
   @override
-  String get styleBar => 'Bar';
+  String get styleBar => 'Μπαρ';
 
   @override
   String get styleFilled => 'Filled rectangle';
 
   @override
-  String get styleSuperRound => 'Pilule';
+  String get styleSuperRound => 'Χάπι';
 
   @override
-  String get styleLiquid => 'Goutte';
+  String get styleLiquid => 'Υγρό';
 
   @override
-  String get styleSticker => 'Sticker';
+  String get styleSticker => 'Αυτοκόλλητη ετικέτα';
 
   @override
-  String get styleBulle => 'Bulles';
+  String get styleBulle => 'Φυσαλίδες';
 
   @override
-  String get styleZebra => 'Zébrure';
+  String get styleZebra => 'Ζέβρα';
 
   @override
-  String get darkMode => 'Dark mode';
+  String get darkMode => 'Σκοτεινή λειτουργία';
 
   @override
-  String get darkModeSubtitle => 'Dark theme, easy on the eyes';
+  String get darkModeSubtitle => 'Σκούρο θέμα, εύκολο στα μάτια';
 
   @override
-  String get capitalizeNames => 'Capitalize item names';
+  String get capitalizeNames => 'Σημειώστε κεφαλαία ονόματα στοιχείων';
 
   @override
-  String get capitalizeSubtitle => 'First letter uppercase';
+  String get capitalizeSubtitle => 'Πρώτο γράμμα κεφαλαίο';
 
   @override
-  String get remindersPerItem => 'Reminders per item';
+  String get remindersPerItem => 'Υπενθυμίσεις ανά στοιχείο';
 
   @override
   String get remindersSubtitle =>
-      'Optional: alarm and note per item (hidden if disabled)';
+      'Προαιρετικά: ξυπνητήρι και σημείωση ανά στοιχείο (κρυφό αν είναι απενεργοποιημένο)';
 
   @override
-  String get categoriesLabel => 'Categories (store, type…)';
+  String get categoriesLabel => 'Κατηγορίες (κατάστημα, τύπος…)';
 
   @override
-  String get formLabel => 'Form';
+  String get formLabel => 'Μορφή';
 
   @override
   String get legendLabel => 'Legend';
@@ -438,172 +443,186 @@ class AppLocalizationsEl extends AppLocalizations {
       'Form: optional name when adding. Legend: squares at top, tap a square to set (e.g. Carrefour).';
 
   @override
-  String get categoryDefinedByStoresBar => 'Définie par les magasins en haut';
+  String get categoryDefinedByStoresBar =>
+      'Ορίζεται από τη γραμμή καταστημάτων στην κορυφή';
 
   @override
   String get tapSquareToSetStoreHint =>
-      'Touchez un carré en haut pour définir le magasin ou la catégorie.';
+      'Πατήστε ένα τετράγωνο στην κορυφή για να ορίσετε το κατάστημα ή την κατηγορία.';
 
   @override
-  String get categoryLabel => 'Catégorie';
+  String get categoryLabel => 'Κατηγορία';
 
   @override
-  String get sortListLabel => 'List sort (Tote \'O Recall+)';
+  String get sortListLabel => 'Ταξινόμηση λίστας (Tote \'O Recall+)';
 
   @override
-  String get sortOrder => 'Order';
+  String get sortOrder => 'Παραγγελία';
 
   @override
-  String get sortName => 'Name';
+  String get sortName => 'Ονομα';
 
   @override
-  String get sortColor => 'Color';
+  String get sortColor => 'Χρώμα';
 
   @override
-  String get sortAisle => 'Rayon';
+  String get sortAisle => 'Διάδρομος';
 
   @override
-  String get aisleOrderTitle => 'Ordre des rayons';
+  String get aisleOrderTitle => 'Παραγγελία διαδρόμου';
 
   @override
   String get aisleOrderSubtitle =>
-      'Numéro de rayon par catégorie (pour tri au magasin)';
+      'Αριθμός διαδρόμου ανά κατηγορία (για ταξινόμηση στο κατάστημα)';
 
   @override
-  String get favoriteStoresTitle => 'Magasin(s) favori(s)';
+  String get favoriteStoresTitle => 'Αγαπημένο(α) κατάστημα(α)';
 
   @override
-  String get favoriteStoresSubtitle => 'Ces rayons apparaissent en premier';
+  String get favoriteStoresSubtitle => 'Αυτοί οι διάδρομοι εμφανίζονται πρώτα';
 
   @override
-  String get partnerSuggestionTitle => 'Suggestion';
+  String get partnerSuggestionTitle => 'Πρόταση';
 
   @override
   String partnerSuggestionMessage(String item, String suggestion) {
-    return 'Un partenaire a ajouté « $item ». Ajouter aussi « $suggestion » ?';
+    return 'Ένας συνεργάτης πρόσθεσε « $item». Προσθήκη «$suggestion]» επίσης;';
   }
 
   @override
-  String get partnerSuggestionAdd => 'Oui, ajouter';
+  String get partnerSuggestionAdd => 'Ναι, προσθέστε';
 
   @override
-  String get partnerSuggestionNo => 'Non';
+  String get partnerSuggestionNo => 'Οχι';
 
   @override
-  String get showPrices => 'Show prices and total';
+  String get showPrices => 'Εμφάνιση τιμών και συνολικά';
 
   @override
-  String get showPricesSubtitle => 'Price per item and estimated total';
+  String get showPricesSubtitle => 'Τιμή ανά είδος και εκτιμώμενο σύνολο';
 
   @override
-  String get aboutSubtitle => 'User guide, author, GPL v3 licence, GDPR';
+  String get aboutSubtitle => 'Οδηγός χρήστη, συγγραφέας, άδεια GPL v3, GDPR';
 
   @override
-  String get saveAsTemplateTitle => 'Save as template';
+  String get saveAsTemplateTitle => 'Αποθήκευση ως πρότυπο';
 
   @override
-  String get modelNameHint => 'Template name';
+  String get modelNameHint => 'Όνομα προτύπου';
 
   @override
-  String get modelSaved => 'Template saved';
+  String get modelSaved => 'Το πρότυπο αποθηκεύτηκε';
 
   @override
-  String get save => 'Save';
+  String get save => 'Εκτός';
 
   @override
-  String get noTemplates => 'No templates. Save a list as template (⋮ menu).';
+  String get noTemplates =>
+      'Χωρίς πρότυπα. Αποθηκεύστε μια λίστα ως πρότυπο (μενού ⋮).';
 
   @override
-  String get chooseTemplate => 'Choose a template';
+  String get chooseTemplate => 'Επιλέξτε ένα πρότυπο';
 
   @override
   String templateItemCount(int count) {
-    return '$count item(s)';
+    return '$count στοιχείο(α)';
   }
 
   @override
   String listCreatedFromTemplate(String name) {
-    return 'List \"$name\" created';
+    return 'Δημιουργήθηκε η λίστα \"$name\".';
   }
 
   @override
-  String get newListTitle => 'New list';
+  String get newListTitle => 'Νέα λίστα';
 
   @override
-  String get listNameHint => 'List name';
+  String get listNameHint => 'Όνομα λίστας';
 
   @override
-  String get createButton => 'Create';
+  String get createButton => 'Δημιουργώ';
 
   @override
-  String get renameTitle => 'Rename';
+  String get renameTitle => 'Μετονομάζω';
 
   @override
-  String get groupLabel => 'Group';
+  String get groupLabel => 'Ομάδα';
 
   @override
-  String get noGroup => 'No group';
+  String get noGroup => 'Καμία ομάδα';
 
   @override
-  String get newGroupTitle => 'New group';
+  String get newGroupTitle => 'Νέα ομάδα';
 
   @override
-  String get groupNameHint => 'E.g. Shopping, DIY';
+  String get groupNameHint => 'Π.χ. Ψώνια, DIY';
 
   @override
-  String get listGroupsTitle => 'List groups';
+  String get listGroupsTitle => 'Λίστα ομάδων';
 
   @override
-  String get newButton => 'New';
+  String get newButton => 'Νέος';
 
   @override
   String get noGroupsHint =>
-      'No groups. Create one to organize your lists (e.g. Shopping, DIY).';
+      'Δεν υπάρχουν ομάδες. Δημιουργήστε μία για να οργανώσετε τις λίστες σας (π.χ. Αγορές, DIY).';
 
   @override
-  String get groupDeleted => 'Group deleted';
+  String get groupDeleted => 'Η ομάδα διαγράφηκε';
 
   @override
-  String get renameGroupTitle => 'Rename group';
+  String get renameGroupTitle => 'Μετονομασία ομάδας';
 
   @override
-  String get renameListTitle => 'Rename list';
+  String get renameListTitle => 'Μετονομασία λίστας';
 
   @override
-  String get nameHint => 'Name';
+  String get nameHint => 'Ονομα';
 
   @override
-  String get saveButton => 'Save';
+  String get saveButton => 'Εκτός';
 
   @override
-  String get chooseGroup => 'Choose a group';
+  String get chooseGroup => 'Επιλέξτε μια ομάδα';
 
   @override
-  String get nameForThisColor => 'Name for this color';
+  String get nameForThisColor => 'Όνομα για αυτό το χρώμα';
 
   @override
   String get colorNameHint =>
-      'E.g. Carrefour, Fruit, Urgent. Items in this color will show this name.';
+      'Π.χ. Carrefour, Φρούτα, Επείγον. Τα στοιχεία σε αυτό το χρώμα θα εμφανίζουν αυτό το όνομα.';
 
   @override
-  String get categoryNameHint => 'Store or category name';
+  String get categoryNameHint => 'Όνομα καταστήματος ή κατηγορίας';
 
   @override
   String shareJoinMessage(String link) {
-    return 'Join my real-time shopping list: $link';
+    return 'Εγγραφείτε στη λίστα αγορών μου σε πραγματικό χρόνο: $link';
   }
 
   @override
   String shareSubject(String appName) {
-    return 'List $appName';
+    return 'Λίστα $appName';
   }
 
   @override
   String get joinListHint =>
-      'Paste the link, 8-character code or ID to join the shared list.';
+      'Επικολλήστε τον σύνδεσμο, τον κωδικό 8 χαρακτήρων ή το αναγνωριστικό για να εγγραφείτε στην κοινόχρηστη λίστα.';
 
   @override
-  String get linkCodeHint => 'Link, code (e.g. ABC12XYZ) or ID';
+  String get joinListTitle => 'Εγγραφείτε σε μια λίστα';
+
+  @override
+  String get engagementsListHint =>
+      'Υπενθυμίσεις και δεσμεύσεις (π.χ. «Πρέπει να τηλεφωνήσω…»). Δεν είναι λίστα αγορών — χρησιμοποιήστε τη \"Νέα λίστα\" για αυτό.';
+
+  @override
+  String get futureListHint =>
+      'Αγορά αργότερα. Γεμίζει όταν τελειώνεις ένα ταξίδι χωρίς να παίρνεις τα πάντα.';
+
+  @override
+  String get linkCodeHint =>
+      'Σύνδεσμος, κωδικός (π.χ. ABC12XYZ) ή αναγνωριστικό';
 
   @override
   String participantsCount(int count) {
@@ -611,67 +630,70 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
-  String get import => 'Import';
+  String get import => 'Εισαγωγή';
 
   @override
-  String get backupFileNotAccessible => 'File not accessible (e.g. Web).';
+  String get backupFileNotAccessible =>
+      'Το αρχείο δεν είναι προσβάσιμο (π.χ. Ιστός).';
 
   @override
   String backupImportError(String error) {
-    return 'Import error: $error';
+    return 'Σφάλμα εισαγωγής: $error';
   }
 
   @override
   String get scanTitle => 'Scan';
 
   @override
-  String get scanAvailablePlus => 'Available in Tote \'O Recall+';
+  String get scanAvailablePlus => 'Διαθέσιμο στο Tote \'O Recall+';
 
   @override
   String get everyoneSeesSameList =>
-      'Everyone sees the same list and changes in real time.';
+      'Όλοι βλέπουν την ίδια λίστα και αλλάζουν σε πραγματικό χρόνο.';
 
   @override
   String everyoneSeesSameListWithCount(int count) {
-    return '$count participant(s) • Everyone sees the same list live.';
+    return '$count συμμετέχοντες • Όλοι βλέπουν την ίδια λίστα ζωντανά.';
   }
 
   @override
-  String get voiceUnavailable => 'Voice input not available';
+  String get voiceUnavailable => 'Η φωνητική είσοδος δεν είναι διαθέσιμη';
 
   @override
-  String get voiceError => 'Voice input unavailable';
+  String get voiceError => 'Η φωνητική είσοδος δεν είναι διαθέσιμη';
 
   @override
-  String get colorLabel => 'Color';
+  String get colorLabel => 'Χρώμα';
 
   @override
-  String get addToListItem => 'Add to list';
+  String get addToListItem => 'Προσθήκη στη λίστα';
 
   @override
   String get quickAddHint =>
-      'Enter at least one item (e.g. Apple or List Store : Apple)';
+      'Εισαγάγετε τουλάχιστον ένα στοιχείο (π.χ. Apple ή List Store : Apple)';
 
   @override
-  String get linkCopiedBrowser => 'Link copied: paste it in your browser.';
+  String get linkCopiedBrowser =>
+      'Ο σύνδεσμος αντιγράφηκε: επικολλήστε τον στο πρόγραμμα περιήγησής σας.';
 
   @override
-  String get signInToJoinList => 'Sign in with Google to join the list.';
+  String get signInToJoinList =>
+      'Συνδεθείτε με το Google για να εγγραφείτε στη λίστα.';
 
   @override
   String cannotJoinList(String error) {
-    return 'Cannot join: $error';
+    return 'Δεν είναι δυνατή η συμμετοχή: $error';
   }
 
   @override
-  String get autocompleteLabel => 'Auto-completion';
+  String get autocompleteLabel => 'Αυτόματη συμπλήρωση';
 
   @override
   String get autocompleteSubtitle =>
-      'Suggest items from the lexicon as you type (e.g. pu… → purée, pull)';
+      'Προτείνετε στοιχεία από το λεξικό καθώς πληκτρολογείτε (π.χ. pu… → purée, pull)';
 
   @override
-  String get addForLater => 'For later';
+  String get addForLater => 'Για αργότερα';
 
   @override
   String addForLaterSnackbar(String name) {
@@ -679,97 +701,98 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
-  String get engagementDetectedTitle => 'Engagement implicite détecté';
+  String get engagementDetectedTitle => 'Εντοπίστηκε σιωπηρή δέσμευση';
 
   @override
   String engagementDetectedMessage(String title) {
-    return 'Créer un rappel pour « $title » dans la liste Engagements ?';
+    return 'Δημιουργία υπενθύμισης για το « $title» στη λίστα αφοσίωσης;';
   }
 
   @override
-  String get createReminderButton => 'Créer un rappel';
+  String get createReminderButton => 'Δημιουργία υπενθύμισης';
 
   @override
   String engagementReminderCreated(String title) {
-    return 'Rappel créé : « $title »';
+    return 'Η υπενθύμιση δημιουργήθηκε: « $title»';
   }
 
   @override
-  String get birthdaysTitle => 'Anniversaires';
+  String get birthdaysTitle => 'Γενέθλια';
 
   @override
   String get birthdaysSubtitle =>
-      'Rappels 1 à 2 jours avant pour ne pas oublier';
+      'Υπενθυμίσεις 1-2 μέρες πριν για να μην το ξεχάσετε';
 
   @override
-  String get addBirthday => 'Ajouter un anniversaire';
+  String get addBirthday => 'Προσθήκη γενεθλίων';
 
   @override
-  String get birthdayNameHint => 'Prénom ou nom (ex. Léontine, Gertrude)';
+  String get birthdayNameHint =>
+      'Όνομα ή πλήρες όνομα (π.χ. Léontine, Gertrude)';
 
   @override
-  String get birthdayDay => 'Jour';
+  String get birthdayDay => 'Ημέρα';
 
   @override
-  String get birthdayMonth => 'Mois';
+  String get birthdayMonth => 'Μήνας';
 
   @override
-  String get reminder1DayBefore => 'Rappel 1 jour avant';
+  String get reminder1DayBefore => 'Υπενθύμιση 1 μέρα πριν';
 
   @override
-  String get reminder2DaysBefore => 'Rappel 2 jours avant';
+  String get reminder2DaysBefore => 'Υπενθύμιση 2 μέρες πριν';
 
   @override
-  String get birthdayDeleted => 'Anniversaire supprimé';
+  String get birthdayDeleted => 'Τα γενέθλια καταργήθηκαν';
 
   @override
   String get emptyBirthdays =>
-      'Aucun anniversaire. Ajoutez-en pour recevoir une alerte 1 à 2 jours avant.';
+      'Χωρίς γενέθλια. Προσθέστε μερικά για να λάβετε ειδοποίηση 1-2 ημέρες πριν.';
 
   @override
-  String get editBirthday => 'Modifier l\'anniversaire';
+  String get editBirthday => 'Επεξεργασία γενεθλίων';
 
   @override
   String deleteBirthdayConfirm(String name) {
-    return 'Supprimer l\'anniversaire de $name ?';
+    return 'Διαγραφή των γενεθλίων του $name;';
   }
 
   @override
-  String get celebrationTypeBirthday => 'Anniversaire (naissance)';
+  String get celebrationTypeBirthday => 'Γενέθλια';
 
   @override
-  String get celebrationTypeWedding => 'Mariage';
+  String get celebrationTypeWedding => 'Γάμος';
 
   @override
-  String get celebrationTypeMeeting => 'Rencontre';
+  String get celebrationTypeMeeting => 'Επέτειος συνάντησης';
 
   @override
-  String get celebrationTypeOther => 'Autre fête';
+  String get celebrationTypeOther => 'Άλλη γιορτή';
 
   @override
-  String get birthdayYearOptional => 'Année (optionnel, pour l\'âge)';
+  String get birthdayYearOptional => 'Έτος (προαιρετικό, για την ηλικία)';
 
   @override
-  String get celebrationTypeLabel => 'Type';
+  String get celebrationTypeLabel => 'Τύπος';
 
   @override
   String ageYears(int count) {
-    return '$count ans';
+    return '$count χρόνια';
   }
 
   @override
-  String get alreadyBoughtValidate => 'Déjà acheté ? Valider';
+  String get alreadyBoughtValidate => 'Έχετε ήδη αγοράσει; Επικυρώνω';
 
   @override
-  String get addToRecurring => 'Ajouter aux achats récurrents';
+  String get addToRecurring => 'Προσθήκη σε επαναλαμβανόμενες αγορές';
 
   @override
   String recurringAddedSnackbar(String name) {
-    return '« $name » en achat récurrent (rappel dans 7 j)';
+    return 'Το « $name» ορίστηκε ως επαναλαμβανόμενο (υπενθύμιση σε 7 ημέρες)';
   }
 
   @override
-  String get recurringTooltip => 'Achat récurrent';
+  String get recurringTooltip => 'Επαναλαμβανόμενη αγορά';
 
   @override
   String get courseTerminee => 'Ολοκλήρωση αγορών';
@@ -825,285 +848,287 @@ class AppLocalizationsEl extends AppLocalizations {
   String get syncConflictHint => 'Πιθανή σύγκρουση: οι αλλαγές συγχωνεύτηκαν.';
 
   @override
-  String get smartCartTitle => 'Aide course';
+  String get smartCartTitle => 'Βοηθός αγορών';
 
   @override
   String get smartCartSubtitle =>
-      'Suggestions selon tes habitudes et le contexte';
+      'Προτάσεις με βάση τις συνήθειες και το πλαίσιο σας';
 
   @override
-  String get smartCartDueTitle => 'Habitudes';
+  String get smartCartDueTitle => 'Συνήθειες';
 
   @override
   String smartCartDueMessage(String name, int days, int recurrence) {
-    return 'Tu n\'as pas acheté « $name » depuis $days jour(s) (d\'habitude tous les $recurrence j). Tu en as besoin ?';
+    return 'Δεν έχετε αγοράσει το « $name» για $days ημέρες (συνήθως κάθε $recurrence] ημέρες). Χρειάζεστε;';
   }
 
   @override
-  String get smartCartAddToList => 'Oui, ajouter';
+  String get smartCartAddToList => 'Ναι, προσθέστε';
 
   @override
-  String get smartCartNotThisTime => 'Pas cette fois';
+  String get smartCartNotThisTime => 'Όχι αυτή τη φορά';
 
   @override
-  String get smartCartContextTitle => 'Contexte';
+  String get smartCartContextTitle => 'Συμφραζόμενα';
 
   @override
-  String get smartCartContextCold =>
-      'Il fait froid. As-tu assez de thé, soupe ?';
+  String get smartCartContextCold => 'Κάνει κρύο. Έχετε αρκετό τσάι, σούπα;';
 
   @override
-  String get smartCartContextCheck => 'Vérifier et ajouter';
+  String get smartCartContextCheck => 'Ελέγξτε και προσθέστε';
 
   @override
-  String get smartCartNoSuggestions => 'Aucune suggestion pour le moment.';
+  String get smartCartNoSuggestions =>
+      'Δεν υπάρχουν προτάσεις αυτήν τη στιγμή.';
 
   @override
-  String get panicCheckoutTitle => 'Vérifier avant la caisse';
+  String get panicCheckoutTitle => 'Ελέγξτε πριν το ταμείο';
 
   @override
-  String get panicCheckoutSubtitle => 'As-tu bien pensé à tout ?';
+  String get panicCheckoutSubtitle => 'Τα θυμηθήκατε όλα;';
 
   @override
   String panicCheckoutUncheckedCount(int count) {
-    return '$count article(s) non coché(s)';
+    return '$count μη επιλεγμένα στοιχεία';
   }
 
   @override
-  String get panicCheckoutAddMissing => 'Ajouter les oubliés à la liste';
+  String get panicCheckoutAddMissing =>
+      'Προσθήκη στοιχείων που λείπουν στη λίστα';
 
   @override
-  String get panicCheckoutAllGood => 'Tout est bon, je passe en caisse';
+  String get panicCheckoutAllGood => 'Όλα καλά, θα πληρώσω';
 
   @override
   String get panicCheckoutEmpty =>
-      'Aucun article à vérifier. Tu peux passer en caisse.';
+      'Δεν υπάρχει τίποτα για έλεγχο. Μπορείτε να πάτε στο ταμείο.';
 
   @override
-  String get streakTitle => 'Streak « O oubli »';
+  String get streakTitle => 'Σερί μηδενικής λήθης';
 
   @override
-  String get streakSubtitle => 'Sorties sans rien oublier d\'affilée';
+  String get streakSubtitle => 'Ταξίδια στη σειρά χωρίς να ξεχάσω τίποτα';
 
   @override
-  String get streakCurrent => 'Série actuelle';
+  String get streakCurrent => 'Τρέχον σερί';
 
   @override
-  String get streakBest => 'Record';
+  String get streakBest => 'Καλύτερος';
 
   @override
   String streakCount(int count) {
-    return '$count sortie(s)';
+    return '$count ταξίδι(α)';
   }
 
   @override
-  String get badgeMemoryMaster => 'Memory Master';
+  String get badgeMemoryMaster => 'Δάσκαλος μνήμης';
 
   @override
-  String get badgeMemoryMasterDesc => '5 sorties sans oubli d\'affilée';
+  String get badgeMemoryMasterDesc => '5 ταξίδια στη σειρά χωρίς να ξεχνάμε';
 
   @override
-  String get badgeStreak10 => 'Champion';
+  String get badgeStreak10 => 'Πρωταθλητής';
 
   @override
-  String get badgeStreak10Desc => '10 sorties sans oubli d\'affilée';
+  String get badgeStreak10Desc => '10 ταξίδια στη σειρά χωρίς να ξεχνάμε';
 
   @override
-  String get badgeHundredTrips => 'Routard';
+  String get badgeHundredTrips => 'Πολεμιστής του δρόμου';
 
   @override
-  String get badgeHundredTripsDesc => '100 courses terminées';
+  String get badgeHundredTripsDesc => '100 ολοκληρωμένα ταξίδια για ψώνια';
 
   @override
-  String get statsMostBought => 'Produits les plus achetés';
+  String get statsMostBought => 'Τα περισσότερα αγορασμένα προϊόντα';
 
   @override
-  String get statsSpendingByCategory => 'Dépenses par catégorie';
+  String get statsSpendingByCategory => 'Δαπάνες ανά κατηγορία';
 
   @override
-  String get statsMostForgotten => 'Produits les plus souvent oubliés';
+  String get statsMostForgotten => 'Τις περισσότερες φορές ξεχνιέται';
 
   @override
-  String get statsTotalTrips => 'Courses terminées';
+  String get statsTotalTrips => 'Ολοκληρωμένα ταξίδια';
 
   @override
-  String get statsZeroOubliRate => 'Taux zéro oubli';
+  String get statsZeroOubliRate => 'Ποσοστό μηδενικής λήθης';
 
   @override
   String get statsZeroOubliSubtitle =>
-      'Courses sans rien déplacer vers Achats futurs';
+      'Ταξίδια χωρίς τίποτα μεταφέρθηκαν στη μελλοντική λίστα';
 
   @override
   String get statsNoDataYet =>
-      'Pas encore de données. Termine des courses pour voir tes stats.';
+      'Δεν υπάρχουν ακόμη στοιχεία. Ολοκληρώστε ταξίδια για να δείτε τα στατιστικά σας.';
 
   @override
   String statsCountTimes(int count) {
-    return '$count fois';
+    return '$count φορές';
   }
 
   @override
-  String get profileConsumptionTitle => 'Profil de conso';
+  String get profileConsumptionTitle => 'Προφίλ κατανάλωσης';
 
   @override
   String get profileConsumptionSubtitle =>
-      'Régimes, allergies, produits à éviter. Optionnel et sans jugement.';
+      'Διατροφή, αλλεργίες, προϊόντα που πρέπει να αποφεύγετε. Προαιρετικό και χωρίς κρίση.';
 
   @override
-  String get profileCoachMode => 'Mode conseil bienveillant';
+  String get profileCoachMode => 'Απαλή λειτουργία προπονητή';
 
   @override
   String get profileCoachModeSubtitle =>
-      'Rappels doux et suggestions de substituts quand tu ajoutes un article (tu peux désactiver à tout moment)';
+      'Ήπιες υπενθυμίσεις και προτάσεις αντικατάστασης όταν προσθέτετε ένα στοιχείο (μπορείτε να απενεργοποιήσετε οποιαδήποτε στιγμή)';
 
   @override
-  String get profileObjectives => 'Objectifs à atteindre';
+  String get profileObjectives => 'Στόχοι προς επίτευξη';
 
   @override
   String get profileObjectivesSubtitle =>
-      'Choisis les objectifs qui te correspondent (sans jugement)';
+      'Επιλέξτε τους στόχους που σας ταιριάζουν (χωρίς κρίση)';
 
   @override
-  String get profileObjectiveWeightLoss => 'Perte de poids';
+  String get profileObjectiveWeightLoss => 'Απώλεια βάρους';
 
   @override
-  String get profileObjectiveReduceBudget => 'Réduire le budget';
+  String get profileObjectiveReduceBudget => 'Μειώστε τον προϋπολογισμό';
 
   @override
-  String get profileObjectiveEatBalanced => 'Manger plus équilibré';
+  String get profileObjectiveEatBalanced => 'Τρώτε πιο ισορροπημένα';
 
   @override
-  String get profileObjectiveReduceSugar => 'Réduire le sucre';
+  String get profileObjectiveReduceSugar => 'Μειώστε τη ζάχαρη';
 
   @override
   String get profileObjectiveReduceCholesterol =>
-      'Réduire le mauvais cholestérol';
+      'Μειώστε την κακή χοληστερόλη';
 
   @override
-  String get profileObjectiveMoreProteins => 'Augmenter les protéines';
+  String get profileObjectiveMoreProteins => 'Αύξηση πρωτεΐνης';
 
   @override
-  String get profileObjectiveLessMeat => 'Moins de viande / protéines animales';
+  String get profileObjectiveLessMeat => 'Λιγότερο κρέας / ζωική πρωτεΐνη';
 
   @override
-  String get profileObjectiveEatHealthier => 'Manger plus sain';
+  String get profileObjectiveEatHealthier => 'Τρώτε πιο υγιεινά';
 
   @override
   String get profileObjectiveReduceUltraProcessed =>
-      'Réduire les ultra-transformés';
+      'Μειώστε τα υπερεπεξεργασμένα τρόφιμα';
 
   @override
-  String get profileObjectiveReducePalmOil => 'Réduire l\'huile de palme';
+  String get profileObjectiveReducePalmOil => 'Μειώστε το φοινικέλαιο';
 
   @override
-  String get profileObjectiveReduceFatty => 'Réduire les produits gras';
+  String get profileObjectiveReduceFatty => 'Μειώστε τα λιπαρά προϊόντα';
 
   @override
-  String get profileObjectiveReduceSalt => 'Réduire le sel';
+  String get profileObjectiveReduceSalt => 'Μειώστε το αλάτι';
 
   @override
-  String get profileObjectiveMoreFiber => 'Plus de fibres';
+  String get profileObjectiveMoreFiber => 'Περισσότερες φυτικές ίνες';
 
   @override
-  String get profileObjectiveMoreVegetables => 'Plus de légumes';
+  String get profileObjectiveMoreVegetables => 'Περισσότερα λαχανικά';
 
   @override
-  String get profileDiet => 'Régime / préférences';
+  String get profileDiet => 'Διατροφή / προτιμήσεις';
 
   @override
-  String get profileVegan => 'Végan';
+  String get profileVegan => 'Vegan';
 
   @override
-  String get profileVegetarian => 'Végétarien';
+  String get profileVegetarian => 'Χορτοφάγος';
 
   @override
-  String get profileGlutenFree => 'Sans gluten';
+  String get profileGlutenFree => 'Χωρίς γλουτένη';
 
   @override
-  String get profileLactoseFree => 'Sans lactose';
+  String get profileLactoseFree => 'Χωρίς λακτόζη';
 
   @override
-  String get profileBioOnly => 'Bio uniquement';
+  String get profileBioOnly => 'Μόνο βιολογικά';
 
   @override
-  String get profileLocalOnly => 'Local uniquement';
+  String get profileLocalOnly => 'Μόνο τοπικά';
 
   @override
-  String get profileFairTrade => 'Équitable';
+  String get profileFairTrade => 'Δίκαιο εμπόριο';
 
   @override
-  String get profileNoAddedSugar => 'Sans sucre ajouté';
+  String get profileNoAddedSugar => 'Χωρίς προσθήκη ζάχαρης';
 
   @override
-  String get profileAllergies => 'Allergies et intolérances';
+  String get profileAllergies => 'Αλλεργίες και δυσανεξίες';
 
   @override
-  String get profileAllergiesHint => 'Un par ligne (ex. arachides, lactose)';
+  String get profileAllergiesHint => 'Ένα ανά γραμμή (π.χ. φιστίκια, λακτόζη)';
 
   @override
-  String get profileProductsToAvoid => 'Produits à éviter';
+  String get profileProductsToAvoid => 'Προϊόντα προς αποφυγή';
 
   @override
-  String get profileProductsToAvoidHint => 'Alcool, porc, fast-food…';
+  String get profileProductsToAvoidHint => 'Αλκοόλ, χοιρινό, γρήγορο φαγητό…';
 
   @override
-  String get profileBrandsToAvoid => 'Marques à éviter';
+  String get profileBrandsToAvoid => 'Μάρκες προς αποφυγή';
 
   @override
-  String get profileTemptations => 'Objectifs bien-être';
+  String get profileTemptations => 'Στόχοι ευημερίας';
 
   @override
   String get profileTemptationsSubtitle =>
-      'On t\'accompagne avec bienveillance : rappels doux et idées de substituts, sans jugement.';
+      'Σας υποστηρίζουμε με ήπιες υπενθυμίσεις και υποκατάστατες ιδέες, χωρίς κρίση.';
 
   @override
-  String get profileTemptationProduct => 'Produit (ex. chocolat, soda)';
+  String get profileTemptationProduct => 'Προϊόν (π.χ. σοκολάτα, σόδα)';
 
   @override
-  String get profileTemptationSubstitute => 'Substitut suggéré (optionnel)';
+  String get profileTemptationSubstitute =>
+      'Προτεινόμενο υποκατάστατο (προαιρετικό)';
 
   @override
-  String get profileAddTemptation => 'Ajouter un objectif';
+  String get profileAddTemptation => 'Προσθέστε έναν στόχο';
 
   @override
   String profileReduceWarning(String product) {
-    return 'Objectif en cours : réduire « $product ». On ajoute quand même cette fois ?';
+    return 'Στόχος σε εξέλιξη: μείωση « $product ». Προσθήκη πάντως αυτή τη φορά;';
   }
 
   @override
   String profileReduceWarningWithProgress(String product, int percent) {
-    return 'Objectif en cours : réduire « $product ». Ta progression : $percent %. On ajoute quand même cette fois ?';
+    return 'Στόχος σε εξέλιξη: μείωση « $product ». Η πρόοδός σας: $percent %. Προσθήκη πάντως αυτή τη φορά;';
   }
 
   @override
   String profileSubstituteSuggestion(String product, String substitute) {
-    return 'Pour ton objectif « $product », on te propose « $substitute » comme alternative. Tu préfères quoi ?';
+    return 'Για τον στόχο σας « $product», προτείνουμε το « $substitute» ως εναλλακτική. Τι προτιμάς;';
   }
 
   @override
-  String get profileAddAnyway => 'Oui, ajouter quand même';
+  String get profileAddAnyway => 'Ναι, προσθέστε πάντως';
 
   @override
   String profileReplaceWith(String name) {
-    return 'Remplacer par « $name »';
+    return 'Αντικατάσταση με « $name»';
   }
 
   @override
-  String get profileCancel => 'Annuler';
+  String get profileCancel => 'Ματαίωση';
 
   @override
-  String get statsPleasurePercent => 'Où tu en es (plaisir)';
+  String get statsPleasurePercent => 'Πού βρίσκεστε (ευχαρίστηση)';
 
   @override
   String get statsPleasureSubtitle =>
-      'Progression vers tes objectifs : part des achats type snacks / sucreries.';
+      'Πρόοδος προς τους στόχους σας: μερίδιο αγορών σνακ/γλυκού τύπου.';
 
   @override
-  String get statsBalanceScore => 'Progression équilibre';
+  String get statsBalanceScore => 'Ισορροπήστε την πρόοδο';
 
   @override
   String get statsBalanceSubtitle =>
-      'Ta progression vers un équilibre qui te convient (sans jugement).';
+      'Η πρόοδός σας προς μια ισορροπία που λειτουργεί για εσάς (χωρίς κρίση).';
 
   @override
   String get statsMonthlyEvolution => 'Μηνιαία εξέλιξη';
@@ -1220,332 +1245,390 @@ class AppLocalizationsEl extends AppLocalizations {
   String get errorGeneric => 'Προέκυψε σφάλμα.';
 
   @override
-  String get paywallTitle => 'Passe à Tote \'O Recall+';
+  String get paywallTitle => 'Αναβάθμιση σε Tote \'O Recall+';
 
   @override
-  String get paywallSubtitle => 'Débloque tout le potentiel de ta liste';
+  String get paywallSubtitle =>
+      'Ξεκλειδώστε πλήρως τις δυνατότητες της λίστας σας';
 
   @override
-  String get paywallBenefitNoAds => 'Zéro pub, expérience fluide';
+  String get paywallBenefitNoAds => 'Χωρίς διαφημίσεις, ομαλή εμπειρία';
 
   @override
-  String get paywallBenefitSmartCart => 'Aide course & liste probable';
+  String get paywallBenefitSmartCart =>
+      'Ανάκληση προτάσεων βοήθειας και συνήθειας';
 
   @override
-  String get paywallBenefitSync => 'Sync sur tous tes appareils';
+  String get paywallBenefitSync => 'Συγχρονισμός σε όλες τις συσκευές σας';
 
   @override
-  String get paywallBenefitStats => 'Stats, badges et gamification';
+  String get paywallBenefitStats =>
+      'Πολλαπλές λίστες, εγχώριο απόθεμα, χωρίς διαφημίσεις';
+
+  @override
+  String get paywallBenefitLists =>
+      'Πολλαπλές λίστες, σαφώς διαχειριζόμενες σε ένα μέρος';
+
+  @override
+  String get paywallBenefitMeals =>
+      'Ετοιμάστε ένα γεύμα: ρακλέ, απεριτίφ, μπάρμπεκιου…';
+
+  @override
+  String get paywallBenefitAxis => 'Αγορά ανά τύπο φαγητού';
 
   @override
   String paywallCta(String price) {
-    return 'Débloquer pour $price';
+    return 'Ξεκλείδωμα για $price';
   }
 
   @override
-  String get paywallTrialCta => 'Essayer 24h gratuit';
+  String get paywallTrialCta => 'Δοκιμάστε 24 ώρες δωρεάν';
 
   @override
-  String get paywallRestore => 'Restaurer l\'achat';
+  String get paywallRestore => 'Επαναφορά αγοράς';
 
   @override
-  String get upgradePromptTitle => 'Tu gères bien tes listes !';
+  String get upgradePromptTitle => 'Τα πας υπέροχα!';
 
   @override
   String get upgradePromptMessage =>
-      'Passe à Tote \'O Recall+ pour garder tes habitudes et débloquer l\'Aide course, la liste probable et la sync.';
+      'Κάντε αναβάθμιση σε Tote \'O Recall+ για να διατηρήσετε τις συνήθειές σας και να ξεκλειδώσετε το Έξυπνο καλάθι, τη λίστα πιθανών και τον συγχρονισμό.';
 
   @override
-  String get upgradePromptCta => 'Découvrir Tote \'O Recall+';
+  String get upgradePromptCta => 'Ανακαλύψτε το Tote \'O Recall+';
 
   @override
-  String get upgradePromptLater => 'Plus tard';
+  String get upgradePromptLater => 'Αργότερα';
 
   @override
-  String get trialGrantedTitle => '24h de Tote \'O Recall+ offertes !';
+  String get trialGrantedTitle => '24 ώρες Tote \'O Recall+ δωρεάν!';
 
   @override
   String get trialGrantedMessage =>
-      'Tu as débloqué un essai gratuit. Profites-en pour tester l\'Aide course et la liste probable.';
+      'Ξεκλειδώσατε μια δωρεάν δοκιμή. Δοκιμάστε το Smart cart και τη λίστα πιθανών.';
 
   @override
-  String get undo => 'Annuler';
+  String get undo => 'Ξεκάνω';
 
   @override
-  String get retry => 'Réessayer';
+  String get retry => 'Δοκιμάζω πάλι';
 
   @override
   String itemAdded(String name) {
-    return '« $name » ajouté';
+    return '« $name» προστέθηκε';
   }
 
   @override
-  String get syncFailed => 'Synchronisation impossible. Vérifie ta connexion.';
+  String get syncFailed => 'Ο συγχρονισμός απέτυχε. Ελέγξτε τη σύνδεσή σας.';
 
   @override
-  String get syncCancelled => 'Connexion annulée.';
+  String get syncCancelled => 'Η είσοδος ακυρώθηκε.';
 
   @override
-  String get syncStatusOk => 'Synchronisé';
+  String get syncStatusOk => 'Συγχρονίστηκε';
 
   @override
-  String get syncStatusSyncing => 'Synchronisation…';
+  String get syncStatusSyncing => 'Συγχρονισμός…';
 
   @override
-  String get syncStatusOffline => 'Hors ligne';
+  String get syncStatusOffline => 'Εκτός σύνδεσης';
 
   @override
-  String get syncStatusError => 'Erreur de sync';
+  String get syncStatusError => 'Σφάλμα συγχρονισμού';
 
   @override
   String scanProductNotFound(String name) {
-    return 'Produit inconnu — ajouté comme « $name »';
+    return 'Άγνωστο προϊόν — προστέθηκε ως « $name»';
   }
 
   @override
-  String get scanFailed => 'Scan impossible. Réessaie.';
+  String get scanFailed => 'Η σάρωση απέτυχε. Προσπαθήστε ξανά.';
 
   @override
   String get scanCameraDenied =>
-      'Autorise la caméra pour scanner un code-barres.';
+      'Επιτρέψτε την πρόσβαση της κάμερας για σάρωση γραμμωτών κωδίκων.';
 
   @override
-  String get purchaseSuccess => 'Tote \'O Recall+ activé. Merci !';
+  String get purchaseSuccess =>
+      'Το Tote \'O Recall+ είναι ενεργοποιημένο. Ευχαριστώ!';
 
   @override
-  String get purchaseCancelled => 'Achat annulé.';
+  String get purchaseCancelled => 'Η αγορά ακυρώθηκε.';
 
   @override
-  String get purchasePending => 'Achat en cours de validation…';
+  String get purchasePending => 'Η αγορά εκκρεμεί…';
 
   @override
-  String get purchaseRestoreSuccess => 'Achat restauré.';
+  String get purchaseRestoreSuccess => 'Η αγορά αποκαταστάθηκε.';
 
   @override
-  String get purchaseRestoreNone => 'Aucun achat à restaurer.';
+  String get purchaseRestoreNone => 'Τίποτα για αποκατάσταση.';
 
   @override
-  String get onboardingStepAddTitle => 'Ajoute des articles';
+  String get onboardingStepAddTitle => 'Λήψη με ένα πάτημα';
 
   @override
   String get onboardingStepAddBody =>
-      'Tape sur + pour ajouter ce dont tu as besoin. Simple et rapide.';
+      'Πατήστε + για να σημειώσετε τι χρειάζεστε. Κάτω από 2 δευτερόλεπτα, είναι στη λίστα.';
 
   @override
-  String get onboardingStepCheckTitle => 'Coche en magasin';
+  String get onboardingStepCheckTitle => 'Ξέχνα τίποτα';
 
   @override
   String get onboardingStepCheckBody =>
-      'Coche les articles au fur et à mesure. Glisse pour supprimer.';
+      'Η εφαρμογή σας υπενθυμίζει τι να αγοράσετε ξανά από τις συνήθειές σας — πριν και κατά τη διάρκεια των αγορών.';
 
   @override
-  String get onboardingStepShareTitle => 'Partage ta liste';
+  String get onboardingStepShareTitle => 'Τελειώστε για να θυμάστε';
 
   @override
   String get onboardingStepShareBody =>
-      'Invite un proche pour faire les courses à deux en temps réel.';
+      'Όταν ολοκληρωθούν οι αγορές, επιβεβαιώστε το: Η Tote μαθαίνει τι αγοράζετε για να σας το υπενθυμίζει καλύτερα την επόμενη φορά.';
 
   @override
-  String get onboardingStartEmpty => 'Commencer avec une liste vide';
+  String get menuMoreFeatures => 'Περισσότερο…';
 
   @override
-  String get onboardingPickTemplate => 'Choisir un modèle';
+  String get menuAdvancedFeatures => 'Προχωρημένος';
 
   @override
-  String get onboardingNext => 'Suivant';
+  String get listDisplayOptions => 'Επίδειξη';
 
   @override
-  String get onboardingSkip => 'Passer';
+  String get emptyListRecallHint =>
+      'Προσθέστε ένα προϊόν ή τα συνηθισμένα σας, εάν έχετε ήδη ψωνίσει στο παρελθόν.';
+
+  @override
+  String get addYourUsualItems => 'Προσθέστε τα συνηθισμένα σας';
+
+  @override
+  String get smartCartTabForget => 'Ξέχασα';
+
+  @override
+  String get smartCartTabWeek => 'Εβδομάδα';
+
+  @override
+  String get settingsSectionAppearance => 'Εμφάνιση';
+
+  @override
+  String get settingsSectionShopping => 'Αγορές και υπενθυμίσεις';
+
+  @override
+  String get settingsSectionAccount => 'Λογαριασμός';
+
+  @override
+  String get settingsSectionAdvanced => 'Προχωρημένος';
+
+  @override
+  String get chooseStoreOptional => 'Άλλαξε κατάστημα';
+
+  @override
+  String get paywallBenefitRecall =>
+      'Ανάκληση βοήθειας: σταματήστε να ξεχνάτε στο κατάστημα';
+
+  @override
+  String get onboardingStartEmpty => 'Ξεκινήστε με μια κενή λίστα';
+
+  @override
+  String get onboardingPickTemplate => 'Επιλέξτε ένα πρότυπο';
+
+  @override
+  String get onboardingNext => 'Επόμενος';
+
+  @override
+  String get onboardingSkip => 'Παραλείπω';
 
   @override
   String get hintSync =>
-      'Connecte-toi pour synchroniser ta liste sur tous tes appareils.';
+      'Συνδεθείτε για να συγχρονίσετε τη λίστα σας μεταξύ συσκευών.';
 
   @override
   String get hintScan =>
-      'Scanne un code-barres pour ajouter un produit rapidement.';
+      'Σαρώστε έναν γραμμωτό κώδικα για να προσθέσετε ένα προϊόν γρήγορα.';
 
   @override
   String get hintSmartCart =>
-      'L\'Aide course te suggère ce qu\'il te manque selon tes habitudes.';
+      'Το έξυπνο καλάθι προτείνει τι μπορεί να σας λείπει.';
 
   @override
-  String get hintGotIt => 'Compris';
+  String get hintGotIt => 'Κατάλαβα';
 
   @override
-  String get premiumFeatureLocked => 'Disponible avec Tote \'O Recall+';
+  String get premiumFeatureLocked => 'Διατίθεται με Tote \'O Recall+';
 
   @override
-  String get planningEmptyCta => 'Ajouter un rappel';
+  String get planningEmptyCta => 'Προσθέστε μια υπενθύμιση';
 
   @override
-  String get birthdaysEmptyCta => 'Ajouter un anniversaire';
+  String get birthdaysEmptyCta => 'Προσθήκη γενεθλίων';
 
   @override
-  String get settingsSaveFailed => 'Impossible d\'enregistrer ce réglage.';
+  String get settingsSaveFailed =>
+      'Δεν ήταν δυνατή η αποθήκευση αυτής της ρύθμισης.';
 
   @override
   String mealPresetTitle(String label) {
-    return 'Liste « $label » ?';
+    return 'Λίστα « $label»;';
   }
 
   @override
   String mealPresetBody(int count) {
-    return 'Ajouter les $count articles typiques en un tap ?';
+    return 'Προσθήκη των $count τυπικών στοιχείων με ένα πάτημα;';
   }
 
   @override
   String get mealPresetPremiumOnly =>
-      'Les listes repas express sont disponibles avec Tote \'O Recall+.';
+      'Οι λίστες γευμάτων express είναι διαθέσιμες με Tote \'O Recall+.';
 
   @override
-  String get mealPresetAddAll => 'Tout ajouter';
+  String get mealPresetAddAll => 'Προσθέστε όλα';
 
   @override
-  String get mealPresetAddSingle => 'Juste ce nom';
+  String get mealPresetAddSingle => 'Μόνο αυτό το όνομα';
 
   @override
   String mealPresetAdded(int count, String label) {
-    return '$count articles ajoutés ($label)';
+    return 'Προστέθηκαν $count στοιχεία ($label)';
   }
 
   @override
-  String get budgetCeiling => 'Plafond budget (€)';
+  String get budgetCeiling => 'Ανώτατο όριο προϋπολογισμού (€)';
 
   @override
   String get budgetCeilingSubtitle =>
-      'Alerte si le total à acheter dépasse ce montant';
+      'Προειδοποιήστε όταν το σύνολο για αγορά υπερβαίνει αυτό το ποσό';
 
   @override
-  String get budgetCeilingHint => 'Ex. 50';
+  String get budgetCeilingHint => 'π.χ. 50';
 
   @override
   String budgetOverBanner(String total, String ceiling) {
-    return 'Budget dépassé : $total € / $ceiling €';
+    return 'Εκτός προϋπολογισμού: $total € / $ceiling €';
   }
 
   @override
-  String get recentItems => 'Récents';
+  String get recentItems => 'Πρόσφατος';
 
   @override
   String recallDueCard(int count) {
-    return '$count article(s) à racheter ?';
+    return '$count αντικείμενο(α) για ανανέωση;';
   }
 
   @override
-  String get recallDueCardCta => 'Voir l\'Aide course';
+  String get recallDueCardCta => 'Ανοίξτε το Smart cart';
 
   @override
-  String get weeklyReminder => 'Rappel jour de courses';
+  String get weeklyReminder => 'Υπενθύμιση ημέρας αγορών';
 
   @override
   String get weeklyReminderSubtitle =>
-      'Notification hebdomadaire pour ne pas oublier ta liste';
+      'Εβδομαδιαία ειδοποίηση για να μην ξεχάσετε τη λίστα σας';
 
   @override
-  String get weeklyReminderDay => 'Jour';
+  String get weeklyReminderDay => 'Ημέρα';
 
   @override
-  String get weeklyReminderTime => 'Heure';
+  String get weeklyReminderTime => 'Φορά';
 
   @override
-  String get weeklyReminderMessage => 'N\'oublie pas ta liste Tote \'O Recall';
+  String get weeklyReminderMessage =>
+      'Μην ξεχάσετε τη λίστα σας Tote \'O Recall';
 
   @override
-  String get weekdayMon => 'Lundi';
+  String get weekdayMon => 'Δευτέρα';
 
   @override
-  String get weekdayTue => 'Mardi';
+  String get weekdayTue => 'Τρίτη';
 
   @override
-  String get weekdayWed => 'Mercredi';
+  String get weekdayWed => 'Τετάρτη';
 
   @override
-  String get weekdayThu => 'Jeudi';
+  String get weekdayThu => 'Πέμπτη';
 
   @override
-  String get weekdayFri => 'Vendredi';
+  String get weekdayFri => 'Παρασκευή';
 
   @override
-  String get weekdaySat => 'Samedi';
+  String get weekdaySat => 'Σάββατο';
 
   @override
-  String get weekdaySun => 'Dimanche';
+  String get weekdaySun => 'Κυριακή';
 
   @override
-  String get dragToReorder => 'Glisse un article pour le déplacer';
+  String get dragToReorder => 'Σύρετε ένα στοιχείο για να το μετακινήσετε';
 
   @override
-  String get dragHandleTooltip => 'Déplacer';
+  String get dragHandleTooltip => 'Κίνηση';
 
   @override
-  String get longPressToDelete => 'Appui long pour supprimer';
+  String get longPressToDelete => 'Πατήστε παρατεταμένα για διαγραφή';
 
   @override
-  String get orgModeLabel => 'Organisation';
+  String get orgModeLabel => 'Σχέδιο';
 
   @override
-  String get orgModeBubbles => 'Bulles';
+  String get orgModeBubbles => 'Φυσαλίδες';
 
   @override
-  String get orgModeNumbered => 'Liste';
+  String get orgModeNumbered => 'Λίστα';
 
   @override
-  String get orgModeManual => 'Perso';
+  String get orgModeManual => 'Εθιμο';
 
   @override
-  String get orgModeBubblesHint => 'Les bulles s’organisent toutes seules';
+  String get orgModeBubblesHint => 'Οι φυσαλίδες συσκευάζονται μόνες τους';
 
   @override
-  String get orgModeNumberedHint => 'Liste numérotée';
+  String get orgModeNumberedHint => 'Αριθμημένη λίστα';
 
   @override
-  String get orgModeManualHint => 'Glisse pour ranger à ta façon';
+  String get orgModeManualHint => 'Σύρετε για να τακτοποιήσετε τον δρόμο σας';
 
   @override
   String get recallDueCardHistoryCta =>
-      'D’après ton historique — voir l’Aide course';
+      'Με βάση το ιστορικό σας — ανοίξτε το Smart cart';
 
   @override
   String mealPresetBodySkip(int missing, int skipped) {
-    return 'Ajouter les $missing articles manquants ($skipped déjà chez toi ou sur la liste) ?';
+    return 'Προσθήκη των $missing στοιχείων που λείπουν ($skipped είναι ήδη στο σπίτι ή στη λίστα);';
   }
 
   @override
   String mealPresetAlreadyHave(String names) {
-    return 'Déjà : $names';
+    return 'Έχουν ήδη: $names';
   }
 
   @override
   String mealPresetAddMissing(int count) {
-    return 'Ajouter $count';
+    return 'Προσθήκη $count';
   }
 
   @override
-  String get pantryTitle => 'Stock maison';
+  String get pantryTitle => 'Οικιακό απόθεμα';
 
   @override
   String get pantrySubtitle =>
-      'Suis ton placard. À zéro, on peut ajouter à la liste.';
+      'Παρακολουθήστε το ντουλάπι σας. Στο μηδέν, προσθέστε στη λίστα.';
 
   @override
   String get pantryPremiumOnly =>
-      'Le stock maison est disponible avec Tote \'O Recall+.';
+      'Το απόθεμα σπιτιού είναι διαθέσιμο με Tote \'O Recall+.';
 
   @override
-  String get pantryItemName => 'Article';
+  String get pantryItemName => 'Είδος';
 
   @override
-  String get pantryQty => 'Qté';
+  String get pantryQty => 'Ποσ';
 
   @override
-  String get pantryAdd => 'Ajouter';
+  String get pantryAdd => 'Προσθέτω';
 
   @override
-  String get pantryEmpty => 'Aucun article en stock';
+  String get pantryEmpty => 'Δεν υπάρχουν είδη σε απόθεμα';
 
   @override
-  String get pantryOutOfStock => 'Rupture';
+  String get pantryOutOfStock => 'Εκτός αποθέματος';
 
   @override
   String pantryQtyLabel(String qty, String unit) {
@@ -1553,223 +1636,3164 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
-  String get pantryUseOne => 'Utiliser 1';
+  String get pantryUseOne => 'Χρήση 1';
 
   @override
-  String get pantryAddOne => 'Ajouter 1';
+  String get pantryAddOne => 'Προσθέστε 1';
 
   @override
-  String get pantryEmptyTitle => 'Plus en stock';
+  String get pantryEmptyTitle => 'Εκτός αποθέματος';
 
   @override
   String pantryEmptyBody(String name) {
-    return 'Ajouter « $name » à la liste de courses ?';
+    return 'Προσθήκη \"$name]\" στη λίστα αγορών;';
   }
 
   @override
-  String get pantryAddToList => 'Ajouter à la liste';
+  String get pantryAddToList => 'Προσθήκη στη λίστα';
 
   @override
   String pantryAddedToList(String name) {
-    return '« $name » ajouté à la liste';
+    return 'Το \"$name\" προστέθηκε στη λίστα';
   }
 
   @override
   String pantryEmptyAlreadyOnList(String name) {
-    return '« $name » est déjà sur la liste';
+    return 'Το \"$name\" είναι ήδη στη λίστα';
   }
 
   @override
-  String get pantryRestockTitle => 'Mettre à jour le stock ?';
+  String get pantryRestockTitle => 'Ενημέρωση μετοχών;';
 
   @override
   String pantryRestockBody(int count) {
-    return 'Ajouter les $count articles achetés au stock maison ?';
+    return 'Προσθήκη των $count αγορασμένων αντικειμένων στο απόθεμα σπιτιού;';
   }
 
   @override
-  String get pantryRestockCta => 'Oui, stocker';
+  String get pantryRestockCta => 'Ναι, ανανέωση';
 
   @override
-  String get geofenceTitle => 'Rappel près du magasin';
+  String get geofenceTitle => 'Υπενθύμιση κοντά στο κατάστημα';
 
   @override
   String get geofenceSubtitle =>
-      'Opt-in : notifie quand tu es près d’un magasin favori (GPS local, sans cloud).';
+      'Συμμετοχή: ειδοποιήστε όταν βρίσκεστε κοντά σε ένα αγαπημένο κατάστημα (τοπικό GPS, χωρίς σύννεφο).';
 
   @override
-  String get geofenceEnable => 'Activer la proximité';
+  String get geofenceEnable => 'Ενεργοποίηση εγγύτητας';
 
   @override
   String get geofenceEnableHint =>
-      'Vérifie à l’ouverture de l’app (pas de suivi en arrière-plan).';
+      'Ελέγχει πότε ανοίγει η εφαρμογή (χωρίς παρακολούθηση παρασκηνίου).';
 
   @override
-  String get geofenceAddHere => 'Enregistrer ma position actuelle';
+  String get geofenceAddHere => 'Αποθήκευση της τρέχουσας τοποθεσίας μου';
 
   @override
-  String get geofenceDefaultStore => 'Mon magasin';
+  String get geofenceDefaultStore => 'Το κατάστημά μου';
 
   @override
-  String get geofenceAdded => 'Position magasin enregistrée';
+  String get geofenceAdded => 'Η τοποθεσία καταστήματος αποθηκεύτηκε';
 
   @override
-  String get geofencePermissionDenied => 'Autorisation de localisation refusée';
+  String get geofencePermissionDenied => 'Η άδεια τοποθεσίας απορρίφθηκε';
 
   @override
-  String get geofenceLocationError => 'Impossible d’obtenir la position';
+  String get geofenceLocationError => 'Δεν ήταν δυνατή η λήψη της τοποθεσίας';
 
   @override
   String geofenceRadiusLabel(int meters) {
-    return 'Rayon $meters m';
+    return '$meters m ακτίνα';
   }
 
   @override
-  String get geofenceNotifTitle => 'Tu es près du magasin';
+  String get geofenceNotifTitle => 'Είσαι κοντά στο κατάστημα';
 
   @override
   String geofenceNotifBody(String store, int count) {
-    return '$store — $count article(s) sur ta liste';
+    return '$store — $count στοιχεία στη λίστα σας';
   }
 
   @override
   String get mealPresetAllCovered =>
-      'Tu as déjà tout pour ce repas — rien à ajouter !';
+      'Έχετε ήδη τα πάντα για αυτό το γεύμα — τίποτα να προσθέσετε!';
 
   @override
-  String get mealPresetAllCoveredCta => 'Parfait';
+  String get mealPresetAllCoveredCta => 'Ομορφη';
 
   @override
-  String get mealPresetNeedIt => 'À prendre';
+  String get mealPresetNeedIt => 'Χρειάζομαι';
 
   @override
-  String get mealPresetInPantry => 'Placard';
+  String get mealPresetInPantry => 'Ντουλάπι';
 
   @override
-  String get mealPresetOnList => 'Liste';
+  String get mealPresetOnList => 'Λίστα';
 
   @override
-  String get mealPresetInBoth => 'OK';
+  String get mealPresetInBoth => 'ΕΝΤΑΞΕΙ';
 
   @override
   String pantryAddedSnack(String name) {
-    return '« $name » en stock';
+    return '\"$name\" σε απόθεμα';
   }
 
   @override
   String pantryAutoAdded(String name) {
-    return 'Rupture → « $name » ajouté à la liste';
+    return 'Εκτός αποθέματος → \"$name\" προστέθηκε στη λίστα';
   }
 
   @override
   String pantryStatInStock(int count) {
-    return '$count en stock';
+    return '$count σε απόθεμα';
   }
 
   @override
   String pantryStatLow(int count) {
-    return '$count bas';
+    return '$count χαμηλό';
   }
 
   @override
   String pantryStatEmpty(int count) {
-    return '$count rupture';
+    return '$count κενό';
   }
 
   @override
-  String get pantrySearchHint => 'Chercher dans le placard…';
+  String get pantrySearchHint => 'Αναζήτηση ντουλάπι…';
 
   @override
-  String get pantryFilterAll => 'Tous';
+  String get pantryFilterAll => 'Ολοι';
 
   @override
-  String get pantryFilterLow => 'Bas';
+  String get pantryFilterLow => 'Χαμηλός';
 
   @override
-  String get pantryFilterEmpty => 'Rupture';
+  String get pantryFilterEmpty => 'Αδειάζω';
 
   @override
-  String get pantryFilterEmptyResult => 'Rien dans ce filtre';
+  String get pantryFilterEmptyResult => 'Τίποτα σε αυτό το φίλτρο';
 
   @override
   String pantryLowHint(String qty) {
-    return 'Plus que $qty — bientôt à racheter';
+    return 'Απομένει μόνο $qty — ανανέωση σύντομα';
   }
 
   @override
   String pantryRestockDone(int count) {
-    return 'Stock +$count';
+    return 'Μετοχή +$count';
   }
 
   @override
-  String get recallDueQuickAdd => 'Ajouter les premiers';
+  String get recallDueQuickAdd => 'Προσθήκη κορυφαίων στοιχείων';
 
   @override
-  String get recallDueSeeAll => 'Tout voir';
+  String get recallDueSeeAll => 'Δείτε όλα';
 
   @override
   String recallDueAdded(int count) {
-    return '$count ajouté(s) à la liste';
+    return '$count προστέθηκε στη λίστα';
   }
 
   @override
-  String get geofenceSetupTitle => 'Nouveau magasin';
+  String get geofenceSetupTitle => 'Νέο κατάστημα';
 
   @override
   String get geofenceSetupHint =>
-      'Enregistre ta position actuelle — on te rappellera ta liste à proximité.';
+      'Αποθηκεύστε την τρέχουσα τοποθεσία σας — θα σας ωθήσουμε όταν είστε κοντά.';
 
   @override
-  String get geofenceStoreName => 'Nom du magasin';
+  String get geofenceStoreName => 'Όνομα καταστήματος';
 
   @override
-  String get geofencePickColor => 'Couleur / rayon magasin';
+  String get geofencePickColor => 'Χρώμα αποθήκευσης';
 
   @override
-  String get geofenceRadiusPick => 'Zone de détection';
+  String get geofenceRadiusPick => 'Ζώνη ανίχνευσης';
 
   @override
-  String get geofenceSaveHere => 'Enregistrer ici';
+  String get geofenceSaveHere => 'Αποθήκευση εδώ';
 
   @override
-  String get geofenceLocating => 'Localisation…';
+  String get geofenceLocating => 'Εντοπισμός…';
 
   @override
   String geofenceAddedNamed(String name) {
-    return '« $name » enregistré';
+    return 'Το \"$name\" αποθηκεύτηκε';
   }
 
   @override
-  String get foodTypeLabel => 'Type d’aliment';
+  String get foodTypeLabel => 'Τύπος φαγητού';
 
   @override
-  String get foodCatUnclassified => 'Non classé';
+  String get foodCatUnclassified => 'Χωρίς κατηγοριοποίηση';
 
   @override
-  String get showFoodCategoryBadge => 'Afficher le type d’aliment';
+  String get foodCatFruits => 'Φρούτα';
+
+  @override
+  String get foodCatVegetables => 'Λαχανικά';
+
+  @override
+  String get foodCatMushrooms => 'Μανιτάρια';
+
+  @override
+  String get foodCatDairy => 'Γαλακτοκομικά & αυγά';
+
+  @override
+  String get foodCatMeat => 'Κρέας';
+
+  @override
+  String get foodCatDeli => 'Αλλαντικά';
+
+  @override
+  String get foodCatFish => 'Ψάρια & θαλασσινά';
+
+  @override
+  String get foodCatBakery => 'Αρτοποιείο';
+
+  @override
+  String get foodCatDrinks => 'Ποτά';
+
+  @override
+  String get foodCatGrocery => 'Παντοπωλείο';
+
+  @override
+  String get foodCatSnacks => 'Σνακ';
+
+  @override
+  String get foodCatDesserts => 'Επιδόρπια';
+
+  @override
+  String get foodCatSweets => 'Γλυκά';
+
+  @override
+  String get foodCatFrozen => 'Κατεψυγμένα';
+
+  @override
+  String get foodCatHygiene => 'Προσωπική φροντίδα';
+
+  @override
+  String get foodCatHousehold => 'Σπίτι';
+
+  @override
+  String get foodCatPets => 'Κατοικίδια';
+
+  @override
+  String get foodCatBaby => 'Μωρό';
+
+  @override
+  String get foodCatOther => 'Άλλο';
+
+  @override
+  String get myList => 'Η λίστα μου';
+
+  @override
+  String get engagementsListName => 'Δεσμεύσεις';
+
+  @override
+  String get listCopySuffix => ' (αντίγραφο)';
+
+  @override
+  String deleteListConfirmEmpty(String name) {
+    return 'Η «$name» θα διαγραφεί.';
+  }
+
+  @override
+  String deleteListConfirmWithItems(String name, int count) {
+    return 'Η «$name» έχει $count είδος/η. Όλα θα διαγραφούν.';
+  }
+
+  @override
+  String get showFoodCategoryBadge => 'Εμφάνιση τύπου τροφής';
 
   @override
   String get showFoodCategoryBadgeSubtitle =>
-      'Petit badge sous chaque article (Légumes, Laitiers…)';
+      'Μικρό σήμα κάτω από κάθε είδος (λαχανικά, γαλακτοκομικά…)';
 
   @override
-  String get axisModeLabel => 'Ranger par';
+  String get axisModeLabel => 'Ομάδα κατά';
 
   @override
-  String get axisModeStore => 'Magasin';
+  String get axisModeStore => 'Κατάστημα';
 
   @override
-  String get axisModeFood => 'Type';
+  String get axisModeFood => 'Τύπος τροφής (λαχανικά, φρούτα…)';
 
   @override
-  String get axisModeDualStoreFood => 'Magasin → type';
+  String get axisModeDualStoreFood => 'Αποθήκευση → τύπος';
 
   @override
-  String get axisModeDualFoodStore => 'Type → magasin';
+  String get axisModeDualFoodStore => 'Πληκτρολογήστε → κατάστημα';
 
   @override
-  String get reclassifyFoodList => 'Reclasser les types';
+  String get reclassifyFoodList => 'Αναταξινομήστε τα είδη τροφίμων';
 
   @override
-  String get reclassifyFoodDone => 'Types d’aliments mis à jour';
+  String get reclassifyFoodDone => 'Οι τύποι τροφίμων ενημερώθηκαν';
+
+  @override
+  String get listsHubTitle => 'Οι λίστες μου';
+
+  @override
+  String get listsHubSubtitle =>
+      'Αλλάξτε λίστες ή δημιουργήστε μια νέα — διαχειριστείτε τα πάντα σε ένα μέρος';
+
+  @override
+  String get listsHubManage => 'Οι λίστες μου';
+
+  @override
+  String get listsHubOpen => 'Ανοιχτό';
+
+  @override
+  String listsHubItemCount(int count) {
+    return '$count στοιχείο(α)';
+  }
+
+  @override
+  String get listsHubSystemBadge => 'Σύστημα';
+
+  @override
+  String get listsHubHideFromBar => 'Απόκρυψη από το μπαρ';
+
+  @override
+  String get listsHubShowInBar => 'Εμφάνιση στη γραμμή';
+
+  @override
+  String get listsHubCurrent => 'Ανοιχτό';
+
+  @override
+  String get listsHubOrganizeGroups => 'Οργανωθείτε σε ομάδες';
+
+  @override
+  String get addToListLabel => 'Προσθήκη σε';
+
+  @override
+  String get toggleAxisByType => 'Τύπος';
+
+  @override
+  String get toggleAxisByStore => 'Κατάστημα';
+
+  @override
+  String get axisChipTooltipType =>
+      'Είδη ομάδας: Λαχανικά, Φρούτα, Γαλακτοκομικά, Κρέας…';
+
+  @override
+  String get axisChipTooltipStore =>
+      'Ομαδοποιήστε τα είδη κατά κατάστημα / χρώμα';
+
+  @override
+  String get axisHintBanner =>
+      'Η λίστα σας είναι ομαδοποιημένη ανά τύπο (λαχανικά, φρούτα…). Μετάβαση στο Store για ομαδοποίηση ανά πωλητή λιανικής.';
+
+  @override
+  String get axisHintBannerStore =>
+      'Συμβουλή: μεταβείτε στην επιλογή Τύπος για να ομαδοποιήσετε λαχανικά, φρούτα, γαλακτοκομικά…';
+
+  @override
+  String get listsHubChipTooltip =>
+      'Δημιουργήστε, ανοίξτε, μετονομάστε ή διαγράψτε μια λίστα';
+
+  @override
+  String get storesLegendHint =>
+      'Πατήστε ένα χρωματιστό τσιπ για να ονομάσετε ένα κατάστημα (Carrefour, market…)';
+
+  @override
+  String get toBuyTooltip => 'Εμφάνιση μόνο ό,τι απομένει για παραλαβή';
+
+  @override
+  String get displayOptionsTooltip =>
+      'Συννεφάκια, αριθμημένη λίστα ή ομαδοποίηση αποθήκευσης / τύπου';
+
+  @override
+  String get mealPresetsChipTooltip =>
+      'Προσθέστε όλα τα υλικά για ένα γεύμα αμέσως';
+
+  @override
+  String get quickAddChipTooltip => 'Προσθέστε πολλά στοιχεία στη σειρά';
+
+  @override
+  String get usualsChipTooltip => 'Προσθέστε ξανά τα πιο συχνά στοιχεία σας';
+
+  @override
+  String get emptyListTypeHint =>
+      'Με το Plus, η λίστα σας ομαδοποιεί ανά τύπο: λαχανικά, φρούτα, γαλακτοκομικά…';
+
+  @override
+  String get mealPresetsMenu => 'Ετοιμάστε ένα γεύμα';
+
+  @override
+  String get mealPresetsPickerTitle => 'Ποιο γεύμα να ετοιμάσω;';
+
+  @override
+  String get mealPresetsPickerSubtitle =>
+      'Προσθέτει κάθε συστατικό που λείπει σε μια λίστα';
+
+  @override
+  String mealPresetsItemsCount(int count) {
+    return '$count συστατικά';
+  }
+
+  @override
+  String get smartCartEmptyTitle => 'Δεν υπάρχουν προτάσεις ακόμα';
+
+  @override
+  String get smartCartEmptyBody =>
+      'Αγοράστε μερικές φορές ή δημιουργήστε ένα επαναλαμβανόμενο προϊόν — οι συμβουλές βασίζονται στις συνήθειές σας.';
+
+  @override
+  String get smartCartEmptyCtaPlanning => 'Ανοιχτός προγραμματισμός';
+
+  @override
+  String smartCartWhyDue(int days) {
+    return 'Οφειλόμενο · συνήθως κάθε $days d';
+  }
+
+  @override
+  String get smartCartWhyOften => 'Αγοράζεται συχνά';
+
+  @override
+  String get smartCartAddToOtherList => 'Άλλη λίστα…';
+
+  @override
+  String panicRemainingCount(int count) {
+    return '$count αριστερά για να αρπάξετε';
+  }
+
+  @override
+  String get panicMarkChecked => 'Επισήμανση ως λήφθηκε';
+
+  @override
+  String get panicGroupedHint =>
+      'Ομαδοποιούνται όπως η λίστα σας — ελέγξτε όσο προχωράτε';
+
+  @override
+  String get reclassifyFoodHint =>
+      'Μη κατηγοριοποιημένα στοιχεία: επαναταξινόμηση για σαφέστερες ενότητες';
+
+  @override
+  String get catalogTapHint =>
+      'Πατήστε ένα στοιχείο για να το προσθέσετε στη λίστα σας.';
+
+  @override
+  String get statsOverview => 'Επισκόπηση';
+
+  @override
+  String get statsCurrentList => 'Τρέχουσα λίστα';
+
+  @override
+  String get statsInCartChecked => 'Στο καλάθι (ελεγμένο)';
+
+  @override
+  String get statsEstimatedTotalUnchecked =>
+      'Εκτιμώμενο σύνολο (μη επιλεγμένο)';
+
+  @override
+  String get statsYourStats => 'Τα στατιστικά σας';
+
+  @override
+  String get statsAllListsSection => 'Όλες οι λίστες';
+
+  @override
+  String get statsListsCount => 'Αριθμός λιστών';
+
+  @override
+  String get statsPlanningSection => 'Σχεδίαση';
+
+  @override
+  String get statsRecurringPurchases => 'Επαναλαμβανόμενες αγορές';
+
+  @override
+  String get statsSeasonalTemplates => 'Εποχιακά πρότυπα';
+
+  @override
+  String get statsModelsSection => 'Πρότυπα';
+
+  @override
+  String get statsSavedListModels => 'Αποθηκευμένα πρότυπα λίστας';
+
+  @override
+  String categoryIndexed(int index) {
+    return 'Κατηγορία $index';
+  }
+
+  @override
+  String get planningTitle => 'Σχεδίαση';
+
+  @override
+  String get planningTabRecurring => 'Επαναλαμβανόμενο';
+
+  @override
+  String get planningTabSeasonal => 'Εποχής';
+
+  @override
+  String get planningRecurringIntro =>
+      'Είδη που αγοράζετε με κανονικό πρόγραμμα. Προσθέστε τα στη λίστα σας όταν έρθει η ώρα.';
+
+  @override
+  String get createRecurringPurchase =>
+      'Δημιουργήστε μια επαναλαμβανόμενη αγορά';
+
+  @override
+  String get fillListWithRecurring =>
+      'Προσθέστε όλα τα επαναλαμβανόμενα στοιχεία στη λίστα';
+
+  @override
+  String get recurringEmptyHint =>
+      'Δεν υπάρχουν ακόμη επαναλαμβανόμενες αγορές.\nΠ.χ. Γάλα κάθε 7 ημέρες.';
+
+  @override
+  String get deleteRecurringConfirmTitle =>
+      'Διαγραφή αυτού του επαναλαμβανόμενου στοιχείου;';
+
+  @override
+  String deleteRecurringConfirmBody(String name) {
+    return 'Το \"$name\" δεν θα υπάρχει πλέον στις επαναλαμβανόμενες αγορές σας.';
+  }
+
+  @override
+  String addedItemSnack(String name) {
+    return 'Προστέθηκε: $name';
+  }
+
+  @override
+  String addedItemsToListSnack(int count) {
+    return '$count στοιχεία προστέθηκαν στη λίστα';
+  }
+
+  @override
+  String neverBoughtEveryDays(int days) {
+    return 'Δεν αγοράστηκε ποτέ • Κάθε $days η';
+  }
+
+  @override
+  String boughtDaysAgoEveryDays(int daysAgo, int days) {
+    return '$daysAgo d πριν • Κάθε $days d';
+  }
+
+  @override
+  String get dueToBuySuffix => '• Οφειλόμενο';
+
+  @override
+  String get newRecurringPurchase => 'Νέα επαναλαμβανόμενη αγορά';
+
+  @override
+  String get editRecurringPurchase => 'Επεξεργασία επαναλαμβανόμενης αγοράς';
+
+  @override
+  String get articleLabel => 'Είδος';
+
+  @override
+  String get articleHintExample => 'Π.χ. Γάλα';
+
+  @override
+  String get freqOncePerWeek => '1× / εβδομάδα';
+
+  @override
+  String get freqOncePerTwoWeeks => '1× / 2 εβδομάδα';
+
+  @override
+  String get freqOncePerMonth => '1× / μήνα';
+
+  @override
+  String freqEveryDays(int days) {
+    return 'Κάθε $days η';
+  }
+
+  @override
+  String get seasonalIntro =>
+      'Λίστες αγορών για μια περίσταση (Χριστούγεννα, επιστροφή στο σχολείο…). Προσθέστε κάθε στοιχείο στη λίστα σας ταυτόχρονα.';
+
+  @override
+  String seasonalAddedSnack(int count, String name) {
+    return 'Προστέθηκαν $count στοιχεία ($name)';
+  }
+
+  @override
+  String get addAll => 'Προσθέστε όλα';
+
+  @override
+  String recurringDueBanner(int count) {
+    return 'Οφειλόμενες $count επαναλαμβανόμενες αγορές';
+  }
+
+  @override
+  String get seasonalTpl_noel => 'Christmas';
+
+  @override
+  String get seasonalTpl_rentree => 'Back to school';
+
+  @override
+  String get seasonalTpl_ete => 'Summer / Holidays';
+
+  @override
+  String get seasonalTpl_halloween => 'Halloween';
+
+  @override
+  String get prod_ail => 'Σκόρδο';
+
+  @override
+  String get prod_avocats => 'Αβοκάντο';
+
+  @override
+  String get prod_baguette => 'Μπαγκέτα';
+
+  @override
+  String get prod_bananes => 'Μπανάνες';
+
+  @override
+  String get prod_basilic => 'Βασιλικός';
+
+  @override
+  String get prod_beurre => 'Βούτυρο';
+
+  @override
+  String get prod_biscuits => 'Μπισκότα';
+
+  @override
+  String get prod_biere => 'Μπύρα';
+
+  @override
+  String get prod_bieres => 'Μπύρες';
+
+  @override
+  String get prod_bonbons => 'Καραμέλα';
+
+  @override
+  String get prod_bouillon => 'Ζωμός';
+
+  @override
+  String get prod_bouteilles_deau => 'Μπουκάλια νερού';
+
+  @override
+  String get prod_brioche => 'Τσουρέκι';
+
+  @override
+  String get prod_buche => 'Γιορτινό κέικ';
+
+  @override
+  String get prod_cacahuetes => 'Φιστίκια';
+
+  @override
+  String get prod_cafe => 'Καφές';
+
+  @override
+  String get prod_cahiers => 'Τετράδια';
+
+  @override
+  String get prod_carottes => 'καρότα';
+
+  @override
+  String get prod_cartable => 'Σχολική τσάντα';
+
+  @override
+  String get prod_champagne => 'σαμπάνια';
+
+  @override
+  String get prod_chapeau => 'Καπέλο';
+
+  @override
+  String get prod_charbon_allume_feu => 'Κάρβουνα / πυροσβέστες';
+
+  @override
+  String get prod_charcuterie => 'Αλλαντικά';
+
+  @override
+  String get prod_chips => 'Τσιπς';
+
+  @override
+  String get prod_chocolat => 'Σοκολάτα';
+
+  @override
+  String get prod_chocolats => 'Σοκολάτες';
+
+  @override
+  String get prod_citrons => 'λεμόνια';
+
+  @override
+  String get prod_citrouille => 'Κολοκύθι';
+
+  @override
+  String get prod_concombre => 'Αγγούρι';
+
+  @override
+  String get prod_confiture => 'Μαρμελάδα';
+
+  @override
+  String get prod_conserves => 'Κονσερβοποιημένα τρόφιμα';
+
+  @override
+  String get prod_cornichons => 'Τουρσιά';
+
+  @override
+  String get prod_courgettes => 'Κολοκύθι';
+
+  @override
+  String get prod_crackers => 'Κρακεράκια';
+
+  @override
+  String get prod_croissants => 'Κρουασάν';
+
+  @override
+  String get prod_creme_fraiche => 'Κρέμα γάλακτος';
+
+  @override
+  String get prod_creme_solaire => 'Αντηλιακό';
+
+  @override
+  String get prod_cereales => 'Δημητριακό';
+
+  @override
+  String get prod_dentifrice => 'Οδοντόκρεμα';
+
+  @override
+  String get prod_deguisement => 'Ενδυμασία';
+
+  @override
+  String get prod_eau => 'Νερό';
+
+  @override
+  String get prod_farine => 'Αλεύρι';
+
+  @override
+  String get prod_filet_de_poisson => 'Φιλέτο ψαριού';
+
+  @override
+  String get prod_foie_gras => 'Φουά γκρα';
+
+  @override
+  String get prod_fraises => 'Φράουλες';
+
+  @override
+  String get prod_frites => 'Πατάτες πατάτες';
+
+  @override
+  String get prod_fromage => 'Τυρί';
+
+  @override
+  String get prod_fromage_rape => 'Τυρί τριμμένο';
+
+  @override
+  String get prod_fromage_a_fondue => 'Τυρί φοντύ';
+
+  @override
+  String get prod_fromage_a_raclette => 'Τυρί Raclette';
+
+  @override
+  String get prod_glaces => 'Παγωτό';
+
+  @override
+  String get prod_glaciere => 'Ψυγείο';
+
+  @override
+  String get prod_gommes => 'Γόμες';
+
+  @override
+  String get prod_guirlandes => 'Γιρλάντες';
+
+  @override
+  String get prod_huile => 'Ελαιο';
+
+  @override
+  String get prod_huile_d => 'Ελαιόλαδο';
+
+  @override
+  String get prod_jambon => 'Ζαμπόν';
+
+  @override
+  String get prod_jouets => 'Παιχνίδια';
+
+  @override
+  String get prod_jus_d => 'Χυμός πορτοκαλιού';
+
+  @override
+  String get prod_ketchup => 'Κέτσαπ';
+
+  @override
+  String get prod_lait => 'Γάλα';
+
+  @override
+  String get prod_lardons => 'Κομμάτια μπέικον';
+
+  @override
+  String get prod_lessive => 'Απορρυπαντικό πλυντηρίου';
+
+  @override
+  String get prod_lunettes_de_soleil => 'Γυαλιά ηλίου';
+
+  @override
+  String get prod_legumes_surgeles => 'Κατεψυγμένα λαχανικά';
+
+  @override
+  String get prod_legumineuses => 'Legumes';
+
+  @override
+  String get prod_miel => 'Μέλι';
+
+  @override
+  String get prod_moutarde => 'Μουστάρδα';
+
+  @override
+  String get prod_mozzarella => 'Μοτσαρέλα';
+
+  @override
+  String get prod_nutella => 'Nutella';
+
+  @override
+  String get prod_oignons => 'κρεμμύδια';
+
+  @override
+  String get prod_olives => 'ελιές';
+
+  @override
+  String get prod_oranges => 'Πορτοκάλια';
+
+  @override
+  String get prod_pain => 'Ψωμί';
+
+  @override
+  String get prod_pain_burger => 'Ψωμάκια Burger';
+
+  @override
+  String get prod_pain_de_mie => 'Ψωμί σάντουιτς';
+
+  @override
+  String get prod_papier_toilette => 'Χαρτί υγείας';
+
+  @override
+  String get prod_parmesan => 'παρμεζάνα';
+
+  @override
+  String get prod_pizza => 'Πίτσα';
+
+  @override
+  String get prod_plats_prepares => 'Έτοιμα γεύματα';
+
+  @override
+  String get prod_poireaux => 'Πράσα';
+
+  @override
+  String get prod_poires => 'Αχλάδια';
+
+  @override
+  String get prod_poivre => 'Πιπέρι';
+
+  @override
+  String get prod_poivrons => 'Πιπεριές';
+
+  @override
+  String get prod_pommes => 'Μήλα';
+
+  @override
+  String get prod_pommes_de_terre => 'Πατάτες';
+
+  @override
+  String get prod_poubelles => 'Σακούλες σκουπιδιών';
+
+  @override
+  String get prod_poulet => 'Κοτόπουλο';
+
+  @override
+  String get prod_pate_a_pizza => 'Ζύμη για πίτσα';
+
+  @override
+  String get prod_pates => 'Ζυμαρικά';
+
+  @override
+  String get prod_raisin => 'σταφύλια';
+
+  @override
+  String get prod_riz => 'Ρύζι';
+
+  @override
+  String get prod_regle => 'Κυβερνήτης';
+
+  @override
+  String get prod_salade => 'Μαρούλι';
+
+  @override
+  String get prod_salade_verte => 'Πράσινη σαλάτα';
+
+  @override
+  String get prod_sandwiches => 'Σάντουιτς';
+
+  @override
+  String get prod_sapin => 'Χριστουγεννιάτικο δέντρο';
+
+  @override
+  String get prod_sauce_burger => 'Σάλτσα μπιφτέκι';
+
+  @override
+  String get prod_sauce_salsa => 'Salsa';
+
+  @override
+  String get prod_sauce_tomate => 'Σάλτσα ντομάτας';
+
+  @override
+  String get prod_saucisses => 'Λουκάνικα';
+
+  @override
+  String get prod_saucisson => 'Σαλάμι';
+
+  @override
+  String get prod_saumon => 'Σολομός';
+
+  @override
+  String get prod_savon => 'Σαπούνι';
+
+  @override
+  String get prod_sel => 'Αλας';
+
+  @override
+  String get prod_shampoing => 'Σαμπουάν';
+
+  @override
+  String get prod_soda => 'Σόδα';
+
+  @override
+  String get prod_steak => 'Μπριζόλα';
+
+  @override
+  String get prod_steaks_haches => 'Μπιφτέκια μπέργκερ';
+
+  @override
+  String get prod_stylos => 'Στυλό';
+
+  @override
+  String get prod_sucre => 'Ζάχαρη';
+
+  @override
+  String get prod_the => 'Τσάι';
+
+  @override
+  String get prod_tomates => 'Ντομάτες';
+
+  @override
+  String get prod_tortillas => 'Τορτίγιες';
+
+  @override
+  String get prod_trousse => 'Μολυβοθήκη';
+
+  @override
+  String get prod_viande_hachee => 'Κιμάς';
+
+  @override
+  String get prod_viande_pour_grillades => 'Ψήστε κρέας στη σχάρα';
+
+  @override
+  String get prod_vin => 'Κρασί';
+
+  @override
+  String get prod_vin_blanc => 'Λευκό κρασί';
+
+  @override
+  String get prod_vinaigre => 'Ξύδι';
+
+  @override
+  String get prod_yaourt => 'Γιαούρτι';
+
+  @override
+  String get prod_eponge => 'Σφουγγάρι';
+
+  @override
+  String get prod_oeufs => 'Αυγά';
+
+  @override
+  String get catalogCat_fruits => 'Φρούτα & λαχανικά';
+
+  @override
+  String get catalogCat_dairy => 'Γαλακτοκομικά';
+
+  @override
+  String get catalogCat_bakery => 'Αρτοποιείο';
+
+  @override
+  String get catalogCat_meat => 'Κρέας & ψάρι';
+
+  @override
+  String get catalogCat_grocery => 'Παντοπωλείο';
+
+  @override
+  String get catalogCat_beverages => 'Ποτά';
+
+  @override
+  String get catalogCat_frozen => 'Κατεψυγμένα';
+
+  @override
+  String get catalogCat_hygiene => 'Υγιεινή & σπίτι';
+
+  @override
+  String get mealLbl_raclette => 'Raclette';
+
+  @override
+  String get mealLbl_apero => 'Aperitif';
+
+  @override
+  String get mealLbl_barbecue => 'Barbecue';
+
+  @override
+  String get mealLbl_petit_dej => 'Breakfast';
+
+  @override
+  String get mealLbl_carbonara => 'Carbonara pasta';
+
+  @override
+  String get mealLbl_salade => 'Mixed salad';
+
+  @override
+  String get mealLbl_fondue => 'Fondue';
+
+  @override
+  String get mealLbl_pizza => 'Homemade pizza';
+
+  @override
+  String get mealLbl_crepes => 'Crepes';
+
+  @override
+  String get mealLbl_tacos => 'Tacos / fajitas';
+
+  @override
+  String get mealLbl_soupe => 'Soup';
+
+  @override
+  String get mealLbl_burger => 'Burgers';
+
+  @override
+  String get aboutCreator => 'Creator';
+
+  @override
+  String get aboutHowTo => 'How to use';
+
+  @override
+  String get aboutPrivacy => 'Privacy';
+
+  @override
+  String get aboutPrivacyFull => 'Full privacy policy';
+
+  @override
+  String get aboutLicense => 'License';
+
+  @override
+  String get aboutLicenseFull => 'View full GPL v3 license';
+
+  @override
+  String get aboutAccessibility => 'Accessibility';
+
+  @override
+  String get aboutCredits => 'Credits';
+
+  @override
+  String aboutVersion(String version) {
+    return 'Version $version';
+  }
+
+  @override
+  String aboutCreatorBody(String app, String tagline, String appPlus) {
+    return '$app was created by DesertYGL.\n$tagline The free version may show discreet ads; $appPlus (one-time purchase) removes ads and unlocks advanced features.';
+  }
+
+  @override
+  String get aboutHowToBody =>
+      '• Add an item: tap the + button at the bottom right, enter a name and optionally pick a color.\n• Check / uncheck: tap an item (in cart = checked).\n• Edit or delete: long-press an item, then Edit or Delete.\n• Quick delete: swipe an item left to delete; a snackbar lets you undo.\n• Colors and categories: in Stores mode (Settings), the chips at the top let you add or name stores; tap a chip to name it.\n• Share: share icon → Export as text or Real-time share (Google sign-in).\n• Multiple lists and advanced features: available with Tote \'O Recall+.\n• Settings (gear icon): item style, dark mode, capitalization, reminders, categories.';
+
+  @override
+  String get quickAddHelp =>
+      'Current list: type the item. Other list: “List Name add item” or “List Name: item, item”.';
+
+  @override
+  String get quickAddHintExample => 'E.g. Apple | List Store: Apple, milk';
+
+  @override
+  String quickAddListChip(String name) {
+    return 'List $name';
+  }
+
+  @override
+  String get pasteTooltip => 'Paste';
+
+  @override
+  String get dictateTooltip => 'Dictate';
+
+  @override
+  String get editItemTitle => 'Edit item';
+
+  @override
+  String get deleteReminderTooltip => 'Delete reminder';
+
+  @override
+  String get deletePhotoTooltip => 'Delete photo';
+
+  @override
+  String get priceHint => 'Estimated price (optional, e.g. 2.50)';
+
+  @override
+  String get qtyHint => 'Qty (e.g. 2)';
+
+  @override
+  String get unitHint => 'Unit (L, kg…)';
+
+  @override
+  String get noteHint => 'Note (e.g. brand, detail)';
+
+  @override
+  String get rightClickEditDelete => 'Right-click: Edit or delete';
+
+  @override
+  String get leaveSharedListAction => 'Leave shared list';
+
+  @override
+  String errorPrefixColon(String error) {
+    return 'Error: $error';
+  }
+
+  @override
+  String get notifChannelProximity => 'Store nearby';
+
+  @override
+  String get notifChannelProximityDesc =>
+      'Reminder when you are near a favorite store';
+
+  @override
+  String get notifChannelItemReminders => 'Per-item reminders';
+
+  @override
+  String get notifChannelRecurring => 'Recurring purchases';
+
+  @override
+  String get notifChannelRecurringDesc =>
+      'Reminder for purchases on a regular schedule';
+
+  @override
+  String get notifChannelBirthdays => 'Birthdays';
+
+  @override
+  String get notifChannelBirthdaysDesc => 'Reminders (1–2 days before)';
+
+  @override
+  String get notifChannelWeekly => 'Weekly reminder';
+
+  @override
+  String get notifChannelWeeklyDesc => 'Weekly reminder for your list';
+
+  @override
+  String get notifChannelDefault => 'Tote \'O Recall reminders';
+
+  @override
+  String get notifRecurringTitle => 'Recurring purchase due';
+
+  @override
+  String scanUnknownArticle(String code) {
+    return 'Item ($code)';
+  }
+
+  @override
+  String get birthdayYearHint => 'e.g. 1990';
+
+  @override
+  String get profileAvoidHint => 'alcohol, pork…';
+
+  @override
+  String get profileBrandHint => 'Brand…';
+
+  @override
+  String get profileAllergensHint => 'peanuts, lactose';
+
+  @override
+  String smartCartRhythmEveryDays(int days) {
+    return 'every ${days}d';
+  }
+
+  @override
+  String get aboutPrivacyBody =>
+      'Data controller: the app publisher (DesertYGL).\n\n• Data collected: shopping lists and settings locally; if syncing (Google): account ID and Firebase data; ads (free version): advertising IDs via the AdMob SDK.\n• Purposes: provide the app, optional sync, show ads (free).\n• Legal basis: contract performance / legitimate interest; consent for personalized ads where required.\n• Retention: local data until uninstall; sync account per Google/Firebase policy.\n• Rights: access, rectification, deletion — contact the publisher.';
+
+  @override
+  String get aboutAccessibilityBody =>
+      'The app aims for accessibility best practices (contrast, touch targets, screen readers). Please report any barriers.';
+
+  @override
+  String get aboutCreditsBody =>
+      'Material Design icons (Google). Open-source libraries as listed in dependency licenses. Tote \'O Recall product and brand: DesertYGL.';
+
+  @override
+  String quickAddAddedOne(String item, String list) {
+    return '$item added to « $list »';
+  }
+
+  @override
+  String quickAddAddedMany(int count, String list) {
+    return '$count items added to « $list »';
+  }
+
+  @override
+  String get quickAddExampleHint => 'Ex: Apple | Liste Auchan : Apple, milk';
+
+  @override
+  String get itemNameHint => 'Item name';
+
+  @override
+  String get speakNowHint => 'Speak now...';
+
+  @override
+  String get listeningTooltip => 'Listening';
+
+  @override
+  String get voiceInputTooltip => 'Voice input';
+
+  @override
+  String get birthYearHint => 'Year of birth (e.g. 1990)';
+
+  @override
+  String get profileHintName => 'First name or nickname';
+
+  @override
+  String get profileHintEmail => 'email@example.com';
+
+  @override
+  String get profileHintCity => 'City';
+
+  @override
+  String get smartCartRhythmTitle => 'Shopping rhythm';
+
+  @override
+  String get smartCartRhythmBody =>
+      'Analysis of your shopping habits to anticipate your needs.';
+
+  @override
+  String get notifChannelRemindersName => 'Toteo reminders';
+
+  @override
+  String get notifChannelRemindersDesc => 'Shopping reminders and alerts';
+
+  @override
+  String get notifChannelGeofenceName => 'Store alerts';
+
+  @override
+  String get notifChannelGeofenceDesc => 'Notifications near a store';
+
+  @override
+  String backupErrorPrefix(String error) {
+    return 'Error: $error';
+  }
+
+  @override
+  String get tooltipEdit => 'Edit';
+
+  @override
+  String get tooltipDelete => 'Delete';
+
+  @override
+  String get tooltipDuplicate => 'Duplicate';
+
+  @override
+  String get tooltipPostpone => 'Postpone';
+
+  @override
+  String get tooltipDetails => 'Details';
+
+  @override
+  String get aboutLegalTitle => 'Legal notice';
+
+  @override
+  String get aboutCompanyLine => 'Publisher: Benjamin San / NoubliPo';
+
+  @override
+  String get aboutSirenLine => 'SIREN: 941 826 115';
+
+  @override
+  String get aboutAddressLine =>
+      'Address: 60 rue François 1er, 75008 Paris, France';
+
+  @override
+  String get aboutHostingLine =>
+      'Hosting: Firebase / Google Cloud (USA) — Firebase Authentication, Cloud Firestore, Firebase Storage, Firebase Hosting.';
+
+  @override
+  String get aboutContactLine => 'Contact: benjamin.san@outlook.fr';
+
+  @override
+  String get aboutPrivacyTitle => 'Privacy policy';
+
+  @override
+  String get aboutPrivacyIntro =>
+      'Tote \'O Recall (NoubliPo) collects and processes the following data:';
+
+  @override
+  String get aboutPrivacyBullet1 =>
+      'Account: email, display name (Firebase Authentication).';
+
+  @override
+  String get aboutPrivacyBullet2 =>
+      'Lists and items: synced via Cloud Firestore when signed in.';
+
+  @override
+  String get aboutPrivacyBullet3 => 'Item photos: stored on Firebase Storage.';
+
+  @override
+  String get aboutPrivacyBullet4 =>
+      'Location (optional): used only for store alerts (geofencing), with your consent.';
+
+  @override
+  String get aboutPrivacyBullet5 =>
+      'Local data: lists, preferences and cache stay on your device.';
+
+  @override
+  String get aboutRightsTitle => 'Your rights';
+
+  @override
+  String get aboutRightsBody =>
+      'Under GDPR, you may access, rectify or delete your data. Contact us at benjamin.san@outlook.fr. You can also delete your account from the app.';
+
+  @override
+  String aboutVersionLabel(String version) {
+    return 'Version $version';
+  }
+
+  @override
+  String get aboutLicenseBody =>
+      'This application is distributed under the GNU GPL v3 license. You are free to use, modify and redistribute this software under the terms of the GPL v3.';
+
+  @override
+  String notifBuyAgainTitle(String name) {
+    return 'Buy again: $name';
+  }
+
+  @override
+  String notifItemReminderBody(String title) {
+    return 'Reminder: $title';
+  }
+
+  @override
+  String notifBirthdayTitle(String celebration, String name) {
+    return '$name\'s $celebration';
+  }
+
+  @override
+  String notifBirthdayTomorrow(String celebration, String name) {
+    return 'Tomorrow: $name\'s $celebration';
+  }
+
+  @override
+  String notifBirthdayInDays(int days, String celebration, String name) {
+    return 'In $days days: $name\'s $celebration';
+  }
+
+  @override
+  String get birthdaysRemindersPrefix => 'Reminders';
+
+  @override
+  String get inCartLabel => 'In cart';
+
+  @override
+  String get listeningSpeakClearly => 'Listening... Speak clearly.';
+
+  @override
+  String get reminderOptionalHint => 'Reminder (optional)';
+
+  @override
+  String get dateLabelShort => 'Date';
+
+  @override
+  String get timeLabelShort => 'Time';
+
+  @override
+  String get reminderNoteExampleHint => 'Ex: important — go to the store';
+
+  @override
+  String get noteQtyPhotoSection => 'Note, quantity, photo';
+
+  @override
+  String get photoLabel => 'Photo';
+
+  @override
+  String get changePhotoLabel => 'Change';
+
+  @override
+  String voiceRecognized(String text) {
+    return 'Recognized: $text';
+  }
+
+  @override
+  String imageErrorPrefix(String error) {
+    return 'Image: $error';
+  }
+
+  @override
+  String get backupShareSubject => 'Toteo backup';
+
+  @override
+  String get prod_courge => 'Σκουός';
+
+  @override
+  String get prod_croutons => 'κρουτόν';
+
+  @override
+  String get prod_sauce_cesar => 'Ντύσιμο του Καίσαρα';
+
+  @override
+  String get socialTrendVeggies => 'More seasonal vegetables this week';
+
+  @override
+  String get socialTrendSoups => 'Soups and hot meals trending up';
+
+  @override
+  String get socialRecipeSoup => 'Seasonal soup';
+
+  @override
+  String get socialRecipeCaesar => 'Caesar salad';
+
+  @override
+  String get colorName_0 => 'Κόκκινο';
+
+  @override
+  String get colorName_1 => 'Ροζ';
+
+  @override
+  String get colorName_2 => 'Μωβ';
+
+  @override
+  String get colorName_3 => 'Γαλαζοπράσινο μωβ';
+
+  @override
+  String get colorName_4 => 'Ινδικό';
+
+  @override
+  String get colorName_5 => 'Μπλε';
+
+  @override
+  String get colorName_6 => 'Κυανό';
+
+  @override
+  String get colorName_7 => 'Πετρόλ';
+
+  @override
+  String get colorName_8 => 'Πράσινο';
+
+  @override
+  String get colorName_9 => 'Ανοιχτό πράσινο';
+
+  @override
+  String get colorName_10 => 'Λάιμ';
+
+  @override
+  String get colorName_11 => 'Κίτρινο';
+
+  @override
+  String get colorName_12 => 'Κεχριμπάρι';
+
+  @override
+  String get colorName_13 => 'Πορτοκαλί';
+
+  @override
+  String get colorName_14 => 'Κοράλλι';
+
+  @override
+  String get colorName_15 => 'Καφέ';
+
+  @override
+  String get prod_creme => 'Κρέμα';
+
+  @override
+  String get prod_return => ') επιστροφή';
+
+  @override
+  String get prod_abricot => 'Βερύκοκκο';
+
+  @override
+  String get prod_abricots_secs => 'Αποξηραμένα βερίκοκα';
+
+  @override
+  String get prod_adhesif => 'Συγκολλητικός';
+
+  @override
+  String get prod_adoucissant => 'Δικηγόρος';
+
+  @override
+  String get prod_agneau => 'Agneau';
+
+  @override
+  String get prod_agrafeuse => 'Agrafeuse';
+
+  @override
+  String get prod_agraves => 'Agraves';
+
+  @override
+  String get prod_ajout_quand_un_partenaire_ou_l =>
+      'Ajout quand un partenaire (ου λ';
+
+  @override
+  String get prod_algues_nori => 'Algues nori';
+
+  @override
+  String get prod_algues_wakame => 'Algues wakame';
+
+  @override
+  String get prod_allumettes => 'Αλουμέτες';
+
+  @override
+  String get prod_amandes => 'αμύγδαλα';
+
+  @override
+  String get prod_ampoule => 'Αμπούλα';
+
+  @override
+  String get prod_ananas => 'Ανανάς';
+
+  @override
+  String get prod_anchois => 'Anchois';
+
+  @override
+  String get prod_andouille => 'Αντουίγ';
+
+  @override
+  String get prod_aneth => 'Ανέθ';
+
+  @override
+  String get prod_anneaux => 'Anneaux';
+
+  @override
+  String get prod_apero_dinatoire => 'Apero dinatoire';
+
+  @override
+  String get prod_apres_rasage => 'Aftershave';
+
+  @override
+  String get prod_apres_shampoing => 'Μαλακτικό';
+
+  @override
+  String get prod_aperitif => 'Απεριτίφ';
+
+  @override
+  String get prod_apero => 'Απεριτίφ';
+
+  @override
+  String get prod_artichaut => 'Αγκινάρα';
+
+  @override
+  String get prod_asperges => 'Σπαράγγι';
+
+  @override
+  String get prod_aubergine => 'Μελιτζάνα';
+
+  @override
+  String get prod_babybel => 'Babybel';
+
+  @override
+  String get prod_bac_a_peinture => 'Δίσκος βαφής';
+
+  @override
+  String get prod_bacon => 'Μπέικον';
+
+  @override
+  String get prod_baies_de_goji => 'Baies de goji';
+
+  @override
+  String get prod_bain_de_bouche => 'Bain de bouche';
+
+  @override
+  String get prod_bambou => 'Μπάμπου';
+
+  @override
+  String get prod_barbecue => 'Ψησταριά';
+
+  @override
+  String get prod_barres_chocolatees => 'Μπάρες σοκολάτας';
+
+  @override
+  String get prod_basilic_thai => 'βασιλικός της Ταϊλάνδης';
+
+  @override
+  String get prod_batterie => 'Μπαταρία';
+
+  @override
+  String get prod_biberon => 'Biberon';
+
+  @override
+  String get prod_biscottes => 'Μπισκότα';
+
+  @override
+  String get prod_biscuits_bio => 'Μπισκότα βιο';
+
+  @override
+  String get prod_biere_sans_alcool => 'Μπύρα χωρίς αλκοόλ';
+
+  @override
+  String get prod_blanc_doeuf => 'Ασπράδι αυγού';
+
+  @override
+  String get prod_blanquette => 'Μπλανκέτα';
+
+  @override
+  String get prod_bloc_de_foie_gras => 'Μπλοκ ντε φουά γκρα';
+
+  @override
+  String get prod_boissons => 'Boissons';
+
+  @override
+  String get prod_bok_choy => 'Μποκ τσόι';
+
+  @override
+  String get prod_bonite_sechee => 'Αποξηραμένη παλαμίδα';
+
+  @override
+  String get prod_boudin_noir => 'Boudin noir';
+
+  @override
+  String get prod_bouillon_cube => 'Κύβος ζωμού';
+
+  @override
+  String get prod_boulangerie => 'Boulangerie';
+
+  @override
+  String get prod_boulettes => 'Μπουλέτες';
+
+  @override
+  String get prod_boulgour => 'Μπουλγκούρ';
+
+  @override
+  String get prod_boulons => 'Μπουλόνια';
+
+  @override
+  String get prod_boursin => 'Boursin';
+
+  @override
+  String get prod_bretzels => 'Μπρέτζελς';
+
+  @override
+  String get prod_brie => 'Brie';
+
+  @override
+  String get prod_briquet => 'Μπρικέτα';
+
+  @override
+  String get prod_brochettes => 'φυλλάδια';
+
+  @override
+  String get prod_brocoli => 'Μπρόκολο';
+
+  @override
+  String get prod_brosse_a_dents => 'Οδοντόβουρτσα';
+
+  @override
+  String get prod_bulots => 'Μπουλότες';
+
+  @override
+  String get prod_burgers => 'Μπέργκερ';
+
+  @override
+  String get prod_burin => 'Γλυφή χαράκτου';
+
+  @override
+  String get prod_boeuf => 'Βοδινό κρέας';
+
+  @override
+  String get prod_boeuf_bourguignon => 'βοδινό bourguignon';
+
+  @override
+  String get prod_cabillaud => 'Γάδος';
+
+  @override
+  String get prod_cacao_en_poudre => 'Σκόνη κακάο';
+
+  @override
+  String get prod_cafe_bio => 'Βιολογικός καφές';
+
+  @override
+  String get prod_cafe_en_grains => 'Κόκκοι καφέ';
+
+  @override
+  String get prod_cafe_moulu => 'Αλεσμένος καφές';
+
+  @override
+  String get prod_cafe_soluble => 'Στιγμιαίος καφές';
+
+  @override
+  String get prod_calamar_seche => 'Αποξηραμένο καλαμάρι';
+
+  @override
+  String get prod_camembert => 'Camembert';
+
+  @override
+  String get prod_canard => 'Φενάκη';
+
+  @override
+  String get prod_cannelle => 'Κανέλα';
+
+  @override
+  String get prod_capres => 'Capres';
+
+  @override
+  String get prod_caprice_des_dieux => 'Caprice des dieux';
+
+  @override
+  String get prod_carnet => 'Δελτίο';
+
+  @override
+  String get prod_carottes_crues => 'Ωμά καρότα';
+
+  @override
+  String get prod_carrelage => 'Carrelage';
+
+  @override
+  String get prod_carte_recharge => 'Επαναφόρτιση καρτών';
+
+  @override
+  String get prod_cartes_postales => 'Cartes postales';
+
+  @override
+  String get prod_cartouche_filtre => 'Φίλτρο Cartouche';
+
+  @override
+  String get prod_caviar_daubergine => 'Χαβιάρι μελιτζάνας';
+
+  @override
+  String get prod_champignons => 'Champignons';
+
+  @override
+  String get prod_champignons_noirs => 'Champignons noir';
+
+  @override
+  String get prod_champignons_shiitake => 'Champignons shiitake';
+
+  @override
+  String get prod_chantilly => 'Chantilly';
+
+  @override
+  String get prod_charcuterie_artisanale => 'Τεχνίτες αλλαντικών';
+
+  @override
+  String get prod_chauffage => 'Chauffage';
+
+  @override
+  String get prod_cheddar => 'κασέρι';
+
+  @override
+  String get prod_chevilles => 'Chevilles';
+
+  @override
+  String get prod_chewing_gum => 'Τσίχλα';
+
+  @override
+  String get prod_chicoree => 'Ραδίκι';
+
+  @override
+  String get prod_chipolatas => 'Τσιπολάτας';
+
+  @override
+  String get prod_chocolat_au_lait => 'Chocolat au lait';
+
+  @override
+  String get prod_chocolat_bio => 'Βιο σοκολάτας';
+
+  @override
+  String get prod_chocolat_blanc => 'Σοκολάτα blanc';
+
+  @override
+  String get prod_chocolat_en_poudre => 'Σκόνη κακάο';
+
+  @override
+  String get prod_chocolat_noir => 'Σοκολατένιο νουάρ';
+
+  @override
+  String get prod_chocolat_noir_85 => '85% μαύρη σοκολάτα';
+
+  @override
+  String get prod_chou => 'Λάχανο';
+
+  @override
+  String get prod_chou_chinois => 'Chou chinois';
+
+  @override
+  String get prod_choucroute => 'Σουκρουτ';
+
+  @override
+  String get prod_chevre => 'κατσικίσιο τυρί';
+
+  @override
+  String get prod_ciboulette => 'Βολβοί φαγώσιμοι';
+
+  @override
+  String get prod_cidre => 'Cidre';
+
+  @override
+  String get prod_cigares => 'Τσιγάρα';
+
+  @override
+  String get prod_cigarettes => 'τσιγάρα';
+
+  @override
+  String get prod_citron => 'Κίτρο';
+
+  @override
+  String get prod_citronnelle => 'Citronnelle';
+
+  @override
+  String get prod_clous => 'Κλούς';
+
+  @override
+  String get prod_cle => 'Κλειδί';
+
+  @override
+  String get prod_cle_a_molette => 'Κλειδί ρυθμιζόμενου ανοίγματος';
+
+  @override
+  String get prod_clementines => 'Κλημεντίνες';
+
+  @override
+  String get prod_colle => 'Colle';
+
+  @override
+  String get prod_colle_carrelage => 'Colle carrelage';
+
+  @override
+  String get prod_collier => 'Ανθρακωρύχος';
+
+  @override
+  String get prod_compote => 'Κομπόστα';
+
+  @override
+  String get prod_compote_bio => 'Κομπόστα βιο';
+
+  @override
+  String get prod_comte => 'Comté';
+
+  @override
+  String get prod_confiture_bio => 'Confiture bio';
+
+  @override
+  String get prod_confiture_dabricot => 'Confiture d\'abricot';
+
+  @override
+  String get prod_confiture_de_fraises => 'Confiture de fraises';
+
+  @override
+  String get prod_confiture_maison => 'Confiture maison';
+
+  @override
+  String get prod_contreplaque => 'Κόντρα πλακέ';
+
+  @override
+  String get prod_coquillages => 'Κοκιλάζ';
+
+  @override
+  String get prod_cordon_bleu => 'Cordon bleu';
+
+  @override
+  String get prod_coriandre_fraiche => 'Φρέσκο ​​κόλιανδρο';
+
+  @override
+  String get prod_corn_flakes => 'Νιφάδες καλαμποκιού';
+
+  @override
+  String get prod_cotons => 'Βαμβάκια';
+
+  @override
+  String get prod_couches => 'Καναπέδες';
+
+  @override
+  String get prod_coulis => 'Ο Κούλης';
+
+  @override
+  String get prod_coupe => 'Κουπέ';
+
+  @override
+  String get prod_crackers_naturels => 'Απλές κροτίδες';
+
+  @override
+  String get prod_crackers_sans_sel => 'Crackers sans sel';
+
+  @override
+  String get prod_cranberries => 'Cranberries';
+
+  @override
+  String get prod_crevettes => 'Γαρίδα';
+
+  @override
+  String get prod_crochet => 'Πλέκω';
+
+  @override
+  String get prod_crustaces => 'Οστρακόδερμο';
+
+  @override
+  String get prod_creme_de_coco => 'Κρέμα καρύδας';
+
+  @override
+  String get prod_creme_dessert => 'Επιδόρπιο κρέμα';
+
+  @override
+  String get prod_creme_hydratante => 'Ενυδατική κρέμα';
+
+  @override
+  String get prod_creme_liquide => 'Κρέμα μαγειρικής';
+
+  @override
+  String get prod_creme_epaisse => 'Παχύρρευστη κρέμα';
+
+  @override
+  String get prod_cremant => 'Crémant';
+
+  @override
+  String get prod_cremone => 'Μπουλόνι Κρεμόνης';
+
+  @override
+  String get prod_crepes => 'Crêpes';
+
+  @override
+  String get prod_curry => 'Κάρι';
+
+  @override
+  String get prod_curry_massaman => 'Μασάμαν κάρυ';
+
+  @override
+  String get prod_curry_rouge => 'Κάρι ρουζ';
+
+  @override
+  String get prod_curry_vert => 'Curry vert';
+
+  @override
+  String get prod_cutter => 'Κόπτης';
+
+  @override
+  String get prod_cable => 'Καλώδιο';
+
+  @override
+  String get prod_celeri => 'Σέλινο';
+
+  @override
+  String get prod_coeur_de_palmier => 'Καρδιά της παλάμης';
+
+  @override
+  String get prod_dashi => 'Ντάσι';
+
+  @override
+  String get prod_dattes => 'Ημερομηνίες';
+
+  @override
+  String get prod_digestif => 'Digestif';
+
+  @override
+  String get prod_dim_sum => 'Dim sum';
+
+  @override
+  String get prod_douille => 'Douille';
+
+  @override
+  String get prod_decafeine => 'Καφές χωρίς καφεΐνη';
+
+  @override
+  String get prod_decapant => 'Διαβρωτικό χρώματος';
+
+  @override
+  String get prod_demaquillant => 'ντεμακιγιάζ';
+
+  @override
+  String get prod_demaquillant_yeux => 'ντεμακιγιάζ ματιών';
+
+  @override
+  String get prod_deodorant => 'Αποσμητικό';
+
+  @override
+  String get prod_desherbant => 'ζιζανιοκτόνος';
+
+  @override
+  String get prod_desinfectant => 'Απολυμαντικό';
+
+  @override
+  String get prod_detachant => 'Αφαίρεση λεκέδων';
+
+  @override
+  String get prod_eau_aromatisee => 'Αρωματισμένο νερό';
+
+  @override
+  String get prod_eau_de_toilette => 'Eau de toilette';
+
+  @override
+  String get prod_eau_petillante => 'Ανθρακούχο νερό';
+
+  @override
+  String get prod_edamame => 'Edamame';
+
+  @override
+  String get prod_emmental => 'Έμενταλ';
+
+  @override
+  String get prod_endives => 'Αντίδια';
+
+  @override
+  String get prod_enduit => 'Enduit';
+
+  @override
+  String get prod_engrais => 'Engrais';
+
+  @override
+  String get prod_enveloppes => 'Φάκελοι';
+
+  @override
+  String get prod_escalope => 'Εσκαλόπ';
+
+  @override
+  String get prod_faisselle => 'Faisselle';
+
+  @override
+  String get prod_farine_complete => 'Αλεύρι ολικής αλέσεως';
+
+  @override
+  String get prod_feta => 'Φέτα';
+
+  @override
+  String get prod_feuilles_de_riz => 'Feuilles de riz';
+
+  @override
+  String get prod_figues_sechees => 'Αποξηραμένα σύκα';
+
+  @override
+  String get prod_fil_dentaire => 'Fil dentaire';
+
+  @override
+  String get prod_filet => 'Φιλέτο';
+
+  @override
+  String get prod_fils_electriques => 'Ηλεκτρικό καλώδιο';
+
+  @override
+  String get prod_filtre_a_eau => 'Φίλτρο νερού';
+
+  @override
+  String get prod_fleurs => 'Fleurs';
+
+  @override
+  String get prod_flocons_davoine => 'Νιφάδες βρώμης';
+
+  @override
+  String get prod_fondue => 'Είδος τυρόπητας';
+
+  @override
+  String get prod_fondue_savoyarde => 'Σαβογιάρδα φοντύ';
+
+  @override
+  String get prod_fromage_blanc => 'Fromage blanc';
+
+  @override
+  String get prod_fromage_de_chevre => 'κατσικίσιο τυρί';
+
+  @override
+  String get prod_fromage_fermier => 'Fromage fermier';
+
+  @override
+  String get prod_fruits => 'Καρπός';
+
+  @override
+  String get prod_fruits_legumes => 'Φρούτα & λαχανικά';
+
+  @override
+  String get prod_fruits_bio => 'Φρούτα βιο';
+
+  @override
+  String get prod_fruits_congeles => 'Κατεψυγμένα φρούτα';
+
+  @override
+  String get prod_fruits_de_mer => 'Fruits de mer';
+
+  @override
+  String get prod_fruits_du_marche => 'Φρούτα στην αγορά';
+
+  @override
+  String get prod_fruits_frais => 'Φρέσκα φρούτα';
+
+  @override
+  String get prod_fruits_secs => 'Αποξηραμένα φρούτα';
+
+  @override
+  String get prod_galette_de_cereales => 'Κέικ δημητριακών';
+
+  @override
+  String get prod_galettes_de_riz => 'Galettes de riz';
+
+  @override
+  String get prod_gel_douche => 'Ντους gel';
+
+  @override
+  String get prod_gibier => 'Gibier';
+
+  @override
+  String get prod_gingembre => 'Τζίντζερ';
+
+  @override
+  String get prod_gingembre_marine => 'Τζίντζερ τουρσί';
+
+  @override
+  String get prod_gommage => 'Gommage';
+
+  @override
+  String get prod_graines => 'Σπόροι';
+
+  @override
+  String get prod_graines_de_chia => 'Graines de chia';
+
+  @override
+  String get prod_graines_de_lin => 'Graines de lin';
+
+  @override
+  String get prod_grattage => 'Grattage';
+
+  @override
+  String get prod_guacamole => 'Γκουακαμόλε';
+
+  @override
+  String get prod_gateau => 'Κέικ';
+
+  @override
+  String get prod_gateaux_secs => 'Μπισκότα';
+
+  @override
+  String get prod_halloween => '31 Οκτώβρη';
+
+  @override
+  String get prod_haricots => 'Haricots';
+
+  @override
+  String get prod_haricots_blancs => 'Λευκά φασόλια';
+
+  @override
+  String get prod_haricots_rouges => 'Κόκκινα φασόλια';
+
+  @override
+  String get prod_haricots_verts => 'Φασολάκια';
+
+  @override
+  String get prod_herbes => 'Herbes';
+
+  @override
+  String get prod_homard => 'Homard';
+
+  @override
+  String get prod_houmous => 'Χούμους';
+
+  @override
+  String get prod_huile_dolive_bio => 'Huile d\'olive bio';
+
+  @override
+  String get prod_huile_de_sesame => 'Σησαμέλαιο';
+
+  @override
+  String get prod_huitres => 'Στρείδια';
+
+  @override
+  String get prod_hygiene_maison => 'Σπίτι & υγιεινή';
+
+  @override
+  String get prod_impregnation => 'Σφραγιστικό ξύλου';
+
+  @override
+  String get prod_infusion => 'Εγχυση';
+
+  @override
+  String get prod_infusion_froide => 'Παγωμένο τσάι από βότανα';
+
+  @override
+  String get prod_interrupteur => 'Διακοπτης';
+
+  @override
+  String get prod_jambon_cru => 'Jambon cru';
+
+  @override
+  String get prod_javel => 'Τζαβέλ';
+
+  @override
+  String get prod_joint => 'Αρθρωση';
+
+  @override
+  String get prod_joint_carrelage => 'Αρθρικό καρέλα';
+
+  @override
+  String get prod_joint_torique => 'Ροπή αρμών';
+
+  @override
+  String get prod_journal => 'Εφημερίδα';
+
+  @override
+  String get prod_jus => 'Jus';
+
+  @override
+  String get prod_jus_de_fruit => 'Χυμός φρούτων';
+
+  @override
+  String get prod_jus_de_fruit_naturel => 'Jus de fruit natural';
+
+  @override
+  String get prod_jus_de_raisin => 'Jus de raisin';
+
+  @override
+  String get prod_jus_dorange => 'Jus dorange';
+
+  @override
+  String get prod_kimchi => 'Kimchi';
+
+  @override
+  String get prod_kiri => 'Κίρι';
+
+  @override
+  String get prod_kiwi => 'Ακτινίδια';
+
+  @override
+  String get prod_laine_de_verre => 'Laine de verre';
+
+  @override
+  String get prod_lait_bio => 'Lait bio';
+
+  @override
+  String get prod_lait_bebe => 'Βρεφική φόρμουλα';
+
+  @override
+  String get prod_lait_concentre => 'Συμπυκνωμένο γάλα';
+
+  @override
+  String get prod_lait_damande => 'Γάλα αμυγδάλου';
+
+  @override
+  String get prod_lait_davoine => 'Γάλα βρώμης';
+
+  @override
+  String get prod_lait_de_coco => 'Lait de coco';
+
+  @override
+  String get prod_lait_de_soja => 'Γάλα σόγιας';
+
+  @override
+  String get prod_lait_demaquillant => 'Γάλα καθαρισμού';
+
+  @override
+  String get prod_lait_en_poudre => 'Lait en poudre';
+
+  @override
+  String get prod_lait_vegetal => 'Φυτικό γάλα';
+
+  @override
+  String get prod_laitue => 'Μαρούλι';
+
+  @override
+  String get prod_lambris => 'Λαμπρής';
+
+  @override
+  String get prod_lame_de_scie => 'Lame de scie';
+
+  @override
+  String get prod_langoustines => 'Λαγκουστίνες';
+
+  @override
+  String get prod_lapin => 'Lapin';
+
+  @override
+  String get prod_lard => 'Λαρδί';
+
+  @override
+  String get prod_lasagnes => 'Λαζάνια';
+
+  @override
+  String get prod_lasure => 'Lasure';
+
+  @override
+  String get prod_laurier => 'Φύλλο δάφνης';
+
+  @override
+  String get prod_lentilles => 'Φακή';
+
+  @override
+  String get prod_lentilles_corail => 'Φακές κοράλλι';
+
+  @override
+  String get prod_levure_maltee => 'Εκχύλισμα βύνης';
+
+  @override
+  String get prod_lime => 'Ασβεστος';
+
+  @override
+  String get prod_limette => 'Limette';
+
+  @override
+  String get prod_lingettes => 'Lingettes';
+
+  @override
+  String get prod_lingettes_bebe => 'Παιδικά μαντηλάκια';
+
+  @override
+  String get prod_liquide_vaisselle => 'Υγρή βαζέλα';
+
+  @override
+  String get prod_loto => 'Loto';
+
+  @override
+  String get prod_legumes => 'Λαχανικά';
+
+  @override
+  String get prod_legumes_bio => 'Βιολογικά λαχανικά';
+
+  @override
+  String get prod_legumes_crus => 'Ωμά λαχανικά';
+
+  @override
+  String get prod_legumes_du_marche => 'Αγορά λαχανικών';
+
+  @override
+  String get prod_legumes_grilles => 'Ψητά λαχανικά';
+
+  @override
+  String get prod_mdf => 'MDF';
+
+  @override
+  String get prod_madeleines => 'Madeleines';
+
+  @override
+  String get prod_magazine => 'Περιοδικό';
+
+  @override
+  String get prod_mangue => 'Μάνγκο';
+
+  @override
+  String get prod_maquereau => 'Σκουμπρί';
+
+  @override
+  String get prod_marteau => 'Marteau';
+
+  @override
+  String get prod_mascarpone => 'Μασκαρπόνε';
+
+  @override
+  String get prod_masque => 'Μάσκα';
+
+  @override
+  String get prod_masse => 'Μαζική';
+
+  @override
+  String get prod_mastic => 'Μαστίχη';
+
+  @override
+  String get prod_mayonnaise => 'Μαγιονέζα';
+
+  @override
+  String get prod_mais => 'Καλαμπόκι';
+
+  @override
+  String get prod_melon => 'Πεπόνι';
+
+  @override
+  String get prod_menthe => 'Menthe';
+
+  @override
+  String get prod_merguez => 'Merguez';
+
+  @override
+  String get prod_miel_bio => 'Miel βιο';
+
+  @override
+  String get prod_miel_du_producteur => 'Miel du producteur';
+
+  @override
+  String get prod_mirin => 'Mirin';
+
+  @override
+  String get prod_morbier => 'Morbier';
+
+  @override
+  String get prod_mortadelle => 'Mortadelle';
+
+  @override
+  String get prod_mouchoirs => 'Μουτσούρες';
+
+  @override
+  String get prod_moules => 'Μύδια';
+
+  @override
+  String get prod_mousse_a_raser => 'Αφρός ξυρίσματος';
+
+  @override
+  String get prod_muesli => 'Μούσλι';
+
+  @override
+  String get prod_muesli_barres => 'Μπάρες μούσλι';
+
+  @override
+  String get prod_muesli_bio => 'Μούσλι βιο';
+
+  @override
+  String get prod_muscade => 'Μοσχοκάρυδο';
+
+  @override
+  String get prod_meches => 'Τρυπάνια';
+
+  @override
+  String get prod_metre => 'Μεζούρα';
+
+  @override
+  String get prod_mures_blanches => 'Λευκές μουριές';
+
+  @override
+  String get prod_nam_pla => 'Nam pla';
+
+  @override
+  String get prod_navet => 'Γογγύλι';
+
+  @override
+  String get prod_nectar => 'Νέκταρ';
+
+  @override
+  String get prod_nems => 'Nems';
+
+  @override
+  String get prod_nettoyant_sol => 'Nettoyant sol';
+
+  @override
+  String get prod_niveau => 'Niveau';
+
+  @override
+  String get prod_noisettes => 'Φουντούκια';
+
+  @override
+  String get prod_noix => 'Καρύδια';
+
+  @override
+  String get prod_noix_de_cajou => 'Noix de cajou';
+
+  @override
+  String get prod_noix_du_bresil => 'Καρύδια Βραζιλίας';
+
+  @override
+  String get prod_nouilles => 'Nouilles';
+
+  @override
+  String get prod_nouilles_instantanees => 'Instant noodles';
+
+  @override
+  String get prod_noel => 'Χριστούγεννα';
+
+  @override
+  String get prod_nuggets => 'Νάγκετς';
+
+  @override
+  String get prod_nuoc_mam => 'Σάλτσα ψαριού';
+
+  @override
+  String get prod_olives_du_marche => 'Ελιές στην αγορά';
+
+  @override
+  String get prod_origan => 'Ρίγανη';
+
+  @override
+  String get prod_pain_aux_cereales => 'Ψωμί με σπόρους';
+
+  @override
+  String get prod_pain_bio => 'Βιο πόνου';
+
+  @override
+  String get prod_pain_complet => 'Ψωμί ολικής αλέσεως';
+
+  @override
+  String get prod_pain_de_campagne => 'χωριάτικο ψωμί';
+
+  @override
+  String get prod_pain_de_viande => 'Pain de viande';
+
+  @override
+  String get prod_palets_bretons => 'Παλέτες βρετονικές';
+
+  @override
+  String get prod_pamplemousse => 'Φράπα';
+
+  @override
+  String get prod_pancetta => 'Πανσέτα';
+
+  @override
+  String get prod_panneau_osb => 'Panneau OSB';
+
+  @override
+  String get prod_papier_de_verre => 'Papier de verre';
+
+  @override
+  String get prod_paprika => 'Πάπρικα';
+
+  @override
+  String get prod_parfum => 'Άρωμα';
+
+  @override
+  String get prod_parquet => 'Παρκέ';
+
+  @override
+  String get prod_pastilles => 'Παστίλιες';
+
+  @override
+  String get prod_pastis => 'Παστής';
+
+  @override
+  String get prod_pasteque => 'Καρπούζι';
+
+  @override
+  String get prod_pate_carbonara => 'Πατέ καρμπονάρα';
+
+  @override
+  String get prod_pates_carbonara => 'Πατέ καρμπονάρα';
+
+  @override
+  String get prod_patere => 'Γάντζος παλτό';
+
+  @override
+  String get prod_paumelle => 'Paumelle';
+
+  @override
+  String get prod_pave => 'Πλακόστρωτο';
+
+  @override
+  String get prod_peinture => 'Peinture';
+
+  @override
+  String get prod_perceuse => 'Perceuse';
+
+  @override
+  String get prod_persil => 'Μαϊντανός';
+
+  @override
+  String get prod_pesto => 'Πέστο';
+
+  @override
+  String get prod_petit_dej => 'Petit dej';
+
+  @override
+  String get prod_petit_dejeuner => 'Petit dejeuner';
+
+  @override
+  String get prod_petit_suisse => 'Petit suisse';
+
+  @override
+  String get prod_petit_dejeuner_2 => 'Πρωινό';
+
+  @override
+  String get prod_petits_pois => 'Αρακάς';
+
+  @override
+  String get prod_pickles => 'Τουρσιά';
+
+  @override
+  String get prod_pile => 'Σωρός';
+
+  @override
+  String get prod_pince => 'Pince';
+
+  @override
+  String get prod_pinceau => 'Πινσό';
+
+  @override
+  String get prod_pizza_maison => 'Pizza maison';
+
+  @override
+  String get prod_pizza_surgelee => 'Παγωμένη πίτσα';
+
+  @override
+  String get prod_planche => 'Planche';
+
+  @override
+  String get prod_plantes => 'Φυτά';
+
+  @override
+  String get prod_plantes_aromatiques => 'Φυτά αρωματικά';
+
+  @override
+  String get prod_plaque_de_platre => 'Γυψοσανίδα';
+
+  @override
+  String get prod_plat_prepare => 'Έτοιμο γεύμα';
+
+  @override
+  String get prod_poignee => 'Πόμολο';
+
+  @override
+  String get prod_poireau => 'Πράσο';
+
+  @override
+  String get prod_pois_casses => 'Φάβα';
+
+  @override
+  String get prod_pois_chiches => 'Ρεβύθια';
+
+  @override
+  String get prod_poisson => 'Poisson';
+
+  @override
+  String get prod_poisson_frais => 'Poisson frais';
+
+  @override
+  String get prod_polystyrene => 'Πολυστυρένιο';
+
+  @override
+  String get prod_pommes_de_terre_vapeur => 'Πατάτες στον ατμό';
+
+  @override
+  String get prod_popcorn => 'Ποπ κορν';
+
+  @override
+  String get prod_porc => 'Porc';
+
+  @override
+  String get prod_porto => 'Πόρτο';
+
+  @override
+  String get prod_pot => 'Δοχείο';
+
+  @override
+  String get prod_pot_au_feu => 'Ποτ-ο-φέου';
+
+  @override
+  String get prod_potage => 'Potage';
+
+  @override
+  String get prod_potiron => 'Κολοκύθι';
+
+  @override
+  String get prod_poudre => 'Poudre';
+
+  @override
+  String get prod_poulet_fermier => 'Πουλέτ φερμιέρ';
+
+  @override
+  String get prod_pousse_de_bambou => 'Pousse de bambou';
+
+  @override
+  String get prod_pousses_de_soja => 'Pousses de soja';
+
+  @override
+  String get prod_presse => 'Πατήστε';
+
+  @override
+  String get prod_prise => 'Βραβείο';
+
+  @override
+  String get prod_produit_vitres => 'Produit vitres';
+
+  @override
+  String get prod_produits_laitiers => 'Laitiers προϊόντων';
+
+  @override
+  String get prod_prune => 'Δαμάσκηνο';
+
+  @override
+  String get prod_pruneaux => 'Pruneaux';
+
+  @override
+  String get prod_pull => 'Τραβήξτε';
+
+  @override
+  String get prod_punaises => 'Punaises';
+
+  @override
+  String get prod_puree => 'Πατάτες πουρέ';
+
+  @override
+  String get prod_puree_damandes => 'βούτυρο αμυγδάλου';
+
+  @override
+  String get prod_puree_d => 'Πουρές';
+
+  @override
+  String get prod_puree_de_noisettes => 'Βούτυρο φουντουκιού';
+
+  @override
+  String get prod_pate_brisee => 'Ζύμη με κρούστα';
+
+  @override
+  String get prod_pate_de_crevettes => 'Γαριδόπαστα';
+
+  @override
+  String get prod_pate_de_curry => 'Πάστα κάρυ';
+
+  @override
+  String get prod_pate_de_piment => 'Πάστα τσίλι';
+
+  @override
+  String get prod_pate_feuilletee => 'Σφολιάτα';
+
+  @override
+  String get prod_pate_miso => 'Πάστα Miso';
+
+  @override
+  String get prod_pates_carbonara_2 => 'Ζυμαρικά καρμπονάρα';
+
+  @override
+  String get prod_pates_completes => 'Ζυμαρικά ολικής αλέσεως';
+
+  @override
+  String get prod_pates_fraiches => 'Φρέσκα ζυμαρικά';
+
+  @override
+  String get prod_pate => 'Pâté';
+
+  @override
+  String get prod_peche => 'Ροδάκινο';
+
+  @override
+  String get prod_quiche => 'Κις';
+
+  @override
+  String get prod_quiche_legumes => 'Κις λαχανικών';
+
+  @override
+  String get prod_quinoa => 'Quinoa';
+
+  @override
+  String get prod_quinoa_bio => 'Βιο κινόα';
+
+  @override
+  String get prod_raccord => 'Raccord';
+
+  @override
+  String get prod_raclette => 'Raclette';
+
+  @override
+  String get prod_radiateur => 'Radiator';
+
+  @override
+  String get prod_radis => 'Ραπανάκι';
+
+  @override
+  String get prod_raisin_sec => 'Σταφίδες';
+
+  @override
+  String get prod_ravioli => 'Ραβιόλι';
+
+  @override
+  String get prod_raviolis_chinois => 'Raviolis chinois';
+
+  @override
+  String get prod_razor => 'Ξυράφι';
+
+  @override
+  String get prod_reblochon => 'Reblochon';
+
+  @override
+  String get prod_recharge_briquet => 'Μπρικέτα επαναφόρτισης';
+
+  @override
+  String get prod_rentree_scolaire => 'Επιστροφή στο σχολείο';
+
+  @override
+  String get prod_rhum => 'Rhum';
+
+  @override
+  String get prod_rideau => 'Rideau';
+
+  @override
+  String get prod_rillettes => 'Rillettes';
+
+  @override
+  String get prod_riz_basmati => 'Ριζ μπασμάτι';
+
+  @override
+  String get prod_riz_complet => 'Ριζ κομπλέ';
+
+  @override
+  String get prod_riz_glutineux => 'Riz glutineux';
+
+  @override
+  String get prod_riz_thai => 'Ταϊλανδέζικο ρύζι';
+
+  @override
+  String get prod_robineterie => 'Robineterie';
+
+  @override
+  String get prod_romarin => 'Δενδρολίβανο';
+
+  @override
+  String get prod_rondele => 'Rondelé';
+
+  @override
+  String get prod_roquefort => 'ροκφόρ';
+
+  @override
+  String get prod_rouleau => 'Μικρός κύλινδρος';
+
+  @override
+  String get prod_ruban_isolant => 'Απομονωτικό Ruban';
+
+  @override
+  String get prod_rape => 'Τριμμένο τυρί';
+
+  @override
+  String get prod_sac_poubelle => 'Sac poubelle';
+
+  @override
+  String get prod_saint_nectaire => 'Σεν-νεκταίρ';
+
+  @override
+  String get prod_sake => 'Sake';
+
+  @override
+  String get prod_salade_composee => 'Salade συνθέτω';
+
+  @override
+  String get prod_salade_composee_2 => 'Ανάμικτη σαλάτα';
+
+  @override
+  String get prod_salsa => 'Salsa';
+
+  @override
+  String get prod_samoussas => 'Σαμούσσας';
+
+  @override
+  String get prod_sandwich_maison => 'Σπιτικό σάντουιτς';
+
+  @override
+  String get prod_sardines => 'Σαρδέλες';
+
+  @override
+  String get prod_sauce => 'Σάλτσα';
+
+  @override
+  String get prod_sauce_bechamel => 'Σάλτσα μπεσαμέλ';
+
+  @override
+  String get prod_sauce_fish => 'Σάλτσα ψαριού';
+
+  @override
+  String get prod_sauce_hoisin => 'Σάλτσα hoisin';
+
+  @override
+  String get prod_sauce_nuoc_mam => 'Σάλτσα ψαριού';
+
+  @override
+  String get prod_sauce_oyster => 'Σάλτσα στρείδι';
+
+  @override
+  String get prod_sauce_soja => 'Σάλτσα σόγιας';
+
+  @override
+  String get prod_sauce_sriracha => 'Σάλτσα sriracha';
+
+  @override
+  String get prod_sauce_teriyaki => 'Σάλτσα teriyaki';
+
+  @override
+  String get prod_saucisson_sec => 'Saucisson sec';
+
+  @override
+  String get prod_saumon_fume => 'Καπνιστός σολομός';
+
+  @override
+  String get prod_scie => 'Επιστήμη';
+
+  @override
+  String get prod_scotch => 'Scotch';
+
+  @override
+  String get prod_seitan => 'Σεϊτάν';
+
+  @override
+  String get prod_seitan_bio => 'Σεϊτάν βιο';
+
+  @override
+  String get prod_semoule => 'Semoule';
+
+  @override
+  String get prod_serrure => 'Serrure';
+
+  @override
+  String get prod_serviettes_hygieniques => 'Σερβιέτες';
+
+  @override
+  String get prod_silicone => 'Σιλικόνη';
+
+  @override
+  String get prod_sirop => 'Sirop';
+
+  @override
+  String get prod_smoothie => 'Smoothie';
+
+  @override
+  String get prod_soda_light => 'Φως σόδας';
+
+  @override
+  String get prod_soda_sans_alcool => 'Σόδα χωρίς αλκοόλ';
+
+  @override
+  String get prod_sorbet => 'Σορμπέ';
+
+  @override
+  String get prod_soupe => 'Σούπα';
+
+  @override
+  String get prod_soupe_potage => 'Σούπα / ποτάτζ';
+
+  @override
+  String get prod_soupe_miso => 'Σουπέ miso';
+
+  @override
+  String get prod_soupe_pho => 'Σούπε φω';
+
+  @override
+  String get prod_spiruline => 'Σπιρουλίνη';
+
+  @override
+  String get prod_steak_de_soja => 'Μπριζόλα de soja';
+
+  @override
+  String get prod_steak_vegetal => 'Μπριζόλα φυτικής προέλευσης';
+
+  @override
+  String get prod_stylo => 'Stylo';
+
+  @override
+  String get prod_surgeles => 'Κατεψυγμένα τρόφιμα';
+
+  @override
+  String get prod_serum => 'Ορρός';
+
+  @override
+  String get prod_sesame => 'Σουσάμι';
+
+  @override
+  String get prod_tabac => 'Tabac';
+
+  @override
+  String get prod_tablette => 'Tablet';
+
+  @override
+  String get prod_taboule => 'Tabbouleh';
+
+  @override
+  String get prod_tacos_fajitas => 'Tacos / fajitas';
+
+  @override
+  String get prod_tahini => 'Ταχίνι';
+
+  @override
+  String get prod_tampons => 'Ταμπόν';
+
+  @override
+  String get prod_tapenade => 'Ταπενάδα';
+
+  @override
+  String get prod_tapioca => 'Ταπιόκα';
+
+  @override
+  String get prod_tartare => 'Tartare';
+
+  @override
+  String get prod_tarte => 'Πίτα';
+
+  @override
+  String get prod_tarte_salade => 'Τάρτα σαλάτας';
+
+  @override
+  String get prod_tartine => 'Τοστ';
+
+  @override
+  String get prod_tartines => 'Τραγανόψωμο';
+
+  @override
+  String get prod_tasseau => 'Τασσώ';
+
+  @override
+  String get prod_tempeh => 'Tempeh';
+
+  @override
+  String get prod_tempura => 'Τεμπούρα';
+
+  @override
+  String get prod_terreau => 'Terreau';
+
+  @override
+  String get prod_terrine => 'Terrine';
+
+  @override
+  String get prod_thermostat => 'Θερμοστάτης';
+
+  @override
+  String get prod_thon => 'Τόνος';
+
+  @override
+  String get prod_thym => 'Θυμάρι';
+
+  @override
+  String get prod_the_bio => 'Βιολογικό τσάι';
+
+  @override
+  String get prod_the_noir => 'Μαύρο τσάι';
+
+  @override
+  String get prod_the_vert => 'Πράσινο τσάι';
+
+  @override
+  String get prod_timbre => 'Τέμπο';
+
+  @override
+  String get prod_tisane => 'Tisane';
+
+  @override
+  String get prod_tofu => 'Tofu';
+
+  @override
+  String get prod_tofu_bio => 'Tofu βιο';
+
+  @override
+  String get prod_tofu_soyeux => 'Tofu soyeux';
+
+  @override
+  String get prod_tomates_cerises => 'ντοματίνια';
+
+  @override
+  String get prod_tortellini => 'Τορτελίνι';
+
+  @override
+  String get prod_tournevis => 'Τουρνέβης';
+
+  @override
+  String get prod_tringle => 'Τριγκλέ';
+
+  @override
+  String get prod_truite => 'Πεστρόφα';
+
+  @override
+  String get prod_truite_fumee => 'Καπνιστή πέστροφα';
+
+  @override
+  String get prod_tuyau => 'Τουγιάου';
+
+  @override
+  String get prod_vache_qui_rit => 'Vache qui rit';
+
+  @override
+  String get prod_veau => 'Veau';
+
+  @override
+  String get prod_vermicelles => 'Φιδές';
+
+  @override
+  String get prod_vermicelles_de_riz => 'Vermicelles de riz';
+
+  @override
+  String get prod_vernis => 'Βέρνης';
+
+  @override
+  String get prod_vernis_a_ongles => 'Βερνίκι νυχιών';
+
+  @override
+  String get prod_verrue => 'Verrue';
+
+  @override
+  String get prod_viande => 'Βιάντε';
+
+  @override
+  String get prod_viande_hachee_2 => 'Viande hachee';
+
+  @override
+  String get prod_viandes_poissons => 'Viandes & Poissons';
+
+  @override
+  String get prod_viennoiseries => 'Viennoiseries';
+
+  @override
+  String get prod_vinaigre_de_riz => 'Vinaigre de riz';
+
+  @override
+  String get prod_vinaigrette => 'Λαδόξιδο';
+
+  @override
+  String get prod_vis => 'Vis';
+
+  @override
+  String get prod_visseuse => 'Visseuse';
+
+  @override
+  String get prod_volaille => 'Volaille';
+
+  @override
+  String get prod_wasabi => 'Wasabi';
+
+  @override
+  String get prod_whisky => 'Ουίσκι';
+
+  @override
+  String get prod_white_spirit => 'Λευκό πνεύμα';
+
+  @override
+  String get prod_wrap => 'Κάλυμμα';
+
+  @override
+  String get prod_wrap_leger => 'Ελαφρύ περιτύλιγμα';
+
+  @override
+  String get prod_wrap_maison => 'Σπιτικό περιτύλιγμα';
+
+  @override
+  String get prod_yaourt_glace => 'Παγωμένο γιαούρτι';
+
+  @override
+  String get prod_yaourt_nature => 'Απλό γιαούρτι';
+
+  @override
+  String get prod_zeste => 'Ζέστε';
+
+  @override
+  String get prod_les => '';
+
+  @override
+  String get prod_le => '';
+
+  @override
+  String get prod_echelle => 'Σκάλα';
+
+  @override
+  String get prod_ecrevisses => 'Καραβίδα';
+
+  @override
+  String get prod_ecrous => 'Ξηροί καρποί (υλικό)';
+
+  @override
+  String get prod_epicerie => 'Παντοπωλείο';
+
+  @override
+  String get prod_epices => 'Μπαχαρικά';
+
+  @override
+  String get prod_epinards => 'Σπανάκι';
+
+  @override
+  String get prod_equerre => 'Κανόνας τετραγώνου';
+
+  @override
+  String get prod_etagere => 'Ράφι';
+
+  @override
+  String get prod_etau => 'Μάγγαινα';
+
+  @override
+  String get prod_ete_vacances => 'Καλοκαίρι / Διακοπές';
+
+  @override
+  String get prod_aaaeeeeiiouuucoeae => '';
+
+  @override
+  String get prod_oeufs_bio => 'Βιολογικά αυγά';
+
+  @override
+  String get prod_oeufs_fermiers => 'Αυγά ελευθέρας βοσκής';
+
+  @override
+  String get prod_oeuf => 'Αυγό';
+
+  @override
+  String get moreOptions => 'More options';
+
+  @override
+  String get errorNotSignedIn => 'Not signed in';
+
+  @override
+  String get errorInvalidShareLink => 'Invalid link or code';
+
+  @override
+  String get errorListNotFound => 'List not found';
+
+  @override
+  String errorBackupNewerVersion(String version) {
+    return 'Backup from a newer version ($version) is not supported.';
+  }
+
+  @override
+  String get errorSyncUnavailable => 'Sync unavailable';
 }

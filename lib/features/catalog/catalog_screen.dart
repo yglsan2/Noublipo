@@ -3,6 +3,7 @@ import 'package:flutter/services.dart' show HapticFeedback;
 import 'package:provider/provider.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/providers/list_provider.dart';
+import '../../../core/utils/content_l10n.dart';
 import '../../../l10n/app_localizations.dart';
 import 'catalog_data.dart';
 
@@ -18,14 +19,14 @@ class CatalogScreen extends StatelessWidget {
         leading: IconButton(
           icon: const Icon(Icons.close),
           onPressed: () => Navigator.of(context).pop(),
-          tooltip: 'Fermer',
+          tooltip: AppLocalizations.of(context).scanClose,
         ),
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         children: [
           Text(
-            'Appuie sur un article pour l\'ajouter à ta liste.',
+            AppLocalizations.of(context).catalogTapHint,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: Theme.of(context).colorScheme.onSurfaceVariant,
                 ),
@@ -43,11 +44,13 @@ class CatalogScreen extends StatelessWidget {
 
   void _addItem(BuildContext context, String name, int colorIndex) {
     HapticFeedback.selectionClick();
+    final l10n = AppLocalizations.of(context);
+    // Stocke la clé FR canonique ; l'UI localise à l'affichage.
     context.read<ListProvider>().addItem(name, colorIndex: colorIndex);
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Ajouté : $name'),
+          content: Text(l10n.addedItemSnack(localizedProductName(l10n, name))),
           behavior: SnackBarBehavior.floating,
           duration: const Duration(seconds: 2),
         ),
@@ -70,7 +73,9 @@ class _CategorySection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (items.isEmpty) return const SizedBox.shrink();
+    final l10n = AppLocalizations.of(context);
     final color = AppColors.categoryColors[category.colorIndex % AppColors.categoryColors.length];
+    final categoryLabel = localizedCatalogCategory(l10n, category.id);
     return Padding(
       padding: const EdgeInsets.only(bottom: 24),
       child: Column(
@@ -86,7 +91,7 @@ class _CategorySection extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  category.label,
+                  categoryLabel,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w600,
                         color: color,
@@ -127,6 +132,8 @@ class _CatalogChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = AppColors.categoryColors[colorIndex % AppColors.categoryColors.length];
+    final l10n = AppLocalizations.of(context);
+    final label = localizedProductName(l10n, item.name);
     return Material(
       color: color.withValues(alpha: 0.2),
       borderRadius: BorderRadius.circular(20),
@@ -143,7 +150,7 @@ class _CatalogChip extends StatelessWidget {
                 const SizedBox(width: 6),
               ],
               Text(
-                item.name,
+                label,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w500,
                     ),

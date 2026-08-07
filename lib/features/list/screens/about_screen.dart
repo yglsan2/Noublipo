@@ -11,9 +11,10 @@ class AboutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).about),
+        title: Text(l10n.about),
       ),
       body: ListView(
         padding: EdgeInsets.fromLTRB(
@@ -30,105 +31,91 @@ class AboutScreen extends StatelessWidget {
                 ),
           ),
           Text(
-            AppLocalizations.of(context).appTagline,
+            l10n.appTagline,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.w500,
                 ),
           ),
           Text(
-            'Version $appVersion',
+            l10n.aboutVersion(appVersion),
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: Colors.grey,
                 ),
           ),
           const SizedBox(height: 24),
           _Section(
-            title: 'Créateur',
+            title: l10n.aboutCreator,
             icon: Icons.person_outline,
             child: Text(
-              "${AppLocalizations.of(context).appTitle} a été créée par DesertYGL.\n"
-              "${AppLocalizations.of(context).appTagline} "
-              "La version gratuite peut afficher des publicités discrètes ; "
-              "${AppLocalizations.of(context).appTitlePlus} (achat unique) retire les pubs et débloque les fonctions avancées.",
+              l10n.aboutCreatorBody(
+                l10n.appTitle,
+                l10n.appTagline,
+                l10n.appTitlePlus,
+              ),
               style: const TextStyle(height: 1.4),
             ),
           ),
           _Section(
-            title: 'Mode d\'emploi',
+            title: l10n.aboutHowTo,
             icon: Icons.menu_book_outlined,
-            child: const Text(
-              '• Ajouter un article : appuyez sur le bouton + en bas à droite, saisissez le nom et choisissez une couleur (optionnel).\n'
-              '• Cocher / décocher : touchez un article (dans le panier = coché).\n'
-              '• Modifier ou supprimer : appui long sur un article, puis « Modifier » ou « Supprimer ».\n'
-              '• Suppression rapide : glissez un article vers la gauche pour le supprimer ; un message permet d’annuler.\n'
-              '• Couleurs et catégories : en mode Magasins (Paramètres), les carrés en haut permettent d\'ajouter ou définir des magasins ; touchez un carré pour lui donner un nom.\n'
-              '• Partager : icône partage → « Exporter en texte » ou « Partager en temps réel » (connexion Google).\n'
-              '• Plusieurs listes et fonctions avancées : disponibles avec Tote \'O Recall+.\n'
-              '• Paramètres (icône engrenage) : style des articles, mode nuit, capitalisation, rappels, catégories.',
-              style: TextStyle(height: 1.5),
+            child: Text(
+              l10n.aboutHowToBody,
+              style: const TextStyle(height: 1.5),
             ),
           ),
           _Section(
-            title: 'Confidentialité',
+            title: l10n.aboutPrivacy,
             icon: Icons.privacy_tip_outlined,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Responsable du traitement : l’éditeur de l’application (DesertYGL).\n\n'
-                  '• Données collectées : listes d’articles et paramètres en local ; en cas de synchronisation (Google) : identifiant de compte et données Firebase ; '
-                  'en version gratuite : identifiants publicitaires via Google AdMob (sous réserve de votre consentement en UE).\n'
-                  '• Finalités : listes de courses, sync multi‑appareils, monétisation publicitaire (gratuit) / achat in-app (Premium).\n'
-                  '• Vos droits RGPD : accès, rectification, effacement, portabilité, opposition. Réclamation possible auprès de la CNIL.\n'
-                  '• Pour supprimer un compte sync : déconnexion Google dans l’app, puis demande d’effacement Firebase auprès de l’éditeur.',
-                  style: TextStyle(height: 1.5),
+                Text(
+                  l10n.aboutPrivacyBody,
+                  style: const TextStyle(height: 1.5),
                 ),
                 const SizedBox(height: 12),
                 OutlinedButton.icon(
                   onPressed: () => _openPrivacy(context),
                   icon: const Icon(Icons.open_in_new, size: 18),
-                  label: const Text('Politique de confidentialité complète'),
+                  label: Text(l10n.aboutPrivacyFull),
                 ),
               ],
             ),
           ),
           _Section(
-            title: 'Licence',
+            title: l10n.aboutLicense,
             icon: Icons.description_outlined,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Cette application est distribuée sous licence GNU GPL v3. '
-                  'Vous avez la liberté d’utiliser, modifier et redistribuer ce logiciel, sous les conditions de la GPL v3.',
-                  style: TextStyle(height: 1.4),
+                Text(
+                  l10n.aboutLicenseBody,
+                  style: const TextStyle(height: 1.4),
                 ),
                 const SizedBox(height: 12),
                 OutlinedButton.icon(
                   onPressed: () => _copyLicenseUrl(context),
                   icon: const Icon(Icons.open_in_new, size: 18),
-                  label: const Text('Voir la licence GPL v3 complète'),
+                  label: Text(l10n.aboutLicenseFull),
                 ),
               ],
             ),
           ),
           _Section(
-            title: 'Accessibilité (RGAA)',
+            title: l10n.aboutAccessibility,
             icon: Icons.accessibility_new_outlined,
-            child: const Text(
-              'Tote \'O Recall vise une conformité aux critères d’accessibilité (RGAA, niveau AA dans la mesure du possible) : '
-              'contraste, tailles de touche, mode nuit, libellés TalkBack, information non portée par la seule couleur.',
-              style: TextStyle(height: 1.5),
+            child: Text(
+              l10n.aboutAccessibilityBody,
+              style: const TextStyle(height: 1.5),
             ),
           ),
           _Section(
-            title: 'Droits et crédits',
+            title: l10n.aboutCredits,
             icon: Icons.info_outline,
-            child: const Text(
-              '© DesertYGL. Tous droits réservés selon les termes de la GPL v3.\n\n'
-              'Cette application est fournie « telle quelle », sans garantie d’aucune sorte.',
-              style: TextStyle(height: 1.4),
+            child: Text(
+              l10n.aboutCreditsBody,
+              style: const TextStyle(height: 1.4),
             ),
           ),
         ],

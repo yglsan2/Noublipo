@@ -9,11 +9,14 @@ import '../../../core/providers/list_provider.dart';
 import '../../../core/providers/pantry_provider.dart';
 import '../../../core/providers/premium_provider.dart';
 import '../../../core/providers/settings_provider.dart';
+import '../../../core/providers/shopping_habits_provider.dart';
 import '../../../core/ui/app_feedback.dart';
 import '../../../core/ui/meal_preset_dialog.dart';
 import '../../../core/utils/app_logger.dart';
 import '../../../core/utils/content_l10n.dart';
 import '../../../core/utils/quick_add_parser.dart';
+import '../../../core/utils/speech_locale.dart';
+import '../../../core/utils/text_script.dart';
 import '../../../core/utils/voice_text_cleaner.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../paywall/paywall_screen.dart';
@@ -81,6 +84,9 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
         ownedSources: _quickMealOwnedSources(listP, pantryP),
       );
       if (!mounted) return;
+      if (action == 'all' || action == 'single') {
+        context.read<ShoppingHabitsProvider>().recordMealUsed(preset.id);
+      }
       if (action == 'all') {
         final provider = context.read<ListProvider>();
         final settings = context.read<SettingsProvider>();
@@ -121,7 +127,10 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
       if (action != 'single') return;
     }
 
-    final result = QuickAddParser.parse(text);
+    final l10n = AppLocalizations.of(context);
+    const marker = '\uE000';
+    final listKw = QuickAddParser.listKeywordFromChip(l10n.quickAddListChip(marker), marker: marker);
+    final result = QuickAddParser.parse(text, listKeyword: listKw);
     if (result.items.isEmpty) {
       if (mounted) {
         AppFeedback.info(context, AppLocalizations.of(context).quickAddHint);
@@ -142,7 +151,6 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
       }
       Navigator.of(context).pop();
       final count = capitalized.length;
-      final l10n = AppLocalizations.of(context);
       final msg = count == 1
           ? l10n.quickAddAddedOne(capitalized.single, listName)
           : l10n.quickAddAddedMany(count, listName);
@@ -159,7 +167,7 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
       final data = await Clipboard.getData(Clipboard.kTextPlain);
       final text = data?.text?.trim() ?? '';
       if (text.isEmpty) return;
-      final lines = text.split(RegExp(r'[\n,;]+')).map((s) => s.trim()).where((s) => s.isNotEmpty);
+      final lines = text.split(RegExp(r'[\n,;、，،]+')).map((s) => s.trim()).where((s) => s.isNotEmpty);
       final toAdd = lines.join(', ');
       if (toAdd.isNotEmpty) {
         final current = _controller.text.trim();
@@ -195,8 +203,10 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
             final raw = result.recognizedWords;
             if (result.finalResult && raw.trim().isNotEmpty) {
               final lowConfidence = result.hasConfidenceRating && !result.isConfident();
-              final cleaned = VoiceTextCleaner.cleanFrenchRecognizedText(
+              final lang = Localizations.localeOf(context).languageCode;
+              final cleaned = VoiceTextCleaner.cleanRecognizedText(
                 raw,
+                languageCode: lang,
                 aggressiveCorrection: lowConfidence,
               );
               _controller.text = cleaned;
@@ -210,7 +220,10 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
         },
         listenFor: const Duration(seconds: 45),
         pauseFor: const Duration(seconds: 5),
-        localeId: 'fr_FR',
+        localeId: await resolveSpeechLocaleId(
+          speech,
+          Localizations.localeOf(context).languageCode,
+        ),
         listenOptions: SpeechListenOptions(
           partialResults: true,
           listenMode: ListenMode.dictation,
@@ -280,8 +293,12 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
                             label: Text(l10n.quickAddListChip(last)),
                             onPressed: () {
                               final t = _controller.text.trim();
-                              // Syntaxe parseur : mots-clés FR « Liste » / « ajouter ».
-                              _controller.text = t.isEmpty ? 'Liste $last ajouter ' : 'Liste $last ajouter $t';
+                              const marker = '\uE000';
+                              final kw = QuickAddParser.listKeywordFromChip(
+                                l10n.quickAddListChip(marker),
+                                marker: marker,
+                              );
+                              _controller.text = t.isEmpty ? '$kw $last: ' : '$kw $last: $t';
                               setState(() {});
                             },
                           ),
@@ -295,7 +312,8 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
               TextField(
                 controller: _controller,
                 autofocus: true,
-                textCapitalization: TextCapitalization.sentences,
+                textCapitalization: context.itemNameTextCapitalization,
+                textInputAction: TextInputAction.done,
                 decoration: InputDecoration(
                   hintText: AppLocalizations.of(context).quickAddExampleHint,
                   prefixIcon: const Icon(Icons.add_task_outlined),

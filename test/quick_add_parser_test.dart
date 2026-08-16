@@ -62,5 +62,11 @@ void main() {
       final r = QuickAddParser.parse('  Pomme   ,   lait  ');
       expect(r.items, ['Pomme', 'Lait']);
     });
+
+    test('still accepts English list/add keywords', () {
+      final r = QuickAddParser.parse('List Tesco: Apple, milk');
+      expect(r.listName, 'Tesco');
+      expect(r.items, ['Apple', 'Milk']);
+    });
   });
 }

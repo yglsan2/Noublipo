@@ -19,6 +19,7 @@ import '../../../core/providers/gamification_provider.dart';
 import '../../../core/providers/list_provider.dart';
 import '../../../core/providers/pantry_provider.dart';
 import '../../../core/providers/settings_provider.dart';
+import '../../../core/providers/shopping_habits_provider.dart';
 import '../widgets/add_item_sheet.dart';
 import '../widgets/budget_ceiling_field.dart';
 import '../widgets/item_tile.dart';
@@ -33,8 +34,10 @@ import '../widgets/onboarding_dialog.dart';
 import '../widgets/quick_add_sheet.dart';
 import '../widgets/recall_due_card.dart';
 import '../../../core/ui/app_feedback.dart';
+import '../../../core/ui/language_wheel_sheet.dart';
 import '../../../core/utils/food_classifier.dart';
 import '../../../core/utils/content_l10n.dart';
+import '../../../core/utils/text_script.dart';
 import '../../../core/utils/list_display_name.dart';
 import '../../../core/ui/food_category_style.dart';
 import '../../../l10n/app_localizations.dart';
@@ -77,8 +80,11 @@ class ListScreen extends StatelessWidget {
         Scaffold(
       appBar: AppBar(
         toolbarHeight: appBarHeight,
-        titleSpacing: isPhone ? 8 : 16,
+        titleSpacing: isPhone ? 4 : 12,
         centerTitle: false,
+        automaticallyImplyLeading: false,
+        leading: const Center(child: LanguageFlagButton()),
+        leadingWidth: isPhone ? 56 : 64,
         title: const ListScreenTitle(),
         actions: [
           IconButton(
@@ -198,6 +204,31 @@ class ListScreen extends StatelessWidget {
                       showQuickAddChip: isPremiumActive,
                       showMealPresetsChip: isPremiumActive,
                       onMealPresets: () => showMealPresetsPickerSheet(context),
+                      showHabitsChip: context.watch<SettingsProvider>().shoppingHabitsEnabled &&
+                          context.watch<ShoppingHabitsProvider>().hasUnusualFor(
+                            Localizations.localeOf(context).languageCode,
+                          ),
+                      onAddHabits: () {
+                        final lang = Localizations.localeOf(context).languageCode;
+                        final names = context.read<ShoppingHabitsProvider>().unusualNames(lang, limit: 8);
+                        final existing = {
+                          for (final x in provider.currentItemNames)
+                            canonicalProductName(x).toLowerCase(),
+                        };
+                        var n = 0;
+                        for (final name in names) {
+                          if (existing.add(canonicalProductName(name).toLowerCase())) {
+                            provider.addItem(name);
+                            n++;
+                          }
+                        }
+                        if (context.mounted && n > 0) {
+                          AppFeedback.success(
+                            context,
+                            AppLocalizations.of(context).addedItemsToListSnack(n),
+                          );
+                        }
+                      },
                       showUsualsChip: isPremiumActive &&
                           context.read<GamificationProvider>().mostBoughtProducts(top: 5).isNotEmpty,
                       onAddUsuals: () {
@@ -597,7 +628,12 @@ class ListScreen extends StatelessWidget {
 
   static List<String> _getSuggestionNames(BuildContext context, ListProvider provider) {
     var names = provider.currentItemNames.toList();
-    // read (pas watch) : appelé hors build (ouverture du sheet d'ajout).
+    try {
+      final habits = context.read<ShoppingHabitsProvider>();
+      names = {...names, ...habits.frequentNames(limit: 16)}.toList();
+    } catch (e, stack) {
+      AppLogger.warning('Suggestions (habitudes)', e, stack);
+    }
     if (!context.read<PremiumProvider>().isPremiumActive) return names;
     try {
       final planning = context.read<PlanningProvider>();
@@ -1692,6 +1728,7 @@ class ListScreen extends StatelessWidget {
       final allChecked = p.checkedCount == p.totalCount && p.totalCount > 0;
       final badgesCountBefore = gamification.badges.length;
       try {
+        context.read<ShoppingHabitsProvider>().recordTripItems(checkedItems.map((e) => e.name));
         await gamification.recordTripComplete(checkedItems, allChecked);
         await storage.incrementTripsCompletedCount();
         List<PantryItem>? pantrySnap;
@@ -1867,11 +1904,15 @@ class ListScreen extends StatelessWidget {
             children: [
               Text(AppLocalizations.of(context).settings, style: Theme.of(ctx).textTheme.titleLarge),
               const SizedBox(height: 16),
-              Consumer<SettingsProvider>(
-                builder: (context, settings, _) {
-                  final localeOptions = localeOptionsForPicker;
+              Consumer2<SettingsProvider, ShoppingHabitsProvider>(
+                builder: (context, settings, habits, _) {
                   final current = settings.localeLanguageCode;
                   final l10n = AppLocalizations.of(ctx);
+                  final langOpt = displayedFlagOption(
+                    storedCode: current,
+                    systemLanguageCode: WidgetsBinding.instance.platformDispatcher.locale.languageCode,
+                  );
+                  final langName = langOpt.$3.isEmpty ? l10n.languageSystem : langOpt.$3;
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -1880,42 +1921,26 @@ class ListScreen extends StatelessWidget {
                         title: Text(AppLocalizations.of(ctx).settingsSectionAppearance),
                         children: [
                       Text(l10n.languageLabel, style: Theme.of(ctx).textTheme.titleSmall),
-                      const SizedBox(height: 4),
-                      Text(
-                        l10n.languageSelectorHint,
-                        style: Theme.of(ctx).textTheme.bodySmall?.copyWith(color: Colors.grey),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
                       const SizedBox(height: 8),
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 6,
-                        children: localeOptions.map((opt) {
-                          final code = opt.$1;
-                          final flag = opt.$2;
-                          final name = opt.$3;
-                          final label = name.isEmpty ? l10n.languageSystem : name;
-                          final selected = (code == null && (current == null || current.isEmpty)) ||
-                              (code != null && current == code);
-                          return FilterChip(
-                            avatar: Text(flag, style: const TextStyle(fontSize: 18)),
-                            label: ConstrainedBox(
-                              constraints: const BoxConstraints(maxWidth: 140),
-                              child: Text(
-                                label,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                softWrap: false,
-                              ),
-                            ),
-                            selected: selected,
-                            onSelected: (_) {
-                              HapticFeedback.selectionClick();
-                              settings.setLocaleLanguageCode(code);
-                            },
-                          );
-                        }).toList(),
+                      Material(
+                        color: Theme.of(ctx).colorScheme.surfaceContainerHighest.withValues(alpha: 0.55),
+                        borderRadius: BorderRadius.circular(DesignConstants.cardBorderRadius),
+                        child: ListTile(
+                          onTap: () {
+                            HapticFeedback.selectionClick();
+                            showLanguageWheelSheet(ctx);
+                          },
+                          leading: Text(langOpt.$2, style: const TextStyle(fontSize: 32, height: 1)),
+                          title: Text(langName),
+                          subtitle: Text(
+                            (current == null || current.isEmpty)
+                                ? l10n.languageUsePhone
+                                : l10n.languageWheelHint,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          trailing: const Icon(Icons.unfold_more_rounded),
+                        ),
                       ),
                       const SizedBox(height: 20),
                       Text(AppLocalizations.of(ctx).articleStyle, style: Theme.of(ctx).textTheme.titleSmall),
@@ -2008,6 +2033,38 @@ class ListScreen extends StatelessWidget {
                         initiallyExpanded: true,
                         title: Text(AppLocalizations.of(ctx).settingsSectionShopping),
                         children: [
+                      SwitchListTile(
+                        title: Text(AppLocalizations.of(ctx).habitsEnabled),
+                        subtitle: Text(AppLocalizations.of(ctx).habitsEnabledSubtitle),
+                        value: settings.shoppingHabitsEnabled,
+                        onChanged: (v) async {
+                          await settings.setShoppingHabitsEnabled(v);
+                          if (!ctx.mounted) return;
+                          ctx.read<ShoppingHabitsProvider>().applyEnabledFlag(v);
+                          AppFeedback.success(
+                            ctx,
+                            v
+                                ? AppLocalizations.of(ctx).habitsEnabledMessage
+                                : AppLocalizations.of(ctx).habitsDisabledMessage,
+                          );
+                        },
+                      ),
+                      if (habits.hasStoredData)
+                        Align(
+                          alignment: AlignmentDirectional.centerStart,
+                          child: TextButton.icon(
+                            onPressed: () async {
+                              await ctx.read<ShoppingHabitsProvider>().clearMemory();
+                              if (!ctx.mounted) return;
+                              AppFeedback.success(
+                                ctx,
+                                AppLocalizations.of(ctx).habitsForgotMessage,
+                              );
+                            },
+                            icon: const Icon(Icons.layers_clear_outlined, size: 18),
+                            label: Text(AppLocalizations.of(ctx).habitsForget),
+                          ),
+                        ),
                       SwitchListTile(
                         title: Text(AppLocalizations.of(ctx).remindersPerItem),
                         subtitle: Text(AppLocalizations.of(ctx).remindersSubtitle),
@@ -3336,7 +3393,7 @@ class _SetCategoryNameSheetState extends State<_SetCategoryNameSheet> {
                 controller: _controller,
                 autofocus: true,
                 enabled: !_busy,
-                textCapitalization: TextCapitalization.sentences,
+                textCapitalization: context.itemNameTextCapitalization,
                 decoration: InputDecoration(
                   hintText: l10n.categoryNameHint,
                   border: const OutlineInputBorder(),

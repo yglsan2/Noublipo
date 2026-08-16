@@ -1,5 +1,5 @@
 // Configuration des langues affichées dans le sélecteur (drapeaux).
-// Version classique : 15 langues. Version Pro : 30 langues.
+// Classique : 18 langues + système. Plus : les 40 locales ARB + système.
 // Détection automatique = langue du téléphone ; choix manuel = clic sur un drapeau.
 import '../../app_config.dart';
 
@@ -40,22 +40,55 @@ const List<LocaleOption> _allOptions = [
   ('nb', '🇳🇴', 'Norsk'),
   ('sk', '🇸🇰', 'Slovenčina'),
   ('bg', '🇧🇬', 'Български'),
-  // Letton, lituanien, estonien (classique et Pro)
   ('lv', '🇱🇻', 'Latviešu'),
   ('lt', '🇱🇹', 'Lietuvių'),
   ('et', '🇪🇪', 'Eesti'),
+  ('ca', '🇦🇩', 'Català'),
+  ('eu', '🇪🇸', 'Euskara'),
+  ('gl', '🇪🇸', 'Galego'),
+  ('hr', '🇭🇷', 'Hrvatski'),
+  ('sr', '🇷🇸', 'Српски'),
+  ('sl', '🇸🇮', 'Slovenščina'),
+  ('ms', '🇲🇾', 'Bahasa Melayu'),
 ];
 
-/// Nombre de langues pour la version classique (système + 18, dont LV/LT/ET).
+/// Nombre de langues pour la version classique (système + 18).
 const int kClassicLocaleCount = 1 + 18;
 
-/// Nombre de langues pour la version Pro (système + 33, dont LV/LT/ET).
-const int kProLocaleCount = 1 + 33;
+/// Toutes les locales ARB (système + 40).
+const int kProLocaleCount = 1 + 40;
 
-/// Retourne les options de langue à afficher dans le sélecteur (drapeaux).
-/// Version classique : 15 langues les plus utilisées + système.
-/// Version Pro : 30 langues + système.
+/// Options pour le sélecteur de langue. Classique : 18 + système. Plus : 40 + système.
 List<LocaleOption> get localeOptionsForPicker {
   final n = isToteoPlus ? kProLocaleCount : kClassicLocaleCount;
   return _allOptions.take(n).toList();
+}
+
+/// Retourne l’option pour [code], ou l’option « système » (🌐) si [code] est null / inconnu.
+/// Cherche dans toutes les langues connues (le drapeau du téléphone reste juste même en version classique).
+LocaleOption localeOptionForCode(String? code) {
+  if (code == null || code.isEmpty) return _allOptions.first;
+  for (final opt in _allOptions) {
+    if (opt.$1 == code) return opt;
+  }
+  return _allOptions.first;
+}
+
+/// Drapeau à afficher : langue forcée, sinon celle du téléphone.
+LocaleOption displayedFlagOption({
+  required String? storedCode,
+  required String systemLanguageCode,
+}) {
+  if (storedCode != null && storedCode.isNotEmpty) {
+    return localeOptionForCode(storedCode);
+  }
+  return localeOptionForCode(systemLanguageCode);
+}
+
+/// Index dans [localeOptionsForPicker] (🌐 = 0 si on suit le système).
+int localePickerIndex({required String? storedCode}) {
+  final options = localeOptionsForPicker;
+  if (storedCode == null || storedCode.isEmpty) return 0;
+  final i = options.indexWhere((o) => o.$1 == storedCode);
+  return i < 0 ? 0 : i;
 }

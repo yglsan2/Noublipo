@@ -3,16 +3,28 @@ import 'package:flutter/services.dart' show HapticFeedback;
 import 'package:provider/provider.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/providers/list_provider.dart';
+import '../../../core/providers/shopping_habits_provider.dart';
 import '../../../core/utils/content_l10n.dart';
 import '../../../l10n/app_localizations.dart';
 import 'catalog_data.dart';
+import 'regional_catalog.dart';
 
 /// Écran catalogue / inspiration visuelle : parcourir des articles par catégorie et les ajouter en un tap.
 class CatalogScreen extends StatelessWidget {
   const CatalogScreen({super.key});
 
+  static const CatalogCategory habitsCategory = CatalogCategory(
+    id: 'habits',
+    label: 'Pour vous',
+    emoji: '✨',
+    colorIndex: 4,
+  );
+
   @override
   Widget build(BuildContext context) {
+    final lang = Localizations.localeOf(context).languageCode;
+    final habits = context.watch<ShoppingHabitsProvider>();
+    final habitItems = habits.catalogItemsFor(lang);
     return Scaffold(
       appBar: AppBar(
         title: Builder(builder: (context) => Text(AppLocalizations.of(context).catalogAndInspiration)),
@@ -32,9 +44,16 @@ class CatalogScreen extends StatelessWidget {
                 ),
           ),
           const SizedBox(height: 16),
-          ...CatalogData.categories.map((cat) => _CategorySection(
+          if (habitItems.isNotEmpty)
+            _CategorySection(
+              category: habitsCategory,
+              items: habitItems,
+              subtitle: AppLocalizations.of(context).habitsHint,
+              onAddItem: (name, colorIndex) => _addItem(context, name, colorIndex),
+            ),
+          ...RegionalCatalog.categoriesFor(lang).map((cat) => _CategorySection(
                 category: cat,
-                items: CatalogData.itemsFor(cat.id),
+                items: RegionalCatalog.itemsFor(cat.id, lang),
                 onAddItem: (name, colorIndex) => _addItem(context, name, colorIndex),
               )),
         ],
@@ -64,11 +83,13 @@ class _CategorySection extends StatelessWidget {
     required this.category,
     required this.items,
     required this.onAddItem,
+    this.subtitle,
   });
 
   final CatalogCategory category;
   final List<CatalogItem> items;
   final void Function(String name, int colorIndex) onAddItem;
+  final String? subtitle;
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +121,16 @@ class _CategorySection extends StatelessWidget {
               ],
             ),
           ),
+          if (subtitle != null && subtitle!.trim().isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Text(
+                subtitle!,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+              ),
+            ),
           Wrap(
             spacing: 8,
             runSpacing: 8,

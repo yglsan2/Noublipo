@@ -37,6 +37,8 @@ class ListProvider extends ChangeNotifier {
   final SyncService? _sync;
   final ReminderService? _reminder;
   final void Function(String recurringItemId)? _onRecurringItemChecked;
+  /// Habitudes locales : appelé après chaque ajout (nom FR canonique).
+  void Function(String canonicalName)? onItemAdded;
   final _uuid = const Uuid();
 
   List<ShoppingListModel> _lists = [];
@@ -923,6 +925,7 @@ class ListProvider extends ChangeNotifier {
       _lists = List.from(_lists)..[listIdx] = targetList;
       if (_list.id == targetList.id) _list = targetList;
       await _save();
+      onItemAdded?.call(trimmed);
       if (_reminder != null && reminderAt != null && reminderAt > DateTime.now().millisecondsSinceEpoch) {
         await _reminder.scheduleReminder(
           id,

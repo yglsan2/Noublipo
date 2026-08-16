@@ -78,6 +78,15 @@ class AppLocalizationsSl extends AppLocalizations {
       'Privzeto je uporabljen jezik telefona. Za spremembo tapnite zastavo.';
 
   @override
+  String get languageUsePhone => 'Jezik telefona';
+
+  @override
+  String get languageWheelHint => 'Pomikajte zastave';
+
+  @override
+  String get languageChoose => 'Izberi ta jezik';
+
+  @override
   String get share => 'Delite';
 
   @override
@@ -3073,9 +3082,6 @@ class AppLocalizationsSl extends AppLocalizations {
   String get prod_creme => 'smetana';
 
   @override
-  String get prod_return => ') vrnitev';
-
-  @override
   String get prod_abricot => 'Marelica';
 
   @override
@@ -3095,10 +3101,6 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get prod_agraves => 'Agraves';
-
-  @override
-  String get prod_ajout_quand_un_partenaire_ou_l =>
-      'Ajout quand un partenaire (ali l';
 
   @override
   String get prod_algues_nori => 'Algues nori';
@@ -4709,12 +4711,6 @@ class AppLocalizationsSl extends AppLocalizations {
   String get prod_zeste => 'Zeste';
 
   @override
-  String get prod_les => '';
-
-  @override
-  String get prod_le => '';
-
-  @override
   String get prod_echelle => 'Lestev';
 
   @override
@@ -4745,9 +4741,6 @@ class AppLocalizationsSl extends AppLocalizations {
   String get prod_ete_vacances => 'Poletje / počitnice';
 
   @override
-  String get prod_aaaeeeeiiouuucoeae => '';
-
-  @override
   String get prod_oeufs_bio => 'Organska jajca';
 
   @override
@@ -4775,4 +4768,1240 @@ class AppLocalizationsSl extends AppLocalizations {
 
   @override
   String get errorSyncUnavailable => 'Sync unavailable';
+
+  @override
+  String get prod_riz_rond => 'Riz rond';
+
+  @override
+  String get prod_nouilles_ramen => 'Nouilles ramen';
+
+  @override
+  String get prod_gyoza => 'Gyoza';
+
+  @override
+  String get prod_feuilles_de_gyoza => 'Feuilles de gyoza';
+
+  @override
+  String get prod_onigiri => 'Onigiri';
+
+  @override
+  String get prod_yakitori => 'Yakitori';
+
+  @override
+  String get prod_miso => 'Miso';
+
+  @override
+  String get prod_natto => 'Natto';
+
+  @override
+  String get prod_kombu => 'Kombu';
+
+  @override
+  String get prod_katsuobushi => 'Katsuobushi';
+
+  @override
+  String get prod_udon => 'Udon';
+
+  @override
+  String get prod_soba => 'Soba';
+
+  @override
+  String get prod_furikake => 'Furikake';
+
+  @override
+  String get prod_umeboshi => 'Umeboshi';
+
+  @override
+  String get prod_daikon => 'Daikon';
+
+  @override
+  String get prod_shiso => 'Shiso';
+
+  @override
+  String get prod_matcha => 'Matcha';
+
+  @override
+  String get prod_mochi => 'Mochi';
+
+  @override
+  String get prod_ponzu => 'Ponzu';
+
+  @override
+  String get prod_sashimi => 'Sashimi';
+
+  @override
+  String get prod_ciboule => 'Ciboule';
+
+  @override
+  String get prod_panko => 'Panko';
+
+  @override
+  String get prod_sauce_tonkatsu => 'Sauce tonkatsu';
+
+  @override
+  String get prod_shiitake => 'Shiitake';
+
+  @override
+  String get prod_enoki => 'Enoki';
+
+  @override
+  String get prod_yuzu => 'Yuzu';
+
+  @override
+  String get prod_konjac => 'Konjac';
+
+  @override
+  String get prod_the_sencha => 'Thé sencha';
+
+  @override
+  String get prod_shochu => 'Shochu';
+
+  @override
+  String get prod_kamaboko => 'Kamaboko';
+
+  @override
+  String get prod_takuan => 'Takuan';
+
+  @override
+  String get prod_bulgogi => 'Bulgogi';
+
+  @override
+  String get prod_gochujang => 'Gochujang';
+
+  @override
+  String get prod_gochugaru => 'Gochugaru';
+
+  @override
+  String get prod_soju => 'Soju';
+
+  @override
+  String get prod_doenjang => 'Doenjang';
+
+  @override
+  String get prod_samgyeopsal => 'Samgyeopsal';
+
+  @override
+  String get prod_tteokbokki => 'Tteokbokki';
+
+  @override
+  String get prod_tteok => 'Tteok';
+
+  @override
+  String get prod_japchae => 'Japchae';
+
+  @override
+  String get prod_galbi => 'Galbi';
+
+  @override
+  String get prod_ssamjang => 'Ssamjang';
+
+  @override
+  String get prod_feuilles_de_perilla => 'Feuilles de périlla';
+
+  @override
+  String get prod_radis_coreen => 'Radis coréen';
+
+  @override
+  String get prod_mandu => 'Mandu';
+
+  @override
+  String get prod_ramyeon => 'Ramyeon';
+
+  @override
+  String get prod_makgeolli => 'Makgeolli';
+
+  @override
+  String get prod_banchan => 'Banchan';
+
+  @override
+  String get prod_galette_de_poisson => 'Galette de poisson';
+
+  @override
+  String get prod_nouilles_de_patate_douce => 'Nouilles de patate douce';
+
+  @override
+  String get prod_huile_de_perilla => 'Huile de périlla';
+
+  @override
+  String get prod_poire_asiatique => 'Poire asiatique';
+
+  @override
+  String get prod_germes_de_soja => 'Germes de soja';
+
+  @override
+  String get prod_gim => 'Gim';
+
+  @override
+  String get prod_sundubu => 'Sundubu';
+
+  @override
+  String get prod_poisson_seche => 'Poisson séché';
+
+  @override
+  String get prod_betterave => 'Betterave';
+
+  @override
+  String get prod_smetana => 'Smetana';
+
+  @override
+  String get prod_sarrasin => 'Sarrasin';
+
+  @override
+  String get prod_pelmeni => 'Pelmeni';
+
+  @override
+  String get prod_pain_noir => 'Pain noir';
+
+  @override
+  String get prod_hareng => 'Hareng';
+
+  @override
+  String get prod_kvas => 'Kvas';
+
+  @override
+  String get prod_chou_fermente => 'Chou fermenté';
+
+  @override
+  String get prod_kefir => 'Kéfir';
+
+  @override
+  String get prod_tvorog => 'Tvorog';
+
+  @override
+  String get prod_blinis => 'Blinis';
+
+  @override
+  String get prod_huile_de_tournesol => 'Huile de tournesol';
+
+  @override
+  String get prod_raifort => 'Raifort';
+
+  @override
+  String get prod_vodka => 'Vodka';
+
+  @override
+  String get prod_caviar => 'Caviar';
+
+  @override
+  String get prod_vareniki => 'Vareniki';
+
+  @override
+  String get prod_adjika => 'Adjika';
+
+  @override
+  String get prod_graines_de_tournesol => 'Graines de tournesol';
+
+  @override
+  String get prod_chachlik => 'Chachlik';
+
+  @override
+  String get prod_pain_de_seigle => 'Pain de seigle';
+
+  @override
+  String get prod_couscous => 'Couscous';
+
+  @override
+  String get prod_tajine => 'Tajine';
+
+  @override
+  String get prod_harissa => 'Harissa';
+
+  @override
+  String get prod_citrons_confits => 'Citrons confits';
+
+  @override
+  String get prod_labneh => 'Labneh';
+
+  @override
+  String get prod_pain_pita => 'Pain pita';
+
+  @override
+  String get prod_falafel => 'Falafel';
+
+  @override
+  String get prod_ras_el_hanout => 'Ras el hanout';
+
+  @override
+  String get prod_zaatar => 'Zaatar';
+
+  @override
+  String get prod_sumac => 'Sumac';
+
+  @override
+  String get prod_melasse_de_grenade => 'Mélasse de grenade';
+
+  @override
+  String get prod_freekeh => 'Freekeh';
+
+  @override
+  String get prod_feves => 'Fèves';
+
+  @override
+  String get prod_eau_de_fleur_doranger => 'Eau de fleur d\'oranger';
+
+  @override
+  String get prod_eau_de_rose => 'Eau de rose';
+
+  @override
+  String get prod_maamoul => 'Maamoul';
+
+  @override
+  String get prod_baklava => 'Baklava';
+
+  @override
+  String get prod_feuilles_de_brick => 'Feuilles de brick';
+
+  @override
+  String get prod_safran => 'Safran';
+
+  @override
+  String get prod_cumin => 'Cumin';
+
+  @override
+  String get prod_the_a_la_menthe => 'Thé à la menthe';
+
+  @override
+  String get prod_amlou => 'Amlou';
+
+  @override
+  String get prod_msemen => 'Msemen';
+
+  @override
+  String get prod_khobz => 'Khobz';
+
+  @override
+  String get prod_arak => 'Arak';
+
+  @override
+  String get prod_smen => 'Smen';
+
+  @override
+  String get prod_pastilla => 'Pastilla';
+
+  @override
+  String get prod_nouilles_chinoises => 'Nouilles chinoises';
+
+  @override
+  String get prod_sauce_dhuitre => 'Sauce d\'huître';
+
+  @override
+  String get prod_pak_choi => 'Pak choi';
+
+  @override
+  String get prod_anis_etoile => 'Anis étoilé';
+
+  @override
+  String get prod_baozi => 'Baozi';
+
+  @override
+  String get prod_wonton => 'Wonton';
+
+  @override
+  String get prod_vin_de_shaoxing => 'Vin de Shaoxing';
+
+  @override
+  String get prod_cinq_epices => 'Cinq-épices';
+
+  @override
+  String get prod_huile_de_piment => 'Huile de piment';
+
+  @override
+  String get prod_doubanjiang => 'Doubanjiang';
+
+  @override
+  String get prod_oreilles_de_judas => 'Oreilles de Judas';
+
+  @override
+  String get prod_liseron_deau => 'Liseron d\'eau';
+
+  @override
+  String get prod_litchi => 'Litchi';
+
+  @override
+  String get prod_saucisse_chinoise => 'Saucisse chinoise';
+
+  @override
+  String get prod_farine_de_riz => 'Farine de riz';
+
+  @override
+  String get prod_garam_masala => 'Garam masala';
+
+  @override
+  String get prod_curcuma => 'Curcuma';
+
+  @override
+  String get prod_cardamome => 'Cardamome';
+
+  @override
+  String get prod_ghee => 'Ghee';
+
+  @override
+  String get prod_naan => 'Naan';
+
+  @override
+  String get prod_chapati => 'Chapati';
+
+  @override
+  String get prod_paneer => 'Paneer';
+
+  @override
+  String get prod_chutney => 'Chutney';
+
+  @override
+  String get prod_lassi => 'Lassi';
+
+  @override
+  String get prod_fenugrec => 'Fenugrec';
+
+  @override
+  String get prod_feuilles_de_curry => 'Feuilles de curry';
+
+  @override
+  String get prod_gombo => 'Gombo';
+
+  @override
+  String get prod_tamarin => 'Tamarin';
+
+  @override
+  String get prod_papadum => 'Papadum';
+
+  @override
+  String get prod_asafoetida => 'Asafoetida';
+
+  @override
+  String get prod_huile_de_moutarde => 'Huile de moutarde';
+
+  @override
+  String get prod_masala_chai => 'Masala chai';
+
+  @override
+  String get prod_galanga => 'Galanga';
+
+  @override
+  String get prod_feuilles_de_kaffir => 'Feuilles de kaffir';
+
+  @override
+  String get prod_sucre_de_palme => 'Sucre de palme';
+
+  @override
+  String get prod_nouilles_de_riz => 'Nouilles de riz';
+
+  @override
+  String get prod_mangue_verte => 'Mangue verte';
+
+  @override
+  String get prod_citron_vert => 'Citron vert';
+
+  @override
+  String get prod_piment_oiseau => 'Piment oiseau';
+
+  @override
+  String get prod_papaye_verte => 'Papaye verte';
+
+  @override
+  String get prod_nouilles_pho => 'Nouilles pho';
+
+  @override
+  String get prod_banh_mi => 'Banh mi';
+
+  @override
+  String get prod_yaourt_grec => 'Yaourt grec';
+
+  @override
+  String get prod_halloumi => 'Halloumi';
+
+  @override
+  String get prod_feuilles_de_vigne => 'Feuilles de vigne';
+
+  @override
+  String get prod_viande_kebab => 'Viande kebab';
+
+  @override
+  String get prod_sucuk => 'Sucuk';
+
+  @override
+  String get prod_simit => 'Simit';
+
+  @override
+  String get prod_ayran => 'Ayran';
+
+  @override
+  String get prod_raki => 'Raki';
+
+  @override
+  String get prod_ouzo => 'Ouzo';
+
+  @override
+  String get prod_tzatziki => 'Tzatziki';
+
+  @override
+  String get prod_olives_kalamata => 'Olives kalamata';
+
+  @override
+  String get prod_yufka => 'Yufka';
+
+  @override
+  String get prod_bretzel => 'Bretzel';
+
+  @override
+  String get prod_quark => 'Quark';
+
+  @override
+  String get prod_spatzle => 'Spätzle';
+
+  @override
+  String get prod_chorizo => 'Chorizo';
+
+  @override
+  String get prod_jambon_serrano => 'Jambon serrano';
+
+  @override
+  String get prod_jalape_os => 'Jalapeños';
+
+  @override
+  String get prod_paprika_fume => 'Paprika fumé';
+
+  @override
+  String get prod_queso_fresco => 'Queso fresco';
+
+  @override
+  String get prod_haricots_noirs => 'Haricots noirs';
+
+  @override
+  String get prod_banane_plantain => 'Banane plantain';
+
+  @override
+  String get prod_manchego => 'Manchego';
+
+  @override
+  String get prod_burrata => 'Burrata';
+
+  @override
+  String get prod_prosciutto => 'Prosciutto';
+
+  @override
+  String get prod_passata => 'Passata';
+
+  @override
+  String get prod_pecorino => 'Pecorino';
+
+  @override
+  String get prod_ricotta => 'Ricotta';
+
+  @override
+  String get prod_gnocchi => 'Gnocchi';
+
+  @override
+  String get prod_polenta => 'Polenta';
+
+  @override
+  String get prod_vinaigre_balsamique => 'Vinaigre balsamique';
+
+  @override
+  String get prod_ciabatta => 'Ciabatta';
+
+  @override
+  String get prod_pierogi => 'Pierogi';
+
+  @override
+  String get prod_kabanos => 'Kabanos';
+
+  @override
+  String get prod_saucisse_polonaise => 'Saucisse polonaise';
+
+  @override
+  String get prod_sambal => 'Sambal';
+
+  @override
+  String get prod_kecap_manis => 'Kecap manis';
+
+  @override
+  String get prod_sate => 'Saté';
+
+  @override
+  String get prod_pandan => 'Pandan';
+
+  @override
+  String get prod_krupuk => 'Krupuk';
+
+  @override
+  String get prod_knackebrod => 'Knäckebröd';
+
+  @override
+  String get prod_airelles => 'Airelles';
+
+  @override
+  String get prod_gravlax => 'Gravlax';
+
+  @override
+  String get prod_brunost => 'Brunost';
+
+  @override
+  String get prod_hareng_marine => 'Hareng mariné';
+
+  @override
+  String get prod_boulettes_de_viande => 'Boulettes de viande';
+
+  @override
+  String get prod_baked_beans => 'Baked beans';
+
+  @override
+  String get prod_digestives => 'Digestives';
+
+  @override
+  String get prod_herbes_de_provence => 'Herbes de Provence';
+
+  @override
+  String get prod_magret_de_canard => 'Magret de canard';
+
+  @override
+  String get prod_ajvar => 'Ajvar';
+
+  @override
+  String get prod_burek => 'Burek';
+
+  @override
+  String get prod_kajmak => 'Kajmak';
+
+  @override
+  String get catalogCat_local => 'Spécialités';
+
+  @override
+  String get mealLbl_sushi => 'Sushi / sashimi';
+
+  @override
+  String get mealLbl_ramen => 'Ramen';
+
+  @override
+  String get mealLbl_gyoza => 'Gyoza';
+
+  @override
+  String get mealLbl_onigiri => 'Onigiri';
+
+  @override
+  String get mealLbl_yakitori => 'Yakitori';
+
+  @override
+  String get mealLbl_miso_soup => 'Soupe miso';
+
+  @override
+  String get mealLbl_bulgogi => 'Bulgogi';
+
+  @override
+  String get mealLbl_kimchi_jjigae => 'Ragoût de kimchi';
+
+  @override
+  String get mealLbl_samgyeopsal => 'Samgyeopsal';
+
+  @override
+  String get mealLbl_tteokbokki => 'Tteokbokki';
+
+  @override
+  String get mealLbl_bibimbap => 'Bibimbap';
+
+  @override
+  String get mealLbl_bortsch => 'Bortsch';
+
+  @override
+  String get mealLbl_chachlik => 'Chachlik';
+
+  @override
+  String get mealLbl_pelmeni => 'Pelmeni';
+
+  @override
+  String get mealLbl_blinis => 'Blinis';
+
+  @override
+  String get mealLbl_couscous => 'Couscous';
+
+  @override
+  String get mealLbl_tajine => 'Tajine';
+
+  @override
+  String get mealLbl_houmous_meal => 'Houmous et mezzé';
+
+  @override
+  String get mealLbl_falafel => 'Falafel';
+
+  @override
+  String get mealLbl_mapo_tofu => 'Mapo tofu';
+
+  @override
+  String get mealLbl_dumplings => 'Raviolis / jiaozi';
+
+  @override
+  String get mealLbl_curry_in => 'Curry';
+
+  @override
+  String get mealLbl_dal => 'Dal';
+
+  @override
+  String get mealLbl_pad_thai => 'Pad thaï';
+
+  @override
+  String get mealLbl_tom_yum => 'Tom yum';
+
+  @override
+  String get mealLbl_pho => 'Phở';
+
+  @override
+  String get mealLbl_kebab => 'Kebab';
+
+  @override
+  String get mealLbl_meze => 'Mezzé';
+
+  @override
+  String get mealLbl_paella => 'Paella';
+
+  @override
+  String get mealLbl_gazpacho => 'Gaspacho';
+
+  @override
+  String get mealLbl_risotto => 'Risotto';
+
+  @override
+  String get mealLbl_schnitzel => 'Schnitzel';
+
+  @override
+  String get mealLbl_pierogi_meal => 'Pierogi';
+
+  @override
+  String get mealLbl_nasi_goreng => 'Nasi goreng';
+
+  @override
+  String get mealLbl_satay => 'Saté';
+
+  @override
+  String get mealLbl_kottbullar => 'Boulettes';
+
+  @override
+  String get mealLbl_full_english => 'English breakfast';
+
+  @override
+  String get prod_pois_gris => 'Pois gris';
+
+  @override
+  String get prod_lard_fume => 'Lard fumé';
+
+  @override
+  String get prod_fromage_au_cumin => 'Fromage au cumin';
+
+  @override
+  String get prod_p_r_gi => 'Pīrāgi';
+
+  @override
+  String get prod_pain_depices => 'Pain d\'épices';
+
+  @override
+  String get prod_baume_noir_de_riga => 'Baume noir de Riga';
+
+  @override
+  String get prod_oseille => 'Oseille';
+
+  @override
+  String get prod_sprats => 'Sprats';
+
+  @override
+  String get prod_kama => 'Kama';
+
+  @override
+  String get prod_kohuke => 'Kohuke';
+
+  @override
+  String get prod_boudin_estonien => 'Boudin estonien';
+
+  @override
+  String get prod_aspic => 'Aspic';
+
+  @override
+  String get prod_cepelinai => 'Cepelinai';
+
+  @override
+  String get prod_kugelis => 'Kugelis';
+
+  @override
+  String get prod_pain_frit => 'Pain frit';
+
+  @override
+  String get prod_midus => 'Midus';
+
+  @override
+  String get prod_myrtilles => 'Myrtilles';
+
+  @override
+  String get prod_l_ngos => 'Lángos';
+
+  @override
+  String get prod_nokedli => 'Nokedli';
+
+  @override
+  String get prod_pog_csa => 'Pogácsa';
+
+  @override
+  String get prod_kolb_sz => 'Kolbász';
+
+  @override
+  String get prod_p_linka => 'Pálinka';
+
+  @override
+  String get prod_creme_de_paprika => 'Crème de paprika';
+
+  @override
+  String get prod_knedl_ky => 'Knedlíky';
+
+  @override
+  String get prod_tvar_ky => 'Tvarůžky';
+
+  @override
+  String get prod_bryndza => 'Bryndza';
+
+  @override
+  String get prod_halu_ky => 'Halušky';
+
+  @override
+  String get prod_o_tiepok => 'Oštiepok';
+
+  @override
+  String get prod_slivovica => 'Slivovica';
+
+  @override
+  String get prod_m_m_lig => 'Mămăligă';
+
+  @override
+  String get prod_mici => 'Mici';
+
+  @override
+  String get prod_telemea => 'Telemea';
+
+  @override
+  String get prod_uic => 'Țuică';
+
+  @override
+  String get prod_cozonac => 'Cozonac';
+
+  @override
+  String get prod_sarmale => 'Sarmale';
+
+  @override
+  String get prod_karjalanpiirakka => 'Karjalanpiirakka';
+
+  @override
+  String get prod_pulla => 'Pulla';
+
+  @override
+  String get prod_viili => 'Viili';
+
+  @override
+  String get prod_leipajuusto => 'Leipäjuusto';
+
+  @override
+  String get prod_salmiakki => 'Salmiakki';
+
+  @override
+  String get prod_kalakukko => 'Kalakukko';
+
+  @override
+  String get prod_muikku => 'Muikku';
+
+  @override
+  String get prod_stroopwafel => 'Stroopwafel';
+
+  @override
+  String get prod_rookworst => 'Rookworst';
+
+  @override
+  String get prod_boerenkool => 'Boerenkool';
+
+  @override
+  String get prod_drop => 'Drop';
+
+  @override
+  String get prod_hagelslag => 'Hagelslag';
+
+  @override
+  String get prod_poffertjes => 'Poffertjes';
+
+  @override
+  String get prod_gouda => 'Gouda';
+
+  @override
+  String get prod_paprika_en_poudre => 'Paprika en poudre';
+
+  @override
+  String get mealLbl_zirni => 'Pois gris au lard';
+
+  @override
+  String get mealLbl_rasols => 'Salade rasols';
+
+  @override
+  String get mealLbl_skabenu_zupa => 'Soupe à l\'oseille';
+
+  @override
+  String get mealLbl_kiluvoileib => 'Tartine aux sprats';
+
+  @override
+  String get mealLbl_verivorst => 'Boudin noir';
+
+  @override
+  String get mealLbl_saltibarsciai => 'Soupe froide à la betterave';
+
+  @override
+  String get mealLbl_cepelinai => 'Cepelinai';
+
+  @override
+  String get mealLbl_goulash => 'Goulash';
+
+  @override
+  String get mealLbl_langos => 'Lángos';
+
+  @override
+  String get mealLbl_svickova => 'Svíčková';
+
+  @override
+  String get mealLbl_halusky => 'Halušky à la bryndza';
+
+  @override
+  String get mealLbl_sarmale => 'Sarmale';
+
+  @override
+  String get mealLbl_ciorba => 'Ciorbă';
+
+  @override
+  String get mealLbl_lohikeitto => 'Soupe au saumon';
+
+  @override
+  String get mealLbl_stamppot => 'Stamppot';
+
+  @override
+  String get prod_morue => 'Morue';
+
+  @override
+  String get prod_pastel_de_nata => 'Pastel de nata';
+
+  @override
+  String get prod_vinho_verde => 'Vinho verde';
+
+  @override
+  String get prod_broa => 'Broa';
+
+  @override
+  String get prod_salo => 'Salo';
+
+  @override
+  String get prod_deruny => 'Deruny';
+
+  @override
+  String get prod_pampushky => 'Pampushky';
+
+  @override
+  String get prod_banitsa => 'Banitsa';
+
+  @override
+  String get prod_lukanka => 'Lukanka';
+
+  @override
+  String get prod_sirene => 'Sirene';
+
+  @override
+  String get prod_lyutenitsa => 'Lyutenitsa';
+
+  @override
+  String get prod_evapi => 'Ćevapi';
+
+  @override
+  String get prod_kranjska => 'Kranjska';
+
+  @override
+  String get prod_potica => 'Potica';
+
+  @override
+  String get prod_pa_amb_tomaquet => 'Pa amb tomàquet';
+
+  @override
+  String get prod_botifarra => 'Botifarra';
+
+  @override
+  String get prod_calcots => 'Calçots';
+
+  @override
+  String get prod_idiazabal => 'Idiazabal';
+
+  @override
+  String get prod_txistorra => 'Txistorra';
+
+  @override
+  String get prod_poulpe => 'Poulpe';
+
+  @override
+  String get prod_nasi_lemak => 'Nasi lemak';
+
+  @override
+  String get prod_laksa => 'Laksa';
+
+  @override
+  String get prod_rendang => 'Rendang';
+
+  @override
+  String get prod_leverpostej => 'Leverpostej';
+
+  @override
+  String get prod_remoulade => 'Remoulade';
+
+  @override
+  String get prod_sm_rrebr_d => 'Smørrebrød';
+
+  @override
+  String get prod_filmjolk => 'Filmjölk';
+
+  @override
+  String get prod_kanelbulle => 'Kanelbulle';
+
+  @override
+  String get prod_kaviar_de_morue => 'Kaviar de morue';
+
+  @override
+  String get prod_pinnekj_tt => 'Pinnekjøtt';
+
+  @override
+  String get prod_r_d_p_lse => 'Rød pølse';
+
+  @override
+  String get mealLbl_bacalhau => 'Morue à la portugaise';
+
+  @override
+  String get mealLbl_cevapi => 'Ćevapi';
+
+  @override
+  String get mealLbl_shopska => 'Salade shopska';
+
+  @override
+  String get mealLbl_deruny => 'Deruny';
+
+  @override
+  String get mealLbl_nasi_lemak => 'Nasi lemak';
+
+  @override
+  String get mealLbl_smorrebrod => 'Smørrebrød';
+
+  @override
+  String get mealLbl_kottbullar_sv => 'Boulettes suédoises';
+
+  @override
+  String get mealLbl_pa_tomaquet => 'Pain à la tomate';
+
+  @override
+  String get prod_huile_de_pepins_de_courge => 'Huile de pépins de courge';
+
+  @override
+  String get prod_zganci => 'Žganci';
+
+  @override
+  String get prod_gibanica => 'Gibanica';
+
+  @override
+  String get prod_empanada => 'Empanada';
+
+  @override
+  String get prod_pimientos_de_padron => 'Pimientos de Padrón';
+
+  @override
+  String get prod_kulen => 'Kulen';
+
+  @override
+  String get prod_prsut => 'Pršut';
+
+  @override
+  String get prod_pljeskavica => 'Pljeskavica';
+
+  @override
+  String get prod_proja => 'Proja';
+
+  @override
+  String get prod_lefse => 'Lefse';
+
+  @override
+  String get prod_lutefisk => 'Lutefisk';
+
+  @override
+  String get prod_romme => 'Rømme';
+
+  @override
+  String get prod_roti_canai => 'Roti canai';
+
+  @override
+  String get prod_belacan => 'Belacan';
+
+  @override
+  String get prod_cendol => 'Cendol';
+
+  @override
+  String get prod_zacusca => 'Zacuscă';
+
+  @override
+  String get prod_kashkaval => 'Kashkaval';
+
+  @override
+  String get prod_tarator => 'Tarator';
+
+  @override
+  String get prod_bitterballen => 'Bitterballen';
+
+  @override
+  String get prod_fuet => 'Fuet';
+
+  @override
+  String get prod_trdelnik => 'Trdelník';
+
+  @override
+  String get prod_bigos => 'Bigos';
+
+  @override
+  String get prod_txakoli => 'Txakoli';
+
+  @override
+  String get prod_pimientos_de_gernika => 'Pimientos de Gernika';
+
+  @override
+  String get prod_lacon => 'Lacón';
+
+  @override
+  String get prod_percebes => 'Percebes';
+
+  @override
+  String get prod_marmite => 'Marmite';
+
+  @override
+  String get prod_crumpets => 'Crumpets';
+
+  @override
+  String get prod_stilton => 'Stilton';
+
+  @override
+  String get prod_focaccia => 'Focaccia';
+
+  @override
+  String get prod_speck => 'Speck';
+
+  @override
+  String get prod_graviera => 'Graviera';
+
+  @override
+  String get prod_roquette => 'Roquette';
+
+  @override
+  String get prod_vin_rouge => 'Vin rouge';
+
+  @override
+  String get prod_manioc => 'Manioc';
+
+  @override
+  String get prod_currywurst => 'Currywurst';
+
+  @override
+  String get prod_leberwurst => 'Leberwurst';
+
+  @override
+  String get mealLbl_carbonara_it => 'Carbonara';
+
+  @override
+  String get mealLbl_cassoulet => 'Cassoulet';
+
+  @override
+  String get mealLbl_fish_chips => 'Fish and chips';
+
+  @override
+  String get mealLbl_moussaka => 'Moussaka';
+
+  @override
+  String get mealLbl_pintxos => 'Pintxos';
+
+  @override
+  String get mealLbl_pulpo_feira => 'Poulpe à la galicienne';
+
+  @override
+  String get mealLbl_laksa_meal => 'Laksa';
+
+  @override
+  String get mealLbl_rendang_meal => 'Rendang';
+
+  @override
+  String get mealLbl_hotpot => 'Fondue chinoise';
+
+  @override
+  String get mealLbl_banh_mi_meal => 'Banh mi';
+
+  @override
+  String get mealLbl_shakshuka => 'Chakchouka';
+
+  @override
+  String get mealLbl_caldo_verde => 'Caldo verde';
+
+  @override
+  String get mealLbl_tortilla_es => 'Tortilla espagnole';
+
+  @override
+  String get mealLbl_jota => 'Jota';
+
+  @override
+  String get mealLbl_banitsa_meal => 'Banitsa';
+
+  @override
+  String get mealLbl_borscht_uk => 'Bortsch';
+
+  @override
+  String get mealLbl_frikadeller => 'Frikadeller';
+
+  @override
+  String get mealLbl_biryani => 'Biryani';
+
+  @override
+  String get mealLbl_gibanica_meal => 'Gibanica';
+
+  @override
+  String get mealLbl_pinnekjott_meal => 'Pinnekjøtt';
+
+  @override
+  String get mealLbl_poffertjes_meal => 'Poffertjes';
+
+  @override
+  String get mealLbl_janssons => 'Tentation de Jansson';
+
+  @override
+  String get mealLbl_pilpil => 'Morue pil-pil';
+
+  @override
+  String get catalogCat_habits => 'Pour vous';
+
+  @override
+  String get habitsHint =>
+      'Repéré dans vos courses, même hors des spécialités locales';
+
+  @override
+  String get habitsYouOftenGet => 'Vous prenez souvent';
+
+  @override
+  String get addYourHabitItems => 'Vos habitudes';
+
+  @override
+  String get habitsChipTooltip => 'Articles mémorisés d\'après vos listes';
+
+  @override
+  String get habitsEnabled => 'Mémoriser mes habitudes';
+
+  @override
+  String get habitsEnabledSubtitle =>
+      'Rappelle vos articles et plats habituels, même hors des listes locales';
+
+  @override
+  String get habitsEnabledMessage => 'Habitudes réactivées';
+
+  @override
+  String get habitsDisabledMessage =>
+      'Habitudes désactivées — plus aucun rappel';
+
+  @override
+  String get habitsForget => 'Oublier ce qui a été mémorisé';
+
+  @override
+  String get habitsForgotMessage => 'Mémoire des habitudes effacée';
 }

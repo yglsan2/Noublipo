@@ -157,8 +157,8 @@ class GamificationProvider extends ChangeNotifier {
     return computed;
   }
 
-  /// Produits les plus achetés (top N, par nombre d'occurrences dans l'historique).
-  List<({String name, int count})> mostBoughtProducts({int top = 15}) {
+  /// Comptages d'achats (toutes occurrences dans l'historique).
+  Map<String, int> purchaseCounts() {
     final byName = <String, int>{};
     for (final trip in _data.tripHistory) {
       for (final item in trip.items) {
@@ -167,6 +167,12 @@ class GamificationProvider extends ChangeNotifier {
         byName[n] = (byName[n] ?? 0) + 1;
       }
     }
+    return byName;
+  }
+
+  /// Produits les plus achetés (top N, par nombre d'occurrences dans l'historique).
+  List<({String name, int count})> mostBoughtProducts({int top = 15}) {
+    final byName = purchaseCounts();
     final list = byName.entries.map((e) => (name: e.key, count: e.value)).toList();
     list.sort((a, b) => b.count.compareTo(a.count));
     return list.take(top).toList();

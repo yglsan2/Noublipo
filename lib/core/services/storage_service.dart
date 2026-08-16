@@ -9,6 +9,7 @@ import '../models/list_template.dart';
 import '../models/pantry_item.dart';
 import '../models/recurring_item.dart';
 import '../models/seasonal_template.dart';
+import '../models/shopping_habits.dart';
 import '../models/shopping_list_model.dart';
 import '../utils/app_logger.dart';
 
@@ -69,6 +70,8 @@ class StorageService {
   static const String _keyFirstOpenMs = 'toteo_first_open_ms';
   static const String _keyTripsCompletedCount = 'toteo_trips_completed_count';
   static const String _keyLastInterstitialShownMs = 'toteo_last_interstitial_ms';
+  static const String _keyShoppingHabits = 'toteo_shopping_habits';
+  static const String _keyShoppingHabitsEnabled = 'toteo_shopping_habits_enabled';
 
   final SharedPreferences _prefs;
 
@@ -739,6 +742,40 @@ class StorageService {
     }
   }
 
+  Future<ShoppingHabitsData> loadShoppingHabits() async {
+    final json = _prefs.getString(_keyShoppingHabits);
+    if (json == null) return ShoppingHabitsData();
+    try {
+      return ShoppingHabitsData.fromJson(
+        jsonDecode(json) as Map<String, dynamic>,
+      );
+    } catch (e, stack) {
+      AppLogger.warning('loadShoppingHabits: JSON invalide', e, stack);
+      return ShoppingHabitsData();
+    }
+  }
+
+  Future<void> saveShoppingHabits(ShoppingHabitsData data) async {
+    try {
+      await _prefs.setString(_keyShoppingHabits, jsonEncode(data.toJson()));
+    } catch (e, stack) {
+      AppLogger.error('saveShoppingHabits', e, stack);
+      rethrow;
+    }
+  }
+
+  /// Rappel des habitudes d'achat. Défaut : activé.
+  bool get shoppingHabitsEnabled => _prefs.getBool(_keyShoppingHabitsEnabled) ?? true;
+
+  Future<void> setShoppingHabitsEnabled(bool value) async {
+    try {
+      await _prefs.setBool(_keyShoppingHabitsEnabled, value);
+    } catch (e, stack) {
+      AppLogger.error('setShoppingHabitsEnabled', e, stack);
+      rethrow;
+    }
+  }
+
   /// Stock maison (Tote+).
   Future<List<PantryItem>> loadPantryItems() async {
     final json = _prefs.getString(_keyPantryStock);
@@ -951,6 +988,8 @@ class StorageService {
       'listTemplates': templates.map((e) => e.toJson()).toList(),
       'listGroups': groups.map((e) => e.toJson()).toList(),
       'birthdays': birthdays.map((e) => e.toJson()).toList(),
+      'shoppingHabits': (await loadShoppingHabits()).toJson(),
+      'shoppingHabitsEnabled': shoppingHabitsEnabled,
     };
   }
 
@@ -987,6 +1026,9 @@ class StorageService {
     if (data['tileStyle'] is String) await setTileStyle(data['tileStyle'] as String);
     if (data['darkMode'] is bool) await setDarkMode(data['darkMode'] as bool);
     if (data['remindersEnabled'] is bool) await setRemindersEnabled(data['remindersEnabled'] as bool);
+    if (data['shoppingHabitsEnabled'] is bool) {
+      await setShoppingHabitsEnabled(data['shoppingHabitsEnabled'] as bool);
+    }
     if (data['categoryStyle'] is String) await setCategoryStyle(data['categoryStyle'] as String);
     if (data['sortMode'] is String) await setSortMode(data['sortMode'] as String);
     if (data['listOrgMode'] is String) await setListOrgMode(data['listOrgMode'] as String);
@@ -1037,6 +1079,11 @@ class StorageService {
           .map((e) => BirthdayEntry.fromJson(e as Map<String, dynamic>))
           .toList();
       await saveBirthdays(birthdays);
+    }
+
+    final habitsRaw = data['shoppingHabits'];
+    if (habitsRaw is Map<String, dynamic>) {
+      await saveShoppingHabits(ShoppingHabitsData.fromJson(habitsRaw));
     }
   }
 }

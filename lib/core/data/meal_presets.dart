@@ -1,4 +1,8 @@
 /// Presets repas / occasions : phrase → liste d'articles (100 % local, sans IA).
+import '../utils/content_l10n.dart';
+
+part 'regional_meals.dart';
+
 class MealPresetItem {
   const MealPresetItem(this.name, {this.colorIndex});
   final String name;
@@ -12,6 +16,7 @@ class MealPreset {
     required this.keywords,
     required this.items,
     this.defaultColorIndex = 0,
+    this.profiles = const [],
   });
 
   final String id;
@@ -19,6 +24,8 @@ class MealPreset {
   final List<String> keywords;
   final List<MealPresetItem> items;
   final int defaultColorIndex;
+  /// Profils alimentaires (ja, ko, ru, ar…) ; vide = international.
+  final List<String> profiles;
 }
 
 /// Dictionnaire embarqué FR. Matching = égalité ou mot-clé contenu dans la saisie.
@@ -26,24 +33,12 @@ class MealPresets {
   MealPresets._();
 
   static String normalize(String input) {
-    var s = input.trim().toLowerCase();
-    const map = {
-      'à': 'a', 'â': 'a', 'ä': 'a',
-      'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e',
-      'î': 'i', 'ï': 'i',
-      'ô': 'o', 'ö': 'o',
-      'ù': 'u', 'û': 'u', 'ü': 'u',
-      'ç': 'c',
-      'œ': 'oe', 'æ': 'ae',
-      "'": '', '’': '', '-': ' ',
-    };
-    for (final e in map.entries) {
-      s = s.replaceAll(e.key, e.value);
-    }
+    var s = foldContentKey(input);
+    s = s.replaceAll("'", '').replaceAll('’', '').replaceAll('-', ' ');
     return s.replaceAll(RegExp(r'\s+'), ' ').trim();
   }
 
-  static final List<MealPreset> all = [
+  static final List<MealPreset> _universal = [
     MealPreset(
       id: 'raclette',
       label: 'Raclette',
@@ -91,7 +86,14 @@ class MealPresets {
     MealPreset(
       id: 'petit_dej',
       label: 'Petit-déjeuner',
-      keywords: ['petit dejeuner', 'petit dej', 'petitdej', 'breakfast'],
+      keywords: [
+        'petit dejeuner', 'petit dej', 'petitdej', 'breakfast',
+        '朝食', '朝ごはん', '아침', '아침식사', 'завтрак', 'сніданок',
+        'فطور', 'افطار', 'إفطار', '早餐', '早饭', 'नाश्ता', 'อาหารเช้า',
+        'bữa sáng', 'ארוחת בוקר', 'kahvaltı', 'πρωινό',
+        'brokastis', 'hommikusöök', 'pusryčiai', 'reggeli',
+        'snídaně', 'raňajky', 'aamiainen', 'ontbijt',
+      ],
       defaultColorIndex: 2,
       items: const [
         MealPresetItem('Pain', colorIndex: 0),
@@ -214,8 +216,123 @@ class MealPresets {
     ),
   ];
 
+  static List<MealPreset> get all => [..._universal, ...kRegionalMealPresets];
+
+  static const _westernIds = {
+    'raclette',
+    'apero',
+    'barbecue',
+    'carbonara',
+    'fondue',
+    'crepes',
+  };
+
+  static const _westernProfiles = {
+    'fr',
+    'de',
+    'it',
+    'en',
+    'nordic',
+    'pl',
+    'es',
+    'pt',
+    'balkan',
+    'lv',
+    'et',
+    'lt',
+    'hu',
+    'cs',
+    'sk',
+    'ro',
+    'fi',
+    'nl',
+    'uk',
+    'bg',
+    'hr',
+    'sr',
+    'sl',
+    'ca',
+    'eu',
+    'gl',
+    'da',
+    'sv',
+    'nb',
+    'ms',
+  };
+
+  static MealPreset breakfastFor(String languageCode) {
+    final profile = foodProfileFor(languageCode);
+    final names = kBreakfastItems[profile] ?? kBreakfastItems['fr']!;
+    final extra = <String>[
+      ...?kBreakfastExtraKeywords[languageCode],
+      ...?kBreakfastExtraKeywords[profile],
+    ];
+    final base = _universal.firstWhere((e) => e.id == 'petit_dej');
+    return MealPreset(
+      id: base.id,
+      label: base.label,
+      keywords: [...base.keywords, ...extra],
+      defaultColorIndex: base.defaultColorIndex,
+      items: [for (final n in names) MealPresetItem(n, colorIndex: 2)],
+    );
+  }
+
+  /// Presets proposés dans le sélecteur, selon la langue.
+  /// [learnedMealIds] : plats mémorisés hors profil linguistique (sushi pour un FR, etc.).
+  static List<MealPreset> visibleFor(
+    String languageCode, {
+    Iterable<String> learnedMealIds = const [],
+  }) {
+    final profile = foodProfileFor(languageCode);
+    final out = <MealPreset>[breakfastFor(languageCode)];
+    final seen = {out.first.id};
+    final byId = {for (final m in all) m.id: m};
+    for (final id in learnedMealIds) {
+      final m = byId[id];
+      if (m == null || !seen.add(m.id)) continue;
+      out.add(m);
+    }
+    for (final m in kRegionalMealPresets) {
+      if (m.profiles.isEmpty || m.profiles.contains(profile)) {
+        if (seen.add(m.id)) out.add(m);
+      }
+    }
+    for (final m in _universal) {
+      if (m.id == 'petit_dej') continue;
+      if (_westernIds.contains(m.id) && !_westernProfiles.contains(profile)) {
+        continue;
+      }
+      if (seen.add(m.id)) out.add(m);
+    }
+    return out;
+  }
+
+  /// True si le plat est déjà proposé pour cette langue, sans habitude apprise.
+  static bool isOfferedByDefault(String mealId, String languageCode) {
+    if (mealId.isEmpty || mealId == 'petit_dej') return true;
+    final profile = foodProfileFor(languageCode);
+    for (final m in kRegionalMealPresets) {
+      if (m.id != mealId) continue;
+      return m.profiles.isEmpty || m.profiles.contains(profile);
+    }
+    for (final m in _universal) {
+      if (m.id != mealId) continue;
+      if (_westernIds.contains(m.id) && !_westernProfiles.contains(profile)) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  }
+
   /// Retourne le preset le plus spécifique dont un mot-clé matche [input].
   static MealPreset? match(String input) {
+    final aliased = mealIdForTypedName(input);
+    if (aliased != null) {
+      for (final p in all) {
+        if (p.id == aliased) return p;
+      }
+    }
     final n = normalize(input);
     if (n.isEmpty) return null;
     MealPreset? best;

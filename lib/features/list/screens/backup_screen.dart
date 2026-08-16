@@ -11,6 +11,7 @@ import '../../../core/providers/category_names_provider.dart';
 import '../../../core/providers/list_provider.dart';
 import '../../../core/providers/planning_provider.dart';
 import '../../../core/providers/settings_provider.dart';
+import '../../../core/providers/shopping_habits_provider.dart';
 import '../../../core/services/storage_service.dart';
 import '../../../core/utils/app_logger.dart';
 import '../../../core/utils/list_display_name.dart';
@@ -112,6 +113,7 @@ class BackupScreen extends StatelessWidget {
     final settingsProvider = context.read<SettingsProvider>();
     final categoryNamesProvider = context.read<CategoryNamesProvider>();
     final planningProvider = context.read<PlanningProvider>();
+    final habitsProvider = context.read<ShoppingHabitsProvider>();
     final navigator = Navigator.of(context);
     final messenger = ScaffoldMessenger.of(context);
 
@@ -141,6 +143,7 @@ class BackupScreen extends StatelessWidget {
       await storage.importBackup(data);
       await listProvider.reload();
       settingsProvider.reloadFromStorage();
+      await habitsProvider.reloadFromStorage();
       categoryNamesProvider.reload();
       await planningProvider.refresh();
 

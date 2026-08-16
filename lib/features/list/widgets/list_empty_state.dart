@@ -16,9 +16,11 @@ class ListEmptyState extends StatelessWidget {
     this.onQuickAdd,
     this.onAddUsuals,
     this.onMealPresets,
+    this.onAddHabits,
     this.showQuickAddChip = false,
     this.showUsualsChip = false,
     this.showMealPresetsChip = false,
+    this.showHabitsChip = false,
     this.contentPaddingHorizontal = 16,
   });
 
@@ -30,9 +32,11 @@ class ListEmptyState extends StatelessWidget {
   final VoidCallback? onQuickAdd;
   final VoidCallback? onAddUsuals;
   final VoidCallback? onMealPresets;
+  final VoidCallback? onAddHabits;
   final bool showQuickAddChip;
   final bool showUsualsChip;
   final bool showMealPresetsChip;
+  final bool showHabitsChip;
   final double contentPaddingHorizontal;
 
   @override
@@ -41,7 +45,8 @@ class ListEmptyState extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
-        if ((showUsualsChip && onAddUsuals != null) ||
+        if ((showHabitsChip && onAddHabits != null) ||
+            (showUsualsChip && onAddUsuals != null) ||
             (showQuickAddChip && onQuickAdd != null) ||
             (showMealPresetsChip && onMealPresets != null))
           Padding(
@@ -52,6 +57,18 @@ class ListEmptyState extends StatelessWidget {
                 spacing: 8,
                 runSpacing: 6,
                 children: [
+                  if (showHabitsChip && onAddHabits != null)
+                    Tooltip(
+                      message: l10n.habitsChipTooltip,
+                      child: ActionChip(
+                        avatar: Icon(Icons.auto_awesome, size: 18, color: Theme.of(context).colorScheme.primary),
+                        label: Text(l10n.addYourHabitItems),
+                        onPressed: () {
+                          HapticFeedback.selectionClick();
+                          onAddHabits!();
+                        },
+                      ),
+                    ),
                   if (showUsualsChip && onAddUsuals != null)
                     Tooltip(
                       message: l10n.usualsChipTooltip,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../l10n/l10n_safety.dart';
 import '../services/storage_service.dart';
 import '../utils/app_logger.dart';
+import '../utils/text_script.dart';
 
 /// Préférences utilisateur (capitalisation, style tuile, mode nuit, rappels, langue).
 class SettingsProvider extends ChangeNotifier {
@@ -39,6 +40,7 @@ class SettingsProvider extends ChangeNotifier {
     _shoppingMode = _storage.shoppingMode;
     _onboardingSeen = _storage.onboardingSeen;
     _coachNutritionEnabled = _storage.coachNutritionEnabled;
+    _shoppingHabitsEnabled = _storage.shoppingHabitsEnabled;
     _hiddenSystemListIds = List<String>.from(_storage.hiddenSystemListIds);
     _applyFoodAxisDefaultIfNeeded();
   }
@@ -69,6 +71,17 @@ class SettingsProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> setShoppingHabitsEnabled(bool value) async {
+    try {
+      await _storage.setShoppingHabitsEnabled(value);
+      _shoppingHabitsEnabled = value;
+      notifyListeners();
+    } catch (e, stack) {
+      AppLogger.error('SettingsProvider.setShoppingHabitsEnabled', e, stack);
+      rethrow;
+    }
+  }
+
   final StorageService _storage;
   bool _capitalizeNames = false;
   String _tileStyle = 'bar';
@@ -94,6 +107,7 @@ class SettingsProvider extends ChangeNotifier {
   bool _shoppingMode = false;
   bool _onboardingSeen = false;
   bool _coachNutritionEnabled = true;
+  bool _shoppingHabitsEnabled = true;
   List<String> _hiddenSystemListIds = [];
 
   bool get capitalizeNames => _capitalizeNames;
@@ -144,6 +158,7 @@ class SettingsProvider extends ChangeNotifier {
   bool get shoppingMode => _shoppingMode;
   bool get onboardingSeen => _onboardingSeen;
   bool get coachNutritionEnabled => _coachNutritionEnabled;
+  bool get shoppingHabitsEnabled => _shoppingHabitsEnabled;
   List<String> get hiddenSystemListIds => List.unmodifiable(_hiddenSystemListIds);
   bool isSystemListHidden(String listId) => _hiddenSystemListIds.contains(listId);
   ThemeMode get themeMode => _darkMode ? ThemeMode.dark : ThemeMode.light;
@@ -442,16 +457,15 @@ class SettingsProvider extends ChangeNotifier {
     _shoppingMode = _storage.shoppingMode;
     _onboardingSeen = _storage.onboardingSeen;
     _coachNutritionEnabled = _storage.coachNutritionEnabled;
+    _shoppingHabitsEnabled = _storage.shoppingHabitsEnabled;
     _hiddenSystemListIds = List<String>.from(_storage.hiddenSystemListIds);
     notifyListeners();
   }
 
   /// Applique la capitalisation au nom si l'option est activée.
+  /// Ne transforme pas le chinois, l’arabe, le japonais, le coréen, etc.
   String applyCapitalization(String name) {
     if (!_capitalizeNames || name.isEmpty) return name;
-    return name.split(' ').map((word) {
-      if (word.isEmpty) return word;
-      return word[0].toUpperCase() + word.substring(1).toLowerCase();
-    }).join(' ');
+    return capitalizePhraseSafely(name);
   }
 }

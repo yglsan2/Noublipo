@@ -6,6 +6,7 @@ import '../../core/providers/consumption_profile_provider.dart';
 import '../../core/providers/premium_provider.dart';
 import '../../core/providers/settings_provider.dart';
 import '../../core/utils/content_l10n.dart';
+import '../../core/utils/text_script.dart';
 import '../../l10n/app_localizations.dart';
 
 /// Feuille Profil de conso (Pro) : régimes, allergies, évitements, tentations.
@@ -398,7 +399,7 @@ class _TemptationsList extends StatelessWidget {
                 labelText: l10n.profileTemptationProduct,
                 border: const OutlineInputBorder(),
               ),
-              textCapitalization: TextCapitalization.sentences,
+              textCapitalization: ctx.itemNameTextCapitalization,
             ),
             const SizedBox(height: 12),
             TextField(
@@ -407,7 +408,7 @@ class _TemptationsList extends StatelessWidget {
                 labelText: l10n.profileTemptationSubstitute,
                 border: const OutlineInputBorder(),
               ),
-              textCapitalization: TextCapitalization.sentences,
+              textCapitalization: ctx.itemNameTextCapitalization,
             ),
           ],
         ),

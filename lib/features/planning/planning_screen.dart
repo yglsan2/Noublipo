@@ -7,6 +7,7 @@ import '../../../core/models/seasonal_template.dart';
 import '../../../core/providers/list_provider.dart';
 import '../../../core/providers/planning_provider.dart';
 import '../../../core/utils/content_l10n.dart';
+import '../../../core/utils/text_script.dart';
 import '../../../l10n/app_localizations.dart';
 
 /// Écran Planification : achats récurrents et listes saisonnières.
@@ -413,7 +414,7 @@ class _RecurringFormSheetState extends State<_RecurringFormSheet> {
                   labelText: l10n.articleLabel,
                   hintText: l10n.articleHintExample,
                 ),
-                textCapitalization: TextCapitalization.sentences,
+                textCapitalization: context.itemNameTextCapitalization,
               ),
               const SizedBox(height: 12),
               Wrap(

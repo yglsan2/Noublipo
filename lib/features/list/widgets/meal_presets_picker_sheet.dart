@@ -8,6 +8,7 @@ import '../../../core/providers/list_provider.dart';
 import '../../../core/providers/pantry_provider.dart';
 import '../../../core/providers/premium_provider.dart';
 import '../../../core/providers/settings_provider.dart';
+import '../../../core/providers/shopping_habits_provider.dart';
 import '../../../core/ui/app_feedback.dart';
 import '../../../core/ui/meal_preset_dialog.dart';
 import '../../../core/utils/content_l10n.dart';
@@ -64,19 +65,30 @@ class MealPresetsPickerSheet extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: ListView.separated(
-                padding: const EdgeInsets.fromLTRB(12, 0, 12, 24),
-                itemCount: MealPresets.all.length,
-                separatorBuilder: (_, _) => const Divider(height: 1),
-                itemBuilder: (context, i) {
-                  final preset = MealPresets.all[i];
-                  final label = localizedMealPresetLabel(l10n, preset.id);
-                  return ListTile(
-                    leading: const Icon(Icons.restaurant_menu_outlined),
-                    title: Text(label),
-                    subtitle: Text(l10n.mealPresetsItemsCount(preset.items.length)),
-                    trailing: const Icon(Icons.chevron_right),
-                    onTap: () => _pickPreset(context, preset),
+              child: Builder(
+                builder: (context) {
+                  final lang = Localizations.localeOf(context).languageCode;
+                  final learned = context.watch<ShoppingHabitsProvider>().learnedMealIds(lang);
+                  final presets = MealPresets.visibleFor(lang, learnedMealIds: learned);
+                  return ListView.separated(
+                    padding: const EdgeInsets.fromLTRB(12, 0, 12, 24),
+                    itemCount: presets.length,
+                    separatorBuilder: (_, _) => const Divider(height: 1),
+                    itemBuilder: (context, i) {
+                      final preset = presets[i];
+                      final label = localizedMealPresetLabel(l10n, preset.id);
+                      return ListTile(
+                        leading: Icon(
+                          learned.contains(preset.id)
+                              ? Icons.auto_awesome
+                              : Icons.restaurant_menu_outlined,
+                        ),
+                        title: Text(label),
+                        subtitle: Text(l10n.mealPresetsItemsCount(preset.items.length)),
+                        trailing: const Icon(Icons.chevron_right),
+                        onTap: () => _pickPreset(context, preset),
+                      );
+                    },
                   );
                 },
               ),
@@ -118,6 +130,7 @@ class MealPresetsPickerSheet extends StatelessWidget {
       ownedSources: ownedSources,
     );
     if (action == null || !context.mounted) return;
+    context.read<ShoppingHabitsProvider>().recordMealUsed(preset.id);
     if (action == 'single') {
       // Stocke le label FR canonique ; snackbar via libellé UI localisé.
       final display = localizedMealPresetLabel(l10n, preset.id);

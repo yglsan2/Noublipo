@@ -8,8 +8,8 @@
 
 ## Langues
 
-- **Version classique** : 15 langues les plus utilisées (sélecteur par drapeaux).
-- **Version Pro** : 30 langues (les 15 + 15 supplémentaires).
+- **Version classique** : 18 langues + détection auto (sélecteur par drapeaux).
+- **Version Plus** : 40 langues (toutes les locales ARB) + système.
 
 La langue du téléphone est utilisée par défaut (détection automatique). L’utilisateur peut changer la langue manuellement en cliquant sur un drapeau dans Paramètres.
 

@@ -6,6 +6,7 @@ import '../../core/constants/design_constants.dart';
 import '../../core/models/birthday_entry.dart';
 import '../../core/providers/birthdays_provider.dart';
 import '../../core/providers/premium_provider.dart';
+import '../../core/utils/text_script.dart';
 import '../../l10n/app_localizations.dart';
 import 'cake_with_candles_icon.dart';
 
@@ -172,7 +173,7 @@ class BirthdaysScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(DesignConstants.cardBorderRadius),
                         ),
                       ),
-                      textCapitalization: TextCapitalization.words,
+                      textCapitalization: ctx.nameWordsTextCapitalization,
                     ),
                     const SizedBox(height: 12),
                     DropdownButtonFormField<CelebrationType>(

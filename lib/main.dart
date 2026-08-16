@@ -22,6 +22,7 @@ import 'core/providers/list_provider.dart';
 import 'core/providers/birthdays_provider.dart';
 import 'core/providers/planning_provider.dart';
 import 'core/providers/settings_provider.dart';
+import 'core/providers/shopping_habits_provider.dart';
 import 'core/services/reminder_service.dart';
 import 'core/services/storage_service.dart';
 import 'core/services/sync_service.dart';
@@ -89,6 +90,14 @@ void main() async {
   final planningProvider = PlanningProvider(storage, reminderService);
   final birthdaysProvider = BirthdaysProvider(storage, reminderService);
   final premium = PremiumProvider(storage);
+  final habits = ShoppingHabitsProvider(storage);
+  final listProvider = ListProvider(
+    storage,
+    syncService,
+    reminderService,
+    planningProvider.updateRecurringLastChecked,
+  );
+  listProvider.onItemAdded = habits.recordAdded;
   final iap = IapService(premium);
   // Ne pas bloquer le démarrage sur le store.
   unawaited(iap.initialize());
@@ -108,14 +117,8 @@ void main() async {
         ChangeNotifierProvider<IapService>.value(value: iap),
         ChangeNotifierProvider<PlanningProvider>.value(value: planningProvider),
         ChangeNotifierProvider<BirthdaysProvider>.value(value: birthdaysProvider),
-        ChangeNotifierProvider<ListProvider>(
-          create: (_) => ListProvider(
-            storage,
-            syncService,
-            reminderService,
-            planningProvider.updateRecurringLastChecked,
-          ),
-        ),
+        ChangeNotifierProvider<ListProvider>.value(value: listProvider),
+        ChangeNotifierProvider<ShoppingHabitsProvider>.value(value: habits),
         ChangeNotifierProvider<CategoryNamesProvider>(
           create: (_) => CategoryNamesProvider(storage),
         ),

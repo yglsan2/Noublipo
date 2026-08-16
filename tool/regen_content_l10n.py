@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import re
+import unicodedata
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,10 +23,22 @@ ACCENT = {
 
 
 def norm(v: str) -> str:
-    t = v.strip().lower()
+    t = unicodedata.normalize("NFKC", v).strip().lower()
     for a, b in ACCENT.items():
         t = t.replace(a, b)
-    return re.sub(r"\s+", " ", t)
+    t = (
+        t.replace("أ", "ا")
+        .replace("إ", "ا")
+        .replace("آ", "ا")
+        .replace("ة", "ه")
+        .replace("ى", "ي")
+        .replace("ـ", "")
+        .replace("ё", "е")
+        .replace("・", " ")
+        .replace("·", " ")
+    )
+    t = re.sub(r"[\u064b-\u065f\u0670]", "", t)
+    return re.sub(r"\s+", " ", t).strip()
 
 
 def esc(s: str) -> str:
@@ -107,6 +120,33 @@ def main() -> None:
         "دفاتر": "prod_cahiers",
         "أقلام": "prod_stylos",
         "مقلمة": "prod_trousse",
+        "海苔": "prod_algues_nori",
+        "のり": "prod_algues_nori",
+        "ノリ": "prod_algues_nori",
+        "nori": "prod_algues_nori",
+        "わさび": "prod_wasabi",
+        "ワサビ": "prod_wasabi",
+        "와사비": "prod_wasabi",
+        "노리": "prod_algues_nori",
+        "ビーツ": "prod_betterave",
+        "ラクレットチーズ": "prod_fromage_a_raclette",
+        "ラクレット": "prod_fromage_a_raclette",
+        "نوري": "prod_algues_nori",
+        "واسابي": "prod_wasabi",
+        "紫菜": "prod_algues_nori",
+        "芥末": "prod_wasabi",
+        "васаби": "prod_wasabi",
+        "нори": "prod_algues_nori",
+        "норі": "prod_algues_nori",
+        "김": "prod_gim",
+        "두부": "prod_tofu",
+        "豆腐": "prod_tofu",
+        "キムチ": "prod_kimchi",
+        "김치": "prod_kimchi",
+        "泡菜": "prod_kimchi",
+        "falafel": "prod_falafel",
+        "labneh": "prod_labneh",
+        "smetana": "prod_smetana",
     }
     for a, k in extras.items():
         if k in fr:
@@ -116,8 +156,21 @@ def main() -> None:
     lines += [
         "import '../../l10n/app_localizations.dart';",
         "",
+        "String foldContentKey(String s) => _norm(s);",
+        "",
         "String _norm(String s) {",
-        "  var t = s.trim().toLowerCase();",
+        "  var t = s.trim();",
+        "  final folded = StringBuffer();",
+        "  for (final r in t.runes) {",
+        "    if (r >= 0xFF01 && r <= 0xFF5E) {",
+        "      folded.writeCharCode(r - 0xFEE0);",
+        "    } else if (r == 0x3000) {",
+        "      folded.write(' ');",
+        "    } else {",
+        "      folded.writeCharCode(r);",
+        "    }",
+        "  }",
+        "  t = folded.toString().toLowerCase();",
         "  const map = {",
         "    'à': 'a', 'â': 'a', 'ä': 'a',",
         "    'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e',",
@@ -125,11 +178,15 @@ def main() -> None:
         "    'ô': 'o', 'ö': 'o',",
         "    'ù': 'u', 'û': 'u', 'ü': 'u',",
         "    'ç': 'c', 'œ': 'oe', 'æ': 'ae',",
+        "    'أ': 'ا', 'إ': 'ا', 'آ': 'ا', 'ة': 'ه', 'ى': 'ي',",
+        "    'ё': 'е', '・': ' ', '·': ' ',",
         "  };",
         "  for (final e in map.entries) {",
         "    t = t.replaceAll(e.key, e.value);",
         "  }",
-        "  return t.replaceAll(RegExp(r'\\s+'), ' ');",
+        "  t = t.replaceAll('ـ', '');",
+        "  t = t.replaceAll(RegExp(r'[\\u064b-\\u065f\\u0670]'), '');",
+        "  return t.replaceAll(RegExp(r'\\s+'), ' ').trim();",
         "}",
         "",
         "String localizedSeasonalTemplateName(AppLocalizations l10n, String id, {String? fallbackName}) {",
@@ -215,35 +272,110 @@ def main() -> None:
         "",
         "String localizedCatalogCategory(AppLocalizations l10n, String id) {",
         "  switch (id) {",
-        "    case 'fruits': return l10n.catalogCat_fruits;",
-        "    case 'dairy': return l10n.catalogCat_dairy;",
-        "    case 'bakery': return l10n.catalogCat_bakery;",
-        "    case 'meat': return l10n.catalogCat_meat;",
-        "    case 'grocery': return l10n.catalogCat_grocery;",
-        "    case 'beverages': return l10n.catalogCat_beverages;",
-        "    case 'frozen': return l10n.catalogCat_frozen;",
-        "    case 'hygiene': return l10n.catalogCat_hygiene;",
+    ]
+    cat_keys = sorted(
+        k for k, v in fr.items()
+        if k.startswith("catalogCat_") and isinstance(v, str)
+    )
+    for k in cat_keys:
+        cid = k.replace("catalogCat_", "", 1)
+        lines.append(f"    case '{cid}': return l10n.{k};")
+    lines += [
         "    default: return id;",
         "  }",
         "}",
         "",
         "String localizedMealPresetLabel(AppLocalizations l10n, String id) {",
         "  switch (id) {",
-        "    case 'raclette': return l10n.mealLbl_raclette;",
-        "    case 'apero': return l10n.mealLbl_apero;",
-        "    case 'barbecue': return l10n.mealLbl_barbecue;",
-        "    case 'petit_dej': return l10n.mealLbl_petit_dej;",
-        "    case 'carbonara': return l10n.mealLbl_carbonara;",
-        "    case 'salade': return l10n.mealLbl_salade;",
-        "    case 'fondue': return l10n.mealLbl_fondue;",
-        "    case 'pizza': return l10n.mealLbl_pizza;",
-        "    case 'crepes': return l10n.mealLbl_crepes;",
-        "    case 'tacos': return l10n.mealLbl_tacos;",
-        "    case 'soupe': return l10n.mealLbl_soupe;",
-        "    case 'burger': return l10n.mealLbl_burger;",
+    ]
+    meal_keys = sorted(
+        k for k, v in fr.items()
+        if k.startswith("mealLbl_") and isinstance(v, str)
+    )
+    for k in meal_keys:
+        mid = k.replace("mealLbl_", "", 1)
+        lines.append(f"    case '{mid}': return l10n.{k};")
+    lines += [
         "    default: return id;",
         "  }",
         "}",
+        "",
+        "/// Libellé de plat (toutes langues) → id de preset. Correspondance exacte, normalisée.",
+        "String? mealIdForTypedName(String typedOrStored) {",
+        "  final raw = typedOrStored.trim();",
+        "  if (raw.isEmpty) return null;",
+        "  final n = _norm(raw);",
+        "  if (n.isEmpty) return null;",
+        "  return _mealAliasToId[n];",
+        "}",
+        "",
+        "const Map<String, String> _mealAliasToId = {",
+    ]
+
+    meal_aliases: dict[str, str] = {}
+
+    def consider_meal_alias(label: str, meal_id: str) -> None:
+        if not label or not meal_id:
+            return
+        def add_one(p: str) -> None:
+            p = p.strip()
+            if not p or len(p) > 80:
+                return
+            n = norm(p)
+            if not n:
+                return
+            has_script = any(
+                "\u3040" <= c <= "\u30ff"
+                or "\u4e00" <= c <= "\u9fff"
+                or "\uac00" <= c <= "\ud7af"
+                or "\u0600" <= c <= "\u06ff"
+                or "\u0590" <= c <= "\u05ff"
+                or "\u0e00" <= c <= "\u0e7f"
+                for c in p
+            )
+            if len(n) < 3 and not has_script:
+                return
+            meal_aliases.setdefault(n, meal_id)
+
+        add_one(label)
+        for part in re.split(r"\s*[\/·•|,;・／、]\s*", label):
+            add_one(part)
+    for path in sorted(arb_paths, key=arb_order):
+        data = json.loads(path.read_text(encoding="utf-8"))
+        for k, v in data.items():
+            if not k.startswith("mealLbl_") or not isinstance(v, str):
+                continue
+            consider_meal_alias(v, k.replace("mealLbl_", "", 1))
+
+    meal_extras = {
+        "bortsch": ["борщ", "borscht", "borshch", "barszcz", "ボルシチ", "보르시", "보르시치", "罗宋汤"],
+        "falafel": ["فلافل", "פלאפל", "ファラフェル", "팔라펠", "法拉费", "фалафель", "falafels"],
+        "sushi": ["寿司", "すし", "スシ", "스시", "사시미", "суши", "sashimi", "سوشي", "sushis", "sushi"],
+        "raclette": ["ラクレット", "라클렛", "راكليت"],
+        "houmous_meal": ["hummus", "حمص", "חומוס", "フムス", "후무스", "鹰嘴豆泥"],
+        "ramen": ["ラーメン", "라면", "拉面", "라멘"],
+        "pho": ["phở", "pho", "フォー"],
+        "kimchi_jjigae": ["김치찌개"],
+        "pad_thai": ["ผัดไทย", "パッタイ"],
+        "couscous": ["كسكس", "クスクス", "쿠스쿠스"],
+        "tajine": ["طاجين", "タジン"],
+        "pelmeni": ["пельмени", "ペリメニ"],
+        "gyoza": ["餃子", "ぎょうざ", "교자"],
+        "mapo_tofu": ["麻婆豆腐", "マーボー豆腐", "마파두부"],
+        "bibimbap": ["비빔밥", "ビビンバ"],
+        "bulgogi": ["불고기", "プルコギ"],
+        "paella": ["パエリア", "파에야"],
+        "kebab": ["ケバブ", "케밥", "كباب"],
+        "crepes": ["crêpes", "crepes", "クレープ", "크레이프", "كريب"],
+    }
+    for meal_id, labels in meal_extras.items():
+        for lab in labels:
+            consider_meal_alias(lab, meal_id)
+
+    for a in sorted(meal_aliases):
+        lines.append(f"  '{esc(a)}': '{esc(meal_aliases[a])}',")
+    lines += [
+        "};",
         "",
         "String localizedCategoryColorName(AppLocalizations l10n, int index) {",
         "  switch (index % 16) {",

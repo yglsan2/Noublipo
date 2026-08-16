@@ -1,16 +1,33 @@
 import '../data/product_lexicon.dart';
+import 'text_script.dart';
 
-/// Nettoyage du texte reconnu vocalement (français) : hésitations, lexique produits.
-/// Partagé entre AddItemSheet et QuickAddSheet.
+/// Nettoyage du texte reconnu vocalement.
+/// Le lexique français n’est appliqué qu’en français — sinon on casse le CJK / l’arabe.
 class VoiceTextCleaner {
   VoiceTextCleaner._();
+
+  static String cleanRecognizedText(
+    String text, {
+    required String languageCode,
+    bool aggressiveCorrection = false,
+  }) {
+    if (languageCode.toLowerCase() == 'fr') {
+      return cleanFrenchRecognizedText(text, aggressiveCorrection: aggressiveCorrection);
+    }
+    final s = text.trim();
+    if (s.isEmpty) return text;
+    if (!localeUsesLetterCase(languageCode) || stringUsesUncasedScript(s)) {
+      return s;
+    }
+    return capitalizePhraseSafely(s);
+  }
 
   static String cleanFrenchRecognizedText(String text, {bool aggressiveCorrection = false}) {
     if (text.trim().isEmpty) return text;
     String s = _removeFillersAndRepetitions(text);
     s = _correctWithLexicon(s, maxDistance: aggressiveCorrection ? 3 : 2);
     if (s.isNotEmpty) {
-      s = s[0].toUpperCase() + s.substring(1);
+      s = capitalizePhraseSafely(s);
     }
     return s;
   }

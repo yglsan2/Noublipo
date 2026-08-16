@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../core/utils/text_script.dart';
 
 /// Dialogue de saisie de nom qui possède son [TextEditingController]
 /// (évite « used after disposed » à la fermeture).
@@ -68,7 +69,7 @@ class _NameInputDialogState extends State<NameInputDialog> {
             autofocus: true,
             enabled: !_busy,
             decoration: InputDecoration(hintText: widget.hint),
-            textCapitalization: TextCapitalization.sentences,
+            textCapitalization: context.itemNameTextCapitalization,
             onSubmitted: (_) => _submit(),
           ),
         ),

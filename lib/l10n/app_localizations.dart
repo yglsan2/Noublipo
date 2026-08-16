@@ -303,8 +303,26 @@ abstract class AppLocalizations {
   /// No description provided for @languageSelectorHint.
   ///
   /// In fr, this message translates to:
-  /// **'La langue du téléphone est utilisée par défaut. Cliquez sur un drapeau pour changer.'**
+  /// **'La langue du téléphone est utilisée par défaut. Touchez le drapeau en haut à gauche pour changer.'**
   String get languageSelectorHint;
+
+  /// No description provided for @languageUsePhone.
+  ///
+  /// In fr, this message translates to:
+  /// **'Langue du téléphone'**
+  String get languageUsePhone;
+
+  /// No description provided for @languageWheelHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Faites défiler les drapeaux'**
+  String get languageWheelHint;
+
+  /// No description provided for @languageChoose.
+  ///
+  /// In fr, this message translates to:
+  /// **'Choisir cette langue'**
+  String get languageChoose;
 
   /// No description provided for @share.
   ///
@@ -5688,12 +5706,6 @@ abstract class AppLocalizations {
   /// **'Crème'**
   String get prod_creme;
 
-  /// No description provided for @prod_return.
-  ///
-  /// In fr, this message translates to:
-  /// **') return'**
-  String get prod_return;
-
   /// No description provided for @prod_abricot.
   ///
   /// In fr, this message translates to:
@@ -5735,12 +5747,6 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Agraves'**
   String get prod_agraves;
-
-  /// No description provided for @prod_ajout_quand_un_partenaire_ou_l.
-  ///
-  /// In fr, this message translates to:
-  /// **'Ajout quand un partenaire (ou l'**
-  String get prod_ajout_quand_un_partenaire_ou_l;
 
   /// No description provided for @prod_algues_nori.
   ///
@@ -5805,7 +5811,7 @@ abstract class AppLocalizations {
   /// No description provided for @prod_apero_dinatoire.
   ///
   /// In fr, this message translates to:
-  /// **'Apero dinatoire'**
+  /// **'Apéro dînatoire'**
   String get prod_apero_dinatoire;
 
   /// No description provided for @prod_apres_rasage.
@@ -7149,7 +7155,7 @@ abstract class AppLocalizations {
   /// No description provided for @prod_jus_dorange.
   ///
   /// In fr, this message translates to:
-  /// **'Jus dorange'**
+  /// **'Jus d\'orange'**
   String get prod_jus_dorange;
 
   /// No description provided for @prod_kimchi.
@@ -8958,18 +8964,6 @@ abstract class AppLocalizations {
   /// **'Zeste'**
   String get prod_zeste;
 
-  /// No description provided for @prod_les.
-  ///
-  /// In fr, this message translates to:
-  /// **''**
-  String get prod_les;
-
-  /// No description provided for @prod_le.
-  ///
-  /// In fr, this message translates to:
-  /// **''**
-  String get prod_le;
-
   /// No description provided for @prod_echelle.
   ///
   /// In fr, this message translates to:
@@ -9030,12 +9024,6 @@ abstract class AppLocalizations {
   /// **'Été / Vacances'**
   String get prod_ete_vacances;
 
-  /// No description provided for @prod_aaaeeeeiiouuucoeae.
-  ///
-  /// In fr, this message translates to:
-  /// **''**
-  String get prod_aaaeeeeiiouuucoeae;
-
   /// No description provided for @prod_oeufs_bio.
   ///
   /// In fr, this message translates to:
@@ -9089,6 +9077,2472 @@ abstract class AppLocalizations {
   /// In fr, this message translates to:
   /// **'Synchronisation indisponible'**
   String get errorSyncUnavailable;
+
+  /// No description provided for @prod_riz_rond.
+  ///
+  /// In fr, this message translates to:
+  /// **'Riz rond'**
+  String get prod_riz_rond;
+
+  /// No description provided for @prod_nouilles_ramen.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouilles ramen'**
+  String get prod_nouilles_ramen;
+
+  /// No description provided for @prod_gyoza.
+  ///
+  /// In fr, this message translates to:
+  /// **'Gyoza'**
+  String get prod_gyoza;
+
+  /// No description provided for @prod_feuilles_de_gyoza.
+  ///
+  /// In fr, this message translates to:
+  /// **'Feuilles de gyoza'**
+  String get prod_feuilles_de_gyoza;
+
+  /// No description provided for @prod_onigiri.
+  ///
+  /// In fr, this message translates to:
+  /// **'Onigiri'**
+  String get prod_onigiri;
+
+  /// No description provided for @prod_yakitori.
+  ///
+  /// In fr, this message translates to:
+  /// **'Yakitori'**
+  String get prod_yakitori;
+
+  /// No description provided for @prod_miso.
+  ///
+  /// In fr, this message translates to:
+  /// **'Miso'**
+  String get prod_miso;
+
+  /// No description provided for @prod_natto.
+  ///
+  /// In fr, this message translates to:
+  /// **'Natto'**
+  String get prod_natto;
+
+  /// No description provided for @prod_kombu.
+  ///
+  /// In fr, this message translates to:
+  /// **'Kombu'**
+  String get prod_kombu;
+
+  /// No description provided for @prod_katsuobushi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Katsuobushi'**
+  String get prod_katsuobushi;
+
+  /// No description provided for @prod_udon.
+  ///
+  /// In fr, this message translates to:
+  /// **'Udon'**
+  String get prod_udon;
+
+  /// No description provided for @prod_soba.
+  ///
+  /// In fr, this message translates to:
+  /// **'Soba'**
+  String get prod_soba;
+
+  /// No description provided for @prod_furikake.
+  ///
+  /// In fr, this message translates to:
+  /// **'Furikake'**
+  String get prod_furikake;
+
+  /// No description provided for @prod_umeboshi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Umeboshi'**
+  String get prod_umeboshi;
+
+  /// No description provided for @prod_daikon.
+  ///
+  /// In fr, this message translates to:
+  /// **'Daikon'**
+  String get prod_daikon;
+
+  /// No description provided for @prod_shiso.
+  ///
+  /// In fr, this message translates to:
+  /// **'Shiso'**
+  String get prod_shiso;
+
+  /// No description provided for @prod_matcha.
+  ///
+  /// In fr, this message translates to:
+  /// **'Matcha'**
+  String get prod_matcha;
+
+  /// No description provided for @prod_mochi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mochi'**
+  String get prod_mochi;
+
+  /// No description provided for @prod_ponzu.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ponzu'**
+  String get prod_ponzu;
+
+  /// No description provided for @prod_sashimi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sashimi'**
+  String get prod_sashimi;
+
+  /// No description provided for @prod_ciboule.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ciboule'**
+  String get prod_ciboule;
+
+  /// No description provided for @prod_panko.
+  ///
+  /// In fr, this message translates to:
+  /// **'Panko'**
+  String get prod_panko;
+
+  /// No description provided for @prod_sauce_tonkatsu.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sauce tonkatsu'**
+  String get prod_sauce_tonkatsu;
+
+  /// No description provided for @prod_shiitake.
+  ///
+  /// In fr, this message translates to:
+  /// **'Shiitake'**
+  String get prod_shiitake;
+
+  /// No description provided for @prod_enoki.
+  ///
+  /// In fr, this message translates to:
+  /// **'Enoki'**
+  String get prod_enoki;
+
+  /// No description provided for @prod_yuzu.
+  ///
+  /// In fr, this message translates to:
+  /// **'Yuzu'**
+  String get prod_yuzu;
+
+  /// No description provided for @prod_konjac.
+  ///
+  /// In fr, this message translates to:
+  /// **'Konjac'**
+  String get prod_konjac;
+
+  /// No description provided for @prod_the_sencha.
+  ///
+  /// In fr, this message translates to:
+  /// **'Thé sencha'**
+  String get prod_the_sencha;
+
+  /// No description provided for @prod_shochu.
+  ///
+  /// In fr, this message translates to:
+  /// **'Shochu'**
+  String get prod_shochu;
+
+  /// No description provided for @prod_kamaboko.
+  ///
+  /// In fr, this message translates to:
+  /// **'Kamaboko'**
+  String get prod_kamaboko;
+
+  /// No description provided for @prod_takuan.
+  ///
+  /// In fr, this message translates to:
+  /// **'Takuan'**
+  String get prod_takuan;
+
+  /// No description provided for @prod_bulgogi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bulgogi'**
+  String get prod_bulgogi;
+
+  /// No description provided for @prod_gochujang.
+  ///
+  /// In fr, this message translates to:
+  /// **'Gochujang'**
+  String get prod_gochujang;
+
+  /// No description provided for @prod_gochugaru.
+  ///
+  /// In fr, this message translates to:
+  /// **'Gochugaru'**
+  String get prod_gochugaru;
+
+  /// No description provided for @prod_soju.
+  ///
+  /// In fr, this message translates to:
+  /// **'Soju'**
+  String get prod_soju;
+
+  /// No description provided for @prod_doenjang.
+  ///
+  /// In fr, this message translates to:
+  /// **'Doenjang'**
+  String get prod_doenjang;
+
+  /// No description provided for @prod_samgyeopsal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Samgyeopsal'**
+  String get prod_samgyeopsal;
+
+  /// No description provided for @prod_tteokbokki.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tteokbokki'**
+  String get prod_tteokbokki;
+
+  /// No description provided for @prod_tteok.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tteok'**
+  String get prod_tteok;
+
+  /// No description provided for @prod_japchae.
+  ///
+  /// In fr, this message translates to:
+  /// **'Japchae'**
+  String get prod_japchae;
+
+  /// No description provided for @prod_galbi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Galbi'**
+  String get prod_galbi;
+
+  /// No description provided for @prod_ssamjang.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ssamjang'**
+  String get prod_ssamjang;
+
+  /// No description provided for @prod_feuilles_de_perilla.
+  ///
+  /// In fr, this message translates to:
+  /// **'Feuilles de périlla'**
+  String get prod_feuilles_de_perilla;
+
+  /// No description provided for @prod_radis_coreen.
+  ///
+  /// In fr, this message translates to:
+  /// **'Radis coréen'**
+  String get prod_radis_coreen;
+
+  /// No description provided for @prod_mandu.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mandu'**
+  String get prod_mandu;
+
+  /// No description provided for @prod_ramyeon.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ramyeon'**
+  String get prod_ramyeon;
+
+  /// No description provided for @prod_makgeolli.
+  ///
+  /// In fr, this message translates to:
+  /// **'Makgeolli'**
+  String get prod_makgeolli;
+
+  /// No description provided for @prod_banchan.
+  ///
+  /// In fr, this message translates to:
+  /// **'Banchan'**
+  String get prod_banchan;
+
+  /// No description provided for @prod_galette_de_poisson.
+  ///
+  /// In fr, this message translates to:
+  /// **'Galette de poisson'**
+  String get prod_galette_de_poisson;
+
+  /// No description provided for @prod_nouilles_de_patate_douce.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouilles de patate douce'**
+  String get prod_nouilles_de_patate_douce;
+
+  /// No description provided for @prod_huile_de_perilla.
+  ///
+  /// In fr, this message translates to:
+  /// **'Huile de périlla'**
+  String get prod_huile_de_perilla;
+
+  /// No description provided for @prod_poire_asiatique.
+  ///
+  /// In fr, this message translates to:
+  /// **'Poire asiatique'**
+  String get prod_poire_asiatique;
+
+  /// No description provided for @prod_germes_de_soja.
+  ///
+  /// In fr, this message translates to:
+  /// **'Germes de soja'**
+  String get prod_germes_de_soja;
+
+  /// No description provided for @prod_gim.
+  ///
+  /// In fr, this message translates to:
+  /// **'Gim'**
+  String get prod_gim;
+
+  /// No description provided for @prod_sundubu.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sundubu'**
+  String get prod_sundubu;
+
+  /// No description provided for @prod_poisson_seche.
+  ///
+  /// In fr, this message translates to:
+  /// **'Poisson séché'**
+  String get prod_poisson_seche;
+
+  /// No description provided for @prod_betterave.
+  ///
+  /// In fr, this message translates to:
+  /// **'Betterave'**
+  String get prod_betterave;
+
+  /// No description provided for @prod_smetana.
+  ///
+  /// In fr, this message translates to:
+  /// **'Smetana'**
+  String get prod_smetana;
+
+  /// No description provided for @prod_sarrasin.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sarrasin'**
+  String get prod_sarrasin;
+
+  /// No description provided for @prod_pelmeni.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pelmeni'**
+  String get prod_pelmeni;
+
+  /// No description provided for @prod_pain_noir.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pain noir'**
+  String get prod_pain_noir;
+
+  /// No description provided for @prod_hareng.
+  ///
+  /// In fr, this message translates to:
+  /// **'Hareng'**
+  String get prod_hareng;
+
+  /// No description provided for @prod_kvas.
+  ///
+  /// In fr, this message translates to:
+  /// **'Kvas'**
+  String get prod_kvas;
+
+  /// No description provided for @prod_chou_fermente.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chou fermenté'**
+  String get prod_chou_fermente;
+
+  /// No description provided for @prod_kefir.
+  ///
+  /// In fr, this message translates to:
+  /// **'Kéfir'**
+  String get prod_kefir;
+
+  /// No description provided for @prod_tvorog.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tvorog'**
+  String get prod_tvorog;
+
+  /// No description provided for @prod_blinis.
+  ///
+  /// In fr, this message translates to:
+  /// **'Blinis'**
+  String get prod_blinis;
+
+  /// No description provided for @prod_huile_de_tournesol.
+  ///
+  /// In fr, this message translates to:
+  /// **'Huile de tournesol'**
+  String get prod_huile_de_tournesol;
+
+  /// No description provided for @prod_raifort.
+  ///
+  /// In fr, this message translates to:
+  /// **'Raifort'**
+  String get prod_raifort;
+
+  /// No description provided for @prod_vodka.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vodka'**
+  String get prod_vodka;
+
+  /// No description provided for @prod_caviar.
+  ///
+  /// In fr, this message translates to:
+  /// **'Caviar'**
+  String get prod_caviar;
+
+  /// No description provided for @prod_vareniki.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vareniki'**
+  String get prod_vareniki;
+
+  /// No description provided for @prod_adjika.
+  ///
+  /// In fr, this message translates to:
+  /// **'Adjika'**
+  String get prod_adjika;
+
+  /// No description provided for @prod_graines_de_tournesol.
+  ///
+  /// In fr, this message translates to:
+  /// **'Graines de tournesol'**
+  String get prod_graines_de_tournesol;
+
+  /// No description provided for @prod_chachlik.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chachlik'**
+  String get prod_chachlik;
+
+  /// No description provided for @prod_pain_de_seigle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pain de seigle'**
+  String get prod_pain_de_seigle;
+
+  /// No description provided for @prod_couscous.
+  ///
+  /// In fr, this message translates to:
+  /// **'Couscous'**
+  String get prod_couscous;
+
+  /// No description provided for @prod_tajine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tajine'**
+  String get prod_tajine;
+
+  /// No description provided for @prod_harissa.
+  ///
+  /// In fr, this message translates to:
+  /// **'Harissa'**
+  String get prod_harissa;
+
+  /// No description provided for @prod_citrons_confits.
+  ///
+  /// In fr, this message translates to:
+  /// **'Citrons confits'**
+  String get prod_citrons_confits;
+
+  /// No description provided for @prod_labneh.
+  ///
+  /// In fr, this message translates to:
+  /// **'Labneh'**
+  String get prod_labneh;
+
+  /// No description provided for @prod_pain_pita.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pain pita'**
+  String get prod_pain_pita;
+
+  /// No description provided for @prod_falafel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Falafel'**
+  String get prod_falafel;
+
+  /// No description provided for @prod_ras_el_hanout.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ras el hanout'**
+  String get prod_ras_el_hanout;
+
+  /// No description provided for @prod_zaatar.
+  ///
+  /// In fr, this message translates to:
+  /// **'Zaatar'**
+  String get prod_zaatar;
+
+  /// No description provided for @prod_sumac.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sumac'**
+  String get prod_sumac;
+
+  /// No description provided for @prod_melasse_de_grenade.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mélasse de grenade'**
+  String get prod_melasse_de_grenade;
+
+  /// No description provided for @prod_freekeh.
+  ///
+  /// In fr, this message translates to:
+  /// **'Freekeh'**
+  String get prod_freekeh;
+
+  /// No description provided for @prod_feves.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fèves'**
+  String get prod_feves;
+
+  /// No description provided for @prod_eau_de_fleur_doranger.
+  ///
+  /// In fr, this message translates to:
+  /// **'Eau de fleur d\'oranger'**
+  String get prod_eau_de_fleur_doranger;
+
+  /// No description provided for @prod_eau_de_rose.
+  ///
+  /// In fr, this message translates to:
+  /// **'Eau de rose'**
+  String get prod_eau_de_rose;
+
+  /// No description provided for @prod_maamoul.
+  ///
+  /// In fr, this message translates to:
+  /// **'Maamoul'**
+  String get prod_maamoul;
+
+  /// No description provided for @prod_baklava.
+  ///
+  /// In fr, this message translates to:
+  /// **'Baklava'**
+  String get prod_baklava;
+
+  /// No description provided for @prod_feuilles_de_brick.
+  ///
+  /// In fr, this message translates to:
+  /// **'Feuilles de brick'**
+  String get prod_feuilles_de_brick;
+
+  /// No description provided for @prod_safran.
+  ///
+  /// In fr, this message translates to:
+  /// **'Safran'**
+  String get prod_safran;
+
+  /// No description provided for @prod_cumin.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cumin'**
+  String get prod_cumin;
+
+  /// No description provided for @prod_the_a_la_menthe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Thé à la menthe'**
+  String get prod_the_a_la_menthe;
+
+  /// No description provided for @prod_amlou.
+  ///
+  /// In fr, this message translates to:
+  /// **'Amlou'**
+  String get prod_amlou;
+
+  /// No description provided for @prod_msemen.
+  ///
+  /// In fr, this message translates to:
+  /// **'Msemen'**
+  String get prod_msemen;
+
+  /// No description provided for @prod_khobz.
+  ///
+  /// In fr, this message translates to:
+  /// **'Khobz'**
+  String get prod_khobz;
+
+  /// No description provided for @prod_arak.
+  ///
+  /// In fr, this message translates to:
+  /// **'Arak'**
+  String get prod_arak;
+
+  /// No description provided for @prod_smen.
+  ///
+  /// In fr, this message translates to:
+  /// **'Smen'**
+  String get prod_smen;
+
+  /// No description provided for @prod_pastilla.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pastilla'**
+  String get prod_pastilla;
+
+  /// No description provided for @prod_nouilles_chinoises.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouilles chinoises'**
+  String get prod_nouilles_chinoises;
+
+  /// No description provided for @prod_sauce_dhuitre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sauce d\'huître'**
+  String get prod_sauce_dhuitre;
+
+  /// No description provided for @prod_pak_choi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pak choi'**
+  String get prod_pak_choi;
+
+  /// No description provided for @prod_anis_etoile.
+  ///
+  /// In fr, this message translates to:
+  /// **'Anis étoilé'**
+  String get prod_anis_etoile;
+
+  /// No description provided for @prod_baozi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Baozi'**
+  String get prod_baozi;
+
+  /// No description provided for @prod_wonton.
+  ///
+  /// In fr, this message translates to:
+  /// **'Wonton'**
+  String get prod_wonton;
+
+  /// No description provided for @prod_vin_de_shaoxing.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vin de Shaoxing'**
+  String get prod_vin_de_shaoxing;
+
+  /// No description provided for @prod_cinq_epices.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cinq-épices'**
+  String get prod_cinq_epices;
+
+  /// No description provided for @prod_huile_de_piment.
+  ///
+  /// In fr, this message translates to:
+  /// **'Huile de piment'**
+  String get prod_huile_de_piment;
+
+  /// No description provided for @prod_doubanjiang.
+  ///
+  /// In fr, this message translates to:
+  /// **'Doubanjiang'**
+  String get prod_doubanjiang;
+
+  /// No description provided for @prod_oreilles_de_judas.
+  ///
+  /// In fr, this message translates to:
+  /// **'Oreilles de Judas'**
+  String get prod_oreilles_de_judas;
+
+  /// No description provided for @prod_liseron_deau.
+  ///
+  /// In fr, this message translates to:
+  /// **'Liseron d\'eau'**
+  String get prod_liseron_deau;
+
+  /// No description provided for @prod_litchi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Litchi'**
+  String get prod_litchi;
+
+  /// No description provided for @prod_saucisse_chinoise.
+  ///
+  /// In fr, this message translates to:
+  /// **'Saucisse chinoise'**
+  String get prod_saucisse_chinoise;
+
+  /// No description provided for @prod_farine_de_riz.
+  ///
+  /// In fr, this message translates to:
+  /// **'Farine de riz'**
+  String get prod_farine_de_riz;
+
+  /// No description provided for @prod_garam_masala.
+  ///
+  /// In fr, this message translates to:
+  /// **'Garam masala'**
+  String get prod_garam_masala;
+
+  /// No description provided for @prod_curcuma.
+  ///
+  /// In fr, this message translates to:
+  /// **'Curcuma'**
+  String get prod_curcuma;
+
+  /// No description provided for @prod_cardamome.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cardamome'**
+  String get prod_cardamome;
+
+  /// No description provided for @prod_ghee.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ghee'**
+  String get prod_ghee;
+
+  /// No description provided for @prod_naan.
+  ///
+  /// In fr, this message translates to:
+  /// **'Naan'**
+  String get prod_naan;
+
+  /// No description provided for @prod_chapati.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chapati'**
+  String get prod_chapati;
+
+  /// No description provided for @prod_paneer.
+  ///
+  /// In fr, this message translates to:
+  /// **'Paneer'**
+  String get prod_paneer;
+
+  /// No description provided for @prod_chutney.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chutney'**
+  String get prod_chutney;
+
+  /// No description provided for @prod_lassi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lassi'**
+  String get prod_lassi;
+
+  /// No description provided for @prod_fenugrec.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fenugrec'**
+  String get prod_fenugrec;
+
+  /// No description provided for @prod_feuilles_de_curry.
+  ///
+  /// In fr, this message translates to:
+  /// **'Feuilles de curry'**
+  String get prod_feuilles_de_curry;
+
+  /// No description provided for @prod_gombo.
+  ///
+  /// In fr, this message translates to:
+  /// **'Gombo'**
+  String get prod_gombo;
+
+  /// No description provided for @prod_tamarin.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tamarin'**
+  String get prod_tamarin;
+
+  /// No description provided for @prod_papadum.
+  ///
+  /// In fr, this message translates to:
+  /// **'Papadum'**
+  String get prod_papadum;
+
+  /// No description provided for @prod_asafoetida.
+  ///
+  /// In fr, this message translates to:
+  /// **'Asafoetida'**
+  String get prod_asafoetida;
+
+  /// No description provided for @prod_huile_de_moutarde.
+  ///
+  /// In fr, this message translates to:
+  /// **'Huile de moutarde'**
+  String get prod_huile_de_moutarde;
+
+  /// No description provided for @prod_masala_chai.
+  ///
+  /// In fr, this message translates to:
+  /// **'Masala chai'**
+  String get prod_masala_chai;
+
+  /// No description provided for @prod_galanga.
+  ///
+  /// In fr, this message translates to:
+  /// **'Galanga'**
+  String get prod_galanga;
+
+  /// No description provided for @prod_feuilles_de_kaffir.
+  ///
+  /// In fr, this message translates to:
+  /// **'Feuilles de kaffir'**
+  String get prod_feuilles_de_kaffir;
+
+  /// No description provided for @prod_sucre_de_palme.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sucre de palme'**
+  String get prod_sucre_de_palme;
+
+  /// No description provided for @prod_nouilles_de_riz.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouilles de riz'**
+  String get prod_nouilles_de_riz;
+
+  /// No description provided for @prod_mangue_verte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mangue verte'**
+  String get prod_mangue_verte;
+
+  /// No description provided for @prod_citron_vert.
+  ///
+  /// In fr, this message translates to:
+  /// **'Citron vert'**
+  String get prod_citron_vert;
+
+  /// No description provided for @prod_piment_oiseau.
+  ///
+  /// In fr, this message translates to:
+  /// **'Piment oiseau'**
+  String get prod_piment_oiseau;
+
+  /// No description provided for @prod_papaye_verte.
+  ///
+  /// In fr, this message translates to:
+  /// **'Papaye verte'**
+  String get prod_papaye_verte;
+
+  /// No description provided for @prod_nouilles_pho.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nouilles pho'**
+  String get prod_nouilles_pho;
+
+  /// No description provided for @prod_banh_mi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Banh mi'**
+  String get prod_banh_mi;
+
+  /// No description provided for @prod_yaourt_grec.
+  ///
+  /// In fr, this message translates to:
+  /// **'Yaourt grec'**
+  String get prod_yaourt_grec;
+
+  /// No description provided for @prod_halloumi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Halloumi'**
+  String get prod_halloumi;
+
+  /// No description provided for @prod_feuilles_de_vigne.
+  ///
+  /// In fr, this message translates to:
+  /// **'Feuilles de vigne'**
+  String get prod_feuilles_de_vigne;
+
+  /// No description provided for @prod_viande_kebab.
+  ///
+  /// In fr, this message translates to:
+  /// **'Viande kebab'**
+  String get prod_viande_kebab;
+
+  /// No description provided for @prod_sucuk.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sucuk'**
+  String get prod_sucuk;
+
+  /// No description provided for @prod_simit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Simit'**
+  String get prod_simit;
+
+  /// No description provided for @prod_ayran.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ayran'**
+  String get prod_ayran;
+
+  /// No description provided for @prod_raki.
+  ///
+  /// In fr, this message translates to:
+  /// **'Raki'**
+  String get prod_raki;
+
+  /// No description provided for @prod_ouzo.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ouzo'**
+  String get prod_ouzo;
+
+  /// No description provided for @prod_tzatziki.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tzatziki'**
+  String get prod_tzatziki;
+
+  /// No description provided for @prod_olives_kalamata.
+  ///
+  /// In fr, this message translates to:
+  /// **'Olives kalamata'**
+  String get prod_olives_kalamata;
+
+  /// No description provided for @prod_yufka.
+  ///
+  /// In fr, this message translates to:
+  /// **'Yufka'**
+  String get prod_yufka;
+
+  /// No description provided for @prod_bretzel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bretzel'**
+  String get prod_bretzel;
+
+  /// No description provided for @prod_quark.
+  ///
+  /// In fr, this message translates to:
+  /// **'Quark'**
+  String get prod_quark;
+
+  /// No description provided for @prod_spatzle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Spätzle'**
+  String get prod_spatzle;
+
+  /// No description provided for @prod_chorizo.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chorizo'**
+  String get prod_chorizo;
+
+  /// No description provided for @prod_jambon_serrano.
+  ///
+  /// In fr, this message translates to:
+  /// **'Jambon serrano'**
+  String get prod_jambon_serrano;
+
+  /// No description provided for @prod_jalape_os.
+  ///
+  /// In fr, this message translates to:
+  /// **'Jalapeños'**
+  String get prod_jalape_os;
+
+  /// No description provided for @prod_paprika_fume.
+  ///
+  /// In fr, this message translates to:
+  /// **'Paprika fumé'**
+  String get prod_paprika_fume;
+
+  /// No description provided for @prod_queso_fresco.
+  ///
+  /// In fr, this message translates to:
+  /// **'Queso fresco'**
+  String get prod_queso_fresco;
+
+  /// No description provided for @prod_haricots_noirs.
+  ///
+  /// In fr, this message translates to:
+  /// **'Haricots noirs'**
+  String get prod_haricots_noirs;
+
+  /// No description provided for @prod_banane_plantain.
+  ///
+  /// In fr, this message translates to:
+  /// **'Banane plantain'**
+  String get prod_banane_plantain;
+
+  /// No description provided for @prod_manchego.
+  ///
+  /// In fr, this message translates to:
+  /// **'Manchego'**
+  String get prod_manchego;
+
+  /// No description provided for @prod_burrata.
+  ///
+  /// In fr, this message translates to:
+  /// **'Burrata'**
+  String get prod_burrata;
+
+  /// No description provided for @prod_prosciutto.
+  ///
+  /// In fr, this message translates to:
+  /// **'Prosciutto'**
+  String get prod_prosciutto;
+
+  /// No description provided for @prod_passata.
+  ///
+  /// In fr, this message translates to:
+  /// **'Passata'**
+  String get prod_passata;
+
+  /// No description provided for @prod_pecorino.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pecorino'**
+  String get prod_pecorino;
+
+  /// No description provided for @prod_ricotta.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ricotta'**
+  String get prod_ricotta;
+
+  /// No description provided for @prod_gnocchi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Gnocchi'**
+  String get prod_gnocchi;
+
+  /// No description provided for @prod_polenta.
+  ///
+  /// In fr, this message translates to:
+  /// **'Polenta'**
+  String get prod_polenta;
+
+  /// No description provided for @prod_vinaigre_balsamique.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vinaigre balsamique'**
+  String get prod_vinaigre_balsamique;
+
+  /// No description provided for @prod_ciabatta.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ciabatta'**
+  String get prod_ciabatta;
+
+  /// No description provided for @prod_pierogi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pierogi'**
+  String get prod_pierogi;
+
+  /// No description provided for @prod_kabanos.
+  ///
+  /// In fr, this message translates to:
+  /// **'Kabanos'**
+  String get prod_kabanos;
+
+  /// No description provided for @prod_saucisse_polonaise.
+  ///
+  /// In fr, this message translates to:
+  /// **'Saucisse polonaise'**
+  String get prod_saucisse_polonaise;
+
+  /// No description provided for @prod_sambal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sambal'**
+  String get prod_sambal;
+
+  /// No description provided for @prod_kecap_manis.
+  ///
+  /// In fr, this message translates to:
+  /// **'Kecap manis'**
+  String get prod_kecap_manis;
+
+  /// No description provided for @prod_sate.
+  ///
+  /// In fr, this message translates to:
+  /// **'Saté'**
+  String get prod_sate;
+
+  /// No description provided for @prod_pandan.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pandan'**
+  String get prod_pandan;
+
+  /// No description provided for @prod_krupuk.
+  ///
+  /// In fr, this message translates to:
+  /// **'Krupuk'**
+  String get prod_krupuk;
+
+  /// No description provided for @prod_knackebrod.
+  ///
+  /// In fr, this message translates to:
+  /// **'Knäckebröd'**
+  String get prod_knackebrod;
+
+  /// No description provided for @prod_airelles.
+  ///
+  /// In fr, this message translates to:
+  /// **'Airelles'**
+  String get prod_airelles;
+
+  /// No description provided for @prod_gravlax.
+  ///
+  /// In fr, this message translates to:
+  /// **'Gravlax'**
+  String get prod_gravlax;
+
+  /// No description provided for @prod_brunost.
+  ///
+  /// In fr, this message translates to:
+  /// **'Brunost'**
+  String get prod_brunost;
+
+  /// No description provided for @prod_hareng_marine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Hareng mariné'**
+  String get prod_hareng_marine;
+
+  /// No description provided for @prod_boulettes_de_viande.
+  ///
+  /// In fr, this message translates to:
+  /// **'Boulettes de viande'**
+  String get prod_boulettes_de_viande;
+
+  /// No description provided for @prod_baked_beans.
+  ///
+  /// In fr, this message translates to:
+  /// **'Baked beans'**
+  String get prod_baked_beans;
+
+  /// No description provided for @prod_digestives.
+  ///
+  /// In fr, this message translates to:
+  /// **'Digestives'**
+  String get prod_digestives;
+
+  /// No description provided for @prod_herbes_de_provence.
+  ///
+  /// In fr, this message translates to:
+  /// **'Herbes de Provence'**
+  String get prod_herbes_de_provence;
+
+  /// No description provided for @prod_magret_de_canard.
+  ///
+  /// In fr, this message translates to:
+  /// **'Magret de canard'**
+  String get prod_magret_de_canard;
+
+  /// No description provided for @prod_ajvar.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ajvar'**
+  String get prod_ajvar;
+
+  /// No description provided for @prod_burek.
+  ///
+  /// In fr, this message translates to:
+  /// **'Burek'**
+  String get prod_burek;
+
+  /// No description provided for @prod_kajmak.
+  ///
+  /// In fr, this message translates to:
+  /// **'Kajmak'**
+  String get prod_kajmak;
+
+  /// No description provided for @catalogCat_local.
+  ///
+  /// In fr, this message translates to:
+  /// **'Spécialités'**
+  String get catalogCat_local;
+
+  /// No description provided for @mealLbl_sushi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sushi / sashimi'**
+  String get mealLbl_sushi;
+
+  /// No description provided for @mealLbl_ramen.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ramen'**
+  String get mealLbl_ramen;
+
+  /// No description provided for @mealLbl_gyoza.
+  ///
+  /// In fr, this message translates to:
+  /// **'Gyoza'**
+  String get mealLbl_gyoza;
+
+  /// No description provided for @mealLbl_onigiri.
+  ///
+  /// In fr, this message translates to:
+  /// **'Onigiri'**
+  String get mealLbl_onigiri;
+
+  /// No description provided for @mealLbl_yakitori.
+  ///
+  /// In fr, this message translates to:
+  /// **'Yakitori'**
+  String get mealLbl_yakitori;
+
+  /// No description provided for @mealLbl_miso_soup.
+  ///
+  /// In fr, this message translates to:
+  /// **'Soupe miso'**
+  String get mealLbl_miso_soup;
+
+  /// No description provided for @mealLbl_bulgogi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bulgogi'**
+  String get mealLbl_bulgogi;
+
+  /// No description provided for @mealLbl_kimchi_jjigae.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ragoût de kimchi'**
+  String get mealLbl_kimchi_jjigae;
+
+  /// No description provided for @mealLbl_samgyeopsal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Samgyeopsal'**
+  String get mealLbl_samgyeopsal;
+
+  /// No description provided for @mealLbl_tteokbokki.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tteokbokki'**
+  String get mealLbl_tteokbokki;
+
+  /// No description provided for @mealLbl_bibimbap.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bibimbap'**
+  String get mealLbl_bibimbap;
+
+  /// No description provided for @mealLbl_bortsch.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bortsch'**
+  String get mealLbl_bortsch;
+
+  /// No description provided for @mealLbl_chachlik.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chachlik'**
+  String get mealLbl_chachlik;
+
+  /// No description provided for @mealLbl_pelmeni.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pelmeni'**
+  String get mealLbl_pelmeni;
+
+  /// No description provided for @mealLbl_blinis.
+  ///
+  /// In fr, this message translates to:
+  /// **'Blinis'**
+  String get mealLbl_blinis;
+
+  /// No description provided for @mealLbl_couscous.
+  ///
+  /// In fr, this message translates to:
+  /// **'Couscous'**
+  String get mealLbl_couscous;
+
+  /// No description provided for @mealLbl_tajine.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tajine'**
+  String get mealLbl_tajine;
+
+  /// No description provided for @mealLbl_houmous_meal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Houmous et mezzé'**
+  String get mealLbl_houmous_meal;
+
+  /// No description provided for @mealLbl_falafel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Falafel'**
+  String get mealLbl_falafel;
+
+  /// No description provided for @mealLbl_mapo_tofu.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mapo tofu'**
+  String get mealLbl_mapo_tofu;
+
+  /// No description provided for @mealLbl_dumplings.
+  ///
+  /// In fr, this message translates to:
+  /// **'Raviolis / jiaozi'**
+  String get mealLbl_dumplings;
+
+  /// No description provided for @mealLbl_curry_in.
+  ///
+  /// In fr, this message translates to:
+  /// **'Curry'**
+  String get mealLbl_curry_in;
+
+  /// No description provided for @mealLbl_dal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Dal'**
+  String get mealLbl_dal;
+
+  /// No description provided for @mealLbl_pad_thai.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pad thaï'**
+  String get mealLbl_pad_thai;
+
+  /// No description provided for @mealLbl_tom_yum.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tom yum'**
+  String get mealLbl_tom_yum;
+
+  /// No description provided for @mealLbl_pho.
+  ///
+  /// In fr, this message translates to:
+  /// **'Phở'**
+  String get mealLbl_pho;
+
+  /// No description provided for @mealLbl_kebab.
+  ///
+  /// In fr, this message translates to:
+  /// **'Kebab'**
+  String get mealLbl_kebab;
+
+  /// No description provided for @mealLbl_meze.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mezzé'**
+  String get mealLbl_meze;
+
+  /// No description provided for @mealLbl_paella.
+  ///
+  /// In fr, this message translates to:
+  /// **'Paella'**
+  String get mealLbl_paella;
+
+  /// No description provided for @mealLbl_gazpacho.
+  ///
+  /// In fr, this message translates to:
+  /// **'Gaspacho'**
+  String get mealLbl_gazpacho;
+
+  /// No description provided for @mealLbl_risotto.
+  ///
+  /// In fr, this message translates to:
+  /// **'Risotto'**
+  String get mealLbl_risotto;
+
+  /// No description provided for @mealLbl_schnitzel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Schnitzel'**
+  String get mealLbl_schnitzel;
+
+  /// No description provided for @mealLbl_pierogi_meal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pierogi'**
+  String get mealLbl_pierogi_meal;
+
+  /// No description provided for @mealLbl_nasi_goreng.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nasi goreng'**
+  String get mealLbl_nasi_goreng;
+
+  /// No description provided for @mealLbl_satay.
+  ///
+  /// In fr, this message translates to:
+  /// **'Saté'**
+  String get mealLbl_satay;
+
+  /// No description provided for @mealLbl_kottbullar.
+  ///
+  /// In fr, this message translates to:
+  /// **'Boulettes'**
+  String get mealLbl_kottbullar;
+
+  /// No description provided for @mealLbl_full_english.
+  ///
+  /// In fr, this message translates to:
+  /// **'English breakfast'**
+  String get mealLbl_full_english;
+
+  /// No description provided for @prod_pois_gris.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pois gris'**
+  String get prod_pois_gris;
+
+  /// No description provided for @prod_lard_fume.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lard fumé'**
+  String get prod_lard_fume;
+
+  /// No description provided for @prod_fromage_au_cumin.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fromage au cumin'**
+  String get prod_fromage_au_cumin;
+
+  /// No description provided for @prod_p_r_gi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pīrāgi'**
+  String get prod_p_r_gi;
+
+  /// No description provided for @prod_pain_depices.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pain d\'épices'**
+  String get prod_pain_depices;
+
+  /// No description provided for @prod_baume_noir_de_riga.
+  ///
+  /// In fr, this message translates to:
+  /// **'Baume noir de Riga'**
+  String get prod_baume_noir_de_riga;
+
+  /// No description provided for @prod_oseille.
+  ///
+  /// In fr, this message translates to:
+  /// **'Oseille'**
+  String get prod_oseille;
+
+  /// No description provided for @prod_sprats.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sprats'**
+  String get prod_sprats;
+
+  /// No description provided for @prod_kama.
+  ///
+  /// In fr, this message translates to:
+  /// **'Kama'**
+  String get prod_kama;
+
+  /// No description provided for @prod_kohuke.
+  ///
+  /// In fr, this message translates to:
+  /// **'Kohuke'**
+  String get prod_kohuke;
+
+  /// No description provided for @prod_boudin_estonien.
+  ///
+  /// In fr, this message translates to:
+  /// **'Boudin estonien'**
+  String get prod_boudin_estonien;
+
+  /// No description provided for @prod_aspic.
+  ///
+  /// In fr, this message translates to:
+  /// **'Aspic'**
+  String get prod_aspic;
+
+  /// No description provided for @prod_cepelinai.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cepelinai'**
+  String get prod_cepelinai;
+
+  /// No description provided for @prod_kugelis.
+  ///
+  /// In fr, this message translates to:
+  /// **'Kugelis'**
+  String get prod_kugelis;
+
+  /// No description provided for @prod_pain_frit.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pain frit'**
+  String get prod_pain_frit;
+
+  /// No description provided for @prod_midus.
+  ///
+  /// In fr, this message translates to:
+  /// **'Midus'**
+  String get prod_midus;
+
+  /// No description provided for @prod_myrtilles.
+  ///
+  /// In fr, this message translates to:
+  /// **'Myrtilles'**
+  String get prod_myrtilles;
+
+  /// No description provided for @prod_l_ngos.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lángos'**
+  String get prod_l_ngos;
+
+  /// No description provided for @prod_nokedli.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nokedli'**
+  String get prod_nokedli;
+
+  /// No description provided for @prod_pog_csa.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pogácsa'**
+  String get prod_pog_csa;
+
+  /// No description provided for @prod_kolb_sz.
+  ///
+  /// In fr, this message translates to:
+  /// **'Kolbász'**
+  String get prod_kolb_sz;
+
+  /// No description provided for @prod_p_linka.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pálinka'**
+  String get prod_p_linka;
+
+  /// No description provided for @prod_creme_de_paprika.
+  ///
+  /// In fr, this message translates to:
+  /// **'Crème de paprika'**
+  String get prod_creme_de_paprika;
+
+  /// No description provided for @prod_knedl_ky.
+  ///
+  /// In fr, this message translates to:
+  /// **'Knedlíky'**
+  String get prod_knedl_ky;
+
+  /// No description provided for @prod_tvar_ky.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tvarůžky'**
+  String get prod_tvar_ky;
+
+  /// No description provided for @prod_bryndza.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bryndza'**
+  String get prod_bryndza;
+
+  /// No description provided for @prod_halu_ky.
+  ///
+  /// In fr, this message translates to:
+  /// **'Halušky'**
+  String get prod_halu_ky;
+
+  /// No description provided for @prod_o_tiepok.
+  ///
+  /// In fr, this message translates to:
+  /// **'Oštiepok'**
+  String get prod_o_tiepok;
+
+  /// No description provided for @prod_slivovica.
+  ///
+  /// In fr, this message translates to:
+  /// **'Slivovica'**
+  String get prod_slivovica;
+
+  /// No description provided for @prod_m_m_lig.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mămăligă'**
+  String get prod_m_m_lig;
+
+  /// No description provided for @prod_mici.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mici'**
+  String get prod_mici;
+
+  /// No description provided for @prod_telemea.
+  ///
+  /// In fr, this message translates to:
+  /// **'Telemea'**
+  String get prod_telemea;
+
+  /// No description provided for @prod_uic.
+  ///
+  /// In fr, this message translates to:
+  /// **'Țuică'**
+  String get prod_uic;
+
+  /// No description provided for @prod_cozonac.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cozonac'**
+  String get prod_cozonac;
+
+  /// No description provided for @prod_sarmale.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sarmale'**
+  String get prod_sarmale;
+
+  /// No description provided for @prod_karjalanpiirakka.
+  ///
+  /// In fr, this message translates to:
+  /// **'Karjalanpiirakka'**
+  String get prod_karjalanpiirakka;
+
+  /// No description provided for @prod_pulla.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pulla'**
+  String get prod_pulla;
+
+  /// No description provided for @prod_viili.
+  ///
+  /// In fr, this message translates to:
+  /// **'Viili'**
+  String get prod_viili;
+
+  /// No description provided for @prod_leipajuusto.
+  ///
+  /// In fr, this message translates to:
+  /// **'Leipäjuusto'**
+  String get prod_leipajuusto;
+
+  /// No description provided for @prod_salmiakki.
+  ///
+  /// In fr, this message translates to:
+  /// **'Salmiakki'**
+  String get prod_salmiakki;
+
+  /// No description provided for @prod_kalakukko.
+  ///
+  /// In fr, this message translates to:
+  /// **'Kalakukko'**
+  String get prod_kalakukko;
+
+  /// No description provided for @prod_muikku.
+  ///
+  /// In fr, this message translates to:
+  /// **'Muikku'**
+  String get prod_muikku;
+
+  /// No description provided for @prod_stroopwafel.
+  ///
+  /// In fr, this message translates to:
+  /// **'Stroopwafel'**
+  String get prod_stroopwafel;
+
+  /// No description provided for @prod_rookworst.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rookworst'**
+  String get prod_rookworst;
+
+  /// No description provided for @prod_boerenkool.
+  ///
+  /// In fr, this message translates to:
+  /// **'Boerenkool'**
+  String get prod_boerenkool;
+
+  /// No description provided for @prod_drop.
+  ///
+  /// In fr, this message translates to:
+  /// **'Drop'**
+  String get prod_drop;
+
+  /// No description provided for @prod_hagelslag.
+  ///
+  /// In fr, this message translates to:
+  /// **'Hagelslag'**
+  String get prod_hagelslag;
+
+  /// No description provided for @prod_poffertjes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Poffertjes'**
+  String get prod_poffertjes;
+
+  /// No description provided for @prod_gouda.
+  ///
+  /// In fr, this message translates to:
+  /// **'Gouda'**
+  String get prod_gouda;
+
+  /// No description provided for @prod_paprika_en_poudre.
+  ///
+  /// In fr, this message translates to:
+  /// **'Paprika en poudre'**
+  String get prod_paprika_en_poudre;
+
+  /// No description provided for @mealLbl_zirni.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pois gris au lard'**
+  String get mealLbl_zirni;
+
+  /// No description provided for @mealLbl_rasols.
+  ///
+  /// In fr, this message translates to:
+  /// **'Salade rasols'**
+  String get mealLbl_rasols;
+
+  /// No description provided for @mealLbl_skabenu_zupa.
+  ///
+  /// In fr, this message translates to:
+  /// **'Soupe à l\'oseille'**
+  String get mealLbl_skabenu_zupa;
+
+  /// No description provided for @mealLbl_kiluvoileib.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tartine aux sprats'**
+  String get mealLbl_kiluvoileib;
+
+  /// No description provided for @mealLbl_verivorst.
+  ///
+  /// In fr, this message translates to:
+  /// **'Boudin noir'**
+  String get mealLbl_verivorst;
+
+  /// No description provided for @mealLbl_saltibarsciai.
+  ///
+  /// In fr, this message translates to:
+  /// **'Soupe froide à la betterave'**
+  String get mealLbl_saltibarsciai;
+
+  /// No description provided for @mealLbl_cepelinai.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cepelinai'**
+  String get mealLbl_cepelinai;
+
+  /// No description provided for @mealLbl_goulash.
+  ///
+  /// In fr, this message translates to:
+  /// **'Goulash'**
+  String get mealLbl_goulash;
+
+  /// No description provided for @mealLbl_langos.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lángos'**
+  String get mealLbl_langos;
+
+  /// No description provided for @mealLbl_svickova.
+  ///
+  /// In fr, this message translates to:
+  /// **'Svíčková'**
+  String get mealLbl_svickova;
+
+  /// No description provided for @mealLbl_halusky.
+  ///
+  /// In fr, this message translates to:
+  /// **'Halušky à la bryndza'**
+  String get mealLbl_halusky;
+
+  /// No description provided for @mealLbl_sarmale.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sarmale'**
+  String get mealLbl_sarmale;
+
+  /// No description provided for @mealLbl_ciorba.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ciorbă'**
+  String get mealLbl_ciorba;
+
+  /// No description provided for @mealLbl_lohikeitto.
+  ///
+  /// In fr, this message translates to:
+  /// **'Soupe au saumon'**
+  String get mealLbl_lohikeitto;
+
+  /// No description provided for @mealLbl_stamppot.
+  ///
+  /// In fr, this message translates to:
+  /// **'Stamppot'**
+  String get mealLbl_stamppot;
+
+  /// No description provided for @prod_morue.
+  ///
+  /// In fr, this message translates to:
+  /// **'Morue'**
+  String get prod_morue;
+
+  /// No description provided for @prod_pastel_de_nata.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pastel de nata'**
+  String get prod_pastel_de_nata;
+
+  /// No description provided for @prod_vinho_verde.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vinho verde'**
+  String get prod_vinho_verde;
+
+  /// No description provided for @prod_broa.
+  ///
+  /// In fr, this message translates to:
+  /// **'Broa'**
+  String get prod_broa;
+
+  /// No description provided for @prod_salo.
+  ///
+  /// In fr, this message translates to:
+  /// **'Salo'**
+  String get prod_salo;
+
+  /// No description provided for @prod_deruny.
+  ///
+  /// In fr, this message translates to:
+  /// **'Deruny'**
+  String get prod_deruny;
+
+  /// No description provided for @prod_pampushky.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pampushky'**
+  String get prod_pampushky;
+
+  /// No description provided for @prod_banitsa.
+  ///
+  /// In fr, this message translates to:
+  /// **'Banitsa'**
+  String get prod_banitsa;
+
+  /// No description provided for @prod_lukanka.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lukanka'**
+  String get prod_lukanka;
+
+  /// No description provided for @prod_sirene.
+  ///
+  /// In fr, this message translates to:
+  /// **'Sirene'**
+  String get prod_sirene;
+
+  /// No description provided for @prod_lyutenitsa.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lyutenitsa'**
+  String get prod_lyutenitsa;
+
+  /// No description provided for @prod_evapi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ćevapi'**
+  String get prod_evapi;
+
+  /// No description provided for @prod_kranjska.
+  ///
+  /// In fr, this message translates to:
+  /// **'Kranjska'**
+  String get prod_kranjska;
+
+  /// No description provided for @prod_potica.
+  ///
+  /// In fr, this message translates to:
+  /// **'Potica'**
+  String get prod_potica;
+
+  /// No description provided for @prod_pa_amb_tomaquet.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pa amb tomàquet'**
+  String get prod_pa_amb_tomaquet;
+
+  /// No description provided for @prod_botifarra.
+  ///
+  /// In fr, this message translates to:
+  /// **'Botifarra'**
+  String get prod_botifarra;
+
+  /// No description provided for @prod_calcots.
+  ///
+  /// In fr, this message translates to:
+  /// **'Calçots'**
+  String get prod_calcots;
+
+  /// No description provided for @prod_idiazabal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Idiazabal'**
+  String get prod_idiazabal;
+
+  /// No description provided for @prod_txistorra.
+  ///
+  /// In fr, this message translates to:
+  /// **'Txistorra'**
+  String get prod_txistorra;
+
+  /// No description provided for @prod_poulpe.
+  ///
+  /// In fr, this message translates to:
+  /// **'Poulpe'**
+  String get prod_poulpe;
+
+  /// No description provided for @prod_nasi_lemak.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nasi lemak'**
+  String get prod_nasi_lemak;
+
+  /// No description provided for @prod_laksa.
+  ///
+  /// In fr, this message translates to:
+  /// **'Laksa'**
+  String get prod_laksa;
+
+  /// No description provided for @prod_rendang.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rendang'**
+  String get prod_rendang;
+
+  /// No description provided for @prod_leverpostej.
+  ///
+  /// In fr, this message translates to:
+  /// **'Leverpostej'**
+  String get prod_leverpostej;
+
+  /// No description provided for @prod_remoulade.
+  ///
+  /// In fr, this message translates to:
+  /// **'Remoulade'**
+  String get prod_remoulade;
+
+  /// No description provided for @prod_sm_rrebr_d.
+  ///
+  /// In fr, this message translates to:
+  /// **'Smørrebrød'**
+  String get prod_sm_rrebr_d;
+
+  /// No description provided for @prod_filmjolk.
+  ///
+  /// In fr, this message translates to:
+  /// **'Filmjölk'**
+  String get prod_filmjolk;
+
+  /// No description provided for @prod_kanelbulle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Kanelbulle'**
+  String get prod_kanelbulle;
+
+  /// No description provided for @prod_kaviar_de_morue.
+  ///
+  /// In fr, this message translates to:
+  /// **'Kaviar de morue'**
+  String get prod_kaviar_de_morue;
+
+  /// No description provided for @prod_pinnekj_tt.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pinnekjøtt'**
+  String get prod_pinnekj_tt;
+
+  /// No description provided for @prod_r_d_p_lse.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rød pølse'**
+  String get prod_r_d_p_lse;
+
+  /// No description provided for @mealLbl_bacalhau.
+  ///
+  /// In fr, this message translates to:
+  /// **'Morue à la portugaise'**
+  String get mealLbl_bacalhau;
+
+  /// No description provided for @mealLbl_cevapi.
+  ///
+  /// In fr, this message translates to:
+  /// **'Ćevapi'**
+  String get mealLbl_cevapi;
+
+  /// No description provided for @mealLbl_shopska.
+  ///
+  /// In fr, this message translates to:
+  /// **'Salade shopska'**
+  String get mealLbl_shopska;
+
+  /// No description provided for @mealLbl_deruny.
+  ///
+  /// In fr, this message translates to:
+  /// **'Deruny'**
+  String get mealLbl_deruny;
+
+  /// No description provided for @mealLbl_nasi_lemak.
+  ///
+  /// In fr, this message translates to:
+  /// **'Nasi lemak'**
+  String get mealLbl_nasi_lemak;
+
+  /// No description provided for @mealLbl_smorrebrod.
+  ///
+  /// In fr, this message translates to:
+  /// **'Smørrebrød'**
+  String get mealLbl_smorrebrod;
+
+  /// No description provided for @mealLbl_kottbullar_sv.
+  ///
+  /// In fr, this message translates to:
+  /// **'Boulettes suédoises'**
+  String get mealLbl_kottbullar_sv;
+
+  /// No description provided for @mealLbl_pa_tomaquet.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pain à la tomate'**
+  String get mealLbl_pa_tomaquet;
+
+  /// No description provided for @prod_huile_de_pepins_de_courge.
+  ///
+  /// In fr, this message translates to:
+  /// **'Huile de pépins de courge'**
+  String get prod_huile_de_pepins_de_courge;
+
+  /// No description provided for @prod_zganci.
+  ///
+  /// In fr, this message translates to:
+  /// **'Žganci'**
+  String get prod_zganci;
+
+  /// No description provided for @prod_gibanica.
+  ///
+  /// In fr, this message translates to:
+  /// **'Gibanica'**
+  String get prod_gibanica;
+
+  /// No description provided for @prod_empanada.
+  ///
+  /// In fr, this message translates to:
+  /// **'Empanada'**
+  String get prod_empanada;
+
+  /// No description provided for @prod_pimientos_de_padron.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pimientos de Padrón'**
+  String get prod_pimientos_de_padron;
+
+  /// No description provided for @prod_kulen.
+  ///
+  /// In fr, this message translates to:
+  /// **'Kulen'**
+  String get prod_kulen;
+
+  /// No description provided for @prod_prsut.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pršut'**
+  String get prod_prsut;
+
+  /// No description provided for @prod_pljeskavica.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pljeskavica'**
+  String get prod_pljeskavica;
+
+  /// No description provided for @prod_proja.
+  ///
+  /// In fr, this message translates to:
+  /// **'Proja'**
+  String get prod_proja;
+
+  /// No description provided for @prod_lefse.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lefse'**
+  String get prod_lefse;
+
+  /// No description provided for @prod_lutefisk.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lutefisk'**
+  String get prod_lutefisk;
+
+  /// No description provided for @prod_romme.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rømme'**
+  String get prod_romme;
+
+  /// No description provided for @prod_roti_canai.
+  ///
+  /// In fr, this message translates to:
+  /// **'Roti canai'**
+  String get prod_roti_canai;
+
+  /// No description provided for @prod_belacan.
+  ///
+  /// In fr, this message translates to:
+  /// **'Belacan'**
+  String get prod_belacan;
+
+  /// No description provided for @prod_cendol.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cendol'**
+  String get prod_cendol;
+
+  /// No description provided for @prod_zacusca.
+  ///
+  /// In fr, this message translates to:
+  /// **'Zacuscă'**
+  String get prod_zacusca;
+
+  /// No description provided for @prod_kashkaval.
+  ///
+  /// In fr, this message translates to:
+  /// **'Kashkaval'**
+  String get prod_kashkaval;
+
+  /// No description provided for @prod_tarator.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tarator'**
+  String get prod_tarator;
+
+  /// No description provided for @prod_bitterballen.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bitterballen'**
+  String get prod_bitterballen;
+
+  /// No description provided for @prod_fuet.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fuet'**
+  String get prod_fuet;
+
+  /// No description provided for @prod_trdelnik.
+  ///
+  /// In fr, this message translates to:
+  /// **'Trdelník'**
+  String get prod_trdelnik;
+
+  /// No description provided for @prod_bigos.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bigos'**
+  String get prod_bigos;
+
+  /// No description provided for @prod_txakoli.
+  ///
+  /// In fr, this message translates to:
+  /// **'Txakoli'**
+  String get prod_txakoli;
+
+  /// No description provided for @prod_pimientos_de_gernika.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pimientos de Gernika'**
+  String get prod_pimientos_de_gernika;
+
+  /// No description provided for @prod_lacon.
+  ///
+  /// In fr, this message translates to:
+  /// **'Lacón'**
+  String get prod_lacon;
+
+  /// No description provided for @prod_percebes.
+  ///
+  /// In fr, this message translates to:
+  /// **'Percebes'**
+  String get prod_percebes;
+
+  /// No description provided for @prod_marmite.
+  ///
+  /// In fr, this message translates to:
+  /// **'Marmite'**
+  String get prod_marmite;
+
+  /// No description provided for @prod_crumpets.
+  ///
+  /// In fr, this message translates to:
+  /// **'Crumpets'**
+  String get prod_crumpets;
+
+  /// No description provided for @prod_stilton.
+  ///
+  /// In fr, this message translates to:
+  /// **'Stilton'**
+  String get prod_stilton;
+
+  /// No description provided for @prod_focaccia.
+  ///
+  /// In fr, this message translates to:
+  /// **'Focaccia'**
+  String get prod_focaccia;
+
+  /// No description provided for @prod_speck.
+  ///
+  /// In fr, this message translates to:
+  /// **'Speck'**
+  String get prod_speck;
+
+  /// No description provided for @prod_graviera.
+  ///
+  /// In fr, this message translates to:
+  /// **'Graviera'**
+  String get prod_graviera;
+
+  /// No description provided for @prod_roquette.
+  ///
+  /// In fr, this message translates to:
+  /// **'Roquette'**
+  String get prod_roquette;
+
+  /// No description provided for @prod_vin_rouge.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vin rouge'**
+  String get prod_vin_rouge;
+
+  /// No description provided for @prod_manioc.
+  ///
+  /// In fr, this message translates to:
+  /// **'Manioc'**
+  String get prod_manioc;
+
+  /// No description provided for @prod_currywurst.
+  ///
+  /// In fr, this message translates to:
+  /// **'Currywurst'**
+  String get prod_currywurst;
+
+  /// No description provided for @prod_leberwurst.
+  ///
+  /// In fr, this message translates to:
+  /// **'Leberwurst'**
+  String get prod_leberwurst;
+
+  /// No description provided for @mealLbl_carbonara_it.
+  ///
+  /// In fr, this message translates to:
+  /// **'Carbonara'**
+  String get mealLbl_carbonara_it;
+
+  /// No description provided for @mealLbl_cassoulet.
+  ///
+  /// In fr, this message translates to:
+  /// **'Cassoulet'**
+  String get mealLbl_cassoulet;
+
+  /// No description provided for @mealLbl_fish_chips.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fish and chips'**
+  String get mealLbl_fish_chips;
+
+  /// No description provided for @mealLbl_moussaka.
+  ///
+  /// In fr, this message translates to:
+  /// **'Moussaka'**
+  String get mealLbl_moussaka;
+
+  /// No description provided for @mealLbl_pintxos.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pintxos'**
+  String get mealLbl_pintxos;
+
+  /// No description provided for @mealLbl_pulpo_feira.
+  ///
+  /// In fr, this message translates to:
+  /// **'Poulpe à la galicienne'**
+  String get mealLbl_pulpo_feira;
+
+  /// No description provided for @mealLbl_laksa_meal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Laksa'**
+  String get mealLbl_laksa_meal;
+
+  /// No description provided for @mealLbl_rendang_meal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rendang'**
+  String get mealLbl_rendang_meal;
+
+  /// No description provided for @mealLbl_hotpot.
+  ///
+  /// In fr, this message translates to:
+  /// **'Fondue chinoise'**
+  String get mealLbl_hotpot;
+
+  /// No description provided for @mealLbl_banh_mi_meal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Banh mi'**
+  String get mealLbl_banh_mi_meal;
+
+  /// No description provided for @mealLbl_shakshuka.
+  ///
+  /// In fr, this message translates to:
+  /// **'Chakchouka'**
+  String get mealLbl_shakshuka;
+
+  /// No description provided for @mealLbl_caldo_verde.
+  ///
+  /// In fr, this message translates to:
+  /// **'Caldo verde'**
+  String get mealLbl_caldo_verde;
+
+  /// No description provided for @mealLbl_tortilla_es.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tortilla espagnole'**
+  String get mealLbl_tortilla_es;
+
+  /// No description provided for @mealLbl_jota.
+  ///
+  /// In fr, this message translates to:
+  /// **'Jota'**
+  String get mealLbl_jota;
+
+  /// No description provided for @mealLbl_banitsa_meal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Banitsa'**
+  String get mealLbl_banitsa_meal;
+
+  /// No description provided for @mealLbl_borscht_uk.
+  ///
+  /// In fr, this message translates to:
+  /// **'Bortsch'**
+  String get mealLbl_borscht_uk;
+
+  /// No description provided for @mealLbl_frikadeller.
+  ///
+  /// In fr, this message translates to:
+  /// **'Frikadeller'**
+  String get mealLbl_frikadeller;
+
+  /// No description provided for @mealLbl_biryani.
+  ///
+  /// In fr, this message translates to:
+  /// **'Biryani'**
+  String get mealLbl_biryani;
+
+  /// No description provided for @mealLbl_gibanica_meal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Gibanica'**
+  String get mealLbl_gibanica_meal;
+
+  /// No description provided for @mealLbl_pinnekjott_meal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pinnekjøtt'**
+  String get mealLbl_pinnekjott_meal;
+
+  /// No description provided for @mealLbl_poffertjes_meal.
+  ///
+  /// In fr, this message translates to:
+  /// **'Poffertjes'**
+  String get mealLbl_poffertjes_meal;
+
+  /// No description provided for @mealLbl_janssons.
+  ///
+  /// In fr, this message translates to:
+  /// **'Tentation de Jansson'**
+  String get mealLbl_janssons;
+
+  /// No description provided for @mealLbl_pilpil.
+  ///
+  /// In fr, this message translates to:
+  /// **'Morue pil-pil'**
+  String get mealLbl_pilpil;
+
+  /// No description provided for @catalogCat_habits.
+  ///
+  /// In fr, this message translates to:
+  /// **'Pour vous'**
+  String get catalogCat_habits;
+
+  /// No description provided for @habitsHint.
+  ///
+  /// In fr, this message translates to:
+  /// **'Repéré dans vos courses, même hors des spécialités locales'**
+  String get habitsHint;
+
+  /// No description provided for @habitsYouOftenGet.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vous prenez souvent'**
+  String get habitsYouOftenGet;
+
+  /// No description provided for @addYourHabitItems.
+  ///
+  /// In fr, this message translates to:
+  /// **'Vos habitudes'**
+  String get addYourHabitItems;
+
+  /// No description provided for @habitsChipTooltip.
+  ///
+  /// In fr, this message translates to:
+  /// **'Articles mémorisés d\'après vos listes'**
+  String get habitsChipTooltip;
+
+  /// No description provided for @habitsEnabled.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mémoriser mes habitudes'**
+  String get habitsEnabled;
+
+  /// No description provided for @habitsEnabledSubtitle.
+  ///
+  /// In fr, this message translates to:
+  /// **'Rappelle vos articles et plats habituels, même hors des listes locales'**
+  String get habitsEnabledSubtitle;
+
+  /// No description provided for @habitsEnabledMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Habitudes réactivées'**
+  String get habitsEnabledMessage;
+
+  /// No description provided for @habitsDisabledMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Habitudes désactivées — plus aucun rappel'**
+  String get habitsDisabledMessage;
+
+  /// No description provided for @habitsForget.
+  ///
+  /// In fr, this message translates to:
+  /// **'Oublier ce qui a été mémorisé'**
+  String get habitsForget;
+
+  /// No description provided for @habitsForgotMessage.
+  ///
+  /// In fr, this message translates to:
+  /// **'Mémoire des habitudes effacée'**
+  String get habitsForgotMessage;
 }
 
 class _AppLocalizationsDelegate

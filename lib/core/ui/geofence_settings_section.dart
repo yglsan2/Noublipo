@@ -8,6 +8,7 @@ import '../providers/category_names_provider.dart';
 import '../providers/geofence_provider.dart';
 import '../services/geofence_monitor.dart';
 import '../utils/app_logger.dart';
+import '../utils/text_script.dart';
 import '../../l10n/app_localizations.dart';
 
 /// Bloc réglages géofence (Tote+) — setup guidé + liste des magasins.
@@ -79,7 +80,7 @@ class _GeofenceSettingsSectionState extends State<GeofenceSettingsSection> {
                         labelText: l10n.geofenceStoreName,
                         border: const OutlineInputBorder(),
                       ),
-                      textCapitalization: TextCapitalization.sentences,
+                      textCapitalization: ctx.itemNameTextCapitalization,
                     ),
                     const SizedBox(height: 12),
                     Text(l10n.geofencePickColor, style: Theme.of(ctx).textTheme.labelLarge),

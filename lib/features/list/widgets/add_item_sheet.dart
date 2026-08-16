@@ -22,11 +22,14 @@ import '../../../core/data/meal_presets.dart';
 import '../../../core/data/food_taxonomy.dart';
 import '../../../core/models/shopping_list_model.dart';
 import '../../../core/providers/premium_provider.dart';
+import '../../../core/providers/shopping_habits_provider.dart';
 import '../../../core/ui/food_category_style.dart';
 import '../../../core/utils/list_display_name.dart';
 import '../../../core/ui/meal_preset_dialog.dart';
 import '../../../core/utils/food_classifier.dart';
 import '../../../core/utils/content_l10n.dart';
+import '../../../core/utils/speech_locale.dart';
+import '../../../core/utils/text_script.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../paywall/paywall_screen.dart';
 
@@ -234,6 +237,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
         );
         if (!mounted) return;
         if (action == 'all') {
+          context.read<ShoppingHabitsProvider>().recordMealUsed(preset.id);
           Navigator.of(context).pop();
           await widget.onExpandPreset!(preset);
           return;
@@ -247,6 +251,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
           return;
         }
         if (action != 'single') return;
+        context.read<ShoppingHabitsProvider>().recordMealUsed(preset.id);
       }
     }
 
@@ -301,7 +306,12 @@ class _AddItemSheetState extends State<AddItemSheet> {
             final raw = result.recognizedWords;
             if (result.finalResult && raw.trim().isNotEmpty) {
               final lowConfidence = result.hasConfidenceRating && !result.isConfident();
-              final cleaned = VoiceTextCleaner.cleanFrenchRecognizedText(raw, aggressiveCorrection: lowConfidence);
+              final lang = Localizations.localeOf(context).languageCode;
+              final cleaned = VoiceTextCleaner.cleanRecognizedText(
+                raw,
+                languageCode: lang,
+                aggressiveCorrection: lowConfidence,
+              );
               _controller.text = cleaned;
               if (cleaned != raw.trim()) {
                 WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -327,7 +337,10 @@ class _AddItemSheetState extends State<AddItemSheet> {
         },
         listenFor: const Duration(seconds: 45),
         pauseFor: const Duration(seconds: 5),
-        localeId: 'fr_FR',
+        localeId: await resolveSpeechLocaleId(
+          speech,
+          Localizations.localeOf(context).languageCode,
+        ),
         listenOptions: SpeechListenOptions(
           partialResults: true,
           listenMode: ListenMode.dictation,
@@ -484,7 +497,8 @@ class _AddItemSheetState extends State<AddItemSheet> {
                 TextField(
                   controller: _controller,
                   autofocus: true,
-                  textCapitalization: TextCapitalization.sentences,
+                  textCapitalization: context.itemNameTextCapitalization,
+                  textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
                     hintText: _isListening
                         ? AppLocalizations.of(context).speakNowHint
@@ -600,14 +614,24 @@ class _AddItemSheetState extends State<AddItemSheet> {
                   Consumer<ListProvider>(
                     builder: (context, listProvider, _) {
                       final recents = listProvider.recentItemNames();
-                      if (recents.isEmpty) return const SizedBox.shrink();
+                      final habits = context.watch<ShoppingHabitsProvider>().frequentNames(limit: 8);
+                      final chips = <String>[];
+                      final seen = <String>{};
+                      for (final n in [...habits, ...recents]) {
+                        final k = n.trim().toLowerCase();
+                        if (k.isEmpty || !seen.add(k)) continue;
+                        chips.add(n);
+                        if (chips.length >= 10) break;
+                      }
+                      if (chips.isEmpty) return const SizedBox.shrink();
+                      final l10n = AppLocalizations.of(context);
                       return Padding(
                         padding: const EdgeInsets.only(top: 10),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              AppLocalizations.of(context).recentItems,
+                              habits.isNotEmpty ? l10n.habitsYouOftenGet : l10n.recentItems,
                               style: Theme.of(context).textTheme.labelMedium,
                             ),
                             const SizedBox(height: 6),
@@ -615,7 +639,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                               spacing: 6,
                               runSpacing: 4,
                               children: [
-                                for (final name in recents)
+                                for (final name in chips)
                                   ActionChip(
                                     label: Text(localizedProductName(
                                       AppLocalizations.of(context),
@@ -989,6 +1013,7 @@ class _AddItemSheetState extends State<AddItemSheet> {
                                 ),
                               ),
                               maxLines: 2,
+                              textCapitalization: context.itemNameTextCapitalization,
                               onChanged: (_) => setState(() {}),
                             ),
                             const SizedBox(height: 8),
